@@ -26,5 +26,12 @@
       }
     }
   },
-  "projects": {}
+  "projects": {
+    "mobile-app": {
+      "tags": []
+    }
+  },
+  "plugins": [
+    "@nxrocks/nx-flutter"
+  ]
 }
