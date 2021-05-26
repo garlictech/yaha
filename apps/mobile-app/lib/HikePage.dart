@@ -86,7 +86,8 @@ class _HikePageState extends State<HikePage> {
                               padding: EdgeInsets.all(1),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(15.0),
-                                child: Image.asset('assets/images/Parlament.jpg',
+                                child: Image.asset(
+                                    'assets/images/Parlament.jpg',
                                     fit: BoxFit.cover,
                                     width: MediaQuery.of(context).size.width),
                               ),
@@ -176,7 +177,7 @@ SpeedDial buildSpeedDial() {
   return SpeedDial(
     /// both default to 16
     marginEnd: 18,
-    marginBottom: 18,
+    marginBottom: 780,
     // animatedIcon: AnimatedIcons.menu_close,
     // animatedIconTheme: IconThemeData(size: 22.0),
     /// This is ignored if animatedIcon is non null
@@ -209,10 +210,10 @@ SpeedDial buildSpeedDial() {
     elevation: 8.0,
     shape: CircleBorder(),
 
-    // orientation: SpeedDialOrientation.Up,
+    orientation: SpeedDialOrientation.Down,
     // childMarginBottom: 2,
     // childMarginTop: 2,
-    gradientBoxShape: BoxShape.circle,
+    // gradientBoxShape: BoxShape.rectangle,
     //gradient: LinearGradient(
     //begin: Alignment.topCenter,
     //end: Alignment.bottomCenter,
