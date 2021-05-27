@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 import 'package:flutter/material.dart';
+import 'BottomBar.dart';
 
 class HikePage extends StatefulWidget {
   @override
@@ -96,7 +97,7 @@ class _HikePageState extends State<HikePage> {
                         ),
                       ),
                       Container(
-                        height: 400,
+                        height: 300,
                         child: GridView.count(
                           primary: false,
                           padding: const EdgeInsets.all(20),
@@ -159,6 +160,111 @@ class _HikePageState extends State<HikePage> {
                         padding: const EdgeInsets.all(20),
                         child: Text('Things on route'),
                       ),
+                      Container(
+                        padding: const EdgeInsets.all(20),
+                        child: Row(
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {},
+                              child: Text('Museum'),
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.orange,
+                              ),
+                            ),
+                            ElevatedButton(
+                              onPressed: () {},
+                              child: Text('Fast food'),
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.purple,
+                              ),
+                            ),
+                            ElevatedButton(
+                              onPressed: () {},
+                              child: Text('Park'),
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.green,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(20),
+                        child: Text('Show all'),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(20),
+                        child: Text('Most interesting places on route'),
+                      ),
+                      Container(
+                        height: 200,
+                        width: MediaQuery.of(context).size.width,
+                        margin: const EdgeInsets.all(20),
+                        child: const Text("..."),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            border: Border.all(width: 4.0, color: Colors.grey)),
+                      ),
+                      Container(
+                        height: 300,
+                        width: MediaQuery.of(context).size.width,
+                        margin: const EdgeInsets.all(20),
+                        child: const Text("Map"),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            border: Border.all(width: 4.0, color: Colors.grey)),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(20),
+                        child: Text('Weather'),
+                      ),
+                      Container(
+                        height: 200,
+                        child: GridView.count(
+                          primary: false,
+                          padding: const EdgeInsets.all(20),
+                          crossAxisSpacing: 10,
+                          mainAxisSpacing: 10,
+                          crossAxisCount: 3,
+                          children: <Widget>[
+                            Container(
+                              padding: const EdgeInsets.all(3),
+                              child: const Text("Today"),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  border: Border.all(
+                                      width: 4.0, color: Colors.grey)),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.all(3),
+                              child: const Text('Wed'),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  border: Border.all(
+                                      width: 4.0, color: Colors.grey)),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.all(3),
+                              child: const Text('Day of hike'),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  border: Border.all(
+                                      width: 4.0, color: Colors.grey)),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(20),
+                        child: Text('Show all'),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {},
+                        child: Text('Hike outline'),
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.green,
+                        ),
+                      ),
                     ],
                   ),
                 );
@@ -166,6 +272,24 @@ class _HikePageState extends State<HikePage> {
               childCount: 1,
             ),
           ),
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        unselectedItemColor: Colors.black,
+        selectedItemColor: Colors.green,
+        items: [
+          new BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          new BottomNavigationBarItem(
+            icon: Icon(Icons.mail),
+            label: 'Messages',
+          ),
+          new BottomNavigationBarItem(
+              icon: Icon(Icons.play_circle), label: 'Profile'),
+          new BottomNavigationBarItem(
+              icon: Icon(Icons.person), label:'Profile')
         ],
       ),
       floatingActionButton: buildSpeedDial(),
@@ -177,7 +301,7 @@ SpeedDial buildSpeedDial() {
   return SpeedDial(
     /// both default to 16
     marginEnd: 18,
-    marginBottom: 780,
+    marginBottom: 730,
     // animatedIcon: AnimatedIcons.menu_close,
     // animatedIconTheme: IconThemeData(size: 22.0),
     /// This is ignored if animatedIcon is non null
@@ -205,7 +329,7 @@ SpeedDial buildSpeedDial() {
     onClose: () => print('DIAL CLOSED'),
     tooltip: 'Speed Dial',
     heroTag: 'speed-dial-hero-tag',
-    backgroundColor: Colors.green,
+    backgroundColor: Colors.white,
     foregroundColor: Colors.black,
     elevation: 8.0,
     shape: CircleBorder(),
