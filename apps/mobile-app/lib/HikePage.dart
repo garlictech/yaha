@@ -59,22 +59,36 @@ class _HikePageState extends State<HikePage> {
                   margin: EdgeInsets.symmetric(vertical: 20.0),
                   child: Column(
                     children: [
-                      ElevatedButton(
-                        onPressed: () {},
-                        child: Text('Start hike'),
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.green,
+                      SizedBox(
+                        height: 50,
+                        width: 300,
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          child: Text('Start hike',
+                              style: TextStyle(
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.w600,
+                              )),
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.green,
+                            shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(15))),
+                          ),
                         ),
                       ),
                       Container(
                         padding: const EdgeInsets.all(20),
                         child: Text(
-                            'It is the capital of Hungary on the banks of the Danube, the home of the 19th century Chain Bridge, the Old Town of Buda and Castle Hill.'),
+                            'It is the capital of Hungary on the banks of the Danube, the home of the 19th century Chain Bridge, the Old Town of Buda and Castle Hill.',
+                            style: TextStyle(
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.w400,
+                            )),
                       ),
                       Container(
                         height: 220.0,
                         width: MediaQuery.of(context).size.width,
-                        //padding: const EdgeInsets.all(20),
                         child: CarouselSlider(
                           options: CarouselOptions(
                             aspectRatio: 1.0,
@@ -158,65 +172,179 @@ class _HikePageState extends State<HikePage> {
                       ),
                       Container(
                         padding: const EdgeInsets.all(20),
-                        child: Text('Things on route'),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.all(20),
-                        child: Row(
+                        child: Column(
                           children: [
-                            ElevatedButton(
-                              onPressed: () {},
-                              child: Text('Museum'),
-                              style: ElevatedButton.styleFrom(
-                                primary: Colors.orange,
-                              ),
-                            ),
-                            ElevatedButton(
-                              onPressed: () {},
-                              child: Text('Fast food'),
-                              style: ElevatedButton.styleFrom(
-                                primary: Colors.purple,
-                              ),
-                            ),
-                            ElevatedButton(
-                              onPressed: () {},
-                              child: Text('Park'),
-                              style: ElevatedButton.styleFrom(
-                                primary: Colors.green,
-                              ),
+                            SizedBox(
+                              width: double.infinity,
+                              child: Text('Things on route',
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.w600,
+                                  )),
                             ),
                           ],
                         ),
                       ),
                       Container(
                         padding: const EdgeInsets.all(20),
-                        child: Text('Show all'),
+                        child: Row(
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.only(right: 10),
+                              child: SizedBox(
+                                height: 50,
+                                width: 180,
+                                child: ElevatedButton(
+                                  onPressed: () {},
+                                  child: Text('Museum',
+                                      style: TextStyle(
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.w600,
+                                      )),
+                                  style: ElevatedButton.styleFrom(
+                                    primary: Colors.orange,
+                                    shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(9))),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              margin: const EdgeInsets.only(right: 10),
+                              child: SizedBox(
+                                height: 50,
+                                width: 160,
+                                child: ElevatedButton(
+                                  onPressed: () {},
+                                  child: Text('Fast food',
+                                      style: TextStyle(
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.w600,
+                                      )),
+                                  style: ElevatedButton.styleFrom(
+                                    primary: Colors.purple,
+                                    shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(9))),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.only(left: 20),
+                            child: SizedBox(
+                              height: 50,
+                              width: 130,
+                              child: ElevatedButton(
+                                onPressed: () {},
+                                child: Text('Park',
+                                    style: TextStyle(
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.w600,
+                                    )),
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.green,
+                                  shape: const RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(9))),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                       Container(
                         padding: const EdgeInsets.all(20),
-                        child: Text('Most interesting places on route'),
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              width: double.infinity,
+                              child: Text('Show all',
+                                  textAlign: TextAlign.right,
+                                  style: TextStyle(
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.w500,
+                                  )),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(20),
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              width: double.infinity,
+                              child: Text('Most interesting places on route',
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.w600,
+                                  )),
+                            ),
+                          ],
+                        ),
                       ),
                       Container(
                         height: 200,
                         width: MediaQuery.of(context).size.width,
                         margin: const EdgeInsets.all(20),
-                        child: const Text("..."),
+                        child: const Text(""),
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            border: Border.all(width: 4.0, color: Colors.grey)),
-                      ),
-                      Container(
-                        height: 300,
-                        width: MediaQuery.of(context).size.width,
-                        margin: const EdgeInsets.all(20),
-                        child: const Text("Map"),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            border: Border.all(width: 4.0, color: Colors.grey)),
+                          color: Colors.lime[100],
+                          borderRadius: BorderRadius.circular(15),
+                        ),
                       ),
                       Container(
                         padding: const EdgeInsets.all(20),
-                        child: Text('Weather'),
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              width: double.infinity,
+                              child: Text('Show all',
+                                  textAlign: TextAlign.right,
+                                  style: TextStyle(
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.w500,
+                                  )),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        height: 340,
+                        width: MediaQuery.of(context).size.width,
+                        margin: const EdgeInsets.all(20),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(15.0),
+                          child: Image.asset(
+                            'assets/images/elevation.png',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(20),
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              width: double.infinity,
+                              child: Text('Weather',
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.w600,
+                                  )),
+                            ),
+                          ],
+                        ),
                       ),
                       Container(
                         height: 200,
@@ -256,13 +384,36 @@ class _HikePageState extends State<HikePage> {
                       ),
                       Container(
                         padding: const EdgeInsets.all(20),
-                        child: Text('Show all'),
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              width: double.infinity,
+                              child: Text('Show all',
+                                  textAlign: TextAlign.right,
+                                  style: TextStyle(
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.w500,
+                                  )),
+                            ),
+                          ],
+                        ),
                       ),
-                      ElevatedButton(
-                        onPressed: () {},
-                        child: Text('Hike outline'),
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.green,
+                      SizedBox(
+                        height: 50,
+                        width: 300,
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          child: Text('Hike outline',
+                              style: TextStyle(
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.w600,
+                              )),
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.green,
+                            shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(15))),
+                          ),
                         ),
                       ),
                     ],
@@ -289,7 +440,7 @@ class _HikePageState extends State<HikePage> {
           new BottomNavigationBarItem(
               icon: Icon(Icons.play_circle), label: 'Profile'),
           new BottomNavigationBarItem(
-              icon: Icon(Icons.person), label:'Profile')
+              icon: Icon(Icons.person), label: 'Profile')
         ],
       ),
       floatingActionButton: buildSpeedDial(),
