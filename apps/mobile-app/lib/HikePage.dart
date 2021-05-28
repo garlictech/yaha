@@ -62,9 +62,14 @@ class _HikePageState extends State<HikePage> {
                       SizedBox(
                         height: 50,
                         width: 300,
-                        child: ElevatedButton(
+                        child: ElevatedButton.icon(
+                          icon: Icon(
+                            Icons.play_circle_rounded,
+                            color: Colors.white,
+                            size: 24.0,
+                          ),
                           onPressed: () {},
-                          child: Text('Start hike',
+                          label: Text('Start hike',
                               style: TextStyle(
                                 fontSize: 16.0,
                                 fontWeight: FontWeight.w600,
@@ -115,53 +120,155 @@ class _HikePageState extends State<HikePage> {
                         child: GridView.count(
                           primary: false,
                           padding: const EdgeInsets.all(20),
-                          crossAxisSpacing: 10,
-                          mainAxisSpacing: 10,
+                          crossAxisSpacing: 30,
+                          mainAxisSpacing: 30,
                           crossAxisCount: 3,
                           children: <Widget>[
                             Container(
-                              padding: const EdgeInsets.all(3),
-                              child: const Text("Distance"),
+                              padding: const EdgeInsets.all(15),
+                              child: Column(
+                                children: [
+                                  const Icon(
+                                    Icons.hiking_rounded,
+                                    size: 32.0,
+                                  ),
+                                  const Text("24.3km",
+                                      style: TextStyle(
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.w600,
+                                      )),
+                                  const Text("Distance",
+                                      style: TextStyle(
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.w500,
+                                      )),
+                                ],
+                              ),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   border: Border.all(
                                       width: 4.0, color: Colors.grey)),
                             ),
                             Container(
-                              padding: const EdgeInsets.all(3),
-                              child: const Text('Uphill'),
+                              padding: const EdgeInsets.all(15),
+                              child: Column(
+                                children: [
+                                  const Icon(
+                                    Icons.trending_up_rounded,
+                                    size: 32.0,
+                                  ),
+                                  const Text("576m",
+                                      style: TextStyle(
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.w600,
+                                      )),
+                                  const Text("Uphill",
+                                      style: TextStyle(
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.w500,
+                                      )),
+                                ],
+                              ),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   border: Border.all(
                                       width: 4.0, color: Colors.grey)),
                             ),
                             Container(
-                              padding: const EdgeInsets.all(3),
-                              child: const Text('Downhill'),
+                              padding: const EdgeInsets.all(15),
+                              child: Column(
+                                children: [
+                                  const Icon(
+                                    Icons.trending_down_rounded,
+                                    size: 32.0,
+                                  ),
+                                  const Text("1.2km",
+                                      style: TextStyle(
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.w600,
+                                      )),
+                                  const Text("Downhill",
+                                      style: TextStyle(
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.w500,
+                                      )),
+                                ],
+                              ),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   border: Border.all(
                                       width: 4.0, color: Colors.grey)),
                             ),
                             Container(
-                              padding: const EdgeInsets.all(3),
-                              child: const Text('Time'),
+                              padding: const EdgeInsets.all(15),
+                              child: Column(
+                                children: [
+                                  const Icon(
+                                    Icons.watch_later_rounded,
+                                    size: 32.0,
+                                  ),
+                                  const Text("6h",
+                                      style: TextStyle(
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.w600,
+                                      )),
+                                  const Text("Time",
+                                      style: TextStyle(
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.w500,
+                                      )),
+                                ],
+                              ),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   border: Border.all(
                                       width: 4.0, color: Colors.grey)),
                             ),
                             Container(
-                              padding: const EdgeInsets.all(3),
-                              child: const Text('Points'),
+                              padding: const EdgeInsets.all(15),
+                              child: Column(
+                                children: [
+                                  const Icon(
+                                    Icons.emoji_events_rounded,
+                                    size: 32.0,
+                                  ),
+                                  const Text("240",
+                                      style: TextStyle(
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.w600,
+                                      )),
+                                  const Text("Points",
+                                      style: TextStyle(
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.w500,
+                                      )),
+                                ],
+                              ),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   border: Border.all(
                                       width: 4.0, color: Colors.grey)),
                             ),
                             Container(
-                              padding: const EdgeInsets.all(3),
-                              child: const Text('Difficulty'),
+                              padding: const EdgeInsets.all(15),
+                              child: Column(
+                                children: [
+                                  const Icon(
+                                    Icons.stars_rounded,
+                                    size: 32.0,
+                                  ),
+                                  const Text("Medium",
+                                      style: TextStyle(
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.w600,
+                                      )),
+                                  const Text("Difficulty",
+                                      style: TextStyle(
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.w500,
+                                      )),
+                                ],
+                              ),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   border: Border.all(
@@ -293,12 +400,62 @@ class _HikePageState extends State<HikePage> {
                         ),
                       ),
                       Container(
-                        height: 200,
+                        height: 230,
                         width: MediaQuery.of(context).size.width,
                         margin: const EdgeInsets.all(20),
-                        child: const Text(""),
+                        child: Column(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(20),
+                              child: Row(
+                                children: [
+                                  const Icon(Icons.home_rounded, size: 35.0),
+                                  Container(
+                                    padding: const EdgeInsets.only(left: 10),
+                                    child: const Text(
+                                        "Hungarian Parliament Building",
+                                        style: TextStyle(
+                                          fontSize: 16.0,
+                                        )),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.all(20),
+                              child: Row(
+                                children: [
+                                  const Icon(Icons.home_rounded, size: 35.0),
+                                  Container(
+                                    padding: const EdgeInsets.only(left: 10),
+                                    child:
+                                        const Text("Hungarian National Museum",
+                                            style: TextStyle(
+                                              fontSize: 16.0,
+                                            )),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.all(20),
+                              child: Row(
+                                children: [
+                                  const Icon(Icons.home_rounded, size: 35.0),
+                                  Container(
+                                    padding: const EdgeInsets.only(left: 10),
+                                    child: const Text("Széchenyi Thermal Bath",
+                                        style: TextStyle(
+                                          fontSize: 16.0,
+                                        )),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                         decoration: BoxDecoration(
-                          color: Colors.lime[100],
+                          color: Colors.brown[50],
                           borderRadius: BorderRadius.circular(15),
                         ),
                       ),
@@ -401,9 +558,14 @@ class _HikePageState extends State<HikePage> {
                       SizedBox(
                         height: 50,
                         width: 300,
-                        child: ElevatedButton(
+                        child: ElevatedButton.icon(
+                          icon: Icon(
+                            Icons.timeline,
+                            color: Colors.white,
+                            size: 24.0,
+                          ),
                           onPressed: () {},
-                          child: Text('Hike outline',
+                          label: Text('Hike outline',
                               style: TextStyle(
                                 fontSize: 16.0,
                                 fontWeight: FontWeight.w600,
@@ -496,23 +658,23 @@ SpeedDial buildSpeedDial() {
     //),
     children: [
       SpeedDialChild(
-        child: Icon(Icons.settings),
-        backgroundColor: Colors.red,
+        child: Icon(Icons.settings_rounded, color: Colors.white),
+        backgroundColor: Colors.green,
         label: 'Settings',
         labelStyle: TextStyle(fontSize: 18.0),
         onTap: () => print('FIRST CHILD'),
         onLongPress: () => print('FIRST CHILD LONG PRESS'),
       ),
       SpeedDialChild(
-        child: Icon(Icons.comment),
-        backgroundColor: Colors.blue,
+        child: Icon(Icons.comment_rounded, color: Colors.white),
+        backgroundColor: Colors.green,
         label: 'Comment',
         labelStyle: TextStyle(fontSize: 18.0),
         onTap: () => print('SECOND CHILD'),
         onLongPress: () => print('SECOND CHILD LONG PRESS'),
       ),
       SpeedDialChild(
-        child: Icon(Icons.bookmark),
+        child: Icon(Icons.bookmark_rounded, color: Colors.white),
         backgroundColor: Colors.green,
         label: 'Bookmark',
         labelStyle: TextStyle(fontSize: 18.0),
@@ -520,7 +682,7 @@ SpeedDial buildSpeedDial() {
         onLongPress: () => print('THIRD CHILD LONG PRESS'),
       ),
       SpeedDialChild(
-        child: Icon(Icons.download_rounded),
+        child: Icon(Icons.download_rounded, color: Colors.white),
         backgroundColor: Colors.green,
         label: 'Download',
         labelStyle: TextStyle(fontSize: 18.0),
