@@ -16,7 +16,7 @@ Scenario: User wants to search for location
     Then navigates to search results screen
 
 Scenario: User wants to search near current location
-    Given user enabled the app to use current location
+    Given user allowed for the app to use their current location
     When taps on current location icon in search around location field
     Then navigates to search results screen
 
