@@ -1,0 +1,639 @@
+{
+  "Resources": {
+    "AnyUppDEVVerifyPullRequestRole60BB5E1B": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "codebuild.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "prod-anyupp-cicd-DevPullRequestBuildStack/AnyUpp:DEV Verify Pull Request/Role/Resource"
+      }
+    },
+    "AnyUppDEVVerifyPullRequestRoleDefaultPolicy0EA8A2EE": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":logs:eu-west-1:568276182587:log-group:/aws/codebuild/",
+                      {
+                        "Ref": "AnyUppDEVVerifyPullRequest56B0DA67"
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":logs:eu-west-1:568276182587:log-group:/aws/codebuild/",
+                      {
+                        "Ref": "AnyUppDEVVerifyPullRequest56B0DA67"
+                      },
+                      ":*"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Action": [
+                "codebuild:CreateReportGroup",
+                "codebuild:CreateReport",
+                "codebuild:UpdateReport",
+                "codebuild:BatchPutTestCases",
+                "codebuild:BatchPutCodeCoverages"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":codebuild:eu-west-1:568276182587:report-group/",
+                    {
+                      "Ref": "AnyUppDEVVerifyPullRequest56B0DA67"
+                    },
+                    "-*"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "secretsmanager:GetSecretValue",
+                "secretsmanager:DescribeSecret"
+              ],
+              "Effect": "Allow",
+              "Resource": "arn:aws:secretsmanager:eu-west-1:568276182587:secret:codebuild-Z12nwS"
+            },
+            {
+              "Action": [
+                "ssm:DescribeParameters",
+                "ssm:GetParameters",
+                "ssm:GetParameter",
+                "ssm:GetParameterHistory"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":ssm:eu-west-1:568276182587:parameter/dev-anyupp-backend/generated/ConsumerWebUserPoolClientId"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "ssm:DescribeParameters",
+                "ssm:GetParameters",
+                "ssm:GetParameter",
+                "ssm:GetParameterHistory"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":ssm:eu-west-1:568276182587:parameter/dev-anyupp-backend/generated/ConsumerNativeUserPoolClientId"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "ssm:DescribeParameters",
+                "ssm:GetParameters",
+                "ssm:GetParameter",
+                "ssm:GetParameterHistory"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":ssm:eu-west-1:568276182587:parameter/dev-anyupp-backend/generated/ConsumerUserPoolDomain"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "ssm:DescribeParameters",
+                "ssm:GetParameters",
+                "ssm:GetParameter",
+                "ssm:GetParameterHistory"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":ssm:eu-west-1:568276182587:parameter/dev-anyupp-backend/generated/IdentityPoolId"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "ssm:DescribeParameters",
+                "ssm:GetParameters",
+                "ssm:GetParameter",
+                "ssm:GetParameterHistory"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":ssm:eu-west-1:568276182587:parameter/dev-anyupp-backend/generated/AnyuppGraphqlApiKey"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "ssm:DescribeParameters",
+                "ssm:GetParameters",
+                "ssm:GetParameter",
+                "ssm:GetParameterHistory"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":ssm:eu-west-1:568276182587:parameter/dev-anyupp-backend/generated/AnyuppGraphqlApiUrl"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "ssm:DescribeParameters",
+                "ssm:GetParameters",
+                "ssm:GetParameter",
+                "ssm:GetParameterHistory"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":ssm:eu-west-1:568276182587:parameter/dev-anyupp-backend/generated/StripeWebhookEndpoint"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "ssm:DescribeParameters",
+                "ssm:GetParameters",
+                "ssm:GetParameter",
+                "ssm:GetParameterHistory"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":ssm:eu-west-1:568276182587:parameter/dev-anyupp-backend/generated/AdminSiteUrl"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "ssm:DescribeParameters",
+                "ssm:GetParameters",
+                "ssm:GetParameter",
+                "ssm:GetParameterHistory"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":ssm:eu-west-1:568276182587:parameter/dev-anyupp-backend/generated/AdminWebUserPoolClientId"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "ssm:DescribeParameters",
+                "ssm:GetParameters",
+                "ssm:GetParameter",
+                "ssm:GetParameterHistory"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":ssm:eu-west-1:568276182587:parameter/dev-anyupp-backend/generated/AdminNativeUserPoolClientId"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "ssm:DescribeParameters",
+                "ssm:GetParameters",
+                "ssm:GetParameter",
+                "ssm:GetParameterHistory"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":ssm:eu-west-1:568276182587:parameter/dev-anyupp-backend/generated/AdminUserPoolId"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "ssm:DescribeParameters",
+                "ssm:GetParameters",
+                "ssm:GetParameter",
+                "ssm:GetParameterHistory"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":ssm:eu-west-1:568276182587:parameter/dev-anyupp-backend/generated/AdminUserPoolDomain"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "ssm:DescribeParameters",
+                "ssm:GetParameters",
+                "ssm:GetParameter",
+                "ssm:GetParameterHistory"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":ssm:eu-west-1:568276182587:parameter/dev-anyupp-backend/generated/CrudApiAppId"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "ssm:DescribeParameters",
+                "ssm:GetParameters",
+                "ssm:GetParameter",
+                "ssm:GetParameterHistory"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":ssm:eu-west-1:568276182587:parameter/dev-anyupp-backend/GoogleClientId"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "ssm:DescribeParameters",
+                "ssm:GetParameters",
+                "ssm:GetParameter",
+                "ssm:GetParameterHistory"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":ssm:eu-west-1:568276182587:parameter/dev-anyupp-backend/StripePublishableKey"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "ssm:DescribeParameters",
+                "ssm:GetParameters",
+                "ssm:GetParameter",
+                "ssm:GetParameterHistory"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":ssm:eu-west-1:568276182587:parameter/dev-anyupp-backend/FacebookAppId"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "ssm:DescribeParameters",
+                "ssm:GetParameters",
+                "ssm:GetParameter",
+                "ssm:GetParameterHistory"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":ssm:eu-west-1:568276182587:parameter/dev-anyupp-backend/GoogleApiKey"
+                  ]
+                ]
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "AnyUppDEVVerifyPullRequestRoleDefaultPolicy0EA8A2EE",
+        "Roles": [
+          {
+            "Ref": "AnyUppDEVVerifyPullRequestRole60BB5E1B"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "prod-anyupp-cicd-DevPullRequestBuildStack/AnyUpp:DEV Verify Pull Request/Role/DefaultPolicy/Resource"
+      }
+    },
+    "AnyUppDEVVerifyPullRequest56B0DA67": {
+      "Type": "AWS::CodeBuild::Project",
+      "Properties": {
+        "Artifacts": {
+          "Type": "NO_ARTIFACTS"
+        },
+        "Environment": {
+          "ComputeType": "BUILD_GENERAL1_MEDIUM",
+          "Image": "aws/codebuild/amazonlinux2-x86_64-standard:3.0",
+          "ImagePullCredentialsType": "CODEBUILD",
+          "PrivilegedMode": false,
+          "Type": "LINUX_CONTAINER"
+        },
+        "ServiceRole": {
+          "Fn::GetAtt": [
+            "AnyUppDEVVerifyPullRequestRole60BB5E1B",
+            "Arn"
+          ]
+        },
+        "Source": {
+          "BuildSpec": "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"install\": {\n      \"commands\": [\n        \"chmod +x ./tools/*.sh\",\n        \"./tools/setup-aws-environment.sh\",\n        \"./tools/install-nodejs-14.sh\",\n        \"yarn --frozen-lockfile\",\n        \"npm install -g @aws-amplify/cli cowsay\",\n        \"git clone https://github.com/flutter/flutter.git -b stable --depth 1 /tmp/flutter\",\n        \"export PATH=$PATH:/tmp/flutter/bin\",\n        \"flutter doctor\",\n        \"npx cowsay \\\"STARTING PR CHECK\\\"\"\n      ]\n    },\n    \"build\": {\n      \"commands\": [\n        \"./tools/build-workspace.sh anyupp-backend dev\",\n        \"yarn nx affected:lint --base=dev --exclude=shared-config --exclude=anyupp-gql-api --exclude=crud-gql-api\",\n        \"yarn nx affected:test --base=dev --exclude=\\\"anyupp-mobile\\\" --exclude=\\\"integration-tests-angular\\\" --exclude=\\\"integration-tests-universal\\\" --exclude=shared-config --exclude=anyupp-gql-api --exclude=crud-gql-api --codeCoverage --coverageReporters=clover\",\n        \"yarn nx buildApk anyupp-mobile\",\n        \"npx cowsay \\\"YOUR PR IS SUPERCOOL!!!\\\"\"\n      ]\n    }\n  },\n  \"env\": {\n    \"secrets-manager\": {\n      \"AWS_ACCESS_KEY_ID\": \"codebuild:codebuild-aws_access_key_id\",\n      \"AWS_SECRET_ACCESS_KEY\": \"codebuild:codebuild-aws_secret_access_key\"\n    },\n    \"variables\": {\n      \"NODE_OPTIONS\": \"--unhandled-rejections=strict --max_old_space_size=8196\"\n    }\n  }\n}",
+          "Location": "https://github.com/bgap/anyupp.git",
+          "ReportBuildStatus": true,
+          "Type": "GITHUB"
+        },
+        "EncryptionKey": "alias/aws/s3",
+        "Triggers": {
+          "FilterGroups": [
+            [
+              {
+                "Pattern": "PULL_REQUEST_CREATED",
+                "Type": "EVENT"
+              },
+              {
+                "Pattern": "refs/heads/dev",
+                "Type": "BASE_REF"
+              }
+            ],
+            [
+              {
+                "Pattern": "PULL_REQUEST_UPDATED",
+                "Type": "EVENT"
+              },
+              {
+                "Pattern": "refs/heads/dev",
+                "Type": "BASE_REF"
+              }
+            ]
+          ],
+          "Webhook": true
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "prod-anyupp-cicd-DevPullRequestBuildStack/AnyUpp:DEV Verify Pull Request/Resource"
+      }
+    },
+    "BuildNotification": {
+      "Type": "AWS::CodeStarNotifications::NotificationRule",
+      "Properties": {
+        "DetailType": "FULL",
+        "EventTypeIds": [
+          "codebuild-project-build-state-in-progress",
+          "codebuild-project-build-state-failed",
+          "codebuild-project-build-state-succeeded"
+        ],
+        "Name": "AnyUppPRNotificationdev",
+        "Resource": {
+          "Fn::GetAtt": [
+            "AnyUppDEVVerifyPullRequest56B0DA67",
+            "Arn"
+          ]
+        },
+        "Targets": [
+          {
+            "TargetAddress": {
+              "Fn::ImportValue": "prod-anyupp-cicd-SlackNotifications:ExportsOutputRefBuildSlacknotificationchannel08420E0FEE05029A"
+            },
+            "TargetType": "AWSChatbotSlack"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "prod-anyupp-cicd-DevPullRequestBuildStack/BuildNotification"
+      }
+    },
+    "CDKMetadata": {
+      "Type": "AWS::CDK::Metadata",
+      "Properties": {
+        "Analytics": "v2:deflate64:H4sIAAAAAAAAE02NzQqDMBCEn8V7XA3Ue8F7kfQJ0rjCakwgPy0l5N2baAs9zTD7zSwH3g/QN1f58q2aty4p6xDSPUi1sXExk3Ryx4COCfQ2OoVstMYHF1Wo91+aWV0o7RkfkfQMaXJ2xRP62sxI7pCE1XhUq05Wk3of0OEyqxM+SGdsoIWUDFT+QQFuf4GIGnNmprCw+u7JL8AHGJrVE7UumkA7gjj1AxsrOLLkAAAA"
+      },
+      "Metadata": {
+        "aws:cdk:path": "prod-anyupp-cicd-DevPullRequestBuildStack/CDKMetadata/Default"
+      }
+    }
+  },
+  "Parameters": {
+    "devanyuppbackendgeneratedConsumerWebUserPoolClientIdParam0Parameter": {
+      "Type": "AWS::SSM::Parameter::Value<String>",
+      "Default": "/dev-anyupp-backend/generated/ConsumerWebUserPoolClientId"
+    },
+    "devanyuppbackendgeneratedConsumerNativeUserPoolClientIdParam0Parameter": {
+      "Type": "AWS::SSM::Parameter::Value<String>",
+      "Default": "/dev-anyupp-backend/generated/ConsumerNativeUserPoolClientId"
+    },
+    "devanyuppbackendgeneratedConsumerUserPoolDomainParam0Parameter": {
+      "Type": "AWS::SSM::Parameter::Value<String>",
+      "Default": "/dev-anyupp-backend/generated/ConsumerUserPoolDomain"
+    },
+    "devanyuppbackendgeneratedIdentityPoolIdParam0Parameter": {
+      "Type": "AWS::SSM::Parameter::Value<String>",
+      "Default": "/dev-anyupp-backend/generated/IdentityPoolId"
+    },
+    "devanyuppbackendgeneratedAnyuppGraphqlApiKeyParam0Parameter": {
+      "Type": "AWS::SSM::Parameter::Value<String>",
+      "Default": "/dev-anyupp-backend/generated/AnyuppGraphqlApiKey"
+    },
+    "devanyuppbackendgeneratedAnyuppGraphqlApiUrlParam0Parameter": {
+      "Type": "AWS::SSM::Parameter::Value<String>",
+      "Default": "/dev-anyupp-backend/generated/AnyuppGraphqlApiUrl"
+    },
+    "devanyuppbackendgeneratedStripeWebhookEndpointParam0Parameter": {
+      "Type": "AWS::SSM::Parameter::Value<String>",
+      "Default": "/dev-anyupp-backend/generated/StripeWebhookEndpoint"
+    },
+    "devanyuppbackendgeneratedAdminSiteUrlParam0Parameter": {
+      "Type": "AWS::SSM::Parameter::Value<String>",
+      "Default": "/dev-anyupp-backend/generated/AdminSiteUrl"
+    },
+    "devanyuppbackendgeneratedAdminWebUserPoolClientIdParam0Parameter": {
+      "Type": "AWS::SSM::Parameter::Value<String>",
+      "Default": "/dev-anyupp-backend/generated/AdminWebUserPoolClientId"
+    },
+    "devanyuppbackendgeneratedAdminNativeUserPoolClientIdParam0Parameter": {
+      "Type": "AWS::SSM::Parameter::Value<String>",
+      "Default": "/dev-anyupp-backend/generated/AdminNativeUserPoolClientId"
+    },
+    "devanyuppbackendgeneratedAdminUserPoolIdParam0Parameter": {
+      "Type": "AWS::SSM::Parameter::Value<String>",
+      "Default": "/dev-anyupp-backend/generated/AdminUserPoolId"
+    },
+    "devanyuppbackendgeneratedAdminUserPoolDomainParam0Parameter": {
+      "Type": "AWS::SSM::Parameter::Value<String>",
+      "Default": "/dev-anyupp-backend/generated/AdminUserPoolDomain"
+    },
+    "devanyuppbackendgeneratedCrudApiAppIdParam0Parameter": {
+      "Type": "AWS::SSM::Parameter::Value<String>",
+      "Default": "/dev-anyupp-backend/generated/CrudApiAppId"
+    },
+    "devanyuppbackendGoogleClientIdParam0Parameter": {
+      "Type": "AWS::SSM::Parameter::Value<String>",
+      "Default": "/dev-anyupp-backend/GoogleClientId"
+    },
+    "devanyuppbackendStripePublishableKeyParam0Parameter": {
+      "Type": "AWS::SSM::Parameter::Value<String>",
+      "Default": "/dev-anyupp-backend/StripePublishableKey"
+    },
+    "devanyuppbackendFacebookAppIdParam0Parameter": {
+      "Type": "AWS::SSM::Parameter::Value<String>",
+      "Default": "/dev-anyupp-backend/FacebookAppId"
+    },
+    "devanyuppbackendGoogleApiKeyParam0Parameter": {
+      "Type": "AWS::SSM::Parameter::Value<String>",
+      "Default": "/dev-anyupp-backend/GoogleApiKey"
+    }
+  }
+}

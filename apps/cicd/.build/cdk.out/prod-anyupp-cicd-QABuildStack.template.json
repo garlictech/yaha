@@ -1,0 +1,1436 @@
+{
+  "Parameters": {
+    "AdminSiteUrlParamDevParameter": {
+      "Type": "AWS::SSM::Parameter::Value<String>",
+      "Default": "/qa-anyupp-backend/generated/AdminSiteUrl"
+    },
+    "qaanyuppbackendgeneratedConsumerWebUserPoolClientIdParam0Parameter": {
+      "Type": "AWS::SSM::Parameter::Value<String>",
+      "Default": "/qa-anyupp-backend/generated/ConsumerWebUserPoolClientId"
+    },
+    "qaanyuppbackendgeneratedConsumerNativeUserPoolClientIdParam0Parameter": {
+      "Type": "AWS::SSM::Parameter::Value<String>",
+      "Default": "/qa-anyupp-backend/generated/ConsumerNativeUserPoolClientId"
+    },
+    "qaanyuppbackendgeneratedConsumerUserPoolDomainParam0Parameter": {
+      "Type": "AWS::SSM::Parameter::Value<String>",
+      "Default": "/qa-anyupp-backend/generated/ConsumerUserPoolDomain"
+    },
+    "qaanyuppbackendgeneratedIdentityPoolIdParam0Parameter": {
+      "Type": "AWS::SSM::Parameter::Value<String>",
+      "Default": "/qa-anyupp-backend/generated/IdentityPoolId"
+    },
+    "qaanyuppbackendgeneratedAnyuppGraphqlApiKeyParam0Parameter": {
+      "Type": "AWS::SSM::Parameter::Value<String>",
+      "Default": "/qa-anyupp-backend/generated/AnyuppGraphqlApiKey"
+    },
+    "qaanyuppbackendgeneratedAnyuppGraphqlApiUrlParam0Parameter": {
+      "Type": "AWS::SSM::Parameter::Value<String>",
+      "Default": "/qa-anyupp-backend/generated/AnyuppGraphqlApiUrl"
+    },
+    "qaanyuppbackendgeneratedStripeWebhookEndpointParam0Parameter": {
+      "Type": "AWS::SSM::Parameter::Value<String>",
+      "Default": "/qa-anyupp-backend/generated/StripeWebhookEndpoint"
+    },
+    "qaanyuppbackendgeneratedAdminSiteUrlParam0Parameter": {
+      "Type": "AWS::SSM::Parameter::Value<String>",
+      "Default": "/qa-anyupp-backend/generated/AdminSiteUrl"
+    },
+    "qaanyuppbackendgeneratedAdminWebUserPoolClientIdParam0Parameter": {
+      "Type": "AWS::SSM::Parameter::Value<String>",
+      "Default": "/qa-anyupp-backend/generated/AdminWebUserPoolClientId"
+    },
+    "qaanyuppbackendgeneratedAdminNativeUserPoolClientIdParam0Parameter": {
+      "Type": "AWS::SSM::Parameter::Value<String>",
+      "Default": "/qa-anyupp-backend/generated/AdminNativeUserPoolClientId"
+    },
+    "qaanyuppbackendgeneratedAdminUserPoolIdParam0Parameter": {
+      "Type": "AWS::SSM::Parameter::Value<String>",
+      "Default": "/qa-anyupp-backend/generated/AdminUserPoolId"
+    },
+    "qaanyuppbackendgeneratedAdminUserPoolDomainParam0Parameter": {
+      "Type": "AWS::SSM::Parameter::Value<String>",
+      "Default": "/qa-anyupp-backend/generated/AdminUserPoolDomain"
+    },
+    "qaanyuppbackendgeneratedCrudApiAppIdParam0Parameter": {
+      "Type": "AWS::SSM::Parameter::Value<String>",
+      "Default": "/qa-anyupp-backend/generated/CrudApiAppId"
+    },
+    "qaanyuppbackendGoogleClientIdParam0Parameter": {
+      "Type": "AWS::SSM::Parameter::Value<String>",
+      "Default": "/qa-anyupp-backend/GoogleClientId"
+    },
+    "qaanyuppbackendStripePublishableKeyParam0Parameter": {
+      "Type": "AWS::SSM::Parameter::Value<String>",
+      "Default": "/qa-anyupp-backend/StripePublishableKey"
+    },
+    "qaanyuppbackendFacebookAppIdParam0Parameter": {
+      "Type": "AWS::SSM::Parameter::Value<String>",
+      "Default": "/qa-anyupp-backend/FacebookAppId"
+    },
+    "qaanyuppbackendGoogleApiKeyParam0Parameter": {
+      "Type": "AWS::SSM::Parameter::Value<String>",
+      "Default": "/qa-anyupp-backend/GoogleApiKey"
+    }
+  },
+  "Resources": {
+    "BuildRoleB7C66CB2": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "codebuild.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "prod-anyupp-cicd-QABuildStack/Build/Role/Resource"
+      }
+    },
+    "BuildRoleDefaultPolicyEAC4E6D6": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":logs:eu-west-1:568276182587:log-group:/aws/codebuild/",
+                      {
+                        "Ref": "Build45A36621"
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":logs:eu-west-1:568276182587:log-group:/aws/codebuild/",
+                      {
+                        "Ref": "Build45A36621"
+                      },
+                      ":*"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Action": [
+                "codebuild:CreateReportGroup",
+                "codebuild:CreateReport",
+                "codebuild:UpdateReport",
+                "codebuild:BatchPutTestCases",
+                "codebuild:BatchPutCodeCoverages"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":codebuild:eu-west-1:568276182587:report-group/",
+                    {
+                      "Ref": "Build45A36621"
+                    },
+                    "-*"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "secretsmanager:GetSecretValue",
+                "secretsmanager:DescribeSecret"
+              ],
+              "Effect": "Allow",
+              "Resource": "arn:aws:secretsmanager:eu-west-1:568276182587:secret:codebuild-Z12nwS"
+            },
+            {
+              "Action": [
+                "ssm:DescribeParameters",
+                "ssm:GetParameters",
+                "ssm:GetParameter",
+                "ssm:GetParameterHistory"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":ssm:eu-west-1:568276182587:parameter/qa-anyupp-backend/generated/ConsumerWebUserPoolClientId"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "ssm:DescribeParameters",
+                "ssm:GetParameters",
+                "ssm:GetParameter",
+                "ssm:GetParameterHistory"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":ssm:eu-west-1:568276182587:parameter/qa-anyupp-backend/generated/ConsumerNativeUserPoolClientId"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "ssm:DescribeParameters",
+                "ssm:GetParameters",
+                "ssm:GetParameter",
+                "ssm:GetParameterHistory"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":ssm:eu-west-1:568276182587:parameter/qa-anyupp-backend/generated/ConsumerUserPoolDomain"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "ssm:DescribeParameters",
+                "ssm:GetParameters",
+                "ssm:GetParameter",
+                "ssm:GetParameterHistory"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":ssm:eu-west-1:568276182587:parameter/qa-anyupp-backend/generated/IdentityPoolId"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "ssm:DescribeParameters",
+                "ssm:GetParameters",
+                "ssm:GetParameter",
+                "ssm:GetParameterHistory"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":ssm:eu-west-1:568276182587:parameter/qa-anyupp-backend/generated/AnyuppGraphqlApiKey"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "ssm:DescribeParameters",
+                "ssm:GetParameters",
+                "ssm:GetParameter",
+                "ssm:GetParameterHistory"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":ssm:eu-west-1:568276182587:parameter/qa-anyupp-backend/generated/AnyuppGraphqlApiUrl"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "ssm:DescribeParameters",
+                "ssm:GetParameters",
+                "ssm:GetParameter",
+                "ssm:GetParameterHistory"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":ssm:eu-west-1:568276182587:parameter/qa-anyupp-backend/generated/StripeWebhookEndpoint"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "ssm:DescribeParameters",
+                "ssm:GetParameters",
+                "ssm:GetParameter",
+                "ssm:GetParameterHistory"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":ssm:eu-west-1:568276182587:parameter/qa-anyupp-backend/generated/AdminSiteUrl"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "ssm:DescribeParameters",
+                "ssm:GetParameters",
+                "ssm:GetParameter",
+                "ssm:GetParameterHistory"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":ssm:eu-west-1:568276182587:parameter/qa-anyupp-backend/generated/AdminWebUserPoolClientId"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "ssm:DescribeParameters",
+                "ssm:GetParameters",
+                "ssm:GetParameter",
+                "ssm:GetParameterHistory"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":ssm:eu-west-1:568276182587:parameter/qa-anyupp-backend/generated/AdminNativeUserPoolClientId"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "ssm:DescribeParameters",
+                "ssm:GetParameters",
+                "ssm:GetParameter",
+                "ssm:GetParameterHistory"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":ssm:eu-west-1:568276182587:parameter/qa-anyupp-backend/generated/AdminUserPoolId"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "ssm:DescribeParameters",
+                "ssm:GetParameters",
+                "ssm:GetParameter",
+                "ssm:GetParameterHistory"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":ssm:eu-west-1:568276182587:parameter/qa-anyupp-backend/generated/AdminUserPoolDomain"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "ssm:DescribeParameters",
+                "ssm:GetParameters",
+                "ssm:GetParameter",
+                "ssm:GetParameterHistory"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":ssm:eu-west-1:568276182587:parameter/qa-anyupp-backend/generated/CrudApiAppId"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "ssm:DescribeParameters",
+                "ssm:GetParameters",
+                "ssm:GetParameter",
+                "ssm:GetParameterHistory"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":ssm:eu-west-1:568276182587:parameter/qa-anyupp-backend/GoogleClientId"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "ssm:DescribeParameters",
+                "ssm:GetParameters",
+                "ssm:GetParameter",
+                "ssm:GetParameterHistory"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":ssm:eu-west-1:568276182587:parameter/qa-anyupp-backend/StripePublishableKey"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "ssm:DescribeParameters",
+                "ssm:GetParameters",
+                "ssm:GetParameter",
+                "ssm:GetParameterHistory"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":ssm:eu-west-1:568276182587:parameter/qa-anyupp-backend/FacebookAppId"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "ssm:DescribeParameters",
+                "ssm:GetParameters",
+                "ssm:GetParameter",
+                "ssm:GetParameterHistory"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":ssm:eu-west-1:568276182587:parameter/qa-anyupp-backend/GoogleApiKey"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "s3:GetObject*",
+                "s3:GetBucket*",
+                "s3:List*",
+                "s3:DeleteObject*",
+                "s3:PutObject*",
+                "s3:Abort*"
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "PipelineArtifactsBucket22248F97",
+                    "Arn"
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      {
+                        "Fn::GetAtt": [
+                          "PipelineArtifactsBucket22248F97",
+                          "Arn"
+                        ]
+                      },
+                      "/*"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Action": [
+                "kms:Decrypt",
+                "kms:DescribeKey",
+                "kms:Encrypt",
+                "kms:ReEncrypt*",
+                "kms:GenerateDataKey*"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "PipelineArtifactsBucketEncryptionKey01D58D69",
+                  "Arn"
+                ]
+              }
+            },
+            {
+              "Action": [
+                "kms:Decrypt",
+                "kms:Encrypt",
+                "kms:ReEncrypt*",
+                "kms:GenerateDataKey*"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "PipelineArtifactsBucketEncryptionKey01D58D69",
+                  "Arn"
+                ]
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "BuildRoleDefaultPolicyEAC4E6D6",
+        "Roles": [
+          {
+            "Ref": "BuildRoleB7C66CB2"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "prod-anyupp-cicd-QABuildStack/Build/Role/DefaultPolicy/Resource"
+      }
+    },
+    "Build45A36621": {
+      "Type": "AWS::CodeBuild::Project",
+      "Properties": {
+        "Artifacts": {
+          "Type": "CODEPIPELINE"
+        },
+        "Environment": {
+          "ComputeType": "BUILD_GENERAL1_MEDIUM",
+          "Image": "aws/codebuild/amazonlinux2-x86_64-standard:3.0",
+          "ImagePullCredentialsType": "CODEBUILD",
+          "PrivilegedMode": false,
+          "Type": "LINUX_CONTAINER"
+        },
+        "ServiceRole": {
+          "Fn::GetAtt": [
+            "BuildRoleB7C66CB2",
+            "Arn"
+          ]
+        },
+        "Source": {
+          "BuildSpec": {
+            "Fn::Join": [
+              "",
+              [
+                "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"install\": {\n      \"commands\": [\n        \"chmod +x ./tools/*.sh\",\n        \"./tools/setup-aws-environment.sh\",\n        \"./tools/install-nodejs-14.sh\",\n        \"yarn --frozen-lockfile\",\n        \"npm install -g @aws-amplify/cli appcenter-cli\"\n      ]\n    },\n    \"build\": {\n      \"commands\": [\n        \"./tools/build-workspace.sh anyupp-backend qa\",\n        \"git clone https://github.com/flutter/flutter.git -b stable --depth 1 /tmp/flutter\",\n        \"yarn nx deploy crud-backend\",\n        \"yarn nx deploy anyupp-backend --stage=qa --app=anyupp-backend\",\n        \"export PATH=$PATH:/tmp/flutter/bin\",\n        \"flutter doctor\",\n        \"yarn nx buildApk anyupp-mobile\"\n      ]\n    },\n    \"post_build\": {\n      \"commands\": [\n        \"tar -cvf ${CODEBUILD_RESOLVED_SOURCE_VERSION}.tgz apps/anyupp-mobile/lib/awsconfiguration.dart\",\n        \"aws s3 cp ${CODEBUILD_RESOLVED_SOURCE_VERSION}.tgz s3://anyupp-build-artifacts-qa/\",\n        \"echo 'Pushing Android APK to appcenter'\",\n        \"./tools/publish-to-appcenter.sh qa android\",\n        \"echo 'Triggering ios app build in appcenter...'\",\n        \"./tools/trigger-appcenter-builds.sh qa ios\",\n        \"yarn nx test integration-tests-universal --codeCoverage --coverageReporters=clover\",\n        \"yarn nx test integration-tests-angular --codeCoverage --coverageReporters=clover\",\n        \"yarn nx e2e-remote admin-e2e --headless --baseUrl=",
+                {
+                  "Ref": "AdminSiteUrlParamDevParameter"
+                },
+                "\",\n        \"yarn cucumber:report\",\n        \"yarn cypress:generate:html:report\"\n      ]\n    }\n  },\n  \"artifacts\": {\n    \"files\": [\n      \"apps/anyupp-backend/cdk.out/**/*\"\n    ]\n  },\n  \"reports\": {\n    \"cypressReports\": {\n      \"files\": [\n        \"cyreport/cucumber-json/**/*\"\n      ],\n      \"file-format\": \"CUCUMBERJSON\"\n    },\n    \"coverage\": {\n      \"files\": [\n        \"coverage/**/*\"\n      ],\n      \"file-format\": \"CLOVERXML\"\n    }\n  },\n  \"env\": {\n    \"secrets-manager\": {\n      \"AWS_ACCESS_KEY_ID\": \"codebuild:codebuild-aws_access_key_id\",\n      \"AWS_SECRET_ACCESS_KEY\": \"codebuild:codebuild-aws_secret_access_key\",\n      \"APP_CENTER_TOKEN\": \"codebuild:codebuild-appcenter-token\"\n    },\n    \"variables\": {\n      \"NODE_OPTIONS\": \"--unhandled-rejections=strict --max_old_space_size=8196\"\n    }\n  }\n}"
+              ]
+            ]
+          },
+          "Type": "CODEPIPELINE"
+        },
+        "Cache": {
+          "Modes": [
+            "LOCAL_CUSTOM_CACHE"
+          ],
+          "Type": "LOCAL"
+        },
+        "EncryptionKey": {
+          "Fn::GetAtt": [
+            "PipelineArtifactsBucketEncryptionKey01D58D69",
+            "Arn"
+          ]
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "prod-anyupp-cicd-QABuildStack/Build/Resource"
+      }
+    },
+    "ArtifactBucket7410C9EF": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "BucketName": "anyupp-build-artifacts-qa",
+        "LifecycleConfiguration": {
+          "Rules": [
+            {
+              "ExpirationInDays": 1,
+              "Status": "Enabled"
+            }
+          ]
+        }
+      },
+      "UpdateReplacePolicy": "Delete",
+      "DeletionPolicy": "Delete",
+      "Metadata": {
+        "aws:cdk:path": "prod-anyupp-cicd-QABuildStack/ArtifactBucket/Resource"
+      }
+    },
+    "PipelineArtifactsBucketEncryptionKey01D58D69": {
+      "Type": "AWS::KMS::Key",
+      "Properties": {
+        "KeyPolicy": {
+          "Statement": [
+            {
+              "Action": [
+                "kms:Create*",
+                "kms:Describe*",
+                "kms:Enable*",
+                "kms:List*",
+                "kms:Put*",
+                "kms:Update*",
+                "kms:Revoke*",
+                "kms:Disable*",
+                "kms:Get*",
+                "kms:Delete*",
+                "kms:ScheduleKeyDeletion",
+                "kms:CancelKeyDeletion",
+                "kms:GenerateDataKey",
+                "kms:TagResource",
+                "kms:UntagResource"
+              ],
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":iam::568276182587:root"
+                    ]
+                  ]
+                }
+              },
+              "Resource": "*"
+            },
+            {
+              "Action": [
+                "kms:Decrypt",
+                "kms:DescribeKey",
+                "kms:Encrypt",
+                "kms:ReEncrypt*",
+                "kms:GenerateDataKey*"
+              ],
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": {
+                  "Fn::GetAtt": [
+                    "PipelineRoleD68726F7",
+                    "Arn"
+                  ]
+                }
+              },
+              "Resource": "*"
+            },
+            {
+              "Action": [
+                "kms:Decrypt",
+                "kms:DescribeKey",
+                "kms:Encrypt",
+                "kms:ReEncrypt*",
+                "kms:GenerateDataKey*"
+              ],
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": {
+                  "Fn::GetAtt": [
+                    "BuildRoleB7C66CB2",
+                    "Arn"
+                  ]
+                }
+              },
+              "Resource": "*"
+            },
+            {
+              "Action": [
+                "kms:Decrypt",
+                "kms:Encrypt",
+                "kms:ReEncrypt*",
+                "kms:GenerateDataKey*"
+              ],
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": {
+                  "Fn::GetAtt": [
+                    "BuildRoleB7C66CB2",
+                    "Arn"
+                  ]
+                }
+              },
+              "Resource": "*"
+            },
+            {
+              "Action": [
+                "kms:Decrypt",
+                "kms:DescribeKey"
+              ],
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": {
+                  "Fn::GetAtt": [
+                    "PipelineFinalizationDeleteSeederRoleF8B69054",
+                    "Arn"
+                  ]
+                }
+              },
+              "Resource": "*"
+            }
+          ],
+          "Version": "2012-10-17"
+        }
+      },
+      "UpdateReplacePolicy": "Delete",
+      "DeletionPolicy": "Delete",
+      "Metadata": {
+        "aws:cdk:path": "prod-anyupp-cicd-QABuildStack/Pipeline/ArtifactsBucketEncryptionKey/Resource"
+      }
+    },
+    "PipelineArtifactsBucketEncryptionKeyAlias5C510EEE": {
+      "Type": "AWS::KMS::Alias",
+      "Properties": {
+        "AliasName": "alias/codepipeline-prodanyuppcicdqabuildstackpipelineccbc70a8",
+        "TargetKeyId": {
+          "Fn::GetAtt": [
+            "PipelineArtifactsBucketEncryptionKey01D58D69",
+            "Arn"
+          ]
+        }
+      },
+      "UpdateReplacePolicy": "Delete",
+      "DeletionPolicy": "Delete",
+      "Metadata": {
+        "aws:cdk:path": "prod-anyupp-cicd-QABuildStack/Pipeline/ArtifactsBucketEncryptionKeyAlias/Resource"
+      }
+    },
+    "PipelineArtifactsBucket22248F97": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "BucketEncryption": {
+          "ServerSideEncryptionConfiguration": [
+            {
+              "ServerSideEncryptionByDefault": {
+                "KMSMasterKeyID": {
+                  "Fn::GetAtt": [
+                    "PipelineArtifactsBucketEncryptionKey01D58D69",
+                    "Arn"
+                  ]
+                },
+                "SSEAlgorithm": "aws:kms"
+              }
+            }
+          ]
+        },
+        "PublicAccessBlockConfiguration": {
+          "BlockPublicAcls": true,
+          "BlockPublicPolicy": true,
+          "IgnorePublicAcls": true,
+          "RestrictPublicBuckets": true
+        }
+      },
+      "UpdateReplacePolicy": "Retain",
+      "DeletionPolicy": "Retain",
+      "Metadata": {
+        "aws:cdk:path": "prod-anyupp-cicd-QABuildStack/Pipeline/ArtifactsBucket/Resource"
+      }
+    },
+    "PipelineRoleD68726F7": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "codepipeline.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "prod-anyupp-cicd-QABuildStack/Pipeline/Role/Resource"
+      }
+    },
+    "PipelineRoleDefaultPolicyC7A05455": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "s3:GetObject*",
+                "s3:GetBucket*",
+                "s3:List*",
+                "s3:DeleteObject*",
+                "s3:PutObject*",
+                "s3:Abort*"
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "PipelineArtifactsBucket22248F97",
+                    "Arn"
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      {
+                        "Fn::GetAtt": [
+                          "PipelineArtifactsBucket22248F97",
+                          "Arn"
+                        ]
+                      },
+                      "/*"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Action": [
+                "kms:Decrypt",
+                "kms:DescribeKey",
+                "kms:Encrypt",
+                "kms:ReEncrypt*",
+                "kms:GenerateDataKey*"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "PipelineArtifactsBucketEncryptionKey01D58D69",
+                  "Arn"
+                ]
+              }
+            },
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "PipelineBuildAndDeployCodePipelineActionRoleF42A7164",
+                  "Arn"
+                ]
+              }
+            },
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "PipelineFinalizationDeleteSeederCodePipelineActionRoleA8A9BDFA",
+                  "Arn"
+                ]
+              }
+            },
+            {
+              "Action": [
+                "s3:DeleteObject*",
+                "s3:PutObject*",
+                "s3:Abort*"
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "ArtifactBucket7410C9EF",
+                    "Arn"
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      {
+                        "Fn::GetAtt": [
+                          "ArtifactBucket7410C9EF",
+                          "Arn"
+                        ]
+                      },
+                      "/*"
+                    ]
+                  ]
+                }
+              ]
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "PipelineRoleDefaultPolicyC7A05455",
+        "Roles": [
+          {
+            "Ref": "PipelineRoleD68726F7"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "prod-anyupp-cicd-QABuildStack/Pipeline/Role/DefaultPolicy/Resource"
+      }
+    },
+    "PipelineC660917D": {
+      "Type": "AWS::CodePipeline::Pipeline",
+      "Properties": {
+        "RoleArn": {
+          "Fn::GetAtt": [
+            "PipelineRoleD68726F7",
+            "Arn"
+          ]
+        },
+        "Stages": [
+          {
+            "Actions": [
+              {
+                "ActionTypeId": {
+                  "Category": "Source",
+                  "Owner": "ThirdParty",
+                  "Provider": "GitHub",
+                  "Version": "1"
+                },
+                "Configuration": {
+                  "Owner": "bgap",
+                  "Repo": "anyupp",
+                  "Branch": "qa",
+                  "OAuthToken": "{{resolve:secretsmanager:arn:aws:secretsmanager:eu-west-1:568276182587:secret:GithubAccessToken-2xxxSw:SecretString:::}}",
+                  "PollForSourceChanges": false
+                },
+                "Name": "CodeCommit_CloneSource",
+                "OutputArtifacts": [
+                  {
+                    "Name": "Artifact_CloneSource_CodeCommit_CloneSource"
+                  }
+                ],
+                "RunOrder": 1
+              }
+            ],
+            "Name": "CloneSource"
+          },
+          {
+            "Actions": [
+              {
+                "ActionTypeId": {
+                  "Category": "Build",
+                  "Owner": "AWS",
+                  "Provider": "CodeBuild",
+                  "Version": "1"
+                },
+                "Configuration": {
+                  "ProjectName": {
+                    "Ref": "Build45A36621"
+                  }
+                },
+                "InputArtifacts": [
+                  {
+                    "Name": "Artifact_CloneSource_CodeCommit_CloneSource"
+                  }
+                ],
+                "Name": "BuildAndDeploy",
+                "OutputArtifacts": [
+                  {
+                    "Name": "buildOutput"
+                  }
+                ],
+                "RoleArn": {
+                  "Fn::GetAtt": [
+                    "PipelineBuildAndDeployCodePipelineActionRoleF42A7164",
+                    "Arn"
+                  ]
+                },
+                "RunOrder": 1
+              }
+            ],
+            "Name": "BuildAndDeploy"
+          },
+          {
+            "Actions": [
+              {
+                "ActionTypeId": {
+                  "Category": "Deploy",
+                  "Owner": "AWS",
+                  "Provider": "CloudFormation",
+                  "Version": "1"
+                },
+                "Configuration": {
+                  "StackName": "qa-anyupp-backend-seeder",
+                  "Capabilities": "CAPABILITY_NAMED_IAM",
+                  "RoleArn": {
+                    "Fn::GetAtt": [
+                      "PipelineFinalizationDeleteSeederRoleF8B69054",
+                      "Arn"
+                    ]
+                  },
+                  "ActionMode": "DELETE_ONLY"
+                },
+                "Name": "DeleteSeeder",
+                "RoleArn": {
+                  "Fn::GetAtt": [
+                    "PipelineFinalizationDeleteSeederCodePipelineActionRoleA8A9BDFA",
+                    "Arn"
+                  ]
+                },
+                "RunOrder": 1
+              }
+            ],
+            "Name": "Finalization"
+          }
+        ],
+        "ArtifactStore": {
+          "EncryptionKey": {
+            "Id": {
+              "Fn::GetAtt": [
+                "PipelineArtifactsBucketEncryptionKey01D58D69",
+                "Arn"
+              ]
+            },
+            "Type": "KMS"
+          },
+          "Location": {
+            "Ref": "PipelineArtifactsBucket22248F97"
+          },
+          "Type": "S3"
+        }
+      },
+      "DependsOn": [
+        "PipelineRoleDefaultPolicyC7A05455",
+        "PipelineRoleD68726F7"
+      ],
+      "Metadata": {
+        "aws:cdk:path": "prod-anyupp-cicd-QABuildStack/Pipeline/Resource"
+      }
+    },
+    "PipelineCloneSourceCodeCommitCloneSourceWebhookResource796B8B22": {
+      "Type": "AWS::CodePipeline::Webhook",
+      "Properties": {
+        "Authentication": "GITHUB_HMAC",
+        "AuthenticationConfiguration": {
+          "SecretToken": "{{resolve:secretsmanager:arn:aws:secretsmanager:eu-west-1:568276182587:secret:GithubAccessToken-2xxxSw:SecretString:::}}"
+        },
+        "Filters": [
+          {
+            "JsonPath": "$.ref",
+            "MatchEquals": "refs/heads/{Branch}"
+          }
+        ],
+        "TargetAction": "CodeCommit_CloneSource",
+        "TargetPipeline": {
+          "Ref": "PipelineC660917D"
+        },
+        "TargetPipelineVersion": 1,
+        "RegisterWithThirdParty": true
+      },
+      "Metadata": {
+        "aws:cdk:path": "prod-anyupp-cicd-QABuildStack/Pipeline/CloneSource/CodeCommit_CloneSource/WebhookResource"
+      }
+    },
+    "PipelineBuildAndDeployCodePipelineActionRoleF42A7164": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":iam::568276182587:root"
+                    ]
+                  ]
+                }
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "prod-anyupp-cicd-QABuildStack/Pipeline/BuildAndDeploy/BuildAndDeploy/CodePipelineActionRole/Resource"
+      }
+    },
+    "PipelineBuildAndDeployCodePipelineActionRoleDefaultPolicyBFAD9166": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "codebuild:BatchGetBuilds",
+                "codebuild:StartBuild",
+                "codebuild:StopBuild"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "Build45A36621",
+                  "Arn"
+                ]
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "PipelineBuildAndDeployCodePipelineActionRoleDefaultPolicyBFAD9166",
+        "Roles": [
+          {
+            "Ref": "PipelineBuildAndDeployCodePipelineActionRoleF42A7164"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "prod-anyupp-cicd-QABuildStack/Pipeline/BuildAndDeploy/BuildAndDeploy/CodePipelineActionRole/DefaultPolicy/Resource"
+      }
+    },
+    "PipelineFinalizationDeleteSeederCodePipelineActionRoleA8A9BDFA": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":iam::568276182587:root"
+                    ]
+                  ]
+                }
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "prod-anyupp-cicd-QABuildStack/Pipeline/Finalization/DeleteSeeder/CodePipelineActionRole/Resource"
+      }
+    },
+    "PipelineFinalizationDeleteSeederCodePipelineActionRoleDefaultPolicy72113444": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "iam:PassRole",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "PipelineFinalizationDeleteSeederRoleF8B69054",
+                  "Arn"
+                ]
+              }
+            },
+            {
+              "Action": [
+                "cloudformation:DeleteStack",
+                "cloudformation:DescribeStack*"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":cloudformation:eu-west-1:568276182587:stack/qa-anyupp-backend-seeder/*"
+                  ]
+                ]
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "PipelineFinalizationDeleteSeederCodePipelineActionRoleDefaultPolicy72113444",
+        "Roles": [
+          {
+            "Ref": "PipelineFinalizationDeleteSeederCodePipelineActionRoleA8A9BDFA"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "prod-anyupp-cicd-QABuildStack/Pipeline/Finalization/DeleteSeeder/CodePipelineActionRole/DefaultPolicy/Resource"
+      }
+    },
+    "PipelineFinalizationDeleteSeederRoleF8B69054": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "cloudformation.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "prod-anyupp-cicd-QABuildStack/Pipeline/Finalization/DeleteSeeder/Role/Resource"
+      }
+    },
+    "PipelineFinalizationDeleteSeederRoleDefaultPolicy678E53B5": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "s3:GetObject*",
+                "s3:GetBucket*",
+                "s3:List*"
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "PipelineArtifactsBucket22248F97",
+                    "Arn"
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      {
+                        "Fn::GetAtt": [
+                          "PipelineArtifactsBucket22248F97",
+                          "Arn"
+                        ]
+                      },
+                      "/*"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Action": [
+                "kms:Decrypt",
+                "kms:DescribeKey"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "PipelineArtifactsBucketEncryptionKey01D58D69",
+                  "Arn"
+                ]
+              }
+            },
+            {
+              "Action": "*",
+              "Effect": "Allow",
+              "Resource": "*"
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "PipelineFinalizationDeleteSeederRoleDefaultPolicy678E53B5",
+        "Roles": [
+          {
+            "Ref": "PipelineFinalizationDeleteSeederRoleF8B69054"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "prod-anyupp-cicd-QABuildStack/Pipeline/Finalization/DeleteSeeder/Role/DefaultPolicy/Resource"
+      }
+    },
+    "BuildNotification": {
+      "Type": "AWS::CodeStarNotifications::NotificationRule",
+      "Properties": {
+        "DetailType": "FULL",
+        "EventTypeIds": [
+          "codepipeline-pipeline-action-execution-failed",
+          "codepipeline-pipeline-action-execution-succeeded",
+          "codepipeline-pipeline-action-execution-started",
+          "codepipeline-pipeline-action-execution-canceled"
+        ],
+        "Name": "AnyUppBuildNotificationqa",
+        "Resource": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":codepipeline:eu-west-1:568276182587:",
+              {
+                "Ref": "PipelineC660917D"
+              }
+            ]
+          ]
+        },
+        "Targets": [
+          {
+            "TargetAddress": {
+              "Fn::ImportValue": "prod-anyupp-cicd-SlackNotifications:ExportsOutputRefBuildSlacknotificationchannel08420E0FEE05029A"
+            },
+            "TargetType": "AWSChatbotSlack"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "prod-anyupp-cicd-QABuildStack/BuildNotification"
+      }
+    },
+    "CDKMetadata": {
+      "Type": "AWS::CDK::Metadata",
+      "Properties": {
+        "Analytics": "v2:deflate64:H4sIAAAAAAAAE02PzU7DMBCEn6X37bYR5A70iISicODsOluxseOt/ANClt+d2Cmipxnvznwrd9gdezzuntR32OvJHLIWT5jfo9IGThc3KK8WiuRhpCDJa4KTuBB90rHu/6YFKmFtT3RObCfMA1/JsqPBy0xb+GYLsFowj2KpIaoOYln/tFBzBcID5pekDbXq5grUA9cb+f9G6935Dzp/ipgCZgmYX6mBqzxbVqE+mtlwISrvJPKFtYq8fg7X/dvdYEyWSgG3ZnEOh6/uEbse+90cmPc+ucgL4bjpLyKl6ndRAQAA"
+      },
+      "Metadata": {
+        "aws:cdk:path": "prod-anyupp-cicd-QABuildStack/CDKMetadata/Default"
+      }
+    }
+  },
+  "Outputs": {
+    "ExportsOutputFnGetAttArtifactBucket7410C9EFArnA3946625": {
+      "Value": {
+        "Fn::GetAtt": [
+          "ArtifactBucket7410C9EF",
+          "Arn"
+        ]
+      },
+      "Export": {
+        "Name": "prod-anyupp-cicd-QABuildStack:ExportsOutputFnGetAttArtifactBucket7410C9EFArnA3946625"
+      }
+    }
+  }
+}
