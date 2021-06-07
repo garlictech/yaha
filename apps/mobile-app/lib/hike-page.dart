@@ -3,6 +3,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
+import 'app-theme.dart';
+
 class HikePage extends StatefulWidget {
   @override
   _HikePageState createState() => _HikePageState();
@@ -43,8 +45,8 @@ class _HikePageState extends State<HikePage> {
               leading: IconButton(
                 iconSize: 40.0,
                 icon: Icon(
-                  Icons.arrow_back,
-                  color: Colors.white,
+                  Icons.arrow_back_ios_rounded,
+                  color: AppTheme.colors.accentColor,
                 ),
                 onPressed: () {
                   // do something
@@ -63,7 +65,7 @@ class _HikePageState extends State<HikePage> {
                         child: ElevatedButton.icon(
                           icon: Icon(
                             Icons.play_circle_rounded,
-                            color: Colors.white,
+                            color: AppTheme.colors.accentColor,
                             size: 24.0,
                           ),
                           onPressed: () {},
@@ -73,7 +75,7 @@ class _HikePageState extends State<HikePage> {
                                 fontWeight: FontWeight.w600,
                               )),
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.green,
+                            primary: AppTheme.colors.primary,
                             shape: const RoundedRectangleBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(15))),
@@ -85,9 +87,9 @@ class _HikePageState extends State<HikePage> {
                         child: Text(
                             'It is the capital of Hungary on the banks of the Danube, the home of the 19th century Chain Bridge, the Old Town of Buda and Castle Hill.',
                             style: TextStyle(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.w400,
-                            )),
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.w400,
+                                color: AppTheme.colors.textColor)),
                       ),
                       Container(
                         height: 220.0,
@@ -126,145 +128,177 @@ class _HikePageState extends State<HikePage> {
                               padding: const EdgeInsets.all(15),
                               child: Column(
                                 children: [
-                                  const Icon(Icons.hiking_rounded,
-                                      size: 32.0, color: Colors.grey),
-                                  const Text("24.3km",
+                                  Icon(Icons.hiking_rounded,
+                                      size: 32.0,
+                                      color:
+                                          AppTheme.colors.secondaryAccentColor),
+                                  Text("24.3km",
                                       style: TextStyle(
                                           fontSize: 16.0,
                                           fontWeight: FontWeight.w600,
-                                          color: Colors.grey)),
-                                  const Text("Distance",
+                                          color: AppTheme
+                                              .colors.secondaryAccentColor)),
+                                  Text("Distance",
                                       style: TextStyle(
                                           fontSize: 16.0,
                                           fontWeight: FontWeight.w500,
-                                          color: Colors.grey)),
+                                          color: AppTheme
+                                              .colors.secondaryAccentColor)),
                                 ],
                               ),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   border: Border.all(
-                                      width: 4.0, color: Colors.grey)),
+                                      width: 4.0,
+                                      color: AppTheme
+                                          .colors.secondaryAccentColor)),
                             ),
                             Container(
                               padding: const EdgeInsets.all(15),
                               child: Column(
                                 children: [
-                                  const Icon(Icons.trending_up_rounded,
-                                      size: 32.0, color: Colors.grey),
-                                  const Text("576m",
+                                  Icon(Icons.trending_up_rounded,
+                                      size: 32.0,
+                                      color:
+                                          AppTheme.colors.secondaryAccentColor),
+                                  Text("576m",
                                       style: TextStyle(
                                           fontSize: 16.0,
                                           fontWeight: FontWeight.w600,
-                                          color: Colors.grey)),
-                                  const Text("Uphill",
+                                          color: AppTheme
+                                              .colors.secondaryAccentColor)),
+                                  Text("Uphill",
                                       style: TextStyle(
                                           fontSize: 16.0,
                                           fontWeight: FontWeight.w500,
-                                          color: Colors.grey)),
+                                          color: AppTheme
+                                              .colors.secondaryAccentColor)),
                                 ],
                               ),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   border: Border.all(
-                                      width: 4.0, color: Colors.grey)),
+                                      width: 4.0,
+                                      color: AppTheme
+                                          .colors.secondaryAccentColor)),
                             ),
                             Container(
                               padding: const EdgeInsets.all(15),
                               child: Column(
                                 children: [
-                                  const Icon(Icons.trending_down_rounded,
-                                      size: 32.0, color: Colors.grey),
-                                  const Text("1.2km",
+                                  Icon(Icons.trending_down_rounded,
+                                      size: 32.0,
+                                      color:
+                                          AppTheme.colors.secondaryAccentColor),
+                                  Text("1.2km",
                                       style: TextStyle(
                                           fontSize: 16.0,
                                           fontWeight: FontWeight.w600,
-                                          color: Colors.grey)),
-                                  const Text("Downhill",
+                                          color: AppTheme
+                                              .colors.secondaryAccentColor)),
+                                  Text("Downhill",
                                       style: TextStyle(
                                           fontSize: 16.0,
                                           fontWeight: FontWeight.w500,
-                                          color: Colors.grey)),
+                                          color: AppTheme
+                                              .colors.secondaryAccentColor)),
                                 ],
                               ),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   border: Border.all(
-                                      width: 4.0, color: Colors.grey)),
+                                      width: 4.0,
+                                      color: AppTheme
+                                          .colors.secondaryAccentColor)),
                             ),
                             Container(
                               padding: const EdgeInsets.all(15),
                               child: Column(
                                 children: [
-                                  const Icon(Icons.watch_later_rounded,
-                                      size: 32.0, color: Colors.grey),
-                                  const Text("6h",
+                                  Icon(Icons.watch_later_rounded,
+                                      size: 32.0,
+                                      color:
+                                          AppTheme.colors.secondaryAccentColor),
+                                  Text("6h",
                                       style: TextStyle(
                                           fontSize: 16.0,
                                           fontWeight: FontWeight.w600,
-                                          color: Colors.grey)),
-                                  const Text("Time",
+                                          color: AppTheme
+                                              .colors.secondaryAccentColor)),
+                                  Text("Time",
                                       style: TextStyle(
                                           fontSize: 16.0,
                                           fontWeight: FontWeight.w500,
-                                          color: Colors.grey)),
+                                          color: AppTheme
+                                              .colors.secondaryAccentColor)),
                                 ],
                               ),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   border: Border.all(
-                                      width: 4.0, color: Colors.grey)),
+                                      width: 4.0,
+                                      color: AppTheme
+                                          .colors.secondaryAccentColor)),
                             ),
                             Container(
                               padding: const EdgeInsets.all(15),
                               child: Column(
                                 children: [
-                                  const Icon(Icons.emoji_events_rounded,
-                                      size: 32.0, color: Colors.grey),
-                                  const Text("240",
+                                  Icon(Icons.emoji_events_rounded,
+                                      size: 32.0,
+                                      color:
+                                          AppTheme.colors.secondaryAccentColor),
+                                  Text("240",
                                       style: TextStyle(
                                           fontSize: 16.0,
                                           fontWeight: FontWeight.w600,
-                                          color: Colors.grey)),
-                                  const Text("Points",
+                                          color: AppTheme
+                                              .colors.secondaryAccentColor)),
+                                  Text("Points",
                                       style: TextStyle(
                                           fontSize: 16.0,
                                           fontWeight: FontWeight.w500,
-                                          color: Colors.grey)),
+                                          color: AppTheme
+                                              .colors.secondaryAccentColor)),
                                 ],
                               ),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   border: Border.all(
-                                      width: 4.0, color: Colors.grey)),
+                                      width: 4.0,
+                                      color: AppTheme
+                                          .colors.secondaryAccentColor)),
                             ),
                             Container(
                               padding: const EdgeInsets.all(15),
                               child: Column(
                                 children: [
-                                  const Icon(Icons.stars_rounded,
-                                      size: 32.0, color: Colors.orange),
-                                  const Text("Medium",
+                                  Icon(Icons.stars_rounded,
+                                      size: 32.0,
+                                      color: AppTheme.colors.secondary),
+                                  Text("Medium",
                                       style: TextStyle(
                                           fontSize: 16.0,
                                           fontWeight: FontWeight.w600,
-                                          color: Colors.orange)),
-                                  const Text("Difficulty",
+                                          color: AppTheme.colors.secondary)),
+                                  Text("Difficulty",
                                       style: TextStyle(
                                           fontSize: 16.0,
                                           fontWeight: FontWeight.w500,
-                                          color: Colors.orange)),
+                                          color: AppTheme.colors.secondary)),
                                 ],
                               ),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   border: Border.all(
-                                      width: 4.0, color: Colors.orange)),
+                                      width: 4.0,
+                                      color: AppTheme.colors.secondary)),
                             ),
                           ],
                         ),
                       ),
                       Container(
-                        padding: const EdgeInsets.all(20),
+                        padding: const EdgeInsets.only(top: 20, left: 20),
                         child: Column(
                           children: [
                             SizedBox(
@@ -272,9 +306,9 @@ class _HikePageState extends State<HikePage> {
                               child: Text('Things on route',
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.w600,
-                                  )),
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.w600,
+                                      color: AppTheme.colors.textColor)),
                             ),
                           ],
                         ),
@@ -291,7 +325,7 @@ class _HikePageState extends State<HikePage> {
                                 child: ElevatedButton.icon(
                                   icon: Icon(
                                     Icons.museum,
-                                    color: Colors.white,
+                                    color: AppTheme.colors.accentColor,
                                     size: 24.0,
                                   ),
                                   onPressed: () {},
@@ -301,7 +335,7 @@ class _HikePageState extends State<HikePage> {
                                         fontWeight: FontWeight.w600,
                                       )),
                                   style: ElevatedButton.styleFrom(
-                                    primary: Colors.orange,
+                                    primary: AppTheme.colors.tourism,
                                     shape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(9))),
@@ -317,7 +351,7 @@ class _HikePageState extends State<HikePage> {
                                 child: ElevatedButton.icon(
                                   icon: Icon(
                                     Icons.fastfood_rounded,
-                                    color: Colors.white,
+                                    color: AppTheme.colors.accentColor,
                                     size: 24.0,
                                   ),
                                   onPressed: () {},
@@ -327,7 +361,7 @@ class _HikePageState extends State<HikePage> {
                                         fontWeight: FontWeight.w600,
                                       )),
                                   style: ElevatedButton.styleFrom(
-                                    primary: Colors.purple,
+                                    primary: AppTheme.colors.amenity,
                                     shape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(9))),
@@ -348,7 +382,7 @@ class _HikePageState extends State<HikePage> {
                               child: ElevatedButton.icon(
                                 icon: Icon(
                                   Icons.park,
-                                  color: Colors.white,
+                                  color: AppTheme.colors.accentColor,
                                   size: 24.0,
                                 ),
                                 onPressed: () {},
@@ -358,7 +392,7 @@ class _HikePageState extends State<HikePage> {
                                       fontWeight: FontWeight.w600,
                                     )),
                                 style: ElevatedButton.styleFrom(
-                                  primary: Colors.green,
+                                  primary: AppTheme.colors.natural,
                                   shape: const RoundedRectangleBorder(
                                       borderRadius:
                                           BorderRadius.all(Radius.circular(9))),
@@ -369,15 +403,15 @@ class _HikePageState extends State<HikePage> {
                         ],
                       ),
                       Container(
-                        padding: const EdgeInsets.all(20),
+                        padding: const EdgeInsets.only(top: 10, left: 20),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Text('Show more',
                                 style: TextStyle(
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.w500,
-                                )),
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.w500,
+                                    color: AppTheme.colors.textColor)),
                             Icon(
                               Icons.chevron_right,
                               size: 40,
@@ -386,7 +420,7 @@ class _HikePageState extends State<HikePage> {
                         ),
                       ),
                       Container(
-                        padding: const EdgeInsets.all(20),
+                        padding: const EdgeInsets.only(top: 20, left: 20),
                         child: Column(
                           children: [
                             SizedBox(
@@ -394,9 +428,9 @@ class _HikePageState extends State<HikePage> {
                               child: Text('Most interesting places on route',
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.w600,
-                                  )),
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.w600,
+                                      color: AppTheme.colors.textColor)),
                             ),
                           ],
                         ),
@@ -408,70 +442,68 @@ class _HikePageState extends State<HikePage> {
                         child: Column(
                           children: [
                             Container(
-                              padding: const EdgeInsets.only(top:20, left: 20),
+                              padding: const EdgeInsets.only(top: 20, left: 20),
                               child: Row(
                                 children: [
                                   CircleAvatar(
-                                    backgroundColor: Colors.blueGrey,
+                                    backgroundColor: AppTheme.colors.tourism,
                                     radius: 20,
-                                    child: const Icon(
+                                    child: Icon(
                                       Icons.location_city_rounded,
                                       size: 25.0,
-                                      color: Colors.white,
+                                      color: AppTheme.colors.accentColor,
                                     ),
                                   ),
                                   Container(
                                     padding: const EdgeInsets.only(left: 10),
-                                    child: const Text(
-                                        "Hungarian Parliament Building",
+                                    child: Text("Hungarian Parliament Building",
                                         style: TextStyle(
-                                          fontSize: 16.0,
-                                        )),
+                                            fontSize: 16.0,
+                                            color: AppTheme.colors.textColor)),
                                   ),
                                 ],
                               ),
                             ),
                             Container(
-                              padding: const EdgeInsets.only(top:20, left: 20),
+                              padding: const EdgeInsets.only(top: 20, left: 20),
                               child: Row(
                                 children: [
                                   CircleAvatar(
-                                      backgroundColor: Colors.blueGrey,
+                                      backgroundColor: AppTheme.colors.tourism,
                                       radius: 20,
-                                      child: const Icon(
+                                      child: Icon(
                                         Icons.museum,
                                         size: 25.0,
-                                        color: Colors.white,
+                                        color: AppTheme.colors.accentColor,
                                       )),
                                   Container(
                                     padding: const EdgeInsets.only(left: 10),
-                                    child:
-                                        const Text("Hungarian National Museum",
-                                            style: TextStyle(
-                                              fontSize: 16.0,
-                                            )),
+                                    child: Text("Hungarian National Museum",
+                                        style: TextStyle(
+                                            fontSize: 16.0,
+                                            color: AppTheme.colors.textColor)),
                                   ),
                                 ],
                               ),
                             ),
                             Container(
-                              padding: const EdgeInsets.only(top:20, left: 20),
+                              padding: const EdgeInsets.only(top: 20, left: 20),
                               child: Row(
                                 children: [
                                   CircleAvatar(
-                                      backgroundColor: Colors.orange,
+                                      backgroundColor: AppTheme.colors.amenity,
                                       radius: 20,
-                                      child: const Icon(
+                                      child: Icon(
                                         Icons.pool_rounded,
                                         size: 25.0,
-                                        color: Colors.white,
+                                        color: AppTheme.colors.accentColor,
                                       )),
                                   Container(
                                     padding: const EdgeInsets.only(left: 10),
-                                    child: const Text("Széchenyi Thermal Bath",
+                                    child: Text("Széchenyi Thermal Bath",
                                         style: TextStyle(
-                                          fontSize: 16.0,
-                                        )),
+                                            fontSize: 16.0,
+                                            color: AppTheme.colors.textColor)),
                                   ),
                                 ],
                               ),
@@ -479,20 +511,20 @@ class _HikePageState extends State<HikePage> {
                           ],
                         ),
                         decoration: BoxDecoration(
-                          color: Colors.brown[50],
+                          color: AppTheme.colors.tertiaryAccentColor,
                           borderRadius: BorderRadius.circular(15),
                         ),
                       ),
                       Container(
-                        padding: const EdgeInsets.all(20),
+                        padding: const EdgeInsets.only(top: 10, left: 20),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Text('Show more',
                                 style: TextStyle(
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.w500,
-                                )),
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.w500,
+                                    color: AppTheme.colors.textColor)),
                             Icon(
                               Icons.chevron_right,
                               size: 40,
@@ -513,7 +545,7 @@ class _HikePageState extends State<HikePage> {
                         ),
                       ),
                       Container(
-                        padding: const EdgeInsets.all(20),
+                        padding: const EdgeInsets.only(top: 20, left: 20),
                         child: Column(
                           children: [
                             SizedBox(
@@ -521,18 +553,19 @@ class _HikePageState extends State<HikePage> {
                               child: Text('Weather',
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.w600,
-                                  )),
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.w600,
+                                      color: AppTheme.colors.textColor)),
                             ),
                           ],
                         ),
                       ),
                       Container(
-                        height: 180,
+                        height: 160,
                         child: GridView.count(
                           primary: false,
-                          padding: const EdgeInsets.all(20),
+                          padding: const EdgeInsets.only(
+                              top: 20, left: 20, right: 20),
                           crossAxisSpacing: 10,
                           mainAxisSpacing: 10,
                           crossAxisCount: 3,
@@ -581,8 +614,9 @@ class _HikePageState extends State<HikePage> {
                                       style: TextStyle(fontSize: 16.0),
                                     ),
                                   ),
-                                  const Icon(Icons.cloud,
-                                      size: 40.0, color: Colors.white),
+                                  Icon(Icons.cloud,
+                                      size: 40.0,
+                                      color: AppTheme.colors.accentColor),
                                   Container(
                                     padding: const EdgeInsets.all(5),
                                     child: const Text(
@@ -611,27 +645,30 @@ class _HikePageState extends State<HikePage> {
                                 child: Text(
                                   'The day of your hike',
                                   style: TextStyle(
-                                      color: Colors.grey[600], fontSize: 16.0),
+                                      color: AppTheme.colors.textColor,
+                                      fontSize: 16.0),
                                 ),
                               ),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   border: Border.all(
-                                      width: 2.0, color: Colors.grey.shade500)),
+                                      width: 2.0,
+                                      color: AppTheme.colors.textColor)),
                             ),
                           ],
                         ),
                       ),
                       Container(
-                        padding: const EdgeInsets.only(right: 20, bottom: 20),
+                        padding: const EdgeInsets.only(
+                            top: 0, right: 20, bottom: 20),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Text('Show more',
                                 style: TextStyle(
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.w500,
-                                )),
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.w500,
+                                    color: AppTheme.colors.textColor)),
                             Icon(
                               Icons.chevron_right,
                               size: 40,
@@ -639,26 +676,29 @@ class _HikePageState extends State<HikePage> {
                           ],
                         ),
                       ),
-                      SizedBox(
-                        height: 50,
-                        width: 300,
-                        child: ElevatedButton.icon(
-                          icon: Icon(
-                            Icons.timeline,
-                            color: Colors.white,
-                            size: 24.0,
-                          ),
-                          onPressed: () {},
-                          label: Text('Hike outline',
-                              style: TextStyle(
-                                fontSize: 16.0,
-                                fontWeight: FontWeight.w600,
-                              )),
-                          style: ElevatedButton.styleFrom(
-                            primary: Colors.green,
-                            shape: const RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(15))),
+                      Container(
+                        padding: const EdgeInsets.all(20),
+                        child: SizedBox(
+                          height: 50,
+                          width: 300,
+                          child: ElevatedButton.icon(
+                            icon: Icon(
+                              Icons.timeline,
+                              color: AppTheme.colors.accentColor,
+                              size: 24.0,
+                            ),
+                            onPressed: () {},
+                            label: Text('Hike outline',
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w600,
+                                )),
+                            style: ElevatedButton.styleFrom(
+                              primary: AppTheme.colors.primary,
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(15))),
+                            ),
                           ),
                         ),
                       ),
@@ -672,8 +712,8 @@ class _HikePageState extends State<HikePage> {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        unselectedItemColor: Colors.black,
-        selectedItemColor: Colors.green,
+        unselectedItemColor: AppTheme.colors.textColor,
+        selectedItemColor: AppTheme.colors.primary,
         items: [
           new BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -702,9 +742,9 @@ SpeedDial buildSpeedDial() {
     // animatedIcon: AnimatedIcons.menu_close,
     // animatedIconTheme: IconThemeData(size: 22.0),
     /// This is ignored if animatedIcon is non null
-    icon: Icons.add,
-    activeIcon: Icons.remove,
-    // iconTheme: IconThemeData(color: Colors.grey[50], size: 30),
+    icon: Icons.expand_more,
+    activeIcon: Icons.expand_less,
+    // iconTheme: IconThemeData(color: AppTheme.colors.secondaryAccentColor[50], size: 30),
 
     /// The label of the main button.
     // label: Text("Open Speed Dial"),
@@ -720,14 +760,14 @@ SpeedDial buildSpeedDial() {
     /// by tapping main button and overlay is not rendered.
     closeManually: false,
     curve: Curves.bounceIn,
-    overlayColor: Colors.black,
+    overlayColor: AppTheme.colors.textColor,
     overlayOpacity: 0.5,
     onOpen: () => print('OPENING DIAL'),
     onClose: () => print('DIAL CLOSED'),
     tooltip: 'Speed Dial',
     heroTag: 'speed-dial-hero-tag',
-    backgroundColor: Colors.white,
-    foregroundColor: Colors.black,
+    backgroundColor: AppTheme.colors.accentColor,
+    foregroundColor: AppTheme.colors.textColor,
     elevation: 8.0,
     shape: CircleBorder(),
 
@@ -738,36 +778,36 @@ SpeedDial buildSpeedDial() {
     //gradient: LinearGradient(
     //begin: Alignment.topCenter,
     //end: Alignment.bottomCenter,
-    //colors: [Colors.black, Colors.white],
+    //colors: [Colors.black, AppTheme.colors.accentColor],
     //),
     children: [
       SpeedDialChild(
-        child: Icon(Icons.settings_rounded, color: Colors.white),
-        backgroundColor: Colors.green,
+        child: Icon(Icons.settings_rounded, color: AppTheme.colors.accentColor),
+        backgroundColor: AppTheme.colors.primary,
         label: 'Settings',
         labelStyle: TextStyle(fontSize: 18.0),
         onTap: () => print('FIRST CHILD'),
         onLongPress: () => print('FIRST CHILD LONG PRESS'),
       ),
       SpeedDialChild(
-        child: Icon(Icons.comment_rounded, color: Colors.white),
-        backgroundColor: Colors.green,
+        child: Icon(Icons.comment_rounded, color: AppTheme.colors.accentColor),
+        backgroundColor: AppTheme.colors.primary,
         label: 'Comment',
         labelStyle: TextStyle(fontSize: 18.0),
         onTap: () => print('SECOND CHILD'),
         onLongPress: () => print('SECOND CHILD LONG PRESS'),
       ),
       SpeedDialChild(
-        child: Icon(Icons.bookmark_rounded, color: Colors.white),
-        backgroundColor: Colors.green,
+        child: Icon(Icons.bookmark_rounded, color: AppTheme.colors.accentColor),
+        backgroundColor: AppTheme.colors.primary,
         label: 'Bookmark',
         labelStyle: TextStyle(fontSize: 18.0),
         onTap: () => print('THIRD CHILD'),
         onLongPress: () => print('THIRD CHILD LONG PRESS'),
       ),
       SpeedDialChild(
-        child: Icon(Icons.download_rounded, color: Colors.white),
-        backgroundColor: Colors.green,
+        child: Icon(Icons.download_rounded, color: AppTheme.colors.accentColor),
+        backgroundColor: AppTheme.colors.primary,
         label: 'Download',
         labelStyle: TextStyle(fontSize: 18.0),
         onTap: () => print('THIRD CHILD'),

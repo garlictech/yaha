@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'HikePage.dart';
+import 'package:mobile_app/poi-page.dart';
+import 'hike-page.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,10 +14,10 @@ class MyApp extends StatelessWidget {
       title: 'Jaha',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          primarySwatch: Colors.green,
-          accentColor: Colors.white,
+          primaryColor: Color(0xFF29A253),
+          scaffoldBackgroundColor: Color(0xFFFDFBF7),
           fontFamily: 'Inter'),
-      home: HikePage(),
+      home: PoiPage(),
     );
   }
 }
