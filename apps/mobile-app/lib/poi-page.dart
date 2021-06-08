@@ -1,7 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'app-theme.dart';
+import 'package:mobile_app/yaha-border-radius.dart';
+import 'package:mobile_app/yaha-colors.dart';
+import 'package:mobile_app/yaha-font-sizes.dart';
+import 'package:mobile_app/yaha-space-sizes.dart';
 
 class PoiPage extends StatefulWidget {
   @override
@@ -20,7 +23,7 @@ class _PoiPageState extends State<PoiPage> {
               (BuildContext context, int index) {
                 return SafeArea(
                   child: Container(
-                    padding: const EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(YahaSpaceSizes.general),
                     child: Column(
                       children: [
                         Row(
@@ -30,43 +33,49 @@ class _PoiPageState extends State<PoiPage> {
                           children: [
                             Icon(
                               Icons.arrow_back_ios_rounded,
-                              size: 25.0,
-                              color: AppTheme.colors.textColor,
+                              size: YahaFontSizes.large,
+                              color: YahaColors.textColor,
                             ),
                             Text('Hungarian\nNational Museum',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    fontSize: 24.0,
+                                    fontSize: YahaFontSizes.xLarge,
                                     fontWeight: FontWeight.w600,
-                                    color: AppTheme.colors.textColor)),
+                                    color: YahaColors.textColor)),
                             Icon(Icons.comment,
-                                size: 25, color: AppTheme.colors.textColor),
+                                size: YahaFontSizes.large,
+                                color: YahaColors.textColor),
                           ],
                         ),
                         Container(
-                          padding: const EdgeInsets.only(top: 20, bottom: 20),
+                          padding: const EdgeInsets.only(
+                              top: YahaSpaceSizes.general,
+                              bottom: YahaSpaceSizes.general),
                           child: CircleAvatar(
-                              backgroundColor: AppTheme.colors.tourism,
-                              radius: 40,
+                              backgroundColor: YahaColors.tourism,
+                              radius: YahaBorderRadius.poiLarge,
                               child: Icon(Icons.museum,
-                                  color: AppTheme.colors.accentColor,
-                                  size: 48)),
+                                  color: YahaColors.accentColor,
+                                  size: YahaFontSizes.xxxLarge)),
                         ),
                         Container(
-                          padding: const EdgeInsets.only(bottom: 20),
+                          padding: const EdgeInsets.only(
+                              bottom: YahaSpaceSizes.general),
                           child: Text(
                               'The Hungarian National Museum (Hungarian: Magyar Nemzeti Múzeum) was founded in 1802 and is the national museum for the history, art, and archaeology of Hungary.',
                               style: TextStyle(
-                                  fontSize: 20.0,
+                                  fontSize: YahaFontSizes.medium,
                                   fontWeight: FontWeight.w400,
-                                  color: AppTheme.colors.textColor)),
+                                  color: YahaColors.textColor)),
                         ),
                         Container(
                           height: 340,
                           width: MediaQuery.of(context).size.width,
-                          padding: const EdgeInsets.only(bottom: 20),
+                          padding: const EdgeInsets.only(
+                              bottom: YahaSpaceSizes.general),
                           child: ClipRRect(
-                            borderRadius: BorderRadius.circular(15.0),
+                            borderRadius:
+                                BorderRadius.circular(YahaBorderRadius.general),
                             child: Image.asset(
                               'assets/images/poi_page.png',
                               fit: BoxFit.cover,
@@ -74,53 +83,59 @@ class _PoiPageState extends State<PoiPage> {
                           ),
                         ),
                         Container(
-                          padding: const EdgeInsets.only(bottom: 20),
+                          padding: const EdgeInsets.only(
+                              bottom: YahaSpaceSizes.general),
                           child: Row(
                             children: [
                               Container(
-                                  padding: const EdgeInsets.only(right: 10),
+                                  padding: const EdgeInsets.only(
+                                      right: YahaSpaceSizes.small),
                                   child: Icon(Icons.schedule_outlined)),
                               Text('Open',
                                   style: TextStyle(
-                                      fontSize: 16.0,
+                                      fontSize: YahaFontSizes.small,
                                       fontWeight: FontWeight.w400,
-                                      color: AppTheme.colors.primary)),
+                                      color: YahaColors.primary)),
                               Text(' - closing: 18:00',
                                   style: TextStyle(
-                                      fontSize: 16.0,
+                                      fontSize: YahaFontSizes.small,
                                       fontWeight: FontWeight.w400,
-                                      color: AppTheme.colors.textColor)),
+                                      color: YahaColors.textColor)),
                               Icon(Icons.expand_more),
                             ],
                           ),
                         ),
                         Container(
-                          padding: const EdgeInsets.only(bottom: 20),
+                          padding: const EdgeInsets.only(
+                              bottom: YahaSpaceSizes.general),
                           child: Row(
                             children: [
                               Container(
-                                  padding: const EdgeInsets.only(right: 10),
+                                  padding: const EdgeInsets.only(
+                                      right: YahaSpaceSizes.small),
                                   child: Icon(Icons.location_on_outlined)),
                               Text('Opening hours',
                                   style: TextStyle(
-                                      fontSize: 16.0,
+                                      fontSize: YahaFontSizes.small,
                                       fontWeight: FontWeight.w400,
-                                      color: AppTheme.colors.textColor)),
+                                      color: YahaColors.textColor)),
                             ],
                           ),
                         ),
                         Container(
-                          padding: const EdgeInsets.only(bottom: 20),
+                          padding: const EdgeInsets.only(
+                              bottom: YahaSpaceSizes.general),
                           child: Row(
                             children: [
                               Container(
-                                  padding: const EdgeInsets.only(right: 10),
+                                  padding: const EdgeInsets.only(
+                                      right: YahaSpaceSizes.small),
                                   child: Icon(Icons.call)),
                               Text('(06 1) 338 2122',
                                   style: TextStyle(
-                                      fontSize: 16.0,
+                                      fontSize: YahaFontSizes.small,
                                       fontWeight: FontWeight.w400,
-                                      color: AppTheme.colors.textColor)),
+                                      color: YahaColors.textColor)),
                             ],
                           ),
                         ),
@@ -135,41 +150,40 @@ class _PoiPageState extends State<PoiPage> {
                               initialPage: 3,
                             ),
                             items: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.all(1),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  child: Image.asset(
-                                      'assets/images/Parlament.jpg',
-                                      fit: BoxFit.cover,
-                                      width: MediaQuery.of(context).size.width),
-                                ),
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(
+                                    YahaBorderRadius.general),
+                                child: Image.asset(
+                                    'assets/images/Parlament.jpg',
+                                    fit: BoxFit.cover,
+                                    width: MediaQuery.of(context).size.width),
                               ),
                             ],
                           ),
                         ),
                         Container(
-                          padding: const EdgeInsets.all(20),
+                          padding: const EdgeInsets.all(YahaSpaceSizes.general),
                           child: SizedBox(
                             height: 50,
                             width: 300,
                             child: ElevatedButton.icon(
                               icon: Icon(
                                 Icons.add,
-                                color: AppTheme.colors.accentColor,
-                                size: 24.0,
+                                color: YahaColors.accentColor,
+                                size: YahaFontSizes.large,
                               ),
                               onPressed: () {},
                               label: Text('Add to hike',
                                   style: TextStyle(
-                                    fontSize: 16.0,
+                                    fontSize: YahaFontSizes.small,
                                     fontWeight: FontWeight.w600,
                                   )),
                               style: ElevatedButton.styleFrom(
-                                primary: AppTheme.colors.primary,
+                                primary: YahaColors.primary,
                                 shape: const RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(15))),
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(
+                                            YahaBorderRadius.general))),
                               ),
                             ),
                           ),
