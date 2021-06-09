@@ -10,7 +10,7 @@ export class AppcenterStack extends sst.Stack {
 
     // Create an iam user with permission to read ths s3 buckets
     this.iamUser = new iam.User(this, 'AppcenterIamUser', {
-      userName: 'appcenter',
+      userName: 'yaha-appcenter',
     });
   }
 }

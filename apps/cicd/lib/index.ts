@@ -2,24 +2,30 @@ import { App } from '@serverless-stack/resources';
 import { DevBuildPipelineStack } from './build-pipeline/dev-pipeline-stack';
 import { SecretsManagerStack } from './build-pipeline/secretsmanager-stack';
 import { DevPullRequestBuildStack } from './build-pipeline/dev-pull-request-stack';
-import { SlackNotificationsStack } from './build-pipeline/slack-notifications-stack';
 import { PipelineStackProps } from './build-pipeline/utils';
 import { CiStack } from './build-pipeline/ci-stack';
 import { QABuildPipelineStack } from './build-pipeline/qa-pipeline-stack';
-import { StagingBuildPipelineStack } from './build-pipeline/staging-pipeline-stack';
 import { AppcenterStack } from './build-pipeline/appcenter-stack';
 
 export default function main(app: App): void {
   const pipelineSecretsManagerArn =
-    'arn:aws:secretsmanager:eu-west-1:568276182587:secret:codebuild-Z12nwS';
+    'arn:aws:secretsmanager:us-east-1:697486207432:secret:cicd-x85ydp';
+
+  const githubSecretsManagerArn =
+    'arn:aws:secretsmanager:us-east-1:697486207432:secret:GithubAccessToken-4e4gsy';
+
+  const commonSecrets = {
+    pipelineSecretsManagerArn,
+    githubSecretsManagerArn,
+  };
 
   const devSecretsManagerStack = new SecretsManagerStack(
     app,
     'devsecretsmanager',
     {
+      ...commonSecrets,
       projectSecretsManagerArn:
-        'arn:aws:secretsmanager:eu-west-1:568276182587:secret:anyupp-dev-secrets-WtbZ0k',
-      pipelineSecretsManagerArn,
+        'arn:aws:secretsmanager:us-east-1:697486207432:secret:/yaha/dev/secrets-JzPwln',
     },
   );
 
@@ -27,20 +33,21 @@ export default function main(app: App): void {
     app,
     'qasecretsmanager',
     {
+      ...commonSecrets,
       projectSecretsManagerArn:
-        'arn:aws:secretsmanager:eu-west-1:568276182587:secret:anyupp-qa-secrets-4cFY1U',
-      pipelineSecretsManagerArn,
+        'arn:aws:secretsmanager:us-east-1:697486207432:secret:/yaha/qa/secrets-2JtTdF',
     },
   );
 
-  const slackChannel = new SlackNotificationsStack(app, 'SlackNotifications');
-
   const appcenterStack = new AppcenterStack(app, 'AppcenterStack');
+  const ciStack = new CiStack(app, 'CiStack', {
+    secretsManager: devSecretsManagerStack,
+  });
 
   const commonConfig = {
-    repoOwner: 'bgap',
-    repoName: 'anyupp',
-    chatbot: slackChannel.chatbot,
+    repoOwner: 'garlictech',
+    repoName: 'yaha',
+    chatbot: ciStack.chatbot,
     appcenterUser: appcenterStack.iamUser,
   };
 
@@ -56,19 +63,19 @@ export default function main(app: App): void {
     ...commonConfig,
   };
 
-  new CiStack(app, 'CiStack', { secretsManager: devSecretsManagerStack });
-
   new DevBuildPipelineStack(
     app,
     'DevBuildPipelineStack',
     devBuildPipelineConfig,
   );
 
-  new DevPullRequestBuildStack(
+  const prBuild = new DevPullRequestBuildStack(
     app,
     'DevPullRequestBuildStack',
     devPullRequestConfig,
   );
+
+  prBuild.addDependency(ciStack);
 
   new QABuildPipelineStack(app, 'QABuildStack', {
     repoBranch: 'qa',
@@ -76,9 +83,9 @@ export default function main(app: App): void {
     ...commonConfig,
   });
 
-  new StagingBuildPipelineStack(app, 'StagingBuildStack', {
+  /*new StagingBuildPipelineStack(app, 'StagingBuildStack', {
     repoBranch: 'staging',
     secretsManager: qaSecretsManagerStack,
     ...commonConfig,
-  });
+  });*/
 }

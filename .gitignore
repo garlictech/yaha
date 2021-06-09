@@ -42,7 +42,7 @@ cyreport
 .setup*.sh
 .build
 .serverless
-/apps/anyupp-backend/build
+/apps/yaha-backend/build
 /apps/infrastructure/cicd/build
 
 # The config - don't commit!
@@ -50,14 +50,14 @@ cyreport
 cdk.out
 
 /apps/crud-backend/amplify
-/libs/anyupp-gql/api/src/lib/generated
+/libs/yaha-gql/api/src/lib/generated
 /libs/crud-gql/api/src/lib/generated/
 
 
 
 # The generated files with hygen
-apps/anyupp-backend/sst.json
-apps/anyupp-backend/serverless.yml
+apps/yaha-backend/sst.json
+apps/yaha-backend/serverless.yml
 apps/crud-backend/.graphqlconfig.yml
 tools/graphql-codegen-crud.yml
 

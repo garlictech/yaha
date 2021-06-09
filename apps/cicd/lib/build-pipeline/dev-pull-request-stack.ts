@@ -25,7 +25,7 @@ export class DevPullRequestBuildStack extends sst.Stack {
     });
 
     const generatedLibExcludes =
-      '--exclude=shared-config --exclude=anyupp-gql-api --exclude=crud-gql-api';
+      '--exclude=shared-config --exclude=yaha-gql-api --exclude=crud-gql-api';
 
     const project = new codebuild.Project(
       this,
@@ -52,9 +52,9 @@ export class DevPullRequestBuildStack extends sst.Stack {
               commands: [
                 `./tools/build-workspace.sh ${utils.appConfig.name} ${stage}`,
                 `yarn nx affected:lint --base=${stage} ${generatedLibExcludes}`,
-                `yarn nx affected:test --base=${stage} --exclude="anyupp-mobile" --exclude="integration-tests-angular" --exclude="integration-tests-universal" ${generatedLibExcludes} --codeCoverage --coverageReporters=clover`,
-                `yarn nx test anyupp-mobile`,
-                `yarn nx buildApk anyupp-mobile`,
+                `yarn nx affected:test --base=${stage} --exclude="yaha-mobile" --exclude="integration-tests-angular" --exclude="integration-tests-universal" ${generatedLibExcludes} --codeCoverage --coverageReporters=clover`,
+                `yarn nx test yaha-mobile`,
+                `yarn nx buildApk yaha-mobile`,
                 'npx cowsay "YOUR PR IS SUPERCOOL!!!"',
               ],
             },

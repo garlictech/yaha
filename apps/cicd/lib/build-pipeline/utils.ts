@@ -21,8 +21,8 @@ export interface PipelineStackProps extends sst.StackProps {
 }
 
 export const appConfig = {
-  name: 'anyupp-backend',
-  appcenterArtifactBucketNamePrefix: 'anyupp-build-artifacts',
+  name: 'yaha-backend',
+  appcenterArtifactBucketNamePrefix: 'yaha-build-artifacts',
 };
 
 export const projectPrefix = (stage: string) => `${stage}-${appConfig.name}`;
@@ -33,13 +33,14 @@ export const configurePermissions = (
   resources: iam.IGrantable[],
   prefix: string,
 ) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const generatedParams = [
     'ConsumerWebUserPoolClientId',
     'ConsumerNativeUserPoolClientId',
     'ConsumerUserPoolDomain',
     'IdentityPoolId',
-    'AnyuppGraphqlApiKey',
-    'AnyuppGraphqlApiUrl',
+    'YahaGraphqlApiKey',
+    'YahaGraphqlApiUrl',
     'StripeWebhookEndpoint',
     'AdminSiteUrl',
     'AdminWebUserPoolClientId',
@@ -49,6 +50,7 @@ export const configurePermissions = (
     'CrudApiAppId',
   ].map(paramName => `/${prefix}/generated/${paramName}`);
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const fixParams = [
     'GoogleClientId',
     'StripePublishableKey',
@@ -56,7 +58,7 @@ export const configurePermissions = (
     'GoogleApiKey',
   ].map(paramName => `/${prefix}/${paramName}`);
 
-  resources.forEach((resource, index) => {
+  /*  resources.forEach((resource, index) => {
     secretsManager.pipelineSecrets.grantRead(resource);
 
     [...generatedParams, ...fixParams].forEach(param =>
@@ -67,6 +69,7 @@ export const configurePermissions = (
       ).grantRead(resource),
     );
   });
+  */
 };
 
 export const getAppcenterArtifactBucketName = (stage: string) =>
@@ -83,7 +86,7 @@ export const createBuildProject = (
       version: '0.2',
       phases: buildProjectPhases,
       artifacts: {
-        files: ['apps/anyupp-backend/cdk.out/**/*'],
+        files: ['apps/yaha-backend/cdk.out/**/*'],
       },
       reports,
       env: {
@@ -279,7 +282,7 @@ export const createCommonDevPipeline = (
   stage: string,
   props: utils.PipelineStackProps,
 ) => {
-  const { adminSiteUrl } = utils.configurePipeline(scope, stage);
+  //const { adminSiteUrl } = utils.configurePipeline(scope, stage);
 
   return createPipeline(scope, stage, {
     ...props,
@@ -305,43 +308,41 @@ export const createCommonDevPipeline = (
       },
       build: {
         commands: [
-          `./tools/build-workspace.sh ${appConfig.name} ${stage}`,
+          //`./tools/build-workspace.sh ${appConfig.name} ${stage}`,
           'git clone https://github.com/flutter/flutter.git -b stable --depth 1 /tmp/flutter',
-          `yarn nx deploy crud-backend`,
-          `yarn nx deploy anyupp-backend --stage=${stage} --app=${appConfig.name}`,
+          //`yarn nx deploy crud-backend`,
+          //`yarn nx deploy yaha-backend --stage=${stage} --app=${appConfig.name}`,
           'export PATH=$PATH:/tmp/flutter/bin',
           'flutter doctor',
-          `yarn nx buildApk anyupp-mobile`,
+          //`yarn nx buildApk yaha-mobile`,
         ],
       },
       post_build: {
         commands: [
-          'tar -cvf ${CODEBUILD_RESOLVED_SOURCE_VERSION}.tgz apps/anyupp-mobile/lib/awsconfiguration.dart',
-          `aws s3 cp \${CODEBUILD_RESOLVED_SOURCE_VERSION}.tgz s3://${getAppcenterArtifactBucketName(
-            stage,
-          )}/`,
+          //'tar -cvf ${CODEBUILD_RESOLVED_SOURCE_VERSION}.tgz apps/yaha-mobile/lib/awsconfiguration.dart',
+          //`aws s3 cp \${CODEBUILD_RESOLVED_SOURCE_VERSION}.tgz s3://${getAppcenterArtifactBucketName(
+          stage,
+          // )}/`,
           `echo 'Pushing Android APK to appcenter'`,
-          `./tools/publish-to-appcenter.sh ${stage} android`,
+          // `./tools/publish-to-appcenter.sh ${stage} android`,
           `echo 'Triggering ios app build in appcenter...'`,
-          `./tools/trigger-appcenter-builds.sh ${stage} ios`,
-          `yarn nx test integration-tests-universal --codeCoverage --coverageReporters=clover`,
-          `yarn nx test integration-tests-angular --codeCoverage --coverageReporters=clover`,
-          `yarn nx e2e-remote admin-e2e --headless --baseUrl=${adminSiteUrl}`,
-          'yarn ts-node --project ./tools/tsconfig.tools.json -r tsconfig-paths/register ./tools/seed-execute.ts',
-          'yarn cucumber:report',
-          'yarn cypress:generate:html:report',
+          // `./tools/trigger-appcenter-builds.sh ${stage} ios`,
+          // `yarn nx test integration-tests-universal --codeCoverage --coverageReporters=clover`,
+          // `yarn nx test integration-tests-angular --codeCoverage --coverageReporters=clover`,
+          //`yarn nx e2e-remote admin-e2e --headless --baseUrl=${adminSiteUrl}`,
+          //'yarn ts-node --project ./tools/tsconfig.tools.json -r tsconfig-paths/register ./tools/seed-execute.ts',
+          //'yarn cucumber:report',
+          //'yarn cypress:generate:html:report',
         ],
       },
     },
-    reports: {
-      cypressReports: {
-        files: ['cyreport/cucumber-json/**/*'],
-        'file-format': 'CUCUMBERJSON',
-      },
-      coverage: {
-        files: ['coverage/**/*'],
-        'file-format': 'CLOVERXML',
-      },
-    },
+    //reports: {
+    //  cypressReports: {
+    //    files: ['cyreport/cucumber-json/**/*'],
+    //    'file-format': 'CUCUMBERJSON',
+    //  },
+    //  coverage: {
+    //    files: ['coverage/**/*'],
+    //    'file-format': 'CLOVERXML',
   });
 };
