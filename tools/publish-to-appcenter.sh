@@ -27,6 +27,6 @@ appcenter distribute release \
     --group Collaborators \
     --file "${appImagePath}" \
     --release-notes 'App submission via AWS CodePipeline' \
-    --app "yaha/${appId}" \
+    --app "garlictech/${appId}" \
     --token "${APP_CENTER_TOKEN}" \
     --quiet
