@@ -313,19 +313,19 @@ export const createCommonDevPipeline = (
           //`yarn nx deploy yaha-backend --stage=${stage} --app=${appConfig.name}`,
           'export PATH=$PATH:/tmp/flutter/bin',
           'flutter doctor',
-          //`yarn nx buildApk yaha-mobile`,
+          `yarn nx buildApk mobile-app`,
         ],
       },
       post_build: {
         commands: [
           //'tar -cvf ${CODEBUILD_RESOLVED_SOURCE_VERSION}.tgz apps/yaha-mobile/lib/awsconfiguration.dart',
           //`aws s3 cp \${CODEBUILD_RESOLVED_SOURCE_VERSION}.tgz s3://${getAppcenterArtifactBucketName(
-          stage,
+          //stage,
           // )}/`,
           `echo 'Pushing Android APK to appcenter'`,
-          // `./tools/publish-to-appcenter.sh ${stage} android`,
+          `./tools/publish-to-appcenter.sh ${stage} android`,
           `echo 'Triggering ios app build in appcenter...'`,
-          // `./tools/trigger-appcenter-builds.sh ${stage} ios`,
+          `./tools/trigger-appcenter-builds.sh ${stage} ios`,
           // `yarn nx test integration-tests-universal --codeCoverage --coverageReporters=clover`,
           // `yarn nx test integration-tests-angular --codeCoverage --coverageReporters=clover`,
           //`yarn nx e2e-remote admin-e2e --headless --baseUrl=${adminSiteUrl}`,
