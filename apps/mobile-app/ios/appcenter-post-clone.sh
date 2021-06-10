@@ -24,7 +24,7 @@ cd ../..
 #aws s3 cp s3://anyupp-build-artifacts-${APPCENTER_BRANCH}/${ARTIFACT_NAME} .
 #tar -zxf ${ARTIFACT_NAME}
 
-cd apps/mobile-app
+cd apps/mobile-app/ios
 
 pod install
 flutter build ios --release --no-codesign
