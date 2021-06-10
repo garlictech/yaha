@@ -6,10 +6,13 @@ class YahaColors {
   static const Color secondary = const Color(0xFF0091FC); // DIFFICULTY - MEDIUM
   static const Color warning = const Color(0xFFF5B800);
   static const Color error = const Color(0xFFD32F2F); // DIFFICULTY - HARD
-  static const Color textColor = const Color(0xFF42403E); // DIFFICULTY - EXTRA HARD
-  static const Color accentColor = const Color(0xFFF3F2E7); // DIFFICULTY - EXTRA HARD
+  static const Color textColor =
+      const Color(0xFF42403E); // DIFFICULTY - EXTRA HARD
+  static const Color accentColor =
+      const Color(0xFFF3F2E7); // DIFFICULTY - EXTRA HARD
   static const Color secondaryAccentColor = const Color(0xFF908D89);
   static const Color tertiaryAccentColor = const Color(0xFFF3F2E7);
+  static const Color divider = const Color(0xFFA8A6A3);
 
 // POI COLORS
   static const Color emergency = const Color(0xFFEF5350);
