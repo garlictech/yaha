@@ -61,9 +61,8 @@ export class DevPullRequestBuildStack extends sst.Stack {
           },
           env: {
             'secrets-manager': {
-              AWS_ACCESS_KEY_ID: 'codebuild:codebuild-aws_access_key_id',
-              AWS_SECRET_ACCESS_KEY:
-                'codebuild:codebuild-aws_secret_access_key',
+              AWS_ACCESS_KEY_ID: 'cicd:codebuild-aws_access_key_id',
+              AWS_SECRET_ACCESS_KEY: 'cicd:codebuild-aws_secret_access_key',
             },
             variables: {
               NODE_OPTIONS:
