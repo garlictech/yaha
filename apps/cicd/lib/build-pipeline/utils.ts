@@ -78,16 +78,16 @@ export const createBuildProject = (
   stack: sst.Stack,
   cache: codebuild.Cache,
   buildProjectPhases: Record<string, unknown>,
-  reports?: Record<string, unknown>,
+  _reports?: Record<string, unknown>,
 ): codebuild.PipelineProject => {
   return new codebuild.PipelineProject(stack, 'Build', {
     buildSpec: codebuild.BuildSpec.fromObject({
       version: '0.2',
       phases: buildProjectPhases,
-      artifacts: {
-        files: ['apps/yaha-backend/cdk.out/**/*'],
-      },
-      reports,
+      //artifacts: {
+      //  files: ['apps/yaha-backend/cdk.out/**/*'],
+      //},
+      // reports,
       env: {
         'secrets-manager': {
           AWS_ACCESS_KEY_ID: 'cicd:codebuild-aws_access_key_id',
