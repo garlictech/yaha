@@ -29,7 +29,7 @@ export class DevPullRequestBuildStack extends sst.Stack {
 
     const project = new codebuild.Project(
       this,
-      'AnyUpp:DEV Verify Pull Request',
+      'Yaha:DEV Verify Pull Request',
       {
         source: githubPrSource,
         buildSpec: codebuild.BuildSpec.fromObject({

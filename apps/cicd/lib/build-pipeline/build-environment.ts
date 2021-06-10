@@ -34,7 +34,7 @@ export class BuildEnvironmentStack extends sst.Stack {
       },
     };
 
-    const x86Image = new codebuild.Project(this, 'AnyUpp: Docker Dev X86', {
+    const x86Image = new codebuild.Project(this, 'Yaha: Docker Dev X86', {
       source: githubSource,
       environment: {
         buildImage: codebuild.LinuxBuildImage.AMAZON_LINUX_2_3,
@@ -52,7 +52,7 @@ export class BuildEnvironmentStack extends sst.Stack {
       cache: codebuild.Cache.local(codebuild.LocalCacheMode.DOCKER_LAYER),
     });
 
-    const armImage = new codebuild.Project(this, 'AnyUpp: Docker Dev ARM', {
+    const armImage = new codebuild.Project(this, 'Yaha: Docker Dev ARM', {
       source: githubSource,
       environment: {
         buildImage: codebuild.LinuxBuildImage.AMAZON_LINUX_2_ARM,
@@ -72,7 +72,7 @@ export class BuildEnvironmentStack extends sst.Stack {
     // For the manifest list
     const manifestBuild = new codebuild.Project(
       this,
-      'AnyUpp: Docker Dev manifest',
+      'Yaha: Docker Dev manifest',
       {
         source: githubSource,
         buildSpec: codebuild.BuildSpec.fromSourceFilename(

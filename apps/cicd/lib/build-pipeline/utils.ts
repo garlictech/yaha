@@ -135,7 +135,7 @@ export const configurePipelineNotifications = (
       'codepipeline-pipeline-action-execution-started',
       'codepipeline-pipeline-action-execution-canceled',
     ],
-    name: `AnyUppBuildNotification${stage}`,
+    name: `YahaBuildNotification${stage}`,
     resource: resourceArn,
     targets: [
       {
@@ -159,7 +159,7 @@ export const configurePRNotifications = (
       'codebuild-project-build-state-failed',
       'codebuild-project-build-state-succeeded',
     ],
-    name: `AnyUppPRNotification${stage}`,
+    name: `YahaPRNotification${stage}`,
     resource: resourceArn,
     targets: [
       {
