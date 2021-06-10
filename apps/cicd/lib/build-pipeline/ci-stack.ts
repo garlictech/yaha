@@ -1,4 +1,5 @@
 import * as chatbot from '@aws-cdk/aws-chatbot';
+import * as codebuild from '@aws-cdk/aws-codebuild';
 import * as sst from '@serverless-stack/resources';
 import * as sns from '@aws-cdk/aws-sns';
 import { SecretsManagerStack } from './secretsmanager-stack';
@@ -13,9 +14,9 @@ export class CiStack extends sst.Stack {
   constructor(app: sst.App, id: string, props: CiStackProps) {
     super(app, id, props);
 
-    /*new codebuild.GitHubSourceCredentials(this, 'CodeBuildGitHubCreds', {
+    new codebuild.GitHubSourceCredentials(this, 'CodeBuildGitHubCreds', {
       accessToken: props.secretsManager.githubOauthToken.secretValue,
-    });*/
+    });
 
     const slackChannelSns = new sns.Topic(this, 'SlackNotificationTopic');
 

@@ -58,18 +58,17 @@ export const configurePermissions = (
     'GoogleApiKey',
   ].map(paramName => `/${prefix}/${paramName}`);
 
-  /*  resources.forEach((resource, index) => {
+  resources.forEach(resource => {
     secretsManager.pipelineSecrets.grantRead(resource);
-
+    /*
     [...generatedParams, ...fixParams].forEach(param =>
       ssm.StringParameter.fromStringParameterName(
         stack,
         param + 'Param' + index,
         param,
       ).grantRead(resource),
-    );
+    );*/
   });
-  */
 };
 
 export const getAppcenterArtifactBucketName = (stage: string) =>
@@ -91,9 +90,9 @@ export const createBuildProject = (
       reports,
       env: {
         'secrets-manager': {
-          AWS_ACCESS_KEY_ID: 'codebuild:codebuild-aws_access_key_id',
-          AWS_SECRET_ACCESS_KEY: 'codebuild:codebuild-aws_secret_access_key',
-          APP_CENTER_TOKEN: 'codebuild:codebuild-appcenter-token',
+          AWS_ACCESS_KEY_ID: 'cicd:codebuild-aws_access_key_id',
+          AWS_SECRET_ACCESS_KEY: 'cicd:codebuild-aws_secret_access_key',
+          APP_CENTER_TOKEN: 'cicd:codebuild-appcenter-token',
         },
         variables: {
           NODE_OPTIONS:
