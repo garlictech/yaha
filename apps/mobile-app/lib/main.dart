@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
           primaryColor: Color(0xFF29A253),
           scaffoldBackgroundColor: Color(0xFFFDFBF7),
           fontFamily: 'Inter'),
-      home: ProfilePage(),
+      home: HikePage(),
     );
   }
 }
