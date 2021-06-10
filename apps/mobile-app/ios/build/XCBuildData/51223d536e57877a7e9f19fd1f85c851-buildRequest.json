@@ -1,58 +1,55 @@
 {
-  "buildCommand" : "prepareForIndexing",
-  "configuredTargets" : [
+  "buildCommand": "prepareForIndexing",
+  "configuredTargets": [
     {
-      "guid" : "6817bc82f2dda5f5c780deada0a388fa88a783a885d8b0b3beb2e9f90bde3f49"
+      "guid": "6817bc82f2dda5f5c780deada0a388fa88a783a885d8b0b3beb2e9f90bde3f49"
     }
   ],
-  "continueBuildingAfterErrors" : true,
-  "enableIndexBuildArena" : false,
-  "hideShellScriptEnvironment" : false,
-  "parameters" : {
-    "action" : "build",
-    "activeArchitecture" : "arm64",
-    "activeRunDestination" : {
-      "disableOnlyActiveArch" : false,
-      "platform" : "iphonesimulator",
-      "sdk" : "iphonesimulator14.5",
-      "sdkVariant" : "iphonesimulator",
-      "supportedArchitectures" : [
-        "arm64",
-        "x86_64"
-      ],
-      "targetArchitecture" : "arm64"
+  "continueBuildingAfterErrors": true,
+  "enableIndexBuildArena": false,
+  "hideShellScriptEnvironment": false,
+  "parameters": {
+    "action": "build",
+    "activeArchitecture": "arm64",
+    "activeRunDestination": {
+      "disableOnlyActiveArch": false,
+      "platform": "iphonesimulator",
+      "sdk": "iphonesimulator14.5",
+      "sdkVariant": "iphonesimulator",
+      "supportedArchitectures": ["arm64", "x86_64"],
+      "targetArchitecture": "arm64"
     },
-    "arenaInfo" : {
-      "buildIntermediatesPath" : "",
-      "buildProductsPath" : "",
-      "derivedDataPath" : "/Users/molnarzs/Library/Developer/Xcode/DerivedData",
-      "indexDataStoreFolderPath" : "/Users/molnarzs/Library/Developer/Xcode/DerivedData/Runner-dapphiaoqpuldlfuqswztvvrdhzm/Index/DataStore",
-      "indexEnableDataStore" : true,
-      "indexPCHPath" : "/Users/molnarzs/Library/Developer/Xcode/DerivedData/Runner-dapphiaoqpuldlfuqswztvvrdhzm/Index/PrecompiledHeaders",
-      "pchPath" : ""
+    "arenaInfo": {
+      "buildIntermediatesPath": "",
+      "buildProductsPath": "",
+      "derivedDataPath": "/Users/molnarzs/Library/Developer/Xcode/DerivedData",
+      "indexDataStoreFolderPath": "/Users/molnarzs/Library/Developer/Xcode/DerivedData/Runner-dapphiaoqpuldlfuqswztvvrdhzm/Index/DataStore",
+      "indexEnableDataStore": true,
+      "indexPCHPath": "/Users/molnarzs/Library/Developer/Xcode/DerivedData/Runner-dapphiaoqpuldlfuqswztvvrdhzm/Index/PrecompiledHeaders",
+      "pchPath": ""
     },
-    "configurationName" : "Debug",
-    "overrides" : {
-      "synthesized" : {
-        "table" : {
-          "ASSETCATALOG_FILTER_FOR_DEVICE_MODEL" : "iPod9,1",
-          "ASSETCATALOG_FILTER_FOR_DEVICE_OS_VERSION" : "14.5",
-          "BUILD_ACTIVE_RESOURCES_ONLY" : "YES",
-          "ENABLE_PREVIEWS" : "NO",
-          "TARGET_DEVICE_IDENTIFIER" : "279D2EBC-9C91-4492-8CDD-D8BCCDC8051A",
-          "TARGET_DEVICE_MODEL" : "iPod9,1",
-          "TARGET_DEVICE_OS_VERSION" : "14.5",
-          "TARGET_DEVICE_PLATFORM_NAME" : "iphonesimulator"
+    "configurationName": "Debug",
+    "overrides": {
+      "synthesized": {
+        "table": {
+          "ASSETCATALOG_FILTER_FOR_DEVICE_MODEL": "iPod9,1",
+          "ASSETCATALOG_FILTER_FOR_DEVICE_OS_VERSION": "14.5",
+          "BUILD_ACTIVE_RESOURCES_ONLY": "YES",
+          "ENABLE_PREVIEWS": "NO",
+          "TARGET_DEVICE_IDENTIFIER": "279D2EBC-9C91-4492-8CDD-D8BCCDC8051A",
+          "TARGET_DEVICE_MODEL": "iPod9,1",
+          "TARGET_DEVICE_OS_VERSION": "14.5",
+          "TARGET_DEVICE_PLATFORM_NAME": "iphonesimulator"
         }
       }
     }
   },
-  "qos" : "default",
-  "schemeCommand" : "launch",
-  "shouldCollectMetrics" : false,
-  "showNonLoggedProgress" : true,
-  "useDryRun" : true,
-  "useImplicitDependencies" : true,
-  "useLegacyBuildLocations" : false,
-  "useParallelTargets" : true
+  "qos": "default",
+  "schemeCommand": "launch",
+  "shouldCollectMetrics": false,
+  "showNonLoggedProgress": true,
+  "useDryRun": true,
+  "useImplicitDependencies": true,
+  "useLegacyBuildLocations": false,
+  "useParallelTargets": true
 }

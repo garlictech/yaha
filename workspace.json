@@ -22,9 +22,7 @@
             "outputPath": "dist/apps/cicd",
             "main": "apps/cicd/src/main.ts",
             "tsConfig": "apps/cicd/tsconfig.app.json",
-            "assets": [
-              "apps/cicd/src/assets"
-            ]
+            "assets": ["apps/cicd/src/assets"]
           }
         },
         "deploy": {
@@ -52,16 +50,12 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/cicd/**/*.ts"
-            ]
+            "lintFilePatterns": ["apps/cicd/**/*.ts"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/apps/cicd"
-          ],
+          "outputs": ["coverage/apps/cicd"],
           "options": {
             "jestConfig": "apps/cicd/jest.config.js",
             "passWithNoTests": true
