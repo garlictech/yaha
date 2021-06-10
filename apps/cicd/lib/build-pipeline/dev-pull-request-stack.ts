@@ -52,9 +52,9 @@ export class DevPullRequestBuildStack extends sst.Stack {
               commands: [
                 `./tools/build-workspace.sh ${utils.appConfig.name} ${stage}`,
                 `yarn nx affected:lint --base=${stage} ${generatedLibExcludes}`,
-                `yarn nx affected:test --base=${stage} --exclude="yaha-mobile" --exclude="integration-tests-angular" --exclude="integration-tests-universal" ${generatedLibExcludes} --codeCoverage --coverageReporters=clover`,
-                `yarn nx test yaha-mobile`,
-                `yarn nx buildApk yaha-mobile`,
+                `yarn nx affected:test --base=${stage} --exclude="mobile-app" --exclude="integration-tests-universal" ${generatedLibExcludes} --codeCoverage --coverageReporters=clover`,
+                `yarn nx test mobile-app`,
+                `yarn nx buildApk mobile-app`,
                 'npx cowsay "YOUR PR IS SUPERCOOL!!!"',
               ],
             },
