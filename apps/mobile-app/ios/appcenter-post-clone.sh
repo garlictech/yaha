@@ -26,6 +26,7 @@ cd ../..
 
 cd apps/mobile-app/ios
 
+flutter pub get
 pod install
 flutter build ios --release --no-codesign
 
