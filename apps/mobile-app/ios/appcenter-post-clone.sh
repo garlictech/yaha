@@ -20,10 +20,11 @@ flutter doctor
 #ARTIFACT_NAME=$(git rev-parse HEAD).tgz
 #echo "***** The build: ${APPCENTER_BRANCH}/${ARTIFACT_NAME}"
 
-#cd ../..
+cd ../..
 #aws s3 cp s3://anyupp-build-artifacts-${APPCENTER_BRANCH}/${ARTIFACT_NAME} .
 #tar -zxf ${ARTIFACT_NAME}
 
-#cd apps/mobile-app
+cd apps/mobile-app
+
 flutter build ios --release --no-codesign
 
