@@ -1,8 +1,4 @@
 {
-  "npmScope": "yaha",
-  "affected": {
-    "defaultBase": "master"
-  },
   "implicitDependencies": {
     "package.json": {
       "dependencies": "*",
@@ -10,16 +6,15 @@
     },
     ".eslintrc.json": "*"
   },
+  "affected": {
+    "defaultBase": "master"
+  },
+  "npmScope": "yaha",
   "tasksRunnerOptions": {
     "default": {
       "runner": "@nrwl/nx-cloud",
       "options": {
-        "cacheableOperations": [
-          "build",
-          "lint",
-          "test",
-          "e2e"
-        ],
+        "cacheableOperations": ["build", "lint", "test", "e2e"],
         "accessToken": "YzIzOWI0OWUtMGRjMS00ZGZhLTliOTctZThlZmUxNGMyNGI2fHJlYWQtd3JpdGU=",
         "canTrackAnalytics": false,
         "showUsageWarnings": true
@@ -29,9 +24,9 @@
   "projects": {
     "mobile-app": {
       "tags": []
+    },
+    "cicd": {
+      "tags": []
     }
-  },
-  "plugins": [
-    "@nxrocks/nx-flutter"
-  ]
+  }
 }
