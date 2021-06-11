@@ -1,6 +1,74 @@
 {
   "version": 2,
+  "cli": {
+    "defaultCollection": "@nrwl/node"
+  },
+  "defaultProject": "cicd",
   "projects": {
+    "cicd": {
+      "root": "apps/cicd",
+      "sourceRoot": "apps/cicd/src",
+      "projectType": "application",
+      "prefix": "cicd",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/workspace:run-commands",
+          "outputs": [
+            "apps/cicd/cdk.out",
+            "apps/cicd/.build",
+            "apps/cicd/.serverless"
+          ],
+          "options": {
+            "outputPath": "dist/apps/cicd",
+            "main": "apps/cicd/src/main.ts",
+            "tsConfig": "apps/cicd/tsconfig.app.json",
+            "assets": [
+              "apps/cicd/src/assets"
+            ]
+          }
+        },
+        "deploy": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "cwd": "apps/cicd",
+            "commands": [
+              {
+                "command": "yarn sst deploy"
+              }
+            ]
+          }
+        },
+        "remove": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "cwd": "apps/cicd",
+            "commands": [
+              {
+                "command": "yarn sst remove"
+              }
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/cicd/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/apps/cicd"
+          ],
+          "options": {
+            "jestConfig": "apps/cicd/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "mobile-app": {
       "root": "apps/mobile-app",
       "sourceRoot": "apps/mobile-app/src",
@@ -127,8 +195,5 @@
         }
       }
     }
-  },
-  "cli": {
-    "defaultCollection": "@nrwl/workspace"
   }
 }
