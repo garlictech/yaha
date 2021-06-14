@@ -313,7 +313,7 @@ export const createCommonDevPipeline = (
           //`yarn nx deploy yaha-backend --stage=${stage} --app=${appConfig.name}`,
           'export PATH=$PATH:/tmp/flutter/bin',
           'flutter doctor',
-          `yarn nx buildApk mobile-app`,
+          `yarn nx buildApk mobile_app`,
         ],
       },
       post_build: {
