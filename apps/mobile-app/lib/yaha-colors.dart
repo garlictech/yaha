@@ -25,5 +25,10 @@ class YahaColors {
   static const Color shop = const Color(0xFFAB47BC);
   static const Color historic = const Color(0xFF8D6E63);
 
+  // AUTH BUTTON COLORS
+  static const Color facebook = const Color(0xFF3B5998);
+  static const Color google = const Color(0xFF4285F4);
+  static const Color apple = const Color(0xFF000000);
+
   const YahaColors();
 }

@@ -77,7 +77,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               ),
                               Container(
                                   child: Divider(
-                                      color: YahaColors.divider, thickness: 1)),
+                                      color: YahaColors.divider, thickness: 0.5)),
                               Container(
                                 padding: const EdgeInsets.only(
                                     left: YahaSpaceSizes.general,
@@ -101,7 +101,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                   ],
                                 ),
                               ),
-                              Divider(color: YahaColors.divider, thickness: 1),
+                              Divider(color: YahaColors.divider, thickness: 0.5),
                               Container(
                                 padding: const EdgeInsets.only(
                                     left: YahaSpaceSizes.general,
@@ -125,7 +125,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                   ],
                                 ),
                               ),
-                              Divider(color: YahaColors.divider, thickness: 1),
+                              Divider(color: YahaColors.divider, thickness: 0.5),
                               Container(
                                 padding: const EdgeInsets.only(
                                     left: YahaSpaceSizes.general,
@@ -195,7 +195,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               ),
                               Container(
                                   child: Divider(
-                                      color: YahaColors.divider, thickness: 1)),
+                                      color: YahaColors.divider, thickness: 0.5)),
                               Container(
                                 padding: const EdgeInsets.only(
                                     left: YahaSpaceSizes.general,
@@ -219,7 +219,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                   ],
                                 ),
                               ),
-                              Divider(color: YahaColors.divider, thickness: 1),
+                              Divider(color: YahaColors.divider, thickness: 0.5),
                               Container(
                                 padding: const EdgeInsets.only(
                                     left: YahaSpaceSizes.general,
@@ -243,7 +243,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                   ],
                                 ),
                               ),
-                              Divider(color: YahaColors.divider, thickness: 1),
+                              Divider(color: YahaColors.divider, thickness: 0.5),
                               Container(
                                 padding: const EdgeInsets.only(
                                     left: YahaSpaceSizes.general,
