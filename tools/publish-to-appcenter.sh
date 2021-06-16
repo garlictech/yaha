@@ -8,7 +8,7 @@ PLATFORM=$2
 appId="yaha-$PLATFORM-$STAGE"
 
 if [ $PLATFORM = 'android' ]; then
-  appImagePath=${CODEBUILD_SRC_DIR:-$PWD}/apps/mobile-app/build/app/outputs/flutter-apk/app-release.apk
+  appImagePath=${CODEBUILD_SRC_DIR:-$PWD}/apps/mobile_app/build/app/outputs/flutter-apk/app-release.apk
 else
   echo "Unsupported platform: ${PLATFORM}"
   exit 1
