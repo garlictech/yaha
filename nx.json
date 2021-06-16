@@ -22,10 +22,10 @@
     }
   },
   "projects": {
-    "mobile_app": {
+    "cicd": {
       "tags": []
     },
-    "cicd": {
+    "mobile_app": {
       "tags": []
     }
   }
