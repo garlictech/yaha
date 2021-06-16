@@ -22,7 +22,7 @@
     }
   },
   "projects": {
-    "mobile-app": {
+    "mobile_app": {
       "tags": []
     },
     "cicd": {

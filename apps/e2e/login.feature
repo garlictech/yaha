@@ -1,27 +1,23 @@
 Feature: Log in
 
-Background:
-    Given user has an account
-    And user logged out
+    Background:
+        Given user has an account
+        And user logged out
 
-Scenario: User logs in with email
-    Given user signed up with email
-    And user filled out email input filed
-    And password input field
-    When user presses log in button
-    Then user sees her/his dashboard
+    Scenario: User logs in with email
+        Given user signed up with email
+        And user filled out email input filed
+        And password input field
+        When user presses log in button
+        Then user navigates to Home - new user screen
 
-Scenario: User logs in with Facebook
-    Given user signed up with Facebook
-    When user presses Log in with Facebook button
-    Then user sees her/his dashboard
+    Scenario Outline: User wants to log in with one of their other accounts
+        Given User is on Log in screen
+        When taps on "<log in option>" button
+        Then navigates to Home - new user screen
 
-Scenario: User logs in with Google
-    Given user signed up with Google
-    When user presses Log in with Google button
-    Then user sees her/his dashboard
-
-Scenario: User logs in with Apple
-    Given user signed up with Apple
-    When user presses Log in with Apple button
-    Then user sees her/his dashboard
+        Example:
+            | log in option        |
+            | Log in with Facebook |
+            | Log in with Google   |
+            | Log in with Apple    |

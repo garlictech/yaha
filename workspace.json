@@ -22,9 +22,7 @@
             "outputPath": "dist/apps/cicd",
             "main": "apps/cicd/src/main.ts",
             "tsConfig": "apps/cicd/tsconfig.app.json",
-            "assets": [
-              "apps/cicd/src/assets"
-            ]
+            "assets": ["apps/cicd/src/assets"]
           }
         },
         "deploy": {
@@ -52,16 +50,12 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/cicd/**/*.ts"
-            ]
+            "lintFilePatterns": ["apps/cicd/**/*.ts"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/apps/cicd"
-          ],
+          "outputs": ["coverage/apps/cicd"],
           "options": {
             "jestConfig": "apps/cicd/jest.config.js",
             "passWithNoTests": true
@@ -69,128 +63,128 @@
         }
       }
     },
-    "mobile-app": {
-      "root": "apps/mobile-app",
-      "sourceRoot": "apps/mobile-app/src",
+    "mobile_app": {
+      "root": "apps/mobile_app",
+      "sourceRoot": "apps/mobile_app/src",
       "projectType": "application",
       "targets": {
         "analyze": {
           "executor": "@nrwl/workspace:run-commands",
           "options": {
             "command": "flutter analyze",
-            "cwd": "apps/mobile-app"
+            "cwd": "apps/mobile_app"
           }
         },
         "clean": {
           "executor": "@nrwl/workspace:run-commands",
           "options": {
             "command": "flutter clean",
-            "cwd": "apps/mobile-app"
+            "cwd": "apps/mobile_app"
           }
         },
         "format": {
           "executor": "@nrwl/workspace:run-commands",
           "options": {
-            "command": "flutter format apps/mobile-app/*",
-            "cwd": "apps/mobile-app"
+            "command": "flutter format apps/mobile_app/*",
+            "cwd": "apps/mobile_app"
           }
         },
         "test": {
           "executor": "@nrwl/workspace:run-commands",
           "options": {
             "command": "flutter test",
-            "cwd": "apps/mobile-app"
+            "cwd": "apps/mobile_app"
           }
         },
         "assemble": {
           "executor": "@nrwl/workspace:run-commands",
           "options": {
             "command": "flutter assemble",
-            "cwd": "apps/mobile-app"
+            "cwd": "apps/mobile_app"
           }
         },
         "attach": {
           "executor": "@nrwl/workspace:run-commands",
           "options": {
             "command": "flutter attach",
-            "cwd": "apps/mobile-app"
+            "cwd": "apps/mobile_app"
           }
         },
         "drive": {
           "executor": "@nrwl/workspace:run-commands",
           "options": {
             "command": "flutter drive",
-            "cwd": "apps/mobile-app"
+            "cwd": "apps/mobile_app"
           }
         },
         "genL10n": {
           "executor": "@nrwl/workspace:run-commands",
           "options": {
             "command": "flutter gen-l10n",
-            "cwd": "apps/mobile-app"
+            "cwd": "apps/mobile_app"
           }
         },
         "install": {
           "executor": "@nrwl/workspace:run-commands",
           "options": {
             "command": "flutter install",
-            "cwd": "apps/mobile-app"
+            "cwd": "apps/mobile_app"
           }
         },
         "run": {
           "executor": "@nrwl/workspace:run-commands",
           "options": {
             "command": "flutter run",
-            "cwd": "apps/mobile-app"
+            "cwd": "apps/mobile_app"
           }
         },
         "buildAar": {
           "executor": "@nrwl/workspace:run-commands",
           "options": {
             "command": "flutter build aar",
-            "cwd": "apps/mobile-app"
+            "cwd": "apps/mobile_app"
           }
         },
         "buildApk": {
           "executor": "@nrwl/workspace:run-commands",
           "options": {
             "command": "flutter build apk",
-            "cwd": "apps/mobile-app"
+            "cwd": "apps/mobile_app"
           }
         },
         "buildAppbundle": {
           "executor": "@nrwl/workspace:run-commands",
           "options": {
             "command": "flutter build appbundle",
-            "cwd": "apps/mobile-app"
+            "cwd": "apps/mobile_app"
           }
         },
         "buildBundle": {
           "executor": "@nrwl/workspace:run-commands",
           "options": {
             "command": "flutter build bundle",
-            "cwd": "apps/mobile-app"
+            "cwd": "apps/mobile_app"
           }
         },
         "buildIos": {
           "executor": "@nrwl/workspace:run-commands",
           "options": {
             "command": "flutter build ios",
-            "cwd": "apps/mobile-app"
+            "cwd": "apps/mobile_app"
           }
         },
         "buildIosFramework": {
           "executor": "@nrwl/workspace:run-commands",
           "options": {
             "command": "flutter build ios-framework",
-            "cwd": "apps/mobile-app"
+            "cwd": "apps/mobile_app"
           }
         },
         "buildIpa": {
           "executor": "@nrwl/workspace:run-commands",
           "options": {
             "command": "flutter build ipa",
-            "cwd": "apps/mobile-app"
+            "cwd": "apps/mobile_app"
           }
         }
       }
