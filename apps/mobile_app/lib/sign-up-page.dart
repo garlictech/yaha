@@ -27,7 +27,7 @@ class _SignUpPageState extends State<SignUpPage> {
             flexibleSpace: FlexibleSpaceBar(
               centerTitle: true,
               title: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+           //     crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
@@ -63,7 +63,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           top: YahaSpaceSizes.large),
                       child: SizedBox(
                         height: 50,
-                        width: 300,
+                        width: 400,
                         child: ElevatedButton.icon(
                           icon: Icon(
                             Icons.timeline,
@@ -90,7 +90,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           const EdgeInsets.only(bottom: YahaSpaceSizes.general),
                       child: SizedBox(
                         height: 50,
-                        width: 300,
+                        width: 400,
                         child: ElevatedButton.icon(
                           icon: Icon(
                             Icons.facebook_rounded,
@@ -117,7 +117,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           const EdgeInsets.only(bottom: YahaSpaceSizes.general),
                       child: SizedBox(
                         height: 50,
-                        width: 300,
+                        width: 400,
                         child: ElevatedButton.icon(
                           icon: Icon(
                             Icons.timeline,
@@ -144,7 +144,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           const EdgeInsets.only(bottom: YahaSpaceSizes.general),
                       child: SizedBox(
                         height: 50,
-                        width: 300,
+                        width: 400,
                         child: ElevatedButton.icon(
                           icon: Icon(
                             Icons.timeline,
@@ -170,8 +170,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       child: Align(
                         alignment: FractionalOffset.bottomCenter,
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.end,
+                    
                           children: [
                             Text('Already have an account?',
                                 style: TextStyle(
