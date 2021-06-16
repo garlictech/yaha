@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Jaha',
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: true,
       theme: ThemeData(
           primaryColor: Color(0xFF29A253),
           scaffoldBackgroundColor: Color(0xFFFDFBF7),
