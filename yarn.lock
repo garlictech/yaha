@@ -2851,7 +2851,7 @@
     slash "^3.0.0"
     strip-ansi "^6.0.0"
 
-"@jest/core@^27.0.3", "@jest/core@^27.0.4":
+"@jest/core@^27.0.4":
   version "27.0.4"
   resolved "https://registry.yarnpkg.com/@jest/core/-/core-27.0.4.tgz#679bf9ac07900da2ddbb9667bb1afa8029038f53"
   integrity sha512-+dsmV8VUs1h/Szb+rEWk8xBM1fp1I///uFy9nk3wXGvRsF2lBp8EVPmtWc+QFRb3MY2b7u2HbkGF1fzoDzQTLA==
@@ -3790,10 +3790,10 @@
     lodash "^4.17.4"
     read-pkg-up "^7.0.0"
 
-"@serverless-stack/cli@0.27.0":
-  version "0.27.0"
-  resolved "https://registry.yarnpkg.com/@serverless-stack/cli/-/cli-0.27.0.tgz#1a6a7b917d73f14e0a475db1a1334080daf7d938"
-  integrity sha512-VoL9r36H4hpvVgmqb3MPGKesOsyCrQljt3CSlLbjFjhSsyBLqxq9uChWY7uFMKBmN3/ewnqH9hd1S7AAsBHE+Q==
+"@serverless-stack/cli@0.28.0":
+  version "0.28.0"
+  resolved "https://registry.yarnpkg.com/@serverless-stack/cli/-/cli-0.28.0.tgz#b149befa537ba1ef09996a2a9f84fa52e0fff389"
+  integrity sha512-zBwIqtUUpfOUwL0weSeE2aY6FM3+9Ez3B1secxXrjnUwcfO/D9gO9Ltj7SERq0Yu7BszG5mdDzQiRfUpExWsTg==
   dependencies:
     "@aws-cdk/aws-apigatewayv2" "1.105.0"
     "@aws-cdk/aws-dynamodb" "1.105.0"
@@ -3805,8 +3805,8 @@
     "@babel/eslint-plugin" "^7.11.3"
     "@babel/plugin-proposal-class-properties" "^7.10.4"
     "@babel/preset-env" "^7.10.4"
-    "@serverless-stack/core" "^0.27.0"
-    "@serverless-stack/resources" "^0.27.0"
+    "@serverless-stack/core" "^0.28.0"
+    "@serverless-stack/resources" "^0.28.0"
     "@types/jest" "^26.0.7"
     "@types/node" "^14.0.27"
     "@typescript-eslint/eslint-plugin" "^4.15.1"
@@ -3837,10 +3837,10 @@
     ws "^7.4.0"
     yargs "^15.4.1"
 
-"@serverless-stack/core@^0.27.0":
-  version "0.27.0"
-  resolved "https://registry.yarnpkg.com/@serverless-stack/core/-/core-0.27.0.tgz#cd7b7ef239ad6937e55bf10b6cbf41235250078d"
-  integrity sha512-wbLSrso1WDekrVBv70J1YuRjgXBWCmp5r8Tvsel3Or+4eea0KpMg9f95eda9xqYQroxw+0AgB85ihoht2jEpBA==
+"@serverless-stack/core@^0.28.0":
+  version "0.28.0"
+  resolved "https://registry.yarnpkg.com/@serverless-stack/core/-/core-0.28.0.tgz#ba04f71c89b5d88b0924869e355b9778e297679d"
+  integrity sha512-f0FKT1N3JoPPd7divxr8I7XrwUky8ON7+NjV2R7MbgdzRkVxhyI10mfHj4cbO/4pfFQscCKY9neHEKjQvgN1xA==
   dependencies:
     aws-cdk "1.105.0"
     aws-sdk "^2.761.0"
@@ -3849,10 +3849,10 @@
     fs-extra "^9.0.1"
     log4js "^6.3.0"
 
-"@serverless-stack/resources@0.27.0", "@serverless-stack/resources@^0.27.0":
-  version "0.27.0"
-  resolved "https://registry.yarnpkg.com/@serverless-stack/resources/-/resources-0.27.0.tgz#ad8a226aeff013c9364ba38fce72b51e81f5c214"
-  integrity sha512-PeHhafYn5TpM/yHLZePUSVJ8pouaNTJLhJ2PU1Bw0pkYQlBdwqA+AoSthLfp67GRRHhnM0Vo1pfzi+oGKFlyHQ==
+"@serverless-stack/resources@0.28.0", "@serverless-stack/resources@^0.28.0":
+  version "0.28.0"
+  resolved "https://registry.yarnpkg.com/@serverless-stack/resources/-/resources-0.28.0.tgz#69fd92a2c60b4a0f5ef669d527a288265d27c9e7"
+  integrity sha512-ybVM1oqFcKkqtVCj4GsyVrOkC3I99pmwj7sp24uiApUT2M8miWGlM2pHeteutYCe57Z99vcfJQQ8vQG4V9SxFA==
   dependencies:
     "@aws-cdk/aws-apigateway" "1.105.0"
     "@aws-cdk/aws-apigatewayv2" "1.105.0"
@@ -3884,7 +3884,7 @@
     "@aws-cdk/aws-sqs" "1.105.0"
     "@aws-cdk/core" "1.105.0"
     "@aws-cdk/cx-api" "1.105.0"
-    "@serverless-stack/core" "^0.27.0"
+    "@serverless-stack/core" "^0.28.0"
     "@types/jest" "^26.0.7"
     chalk "^4.1.0"
     cross-spawn "^7.0.3"
@@ -11438,7 +11438,7 @@ jest-cli@^26.6.3:
     prompts "^2.0.1"
     yargs "^15.4.1"
 
-jest-cli@^27.0.3:
+jest-cli@^27.0.4:
   version "27.0.4"
   resolved "https://registry.yarnpkg.com/jest-cli/-/jest-cli-27.0.4.tgz#491b12c754c0d7c6873b13a66f26b3a80a852910"
   integrity sha512-E0T+/i2lxsWAzV7LKYd0SB7HUAvePqaeIh5vX43/G5jXLhv1VzjYzJAGEkTfvxV774ll9cyE2ljcL73PVMEOXQ==
@@ -12135,14 +12135,14 @@ jest-worker@^27.0.2:
     merge-stream "^2.0.0"
     supports-color "^8.0.0"
 
-jest@27.0.3:
-  version "27.0.3"
-  resolved "https://registry.yarnpkg.com/jest/-/jest-27.0.3.tgz#0b4ac738c93612f778d58250aee026220487e5a4"
-  integrity sha512-0G9+QqXFIZWgf5rs3yllpaA+13ZawVHfyuhuCV1EnoFbX++rVMRrYWCAnk+dfhwyv9/VTQvn+XG969u8aPRsBg==
+jest@27.0.4:
+  version "27.0.4"
+  resolved "https://registry.yarnpkg.com/jest/-/jest-27.0.4.tgz#91d4d564b36bcf93b98dac1ab19f07089e670f53"
+  integrity sha512-Px1iKFooXgGSkk1H8dJxxBIrM3tsc5SIuI4kfKYK2J+4rvCvPGr/cXktxh0e9zIPQ5g09kOMNfHQEmusBUf/ZA==
   dependencies:
-    "@jest/core" "^27.0.3"
+    "@jest/core" "^27.0.4"
     import-local "^3.0.2"
-    jest-cli "^27.0.3"
+    jest-cli "^27.0.4"
 
 jest@^26.1.0, jest@^26.5.3:
   version "26.6.3"
