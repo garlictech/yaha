@@ -10,9 +10,9 @@
       "sourceRoot": "apps/cicd/src",
       "projectType": "application",
       "prefix": "cicd",
-      "architect": {
+      "targets": {
         "build": {
-          "builder": "@nrwl/workspace:run-commands",
+          "executor": "@nrwl/workspace:run-commands",
           "outputs": [
             "apps/cicd/cdk.out",
             "apps/cicd/.build",
@@ -26,7 +26,7 @@
           }
         },
         "deploy": {
-          "builder": "@nrwl/workspace:run-commands",
+          "executor": "@nrwl/workspace:run-commands",
           "options": {
             "cwd": "apps/cicd",
             "commands": [
@@ -37,7 +37,7 @@
           }
         },
         "remove": {
-          "builder": "@nrwl/workspace:run-commands",
+          "executor": "@nrwl/workspace:run-commands",
           "options": {
             "cwd": "apps/cicd",
             "commands": [
@@ -48,13 +48,13 @@
           }
         },
         "lint": {
-          "builder": "@nrwl/linter:eslint",
+          "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["apps/cicd/**/*.ts"]
           }
         },
         "test": {
-          "builder": "@nrwl/jest:jest",
+          "executor": "@nrwl/jest:jest",
           "outputs": ["coverage/apps/cicd"],
           "options": {
             "jestConfig": "apps/cicd/jest.config.js",
