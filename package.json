@@ -62,7 +62,7 @@
     "@types/googlemaps": "3.43.3",
     "@types/lodash-es": "4.17.4",
     "@commitlint/cli": "12.1.4",
-    "@serverless-stack/cli": "0.27.0",
+    "@serverless-stack/cli": "0.28.0",
     "@serverless-stack/resources": "0.27.0",
     "@commitlint/config-conventional": "12.1.4",
     "@graphql-codegen/cli": "1.21.5",
