@@ -28,15 +28,14 @@ class _HikePageState extends State<HikePage> {
                 titlePadding: EdgeInsets.only(left: 60.0, bottom: 8.0),
                 centerTitle: false,
                 title: Container(
-                  child: Flexible(
-                    flex: 1,
-                    child: Text('Budapest',
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
+                  // child: Flexible(
+                  //   flex: 1,
+                  child: Text('Budapest',
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
                           fontWeight: FontWeight.w700,
-                          fontSize: YahaFontSizes.xxLarge
-                        )),
-                  ),
+                          fontSize: YahaFontSizes.xxLarge)),
+                  // ),
                 ),
                 background: Image.asset(
                   'assets/images/Budapest-dark.png',
@@ -341,33 +340,6 @@ class _HikePageState extends State<HikePage> {
                                       )),
                                   style: ElevatedButton.styleFrom(
                                     primary: YahaColors.tourism,
-                                    shape: const RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(9))),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              margin: const EdgeInsets.only(
-                                  right: YahaSpaceSizes.small),
-                              child: SizedBox(
-                                height: 50,
-                                width: 160,
-                                child: ElevatedButton.icon(
-                                  icon: Icon(
-                                    Icons.fastfood_rounded,
-                                    color: YahaColors.accentColor,
-                                    size: YahaFontSizes.large,
-                                  ),
-                                  onPressed: () {},
-                                  label: Text('Fast food',
-                                      style: TextStyle(
-                                        fontSize: YahaFontSizes.small,
-                                        fontWeight: FontWeight.w600,
-                                      )),
-                                  style: ElevatedButton.styleFrom(
-                                    primary: YahaColors.amenity,
                                     shape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(9))),
