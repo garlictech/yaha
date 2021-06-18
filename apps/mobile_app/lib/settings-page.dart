@@ -272,7 +272,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                     YahaSpaceSizes.general),
                                 child: SizedBox(
                                   height: 50,
-                                  width: 300,
+                                  width: 400,
                                   child: ElevatedButton.icon(
                                     icon: Icon(
                                       Icons.star,
