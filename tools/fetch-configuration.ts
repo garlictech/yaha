@@ -15,7 +15,7 @@ const prefix = `${stage}-${project}`;
 
 const targetDir = `${__dirname}/../libs/shared/config/src/lib/generated`;
 const targetFile = `${targetDir}/config.json`;
-const mobileAppConfigurationFile = `${__dirname}/../apps/anyupp-mobile/lib/awsconfiguration.dart`;
+const mobileAppConfigurationFile = `${__dirname}/../apps/yaha-mobile/lib/awsconfiguration.dart`;
 
 const amplifyMetaConfigFile = `${__dirname}/../apps/crud-backend/amplify/backend/amplify-meta.json`;
 

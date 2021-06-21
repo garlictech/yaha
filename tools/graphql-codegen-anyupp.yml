@@ -1,8 +1,8 @@
 overwrite: true
-schema: libs/anyupp-gql/backend/src/graphql/schema/*.graphql
-documents: libs/anyupp-gql/backend/src/graphql/documents/*.graphql
+schema: libs/yaha-gql/backend/src/graphql/schema/*.graphql
+documents: libs/yaha-gql/backend/src/graphql/documents/*.graphql
 generates:
-  libs/anyupp-gql/api/src/lib/generated/anyupp-api.ts:
+  libs/yaha-gql/api/src/lib/generated/yaha-api.ts:
     hooks:
       afterOneFileWrite:
         - prettier --write

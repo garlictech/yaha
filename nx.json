@@ -22,11 +22,14 @@
     }
   },
   "projects": {
+    "backend": {
+      "tags": ["type:backend", "platform:nodejs"]
+    },
     "cicd": {
-      "tags": []
+      "tags": ["type:backend", "platform:nodejs"]
     },
     "mobile_app": {
-      "tags": []
+      "tags": ["type:application", "platform:flutter"]
     }
   }
 }

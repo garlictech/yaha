@@ -4,15 +4,15 @@ import { pipe } from 'fp-ts/lib/function';
 import * as fp from 'lodash/fp';
 import * as fs from 'fs';
 
-// Project is unised now, it's anyupp always. Might be changed in the future!
+// Project is unised now, it's yaha always. Might be changed in the future!
 //const project = process.argv[2];
-const project = 'anyupp';
+const project = 'yaha';
 const stage = process.argv[3];
 
 const secretName = `${project}-${stage}-secrets`;
 const targetDir = `${__dirname}/../libs/shared/config/src/lib/generated`;
-const androidKeyStoreTargetFile = `${__dirname}/../apps/anyupp-mobile/android/anyupp-keystore.jks`;
-const androidKeyPropertiesTargetFile = `${__dirname}/../apps/anyupp-mobile/android/key.properties`;
+const androidKeyStoreTargetFile = `${__dirname}/../apps/yaha-mobile/android/yaha-keystore.jks`;
+const androidKeyPropertiesTargetFile = `${__dirname}/../apps/yaha-mobile/android/key.properties`;
 
 const client = new AWS.SecretsManager({
   region: region,
