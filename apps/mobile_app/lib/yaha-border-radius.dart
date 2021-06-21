@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class YahaBorderRadius {
   // YAHA THEME BORDER RADIUS SIZES
+  static const xSmall = 7.0;
   static const small = 12.0;
   static const general = 15.0;
 

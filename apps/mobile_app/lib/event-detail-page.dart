@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app/yaha-border-radius.dart';
+import 'package:mobile_app/yaha-border-width.dart';
 import 'package:mobile_app/yaha-colors.dart';
 import 'package:mobile_app/yaha-font-sizes.dart';
 import 'package:mobile_app/yaha-space-sizes.dart';
@@ -24,8 +25,8 @@ class _EventDetailPageState extends State<EventDetailPage> {
                     children: [
                       Container(
                         padding: const EdgeInsets.only(
-                            left: YahaSpaceSizes.small,
-                            right: YahaSpaceSizes.small),
+                            left: YahaSpaceSizes.general,
+                            right: YahaSpaceSizes.general),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -54,15 +55,22 @@ class _EventDetailPageState extends State<EventDetailPage> {
                         child: Container(
                           decoration: BoxDecoration(
                               border: Border.all(
-                                width: 3.0,
+                                width: YahaBorderWidth.medium,
                                 color: YahaColors.primary,
                               ),
-                              borderRadius: BorderRadius.circular(15.0)),
-                          child: Image.asset(
-                            'assets/images/EgerCsillaga.jpeg',
-                            fit: BoxFit.cover,
-                            height: 120.0,
-                            width: 120.0,
+                              borderRadius: BorderRadius.circular(
+                                  YahaBorderRadius.general)),
+                          child: ClipRRect(
+                            borderRadius:
+                                BorderRadius.circular(YahaBorderRadius.general),
+                            child: Image.asset(
+                              'assets/images/EgerCsillaga.jpeg',
+                              fit: BoxFit.cover,
+                              height: 120.0,
+                              width: 120.0,
+                              semanticLabel:
+                                  "Eger Csillaga Teljesítménytúra logó",
+                            ),
                           ),
                         ),
                       ),
@@ -71,7 +79,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
                           Container(
                             padding: const EdgeInsets.only(
                                 bottom: YahaSpaceSizes.small,
-                                left: YahaSpaceSizes.small),
+                                left: YahaSpaceSizes.general),
                             child: Row(
                               children: [
                                 Icon(
@@ -84,7 +92,6 @@ class _EventDetailPageState extends State<EventDetailPage> {
                                   child: Text('Saturday, August 14, 2021',
                                       style: TextStyle(
                                           fontSize: YahaFontSizes.small,
-                                          fontWeight: FontWeight.w400,
                                           color: YahaColors.textColor)),
                                 ),
                               ],
@@ -93,7 +100,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
                           Container(
                             padding: const EdgeInsets.only(
                                 bottom: YahaSpaceSizes.small,
-                                left: YahaSpaceSizes.small),
+                                left: YahaSpaceSizes.general),
                             child: Row(
                               children: [
                                 Icon(
@@ -106,7 +113,6 @@ class _EventDetailPageState extends State<EventDetailPage> {
                                   child: Text('Felsőtárkány, lakeside',
                                       style: TextStyle(
                                           fontSize: YahaFontSizes.small,
-                                          fontWeight: FontWeight.w400,
                                           color: YahaColors.textColor)),
                                 ),
                               ],
@@ -115,7 +121,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
                           Container(
                             padding: const EdgeInsets.only(
                                 bottom: YahaSpaceSizes.general,
-                                left: YahaSpaceSizes.small),
+                                left: YahaSpaceSizes.general),
                             child: Row(
                               children: [
                                 Icon(
@@ -128,7 +134,6 @@ class _EventDetailPageState extends State<EventDetailPage> {
                                   child: Text('20 USD',
                                       style: TextStyle(
                                           fontSize: YahaFontSizes.small,
-                                          fontWeight: FontWeight.w400,
                                           color: YahaColors.textColor)),
                                 ),
                               ],
@@ -139,49 +144,131 @@ class _EventDetailPageState extends State<EventDetailPage> {
                       Container(
                         padding: const EdgeInsets.only(
                             bottom: YahaSpaceSizes.general,
-                            left: YahaSpaceSizes.medium,
-                            right: YahaSpaceSizes.medium),
+                            left: YahaSpaceSizes.general,
+                            right: YahaSpaceSizes.general),
                         child: Text(
-                            'THE STAR OF EGER is a performance tour to be held in Bükk. On the performance tour, the given distances must be completed within the specified level time by touching the mandatory checkpoints one after the other.'),
+                          'THE STAR OF EGER is a performance tour to be held in Bükk. On the performance tour, the given distances must be completed within the specified level time by touching the mandatory checkpoints one after the other.',
+                          style: TextStyle(fontSize: YahaFontSizes.small),
+                        ),
                       ),
-                      Container(
-                        padding: const EdgeInsets.only(
-                            bottom: YahaSpaceSizes.general),
-                        child: Text(
-                          'Prizes',
-                          style: TextStyle(
-                              fontSize: YahaFontSizes.medium,
-                              fontWeight: FontWeight.w600,
-                              color: YahaColors.textColor),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Container(
+                          padding: const EdgeInsets.only(
+                              bottom: YahaSpaceSizes.general,
+                              left: YahaSpaceSizes.general),
+                          child: Text(
+                            'Prizes',
+                            style: TextStyle(
+                                fontSize: YahaFontSizes.medium,
+                                fontWeight: FontWeight.w600,
+                                color: YahaColors.textColor),
+                          ),
                         ),
                       ),
                       Row(
                         children: [
                           Container(
                             padding: const EdgeInsets.only(
-                                left: YahaSpaceSizes.small,
+                                left: YahaSpaceSizes.general,
                                 right: YahaSpaceSizes.general),
-                            child: Image.asset('assets/images/lynx-brooch.png',
-                                fit: BoxFit.cover),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                    width: YahaBorderWidth.small,
+                                    color: YahaColors.primary,
+                                  ),
+                                  borderRadius: BorderRadius.circular(
+                                      YahaBorderRadius.xSmall)),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(
+                                    YahaBorderRadius.xSmall),
+                                child: Image.asset(
+                                    'assets/images/lynx-brooch.png',
+                                    fit: BoxFit.cover),
+                              ),
+                            ),
                           ),
                           Container(
                             padding: const EdgeInsets.only(
                                 right: YahaSpaceSizes.general),
-                            child: Image.asset('assets/images/deer-brooch.png',
-                                fit: BoxFit.cover),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                    width: YahaBorderWidth.small,
+                                    color: YahaColors.primary,
+                                  ),
+                                  borderRadius: BorderRadius.circular(
+                                      YahaBorderRadius.xSmall)),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(
+                                    YahaBorderRadius.xSmall),
+                                child: Image.asset(
+                                    'assets/images/deer-brooch.png',
+                                    fit: BoxFit.cover),
+                              ),
+                            ),
                           ),
                           Container(
                             padding: const EdgeInsets.only(
                                 right: YahaSpaceSizes.general),
-                            child: Image.asset(
-                                'assets/images/flower-brooch.png',
-                                fit: BoxFit.cover),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                    width: YahaBorderWidth.small,
+                                    color: YahaColors.primary,
+                                  ),
+                                  borderRadius: BorderRadius.circular(
+                                      YahaBorderRadius.xSmall)),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(
+                                    YahaBorderRadius.xSmall),
+                                child: Image.asset(
+                                    'assets/images/flower-brooch.png',
+                                    fit: BoxFit.cover),
+                              ),
+                            ),
                           ),
                           Container(
-                            child: Image.asset('assets/images/paw-brooch.png',
-                                fit: BoxFit.cover),
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                  width: YahaBorderWidth.small,
+                                  color: YahaColors.primary,
+                                ),
+                                borderRadius: BorderRadius.circular(
+                                    YahaBorderRadius.xSmall)),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(
+                                  YahaBorderRadius.xSmall),
+                              child: Image.asset('assets/images/paw-brooch.png',
+                                  fit: BoxFit.cover),
+                            ),
                           ),
                         ],
+                      ),
+                      Container(
+                        padding:
+                            const EdgeInsets.only(top: YahaSpaceSizes.large),
+                        child: SizedBox(
+                          width: 300.0,
+                          height: 50.0,
+                          child: ElevatedButton(
+                            child: Text(
+                              'Apply',
+                              style: TextStyle(
+                                  fontSize: YahaFontSizes.small,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                              primary: YahaColors.primary,
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(
+                                      Radius.circular(
+                                          YahaBorderRadius.general))),
+                            ),
+                          ),
+                        ),
                       ),
                     ],
                   ),
