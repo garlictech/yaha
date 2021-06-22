@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app/yaha-border-radius.dart';
 import 'package:mobile_app/yaha-border-width.dart';
+import 'package:mobile_app/yaha-box-sizes.dart';
 import 'package:mobile_app/yaha-colors.dart';
 import 'package:mobile_app/yaha-font-sizes.dart';
 import 'package:mobile_app/yaha-space-sizes.dart';
@@ -27,24 +28,30 @@ class _EventDetailPageState extends State<EventDetailPage> {
                         padding: const EdgeInsets.only(
                             left: YahaSpaceSizes.general,
                             right: YahaSpaceSizes.general),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        child: Stack(
+                          //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Icon(
-                              Icons.arrow_back_ios_rounded,
-                              size: 28.0,
-                              color: YahaColors.textColor,
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Icon(
+                                Icons.arrow_back_ios_rounded,
+                                size: 28.0,
+                                color: YahaColors.textColor,
+                              ),
                             ),
-                            Text('Eger Csillaga\n Teljesítménytúra',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontSize: YahaFontSizes.large,
-                                    fontWeight: FontWeight.w600,
-                                    color: YahaColors.textColor)),
-                            Container(
-                              width: 32.0,
-                              height: 0.0,
+                            Align(
+                              alignment: Alignment.center,
+                              child: Text('Eger Csillaga\n Teljesítménytúra',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize: YahaFontSizes.large,
+                                      fontWeight: FontWeight.w600,
+                                      color: YahaColors.textColor)),
                             ),
+                            //Container(
+                              //width: 32.0,
+                              //height: 0.0,
+                            //),
                           ],
                         ),
                       ),
@@ -66,8 +73,8 @@ class _EventDetailPageState extends State<EventDetailPage> {
                             child: Image.asset(
                               'assets/images/EgerCsillaga.jpeg',
                               fit: BoxFit.cover,
-                              height: 120.0,
-                              width: 120.0,
+                              height: YahaBoxSizes.heightSmall,
+                              width: YahaBoxSizes.widthSmall,
                               semanticLabel:
                                   "Eger Csillaga Teljesítménytúra logó",
                             ),
