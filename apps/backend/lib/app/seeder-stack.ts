@@ -9,7 +9,7 @@ import { Provider } from '@aws-cdk/custom-resources';
 export type SeederStackProps = sst.StackProps;
 
 export class SeederStack extends sst.Stack {
-  constructor(scope: sst.App, id: string, props: SeederStackProps) {
+  constructor(scope: sst.App, id: string, _props: SeederStackProps) {
     super(scope, id);
     //const AdminUserPoolId = props.adminUserPool.userPoolId;
 
