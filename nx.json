@@ -30,6 +30,12 @@
     },
     "mobile_app": {
       "tags": ["type:application", "platform:flutter"]
+    },
+    "shared-config": {
+      "tags": []
+    },
+    "shared-utils": {
+      "tags": ["type:utils", "platform:universal"]
     }
   }
 }

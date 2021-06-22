@@ -1,5 +1,4 @@
 import * as AWS from 'aws-sdk';
-const region = 'eu-west-1';
 import { pipe } from 'fp-ts/lib/function';
 import * as fp from 'lodash/fp';
 import * as fs from 'fs';
@@ -15,7 +14,7 @@ const androidKeyStoreTargetFile = `${__dirname}/../apps/yaha-mobile/android/yaha
 const androidKeyPropertiesTargetFile = `${__dirname}/../apps/yaha-mobile/android/key.properties`;
 
 const client = new AWS.SecretsManager({
-  region: region,
+  region: process.env.AWS_REGION,
 });
 
 fs.mkdirSync(targetDir, { recursive: true });

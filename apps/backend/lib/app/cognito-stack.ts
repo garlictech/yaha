@@ -313,8 +313,8 @@ export class CognitoStack extends Stack {
           cognito.OAuthScope.COGNITO_ADMIN,
           cognito.OAuthScope.PROFILE,
         ],
-        callbackUrls: ['anyupp://signin/'],
-        logoutUrls: ['anyupp://signout/'],
+        callbackUrls: ['yaha://signin/'],
+        logoutUrls: ['yaha://signout/'],
       },
       supportedIdentityProviders: [
         cognito.UserPoolClientIdentityProvider.GOOGLE,
@@ -371,12 +371,12 @@ export class CognitoStack extends Stack {
       selfSignUpEnabled: true,
       autoVerify: { email: true },
       userVerification: {
-        emailSubject: 'Verify your email for AnyUPP',
+        emailSubject: 'Verify your email for yaha',
         emailBody:
-          'Hello, thanks for signing up to AnyUPP! Your verification code is {####}',
+          'Hello, thanks for signing up to yaha! Your verification code is {####}',
         emailStyle: cognito.VerificationEmailStyle.CODE,
         smsMessage:
-          'Hello thanks for signing up to AnyUPP! Your verification code is {####}',
+          'Hello thanks for signing up to yaha! Your verification code is {####}',
       },
       mfa: cognito.Mfa.OPTIONAL,
       mfaSecondFactor: {
@@ -420,8 +420,6 @@ export class CognitoStack extends Stack {
   }
 
   private createAdminUserPool(app: App) {
-    const pretokenTriggerLambda = this.createPretokenTriggerLambda();
-
     const userPool = new cognito.UserPool(this, 'AdminUserPool', {
       userPoolName: app.logicalPrefixedName('admin-user-pool'),
       ...this.getCommonUserPoolProperties(),
@@ -451,49 +449,24 @@ export class CognitoStack extends Stack {
           mutable: true,
         }),
       },
-      lambdaTriggers: {
-        preTokenGeneration: pretokenTriggerLambda,
-      },
     });
 
     return userPool;
   }
 
-  private createPretokenTriggerLambda() {
+  private createConsumerPreSignupTriggerLambda() {
     const lambdaFn = new lambda.Function(
       this,
-      'AdminPreTokenGenerationLambda',
+      'ConsumerPreSignupTriggerLambda',
       {
         ...commonLambdaProps,
         // It must be relative to the serverless.yml file
-        handler: 'lib/lambda/pre-token-generation/index.handler',
+        handler: 'lib/lambda/consumer-pre-signup/index.handler',
         code: lambda.Code.fromAsset(
-          path.join(__dirname, '../../.serverless/pre-token-generation.zip'),
+          path.join(__dirname, '../../.serverless/consumer-pre-signup.zip'),
         ),
       },
     );
-
-    if (lambdaFn.role) {
-      lambdaFn.role.addToPrincipalPolicy(
-        new iam.PolicyStatement({
-          actions: ['cognito-idp:AdminUpdateUserAttributes'],
-          resources: ['*'],
-        }),
-      );
-    }
-
-    return lambdaFn;
-  }
-
-  private createConsumerPreSignupTriggerLambda() {
-    const lambdaFn = new lambda.Function(this, 'AdminPreSignupTriggerLambda', {
-      ...commonLambdaProps,
-      // It must be relative to the serverless.yml file
-      handler: 'lib/lambda/consumer-pre-signup/index.handler',
-      code: lambda.Code.fromAsset(
-        path.join(__dirname, '../../.serverless/consumer-pre-signup.zip'),
-      ),
-    });
 
     if (lambdaFn.role) {
       lambdaFn.role.addToPrincipalPolicy(

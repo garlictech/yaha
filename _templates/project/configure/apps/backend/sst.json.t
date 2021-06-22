@@ -1,5 +1,8 @@
+---
+to: apps/backend/sst.json 
+---
 {
-  "name": "yaha",
+  "name": "<%= app %>",
   "type": "@serverless-stack/resources",
   "stage": "dev",
   "region": "us-east-1",

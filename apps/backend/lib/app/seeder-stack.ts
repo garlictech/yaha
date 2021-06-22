@@ -5,17 +5,13 @@ import * as sst from '@serverless-stack/resources';
 import { commonLambdaProps } from './lambda-common';
 import { Duration, CustomResource } from '@aws-cdk/core';
 import { Provider } from '@aws-cdk/custom-resources';
-import * as cognito from '@aws-cdk/aws-cognito';
 
-export interface SeederStackProps extends sst.StackProps {
-  adminUserPool: cognito.UserPool;
-  anyuppApiArn: string;
-}
+export type SeederStackProps = sst.StackProps;
 
 export class SeederStack extends sst.Stack {
   constructor(scope: sst.App, id: string, props: SeederStackProps) {
     super(scope, id);
-    const AdminUserPoolId = props.adminUserPool.userPoolId;
+    //const AdminUserPoolId = props.adminUserPool.userPoolId;
 
     const seederLambda = new lambda.Function(this, 'StackSeederLambda', {
       ...commonLambdaProps,
@@ -35,7 +31,7 @@ export class SeederStack extends sst.Stack {
           actions: ['appsync:GraphQL'],
           resources: ['*'],
         }),
-        new iam.PolicyStatement({
+        /*    new iam.PolicyStatement({
           actions: [
             'cognito-idp:AdminSetUserPassword',
             'cognito-idp:AdminGetUser',
@@ -43,6 +39,7 @@ export class SeederStack extends sst.Stack {
           ],
           resources: [props.adminUserPool.userPoolArn],
         }),
+        */
       ],
     });
 
@@ -62,7 +59,7 @@ export class SeederStack extends sst.Stack {
       serviceToken: provider.serviceToken,
       resourceType: 'Custom::StackSeeder',
       properties: {
-        AdminUserPoolId,
+        //AdminUserPoolId,
         physicalResourceId: scope.logicalPrefixedName('seeder'),
       },
     });

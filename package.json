@@ -101,6 +101,7 @@
     ]
   },
   "workspaces": [
-    "apps/cicd"
+    "apps/cicd",
+    "apps/backend"
   ]
 }

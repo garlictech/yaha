@@ -2,12 +2,11 @@ import * as ssm from '@aws-cdk/aws-ssm';
 import { CfnOutput } from '@aws-cdk/core';
 import * as sst from '@serverless-stack/resources';
 
-const rootAppName = 'anyupp-backend';
+const rootAppName = 'yaha';
 
 export class ParamsStack extends sst.Stack {
   public googleClientId: string;
   public facebookAppId: string;
-  public stripePublishableKey: string;
   public googleApiKey: string;
   public appleTeamId: string;
   public appleKeyId: string;
@@ -41,20 +40,6 @@ export class ParamsStack extends sst.Stack {
     new CfnOutput(this, 'facebookAppIdOutput', {
       value: this.facebookAppId,
       exportName: app.logicalPrefixedName('facebookAppId'),
-    });
-
-    this.stripePublishableKey =
-      ssm.StringParameter.fromStringParameterAttributes(
-        this,
-        'stripePublishableKeyParam',
-        {
-          parameterName: `/${app.stage}-${rootAppName}/StripePublishableKey`,
-        },
-      ).stringValue;
-
-    new CfnOutput(this, 'stripePublishableKeyOutput', {
-      value: this.stripePublishableKey,
-      exportName: app.logicalPrefixedName('stripePublishableKey'),
     });
 
     this.googleApiKey = ssm.StringParameter.fromStringParameterAttributes(

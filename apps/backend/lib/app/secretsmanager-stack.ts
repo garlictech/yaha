@@ -4,23 +4,20 @@ import * as sst from '@serverless-stack/resources';
 import { App } from '@serverless-stack/resources';
 
 const secretsManagerArns: Record<string, string> = {
-  dev: 'arn:aws:secretsmanager:eu-west-1:568276182587:secret:anyupp-dev-secrets-WtbZ0k',
-  qa: 'arn:aws:secretsmanager:eu-west-1:568276182587:secret:anyupp-qa-secrets-4cFY1U',
+  dev: 'arn:aws:secretsmanager:us-east-1:697486207432:secret:/yaha/dev/secrets',
+  qa: 'arn:aws:secretsmanager:us-east-1:697486207432:secret:/yaha/qa/secrets',
   staging:
-    'arn:aws:secretsmanager:eu-west-1:568276182587:secret:anyupp-staging-secrets-4rGQUb',
-  prod: 'arn:aws:secretsmanager:eu-west-1:486782650003:secret:anyupp-prod-secrets-OQjuwn',
+    'arn:aws:secretsmanager:us-east-1:697486207432:secret:/yaha/qa/secrets',
+  prod: 'arn:aws:secretsmanager:us-east-1:697486207432:secret:/yaha/qa/secrets',
   appleSigninKey:
-    'arn:aws:secretsmanager:eu-west-1:568276182587:secret:apple-signin-private-key-eHFjFn',
+    'arn:aws:secretsmanager:us-east-1:697486207432:secret:apple-signin-private-key',
   appleSigninKeyProd:
-    'arn:aws:secretsmanager:eu-west-1:486782650003:secret:apple-signin-private-key-oejVJN',
+    'arn:aws:secretsmanager:us-east-1:697486207432:secret:apple-signin-private-key',
 };
 
 export class SecretsManagerStack extends sst.Stack {
   public googleClientSecret: string;
   public facebookAppSecret: string;
-  public stripeSecretKey: string;
-  public stripeSigningSecret: string;
-  public szamlazzhuAgentKey: string;
   public appleSigninKey: string;
   public secretsManager: sm.ISecret;
 
@@ -31,25 +28,22 @@ export class SecretsManagerStack extends sst.Stack {
     const secretsManagerArn =
       secretsManagerArns[scope.stage] || secretsManagerArns.dev;
 
-    this.secretsManager = sm.Secret.fromSecretAttributes(
-      this,
-      'AnyuppSecrets',
-      {
-        secretArn: secretsManagerArn,
-      },
-    );
+    this.secretsManager = sm.Secret.fromSecretAttributes(this, 'yahaSecrets', {
+      secretPartialArn: secretsManagerArn,
+    });
 
     const appleSigninKeySecret = sm.Secret.fromSecretAttributes(
       this,
       'AppleSigninKey',
       {
-        secretArn:
+        secretPartialArn:
           app.stage === 'prod'
             ? secretsManagerArns.appleSigninKeyProd
             : secretsManagerArns.appleSigninKey,
       },
     );
 
+    this.appleSigninKey = appleSigninKeySecret.secretValue.toString();
     const googleClientSecret =
       this.secretsManager.secretValueFromJson('googleClientSecret');
     this.googleClientSecret = googleClientSecret.toString();
@@ -57,22 +51,6 @@ export class SecretsManagerStack extends sst.Stack {
     const facebookAppSecret =
       this.secretsManager.secretValueFromJson('facebookAppSecret');
     this.facebookAppSecret = facebookAppSecret.toString();
-
-    //--- get Stripe secret keys
-    const stripeSecretKey =
-      this.secretsManager.secretValueFromJson('stripeSecretKey');
-    this.stripeSecretKey = stripeSecretKey.toString();
-
-    const stripeSigningSecret = this.secretsManager.secretValueFromJson(
-      'stripeSigningSecret',
-    );
-    this.stripeSigningSecret = stripeSigningSecret.toString();
-
-    const szamlazzhuAgentKey =
-      this.secretsManager.secretValueFromJson('szamlazzhuAgentKey');
-    this.szamlazzhuAgentKey = szamlazzhuAgentKey.toString();
-
-    this.appleSigninKey = appleSigninKeySecret.secretValue.toString();
 
     new CfnOutput(this, 'SecretsManager', {
       value: this.secretsManager.secretArn,

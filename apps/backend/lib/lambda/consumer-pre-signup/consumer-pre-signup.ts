@@ -4,7 +4,7 @@ import { flow, pipe } from 'fp-ts/lib/function';
 import { CognitoIdentityServiceProvider } from 'aws-sdk';
 import { combineLatest, defer, from, of, throwError } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
-import { throwIfEmptyValue } from '@bgap/shared/utils';
+import { throwIfEmptyValue } from '@yaha/shared/utils';
 
 export interface Deps {
   cognitoidentityserviceprovider: CognitoIdentityServiceProvider;

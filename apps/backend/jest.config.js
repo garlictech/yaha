@@ -1,6 +1,6 @@
 module.exports = {
   collectCoverageFrom: ['src/**/*.{js,ts}'],
-  displayName: 'anyupp-backend',
+  displayName: 'backend',
   preset: '../../jest.preset.js',
   globals: {
     'ts-jest': { tsconfig: '<rootDir>/tsconfig.spec.json' },
@@ -9,5 +9,5 @@ module.exports = {
     '^.+\\.[tj]s$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../coverage/apps/anyupp-backend',
+  coverageDirectory: '../../coverage/apps/backend',
 };
