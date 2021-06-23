@@ -23,7 +23,7 @@ export class StagingBuildPipelineStack extends sst.Stack {
             `./tools/build-workspace.sh ${utils.appConfig.name} ${stage}`,
             'git clone https://github.com/flutter/flutter.git -b stable --depth 1 /tmp/flutter',
             `yarn nx deploy crud-backend`,
-            `yarn nx deploy yaha-backend --stage=${stage} --app=${utils.appConfig.name}`,
+            `yarn nx deploy backend --stage=${stage} --app=${utils.appConfig.name}`,
             'export PATH=$PATH:/tmp/flutter/bin',
             'flutter doctor',
             `yarn nx buildApk yaha-mobile`,

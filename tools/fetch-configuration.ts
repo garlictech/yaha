@@ -1,5 +1,4 @@
 import * as AWS from 'aws-sdk';
-const region = 'eu-west-1';
 import * as fp from 'lodash/fp';
 import * as fs from 'fs';
 import { flow, pipe } from 'fp-ts/lib/function';
@@ -7,23 +6,23 @@ import { map } from 'rxjs/operators';
 import { GetParametersRequest, GetParametersResult } from 'aws-sdk/clients/ssm';
 import { bindNodeCallback, Observable, combineLatest } from 'rxjs';
 
+const region = process.env.AWS_REGION;
 const client = new AWS.SSM({ region });
-
 const project = process.argv[2];
 const stage = process.argv[3];
 const prefix = `${stage}-${project}`;
 
 const targetDir = `${__dirname}/../libs/shared/config/src/lib/generated`;
 const targetFile = `${targetDir}/config.json`;
-const mobileAppConfigurationFile = `${__dirname}/../apps/anyupp-mobile/lib/awsconfiguration.dart`;
+const mobileAppConfigurationFile = `${__dirname}/../apps/yaha-mobile/lib/awsconfiguration.dart`;
 
-const amplifyMetaConfigFile = `${__dirname}/../apps/crud-backend/amplify/backend/amplify-meta.json`;
+//const amplifyMetaConfigFile = `${__dirname}/../apps/crud-backend/amplify/backend/amplify-meta.json`;
 
 //--- Read generated crud amplify backend (meta-) config
-const amplifyConfig = JSON.parse(
+/*const amplifyConfig = JSON.parse(
   fs.readFileSync(amplifyMetaConfigFile, 'utf8'),
 );
-
+*/
 fs.mkdirSync(targetDir, { recursive: true });
 
 const generatedParams = [
@@ -35,7 +34,7 @@ const generatedParams = [
   'ConsumerUserPoolId',
 ].map(paramName => `/${prefix}/generated/${paramName}`);
 
-const fixParams = ['StripePublishableKey', 'GoogleApiKey'].map(
+const fixParams = ['GoogleApiKey', 'FlickrApiKey'].map(
   paramName => `/${prefix}/${paramName}`,
 );
 
@@ -71,7 +70,7 @@ pipe(
         fs.writeFileSync(targetFile, JSON.stringify(config, null, 2));
         console.log(`Config written to ${targetFile}`);
       }),
-      fp.tap(config => {
+      /*fp.tap(config => {
         const apiKeyName = Object.keys(amplifyConfig['api'])[0];
         if (!amplifyConfig['storage']) {
           throw Error(
@@ -83,7 +82,7 @@ pipe(
         config['Stage'] = stage;
         config['CrudGraphqlApiUrl'] =
           amplifyConfig['api'][apiKeyName]['output'][
-            'GraphQLAPIEndpointOutput'
+          'GraphQLAPIEndpointOutput'
           ];
         config['CrudGraphqlApiKey'] =
           amplifyConfig['api'][apiKeyName]['output']['GraphQLAPIKeyOutput'];
@@ -98,7 +97,7 @@ pipe(
         console.log(
           `Mobile application config written to ${mobileAppConfigurationFile}`,
         );
-      }),
+      }),*/
     ),
   ),
 ).subscribe();

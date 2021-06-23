@@ -42,7 +42,7 @@ cyreport
 .setup*.sh
 .build
 .serverless
-/apps/yaha-backend/build
+/apps/backend/build
 /apps/infrastructure/cicd/build
 
 # The config - don't commit!
@@ -56,8 +56,8 @@ cdk.out
 
 
 # The generated files with hygen
-apps/yaha-backend/sst.json
-apps/yaha-backend/serverless.yml
+apps/backend/sst.json
+apps/backend/serverless.yml
 apps/crud-backend/.graphqlconfig.yml
 tools/graphql-codegen-crud.yml
 

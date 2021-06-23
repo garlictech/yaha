@@ -5,6 +5,72 @@
   },
   "defaultProject": "cicd",
   "projects": {
+    "backend": {
+      "root": "apps/backend",
+      "sourceRoot": "apps/backend/src",
+      "projectType": "application",
+      "prefix": "backend",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "cwd": "apps/backend",
+            "parallel": false,
+            "commands": [
+              "yarn sls package --stage='{args.stage}'",
+              "yarn sst cdk synth"
+            ]
+          },
+          "outputs": [
+            "apps/backend/cdk.out",
+            "apps/backend/.build",
+            "apps/backend/.serverless"
+          ]
+        },
+        "deploy": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "cwd": "apps/backend",
+            "parallel": false,
+            "commands": [
+              {
+                "command": "yarn sst deploy --stage='{args.stage}'"
+              },
+              {
+                "command": "cd ../.. && yarn ts-node ./tools/fetch-configuration.ts '{args.app}' '{args.stage}'"
+              }
+            ]
+          }
+        },
+        "remove": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "cwd": "apps/backend",
+            "parallel": false,
+            "commands": [
+              {
+                "command": "yarn sst remove --stage='{args.stage}'"
+              }
+            ]
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/backend/**/*.ts"],
+            "cache": true
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/backend"],
+          "options": {
+            "jestConfig": "apps/backend/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "cicd": {
       "root": "apps/cicd",
       "sourceRoot": "apps/cicd/src",
@@ -185,6 +251,48 @@
           "options": {
             "command": "flutter build ipa",
             "cwd": "apps/mobile_app"
+          }
+        }
+      }
+    },
+    "shared-config": {
+      "root": "libs/shared/config",
+      "sourceRoot": "libs/shared/config/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/shared/config/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/config"],
+          "options": {
+            "jestConfig": "libs/shared/config/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "shared-utils": {
+      "root": "libs/shared/utils",
+      "sourceRoot": "libs/shared/utils/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/shared/utils/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/utils"],
+          "options": {
+            "jestConfig": "libs/shared/utils/jest.config.js",
+            "passWithNoTests": true
           }
         }
       }

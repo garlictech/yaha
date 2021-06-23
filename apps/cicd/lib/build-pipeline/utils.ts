@@ -21,7 +21,7 @@ export interface PipelineStackProps extends sst.StackProps {
 }
 
 export const appConfig = {
-  name: 'yaha-backend',
+  name: 'yaha',
   appcenterArtifactBucketNamePrefix: 'yaha-build-artifacts',
 };
 
@@ -85,7 +85,7 @@ export const createBuildProject = (
       version: '0.2',
       phases: buildProjectPhases,
       //artifacts: {
-      //  files: ['apps/yaha-backend/cdk.out/**/*'],
+      //  files: ['apps/backend/cdk.out/**/*'],
       //},
       // reports,
       env: {
@@ -307,10 +307,10 @@ export const createCommonDevPipeline = (
       },
       build: {
         commands: [
-          //`./tools/build-workspace.sh ${appConfig.name} ${stage}`,
+          `./tools/build-workspace.sh ${appConfig.name} ${stage}`,
           'git clone https://github.com/flutter/flutter.git -b stable --depth 1 /tmp/flutter',
           //`yarn nx deploy crud-backend`,
-          //`yarn nx deploy yaha-backend --stage=${stage} --app=${appConfig.name}`,
+          `yarn nx deploy backend --stage=${stage} --app=${appConfig.name}`,
           'export PATH=$PATH:/tmp/flutter/bin',
           'flutter doctor',
           `yarn nx buildApk mobile_app`,
