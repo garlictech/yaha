@@ -81,7 +81,7 @@
     "ts-jest": "27.0.3",
     "eslint-plugin-cypress": "2.11.3",
     "cucumber-html-reporter": "5.4.0",
-    "cypress": "7.5.0",
+    "cypress": "7.6.0",
     "cypress-cucumber-preprocessor": "4.1.2",
     "cypress-localstorage-commands": "1.4.5",
     "eslint-plugin-unused-imports": "1.1.1",
