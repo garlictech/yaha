@@ -730,24 +730,6 @@ class _HikePageState extends State<HikePage> {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        unselectedItemColor: YahaColors.textColor,
-        selectedItemColor: YahaColors.primary,
-        items: [
-          new BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          new BottomNavigationBarItem(
-            icon: Icon(Icons.mail),
-            label: 'Messages',
-          ),
-          new BottomNavigationBarItem(
-              icon: Icon(Icons.play_circle), label: 'Profile'),
-          new BottomNavigationBarItem(
-              icon: Icon(Icons.person), label: 'Profile')
-        ],
-      ),
       floatingActionButton: buildSpeedDial(),
     );
   }

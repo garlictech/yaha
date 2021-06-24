@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_app/bottom-nav-bar.dart';
 import 'package:mobile_app/event-detail-page.dart';
 import 'package:mobile_app/poi-page.dart';
 import 'package:mobile_app/profile-page.dart';
@@ -21,7 +22,12 @@ class MyApp extends StatelessWidget {
           primaryColor: Color(0xFF29A253),
           scaffoldBackgroundColor: Color(0xFFFDFBF7),
           fontFamily: 'Inter'),
-      home: EventDetailPage(),
+      home: BottomNavBar(),
+      initialRoute: '/',
+      routes: {
+        '/hike': (context) => HikePage(),
+        '/profile': (context) => ProfilePage(),
+      },
     );
   }
 }

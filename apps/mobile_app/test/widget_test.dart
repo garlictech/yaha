@@ -20,4 +20,26 @@ void main() {
     await tester.pumpWidget(MyApp());
     expect(true, true);
   });
+ 
+  //   testWidgets('Yaha hike page test', (WidgetTester tester) async {
+  //   await tester.pumpWidget(HikePage());
+  //   expect(true, true);
+  // });
+  // testWidgets('Yaha poi page test', (WidgetTester tester) async {
+  //   await tester.pumpWidget(PoiPage());
+  //   expect(true, true);
+  // });
+  // testWidgets('Yaha profile page test', (WidgetTester tester) async {
+  //   await tester.pumpWidget(ProfilePage());
+  //   expect(true, true);
+  // });
+  // testWidgets('Yaha settings page test', (WidgetTester tester) async {
+  //   await tester.pumpWidget(SettingsPage());
+  //   expect(true, true);
+  // });
+  // testWidgets('Yaha sign up page test', (WidgetTester tester) async {
+  //   await tester.pumpWidget(SignUpPage());
+  //   expect(true, true);
+  // });
+  
 }
