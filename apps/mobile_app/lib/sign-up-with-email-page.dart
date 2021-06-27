@@ -12,6 +12,9 @@ class SignUpWithEmailPage extends StatefulWidget {
 }
 
 class _SignUpWithEmailPageState extends State<SignUpWithEmailPage> {
+  bool _passwordVisible = false;
+  bool _passwordAgainVisible = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,6 +68,8 @@ class _SignUpWithEmailPageState extends State<SignUpWithEmailPage> {
                               child: SizedBox(
                                 height: 40.0,
                                 child: TextFormField(
+                                  keyboardType: TextInputType.text,
+                                  autocorrect: false,
                                   style: TextStyle(
                                       fontWeight: FontWeight.w500,
                                       color: YahaColors.textColor,
@@ -111,6 +116,8 @@ class _SignUpWithEmailPageState extends State<SignUpWithEmailPage> {
                             child: SizedBox(
                               height: 40.0,
                               child: TextFormField(
+                                keyboardType: TextInputType.emailAddress,
+                                autocorrect: false,
                                 style: TextStyle(
                                     fontWeight: FontWeight.w500,
                                     color: YahaColors.textColor,
@@ -156,7 +163,8 @@ class _SignUpWithEmailPageState extends State<SignUpWithEmailPage> {
                             child: SizedBox(
                               height: 40.0,
                               child: TextFormField(
-                                obscureText: true,
+                                keyboardType: TextInputType.text,
+                                obscureText: !_passwordVisible,
                                 enableSuggestions: false,
                                 autocorrect: false,
                                 style: TextStyle(
@@ -164,9 +172,18 @@ class _SignUpWithEmailPageState extends State<SignUpWithEmailPage> {
                                     color: YahaColors.textColor,
                                     fontSize: YahaFontSizes.small),
                                 decoration: InputDecoration(
-                                    suffixIcon: Icon(
-                                      Icons.visibility_outlined,
-                                      color: YahaColors.textColor,
+                                    suffixIcon: IconButton(
+                                      icon: Icon(
+                                        _passwordVisible
+                                            ? Icons.visibility_off_outlined
+                                            : Icons.visibility_outlined,
+                                        color: YahaColors.textColor,
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          _passwordVisible = !_passwordVisible;
+                                        });
+                                      },
                                     ),
                                     contentPadding: EdgeInsets.only(
                                         left: YahaSpaceSizes.medium),
@@ -223,7 +240,8 @@ class _SignUpWithEmailPageState extends State<SignUpWithEmailPage> {
                             child: SizedBox(
                               height: 40.0,
                               child: TextFormField(
-                                obscureText: true,
+                                keyboardType: TextInputType.text,
+                                obscureText: !_passwordAgainVisible,
                                 enableSuggestions: false,
                                 autocorrect: false,
                                 style: TextStyle(
@@ -231,9 +249,19 @@ class _SignUpWithEmailPageState extends State<SignUpWithEmailPage> {
                                     color: YahaColors.textColor,
                                     fontSize: YahaFontSizes.small),
                                 decoration: InputDecoration(
-                                    suffixIcon: Icon(
-                                      Icons.visibility_outlined,
-                                      color: YahaColors.textColor,
+                                    suffixIcon: IconButton(
+                                      icon: Icon(
+                                        _passwordAgainVisible
+                                            ? Icons.visibility_off_outlined
+                                            : Icons.visibility_outlined,
+                                        color: YahaColors.textColor,
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          _passwordAgainVisible =
+                                              !_passwordAgainVisible;
+                                        });
+                                      },
                                     ),
                                     contentPadding: EdgeInsets.only(
                                         left: YahaSpaceSizes.medium),
