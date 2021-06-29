@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile_app/gallery.dart';
 import 'package:mobile_app/yaha-border-radius.dart';
 import 'package:mobile_app/yaha-colors.dart';
 import 'package:mobile_app/yaha-font-sizes.dart';
@@ -141,24 +142,7 @@ class _PoiPageState extends State<PoiPage> {
                         Container(
                           height: 220.0,
                           width: MediaQuery.of(context).size.width,
-                          child: CarouselSlider(
-                            options: CarouselOptions(
-                              aspectRatio: 1.0,
-                              enlargeCenterPage: true,
-                              enableInfiniteScroll: true,
-                              initialPage: 3,
-                            ),
-                            items: <Widget>[
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(
-                                    YahaBorderRadius.general),
-                                child: Image.asset(
-                                    'assets/images/Parlament.jpg',
-                                    fit: BoxFit.cover,
-                                    width: MediaQuery.of(context).size.width),
-                              ),
-                            ],
-                          ),
+                          child: Gallery()
                         ),
                         Container(
                           padding: const EdgeInsets.all(YahaSpaceSizes.general),

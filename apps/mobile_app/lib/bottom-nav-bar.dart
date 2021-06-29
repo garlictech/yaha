@@ -62,25 +62,29 @@ List<PersistentBottomNavBarItem> _navBarsItems() {
     PersistentBottomNavBarItem(
       icon: Icon(Icons.home_rounded),
       title: ("Home"),
-      activeColorPrimary: YahaColors.primary,
+      activeColorPrimary: YahaColors.tertiaryAccentColorDark,
+      activeColorSecondary: YahaColors.primary,
       inactiveColorPrimary: YahaColors.textColor,
     ),
     PersistentBottomNavBarItem(
       icon: Icon(Icons.travel_explore),
       title: ("Explore"),
-      activeColorPrimary: YahaColors.primary,
+      activeColorPrimary: YahaColors.tertiaryAccentColorDark,
+      activeColorSecondary: YahaColors.primary,
       inactiveColorPrimary: YahaColors.textColor,
     ),
     PersistentBottomNavBarItem(
       icon: Icon(Icons.play_circle_fill),
       title: ("Track"),
-      activeColorPrimary: YahaColors.primary,
+      activeColorPrimary: YahaColors.tertiaryAccentColorDark,
+      activeColorSecondary: YahaColors.primary,
       inactiveColorPrimary: YahaColors.textColor,
     ),
     PersistentBottomNavBarItem(
       icon: Icon(Icons.face_rounded),
       title: ("Profile"),
-      activeColorPrimary: YahaColors.primary,
+      activeColorPrimary: YahaColors.tertiaryAccentColorDark,
+      activeColorSecondary: YahaColors.primary,
       inactiveColorPrimary: YahaColors.textColor,
     ),
   ];

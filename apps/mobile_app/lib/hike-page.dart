@@ -2,6 +2,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:mobile_app/gallery.dart';
 import 'package:mobile_app/yaha-border-radius.dart';
 import 'package:mobile_app/yaha-colors.dart';
 import 'package:mobile_app/yaha-font-sizes.dart';
@@ -97,23 +98,7 @@ class _HikePageState extends State<HikePage> {
                         padding: const EdgeInsets.all(YahaSpaceSizes.general),
                         height: 220.0,
                         width: MediaQuery.of(context).size.width,
-                        child: CarouselSlider(
-                          options: CarouselOptions(
-                            aspectRatio: 1.0,
-                            enlargeCenterPage: true,
-                            enableInfiniteScroll: true,
-                            initialPage: 3,
-                          ),
-                          items: <Widget>[
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(
-                                  YahaBorderRadius.general),
-                              child: Image.asset('assets/images/Parlament.jpg',
-                                  fit: BoxFit.cover,
-                                  width: MediaQuery.of(context).size.width),
-                            ),
-                          ],
-                        ),
+                        child: Gallery()
                       ),
                       Container(
                         height: 300,
@@ -739,7 +724,7 @@ SpeedDial buildSpeedDial() {
   return SpeedDial(
     /// both default to 16
     marginEnd: 18,
-    marginBottom: 730,
+    marginBottom: 820,
     // animatedIcon: AnimatedIcons.menu_close,
     // animatedIconTheme: IconThemeData(size: 22.0),
     /// This is ignored if animatedIcon is non null
