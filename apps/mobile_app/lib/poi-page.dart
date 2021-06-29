@@ -1,4 +1,3 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_app/gallery.dart';
 import 'package:mobile_app/yaha-border-radius.dart';
@@ -140,10 +139,9 @@ class _PoiPageState extends State<PoiPage> {
                           ),
                         ),
                         Container(
-                          height: 220.0,
-                          width: MediaQuery.of(context).size.width,
-                          child: Gallery()
-                        ),
+                            height: 220.0,
+                            width: MediaQuery.of(context).size.width,
+                            child: Gallery()),
                         Container(
                           padding: const EdgeInsets.all(YahaSpaceSizes.general),
                           child: SizedBox(

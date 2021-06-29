@@ -1,5 +1,4 @@
 //import 'dart:html';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:mobile_app/gallery.dart';
@@ -95,11 +94,10 @@ class _HikePageState extends State<HikePage> {
                                 color: YahaColors.textColor)),
                       ),
                       Container(
-                        padding: const EdgeInsets.all(YahaSpaceSizes.general),
-                        height: 220.0,
-                        width: MediaQuery.of(context).size.width,
-                        child: Gallery()
-                      ),
+                          padding: const EdgeInsets.all(YahaSpaceSizes.general),
+                          height: 220.0,
+                          width: MediaQuery.of(context).size.width,
+                          child: Gallery()),
                       Container(
                         height: 300,
                         child: GridView.count(

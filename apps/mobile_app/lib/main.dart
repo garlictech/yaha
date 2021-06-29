@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app/bottom-nav-bar.dart';
-import 'package:mobile_app/event-detail-page.dart';
-import 'package:mobile_app/poi-page.dart';
 import 'package:mobile_app/profile-page.dart';
-import 'package:mobile_app/settings-page.dart';
-import 'package:mobile_app/sign-up-page.dart';
-import 'package:mobile_app/sign-up-with-email-page.dart';
 import 'hike-page.dart';
 
 void main() {

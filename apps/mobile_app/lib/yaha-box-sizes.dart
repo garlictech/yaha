@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class YahaBoxSizes {
   //HEIGHT
   static const heightSmall = 120.0;

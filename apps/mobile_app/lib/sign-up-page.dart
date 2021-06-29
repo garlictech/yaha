@@ -1,7 +1,5 @@
 //import 'dart:html';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:mobile_app/yaha-border-radius.dart';
 import 'package:mobile_app/yaha-colors.dart';
 import 'package:mobile_app/yaha-font-sizes.dart';
@@ -27,7 +25,7 @@ class _SignUpPageState extends State<SignUpPage> {
             flexibleSpace: FlexibleSpaceBar(
               centerTitle: true,
               title: Column(
-           //     crossAxisAlignment: CrossAxisAlignment.stretch,
+                //     crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
@@ -170,7 +168,6 @@ class _SignUpPageState extends State<SignUpPage> {
                       child: Align(
                         alignment: FractionalOffset.bottomCenter,
                         child: Row(
-                    
                           children: [
                             Text('Already have an account?',
                                 style: TextStyle(
