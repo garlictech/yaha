@@ -103,8 +103,8 @@ class _HikePageState extends State<HikePage> {
                         child: GridView.count(
                           primary: false,
                           padding: const EdgeInsets.all(YahaSpaceSizes.general),
-                          crossAxisSpacing: 30,
-                          mainAxisSpacing: 30,
+                         crossAxisSpacing: 15,
+                          mainAxisSpacing: 10,
                           crossAxisCount: 3,
                           children: <Widget>[
                             Container(
