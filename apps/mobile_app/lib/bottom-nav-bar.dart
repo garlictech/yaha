@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app/hike-page.dart';
 import 'package:mobile_app/profile-page.dart';
-import 'package:mobile_app/settings-page.dart';
 import 'package:mobile_app/track-page.dart';
 import 'package:mobile_app/yaha-colors.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
@@ -62,25 +61,29 @@ List<PersistentBottomNavBarItem> _navBarsItems() {
     PersistentBottomNavBarItem(
       icon: Icon(Icons.home_rounded),
       title: ("Home"),
-      activeColorPrimary: YahaColors.primary,
+      activeColorPrimary: YahaColors.tertiaryAccentColorDark,
+      activeColorSecondary: YahaColors.primary,
       inactiveColorPrimary: YahaColors.textColor,
     ),
     PersistentBottomNavBarItem(
       icon: Icon(Icons.travel_explore),
       title: ("Explore"),
-      activeColorPrimary: YahaColors.primary,
+      activeColorPrimary: YahaColors.tertiaryAccentColorDark,
+      activeColorSecondary: YahaColors.primary,
       inactiveColorPrimary: YahaColors.textColor,
     ),
     PersistentBottomNavBarItem(
       icon: Icon(Icons.play_circle_fill),
       title: ("Track"),
-      activeColorPrimary: YahaColors.primary,
+      activeColorPrimary: YahaColors.tertiaryAccentColorDark,
+      activeColorSecondary: YahaColors.primary,
       inactiveColorPrimary: YahaColors.textColor,
     ),
     PersistentBottomNavBarItem(
       icon: Icon(Icons.face_rounded),
       title: ("Profile"),
-      activeColorPrimary: YahaColors.primary,
+      activeColorPrimary: YahaColors.tertiaryAccentColorDark,
+      activeColorSecondary: YahaColors.primary,
       inactiveColorPrimary: YahaColors.textColor,
     ),
   ];

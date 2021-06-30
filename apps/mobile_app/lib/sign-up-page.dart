@@ -1,7 +1,5 @@
 //import 'dart:html';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:mobile_app/yaha-border-radius.dart';
 import 'package:mobile_app/yaha-box-sizes.dart';
 import 'package:mobile_app/yaha-colors.dart';

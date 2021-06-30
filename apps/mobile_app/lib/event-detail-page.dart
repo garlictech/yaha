@@ -49,8 +49,8 @@ class _EventDetailPageState extends State<EventDetailPage> {
                                       color: YahaColors.textColor)),
                             ),
                             //Container(
-                              //width: 32.0,
-                              //height: 0.0,
+                            //width: 32.0,
+                            //height: 0.0,
                             //),
                           ],
                         ),

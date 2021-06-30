@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app/bottom-nav-bar.dart';
-import 'package:mobile_app/event-detail-page.dart';
 import 'package:mobile_app/poi-page.dart';
 import 'package:mobile_app/profile-page.dart';
 import 'package:mobile_app/settings-page.dart';
 import 'package:mobile_app/sign-up-page.dart';
-import 'package:mobile_app/sign-up-with-email-page.dart';
+import 'package:mobile_app/track-page.dart';
+import 'event-detail-page.dart';
+import 'explore-page.dart';
 import 'hike-page.dart';
 
 void main() {
@@ -28,6 +29,12 @@ class MyApp extends StatelessWidget {
       routes: {
         '/hike': (context) => HikePage(),
         '/profile': (context) => ProfilePage(),
+        '/event': (context) => EventDetailPage(),
+        '/poi': (context) => PoiPage(),
+        '/settings': (context) => SettingsPage(),
+        '/signup': (context) => SignUpPage(),
+        '/track': (context) => TrackPage(),
+        '/explore': (context) => ExplorePage(),
       },
     );
   }

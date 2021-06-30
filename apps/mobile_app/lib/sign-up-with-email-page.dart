@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app/yaha-border-radius.dart';
 import 'package:mobile_app/yaha-border-width.dart';
-import 'package:mobile_app/yaha-box-sizes.dart';
 import 'package:mobile_app/yaha-colors.dart';
 import 'package:mobile_app/yaha-font-sizes.dart';
 import 'package:mobile_app/yaha-space-sizes.dart';
