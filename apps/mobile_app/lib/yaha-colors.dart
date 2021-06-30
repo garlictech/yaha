@@ -16,6 +16,8 @@ class YahaColors {
 
   static const Color divider = const Color(0xFFA8A6A3);
 
+  static const Color background = const Color(0xFFFDFBF7);
+
 // POI COLORS
   static const Color emergency = const Color(0xFFEF5350);
   static const Color military = const Color(0xFF78909C);

@@ -13,6 +13,21 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+          backgroundColor: YahaColors.background,
+          title: const Text('Settings',
+              style: TextStyle(
+                  fontSize: YahaFontSizes.large,
+                  fontWeight: FontWeight.w600,
+                  color: YahaColors.textColor)),
+          leading: IconButton(
+            iconSize: YahaFontSizes.xxLarge,
+            icon: Icon(
+              Icons.arrow_back_ios_rounded,
+              color: YahaColors.textColor,
+            ),
+            onPressed: () => Navigator.of(context).pop(),
+          )),
       body: CustomScrollView(
         physics: BouncingScrollPhysics(),
         slivers: <Widget>[
@@ -23,15 +38,15 @@ class _SettingsPageState extends State<SettingsPage> {
                   child: Container(
                     child: Column(
                       children: [
-                        Container(
-                          padding: const EdgeInsets.all(YahaSpaceSizes.general),
-                          child: Text('Settings',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: YahaFontSizes.large,
-                                  fontWeight: FontWeight.w600,
-                                  color: YahaColors.textColor)),
-                        ),
+                        // Container(
+                        //   padding: const EdgeInsets.all(YahaSpaceSizes.general),
+                        //   child: Text('Settings',
+                        //       textAlign: TextAlign.center,
+                        //       style: TextStyle(
+                        //           fontSize: YahaFontSizes.large,
+                        //           fontWeight: FontWeight.w600,
+                        //           color: YahaColors.textColor)),
+                        // ),
                         Container(
                           width: MediaQuery.of(context).size.width,
                           padding: const EdgeInsets.only(

@@ -5,6 +5,7 @@ import 'package:mobile_app/profile-page.dart';
 import 'package:mobile_app/settings-page.dart';
 import 'package:mobile_app/sign-up-page.dart';
 import 'package:mobile_app/track-page.dart';
+import 'package:mobile_app/yaha-colors.dart';
 import 'event-detail-page.dart';
 import 'explore-page.dart';
 import 'hike-page.dart';
@@ -21,8 +22,8 @@ class MyApp extends StatelessWidget {
       title: 'Jaha',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          primaryColor: Color(0xFF29A253),
-          scaffoldBackgroundColor: Color(0xFFFDFBF7),
+          primaryColor: YahaColors.primary,
+          scaffoldBackgroundColor: YahaColors.background,
           fontFamily: 'Inter'),
       home: BottomNavBar(),
       initialRoute: '/',

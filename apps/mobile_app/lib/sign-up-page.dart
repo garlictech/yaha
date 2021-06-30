@@ -1,5 +1,6 @@
 //import 'dart:html';
 import 'package:flutter/material.dart';
+import 'package:mobile_app/sign-up-with-email-page.dart';
 import 'package:mobile_app/yaha-border-radius.dart';
 import 'package:mobile_app/yaha-box-sizes.dart';
 import 'package:mobile_app/yaha-colors.dart';
@@ -64,6 +65,13 @@ class _SignUpPageState extends State<SignUpPage> {
                         height: YahaBoxSizes.buttonHeight,
                         width: YahaBoxSizes.buttonWidthBig,
                         child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.of(this.context).push(
+                                new MaterialPageRoute<dynamic>(
+                                    builder: (BuildContext context) {
+                              return new SignUpWithEmailPage();
+                            }));
+                          },
                           child: Stack(
                             children: [
                               Container(
@@ -94,7 +102,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           //color: YahaColors.accentColor,
                           //size: YahaFontSizes.large,
                           //),
-                          onPressed: () {},
+
                           //label: Text('Sign up with email',
                           //style: TextStyle(
                           //fontSize: YahaFontSizes.small,

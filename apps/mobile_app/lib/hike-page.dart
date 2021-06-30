@@ -20,39 +20,30 @@ class _HikePageState extends State<HikePage> {
         physics: BouncingScrollPhysics(),
         slivers: <Widget>[
           SliverAppBar(
-              pinned: true,
-              snap: true,
-              floating: true,
-              expandedHeight: 240.0,
-              flexibleSpace: FlexibleSpaceBar(
-                titlePadding: EdgeInsets.only(left: 60.0, bottom: 8.0),
-                centerTitle: false,
-                title: Container(
-                  // child: Flexible(
-                  //   flex: 1,
-                  child: Text('Budapest',
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                          fontWeight: FontWeight.w700,
-                          fontSize: YahaFontSizes.xxLarge)),
-                  // ),
-                ),
-                background: Image.asset(
-                  'assets/images/Budapest-dark.png',
-                  fit: BoxFit.fill,
-                  width: MediaQuery.of(context).size.width,
-                ),
+            pinned: true,
+            snap: true,
+            floating: true,
+            expandedHeight: 240.0,
+            flexibleSpace: FlexibleSpaceBar(
+              titlePadding: EdgeInsets.only(left: 60.0, bottom: 8.0),
+              centerTitle: false,
+              title: Container(
+                // child: Flexible(
+                //   flex: 1,
+                child: Text('Budapest',
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        fontSize: YahaFontSizes.xxLarge)),
+                // ),
               ),
-              leading: IconButton(
-                iconSize: YahaFontSizes.xxLarge,
-                icon: Icon(
-                  Icons.arrow_back_ios_rounded,
-                  color: YahaColors.accentColor,
-                ),
-                onPressed: () {
-                  // do something
-                },
-              )),
+              background: Image.asset(
+                'assets/images/Budapest-dark.png',
+                fit: BoxFit.fill,
+                width: MediaQuery.of(context).size.width,
+              ),
+            ),
+          ),
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
@@ -103,7 +94,7 @@ class _HikePageState extends State<HikePage> {
                         child: GridView.count(
                           primary: false,
                           padding: const EdgeInsets.all(YahaSpaceSizes.general),
-                         crossAxisSpacing: 15,
+                          crossAxisSpacing: 15,
                           mainAxisSpacing: 10,
                           crossAxisCount: 3,
                           children: <Widget>[

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_app/settings-page.dart';
 import 'package:mobile_app/yaha-border-radius.dart';
 import 'package:mobile_app/yaha-colors.dart';
 import 'package:mobile_app/yaha-font-sizes.dart';
 import 'package:mobile_app/yaha-space-sizes.dart';
+import 'package:path/path.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -129,24 +131,33 @@ class _ProfilePageState extends State<ProfilePage> {
                         padding: const EdgeInsets.all(YahaSpaceSizes.general),
                         child: Column(
                           children: [
-                            Container(
-                              margin:
-                                  EdgeInsets.only(bottom: YahaSpaceSizes.small),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text('Settings',
-                                      style: TextStyle(
-                                          fontSize: YahaFontSizes.medium,
-                                          fontWeight: FontWeight.w400,
-                                          color: YahaColors.textColor)),
-                                  Icon(
-                                    Icons.chevron_right_rounded,
-                                    color: YahaColors.primary,
-                                    size: YahaFontSizes.xxLarge,
-                                  )
-                                ],
+                            InkWell(
+                              onTap: () {
+                                Navigator.of(this.context).push(
+                                    new MaterialPageRoute<dynamic>(
+                                        builder: (BuildContext context) {
+                                  return new SettingsPage();
+                                }));
+                              },
+                              child: Container(
+                                margin: EdgeInsets.only(
+                                    bottom: YahaSpaceSizes.small),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text('Settings',
+                                        style: TextStyle(
+                                            fontSize: YahaFontSizes.medium,
+                                            fontWeight: FontWeight.w400,
+                                            color: YahaColors.textColor)),
+                                    Icon(
+                                      Icons.chevron_right_rounded,
+                                      color: YahaColors.primary,
+                                      size: YahaFontSizes.xxLarge,
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                             Divider(color: YahaColors.divider, thickness: 1),
