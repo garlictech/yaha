@@ -38,3 +38,6 @@ functions:
 
   consumer-pre-signup:
     handler: lib/lambda/consumer-pre-signup/index.handler
+  
+  graphql-neo4j:
+    handler: lib/lambda/graphql-neo4j/index.handler

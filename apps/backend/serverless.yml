@@ -1,5 +1,5 @@
 org: garlictech
-service: yaha
+service: backend
 configValidationMode: error
 frameworkVersion: ^2.16.1
 
@@ -14,7 +14,7 @@ custom:
   # commands. Or falls back to what we have set in the provider section.
   stage: ${opt:stage, self:provider.stage}
   # Name of the SST app that's deploying our infrastructure
-  sstApp: ${self:custom.stage}-yaha
+  sstApp: ${self:custom.stage}-backend
   bundle:
     packager: yarn
     linting: false
@@ -35,3 +35,6 @@ functions:
 
   consumer-pre-signup:
     handler: lib/lambda/consumer-pre-signup/index.handler
+
+  graphql-neo4j:
+    handler: lib/lambda/graphql-neo4j/index.handler
