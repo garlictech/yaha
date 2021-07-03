@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_app/hike-page.dart';
-import 'package:mobile_app/profile-page.dart';
-import 'package:mobile_app/sign-up-page.dart';
-import 'package:mobile_app/track-page.dart';
-import 'package:mobile_app/yaha-colors.dart';
+import 'package:yaha/hike-page.dart';
+import 'package:yaha/profile-page.dart';
+import 'package:yaha/sign-up-page.dart';
+import 'package:yaha/track-page.dart';
+import 'package:yaha/yaha-colors.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 import 'explore-page.dart';

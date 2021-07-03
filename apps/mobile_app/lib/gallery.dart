@@ -1,6 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:mobile_app/yaha-border-radius.dart';
+import 'package:yaha/yaha-border-radius.dart';
 
 class Gallery extends StatelessWidget {
   const Gallery({Key? key}) : super(key: key);

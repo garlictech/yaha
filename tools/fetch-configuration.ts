@@ -14,7 +14,7 @@ const prefix = `${stage}-${project}`;
 
 const targetDir = `${__dirname}/../libs/shared/config/src/lib/generated`;
 const targetFile = `${targetDir}/config.json`;
-const mobileAppConfigurationFile = `${__dirname}/../apps/yaha-mobile/lib/awsconfiguration.dart`;
+const mobileAppConfigurationFile = `${__dirname}/../apps/mobile_app/lib/awsconfiguration.dart`;
 
 //const amplifyMetaConfigFile = `${__dirname}/../apps/crud-backend/amplify/backend/amplify-meta.json`;
 
@@ -26,8 +26,8 @@ const mobileAppConfigurationFile = `${__dirname}/../apps/yaha-mobile/lib/awsconf
 fs.mkdirSync(targetDir, { recursive: true });
 
 const generatedParams = [
-  'YahaGraphqlApiKey',
-  'YahaGraphqlApiUrl',
+  //'YahaGraphqlApiKey',
+  //'YahaGraphqlApiUrl',
   'IdentityPoolId',
   'ConsumerWebUserPoolClientId',
   'ConsumerUserPoolDomain',
@@ -70,16 +70,14 @@ pipe(
         fs.writeFileSync(targetFile, JSON.stringify(config, null, 2));
         console.log(`Config written to ${targetFile}`);
       }),
-      /*fp.tap(config => {
-        const apiKeyName = Object.keys(amplifyConfig['api'])[0];
+      fp.tap(config => {
+        /*  const apiKeyName = Object.keys(amplifyConfig['api'])[0];
         if (!amplifyConfig['storage']) {
           throw Error(
             'No bucket configured for this Amplify project! amplify-meta.json must have a "bucket": section.',
           );
         }
         const bucketKeyName = Object.keys(amplifyConfig['storage'])[0];
-        config['Region'] = region;
-        config['Stage'] = stage;
         config['CrudGraphqlApiUrl'] =
           amplifyConfig['api'][apiKeyName]['output'][
           'GraphQLAPIEndpointOutput'
@@ -89,7 +87,9 @@ pipe(
         config['S3BucketName'] =
           amplifyConfig['storage'][bucketKeyName]['output']['BucketName'];
         console.log(config);
-
+*/
+        config['Region'] = region;
+        config['Stage'] = stage;
         fs.writeFileSync(
           mobileAppConfigurationFile,
           `const AWSCONFIG = '''${JSON.stringify(config, null, 2)}''';`,
@@ -97,7 +97,7 @@ pipe(
         console.log(
           `Mobile application config written to ${mobileAppConfigurationFile}`,
         );
-      }),*/
+      }),
     ),
   ),
 ).subscribe();

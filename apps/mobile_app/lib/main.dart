@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_app/bottom-nav-bar.dart';
-import 'package:mobile_app/poi-page.dart';
-import 'package:mobile_app/profile-page.dart';
-import 'package:mobile_app/settings-page.dart';
-import 'package:mobile_app/sign-up-page.dart';
-import 'package:mobile_app/track-page.dart';
-import 'package:mobile_app/yaha-colors.dart';
+import 'package:yaha/bottom-nav-bar.dart';
+import 'package:yaha/poi-page.dart';
+import 'package:yaha/profile-page.dart';
+import 'package:yaha/settings-page.dart';
+import 'package:yaha/sign-up-page.dart';
+import 'package:yaha/track-page.dart';
+import 'package:yaha/yaha-colors.dart';
 import 'event-detail-page.dart';
 import 'explore-page.dart';
 import 'hike-page.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
