@@ -7,6 +7,7 @@ class YahaSpaceSizes {
   static const general = 20.0;
 
   static const large = 35.0;
+  static const xLarge = 40.0;
 
   const YahaSpaceSizes();
 }
