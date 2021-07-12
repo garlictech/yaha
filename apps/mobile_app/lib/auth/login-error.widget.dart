@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'auth-state.dart';
 
-class LoginError extends ConsumerWidget {
+class LoginErrorWidget extends ConsumerWidget {
   final String error;
 
-  const LoginError({Key? key, required this.error}) : super(key: key);
+  const LoginErrorWidget({Key? key, required this.error}) : super(key: key);
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {

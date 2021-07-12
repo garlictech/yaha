@@ -36,6 +36,9 @@ dependencies:
   shared_preferences: ^2.0.6
   webview_flutter: ^2.0.8
   google_fonts: ^2.1.0
+  logger: ^1.0.0
+  logger_flutter: ^0.0.1
+  dartz: ^0.10.0-nullsafety.2
 
 dev_dependencies:
   flutter_test:

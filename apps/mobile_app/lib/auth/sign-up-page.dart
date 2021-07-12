@@ -1,9 +1,5 @@
-import 'dart:async';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
-import 'package:amazon_cognito_identity_dart_2/cognito.dart';
 import 'package:flutter/material.dart';
-import 'package:yaha/sign-up-with-email-page.dart';
+import 'package:yaha/auth/auth-state.dart';
 import 'package:yaha/yaha-border-radius.dart';
 import 'package:yaha/yaha-box-sizes.dart';
 import 'package:yaha/yaha-colors.dart';
@@ -11,127 +7,26 @@ import 'package:yaha/yaha-font-sizes.dart';
 import 'package:yaha/yaha-space-sizes.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'app-config.dart';
-import 'auth/cognito/login_methods.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+import 'cognito/login_methods.dart';
+import 'sign-up-with-email-page.dart';
+import 'social-login.widget.dart';
 
-class AuthState {
-  final LoginMethod? socialLoginStarted;
-  final String? error;
-
-  AuthState({this.socialLoginStarted, this.error});
-}
-
-class AuthStateNotifier extends StateNotifier<AuthState> {
-  AuthStateNotifier() : super(AuthState());
-
-  startSocialLogin(LoginMethod method) =>
-      state = AuthState(socialLoginStarted: method);
-
-  errorHappened(String error) =>
-      state = AuthState(socialLoginStarted: null, error: error);
-}
-
-final authStateProvider = StateNotifierProvider<AuthStateNotifier, AuthState>(
-    (_) => AuthStateNotifier());
-
+@immutable
 class SignUpPage extends ConsumerWidget {
-  final Completer<WebViewController> _webViewController =
-      Completer<WebViewController>();
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     final authState = watch(authStateProvider);
+    final loginMethod = authState.loginMethod;
 
-    if (authState.socialLoginStarted == LoginMethod.FACEBOOK) {
-      final provider = 'Facebook';
-
-      var url = '${AppConfig.userPoolDomain}/oauth2/authorize?'
-          'identity_provider=$provider&'
-          'redirect_uri=${AppConfig.signinCallback}&'
-          'response_type=CODE&'
-          'client_id=${AppConfig.userPoolClientId}&'
-          'scope=email%20openid%20profile%20aws.cognito.signin.user.admin';
-      print('SocialLoginScreen.getWebView().url=$url');
-
-      return WebView(
-        initialUrl: url,
-        javascriptMode: JavascriptMode.unrestricted,
-        onWebViewCreated: (WebViewController webViewController) {
-          _webViewController.complete(webViewController);
-        },
-        navigationDelegate: (NavigationRequest request) {
-          print('SocialLoginScreen.navigationDelegate().request=$request');
-
-          if (request.url.startsWith('${AppConfig.signinCallback}?code=')) {
-            var code = request.url
-                .substring('${AppConfig.signinCallback}?code='.length);
-            // This is the authorization code!!!
-            signUserInWithAuthCode(context, code);
-            return NavigationDecision.prevent;
-          }
-          return NavigationDecision.navigate;
-        },
-        gestureNavigationEnabled: true,
-      );
+    if (loginMethod != null) {
+      return SocialLoginWidget(title: "Login to YAHA", method: loginMethod);
     } else {
       return SignUpPageBase();
     }
   }
-
-  Future signUserInWithAuthCode(BuildContext context, String authCode) async {
-    print('SocialLoginScreen.signUserInWithAuthCode().authCode=$authCode');
-    var url = '${AppConfig.userPoolDomain}/oauth2/token?'
-        'grant_type=authorization_code&'
-        'client_id=${AppConfig.userPoolClientId}&'
-        'code=$authCode&'
-        'redirect_uri=${AppConfig.signinCallback}';
-    final response = await http.post(
-      Uri.parse(url),
-      body: {},
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-    );
-    print(
-        'SocialLoginScreen.signUserInWithAuthCode().response=${response.statusCode}');
-    print(
-        'SocialLoginScreen.signUserInWithAuthCode().response.body=${response.body}');
-    if (response.statusCode != 200) {
-      print('${response.statusCode}: ${response.body}');
-      return;
-      // throw Exception('Received bad status code from Cognito for auth code:' +
-      //     response.statusCode.toString() +
-      //     '; body: ' +
-      //     response.body);
-    }
-
-    try {
-      final tokenData = json.decode(response.body);
-      final idToken = CognitoIdToken(tokenData['id_token']);
-      final accessToken = CognitoAccessToken(tokenData['access_token']);
-      final refreshToken = CognitoRefreshToken(tokenData['refresh_token']);
-      print(
-          'SocialLoginScreen.signUserInWithAuthCode().idToken=${idToken.jwtToken}');
-      print(
-          'SocialLoginScreen.signUserInWithAuthCode().accessToken=${accessToken.jwtToken}');
-      print(
-          'SocialLoginScreen.signUserInWithAuthCode().refreshToken=${refreshToken.token}');
-      dynamic payload = idToken.decodePayload();
-      String username = payload['cognito:username'];
-      print('SocialLoginScreen()signUserInWithAuthCode().username=' + username);
-
-      //final session =
-      //    CognitoUserSession(idToken, accessToken, refreshToken: refreshToken);
-      //AuthRepository repository = getIt<AuthRepository>();
-      //await repository.loginWithCognitoSession(session, username);
-
-      Navigator.of(context).pop();
-    } on Exception catch (e) {
-      print('UNKNOWN_ERROR: $e');
-    }
-  }
 }
 
+@immutable
 class SignUpPageBase extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
@@ -318,7 +213,8 @@ class SignUpPageBase extends ConsumerWidget {
                               ),
                             ],
                           ),
-                          onPressed: () {},
+                          onPressed: () => authStateNotifier
+                              .startSocialLogin(LoginMethod.GOOGLE),
                           style: ElevatedButton.styleFrom(
                             primary: YahaColors.google,
                             shape: const RoundedRectangleBorder(
@@ -363,7 +259,8 @@ class SignUpPageBase extends ConsumerWidget {
                           //'assets/images/apple_logo@3x.png',
                           //height: 25.0,
                           //),
-                          onPressed: () {},
+                          onPressed: () => authStateNotifier
+                              .startSocialLogin(LoginMethod.GOOGLE),
                           //label: Text('Sign up with Apple',
                           //style: TextStyle(
                           //fontSize: YahaFontSizes.small,

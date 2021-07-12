@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:yaha/auth/sign-up-page.dart';
 import 'package:yaha/bottom-nav-bar.dart';
 import 'package:yaha/poi-page.dart';
 import 'package:yaha/profile-page.dart';
 import 'package:yaha/settings-page.dart';
-import 'package:yaha/sign-up-page.dart';
 import 'package:yaha/track-page.dart';
 import 'package:yaha/yaha-colors.dart';
 import 'event-detail-page.dart';

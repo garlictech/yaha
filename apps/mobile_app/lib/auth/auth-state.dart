@@ -4,23 +4,30 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'cognito/login_methods.dart';
 
 class AuthState {
-  final LoginMethod? socialLoginStarted;
+  final LoginMethod? loginMethod;
   final String? error;
+  final bool working;
 
-  AuthState({this.socialLoginStarted, this.error});
+  AuthState({this.loginMethod, this.error, this.working = false});
 }
 
 class AuthStateNotifier extends StateNotifier<AuthState> {
   AuthStateNotifier() : super(AuthState());
 
   startSocialLogin(LoginMethod method) =>
-      state = AuthState(socialLoginStarted: method);
+      state = AuthState(loginMethod: method, working: true);
+
+  finishSocialLogin() => state = AuthState();
 
   errorHappened(String error) =>
-      state = AuthState(socialLoginStarted: null, error: error);
+      state = AuthState(working: false, error: error);
 
-  clearError() => state =
-      AuthState(socialLoginStarted: state.socialLoginStarted, error: null);
+  clearError() => state = AuthState(loginMethod: state.loginMethod);
+
+  loggedIn() => state = AuthState();
+
+  waiting() =>
+      state = AuthState(loginMethod: state.loginMethod, error: state.error);
 }
 
 final authStateProvider = StateNotifierProvider<AuthStateNotifier, AuthState>(
