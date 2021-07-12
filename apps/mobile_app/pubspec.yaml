@@ -31,6 +31,14 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_speed_dial: ^3.0.5
   persistent_bottom_nav_bar: ^4.0.2
+  flutter_native_splash: ^1.2.0
+
+flutter_native_splash:
+  background_image: assets/images/splash-screen.png
+  android: true
+  ios: true
+  android_gravity: fill
+  ios_content_mode: scaleAspectFill
 
 dev_dependencies:
   flutter_test:
