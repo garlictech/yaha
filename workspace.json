@@ -260,14 +260,23 @@
       "sourceRoot": "libs/shared/config/src",
       "projectType": "library",
       "targets": {
+        "config": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "ts-node ./tools/fetch-configuration.ts '{args.app}' '{args.stage}'",
+              "ts-node ./tools/get-secrets.ts '{args.app}' '{args.stage}'"
+            ]
+          }
+        },
         "lint": {
-          "executor": "@nrwl/linter:eslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/shared/config/**/*.ts"]
           }
         },
         "test": {
-          "executor": "@nrwl/jest:jest",
+          "builder": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/shared/config"],
           "options": {
             "jestConfig": "libs/shared/config/jest.config.js",
