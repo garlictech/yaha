@@ -14,13 +14,13 @@ const prefix = `${stage}-${project}`;
 
 const targetDir = `${__dirname}/../libs/shared/config/src/lib/generated`;
 const targetFile = `${targetDir}/config.json`;
-const mobileAppConfigurationFile = `${__dirname}/../apps/yaha-mobile/lib/awsconfiguration.dart`;
+const mobileAppConfigurationFile = `${__dirname}/../apps/mobile_app/lib/awsconfiguration.dart`;
 
 fs.mkdirSync(targetDir, { recursive: true });
 
 const generatedParams = [
-  'YahaGraphqlApiKey',
-  'YahaGraphqlApiUrl',
+  //'YahaGraphqlApiKey',
+  //'YahaGraphqlApiUrl',
   'IdentityPoolId',
   'ConsumerWebUserPoolClientId',
   'ConsumerUserPoolDomain',
@@ -66,8 +66,6 @@ pipe(
       fp.tap(config => {
         config['Region'] = region;
         config['Stage'] = stage;
-        console.log(config);
-
         fs.writeFileSync(
           mobileAppConfigurationFile,
           `const AWSCONFIG = '''${JSON.stringify(config, null, 2)}''';`,

@@ -1,20 +1,37 @@
-//import 'dart:html';
 import 'package:flutter/material.dart';
-import 'package:mobile_app/sign-up-with-email-page.dart';
-import 'package:mobile_app/yaha-border-radius.dart';
-import 'package:mobile_app/yaha-box-sizes.dart';
-import 'package:mobile_app/yaha-colors.dart';
-import 'package:mobile_app/yaha-font-sizes.dart';
-import 'package:mobile_app/yaha-space-sizes.dart';
+import 'package:yaha/auth/auth-state.dart';
+import 'package:yaha/yaha-border-radius.dart';
+import 'package:yaha/yaha-box-sizes.dart';
+import 'package:yaha/yaha-colors.dart';
+import 'package:yaha/yaha-font-sizes.dart';
+import 'package:yaha/yaha-space-sizes.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'cognito/login_methods.dart';
+import 'sign-up-with-email-page.dart';
+import 'social-login.widget.dart';
 
-class SignUpPage extends StatefulWidget {
+@immutable
+class SignUpPage extends ConsumerWidget {
   @override
-  _SignUpPageState createState() => _SignUpPageState();
+  Widget build(BuildContext context, ScopedReader watch) {
+    final authState = watch(authStateProvider);
+    final loginMethod = authState.loginMethod;
+
+    if (loginMethod != null) {
+      return SocialLoginWidget(title: "Login to YAHA", method: loginMethod);
+    } else {
+      return SignUpPageBase();
+    }
+  }
 }
 
-class _SignUpPageState extends State<SignUpPage> {
+@immutable
+class SignUpPageBase extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ScopedReader watch) {
+    final authStateNotifier = watch(authStateProvider.notifier);
+
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: YahaBoxSizes.heightGeneral,
@@ -47,6 +64,39 @@ class _SignUpPageState extends State<SignUpPage> {
       body: CustomScrollView(
         physics: BouncingScrollPhysics(),
         slivers: <Widget>[
+          SliverAppBar(
+            pinned: true,
+            snap: true,
+            floating: true,
+            expandedHeight: 195.0,
+            flexibleSpace: FlexibleSpaceBar(
+              centerTitle: true,
+              title: Column(
+                //     crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Text('New to YAHA?',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: YahaFontSizes.medium,
+                          fontWeight: FontWeight.w500)),
+                  const Text(
+                    "Create an account!",
+                    style: TextStyle(
+                        fontSize: YahaFontSizes.medium,
+                        fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+              background: Image.asset(
+                'assets/images/top-picture.png',
+                fit: BoxFit.fill,
+                width: MediaQuery.of(context).size.width,
+              ),
+            ),
+          ),
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
@@ -61,7 +111,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         width: YahaBoxSizes.buttonWidthBig,
                         child: ElevatedButton(
                           onPressed: () {
-                            Navigator.of(this.context).push(
+                            Navigator.of(context).push(
                                 new MaterialPageRoute<dynamic>(
                                     builder: (BuildContext context) {
                               return new SignUpWithEmailPage();
@@ -148,7 +198,8 @@ class _SignUpPageState extends State<SignUpPage> {
                           //color: YahaColors.accentColor,
                           //size: YahaFontSizes.large,
                           //),
-                          onPressed: () {},
+                          onPressed: () => authStateNotifier
+                              .startSocialLogin(LoginMethod.FACEBOOK),
                           //label: Text('Sign up with Facebook',
                           //style: TextStyle(
                           //fontSize: YahaFontSizes.small,
@@ -190,7 +241,8 @@ class _SignUpPageState extends State<SignUpPage> {
                               ),
                             ],
                           ),
-                          onPressed: () {},
+                          onPressed: () => authStateNotifier
+                              .startSocialLogin(LoginMethod.GOOGLE),
                           style: ElevatedButton.styleFrom(
                             primary: YahaColors.google,
                             shape: const RoundedRectangleBorder(
@@ -235,7 +287,8 @@ class _SignUpPageState extends State<SignUpPage> {
                           //'assets/images/apple_logo@3x.png',
                           //height: 25.0,
                           //),
-                          onPressed: () {},
+                          onPressed: () => authStateNotifier
+                              .startSocialLogin(LoginMethod.GOOGLE),
                           //label: Text('Sign up with Apple',
                           //style: TextStyle(
                           //fontSize: YahaFontSizes.small,
