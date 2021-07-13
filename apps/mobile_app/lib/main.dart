@@ -9,15 +9,16 @@ import 'package:mobile_app/yaha-colors.dart';
 import 'event-detail-page.dart';
 import 'explore-page.dart';
 import 'hike-page.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends HookConsumerWidget {
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       title: 'Jaha',
       debugShowCheckedModeBanner: false,

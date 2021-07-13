@@ -4,6 +4,8 @@ import 'package:mobile_app/yaha-colors.dart';
 import 'package:mobile_app/yaha-font-sizes.dart';
 import 'package:mobile_app/yaha-space-sizes.dart';
 
+import 'application-page.dart';
+
 class SettingsPage extends StatefulWidget {
   @override
   _SettingsPageState createState() => _SettingsPageState();
@@ -117,27 +119,36 @@ class _SettingsPageState extends State<SettingsPage> {
                               ),
                               Divider(
                                   color: YahaColors.divider, thickness: 0.5),
-                              Container(
-                                padding: const EdgeInsets.only(
-                                    left: YahaSpaceSizes.general,
-                                    top: YahaSpaceSizes.small,
-                                    right: YahaSpaceSizes.general,
-                                    bottom: YahaSpaceSizes.small),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text('Application',
-                                        style: TextStyle(
-                                            fontSize: YahaFontSizes.small,
-                                            fontWeight: FontWeight.w400,
-                                            color: YahaColors.textColor)),
-                                    Icon(
-                                      Icons.chevron_right_rounded,
-                                      color: YahaColors.primary,
-                                      size: YahaFontSizes.xxLarge,
-                                    )
-                                  ],
+                              InkWell(
+                                onTap: () {
+                                  Navigator.of(this.context).push(
+                                      new MaterialPageRoute<dynamic>(
+                                          builder: (BuildContext context) {
+                                    return new ApplicationPage();
+                                  }));
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.only(
+                                      left: YahaSpaceSizes.general,
+                                      top: YahaSpaceSizes.small,
+                                      right: YahaSpaceSizes.general,
+                                      bottom: YahaSpaceSizes.small),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text('Application',
+                                          style: TextStyle(
+                                              fontSize: YahaFontSizes.small,
+                                              fontWeight: FontWeight.w400,
+                                              color: YahaColors.textColor)),
+                                      Icon(
+                                        Icons.chevron_right_rounded,
+                                        color: YahaColors.primary,
+                                        size: YahaFontSizes.xxLarge,
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ),
                               Divider(

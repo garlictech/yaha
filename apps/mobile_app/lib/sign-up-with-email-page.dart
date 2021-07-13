@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app/yaha-border-radius.dart';
 import 'package:mobile_app/yaha-border-width.dart';
+import 'package:mobile_app/yaha-box-sizes.dart';
 import 'package:mobile_app/yaha-colors.dart';
 import 'package:mobile_app/yaha-font-sizes.dart';
 import 'package:mobile_app/yaha-space-sizes.dart';
@@ -17,28 +18,37 @@ class _SignUpWithEmailPageState extends State<SignUpWithEmailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: YahaBoxSizes.heightGeneral,
+        title: Column(
+          children: [
+            Text(
+              "New to Yaha?",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: YahaFontSizes.xLarge, fontWeight: FontWeight.w700),
+            ),
+            Container(
+              padding: const EdgeInsets.only(top: 3.0),
+              child: Text(
+                "Create an account.",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: YahaFontSizes.xLarge,
+                    fontWeight: FontWeight.w700),
+              ),
+            ),
+          ],
+        ),
+        flexibleSpace: Image.asset(
+          'assets/images/top-picture.png',
+          fit: BoxFit.cover,
+          //width: MediaQuery.of(context).size.width,
+        ),
+      ),
       body: CustomScrollView(
         physics: BouncingScrollPhysics(),
         slivers: <Widget>[
-          SliverAppBar(
-            pinned: true,
-            snap: true,
-            floating: true,
-            expandedHeight: 195.0,
-            flexibleSpace: FlexibleSpaceBar(
-              centerTitle: true,
-              title: Text("New to Yaha?\nCreate an account!",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: YahaFontSizes.medium,
-                      fontWeight: FontWeight.bold)),
-              background: Image.asset(
-                'assets/images/top-picture.png',
-                fit: BoxFit.cover,
-                //width: MediaQuery.of(context).size.width,
-              ),
-            ),
-          ),
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
