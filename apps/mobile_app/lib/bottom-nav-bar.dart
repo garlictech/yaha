@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_app/gallery.dart';
+import 'package:mobile_app/hike-card.dart';
 import 'package:mobile_app/hike-page.dart';
 import 'package:mobile_app/log-in-page.dart';
+import 'package:mobile_app/previous-activities-page.dart';
 import 'package:mobile_app/profile-page.dart';
 import 'package:mobile_app/sign-up-page.dart';
 import 'package:mobile_app/track-page.dart';
@@ -55,7 +58,7 @@ class BottomNavBar extends StatelessWidget {
 }
 
 List<Widget> _buildScreens() {
-  return [HikePage(), SignUpPage(), LogInPage(), ProfilePage()];
+  return [HikePage(), SignUpPage(), PreviousActivitiesPage(), ProfilePage()];
 }
 
 List<PersistentBottomNavBarItem> _navBarsItems() {
