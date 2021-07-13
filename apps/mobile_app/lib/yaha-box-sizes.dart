@@ -16,5 +16,8 @@ class YahaBoxSizes {
   static const buttonWidthSmall = 200.0;
   static const buttonWidthBig = 300.0;
 
+  //WIDTH - toggle
+  static const toggleWidth = 145.0;
+
   const YahaBoxSizes();
 }

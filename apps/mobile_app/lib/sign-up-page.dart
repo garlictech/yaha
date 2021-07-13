@@ -16,42 +16,37 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: YahaBoxSizes.heightGeneral,
+        title: Column(
+          children: [
+            Text(
+              "New to Yaha?",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: YahaFontSizes.xLarge, fontWeight: FontWeight.w700),
+            ),
+            Container(
+              padding: const EdgeInsets.only(top: 3.0),
+              child: Text(
+                "Create an account.",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: YahaFontSizes.xLarge,
+                    fontWeight: FontWeight.w700),
+              ),
+            ),
+          ],
+        ),
+        flexibleSpace: Image.asset(
+          'assets/images/top-picture.png',
+          fit: BoxFit.cover,
+          //width: MediaQuery.of(context).size.width,
+        ),
+      ),
       body: CustomScrollView(
         physics: BouncingScrollPhysics(),
         slivers: <Widget>[
-          SliverAppBar(
-            pinned: true,
-            snap: true,
-            floating: true,
-            expandedHeight: 195.0,
-            flexibleSpace: FlexibleSpaceBar(
-              centerTitle: true,
-              title: Column(
-                //     crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  const Text("New to Yaha?",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize: YahaFontSizes.medium,
-                          fontWeight: FontWeight.w500)),
-                  const Text(
-                    "Create an account!",
-                    style: TextStyle(
-                        fontSize: YahaFontSizes.medium,
-                        fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-              background: Image.asset(
-                'assets/images/top-picture.png',
-                fit: BoxFit.fill,
-                width: MediaQuery.of(context).size.width,
-              ),
-            ),
-          ),
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
