@@ -86,7 +86,7 @@
     "cypress-cucumber-preprocessor": "4.1.4",
     "cypress-localstorage-commands": "1.4.5",
     "eslint-plugin-unused-imports": "1.1.2",
-    "ts-node": "10.0.0",
+    "ts-node": "10.1.0",
     "husky": "7.0.1",
     "patch-package": "6.4.7",
     "prettier": "2.3.2",
