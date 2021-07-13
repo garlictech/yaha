@@ -351,7 +351,10 @@ class _LogInPageState extends State<LogInPage> {
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.all(YahaSpaceSizes.general),
+                      padding: EdgeInsets.only(
+                          left: YahaSpaceSizes.general,
+                          right: YahaSpaceSizes.general,
+                          bottom: YahaSpaceSizes.general),
                       child: Align(
                         alignment: FractionalOffset.bottomCenter,
                         child: Row(

@@ -168,7 +168,7 @@ class _SignUpWithEmailPageState extends State<SignUpWithEmailPage> {
                           Container(
                             padding: const EdgeInsets.only(
                                 top: YahaSpaceSizes.xSmall,
-                                bottom: YahaSpaceSizes.xSmall),
+                                bottom: YahaSpaceSizes.medium),
                             child: SizedBox(
                               height: 40.0,
                               child: TextFormField(
@@ -211,21 +211,21 @@ class _SignUpWithEmailPageState extends State<SignUpWithEmailPage> {
                               ),
                             ),
                           ),
-                          SizedBox(
-                            width: 300.0,
-                            child: Container(
-                              padding: const EdgeInsets.only(
-                                  bottom: YahaSpaceSizes.medium),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text('At least 8 characters long'),
-                                  Text('Contains numbers'),
-                                  Text('Contains special characters')
-                                ],
-                              ),
-                            ),
-                          ),
+                          // SizedBox(
+                          //   width: 300.0,
+                          //   child: Container(
+                          //     padding: const EdgeInsets.only(
+                          //         bottom: YahaSpaceSizes.medium),
+                          //     child: Column(
+                          //       crossAxisAlignment: CrossAxisAlignment.start,
+                          //       children: [
+                          //         Text('At least 8 characters long'),
+                          //         Text('Contains numbers'),
+                          //         Text('Contains special characters')
+                          //       ],
+                          //     ),
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),
@@ -316,6 +316,7 @@ class _SignUpWithEmailPageState extends State<SignUpWithEmailPage> {
                     Container(
                       //child: Align(
                       //alignment: FractionalOffset.bottomCenter,
+                      padding: EdgeInsets.all(YahaSpaceSizes.general),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
