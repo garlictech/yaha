@@ -43,7 +43,7 @@ package="com.example.mobile_app">
         android:host="qa-yaha-consumer.auth.us-east-1.amazoncognito.com" />
         <data android:scheme="https"
         android:host="staging-yaha-consumer.auth.us-east-1.amazoncognito.com" />
-        <ata android:scheme="https"
+        <data android:scheme="https"
         android:host="prod-yaha-consumer.auth.us-east-1.amazoncognito.com" />
       </intent-filter>
     </activity>
