@@ -94,7 +94,7 @@ class _HikePageState extends State<HikePage> {
                         child: GridView.count(
                           primary: false,
                           padding: const EdgeInsets.all(YahaSpaceSizes.general),
-                          crossAxisSpacing: 15,
+                          crossAxisSpacing: 10,
                           mainAxisSpacing: 10,
                           crossAxisCount: 3,
                           children: <Widget>[
@@ -628,7 +628,7 @@ class _HikePageState extends State<HikePage> {
                               padding: const EdgeInsets.all(3),
                               child: Container(
                                 padding: const EdgeInsets.only(
-                                    top: YahaSpaceSizes.large,
+                                    top: YahaSpaceSizes.general,
                                     left: YahaSpaceSizes.small,
                                     right: YahaSpaceSizes.small,
                                     bottom: YahaSpaceSizes.general),
@@ -713,7 +713,7 @@ SpeedDial buildSpeedDial() {
   return SpeedDial(
     /// both default to 16
     marginEnd: 18,
-    marginBottom: 820,
+    marginBottom: 720,
     // animatedIcon: AnimatedIcons.menu_close,
     // animatedIconTheme: IconThemeData(size: 22.0),
     /// This is ignored if animatedIcon is non null
