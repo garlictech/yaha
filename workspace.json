@@ -265,7 +265,7 @@
           "options": {
             "commands": [
               "yarn ts-node ./tools/fetch-configuration.ts '{args.app}' '{args.stage}'",
-              "yarn ts-node ./tools/get-secrets.ts '{args.app}' '{args.stage}'"
+              "yarn ts-node ./tools/get-secrets.ts 'yaha' '{args.stage}'"
             ]
           }
         },

@@ -16,13 +16,6 @@ const targetDir = `${__dirname}/../libs/shared/config/src/lib/generated`;
 const targetFile = `${targetDir}/config.json`;
 const mobileAppConfigurationFile = `${__dirname}/../apps/mobile_app/lib/awsconfiguration.dart`;
 
-//const amplifyMetaConfigFile = `${__dirname}/../apps/crud-backend/amplify/backend/amplify-meta.json`;
-
-//--- Read generated crud amplify backend (meta-) config
-/*const amplifyConfig = JSON.parse(
-  fs.readFileSync(amplifyMetaConfigFile, 'utf8'),
-);
-*/
 fs.mkdirSync(targetDir, { recursive: true });
 
 const generatedParams = [
@@ -71,23 +64,6 @@ pipe(
         console.log(`Config written to ${targetFile}`);
       }),
       fp.tap(config => {
-        /*  const apiKeyName = Object.keys(amplifyConfig['api'])[0];
-        if (!amplifyConfig['storage']) {
-          throw Error(
-            'No bucket configured for this Amplify project! amplify-meta.json must have a "bucket": section.',
-          );
-        }
-        const bucketKeyName = Object.keys(amplifyConfig['storage'])[0];
-        config['CrudGraphqlApiUrl'] =
-          amplifyConfig['api'][apiKeyName]['output'][
-          'GraphQLAPIEndpointOutput'
-          ];
-        config['CrudGraphqlApiKey'] =
-          amplifyConfig['api'][apiKeyName]['output']['GraphQLAPIKeyOutput'];
-        config['S3BucketName'] =
-          amplifyConfig['storage'][bucketKeyName]['output']['BucketName'];
-        console.log(config);
-*/
         config['Region'] = region;
         config['Stage'] = stage;
         fs.writeFileSync(
