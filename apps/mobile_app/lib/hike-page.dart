@@ -80,7 +80,7 @@ class _HikePageState extends State<HikePage> {
                         child: Text(
                             'It is the capital of Hungary on the banks of the Danube, the home of the 19th century Chain Bridge, the Old Town of Buda and Castle Hill.',
                             style: TextStyle(
-                                fontSize: YahaFontSizes.medium,
+                                fontSize: YahaFontSizes.small,
                                 fontWeight: FontWeight.w400,
                                 color: YahaColors.textColor)),
                       ),
@@ -94,8 +94,8 @@ class _HikePageState extends State<HikePage> {
                         child: GridView.count(
                           primary: false,
                           padding: const EdgeInsets.all(YahaSpaceSizes.general),
-                          crossAxisSpacing: 10,
-                          mainAxisSpacing: 10,
+                          crossAxisSpacing: 5,
+                          mainAxisSpacing: 5,
                           crossAxisCount: 3,
                           children: <Widget>[
                             Container(
@@ -104,7 +104,7 @@ class _HikePageState extends State<HikePage> {
                               child: Column(
                                 children: [
                                   Icon(Icons.hiking_rounded,
-                                      size: YahaFontSizes.xxLarge,
+                                      size: YahaFontSizes.xLarge,
                                       color: YahaColors.secondaryAccentColor),
                                   Text("24.3km",
                                       style: TextStyle(
@@ -133,7 +133,7 @@ class _HikePageState extends State<HikePage> {
                               child: Column(
                                 children: [
                                   Icon(Icons.trending_up_rounded,
-                                      size: YahaFontSizes.xxLarge,
+                                      size: YahaFontSizes.xLarge,
                                       color: YahaColors.secondaryAccentColor),
                                   Text("576m",
                                       style: TextStyle(
@@ -162,7 +162,7 @@ class _HikePageState extends State<HikePage> {
                               child: Column(
                                 children: [
                                   Icon(Icons.trending_down_rounded,
-                                      size: YahaFontSizes.xxLarge,
+                                      size: YahaFontSizes.xLarge,
                                       color: YahaColors.secondaryAccentColor),
                                   Text("1.2km",
                                       style: TextStyle(
@@ -191,7 +191,7 @@ class _HikePageState extends State<HikePage> {
                               child: Column(
                                 children: [
                                   Icon(Icons.watch_later_rounded,
-                                      size: YahaFontSizes.xxLarge,
+                                      size: YahaFontSizes.xLarge,
                                       color: YahaColors.secondaryAccentColor),
                                   Text("6h",
                                       style: TextStyle(
@@ -220,7 +220,7 @@ class _HikePageState extends State<HikePage> {
                               child: Column(
                                 children: [
                                   Icon(Icons.emoji_events_rounded,
-                                      size: YahaFontSizes.xxLarge,
+                                      size: YahaFontSizes.xLarge,
                                       color: YahaColors.secondaryAccentColor),
                                   Text("240",
                                       style: TextStyle(
@@ -249,7 +249,7 @@ class _HikePageState extends State<HikePage> {
                               child: Column(
                                 children: [
                                   Icon(Icons.stars_rounded,
-                                      size: YahaFontSizes.xxLarge,
+                                      size: YahaFontSizes.xLarge,
                                       color: YahaColors.secondary),
                                   Text("Medium",
                                       style: TextStyle(
@@ -540,8 +540,8 @@ class _HikePageState extends State<HikePage> {
                               top: YahaSpaceSizes.general,
                               left: YahaSpaceSizes.general,
                               right: YahaSpaceSizes.general),
-                          crossAxisSpacing: 10,
-                          mainAxisSpacing: 10,
+                          crossAxisSpacing: 5,
+                          mainAxisSpacing: 5,
                           crossAxisCount: 3,
                           children: <Widget>[
                             Container(
@@ -559,7 +559,7 @@ class _HikePageState extends State<HikePage> {
                                     ),
                                   ),
                                   const Icon(Icons.wb_sunny,
-                                      size: YahaFontSizes.xxLarge,
+                                      size: YahaFontSizes.xLarge,
                                       color: Colors.yellow),
                                   Container(
                                     padding: const EdgeInsets.all(
@@ -599,7 +599,7 @@ class _HikePageState extends State<HikePage> {
                                     ),
                                   ),
                                   Icon(Icons.cloud,
-                                      size: YahaFontSizes.xxLarge,
+                                      size: YahaFontSizes.xLarge,
                                       color: YahaColors.accentColor),
                                   Container(
                                     padding: const EdgeInsets.all(

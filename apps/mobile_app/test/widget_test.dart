@@ -23,8 +23,9 @@ import 'package:yaha/settings-page.dart';
 import 'package:yaha/track-page.dart';
 
 void main() {
+
   testWidgets('Yaha main smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(MyApp());
+    await tester.pumpWidget(ProviderScope(child: MyApp()));
     expect(true, true);
   });
 
