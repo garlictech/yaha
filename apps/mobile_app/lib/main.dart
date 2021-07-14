@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_app/bottom-nav-bar.dart';
 import 'package:mobile_app/poi-page.dart';
 import 'package:mobile_app/profile-page.dart';
 import 'package:mobile_app/settings-page.dart';
-import 'package:mobile_app/sign-up-page.dart';
 import 'package:mobile_app/track-page.dart';
 import 'package:mobile_app/yaha-colors.dart';
+import 'auth/sign-up-page.dart';
+import 'bottom-nav-bar.dart';
 import 'event-detail-page.dart';
 import 'explore-page.dart';
 import 'hike-page.dart';

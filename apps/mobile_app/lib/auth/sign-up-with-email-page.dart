@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_app/yaha-border-radius.dart';
-import 'package:mobile_app/yaha-border-width.dart';
-import 'package:mobile_app/yaha-box-sizes.dart';
-import 'package:mobile_app/yaha-colors.dart';
-import 'package:mobile_app/yaha-font-sizes.dart';
-import 'package:mobile_app/yaha-space-sizes.dart';
+import 'package:yaha/yaha-border-radius.dart';
+import 'package:yaha/yaha-border-width.dart';
+import 'package:yaha/yaha-box-sizes.dart';
+import 'package:yaha/yaha-colors.dart';
+import 'package:yaha/yaha-font-sizes.dart';
+import 'package:yaha/yaha-space-sizes.dart';
 
 class SignUpWithEmailPage extends StatefulWidget {
   @override
