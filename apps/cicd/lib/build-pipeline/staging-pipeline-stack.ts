@@ -26,12 +26,12 @@ export class StagingBuildPipelineStack extends sst.Stack {
             `yarn nx deploy backend --stage=${stage} --app=${utils.appConfig.name}`,
             'export PATH=$PATH:/tmp/flutter/bin',
             'flutter doctor',
-            `yarn nx buildApk yaha-mobile`,
+            `yarn nx buildApk yaha`,
           ],
         },
         post_build: {
           commands: [
-            'tar -cvf ${CODEBUILD_RESOLVED_SOURCE_VERSION}.tgz apps/yaha-mobile/lib/awsconfiguration.dart',
+            'tar -cvf ${CODEBUILD_RESOLVED_SOURCE_VERSION}.tgz apps/yaha/lib/awsconfiguration.dart',
             `aws s3 cp \${CODEBUILD_RESOLVED_SOURCE_VERSION}.tgz s3://${utils.getAppcenterArtifactBucketName(
               stage,
             )}/`,
