@@ -8,7 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hooks_riverpod/all.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yaha/auth/sign-up-page.dart';
 import 'package:yaha/auth/sign-up-with-email-page.dart';
 import 'package:yaha/bottom-nav-bar.dart';
@@ -23,7 +23,6 @@ import 'package:yaha/settings-page.dart';
 import 'package:yaha/track-page.dart';
 
 void main() {
-
   testWidgets('Yaha main smoke test', (WidgetTester tester) async {
     await tester.pumpWidget(ProviderScope(child: MyApp()));
     expect(true, true);

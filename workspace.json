@@ -162,6 +162,13 @@
             "cwd": "apps/mobile_app"
           }
         },
+        "lint": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "flutter analyze",
+            "cwd": "apps/mobile_app"
+          }
+        },
         "assemble": {
           "executor": "@nrwl/workspace:run-commands",
           "options": {
