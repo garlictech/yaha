@@ -39,35 +39,33 @@ export const configurePermissions = (
     'ConsumerNativeUserPoolClientId',
     'ConsumerUserPoolDomain',
     'IdentityPoolId',
-    'YahaGraphqlApiKey',
+    /*    'YahaGraphqlApiKey',
     'YahaGraphqlApiUrl',
-    'StripeWebhookEndpoint',
     'AdminSiteUrl',
     'AdminWebUserPoolClientId',
     'AdminNativeUserPoolClientId',
     'AdminUserPoolId',
     'AdminUserPoolDomain',
-    'CrudApiAppId',
+    'CrudApiAppId',*/
   ].map(paramName => `/${prefix}/generated/${paramName}`);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const fixParams = [
     'GoogleClientId',
-    'StripePublishableKey',
     'FacebookAppId',
+    'FlickrApiKey',
     'GoogleApiKey',
   ].map(paramName => `/${prefix}/${paramName}`);
 
   resources.forEach(resource => {
     secretsManager.pipelineSecrets.grantRead(resource);
-    /*
-    [...generatedParams, ...fixParams].forEach(param =>
+    [...generatedParams, ...fixParams].forEach((param, index) =>
       ssm.StringParameter.fromStringParameterName(
         stack,
         param + 'Param' + index,
         param,
       ).grantRead(resource),
-    );*/
+    );
   });
 };
 
@@ -318,7 +316,7 @@ export const createCommonDevPipeline = (
       },
       post_build: {
         commands: [
-          //'tar -cvf ${CODEBUILD_RESOLVED_SOURCE_VERSION}.tgz apps/yaha-mobile/lib/awsconfiguration.dart',
+          //'tar -cvf ${CODEBUILD_RESOLVED_SOURCE_VERSION}.tgz apps/yaha/lib/awsconfiguration.dart',
           //`aws s3 cp \${CODEBUILD_RESOLVED_SOURCE_VERSION}.tgz s3://${getAppcenterArtifactBucketName(
           //stage,
           // )}/`,
