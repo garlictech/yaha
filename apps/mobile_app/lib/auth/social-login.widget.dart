@@ -30,7 +30,7 @@ class Deps {
 @immutable
 class SocialLoginWidget extends ConsumerWidget {
   final String title;
-  final LoginMethod? method;
+  final LoginMethod method;
   final Completer<WebViewController> _webViewController =
       Completer<WebViewController>();
 
@@ -38,7 +38,7 @@ class SocialLoginWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    String provider = getCognitoProviderName(method!);
+    String provider = getCognitoProviderName(method);
     final authStateNotifier = watch(authStateProvider.notifier);
     final authState = watch(authStateProvider);
     final error = authState.error;
