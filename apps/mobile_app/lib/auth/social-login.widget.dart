@@ -29,12 +29,12 @@ class Deps {
 
 @immutable
 class SocialLoginWidget extends ConsumerWidget {
-  final String title;
-  final LoginMethod method;
+  final String title = "fasz";
+  final LoginMethod method = LoginMethod.FACEBOOK;
   final Completer<WebViewController> _webViewController =
       Completer<WebViewController>();
 
-  SocialLoginWidget({required this.title, required this.method}) : super();
+  SocialLoginWidget() : super();
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {
