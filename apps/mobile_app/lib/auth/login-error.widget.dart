@@ -1,6 +1,6 @@
-import 'package:hooks_riverpod/all.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'auth-state.dart';
 
 class LoginErrorWidget extends ConsumerWidget {

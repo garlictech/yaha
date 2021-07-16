@@ -19,7 +19,7 @@ class SignUpPage extends ConsumerWidget {
     final loginMethod = authState.loginMethod;
 
     if (loginMethod != null) {
-      return SocialLoginWidget(title: "Login to YAHA", method: loginMethod);
+      return SocialLoginWidget();
     } else {
       return SignUpPageBase();
     }
