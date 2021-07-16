@@ -4,7 +4,6 @@ import 'package:yaha/yaha-border-radius.dart';
 import 'package:yaha/yaha-colors.dart';
 import 'package:yaha/yaha-font-sizes.dart';
 import 'package:yaha/yaha-space-sizes.dart';
-import 'package:path/path.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -128,7 +127,9 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       ),
                       Container(
-                        padding: const EdgeInsets.only(left: YahaSpaceSizes.general, right: YahaSpaceSizes.general),
+                        padding: const EdgeInsets.only(
+                            left: YahaSpaceSizes.general,
+                            right: YahaSpaceSizes.general),
                         child: Column(
                           children: [
                             InkWell(

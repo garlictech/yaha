@@ -32,13 +32,6 @@ dependencies:
   flutter_speed_dial: ^3.0.5
   persistent_bottom_nav_bar: ^4.0.2
   flutter_native_splash: ^1.2.0
-
-flutter_native_splash:
-  background_image: assets/images/splash-screen.png
-  android: true
-  ios: true
-  android_gravity: fill
-  ios_content_mode: scaleAspectFill
   hooks_riverpod: ^0.14.0+4
   amazon_cognito_identity_dart_2: ^1.0.3
   shared_preferences: ^2.0.6
@@ -48,6 +41,13 @@ flutter_native_splash:
   logger_flutter: ^0.0.1
   dartz: ^0.10.0-nullsafety.2
   toggle_switch: ^1.2.0
+
+flutter_native_splash:
+  background_image: assets/images/splash-screen.png
+  android: true
+  ios: true
+  android_gravity: fill
+  ios_content_mode: scaleAspectFill
 
 dev_dependencies:
   flutter_test:

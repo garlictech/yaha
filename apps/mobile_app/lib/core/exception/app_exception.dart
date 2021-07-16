@@ -18,26 +18,36 @@ abstract class AppException implements Exception {
     this.message,
     this.details,
     this.subCode,
-  }) 
+  });
 
   @override
-  String toString() => 'AppException(code=$code, message=$message, details=$details)';
+  String toString() {
+    return 'AppException(code=$code, message=$message, details=$details)';
+  }
 
   static String peCode(PlatformException pe) {
     return pe.details != null && pe.details['details'] != null
         ? pe.details['details']['code']
-        : pe.details != null && pe.details['code'] ? pe.details['code'] : pe.code;
+        : pe.details != null && pe.details['code']
+            ? pe.details['code']
+            : pe.code;
   }
 
   static String peSubCode(PlatformException pe) {
-    return pe.details != null && pe.details['details'] != null ? pe.details['details']['subCode'] : null;
+    return pe.details != null && pe.details['details'] != null
+        ? pe.details['details']['subCode']
+        : null;
   }
 
   static String peDetails(PlatformException pe) {
-    return pe.details != null && pe.details['details'] != null ? pe.details['details'] : pe.details;
+    return pe.details != null && pe.details['details'] != null
+        ? pe.details['details']
+        : pe.details;
   }
 
   static String peMessage(PlatformException pe) {
-    return pe.details != null && pe.details['message'] != null ? pe.details['message'] : pe.message;
+    return pe.details != null && pe.details['message'] != null
+        ? pe.details['message']
+        : pe.message;
   }
 }
