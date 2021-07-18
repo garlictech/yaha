@@ -1,9 +1,10 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:mobile_app/yaha-border-radius.dart';
-import 'package:mobile_app/yaha-colors.dart';
-import 'package:mobile_app/yaha-font-sizes.dart';
-import 'package:mobile_app/yaha-space-sizes.dart';
+import 'package:yaha/yaha-border-radius.dart';
+import 'package:yaha/yaha-colors.dart';
+import 'package:yaha/yaha-font-sizes.dart';
+import 'package:yaha/yaha-space-sizes.dart';
+
+import 'application-page.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -14,6 +15,21 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+          backgroundColor: YahaColors.background,
+          title: const Text('Settings',
+              style: TextStyle(
+                  fontSize: YahaFontSizes.large,
+                  fontWeight: FontWeight.w600,
+                  color: YahaColors.textColor)),
+          leading: IconButton(
+            iconSize: YahaFontSizes.xxLarge,
+            icon: Icon(
+              Icons.arrow_back_ios_rounded,
+              color: YahaColors.textColor,
+            ),
+            onPressed: () => Navigator.of(context).pop(),
+          )),
       body: CustomScrollView(
         physics: BouncingScrollPhysics(),
         slivers: <Widget>[
@@ -24,15 +40,15 @@ class _SettingsPageState extends State<SettingsPage> {
                   child: Container(
                     child: Column(
                       children: [
-                        Container(
-                          padding: const EdgeInsets.all(YahaSpaceSizes.general),
-                          child: Text('Settings',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: YahaFontSizes.large,
-                                  fontWeight: FontWeight.w600,
-                                  color: YahaColors.textColor)),
-                        ),
+                        // Container(
+                        //   padding: const EdgeInsets.all(YahaSpaceSizes.general),
+                        //   child: Text('Settings',
+                        //       textAlign: TextAlign.center,
+                        //       style: TextStyle(
+                        //           fontSize: YahaFontSizes.large,
+                        //           fontWeight: FontWeight.w600,
+                        //           color: YahaColors.textColor)),
+                        // ),
                         Container(
                           width: MediaQuery.of(context).size.width,
                           padding: const EdgeInsets.only(
@@ -76,7 +92,8 @@ class _SettingsPageState extends State<SettingsPage> {
                               ),
                               Container(
                                   child: Divider(
-                                      color: YahaColors.divider, thickness: 0.5)),
+                                      color: YahaColors.divider,
+                                      thickness: 0.5)),
                               Container(
                                 padding: const EdgeInsets.only(
                                     left: YahaSpaceSizes.general,
@@ -100,31 +117,42 @@ class _SettingsPageState extends State<SettingsPage> {
                                   ],
                                 ),
                               ),
-                              Divider(color: YahaColors.divider, thickness: 0.5),
-                              Container(
-                                padding: const EdgeInsets.only(
-                                    left: YahaSpaceSizes.general,
-                                    top: YahaSpaceSizes.small,
-                                    right: YahaSpaceSizes.general,
-                                    bottom: YahaSpaceSizes.small),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text('Application',
-                                        style: TextStyle(
-                                            fontSize: YahaFontSizes.small,
-                                            fontWeight: FontWeight.w400,
-                                            color: YahaColors.textColor)),
-                                    Icon(
-                                      Icons.chevron_right_rounded,
-                                      color: YahaColors.primary,
-                                      size: YahaFontSizes.xxLarge,
-                                    )
-                                  ],
+                              Divider(
+                                  color: YahaColors.divider, thickness: 0.5),
+                              InkWell(
+                                onTap: () {
+                                  Navigator.of(this.context).push(
+                                      new MaterialPageRoute<dynamic>(
+                                          builder: (BuildContext context) {
+                                    return new ApplicationPage();
+                                  }));
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.only(
+                                      left: YahaSpaceSizes.general,
+                                      top: YahaSpaceSizes.small,
+                                      right: YahaSpaceSizes.general,
+                                      bottom: YahaSpaceSizes.small),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text('Application',
+                                          style: TextStyle(
+                                              fontSize: YahaFontSizes.small,
+                                              fontWeight: FontWeight.w400,
+                                              color: YahaColors.textColor)),
+                                      Icon(
+                                        Icons.chevron_right_rounded,
+                                        color: YahaColors.primary,
+                                        size: YahaFontSizes.xxLarge,
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ),
-                              Divider(color: YahaColors.divider, thickness: 0.5),
+                              Divider(
+                                  color: YahaColors.divider, thickness: 0.5),
                               Container(
                                 padding: const EdgeInsets.only(
                                     left: YahaSpaceSizes.general,
@@ -194,7 +222,8 @@ class _SettingsPageState extends State<SettingsPage> {
                               ),
                               Container(
                                   child: Divider(
-                                      color: YahaColors.divider, thickness: 0.5)),
+                                      color: YahaColors.divider,
+                                      thickness: 0.5)),
                               Container(
                                 padding: const EdgeInsets.only(
                                     left: YahaSpaceSizes.general,
@@ -218,7 +247,8 @@ class _SettingsPageState extends State<SettingsPage> {
                                   ],
                                 ),
                               ),
-                              Divider(color: YahaColors.divider, thickness: 0.5),
+                              Divider(
+                                  color: YahaColors.divider, thickness: 0.5),
                               Container(
                                 padding: const EdgeInsets.only(
                                     left: YahaSpaceSizes.general,
@@ -242,7 +272,8 @@ class _SettingsPageState extends State<SettingsPage> {
                                   ],
                                 ),
                               ),
-                              Divider(color: YahaColors.divider, thickness: 0.5),
+                              Divider(
+                                  color: YahaColors.divider, thickness: 0.5),
                               Container(
                                 padding: const EdgeInsets.only(
                                     left: YahaSpaceSizes.general,

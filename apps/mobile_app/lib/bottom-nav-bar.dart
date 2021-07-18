@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_app/hike-page.dart';
-import 'package:mobile_app/profile-page.dart';
-import 'package:mobile_app/settings-page.dart';
-import 'package:mobile_app/track-page.dart';
-import 'package:mobile_app/yaha-colors.dart';
+import 'package:yaha/hike-page.dart';
+import 'package:yaha/log-in-page.dart';
+import 'package:yaha/profile-page.dart';
+import 'package:yaha/yaha-colors.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
-import 'explore-page.dart';
+import 'auth/sign-up-page.dart';
 
 // PersistentTabController _controller;
 
@@ -23,7 +22,7 @@ class BottomNavBar extends StatelessWidget {
       screens: _buildScreens(),
       items: _navBarsItems(),
       confineInSafeArea: true,
-      backgroundColor: Colors.white, // Default is Colors.white.
+      backgroundColor: YahaColors.background, // Default is Colors.white.
       handleAndroidBackButtonPress: true, // Default is true.
       resizeToAvoidBottomInset:
           true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
@@ -31,8 +30,8 @@ class BottomNavBar extends StatelessWidget {
       hideNavigationBarWhenKeyboardShows:
           true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
       decoration: NavBarDecoration(
-        borderRadius: BorderRadius.circular(10.0),
-        colorBehindNavBar: Colors.white,
+        // borderRadius: BorderRadius.circular(10.0),
+       border: Border.all(color: YahaColors.divider, width: 0.2)
       ),
       popAllScreensOnTapOfSelectedTab: true,
       popActionScreens: PopActionScreensType.all,
@@ -54,7 +53,7 @@ class BottomNavBar extends StatelessWidget {
 }
 
 List<Widget> _buildScreens() {
-  return [HikePage(), ExplorePage(), TrackPage(), ProfilePage()];
+  return [HikePage(), SignUpPage(), LogInPage(), ProfilePage()];
 }
 
 List<PersistentBottomNavBarItem> _navBarsItems() {
@@ -62,25 +61,29 @@ List<PersistentBottomNavBarItem> _navBarsItems() {
     PersistentBottomNavBarItem(
       icon: Icon(Icons.home_rounded),
       title: ("Home"),
-      activeColorPrimary: YahaColors.primary,
+      activeColorPrimary: YahaColors.tertiaryAccentColorDark,
+      activeColorSecondary: YahaColors.primary,
       inactiveColorPrimary: YahaColors.textColor,
     ),
     PersistentBottomNavBarItem(
       icon: Icon(Icons.travel_explore),
       title: ("Explore"),
-      activeColorPrimary: YahaColors.primary,
+      activeColorPrimary: YahaColors.tertiaryAccentColorDark,
+      activeColorSecondary: YahaColors.primary,
       inactiveColorPrimary: YahaColors.textColor,
     ),
     PersistentBottomNavBarItem(
       icon: Icon(Icons.play_circle_fill),
       title: ("Track"),
-      activeColorPrimary: YahaColors.primary,
+      activeColorPrimary: YahaColors.tertiaryAccentColorDark,
+      activeColorSecondary: YahaColors.primary,
       inactiveColorPrimary: YahaColors.textColor,
     ),
     PersistentBottomNavBarItem(
       icon: Icon(Icons.face_rounded),
       title: ("Profile"),
-      activeColorPrimary: YahaColors.primary,
+      activeColorPrimary: YahaColors.tertiaryAccentColorDark,
+      activeColorSecondary: YahaColors.primary,
       inactiveColorPrimary: YahaColors.textColor,
     ),
   ];

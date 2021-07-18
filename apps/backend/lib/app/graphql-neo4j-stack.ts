@@ -15,7 +15,7 @@ export class GraphqlNeo4jStack extends sst.Stack {
         ...commonLambdaProps,
         handler: 'lib/lambda/neo4j-graphgl/index.handler',
         code: lambda.Code.fromAsset(
-          path.join(__dirname, '../../.serverless/neo4j-graphgl.zip'),
+          path.join(__dirname, '../../.serverless/graphql-neo4j.zip'),
         ),
       },
     );

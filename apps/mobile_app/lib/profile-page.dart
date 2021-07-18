@@ -1,9 +1,9 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:mobile_app/yaha-border-radius.dart';
-import 'package:mobile_app/yaha-colors.dart';
-import 'package:mobile_app/yaha-font-sizes.dart';
-import 'package:mobile_app/yaha-space-sizes.dart';
+import 'package:yaha/settings-page.dart';
+import 'package:yaha/yaha-border-radius.dart';
+import 'package:yaha/yaha-colors.dart';
+import 'package:yaha/yaha-font-sizes.dart';
+import 'package:yaha/yaha-space-sizes.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -39,7 +39,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       Container(
                         child: Text('John Doe',
                             style: TextStyle(
-                                fontSize: YahaFontSizes.large,
+                                fontSize: YahaFontSizes.medium,
                                 fontWeight: FontWeight.w600,
                                 color: YahaColors.textColor)),
                       ),
@@ -63,16 +63,16 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       ),
                       Container(
-                        height: 85,
+                        height: 65,
                         width: MediaQuery.of(context).size.width,
-                        margin: const EdgeInsets.all(YahaSpaceSizes.large),
+                        margin: const EdgeInsets.all(YahaSpaceSizes.medium),
                         decoration: BoxDecoration(
                           color: YahaColors.tertiaryAccentColor,
                           borderRadius:
                               BorderRadius.circular(YahaBorderRadius.general),
                         ),
                         child: Container(
-                          margin: const EdgeInsets.all(YahaSpaceSizes.medium),
+                          margin: const EdgeInsets.all(YahaSpaceSizes.small),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
@@ -80,12 +80,12 @@ class _ProfilePageState extends State<ProfilePage> {
                                 children: [
                                   Text('34',
                                       style: TextStyle(
-                                          fontSize: YahaFontSizes.large,
+                                          fontSize: YahaFontSizes.medium,
                                           fontWeight: FontWeight.w600,
                                           color: YahaColors.textColor)),
                                   Text('hikes',
                                       style: TextStyle(
-                                          fontSize: YahaFontSizes.medium,
+                                          fontSize: YahaFontSizes.small,
                                           fontWeight: FontWeight.w400,
                                           color: YahaColors.textColor)),
                                 ],
@@ -96,12 +96,12 @@ class _ProfilePageState extends State<ProfilePage> {
                                 children: [
                                   Text('370',
                                       style: TextStyle(
-                                          fontSize: YahaFontSizes.large,
+                                          fontSize: YahaFontSizes.medium,
                                           fontWeight: FontWeight.w600,
                                           color: YahaColors.textColor)),
                                   Text('km',
                                       style: TextStyle(
-                                          fontSize: YahaFontSizes.medium,
+                                          fontSize: YahaFontSizes.small,
                                           fontWeight: FontWeight.w400,
                                           color: YahaColors.textColor)),
                                 ],
@@ -112,12 +112,12 @@ class _ProfilePageState extends State<ProfilePage> {
                                 children: [
                                   Text('54',
                                       style: TextStyle(
-                                          fontSize: YahaFontSizes.large,
+                                          fontSize: YahaFontSizes.medium,
                                           fontWeight: FontWeight.w600,
                                           color: YahaColors.textColor)),
                                   Text('hours',
                                       style: TextStyle(
-                                          fontSize: YahaFontSizes.medium,
+                                          fontSize: YahaFontSizes.small,
                                           fontWeight: FontWeight.w400,
                                           color: YahaColors.textColor)),
                                 ],
@@ -127,41 +127,52 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       ),
                       Container(
-                        padding: const EdgeInsets.all(YahaSpaceSizes.general),
+                        padding: const EdgeInsets.only(
+                            left: YahaSpaceSizes.general,
+                            right: YahaSpaceSizes.general),
                         child: Column(
                           children: [
-                            Container(
-                              margin:
-                                  EdgeInsets.only(bottom: YahaSpaceSizes.small),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text('Settings',
-                                      style: TextStyle(
-                                          fontSize: YahaFontSizes.medium,
-                                          fontWeight: FontWeight.w400,
-                                          color: YahaColors.textColor)),
-                                  Icon(
-                                    Icons.chevron_right_rounded,
-                                    color: YahaColors.primary,
-                                    size: YahaFontSizes.xxLarge,
-                                  )
-                                ],
+                            InkWell(
+                              onTap: () {
+                                Navigator.of(this.context).push(
+                                    new MaterialPageRoute<dynamic>(
+                                        builder: (BuildContext context) {
+                                  return new SettingsPage();
+                                }));
+                              },
+                              child: Container(
+                                margin: EdgeInsets.only(
+                                    bottom: YahaSpaceSizes.xSmall),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text('Settings',
+                                        style: TextStyle(
+                                            fontSize: YahaFontSizes.small,
+                                            fontWeight: FontWeight.w400,
+                                            color: YahaColors.textColor)),
+                                    Icon(
+                                      Icons.chevron_right_rounded,
+                                      color: YahaColors.primary,
+                                      size: YahaFontSizes.xxLarge,
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                             Divider(color: YahaColors.divider, thickness: 1),
                             Container(
                               margin: EdgeInsets.only(
                                   top: YahaSpaceSizes.small,
-                                  bottom: YahaSpaceSizes.small),
+                                  bottom: YahaSpaceSizes.xSmall),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text('Events',
                                       style: TextStyle(
-                                          fontSize: YahaFontSizes.medium,
+                                          fontSize: YahaFontSizes.small,
                                           fontWeight: FontWeight.w400,
                                           color: YahaColors.textColor)),
                                   Icon(
@@ -176,14 +187,14 @@ class _ProfilePageState extends State<ProfilePage> {
                             Container(
                               margin: EdgeInsets.only(
                                   top: YahaSpaceSizes.small,
-                                  bottom: YahaSpaceSizes.small),
+                                  bottom: YahaSpaceSizes.xSmall),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text('Challanges',
                                       style: TextStyle(
-                                          fontSize: YahaFontSizes.medium,
+                                          fontSize: YahaFontSizes.small,
                                           fontWeight: FontWeight.w400,
                                           color: YahaColors.textColor)),
                                   Icon(
@@ -198,14 +209,14 @@ class _ProfilePageState extends State<ProfilePage> {
                             Container(
                               margin: EdgeInsets.only(
                                   top: YahaSpaceSizes.small,
-                                  bottom: YahaSpaceSizes.small),
+                                  bottom: YahaSpaceSizes.xSmall),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text('Statistics',
                                       style: TextStyle(
-                                          fontSize: YahaFontSizes.medium,
+                                          fontSize: YahaFontSizes.small,
                                           fontWeight: FontWeight.w400,
                                           color: YahaColors.textColor)),
                                   Icon(
@@ -220,14 +231,14 @@ class _ProfilePageState extends State<ProfilePage> {
                             Container(
                               margin: EdgeInsets.only(
                                   top: YahaSpaceSizes.small,
-                                  bottom: YahaSpaceSizes.small),
+                                  bottom: YahaSpaceSizes.xSmall),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text('TimeCapsules',
                                       style: TextStyle(
-                                          fontSize: YahaFontSizes.medium,
+                                          fontSize: YahaFontSizes.small,
                                           fontWeight: FontWeight.w400,
                                           color: YahaColors.textColor)),
                                   Icon(
@@ -242,14 +253,14 @@ class _ProfilePageState extends State<ProfilePage> {
                             Container(
                               margin: EdgeInsets.only(
                                   top: YahaSpaceSizes.small,
-                                  bottom: YahaSpaceSizes.small),
+                                  bottom: YahaSpaceSizes.xSmall),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text('Bookmarked hikes',
                                       style: TextStyle(
-                                          fontSize: YahaFontSizes.medium,
+                                          fontSize: YahaFontSizes.small,
                                           fontWeight: FontWeight.w400,
                                           color: YahaColors.textColor)),
                                   Icon(

@@ -5,41 +5,87 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mobile_app/hike-page.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:yaha/auth/sign-up-page.dart';
+import 'package:yaha/auth/sign-up-with-email-page.dart';
+import 'package:yaha/bottom-nav-bar.dart';
+import 'package:yaha/event-detail-page.dart';
+import 'package:yaha/gallery.dart';
+import 'package:yaha/hike-page.dart';
 
-import 'package:mobile_app/main.dart';
-import 'package:mobile_app/poi-page.dart';
-import 'package:mobile_app/profile-page.dart';
-import 'package:mobile_app/settings-page.dart';
-import 'package:mobile_app/sign-up-page.dart';
+import 'package:yaha/main.dart';
+import 'package:yaha/poi-page.dart';
+import 'package:yaha/profile-page.dart';
+import 'package:yaha/settings-page.dart';
+import 'package:yaha/track-page.dart';
 
 void main() {
-  testWidgets('Yaha smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(MyApp());
+  testWidgets('Yaha main smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(ProviderScope(child: MyApp()));
     expect(true, true);
   });
- 
-  //   testWidgets('Yaha hike page test', (WidgetTester tester) async {
-  //   await tester.pumpWidget(HikePage());
-  //   expect(true, true);
-  // });
-  // testWidgets('Yaha poi page test', (WidgetTester tester) async {
-  //   await tester.pumpWidget(PoiPage());
-  //   expect(true, true);
-  // });
-  // testWidgets('Yaha profile page test', (WidgetTester tester) async {
-  //   await tester.pumpWidget(ProfilePage());
-  //   expect(true, true);
-  // });
-  // testWidgets('Yaha settings page test', (WidgetTester tester) async {
-  //   await tester.pumpWidget(SettingsPage());
-  //   expect(true, true);
-  // });
-  // testWidgets('Yaha sign up page test', (WidgetTester tester) async {
-  //   await tester.pumpWidget(SignUpPage());
-  //   expect(true, true);
-  // });
-  
+
+  Widget createWidgetForTesting({Widget? child}) {
+    return ProviderScope(
+        child: MaterialApp(
+      home: child,
+    ));
+  }
+
+  testWidgets('Hike Page smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetForTesting(child: new HikePage()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Poi Page smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetForTesting(child: new PoiPage()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Profile Page smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetForTesting(child: new ProfilePage()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Settings Page smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetForTesting(child: new SettingsPage()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Sign Up Page smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetForTesting(child: new SignUpPage()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Sign Up With Email Page smoke test',
+      (WidgetTester tester) async {
+    await tester
+        .pumpWidget(createWidgetForTesting(child: new SignUpWithEmailPage()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Event Detail Page smoke test', (WidgetTester tester) async {
+    await tester
+        .pumpWidget(createWidgetForTesting(child: new EventDetailPage()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Track Page smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetForTesting(child: new TrackPage()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Gallery smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetForTesting(child: new Gallery()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Bottom nav bar smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetForTesting(child: new BottomNavBar()));
+
+    await tester.pumpAndSettle();
+  });
 }

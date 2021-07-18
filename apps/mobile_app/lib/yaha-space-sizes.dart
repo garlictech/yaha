@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class YahaSpaceSizes {
   // YAHA THEME SPACING SIZES
   static const xSmall = 5.0;
@@ -9,6 +7,7 @@ class YahaSpaceSizes {
   static const general = 20.0;
 
   static const large = 35.0;
+  static const xLarge = 40.0;
 
   const YahaSpaceSizes();
 }

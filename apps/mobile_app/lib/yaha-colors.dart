@@ -12,7 +12,11 @@ class YahaColors {
       const Color(0xFFF3F2E7); // DIFFICULTY - EXTRA HARD
   static const Color secondaryAccentColor = const Color(0xFF908D89);
   static const Color tertiaryAccentColor = const Color(0xFFF3F2E7);
+  static const Color tertiaryAccentColorDark = const Color(0xFFC0BFB4);
+
   static const Color divider = const Color(0xFFA8A6A3);
+
+  static const Color background = const Color(0xFFFDFBF7);
 
 // POI COLORS
   static const Color emergency = const Color(0xFFEF5350);

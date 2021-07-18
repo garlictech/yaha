@@ -31,6 +31,12 @@
     "mobile_app": {
       "tags": ["type:application", "platform:flutter"]
     },
+    "neo4j-gql-api": {
+      "tags": []
+    },
+    "neo4j-gql-backend": {
+      "tags": []
+    },
     "shared-config": {
       "tags": []
     },

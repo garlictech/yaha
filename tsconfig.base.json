@@ -30,6 +30,8 @@
     "allowJs": true,
     "baseUrl": ".",
     "paths": {
+      "@yaha/neo4j-gql/api": ["libs/neo4j-gql/api/src/index.ts"],
+      "@yaha/neo4j-gql/backend": ["libs/neo4j-gql/backend/src/index.ts"],
       "@yaha/shared/config": ["libs/shared/config/src/index.ts"],
       "@yaha/shared/utils": ["libs/shared/utils/src/index.ts"]
     }
