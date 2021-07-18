@@ -31,7 +31,6 @@ class SignUpPageBase extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     final authStateNotifier = watch(authStateProvider.notifier);
-
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: YahaBoxSizes.heightGeneral,
@@ -64,39 +63,6 @@ class SignUpPageBase extends ConsumerWidget {
       body: CustomScrollView(
         physics: BouncingScrollPhysics(),
         slivers: <Widget>[
-          SliverAppBar(
-            pinned: true,
-            snap: true,
-            floating: true,
-            expandedHeight: 195.0,
-            flexibleSpace: FlexibleSpaceBar(
-              centerTitle: true,
-              title: Column(
-                //     crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Text('New to YAHA?',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize: YahaFontSizes.medium,
-                          fontWeight: FontWeight.w500)),
-                  const Text(
-                    "Create an account!",
-                    style: TextStyle(
-                        fontSize: YahaFontSizes.medium,
-                        fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-              background: Image.asset(
-                'assets/images/top-picture.png',
-                fit: BoxFit.fill,
-                width: MediaQuery.of(context).size.width,
-              ),
-            ),
-          ),
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
