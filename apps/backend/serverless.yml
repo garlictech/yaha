@@ -1,10 +1,11 @@
 org: garlictech
-service: backend
+service: yaha
 configValidationMode: error
 frameworkVersion: ^2.16.1
 
 plugins:
   - serverless-bundle
+  - serverless-offline
 
 package:
   individually: true
@@ -14,7 +15,7 @@ custom:
   # commands. Or falls back to what we have set in the provider section.
   stage: ${opt:stage, self:provider.stage}
   # Name of the SST app that's deploying our infrastructure
-  sstApp: ${self:custom.stage}-backend
+  sstApp: ${self:custom.stage}-yaha
   bundle:
     packager: yarn
     linting: false
@@ -38,3 +39,12 @@ functions:
 
   graphql-neo4j:
     handler: lib/lambda/graphql-neo4j/index.handler
+    events:
+      - http:
+          path: graphql
+          method: post
+          cors: true
+      - http:
+          path: graphql
+          method: get
+          cors: true

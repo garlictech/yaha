@@ -1,8 +1,6 @@
 import { ApolloServer } from 'apollo-server-lambda';
 import neo4j from 'neo4j-driver';
-
-import * as neo4jGraphqlJs from 'neo4j-graphql-js';
-const { makeAugmentedSchema } = neo4jGraphqlJs;
+import { Neo4jGraphQL } from '@neo4j/graphql';
 
 const typeDefs = `
 type Kitteh {
@@ -11,19 +9,20 @@ type Kitteh {
 }
 `;
 
-const schema = makeAugmentedSchema({ typeDefs });
 const driver = neo4j.driver(
-  'bolt://18.208.119.122:32864',
-  neo4j.auth.basic('neo4j', 'floor-custody-directions'),
+  'bolt://18.207.184.118:7687',
+  neo4j.auth.basic('neo4j', 'noise-blankets-balloon'),
 );
 
+const neoSchema = new Neo4jGraphQL({ typeDefs, driver });
+
 const server = new ApolloServer({
-  schema,
+  schema: neoSchema.schema,
   introspection: true,
   playground: {
     endpoint: '/dev/graphql',
   },
-  context: { driver },
+  context: ({ req }) => ({ req }),
 });
 
 export const handler = server.createHandler();

@@ -8,6 +8,7 @@ frameworkVersion: ^2.16.1
 
 plugins:
   - serverless-bundle
+  - serverless-offline
 
 package:
   individually: true
@@ -41,3 +42,12 @@ functions:
   
   graphql-neo4j:
     handler: lib/lambda/graphql-neo4j/index.handler
+    events:
+      - http:
+          path: graphql
+          method: post
+          cors: true
+      - http:
+          path: graphql
+          method: get
+          cors: true
