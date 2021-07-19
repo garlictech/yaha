@@ -1,6 +1,85 @@
 # Yaha
 
+[![iOS DEV app](https://build.appcenter.ms/v0.1/apps/632fc135-5359-468f-98e0-d29445363745/branches/dev/badge)](https://appcenter.ms)
+
 This project was generated using [Nx](https://nx.dev).
+
+## General knowledge
+
+The system supports building and deploying separate stacks for development and
+testing purposes. You have to configure and build these stacks, according to the
+sections below. The configuration and build commands generally support `app` and
+`stage` flags. The `app` is an unique identification of your stack. The stage is
+important as the app uses some stage-dependent externally configured resources
+(like secrets). The stage specifies which resource set is used.
+There are three stages: `dev`, `qa`, `producton`.
+
+Currently, only the `dev` stage is available. You should almost always use the `dev` stage.
+
+The app name for production is currently `yaha`, the backend subproject is `backend`. Don't overwrite them
+please :)
+
+## Pre-requisites
+
+Install the following tools:
+
+- AWS CLI - [install](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) [configure](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html)
+- The following command line tools: `jq` - [install](https://stedolan.github.io/jq/)
+
+## Configuring/building the project
+
+Use the `config` build targets for projects requiring configuration.
+Use the `build` build targets for projects requiring build/code generation.
+
+**the whole project**
+
+At this point we use [hygen](https://www.hygen.io/) to generate those project files
+that contains app names or stage names in theit content and cannot be parametrized
+by any other ways.
+
+```
+ yarn hygen project configure --app=my-app-name
+```
+
+Mind, that the app names must be consistent througout the project, for example:
+
+```
+ yarn hygen project configure --app=yaha
+```
+
+TRICK: to force overwrite files:
+
+```
+HYGEN_OVERWRITE=1 yarn hygen project configure --app yaha-zsolt
+```
+
+**important**:
+The `tools/build-workspace.sh` script supports this part, so it generates the project
+for you. The safest option is using this script.
+
+**the configs (and secrets)**
+
+`nx config shared-config --app=APPNAME --stage=dev` :exclamation: use your own app name
+
+Always add the parameters, there are no defaults supported!
+
+Execute this command when:
+
+- you clone the github repo
+- any config parameters change in the AWS Parameter Store or AWS Secret Manager
+- you change the project stage (dev, production, qa)
+
+The command fetches the config parameters and writes them into files in
+`libs/shared/config`, `apps/mobile_app/lib/awsconfiguration.dart`, etc. You need AWS credentials set in your environment with the
+appropriate access!
+
+**IMPORTANT**
+
+Ensure that the generated files are NOT checked in to github. They are gitignored by default, don't remove those ignores.
+
+Always check the invoked scripts for their internals and parameters!
+
+## The nx stuff
 
 <p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
 

@@ -316,10 +316,10 @@ export const createCommonDevPipeline = (
       },
       post_build: {
         commands: [
-          //'tar -cvf ${CODEBUILD_RESOLVED_SOURCE_VERSION}.tgz apps/yaha/lib/awsconfiguration.dart',
-          //`aws s3 cp \${CODEBUILD_RESOLVED_SOURCE_VERSION}.tgz s3://${getAppcenterArtifactBucketName(
-          //stage,
-          // )}/`,
+          'tar -cvf ${CODEBUILD_RESOLVED_SOURCE_VERSION}.tgz apps/mobile_app/lib/awsconfiguration.dart',
+          `aws s3 cp \${CODEBUILD_RESOLVED_SOURCE_VERSION}.tgz s3://${getAppcenterArtifactBucketName(
+            stage,
+          )}/`,
           `echo 'Pushing Android APK to appcenter'`,
           `./tools/publish-to-appcenter.sh ${stage} android`,
           `echo 'Triggering ios app build in appcenter...'`,
