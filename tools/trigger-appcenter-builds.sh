@@ -8,7 +8,7 @@ PLATFORM=$2
 branch=$STAGE
 
 if [ $STAGE = 'dev'  ] && [ $PLATFORM = 'ios' ]; then
-  appId="yaha"
+  appId="yaha-ios-dev"
 else
   echo "Unsupported app: ${STAGE}/${PLATFORM}"
   exit 1
