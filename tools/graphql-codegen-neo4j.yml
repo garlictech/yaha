@@ -1,0 +1,7 @@
+overwrite: true
+schema: http://localhost:3000/dev/graphql
+#documents: libs/yaha-gql/backend/src/graphql/documents/*.graphql
+generates:
+  libs/neo4j-gql/api/src/lib/generated/yaha-api.ts:
+    plugins:
+      - schema-ast

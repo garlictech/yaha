@@ -1,59 +1,102 @@
-# Type Defs from central perk api
-type Step {
-  latitude: Float
-  longitude: Float
+## ------ Generic types -----------------------------------------------------
+enum PublicationState {
+  draft
+  published
+  archived
 }
 
-type Tag {
-  key: String
-  value: String
+# ------ TEXTUAL DESCRIPTION -----------------------------------------------------
+enum TextualDescriptionType {
+  markdown
+  html
 }
 
-type PointOfInterest {
-  name: String
-  location: Point
-  type: String
-  node_osm_id: ID!
+type TextualDescription {
+  languageKey: String!
+  title: String
+  summary: String
+  fullDescription: String
+  type: TextualDescriptionType!
+}
 
-  wikipedia: String
-    @cypher(
-      statement: """
-      MATCH (this)-->(t:OSMTags)
-      WHERE EXISTS(t.wikipedia) WITH t LIMIT 1
-      CALL apoc.load.json('https://en.wikipedia.org/w/api.php?action=parse&prop=text&formatversion=2&format=json&page=' + apoc.text.urlencode(t.wikipedia)) YIELD value
-      RETURN value.parse.text
-      """
-    )
+# ------ HIKE -----------------------------------------------------
+type BoundingBox {
+  NorthEast: Point!
+  SouthWest: Point!
+}
 
-  tags: [Tag]
-    @cypher(
-      statement: """
-      MATCH (this)-->(t:OSMTags)
-      UNWIND keys(t) AS key
-      RETURN {key: key, value: t[key]} AS tag
-      """
-    )
+type RouteData {
+  distance: Int!
+  uphill: Int!
+  downhill: Int!
+  track: [[Float!]!]!
+  bigBuffer: [[[Float!]!]!]!
+  smallBuffer: [[[Float!]!]!]!
+  averageTime: Int!
+  score: Int!
+  difficulty: Int!
+  bounds: BoundingBox!
+  isRoundTrip: Boolean!
+  poiSearchBox: BoundingBox!
+}
 
-  routeToPOI(poi: ID!): [Step]
-    @cypher(
-      statement: """
-      MATCH (other:PointOfInterest {node_osm_id: $poi})
-      CALL gds.alpha.shortestPath.stream({
-        nodeProjection: 'OSMNode',
-          relationshipProjection: {
-            ROUTE: {
-                type: 'ROUTE',
-                  properties: 'distance',
-                  orientation: 'UNDIRECTED'
-              }
-          },
-          startNode: this,
-          endNode: other,
-          relationshipWeightProperty: 'distance'
-      })
-      YIELD nodeId, cost
-      WITH gds.util.asNode(nodeId) AS node
-      RETURN {latitude: node.location.latitude, longitude: node.location.longitude} AS route
-      """
-    )
+type HikeStop {
+  poiId: ID!
+  description: [TextualDescription!]
+}
+
+enum PoiSource {
+  google
+  wikipedia
+  osmAmenity
+  osmNatural
+  osmRoute
+  osmPublicTransport
+  osmEmergency
+  osmHistoric
+  osmLeisure
+  osmManMade
+  osmMilitary
+  osmShop
+  osmTourism
+  mapillary
+  flickr
+}
+
+type PoiSourceObject {
+  objectType: PoiSource!
+  languageKey: String
+  objectId: String!
+  url: String
+}
+
+type Poi {
+  id: ID! @id
+  location: Point!
+  types: [String!]
+  description: [TextualDescription!]!
+  tags: [String!]
+  sourceObject: [PoiSourceObject!]!
+  address: String
+  phoneNumber: String
+  openingHours: String
+}
+
+union Checkpoint = Poi | Point
+
+type Hike {
+  id: ID! @id
+  description: [TextualDescription!]!
+  location: String!
+  publicationState: PublicationState!
+  featured: Boolean
+  rate: String
+  offlineMap: String
+  featuredStops: [HikeStop]
+  checkpoints: [Checkpoint]
+  tags: [String!]
+  route: RouteData!
+  segments: [Int!]!
+  startPoint: Point!
+  endPoint: Point!
 }

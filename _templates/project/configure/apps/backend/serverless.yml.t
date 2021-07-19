@@ -24,6 +24,9 @@ custom:
     linting: false
     sourcemaps: true
     caching: true
+    copyFiles:
+      - from: ../../libs/neo4j-gql/backend/graphql/schema/hiking-api.graphql
+        to: lib/lambda/graphql-neo4j/hiking-api.graphql
 
   offline:
     useChildProcesses: true
