@@ -2349,6 +2349,21 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@eslint/eslintrc@^0.4.3":
+  version "0.4.3"
+  resolved "https://registry.yarnpkg.com/@eslint/eslintrc/-/eslintrc-0.4.3.tgz#9e42981ef035beb3dd49add17acb96e8ff6f394c"
+  integrity sha512-J6KFFz5QCYUJq3pf0mjEcCJVERbzv71PUIDczuh9JkwGEzced6CO5ADLHB1rbf/+oPBtoPfMYNOpGDzCANlbXw==
+  dependencies:
+    ajv "^6.12.4"
+    debug "^4.1.1"
+    espree "^7.3.0"
+    globals "^13.9.0"
+    ignore "^4.0.6"
+    import-fresh "^3.2.1"
+    js-yaml "^3.13.1"
+    minimatch "^3.0.4"
+    strip-json-comments "^3.1.1"
+
 "@graphql-codegen/cli@1.21.7":
   version "1.21.7"
   resolved "https://registry.yarnpkg.com/@graphql-codegen/cli/-/cli-1.21.7.tgz#ac90afdf0d166bc725c60d2269482e65af1c7848"
@@ -3734,10 +3749,10 @@
     lodash "^4.17.4"
     read-pkg-up "^7.0.0"
 
-"@serverless-stack/cli@0.33.0":
-  version "0.33.0"
-  resolved "https://registry.yarnpkg.com/@serverless-stack/cli/-/cli-0.33.0.tgz#8cb68012d13c4eba8c5281da8e2217fcf64de04a"
-  integrity sha512-nw8Pti3tFgeDs1OmrvHV5821Xgb+FeKegA1HBB3e6C6so34WHmR7lQxHlWLQiDHe8vmixwofhwxBpm+lqfWN2Q==
+"@serverless-stack/cli@0.33.1":
+  version "0.33.1"
+  resolved "https://registry.yarnpkg.com/@serverless-stack/cli/-/cli-0.33.1.tgz#be410937c6db8d9c564042a05785d3c75eba5c6e"
+  integrity sha512-gr7FC/lgrIW0u3gGUiJke7ms3FFKZBSB85FiTGPHS3cYVU3u424foUvkrMCkhv3QEdiP22b4k2FvPxI9Iyxb8w==
   dependencies:
     "@aws-cdk/aws-apigatewayv2" "1.111.0"
     "@aws-cdk/aws-dynamodb" "1.111.0"
@@ -3749,8 +3764,8 @@
     "@babel/eslint-plugin" "^7.11.3"
     "@babel/plugin-proposal-class-properties" "^7.10.4"
     "@babel/preset-env" "^7.10.4"
-    "@serverless-stack/core" "^0.33.0"
-    "@serverless-stack/resources" "^0.33.0"
+    "@serverless-stack/core" "^0.33.1"
+    "@serverless-stack/resources" "^0.33.1"
     "@types/jest" "^26.0.7"
     "@types/node" "^14.0.27"
     "@typescript-eslint/eslint-plugin" "^4.15.1"
@@ -3781,10 +3796,10 @@
     ws "^7.4.0"
     yargs "^15.4.1"
 
-"@serverless-stack/core@^0.33.0":
-  version "0.33.0"
-  resolved "https://registry.yarnpkg.com/@serverless-stack/core/-/core-0.33.0.tgz#07f738ea94e38f90435d1f9f1ae96a9b2b69a4eb"
-  integrity sha512-P2UzG363qq9bWhHI0PXT+npDNZ7iMX4Y4Qcs1Js0I9ERkg+EDKHAV04voBsH3cTar9UXUnu2Hn+CSJZNerD6yA==
+"@serverless-stack/core@^0.33.1":
+  version "0.33.1"
+  resolved "https://registry.yarnpkg.com/@serverless-stack/core/-/core-0.33.1.tgz#33bf44dcf866ec9f748a255666afdb1892e5bb38"
+  integrity sha512-Tcda5XgAvT9g5F+V8h31Dpab9YykJv/zTWPI7UpWk5HNBSRrH3cGntBwmY2wF6PUUsNxgm0lP7rXguahaxnvNg==
   dependencies:
     aws-cdk "1.111.0"
     aws-sdk "^2.761.0"
@@ -3793,10 +3808,10 @@
     fs-extra "^9.0.1"
     log4js "^6.3.0"
 
-"@serverless-stack/resources@0.33.0", "@serverless-stack/resources@^0.33.0":
-  version "0.33.0"
-  resolved "https://registry.yarnpkg.com/@serverless-stack/resources/-/resources-0.33.0.tgz#2b0c6f7602c36be33f44625ae908acadb27dab5b"
-  integrity sha512-JdTsnV0+y0u7CF+JVd2YtkfNKLRn+z6lT53pmpr8FJcwF8EQDNbMCr957j0PRBhB3YWt/Acv2A6W4xyu5dyP5A==
+"@serverless-stack/resources@0.33.1", "@serverless-stack/resources@^0.33.1":
+  version "0.33.1"
+  resolved "https://registry.yarnpkg.com/@serverless-stack/resources/-/resources-0.33.1.tgz#e042f6c38322b9952c2fbe07fc9a93cd37a55f73"
+  integrity sha512-TBtq9fNkXlEw6gcVsN574kMLmqEOc2BnprSQKqxPus4/fVqV1QigaD54fo6WZ5KOjmpycURr7TjcAThiQMT2+A==
   dependencies:
     "@aws-cdk/aws-apigateway" "1.111.0"
     "@aws-cdk/aws-apigatewayv2" "1.111.0"
@@ -3829,7 +3844,7 @@
     "@aws-cdk/core" "1.111.0"
     "@aws-cdk/cx-api" "1.111.0"
     "@aws-cdk/lambda-layer-awscli" "1.111.0"
-    "@serverless-stack/core" "^0.33.0"
+    "@serverless-stack/core" "^0.33.1"
     "@types/jest" "^26.0.7"
     chalk "^4.1.0"
     cross-spawn "^7.0.3"
@@ -4167,10 +4182,10 @@
   resolved "https://registry.yarnpkg.com/@types/aws-lambda/-/aws-lambda-8.10.79.tgz#c87fcc10500d0524f583b7fd7828025d8aa834fd"
   integrity sha512-YgpllvHcDrPfzyf8/a2+ScRoEtJQjAP0pSgIneWcVpfqHGmiAaS2oMO3e4y3InJMgrMyuxGPde72CBZS/X8vJA==
 
-"@types/aws-serverless-express@3.3.4":
-  version "3.3.4"
-  resolved "https://registry.yarnpkg.com/@types/aws-serverless-express/-/aws-serverless-express-3.3.4.tgz#ff333e2bb1a803d7840771c5c723d5e83a758be3"
-  integrity sha512-sYco0AOYQPihY+KsaIZ8CgG9jtqsWYm82RjYEe+J8L/kaZ0ge/C6mXOAm8jzVYRFhsLex8hADzJiapzd9tu2MA==
+"@types/aws-serverless-express@3.3.5":
+  version "3.3.5"
+  resolved "https://registry.yarnpkg.com/@types/aws-serverless-express/-/aws-serverless-express-3.3.5.tgz#3eb6cc3491f5a8d6f47a9a68dd82415d1d9e2961"
+  integrity sha512-f0zxBP2dGs07kOWKMQC1dWgQ/+wk7nfQ4zaHG65xTPxhAhlRwiJhfTHsUDEFE7v9iYU5s0ewznhyspE92YW9EA==
   dependencies:
     "@types/aws-lambda" "*"
     "@types/express" "*"
@@ -5524,10 +5539,10 @@ aws-sdk@*, aws-sdk@^2.761.0, aws-sdk@^2.848.0:
     uuid "3.3.2"
     xml2js "0.4.19"
 
-aws-sdk@2.947.0:
-  version "2.947.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.947.0.tgz#2cc329654ad09ee7199ef25bc88f2b0e5a2fc155"
-  integrity sha512-m58mW/0Yg2RnRCJSzWZS8JUMhoBQ4trjKf+uJ3bD24jeV+Nf6iIHQ1s4ogP2O2XXUreSRsJNe8l0cOPSOM37Lg==
+aws-sdk@2.948.0:
+  version "2.948.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.948.0.tgz#0c974c351af97dbc66dbd96bd6c20928baf10415"
+  integrity sha512-UJaCwccNaNNFtbhlvg+BmcaVWNI7RPonZA16nca0s3O+UnHm5y5H/nN6XpuJp+NUrxrLgTFaztPvjmBp5q6p+g==
   dependencies:
     buffer "4.9.2"
     events "1.1.1"
@@ -8797,13 +8812,14 @@ eslint-visitor-keys@^2.0.0, eslint-visitor-keys@^2.1.0:
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-2.1.0.tgz#f65328259305927392c938ed44eb0a5c9b2bd303"
   integrity sha512-0rSmRBzXgDzIsD6mGdJgevzgezI534Cer5L/vyMX0kHzT/jiB43jRhd9YUlMGYLQy2zprNmoT8qasCGtY+QaKw==
 
-eslint@7.29.0:
-  version "7.29.0"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-7.29.0.tgz#ee2a7648f2e729485e4d0bd6383ec1deabc8b3c0"
-  integrity sha512-82G/JToB9qIy/ArBzIWG9xvvwL3R86AlCjtGw+A29OMZDqhTybz/MByORSukGxeI+YPCR4coYyITKk8BFH9nDA==
+eslint@7.31.0:
+  version "7.31.0"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-7.31.0.tgz#f972b539424bf2604907a970860732c5d99d3aca"
+  integrity sha512-vafgJpSh2ia8tnTkNUkwxGmnumgckLh5aAbLa1xRmIn9+owi8qBNGKL+B881kNKNTy7FFqTEkpNkUvmw0n6PkA==
   dependencies:
     "@babel/code-frame" "7.12.11"
-    "@eslint/eslintrc" "^0.4.2"
+    "@eslint/eslintrc" "^0.4.3"
+    "@humanwhocodes/config-array" "^0.5.0"
     ajv "^6.10.0"
     chalk "^4.0.0"
     cross-spawn "^7.0.2"
@@ -16236,10 +16252,10 @@ serve-static@1.14.1:
     parseurl "~1.3.3"
     send "0.17.1"
 
-serverless-bundle@4.3.1:
-  version "4.3.1"
-  resolved "https://registry.yarnpkg.com/serverless-bundle/-/serverless-bundle-4.3.1.tgz#6a3539f33ca07974123c475a7636b53294459dbe"
-  integrity sha512-k3FaHN28e4kfQFjSHSDpkZUFJG10m+oIV4GCFd/REs+4Ostl2ciyJ2zlHbeF3mXOX9xgLQVDZF2taxqQQcxDLw==
+serverless-bundle@4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/serverless-bundle/-/serverless-bundle-4.4.0.tgz#113714b809fedbacdae975416e1b8db72a1e3286"
+  integrity sha512-upzxESCrLOfTaWW/zlqOeIKx7yiY+4o6eTnV6Ts0xA2GsSXreu+5rDy6YyQFdMQDDONZvCU75Do/GxIk6w8s6Q==
   dependencies:
     "@babel/core" "^7.5.4"
     "@babel/plugin-proposal-class-properties" "^7.5.5"
