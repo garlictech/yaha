@@ -21,9 +21,9 @@ ARTIFACT_NAME=$(git rev-parse HEAD).tgz
 echo "***** The build: ${APPCENTER_BRANCH}/${ARTIFACT_NAME}"
 
 cd ../..
-aws s3 cp s3://anyupp-build-artifacts-${APPCENTER_BRANCH}/${ARTIFACT_NAME} .
+aws s3 cp s3://yaha-build-artifacts-${APPCENTER_BRANCH}/${ARTIFACT_NAME} .
 tar -zxf ${ARTIFACT_NAME}
 
-cd apps/anyupp-mobile
+cd apps/mobile_app
 flutter build ios --release --no-codesign
 
