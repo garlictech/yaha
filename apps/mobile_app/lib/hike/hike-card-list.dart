@@ -12,43 +12,18 @@ class HikeCardList extends StatelessWidget {
       "",
       "",
       "",
-      "",
-      "",
     ];
 
-    final List<Widget> images = [
-      HikeCard(),
-      ClipRRect(
-        borderRadius: BorderRadius.circular(20.0),
-        child: Container(
-          color: Colors.yellow,
-        ),
-      ),
-      ClipRRect(
-        borderRadius: BorderRadius.circular(20.0),
-        child: Container(
-          color: Colors.black,
-        ),
-      ),
-      ClipRRect(
-        borderRadius: BorderRadius.circular(20.0),
-        child: Container(
-          color: Colors.cyan,
-        ),
-      ),
-      ClipRRect(
-        borderRadius: BorderRadius.circular(20.0),
-        child: Container(
-          color: Colors.blue,
-        ),
-      ),
-      ClipRRect(
-        borderRadius: BorderRadius.circular(20.0),
-        child: Container(
-          color: Colors.grey,
-        ),
-      ),
+    final data = [
+      [Colors.red, 'Hike 1'],
+      [Colors.cyan, 'Hike 2'],
+      [Colors.blue, 'Hike 3'],
+      [Colors.yellow, 'Hike 4']
     ];
+
+    final images = data
+        .map((e) => HikeCard(color: e[0] as Color, title: e[1] as String))
+        .toList();
 
     return Scaffold(
       body: SafeArea(
