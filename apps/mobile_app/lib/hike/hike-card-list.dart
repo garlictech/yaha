@@ -1,27 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:vertical_card_pager/vertical_card_pager.dart';
+import 'package:yaha/hike/hike-card.dart';
 
-class HikeCard extends StatelessWidget {
-  const HikeCard({Key? key}) : super(key: key);
-  
+class HikeCardList extends StatelessWidget {
+  const HikeCardList({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final List<String> titles = [
-      "RED",
-      "YELLOW",
-      "BLACK",
-      "CYAN",
-      "BLUE",
-      "GREY",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
     ];
 
     final List<Widget> images = [
-      ClipRRect(
-        borderRadius: BorderRadius.circular(20.0),
-        child: Container(
-          color: Colors.red,
-        ),
-      ),
+      HikeCard(),
       ClipRRect(
         borderRadius: BorderRadius.circular(20.0),
         child: Container(
@@ -62,7 +58,7 @@ class HikeCard extends StatelessWidget {
               child: VerticalCardPager(
                 titles: titles,
                 images: images,
-                align : ALIGN.CENTER
+                align: ALIGN.CENTER,
               ),
             ),
           ],

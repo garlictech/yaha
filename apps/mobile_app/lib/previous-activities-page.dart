@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaha/hike-card.dart';
+import 'package:yaha/hike/hike-card-list.dart';
 import 'package:yaha/yaha-colors.dart';
 import 'package:yaha/yaha-font-sizes.dart';
 import 'package:yaha/yaha-space-sizes.dart';
@@ -55,7 +55,7 @@ class _PreviousActivitiesState extends State<PreviousActivitiesPage> {
                       ),
                       Container(
                         height: MediaQuery.of(context).size.height,
-                        child: HikeCard(),
+                        child: HikeCardList(),
                       ),
                     ],
                   ),
