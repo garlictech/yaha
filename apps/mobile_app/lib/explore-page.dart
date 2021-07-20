@@ -26,7 +26,7 @@ class _ExplorePageState extends State<ExplorePage> {
               (BuildContext context, int index) {
                 return SafeArea(
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    
                     children: [
                       Text('Explore',
                           style: TextStyle(
