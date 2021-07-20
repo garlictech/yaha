@@ -4,7 +4,6 @@ import { SecretsManagerStack } from './build-pipeline/secretsmanager-stack';
 import { DevPullRequestBuildStack } from './build-pipeline/dev-pull-request-stack';
 import { PipelineStackProps } from './build-pipeline/utils';
 import { CiStack } from './build-pipeline/ci-stack';
-import { QABuildPipelineStack } from './build-pipeline/qa-pipeline-stack';
 import { AppcenterStack } from './build-pipeline/appcenter-stack';
 
 export default function main(app: App): void {
@@ -29,7 +28,7 @@ export default function main(app: App): void {
     },
   );
 
-  const qaSecretsManagerStack = new SecretsManagerStack(
+  /*const qaSecretsManagerStack = new SecretsManagerStack(
     app,
     'qasecretsmanager',
     {
@@ -38,7 +37,7 @@ export default function main(app: App): void {
         'arn:aws:secretsmanager:us-east-1:697486207432:secret:/yaha/qa/secrets-2JtTdF',
     },
   );
-
+*/
   const appcenterStack = new AppcenterStack(app, 'AppcenterStack');
   const ciStack = new CiStack(app, 'CiStack', {
     secretsManager: devSecretsManagerStack,
@@ -77,13 +76,13 @@ export default function main(app: App): void {
 
   prBuild.addDependency(ciStack);
 
-  new QABuildPipelineStack(app, 'QABuildStack', {
+  /*new QABuildPipelineStack(app, 'QABuildStack', {
     repoBranch: 'qa',
     secretsManager: qaSecretsManagerStack,
     ...commonConfig,
   });
 
-  /*new StagingBuildPipelineStack(app, 'StagingBuildStack', {
+  new StagingBuildPipelineStack(app, 'StagingBuildStack', {
     repoBranch: 'staging',
     secretsManager: qaSecretsManagerStack,
     ...commonConfig,

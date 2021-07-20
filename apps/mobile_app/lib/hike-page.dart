@@ -1,11 +1,11 @@
 //import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:mobile_app/gallery.dart';
-import 'package:mobile_app/yaha-border-radius.dart';
-import 'package:mobile_app/yaha-colors.dart';
-import 'package:mobile_app/yaha-font-sizes.dart';
-import 'package:mobile_app/yaha-space-sizes.dart';
+import 'package:yaha/gallery.dart';
+import 'package:yaha/yaha-border-radius.dart';
+import 'package:yaha/yaha-colors.dart';
+import 'package:yaha/yaha-font-sizes.dart';
+import 'package:yaha/yaha-space-sizes.dart';
 
 class HikePage extends StatefulWidget {
   @override
@@ -80,7 +80,7 @@ class _HikePageState extends State<HikePage> {
                         child: Text(
                             'It is the capital of Hungary on the banks of the Danube, the home of the 19th century Chain Bridge, the Old Town of Buda and Castle Hill.',
                             style: TextStyle(
-                                fontSize: YahaFontSizes.medium,
+                                fontSize: YahaFontSizes.small,
                                 fontWeight: FontWeight.w400,
                                 color: YahaColors.textColor)),
                       ),
@@ -94,8 +94,8 @@ class _HikePageState extends State<HikePage> {
                         child: GridView.count(
                           primary: false,
                           padding: const EdgeInsets.all(YahaSpaceSizes.general),
-                          crossAxisSpacing: 15,
-                          mainAxisSpacing: 10,
+                          crossAxisSpacing: 5,
+                          mainAxisSpacing: 5,
                           crossAxisCount: 3,
                           children: <Widget>[
                             Container(
@@ -104,7 +104,7 @@ class _HikePageState extends State<HikePage> {
                               child: Column(
                                 children: [
                                   Icon(Icons.hiking_rounded,
-                                      size: YahaFontSizes.xxLarge,
+                                      size: YahaFontSizes.xLarge,
                                       color: YahaColors.secondaryAccentColor),
                                   Text("24.3km",
                                       style: TextStyle(
@@ -133,7 +133,7 @@ class _HikePageState extends State<HikePage> {
                               child: Column(
                                 children: [
                                   Icon(Icons.trending_up_rounded,
-                                      size: YahaFontSizes.xxLarge,
+                                      size: YahaFontSizes.xLarge,
                                       color: YahaColors.secondaryAccentColor),
                                   Text("576m",
                                       style: TextStyle(
@@ -162,7 +162,7 @@ class _HikePageState extends State<HikePage> {
                               child: Column(
                                 children: [
                                   Icon(Icons.trending_down_rounded,
-                                      size: YahaFontSizes.xxLarge,
+                                      size: YahaFontSizes.xLarge,
                                       color: YahaColors.secondaryAccentColor),
                                   Text("1.2km",
                                       style: TextStyle(
@@ -191,7 +191,7 @@ class _HikePageState extends State<HikePage> {
                               child: Column(
                                 children: [
                                   Icon(Icons.watch_later_rounded,
-                                      size: YahaFontSizes.xxLarge,
+                                      size: YahaFontSizes.xLarge,
                                       color: YahaColors.secondaryAccentColor),
                                   Text("6h",
                                       style: TextStyle(
@@ -220,7 +220,7 @@ class _HikePageState extends State<HikePage> {
                               child: Column(
                                 children: [
                                   Icon(Icons.emoji_events_rounded,
-                                      size: YahaFontSizes.xxLarge,
+                                      size: YahaFontSizes.xLarge,
                                       color: YahaColors.secondaryAccentColor),
                                   Text("240",
                                       style: TextStyle(
@@ -249,7 +249,7 @@ class _HikePageState extends State<HikePage> {
                               child: Column(
                                 children: [
                                   Icon(Icons.stars_rounded,
-                                      size: YahaFontSizes.xxLarge,
+                                      size: YahaFontSizes.xLarge,
                                       color: YahaColors.secondary),
                                   Text("Medium",
                                       style: TextStyle(
@@ -540,8 +540,8 @@ class _HikePageState extends State<HikePage> {
                               top: YahaSpaceSizes.general,
                               left: YahaSpaceSizes.general,
                               right: YahaSpaceSizes.general),
-                          crossAxisSpacing: 10,
-                          mainAxisSpacing: 10,
+                          crossAxisSpacing: 5,
+                          mainAxisSpacing: 5,
                           crossAxisCount: 3,
                           children: <Widget>[
                             Container(
@@ -559,7 +559,7 @@ class _HikePageState extends State<HikePage> {
                                     ),
                                   ),
                                   const Icon(Icons.wb_sunny,
-                                      size: YahaFontSizes.xxLarge,
+                                      size: YahaFontSizes.xLarge,
                                       color: Colors.yellow),
                                   Container(
                                     padding: const EdgeInsets.all(
@@ -599,7 +599,7 @@ class _HikePageState extends State<HikePage> {
                                     ),
                                   ),
                                   Icon(Icons.cloud,
-                                      size: YahaFontSizes.xxLarge,
+                                      size: YahaFontSizes.xLarge,
                                       color: YahaColors.accentColor),
                                   Container(
                                     padding: const EdgeInsets.all(
@@ -628,7 +628,7 @@ class _HikePageState extends State<HikePage> {
                               padding: const EdgeInsets.all(3),
                               child: Container(
                                 padding: const EdgeInsets.only(
-                                    top: YahaSpaceSizes.large,
+                                    top: YahaSpaceSizes.general,
                                     left: YahaSpaceSizes.small,
                                     right: YahaSpaceSizes.small,
                                     bottom: YahaSpaceSizes.general),
@@ -713,7 +713,7 @@ SpeedDial buildSpeedDial() {
   return SpeedDial(
     /// both default to 16
     marginEnd: 18,
-    marginBottom: 820,
+    marginBottom: 720,
     // animatedIcon: AnimatedIcons.menu_close,
     // animatedIconTheme: IconThemeData(size: 22.0),
     /// This is ignored if animatedIcon is non null

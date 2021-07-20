@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_app/yaha-border-radius.dart';
-import 'package:mobile_app/yaha-border-width.dart';
-import 'package:mobile_app/yaha-colors.dart';
-import 'package:mobile_app/yaha-font-sizes.dart';
-import 'package:mobile_app/yaha-space-sizes.dart';
+import 'package:yaha/yaha-border-radius.dart';
+import 'package:yaha/yaha-border-width.dart';
+import 'package:yaha/yaha-box-sizes.dart';
+import 'package:yaha/yaha-colors.dart';
+import 'package:yaha/yaha-font-sizes.dart';
+import 'package:yaha/yaha-space-sizes.dart';
 
 class SignUpWithEmailPage extends StatefulWidget {
   @override
@@ -17,28 +18,37 @@ class _SignUpWithEmailPageState extends State<SignUpWithEmailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: YahaBoxSizes.heightGeneral,
+        title: Column(
+          children: [
+            Text(
+              "New to Yaha?",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: YahaFontSizes.xLarge, fontWeight: FontWeight.w700),
+            ),
+            Container(
+              padding: const EdgeInsets.only(top: 3.0),
+              child: Text(
+                "Create an account.",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: YahaFontSizes.xLarge,
+                    fontWeight: FontWeight.w700),
+              ),
+            ),
+          ],
+        ),
+        flexibleSpace: Image.asset(
+          'assets/images/top-picture.png',
+          fit: BoxFit.cover,
+          //width: MediaQuery.of(context).size.width,
+        ),
+      ),
       body: CustomScrollView(
         physics: BouncingScrollPhysics(),
         slivers: <Widget>[
-          SliverAppBar(
-            pinned: true,
-            snap: true,
-            floating: true,
-            expandedHeight: 195.0,
-            flexibleSpace: FlexibleSpaceBar(
-              centerTitle: true,
-              title: Text("New to Yaha?\nCreate an account!",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: YahaFontSizes.medium,
-                      fontWeight: FontWeight.bold)),
-              background: Image.asset(
-                'assets/images/top-picture.png',
-                fit: BoxFit.cover,
-                //width: MediaQuery.of(context).size.width,
-              ),
-            ),
-          ),
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
@@ -158,7 +168,7 @@ class _SignUpWithEmailPageState extends State<SignUpWithEmailPage> {
                           Container(
                             padding: const EdgeInsets.only(
                                 top: YahaSpaceSizes.xSmall,
-                                bottom: YahaSpaceSizes.xSmall),
+                                bottom: YahaSpaceSizes.medium),
                             child: SizedBox(
                               height: 40.0,
                               child: TextFormField(
@@ -201,21 +211,21 @@ class _SignUpWithEmailPageState extends State<SignUpWithEmailPage> {
                               ),
                             ),
                           ),
-                          SizedBox(
-                            width: 300.0,
-                            child: Container(
-                              padding: const EdgeInsets.only(
-                                  bottom: YahaSpaceSizes.medium),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text('At least 8 characters long'),
-                                  Text('Contains numbers'),
-                                  Text('Contains special characters')
-                                ],
-                              ),
-                            ),
-                          ),
+                          // SizedBox(
+                          //   width: 300.0,
+                          //   child: Container(
+                          //     padding: const EdgeInsets.only(
+                          //         bottom: YahaSpaceSizes.medium),
+                          //     child: Column(
+                          //       crossAxisAlignment: CrossAxisAlignment.start,
+                          //       children: [
+                          //         Text('At least 8 characters long'),
+                          //         Text('Contains numbers'),
+                          //         Text('Contains special characters')
+                          //       ],
+                          //     ),
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),
@@ -306,6 +316,7 @@ class _SignUpWithEmailPageState extends State<SignUpWithEmailPage> {
                     Container(
                       //child: Align(
                       //alignment: FractionalOffset.bottomCenter,
+                      padding: EdgeInsets.all(YahaSpaceSizes.general),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
