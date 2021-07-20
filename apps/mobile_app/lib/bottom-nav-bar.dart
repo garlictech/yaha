@@ -6,6 +6,7 @@ import 'package:yaha/yaha-colors.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 import 'auth/sign-up-page.dart';
+import 'explore-page.dart';
 
 // PersistentTabController _controller;
 
@@ -53,7 +54,7 @@ class BottomNavBar extends StatelessWidget {
 }
 
 List<Widget> _buildScreens() {
-  return [HikePage(), SignUpPage(), LogInPage(), ProfilePage()];
+  return [HikePage(), ExplorePage(), LogInPage(), ProfilePage()];
 }
 
 List<PersistentBottomNavBarItem> _navBarsItems() {
