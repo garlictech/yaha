@@ -1,7 +1,19 @@
 overwrite: true
-schema: http://localhost:3000/dev/graphql
-#documents: libs/yaha-gql/backend/src/graphql/documents/*.graphql
+schema: libs/neo4j-gql/backend/graphql/schema/*.graphql
+#documents: libs/anyupp-gql/backend/src/graphql/documents/*.graphql
 generates:
   libs/neo4j-gql/api/src/lib/generated/yaha-api.ts:
+    hooks:
+      afterOneFileWrite:
+        - prettier --write
     plugins:
-      - schema-ast
+      - typescript
+      - typescript-operations
+      - typescript-generic-sdk
+    config:
+      declarationKind: 'interface'
+      defaultScalarType: unknown
+      skipTypename: true
+      namingConvention:
+        enumValues: change-case#lowerCase
+      usingObservableFrom: "import { Observable } from 'rxjs';"

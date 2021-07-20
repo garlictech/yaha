@@ -96,7 +96,6 @@ type Hike {
   checkpoints: [Checkpoint]
   tags: [String!]
   route: RouteData!
-  segments: [Int!]!
   startPoint: Point!
   endPoint: Point!
 }

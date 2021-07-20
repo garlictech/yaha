@@ -9,7 +9,6 @@ const driver = neo4j.driver(
 );
 
 const schemaFilename = `${__dirname}/hiking-api.graphql`;
-console.error(schemaFilename);
 
 export const typeDefs = fs.readFileSync(schemaFilename).toString('utf-8');
 
