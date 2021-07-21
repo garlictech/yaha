@@ -54,7 +54,8 @@ class _PreviousActivitiesState extends State<PreviousActivitiesPage> {
                         ),
                       ),
                       Container(
-                        height: MediaQuery.of(context).size.height,
+                        //height: MediaQuery.of(context).size.height,
+                        height: 800,
                         child: HikeCardList(),
                       ),
                     ],
