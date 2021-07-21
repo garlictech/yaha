@@ -9,15 +9,19 @@ import 'package:toggle_switch/toggle_switch.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter/widgets.dart';
 
+import 'app-settings-state.dart';
+
 // ignore: must_be_immutable
 class ApplicationPage extends ConsumerWidget {
-  String? distance;
-  String? temperature;
-  String? timeFormat;
-  String dropdownValue = 'English';
-
   @override
-  Widget build(BuildContext context, ScopedReader ref) {
+  Widget build(BuildContext context, ScopedReader watch) {
+    var appSettingsState = watch(applicationSettingsStateProvider);
+    var appSettingsStateNotifier =
+        watch(applicationSettingsStateProvider.notifier);
+    var currentLanguage = appSettingsState.isEnglish ? "English" : "Hungarian";
+    var languages = [
+      "English",
+    ];
     return Scaffold(
       appBar: AppBar(
           backgroundColor: YahaColors.background,
@@ -81,7 +85,7 @@ class ApplicationPage extends ConsumerWidget {
                               alignedDropdown: true,
                               child: DropdownButton<String>(
                                 isExpanded: true,
-                                value: dropdownValue,
+                                value: currentLanguage,
                                 icon: const Icon(Icons.expand_more,
                                     size: YahaFontSizes.xxLarge),
                                 style: const TextStyle(
@@ -98,6 +102,11 @@ class ApplicationPage extends ConsumerWidget {
                                   );
                                 }).toList(),
                                 onChanged: (String? newValue) {
+                                  var newState = newValue == 'English'
+                                      ? appSettingsState.isEnglish = true
+                                      : appSettingsState.isEnglish = false;
+                                  // appSettingsStateNotifier
+                                  //     .updateApplicationSettings();
                                   // setState(() {
                                   //   dropdownValue = newValue!;
                                   // });
@@ -157,6 +166,9 @@ class ApplicationPage extends ConsumerWidget {
                                         labels: ['km', 'mile'],
                                         onToggle: (index) {
                                           print('switched to: $index');
+                                          var newState = index == 0
+                                              ? appSettingsState.isKm = true
+                                              : appSettingsState.isKm = false;
                                         },
                                       ),
                                     ),
@@ -194,6 +206,9 @@ class ApplicationPage extends ConsumerWidget {
                                         labels: ['Celsius', 'Fahrenheit'],
                                         onToggle: (index) {
                                           print('switched to: $index');
+                                               var newState = index == 0
+                                              ? appSettingsState.isCelsius = true
+                                              : appSettingsState.isKm = false;
                                         },
                                       ),
                                     ),
@@ -232,6 +247,9 @@ class ApplicationPage extends ConsumerWidget {
                                         labels: ['12h', '24h'],
                                         onToggle: (index) {
                                           print('switched to: $index');
+                                               var newState = index == 0
+                                              ? appSettingsState.isTimeFormat12 = true
+                                              : appSettingsState.isKm = false;
                                         },
                                       ),
                                     ),
