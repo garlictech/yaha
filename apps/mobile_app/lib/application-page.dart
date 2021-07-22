@@ -13,15 +13,11 @@ import 'app-settings-state.dart';
 
 // ignore: must_be_immutable
 class ApplicationPage extends ConsumerWidget {
-  int initialIndex = 0;
-
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     var appSettingsState = watch(applicationSettingsStateProvider);
     var appSettingsStateNotifier =
         watch(applicationSettingsStateProvider.notifier);
-    var currentLanguage =
-        ApplicationSettingsStateNotifier.isEnglish ? 'English' : 'Hungarian';
 
     return Scaffold(
       appBar: AppBar(
@@ -86,8 +82,7 @@ class ApplicationPage extends ConsumerWidget {
                               alignedDropdown: true,
                               child: DropdownButton<String>(
                                 isExpanded: true,
-                                value: ApplicationSettingsStateNotifier
-                                    .currentLanguageTitle,
+                                value: appSettingsState.currentLanguageTitle,
                                 icon: const Icon(Icons.expand_more,
                                     size: YahaFontSizes.xxLarge),
                                 style: const TextStyle(
@@ -104,11 +99,8 @@ class ApplicationPage extends ConsumerWidget {
                                   );
                                 }).toList(),
                                 onChanged: (String? newValue) {
-                                  var newLangState = newValue == 'English'
-                                      ? ApplicationSettingsStateNotifier
-                                          .isEnglish = true
-                                      : ApplicationSettingsStateNotifier
-                                          .isEnglish = false;
+                                  var newLangState =
+                                      newValue == 'English' ? true : false;
                                   appSettingsStateNotifier.updateLanguage(
                                       newLangState, newValue!);
                                 },
@@ -153,7 +145,6 @@ class ApplicationPage extends ConsumerWidget {
                                           )),
                                     ),
                                     Container(
-                                      // width: MediaQuery.of(context).size.width,
                                       padding: const EdgeInsets.only(
                                         left: YahaSpaceSizes.medium,
                                         right: YahaSpaceSizes.medium,
@@ -162,18 +153,13 @@ class ApplicationPage extends ConsumerWidget {
                                         minWidth: YahaBoxSizes.toggleWidth,
                                         activeBgColor: [YahaColors.primary],
                                         inactiveBgColor: YahaColors.accentColor,
-                                        initialLabelIndex:
-                                            ApplicationSettingsStateNotifier
-                                                .distanceInitialIndex,
+                                        initialLabelIndex: appSettingsState
+                                            .distanceInitialIndex,
                                         totalSwitches: 2,
                                         labels: ['km', 'mile'],
                                         onToggle: (index) {
-                                          var newDistanceFormatState = index ==
-                                                  0
-                                              ? ApplicationSettingsStateNotifier
-                                                  .isKm = true
-                                              : ApplicationSettingsStateNotifier
-                                                  .isKm = false;
+                                          var newDistanceFormatState =
+                                              index == 0 ? true : false;
 
                                           appSettingsStateNotifier
                                               .updateDistanceFormat(
@@ -211,18 +197,13 @@ class ApplicationPage extends ConsumerWidget {
                                         minWidth: YahaBoxSizes.toggleWidth,
                                         activeBgColor: [YahaColors.primary],
                                         inactiveBgColor: YahaColors.accentColor,
-                                        initialLabelIndex:
-                                            ApplicationSettingsStateNotifier
-                                                .temperatureInitialIndex,
+                                        initialLabelIndex: appSettingsState
+                                            .temperatureInitialIndex,
                                         totalSwitches: 2,
                                         labels: ['Celsius', 'Fahrenheit'],
                                         onToggle: (index) {
-                                          var newTemperatureFormatState = index ==
-                                                  0
-                                              ? ApplicationSettingsStateNotifier
-                                                  .isCelsius = true
-                                              : ApplicationSettingsStateNotifier
-                                                  .isCelsius = false;
+                                          var newTemperatureFormatState =
+                                              index == 0 ? true : false;
                                           appSettingsStateNotifier
                                               .updateTemperatureFormat(
                                                   newTemperatureFormatState,
@@ -260,17 +241,13 @@ class ApplicationPage extends ConsumerWidget {
                                         minWidth: YahaBoxSizes.toggleWidth,
                                         activeBgColor: [YahaColors.primary],
                                         inactiveBgColor: YahaColors.accentColor,
-                                        initialLabelIndex:
-                                            ApplicationSettingsStateNotifier
-                                                .timeFormatInitialIndex,
+                                        initialLabelIndex: appSettingsState
+                                            .timeFormatInitialIndex,
                                         totalSwitches: 2,
                                         labels: ['12h', '24h'],
                                         onToggle: (index) {
-                                          var newTimeFormatState = index == 0
-                                              ? ApplicationSettingsStateNotifier
-                                                  .isTimeFormat24 = true
-                                              : ApplicationSettingsStateNotifier
-                                                  .isTimeFormat24 = false;
+                                          var newTimeFormatState =
+                                              index == 0 ? true : false;
                                           appSettingsStateNotifier
                                               .updateTimeFormat(
                                                   newTimeFormatState, index);
