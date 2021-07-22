@@ -13,15 +13,16 @@ import 'app-settings-state.dart';
 
 // ignore: must_be_immutable
 class ApplicationPage extends ConsumerWidget {
+  int initialIndex = 0;
+
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     var appSettingsState = watch(applicationSettingsStateProvider);
     var appSettingsStateNotifier =
         watch(applicationSettingsStateProvider.notifier);
-    var currentLanguage = appSettingsState.isEnglish ? "English" : "Hungarian";
-    var languages = [
-      "English",
-    ];
+    var currentLanguage =
+        ApplicationSettingsStateNotifier.isEnglish ? 'English' : 'Hungarian';
+
     return Scaffold(
       appBar: AppBar(
           backgroundColor: YahaColors.background,
@@ -85,7 +86,8 @@ class ApplicationPage extends ConsumerWidget {
                               alignedDropdown: true,
                               child: DropdownButton<String>(
                                 isExpanded: true,
-                                value: currentLanguage,
+                                value: ApplicationSettingsStateNotifier
+                                    .currentLanguageTitle,
                                 icon: const Icon(Icons.expand_more,
                                     size: YahaFontSizes.xxLarge),
                                 style: const TextStyle(
@@ -102,14 +104,13 @@ class ApplicationPage extends ConsumerWidget {
                                   );
                                 }).toList(),
                                 onChanged: (String? newValue) {
-                                  var newState = newValue == 'English'
-                                      ? appSettingsState.isEnglish = true
-                                      : appSettingsState.isEnglish = false;
-                                  // appSettingsStateNotifier
-                                  //     .updateApplicationSettings();
-                                  // setState(() {
-                                  //   dropdownValue = newValue!;
-                                  // });
+                                  var newLangState = newValue == 'English'
+                                      ? ApplicationSettingsStateNotifier
+                                          .isEnglish = true
+                                      : ApplicationSettingsStateNotifier
+                                          .isEnglish = false;
+                                  appSettingsStateNotifier.updateLanguage(
+                                      newLangState, newValue!);
                                 },
                               ),
                             ),
@@ -161,14 +162,23 @@ class ApplicationPage extends ConsumerWidget {
                                         minWidth: YahaBoxSizes.toggleWidth,
                                         activeBgColor: [YahaColors.primary],
                                         inactiveBgColor: YahaColors.accentColor,
-                                        initialLabelIndex: 0,
+                                        initialLabelIndex:
+                                            ApplicationSettingsStateNotifier
+                                                .distanceInitialIndex,
                                         totalSwitches: 2,
                                         labels: ['km', 'mile'],
                                         onToggle: (index) {
-                                          print('switched to: $index');
-                                          var newState = index == 0
-                                              ? appSettingsState.isKm = true
-                                              : appSettingsState.isKm = false;
+                                          var newDistanceFormatState = index ==
+                                                  0
+                                              ? ApplicationSettingsStateNotifier
+                                                  .isKm = true
+                                              : ApplicationSettingsStateNotifier
+                                                  .isKm = false;
+
+                                          appSettingsStateNotifier
+                                              .updateDistanceFormat(
+                                                  newDistanceFormatState,
+                                                  index);
                                         },
                                       ),
                                     ),
@@ -201,14 +211,22 @@ class ApplicationPage extends ConsumerWidget {
                                         minWidth: YahaBoxSizes.toggleWidth,
                                         activeBgColor: [YahaColors.primary],
                                         inactiveBgColor: YahaColors.accentColor,
-                                        initialLabelIndex: 0,
+                                        initialLabelIndex:
+                                            ApplicationSettingsStateNotifier
+                                                .temperatureInitialIndex,
                                         totalSwitches: 2,
                                         labels: ['Celsius', 'Fahrenheit'],
                                         onToggle: (index) {
-                                          print('switched to: $index');
-                                               var newState = index == 0
-                                              ? appSettingsState.isCelsius = true
-                                              : appSettingsState.isKm = false;
+                                          var newTemperatureFormatState = index ==
+                                                  0
+                                              ? ApplicationSettingsStateNotifier
+                                                  .isCelsius = true
+                                              : ApplicationSettingsStateNotifier
+                                                  .isCelsius = false;
+                                          appSettingsStateNotifier
+                                              .updateTemperatureFormat(
+                                                  newTemperatureFormatState,
+                                                  index);
                                         },
                                       ),
                                     ),
@@ -242,14 +260,20 @@ class ApplicationPage extends ConsumerWidget {
                                         minWidth: YahaBoxSizes.toggleWidth,
                                         activeBgColor: [YahaColors.primary],
                                         inactiveBgColor: YahaColors.accentColor,
-                                        initialLabelIndex: 0,
+                                        initialLabelIndex:
+                                            ApplicationSettingsStateNotifier
+                                                .timeFormatInitialIndex,
                                         totalSwitches: 2,
                                         labels: ['12h', '24h'],
                                         onToggle: (index) {
-                                          print('switched to: $index');
-                                               var newState = index == 0
-                                              ? appSettingsState.isTimeFormat12 = true
-                                              : appSettingsState.isKm = false;
+                                          var newTimeFormatState = index == 0
+                                              ? ApplicationSettingsStateNotifier
+                                                  .isTimeFormat24 = true
+                                              : ApplicationSettingsStateNotifier
+                                                  .isTimeFormat24 = false;
+                                          appSettingsStateNotifier
+                                              .updateTimeFormat(
+                                                  newTimeFormatState, index);
                                         },
                                       ),
                                     ),
