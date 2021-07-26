@@ -41,6 +41,7 @@ dependencies:
   logger_flutter: ^0.0.1
   dartz: ^0.10.0-nullsafety.2
   toggle_switch: ^1.2.0
+  functional_data: ^1.0.0
 
 flutter_native_splash:
   background_image: assets/images/splash-screen.png
@@ -50,8 +51,10 @@ flutter_native_splash:
   ios_content_mode: scaleAspectFill
 
 dev_dependencies:
+  build_runner: ^2.0.6
   flutter_test:
     sdk: flutter
+  functional_data_generator: ^1.1.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
