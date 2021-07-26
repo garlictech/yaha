@@ -46,8 +46,8 @@
     "graphql-tools": "7.0.5"
   },
   "devDependencies": {
-    "@commitlint/cli": "12.1.4",
-    "@commitlint/config-conventional": "12.1.4",
+    "@commitlint/cli": "13.1.0",
+    "@commitlint/config-conventional": "13.1.0",
     "@graphql-codegen/cli": "1.21.7",
     "@graphql-codegen/introspection": "1.18.2",
     "@graphql-codegen/named-operations-object": "1.18.2",
