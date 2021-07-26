@@ -21,27 +21,28 @@ class ApplicationSettingsState {
       this.timeFormatInitialIndex = 1,
       this.currentLanguageTitle = 'English'});
 
-  ApplicationSettingsState copyWith({
-    required ApplicationSettingsState state,
-    bool isEnglish,
-    bool isKm,
-    bool isCelsius,
-    bool isTimeFormat24,
-    int distanceInitialIndex,
-    int temperatureInitialIndex,
-    int timeFormatInitialIndex,
-    String currentLanguageTitle,
-    
-  }) {
+  static ApplicationSettingsState copyWith(ApplicationSettingsState state,
+      {bool? isEnglish,
+      bool? isKm,
+      bool? isCelsius,
+      bool? isTimeFormat24,
+      int? distanceInitialIndex,
+      int? temperatureInitialIndex,
+      int? timeFormatInitialIndex,
+      String? currentLanguageTitle}) {
     return ApplicationSettingsState(
-        isEnglish: isEnglish ?? this.isEnglish,
-        isKm: isKm,
-        isCelsius: isCelsius,
-        isTimeFormat24: isTimeFormat24,
-        distanceInitialIndex: distanceInitialIndex,
-        temperatureInitialIndex: temperatureInitialIndex,
-        timeFormatInitialIndex: timeFormatInitialIndex,
-        currentLanguageTitle: currentLanguageTitle);
+        isEnglish: isEnglish ?? state.isEnglish,
+        isKm: isKm ?? state.isKm,
+        isCelsius: isCelsius ?? state.isCelsius,
+        isTimeFormat24: isTimeFormat24 ?? state.isTimeFormat24,
+        distanceInitialIndex:
+            distanceInitialIndex ?? state.distanceInitialIndex,
+        temperatureInitialIndex:
+            temperatureInitialIndex ?? state.temperatureInitialIndex,
+        timeFormatInitialIndex:
+            timeFormatInitialIndex ?? state.timeFormatInitialIndex,
+        currentLanguageTitle:
+            currentLanguageTitle ?? state.currentLanguageTitle);
   }
 }
 
@@ -50,19 +51,19 @@ class ApplicationSettingsStateNotifier
   ApplicationSettingsStateNotifier() : super(ApplicationSettingsState());
 
   updateLanguage(bool newState, String title) =>
-      state = ApplicationSettingsState(
+      state = ApplicationSettingsState.copyWith(state,
           isEnglish: newState, currentLanguageTitle: title);
 
   updateDistanceFormat(bool newState, int newInitialIndex) =>
-      state = ApplicationSettingsState(
+      state = ApplicationSettingsState.copyWith(state,
           isKm: newState, distanceInitialIndex: newInitialIndex);
 
   updateTemperatureFormat(bool newState, int newInitialIndex) =>
-      state = ApplicationSettingsState(
+      state = ApplicationSettingsState.copyWith(state,
           isCelsius: newState, temperatureInitialIndex: newInitialIndex);
 
   updateTimeFormat(bool newState, int newInitialIndex) =>
-      state = ApplicationSettingsState(
+      state = ApplicationSettingsState.copyWith(state,
           isTimeFormat24: newState, timeFormatInitialIndex: newInitialIndex);
 }
 
