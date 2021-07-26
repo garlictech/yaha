@@ -20,6 +20,29 @@ class ApplicationSettingsState {
       this.temperatureInitialIndex = 0,
       this.timeFormatInitialIndex = 1,
       this.currentLanguageTitle = 'English'});
+
+  ApplicationSettingsState copyWith({
+    required ApplicationSettingsState state,
+    bool isEnglish,
+    bool isKm,
+    bool isCelsius,
+    bool isTimeFormat24,
+    int distanceInitialIndex,
+    int temperatureInitialIndex,
+    int timeFormatInitialIndex,
+    String currentLanguageTitle,
+    
+  }) {
+    return ApplicationSettingsState(
+        isEnglish: isEnglish ?? this.isEnglish,
+        isKm: isKm,
+        isCelsius: isCelsius,
+        isTimeFormat24: isTimeFormat24,
+        distanceInitialIndex: distanceInitialIndex,
+        temperatureInitialIndex: temperatureInitialIndex,
+        timeFormatInitialIndex: timeFormatInitialIndex,
+        currentLanguageTitle: currentLanguageTitle);
+  }
 }
 
 class ApplicationSettingsStateNotifier
