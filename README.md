@@ -79,6 +79,10 @@ Ensure that the generated files are NOT checked in to github. They are gitignore
 
 Always check the invoked scripts for their internals and parameters!
 
+## How to code
+
+- [Functional data types in Flutter](wiki/Functional-programming-in-YAHA)
+
 ## The nx stuff
 
 <p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
