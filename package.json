@@ -39,7 +39,7 @@
     "fp-ts": "2.11.1",
     "tslib": "2.3.0",
     "lodash-es": "4.17.21",
-    "rxjs": "7.1.0",
+    "rxjs": "7.3.0",
     "graphql": "15.5.1",
     "graphql-subscriptions": "1.2.1",
     "graphql-tag": "2.12.5",
