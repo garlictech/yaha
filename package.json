@@ -65,7 +65,7 @@
     "@nrwl/workspace": "12.6.2",
     "@nrwl/cypress": "12.6.2",
     "@nxrocks/nx-flutter": "2.1.0",
-    "@serverless-stack/cli": "0.35.1",
+    "@serverless-stack/cli": "0.35.2",
     "@serverless-stack/resources": "0.35.1",
     "@types/aws-lambda": "8.10.81",
     "@types/cypress-cucumber-preprocessor": "4.0.1",
