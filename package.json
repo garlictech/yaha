@@ -43,7 +43,7 @@
     "graphql": "15.5.1",
     "graphql-subscriptions": "1.2.1",
     "graphql-tag": "2.12.5",
-    "graphql-tools": "7.0.5"
+    "graphql-tools": "8.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "13.1.0",
