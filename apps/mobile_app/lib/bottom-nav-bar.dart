@@ -5,7 +5,8 @@ import 'package:yaha/profile-page.dart';
 import 'package:yaha/yaha-colors.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
-import 'explore-page.dart';
+import 'explore.dart';
+
 
 // PersistentTabController _controller;
 
