@@ -2,8 +2,10 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:functional_data/functional_data.dart';
 
+part 'filter-state.g.dart';
+
 @FunctionalData()
-class FilterSettingsState {
+class FilterSettingsState extends $FilterSettingsState {
   final double lengthMin;
   final double lengthMax;
   final double durationMin;
@@ -27,18 +29,18 @@ class FilterSettingsStateNotifier extends StateNotifier<FilterSettingsState> {
   FilterSettingsStateNotifier() : super(FilterSettingsState());
 
   updateLength(double newLenghtMinState, double newLengthMaxState) =>
-      state = FilterSettingsState(
+      state = state.copyWith(
           lengthMin: newLenghtMinState, lengthMax: newLengthMaxState);
 
   updateDuration(double newDurationMinState, double newDurationMaxState) =>
-      state = FilterSettingsState(
+      state = state.copyWith(
           durationMin: newDurationMinState, durationMax: newDurationMaxState);
 
   updateSearchRadius(double newState) =>
-      state = FilterSettingsState(searchRadius: newState);
+      state = state.copyWith(searchRadius: newState);
 
   updateDifficulty(int newState, int index) =>
-      state = FilterSettingsState(difficulty: newState, difficultyIndex: index);
+      state = state.copyWith(difficulty: newState, difficultyIndex: index);
 }
 
 final filterSettingsStateProvider =
