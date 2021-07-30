@@ -7,7 +7,6 @@ import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 import 'explore.dart';
 
-
 // PersistentTabController _controller;
 
 // _controller = PersistentTabController(initialIndex: 0);
@@ -31,9 +30,8 @@ class BottomNavBar extends StatelessWidget {
       hideNavigationBarWhenKeyboardShows:
           true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
       decoration: NavBarDecoration(
-        // borderRadius: BorderRadius.circular(10.0),
-       border: Border.all(color: YahaColors.divider, width: 0.2)
-      ),
+          // borderRadius: BorderRadius.circular(10.0),
+          border: Border.all(color: YahaColors.divider, width: 0.2)),
       popAllScreensOnTapOfSelectedTab: true,
       popActionScreens: PopActionScreensType.all,
       itemAnimationProperties: ItemAnimationProperties(

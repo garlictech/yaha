@@ -9,7 +9,7 @@ class FilterSettingsState {
   final double durationMin;
   final double durationMax;
   final double searchRadius;
-  final double difficulty;
+  final int difficulty;
   final int difficultyIndex;
 
   FilterSettingsState({
@@ -37,7 +37,7 @@ class FilterSettingsStateNotifier extends StateNotifier<FilterSettingsState> {
   updateSearchRadius(double newState) =>
       state = FilterSettingsState(searchRadius: newState);
 
-  updateDifficulty(double newState, int index) =>
+  updateDifficulty(int newState, int index) =>
       state = FilterSettingsState(difficulty: newState, difficultyIndex: index);
 }
 
