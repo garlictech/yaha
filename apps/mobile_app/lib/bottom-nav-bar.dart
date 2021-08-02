@@ -5,7 +5,7 @@ import 'package:yaha/profile-page.dart';
 import 'package:yaha/yaha-colors.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
-import 'auth/sign-up-page.dart';
+import 'explore.dart';
 
 // PersistentTabController _controller;
 
@@ -30,9 +30,8 @@ class BottomNavBar extends StatelessWidget {
       hideNavigationBarWhenKeyboardShows:
           true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
       decoration: NavBarDecoration(
-        // borderRadius: BorderRadius.circular(10.0),
-       border: Border.all(color: YahaColors.divider, width: 0.2)
-      ),
+          // borderRadius: BorderRadius.circular(10.0),
+          border: Border.all(color: YahaColors.divider, width: 0.2)),
       popAllScreensOnTapOfSelectedTab: true,
       popActionScreens: PopActionScreensType.all,
       itemAnimationProperties: ItemAnimationProperties(
@@ -53,7 +52,7 @@ class BottomNavBar extends StatelessWidget {
 }
 
 List<Widget> _buildScreens() {
-  return [HikePage(), SignUpPage(), LogInPage(), ProfilePage()];
+  return [HikePage(), ExplorePage(), LogInPage(), ProfilePage()];
 }
 
 List<PersistentBottomNavBarItem> _navBarsItems() {
