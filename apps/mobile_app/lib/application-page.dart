@@ -58,7 +58,6 @@ class ApplicationPage extends ConsumerWidget {
                                   color: YahaColors.textColor)),
                           decoration: BoxDecoration(
                               color: YahaColors.tertiaryAccentColor),
-                          height: 56.0,
                         ),
                         Container(
                           margin: const EdgeInsets.only(
