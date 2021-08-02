@@ -9,15 +9,16 @@ import 'package:toggle_switch/toggle_switch.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter/widgets.dart';
 
+import 'app-settings-state.dart';
+
 // ignore: must_be_immutable
 class ApplicationPage extends ConsumerWidget {
-  String? distance;
-  String? temperature;
-  String? timeFormat;
-  String dropdownValue = 'English';
-
   @override
-  Widget build(BuildContext context, ScopedReader ref) {
+  Widget build(BuildContext context, ScopedReader watch) {
+    var appSettingsState = watch(applicationSettingsStateProvider);
+    var appSettingsStateNotifier =
+        watch(applicationSettingsStateProvider.notifier);
+
     return Scaffold(
       appBar: AppBar(
           backgroundColor: YahaColors.background,
@@ -57,7 +58,6 @@ class ApplicationPage extends ConsumerWidget {
                                   color: YahaColors.textColor)),
                           decoration: BoxDecoration(
                               color: YahaColors.tertiaryAccentColor),
-                          height: 56.0,
                         ),
                         Container(
                           margin: const EdgeInsets.only(
@@ -81,7 +81,7 @@ class ApplicationPage extends ConsumerWidget {
                               alignedDropdown: true,
                               child: DropdownButton<String>(
                                 isExpanded: true,
-                                value: dropdownValue,
+                                value: appSettingsState.currentLanguageTitle,
                                 icon: const Icon(Icons.expand_more,
                                     size: YahaFontSizes.xxLarge),
                                 style: const TextStyle(
@@ -98,9 +98,10 @@ class ApplicationPage extends ConsumerWidget {
                                   );
                                 }).toList(),
                                 onChanged: (String? newValue) {
-                                  // setState(() {
-                                  //   dropdownValue = newValue!;
-                                  // });
+                                  var newLangState =
+                                      newValue == 'English' ? true : false;
+                                  appSettingsStateNotifier.updateLanguage(
+                                      newLangState, newValue!);
                                 },
                               ),
                             ),
@@ -143,7 +144,6 @@ class ApplicationPage extends ConsumerWidget {
                                           )),
                                     ),
                                     Container(
-                                      // width: MediaQuery.of(context).size.width,
                                       padding: const EdgeInsets.only(
                                         left: YahaSpaceSizes.medium,
                                         right: YahaSpaceSizes.medium,
@@ -152,11 +152,18 @@ class ApplicationPage extends ConsumerWidget {
                                         minWidth: YahaBoxSizes.toggleWidth,
                                         activeBgColor: [YahaColors.primary],
                                         inactiveBgColor: YahaColors.accentColor,
-                                        initialLabelIndex: 0,
+                                        initialLabelIndex: appSettingsState
+                                            .distanceInitialIndex,
                                         totalSwitches: 2,
                                         labels: ['km', 'mile'],
                                         onToggle: (index) {
-                                          print('switched to: $index');
+                                          var newDistanceFormatState =
+                                              index == 0 ? true : false;
+
+                                          appSettingsStateNotifier
+                                              .updateDistanceFormat(
+                                                  newDistanceFormatState,
+                                                  index);
                                         },
                                       ),
                                     ),
@@ -189,11 +196,17 @@ class ApplicationPage extends ConsumerWidget {
                                         minWidth: YahaBoxSizes.toggleWidth,
                                         activeBgColor: [YahaColors.primary],
                                         inactiveBgColor: YahaColors.accentColor,
-                                        initialLabelIndex: 0,
+                                        initialLabelIndex: appSettingsState
+                                            .temperatureInitialIndex,
                                         totalSwitches: 2,
                                         labels: ['Celsius', 'Fahrenheit'],
                                         onToggle: (index) {
-                                          print('switched to: $index');
+                                          var newTemperatureFormatState =
+                                              index == 0 ? true : false;
+                                          appSettingsStateNotifier
+                                              .updateTemperatureFormat(
+                                                  newTemperatureFormatState,
+                                                  index);
                                         },
                                       ),
                                     ),
@@ -227,11 +240,16 @@ class ApplicationPage extends ConsumerWidget {
                                         minWidth: YahaBoxSizes.toggleWidth,
                                         activeBgColor: [YahaColors.primary],
                                         inactiveBgColor: YahaColors.accentColor,
-                                        initialLabelIndex: 0,
+                                        initialLabelIndex: appSettingsState
+                                            .timeFormatInitialIndex,
                                         totalSwitches: 2,
                                         labels: ['12h', '24h'],
                                         onToggle: (index) {
-                                          print('switched to: $index');
+                                          var newTimeFormatState =
+                                              index == 0 ? true : false;
+                                          appSettingsStateNotifier
+                                              .updateTimeFormat(
+                                                  newTimeFormatState, index);
                                         },
                                       ),
                                     ),
