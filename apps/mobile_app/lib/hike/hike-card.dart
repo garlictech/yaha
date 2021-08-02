@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:yaha/yaha-border-radius.dart';
+import 'package:yaha/yaha-colors.dart';
+import 'package:yaha/yaha-font-sizes.dart';
+import 'package:yaha/yaha-space-sizes.dart';
 
 class HikeCard extends StatelessWidget {
   //final Color color;
@@ -27,12 +30,36 @@ class HikeCard extends StatelessWidget {
                 image: AssetImage('assets/images/Parlament.jpg'),
                 fit: BoxFit.cover),
           ),
-          child: Column(
-            children: [
-              Align(child: Text(title)),
-              Text(subTitle),
-              Text('$distanceFromCurrentLocation km away'),
-            ],
+          child: Align(
+            alignment: Alignment.bottomLeft,
+            child: Container(
+              padding: EdgeInsets.only(
+                left: YahaSpaceSizes.small,
+                bottom: YahaSpaceSizes.small,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: YahaFontSizes.large,
+                      fontWeight: FontWeight.w700,
+                      color: YahaColors.background,
+                    ),
+                  ),
+                  Text(
+                    subTitle + ' ($distanceFromCurrentLocation km away)',
+                    style: TextStyle(
+                      fontSize: YahaFontSizes.small,
+                      fontWeight: FontWeight.w500,
+                      color: YahaColors.background,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
         ),
       ),
