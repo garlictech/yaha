@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:yaha/hike-page.dart';
-import 'package:yaha/log-in-page.dart';
 import 'package:yaha/previous-activities-page.dart';
 import 'package:yaha/profile-page.dart';
 import 'package:yaha/yaha-colors.dart';
