@@ -8,7 +8,8 @@ import 'package:yaha/yaha-colors.dart';
 import 'auth/sign-up-page.dart';
 import 'bottom-nav-bar.dart';
 import 'event-detail-page.dart';
-import 'explore-page.dart';
+
+import 'explore.dart';
 import 'hike-page.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
