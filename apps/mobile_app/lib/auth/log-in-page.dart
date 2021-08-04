@@ -51,14 +51,19 @@ class _LogInPageState extends State<LogInPage> {
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
-                return Column(
-                  children: [
-                    SizedBox(
-                      width: 300.0,
-                      child: Container(
-                        padding:
-                            const EdgeInsets.only(top: YahaSpaceSizes.large),
+                return Container(
+                  padding: EdgeInsets.only(
+                    left: YahaSpaceSizes.general,
+                    right: YahaSpaceSizes.general,
+                  ),
+                  child: Column(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.only(
+                          top: YahaSpaceSizes.large,
+                        ),
                         child: Container(
+                          constraints: BoxConstraints(maxWidth: 400),
                           padding: const EdgeInsets.only(
                               top: YahaSpaceSizes.xSmall,
                               bottom: YahaSpaceSizes.medium),
@@ -88,13 +93,12 @@ class _LogInPageState extends State<LogInPage> {
                           ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      width: 300.0,
-                      child: Container(
+                      Container(
+                        constraints: BoxConstraints(maxWidth: 400),
                         padding: const EdgeInsets.only(
-                            top: YahaSpaceSizes.small,
-                            bottom: YahaSpaceSizes.general),
+                          top: YahaSpaceSizes.small,
+                          bottom: YahaSpaceSizes.general,
+                        ),
                         child: TextFormField(
                           keyboardType: TextInputType.text,
                           obscureText: !_passwordVisible,
@@ -135,46 +139,46 @@ class _LogInPageState extends State<LogInPage> {
                                       width: YahaBorderWidth.small))),
                         ),
                       ),
-                    ),
-                    Container(
-                      child: SizedBox(
-                        width: 300.0,
-                        height: 50.0,
-                        child: ElevatedButton(
-                          child: Text(
-                            'Log in',
-                            style: TextStyle(
-                                fontSize: YahaFontSizes.small,
-                                fontWeight: FontWeight.w600),
-                          ),
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                            primary: YahaColors.primary,
-                            shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(
-                                    Radius.circular(YahaBorderRadius.general))),
+                      Container(
+                        constraints: BoxConstraints(minWidth: 600),
+                        child: SizedBox(
+                          //width: YahaBoxSizes.buttonWidthBig,
+                          height: YahaBoxSizes.buttonHeight,
+                          child: ElevatedButton(
+                            child: Text(
+                              'Log in',
+                              style: TextStyle(
+                                  fontSize: YahaFontSizes.small,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                              primary: YahaColors.primary,
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(
+                                      Radius.circular(
+                                          YahaBorderRadius.general))),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    Container(
-                      alignment: Alignment.center,
-                      padding:
-                          const EdgeInsets.only(top: YahaSpaceSizes.medium),
-                      child: Text(
-                        'Forgot password?',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            color: YahaColors.primary,
-                            fontSize: YahaFontSizes.small),
+                      Container(
+                        alignment: Alignment.center,
+                        padding:
+                            const EdgeInsets.only(top: YahaSpaceSizes.medium),
+                        child: Text(
+                          'Forgot password?',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              color: YahaColors.primary,
+                              fontSize: YahaFontSizes.small),
+                        ),
                       ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.only(
-                          top: YahaSpaceSizes.xLarge,
-                          bottom: YahaSpaceSizes.xLarge),
-                      child: SizedBox(
-                        width: 300.0,
+                      Container(
+                        constraints: BoxConstraints(maxWidth: 400),
+                        padding: EdgeInsets.only(
+                            top: YahaSpaceSizes.xLarge,
+                            bottom: YahaSpaceSizes.xLarge),
                         child: Row(
                           children: [
                             Expanded(
@@ -200,150 +204,153 @@ class _LogInPageState extends State<LogInPage> {
                           ],
                         ),
                       ),
-                    ),
-                    Container(
-                      padding:
-                          const EdgeInsets.only(bottom: YahaSpaceSizes.general),
-                      child: SizedBox(
-                        height: YahaBoxSizes.buttonHeight,
-                        width: YahaBoxSizes.buttonWidthBig,
-                        child: ElevatedButton(
-                          child: Stack(
-                            children: [
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: Container(
-                                  padding: const EdgeInsets.only(left: 5.0),
-                                  child: Image.asset(
-                                    'assets/images/facebook_logo@3x.png',
-                                    height: 28.0,
+                      Container(
+                        padding: const EdgeInsets.only(
+                            bottom: YahaSpaceSizes.general),
+                        child: SizedBox(
+                          height: YahaBoxSizes.buttonHeight,
+                          width: YahaBoxSizes.buttonWidthBig,
+                          child: ElevatedButton(
+                            child: Stack(
+                              children: [
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Container(
+                                    padding: const EdgeInsets.only(left: 5.0),
+                                    child: Image.asset(
+                                      'assets/images/facebook_logo@3x.png',
+                                      height: 28.0,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Align(
-                                alignment: Alignment.center,
-                                child: Text(
-                                  'Sign up with Facebook',
-                                  style: TextStyle(
-                                    fontSize: YahaFontSizes.small,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                            primary: YahaColors.facebook,
-                            shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(
-                                    Radius.circular(YahaBorderRadius.general))),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      padding:
-                          const EdgeInsets.only(bottom: YahaSpaceSizes.general),
-                      child: SizedBox(
-                        height: YahaBoxSizes.buttonHeight,
-                        width: YahaBoxSizes.buttonWidthBig,
-                        child: ElevatedButton(
-                          child: Stack(
-                            children: [
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: Image.asset(
-                                  'assets/images/btn_google_dark_normal_ios@3x.png',
-                                  height: 40.0,
-                                ),
-                              ),
-                              Align(
-                                alignment: Alignment.center,
-                                child: Text(
-                                  'Sign up with Google',
-                                  style: TextStyle(
+                                Align(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    'Sign up with Facebook',
+                                    style: TextStyle(
                                       fontSize: YahaFontSizes.small,
-                                      fontWeight: FontWeight.w600),
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                            primary: YahaColors.google,
-                            shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(
-                                    Radius.circular(YahaBorderRadius.general))),
+                              ],
+                            ),
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                              primary: YahaColors.facebook,
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(
+                                      Radius.circular(
+                                          YahaBorderRadius.general))),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    Container(
-                      padding:
-                          const EdgeInsets.only(bottom: YahaSpaceSizes.general),
-                      child: SizedBox(
-                        height: YahaBoxSizes.buttonHeight,
-                        width: YahaBoxSizes.buttonWidthBig,
-                        child: ElevatedButton(
-                          child: Stack(
-                            children: [
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: Container(
-                                  padding: const EdgeInsets.only(left: 10.0),
+                      Container(
+                        padding: const EdgeInsets.only(
+                            bottom: YahaSpaceSizes.general),
+                        child: SizedBox(
+                          height: YahaBoxSizes.buttonHeight,
+                          width: YahaBoxSizes.buttonWidthBig,
+                          child: ElevatedButton(
+                            child: Stack(
+                              children: [
+                                Align(
+                                  alignment: Alignment.centerLeft,
                                   child: Image.asset(
-                                    'assets/images/apple_logo@3x.png',
-                                    height: 26.0,
+                                    'assets/images/btn_google_dark_normal_ios@3x.png',
+                                    height: 40.0,
                                   ),
                                 ),
-                              ),
-                              Align(
-                                alignment: Alignment.center,
-                                child: Text(
-                                  'Sign up with Apple',
+                                Align(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    'Sign up with Google',
+                                    style: TextStyle(
+                                        fontSize: YahaFontSizes.small,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                              primary: YahaColors.google,
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(
+                                      Radius.circular(
+                                          YahaBorderRadius.general))),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.only(
+                            bottom: YahaSpaceSizes.general),
+                        child: SizedBox(
+                          height: YahaBoxSizes.buttonHeight,
+                          width: YahaBoxSizes.buttonWidthBig,
+                          child: ElevatedButton(
+                            child: Stack(
+                              children: [
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Container(
+                                    padding: const EdgeInsets.only(left: 10.0),
+                                    child: Image.asset(
+                                      'assets/images/apple_logo@3x.png',
+                                      height: 26.0,
+                                    ),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    'Sign up with Apple',
+                                    style: TextStyle(
+                                      fontSize: YahaFontSizes.small,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                              primary: YahaColors.apple,
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(
+                                      Radius.circular(
+                                          YahaBorderRadius.general))),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.only(
+                            left: YahaSpaceSizes.general,
+                            right: YahaSpaceSizes.general,
+                            bottom: YahaSpaceSizes.general),
+                        child: Align(
+                          alignment: FractionalOffset.bottomCenter,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text("Don't have an account? ",
                                   style: TextStyle(
-                                    fontSize: YahaFontSizes.small,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ),
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: YahaFontSizes.small)),
+                              Text('Sign up',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      color: YahaColors.primary,
+                                      fontSize: YahaFontSizes.small)),
                             ],
                           ),
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                            primary: YahaColors.apple,
-                            shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(
-                                    Radius.circular(YahaBorderRadius.general))),
-                          ),
                         ),
                       ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.only(
-                          left: YahaSpaceSizes.general,
-                          right: YahaSpaceSizes.general,
-                          bottom: YahaSpaceSizes.general),
-                      child: Align(
-                        alignment: FractionalOffset.bottomCenter,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text("Don't have an account? ",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: YahaFontSizes.small)),
-                            Text('Sign up',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    color: YahaColors.primary,
-                                    fontSize: YahaFontSizes.small)),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 );
               },
               childCount: 1,

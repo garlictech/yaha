@@ -49,7 +49,7 @@ class _HikeCardListState extends State<HikeCardList> {
           children: <Widget>[
             Expanded(
               child: Container(
-                   margin: EdgeInsets.all(20),
+                   padding: EdgeInsets.all(20),
                   // child: VerticalCardPager(
                   //   titles: titles,
                   //   images: images,

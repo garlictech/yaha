@@ -52,72 +52,30 @@ class _SignUpWithEmailPageState extends State<SignUpWithEmailPage> {
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
-                return Column(
-                  children: [
-                    SizedBox(
-                      width: 300.0,
-                      child: Container(
-                          padding:
-                              const EdgeInsets.only(top: YahaSpaceSizes.large),
-                          /*child: Column(
-                          children: [
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                'Name',
-                                style: TextStyle(
-                                    fontSize: YahaFontSizes.small,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                            ),*/
-                          child: Container(
-                            padding: const EdgeInsets.only(
-                                top: YahaSpaceSizes.xSmall,
-                                bottom: YahaSpaceSizes.medium),
-                            child: TextFormField(
-                              keyboardType: TextInputType.text,
-                              autocorrect: false,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  color: YahaColors.textColor,
-                                  fontSize: YahaFontSizes.small),
-                              decoration: InputDecoration(
-                                  labelText: 'Name',
-                                  contentPadding: EdgeInsets.only(
-                                      left: YahaSpaceSizes.medium),
-                                  enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(
-                                          YahaBorderRadius.small),
-                                      borderSide: BorderSide(
-                                          color: YahaColors.textColor,
-                                          width: YahaBorderWidth.small)),
-                                  focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(
-                                          YahaBorderRadius.small),
-                                      borderSide: BorderSide(
-                                          color: YahaColors.secondary,
-                                          width: YahaBorderWidth.small))),
-                            ),
-                          )
-                          //],
-                          //),
-                          ),
-                    ),
-                    SizedBox(
-                        width: 300.0,
+                return Container(
+                  padding: const EdgeInsets.only(
+                    left: YahaSpaceSizes.general,
+                    right: YahaSpaceSizes.general,
+                  ),
+                  child: Column(
+                    children: [
+                      Container(
+                        constraints: BoxConstraints(maxWidth: 400),
+                        padding:
+                            const EdgeInsets.only(top: YahaSpaceSizes.large),
                         child: Container(
                           padding: const EdgeInsets.only(
-                              top: YahaSpaceSizes.small,
+                              top: YahaSpaceSizes.xSmall,
                               bottom: YahaSpaceSizes.medium),
                           child: TextFormField(
-                            keyboardType: TextInputType.emailAddress,
+                            keyboardType: TextInputType.text,
                             autocorrect: false,
                             style: TextStyle(
                                 fontWeight: FontWeight.w500,
                                 color: YahaColors.textColor,
                                 fontSize: YahaFontSizes.small),
                             decoration: InputDecoration(
-                                labelText: 'Email',
+                                labelText: 'Name',
                                 contentPadding: EdgeInsets.only(
                                     left: YahaSpaceSizes.medium),
                                 enabledBorder: OutlineInputBorder(
@@ -133,10 +91,40 @@ class _SignUpWithEmailPageState extends State<SignUpWithEmailPage> {
                                         color: YahaColors.secondary,
                                         width: YahaBorderWidth.small))),
                           ),
-                        )),
-                    SizedBox(
-                      width: 300.0,
-                      child: Container(
+                        ),
+                      ),
+                      Container(
+                        constraints: BoxConstraints(maxWidth: 400),
+                        padding: const EdgeInsets.only(
+                            top: YahaSpaceSizes.small,
+                            bottom: YahaSpaceSizes.medium),
+                        child: TextFormField(
+                          keyboardType: TextInputType.emailAddress,
+                          autocorrect: false,
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              color: YahaColors.textColor,
+                              fontSize: YahaFontSizes.small),
+                          decoration: InputDecoration(
+                              labelText: 'Email',
+                              contentPadding:
+                                  EdgeInsets.only(left: YahaSpaceSizes.medium),
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(
+                                      YahaBorderRadius.small),
+                                  borderSide: BorderSide(
+                                      color: YahaColors.textColor,
+                                      width: YahaBorderWidth.small)),
+                              focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(
+                                      YahaBorderRadius.small),
+                                  borderSide: BorderSide(
+                                      color: YahaColors.secondary,
+                                      width: YahaBorderWidth.small))),
+                        ),
+                      ),
+                      Container(
+                        constraints: BoxConstraints(maxWidth: 400),
                         padding: const EdgeInsets.only(
                             top: YahaSpaceSizes.small,
                             bottom: YahaSpaceSizes.medium),
@@ -180,25 +168,8 @@ class _SignUpWithEmailPageState extends State<SignUpWithEmailPage> {
                                       width: YahaBorderWidth.small))),
                         ),
                       ),
-                      // SizedBox(
-                      //   width: 300.0,
-                      //   child: Container(
-                      //     padding: const EdgeInsets.only(
-                      //         bottom: YahaSpaceSizes.medium),
-                      //     child: Column(
-                      //       crossAxisAlignment: CrossAxisAlignment.start,
-                      //       children: [
-                      //         Text('At least 8 characters long'),
-                      //         Text('Contains numbers'),
-                      //         Text('Contains special characters')
-                      //       ],
-                      //     ),
-                      //   ),
-                      // ),
-                    ),
-                    SizedBox(
-                      width: 300.0,
-                      child: Container(
+                      Container(
+                        constraints: BoxConstraints(maxWidth: 400),
                         padding: const EdgeInsets.only(
                             top: YahaSpaceSizes.small,
                             bottom: YahaSpaceSizes.large),
@@ -243,49 +214,50 @@ class _SignUpWithEmailPageState extends State<SignUpWithEmailPage> {
                                       width: YahaBorderWidth.small))),
                         ),
                       ),
-                    ),
-                    Container(
-                      child: SizedBox(
-                        width: 300.0,
-                        height: 50.0,
-                        child: ElevatedButton(
-                          child: Text(
-                            'Sign up',
-                            style: TextStyle(
-                                fontSize: YahaFontSizes.small,
-                                fontWeight: FontWeight.w600),
-                          ),
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                            primary: YahaColors.primary,
-                            shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(
-                                    Radius.circular(YahaBorderRadius.general))),
+                      Container(
+                        child: SizedBox(
+                          width: 300.0,
+                          height: 50.0,
+                          child: ElevatedButton(
+                            child: Text(
+                              'Sign up',
+                              style: TextStyle(
+                                  fontSize: YahaFontSizes.small,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                              primary: YahaColors.primary,
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(
+                                      Radius.circular(
+                                          YahaBorderRadius.general))),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    Container(
-                      //child: Align(
-                      //alignment: FractionalOffset.bottomCenter,
-                      padding: EdgeInsets.all(YahaSpaceSizes.general),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('Already have an account? ',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: YahaFontSizes.small)),
-                          Text('Log in',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  color: YahaColors.primary,
-                                  fontSize: YahaFontSizes.small)),
-                        ],
+                      Container(
+                        //child: Align(
+                        //alignment: FractionalOffset.bottomCenter,
+                        padding: EdgeInsets.all(YahaSpaceSizes.general),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('Already have an account? ',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: YahaFontSizes.small)),
+                            Text('Log in',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    color: YahaColors.primary,
+                                    fontSize: YahaFontSizes.small)),
+                          ],
+                        ),
                       ),
-                    ),
-                    //),
-                  ],
+                      //),
+                    ],
+                  ),
                 );
               },
               childCount: 1,
