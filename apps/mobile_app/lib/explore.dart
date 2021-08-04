@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:yaha/filter-page.dart';
-import 'package:yaha/yaha-colors.dart';
-import 'package:yaha/yaha-font-sizes.dart';
-import 'package:yaha/yaha-border-radius.dart';
-import 'package:yaha/yaha-border-width.dart';
-import 'package:yaha/yaha-space-sizes.dart';
+import 'package:yaha/search-result.dart';
+import 'package:yaha/utility/yaha-border-radius.dart';
+import 'package:yaha/utility/yaha-border-width.dart';
+import 'package:yaha/utility/yaha-colors.dart';
+import 'package:yaha/utility/yaha-font-sizes.dart';
+import 'package:yaha/utility/yaha-space-sizes.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+
+import 'filter/filter-page.dart';
 
 class ExplorePage extends StatefulWidget {
   @override
@@ -35,6 +37,13 @@ class _ExplorePageState extends State<ExplorePage> {
                     Container(
                       padding: EdgeInsets.all(YahaSpaceSizes.general),
                       child: TextFormField(
+                        onTap: () {
+                          Navigator.of(this.context).push(
+                              new MaterialPageRoute<dynamic>(
+                                  builder: (BuildContext context) {
+                            return new SearchResultPage();
+                          }));
+                        },
                         keyboardType: TextInputType.text,
                         enableSuggestions: false,
                         autocorrect: false,

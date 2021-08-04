@@ -3,7 +3,8 @@ import 'package:yaha/poi-page.dart';
 import 'package:yaha/profile-page.dart';
 import 'package:yaha/settings-page.dart';
 import 'package:yaha/track-page.dart';
-import 'package:yaha/yaha-colors.dart';
+
+import 'package:yaha/utility/yaha-colors.dart';
 
 import 'auth/sign-up-page.dart';
 import 'bottom-nav-bar.dart';
@@ -26,6 +27,7 @@ class MyApp extends ConsumerWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           primaryColor: YahaColors.primary,
+          focusColor: YahaColors.primary,
           scaffoldBackgroundColor: YahaColors.background,
           fontFamily: 'Inter'),
       home: BottomNavBar(),

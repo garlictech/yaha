@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:yaha/hike-page.dart';
 import 'package:yaha/previous-activities-page.dart';
 import 'package:yaha/profile-page.dart';
-import 'package:yaha/yaha-colors.dart';
+
+import 'package:yaha/utility/yaha-colors.dart';
+
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 import 'explore.dart';
