@@ -65,8 +65,7 @@ class _LogInPageState extends State<LogInPage> {
                         child: Container(
                           constraints: BoxConstraints(maxWidth: 400),
                           padding: const EdgeInsets.only(
-                              top: YahaSpaceSizes.xSmall,
-                              bottom: YahaSpaceSizes.medium),
+                              bottom: YahaSpaceSizes.general),
                           child: TextFormField(
                             keyboardType: TextInputType.emailAddress,
                             autocorrect: false,
@@ -96,7 +95,6 @@ class _LogInPageState extends State<LogInPage> {
                       Container(
                         constraints: BoxConstraints(maxWidth: 400),
                         padding: const EdgeInsets.only(
-                          top: YahaSpaceSizes.small,
                           bottom: YahaSpaceSizes.general,
                         ),
                         child: TextFormField(
@@ -140,9 +138,8 @@ class _LogInPageState extends State<LogInPage> {
                         ),
                       ),
                       Container(
-                        constraints: BoxConstraints(minWidth: 600),
                         child: SizedBox(
-                          //width: YahaBoxSizes.buttonWidthBig,
+                          width: YahaBoxSizes.buttonWidthBig,
                           height: YahaBoxSizes.buttonHeight,
                           child: ElevatedButton(
                             child: Text(
