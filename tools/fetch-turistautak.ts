@@ -1,17 +1,3 @@
-//
-// EXECUTE: yarn ts-node --project ./tools/tsconfig.tools.json -r tsconfig-paths/register ./tools/fetch-turistautak.ts
-//
-/* eslint no-console: "off" */
-//import * as E from 'fp-ts/lib/Either';
-//import * as togeojson from '@mapbox/togeojson';
-const togeojson = require('@mapbox/togeojson');
-import lineChunk from '@turf/line-chunk';
-import * as fp from 'lodash/fp';
-import * as rp from 'request-promise';
-import { from, throwError } from 'rxjs';
-import { filter, map, mergeMap, tap } from 'rxjs/operators';
-import * as xmlParse from 'fast-xml-parser';
-import * as DOMParser from 'xmldom';
 /*import {resolveDataInPolygon} from '@bit/garlictech.universal.shared.graphql-data';
 import {PoiApiService, PoiModule} from '../../lib/nestjs/gtrack/poi';
 import {CheckpointAdminFp} from '../../lib/universal/gtrack/checkpoints-admin';
@@ -22,22 +8,102 @@ import {GtrackDefaults} from '@bit/garlictech.universal.gtrack.defaults/defaults
 import {foldObservableEither} from '@bit/garlictech.universal.shared.fp';
 import {getCityFromGoogle} from '@bit/garlictech.nodejs.shared.reverse-geocoding';
 */
-
 import { OGM } from '@neo4j/graphql-ogm';
+import lineChunk from '@turf/line-chunk';
+import * as xmlParse from 'fast-xml-parser';
+import { flow } from 'fp-ts/lib/function';
+import fs from 'fs';
+import * as fp from 'lodash/fp';
 import neo4j from 'neo4j-driver';
+import * as rp from 'request-promise';
+import { defer, from, Observable, throwError } from 'rxjs';
+import { filter, map, mergeMap, switchMap, tap } from 'rxjs/operators';
+import * as DOMParser from 'xmldom';
+import { BaseBuilder, buildGPX } from 'gpx-builder';
+//
+// EXECUTE: yarn ts-node --project ./tools/tsconfig.tools.json -r tsconfig-paths/register ./tools/fetch-turistautak.ts
+//
+/* eslint no-console: "off" */
+//import * as E from 'fp-ts/lib/Either';
+//import * as togeojson from '@mapbox/togeojson';
+const togeojson = require('@mapbox/togeojson');
 
 const driver = neo4j.driver(
-  'bolt://52.91.166.161:7687',
-  neo4j.auth.basic('neo4j', 'firefighting-drums-accomplishment'),
+  'bolt://192.168.68.129:7687',
+  neo4j.auth.basic('neo4j', 'Neo4j'),
 );
 
-const schemaFilename = `${__dirname}/../libs/neo4j-gql/backend/graphql/schema/hiking-api.graphql`;
+const session = driver.session();
 
-export const typeDefs = fs.readFileSync(schemaFilename).toString('utf-8');
+const Waypoint = BaseBuilder.MODELS.Point;
 
-const ogm = new OGM({ typeDefs, driver });
+const remoteDriver = neo4j.driver(
+  'neo4j+s://e3e9432e.databases.neo4j.io',
+  neo4j.auth.basic('neo4j', 'aElraEICqptQ_ft769KhSikUl9Zg5IliVOwuWzGdX2Y'),
+);
 
-const Hike = ogm.model('Hike');
+const remoteSession = remoteDriver.session();
+
+const getCoordinates = (): Observable<any> =>
+  defer(() => {
+    return from(
+      session.run(
+        `
+      MATCH (n:OSMWay)-[:TAGS]->(t:OSMTags)
+      WHERE t.route = "hiking"
+      WITH n LIMIT 1
+      MATCH (n)-[:FIRST_NODE]->(p1:OSMWayNode)
+      MATCH (p1)-[:NEXT *1..]->(p2:OSMWayNode)
+      MATCH (p2)-[:NODE]->(p3)
+      RETURN p3.lat, p3.lon
+      `,
+      ),
+    );
+  }).pipe(
+    map(
+      flow(
+        result => result.records,
+        fp.map((record: any) => record._fields),
+      ),
+    ),
+  );
+
+const getGpx = getCoordinates().pipe(
+  tap(console.log),
+  map(
+    flow(
+      fp.map((coordinate: any) => {
+        return new Waypoint(coordinate[0], coordinate[1], {
+          ele: 0,
+        });
+      }),
+      segmentPoints => {
+        const gpxData = new BaseBuilder();
+        gpxData.setSegmentPoints(segmentPoints);
+        return buildGPX(gpxData.toObject());
+      },
+    ),
+  ),
+  tap(data => fs.writeFileSync('lofasz.gpx', data)),
+  tap(() => console.log('Finished.')),
+);
+
+getGpx.subscribe();
+
+const createHike = getCoordinates().pipe(
+  map(
+    coordinates => `
+
+    `,
+  ),
+);
+//const schemaFilename = `${__dirname}/../libs/neo4j-gql/backend/graphql/schema/hiking-api.graphql`;
+
+//export const typeDefs = fs.readFileSync(schemaFilename).toString('utf-8');
+
+//const ogm = new OGM({ typeDefs, driver });
+
+//const Hike = ogm.model('Hike');
 
 const hikeIds = [
   113261124,
@@ -327,140 +393,140 @@ const getEnvironment = (segments: Position[][]): Observable<Environment> =>
     }))
   );
 */
-const fetchRoute = (routeId: number) => {
-  console.log(`Processing route id ${routeId}`);
-  return from(
-    rp.get(
-      encodeURI(
-        `https://regio.outdooractive.com/download.tour.gpx?i=${routeId}&project=oar-hungary&lang=hu`,
-      ),
+
+/*from(
+  rp.get(
+    encodeURI(
+      `https://regio.outdooractive.com/download.tour.gpx?i=${routeId}&project=oar-hungary&lang=hu`,
     ),
-  ).pipe(
-    map((gpxFile: string) => {
-      try {
-        const _doc = new DOMParser.DOMParser().parseFromString(
-          gpxFile,
-          'application/xml',
-        );
-        const descriptionContent = xmlParse.parse(gpxFile);
-        const geojson = togeojson.gpx(_doc);
-        const chunks = lineChunk(geojson, segmentDistance, {
-          units: 'kilometers',
-        });
-        return {
-          segments: fp.map((x: any) => x.geometry.coordinates, chunks.features),
-          title: descriptionContent.gpx.metadata.name,
-          description: descriptionContent.gpx.metadata.desc,
-        };
-      } catch (err) {
-        return throwError(err);
+  ),
+).pipe(
+  map((gpxFile: string) => {
+    try {
+      const _doc = new DOMParser.DOMParser().parseFromString(
+        gpxFile,
+        'application/xml',
+      );
+      const descriptionContent = xmlParse.parse(gpxFile);
+      const geojson = togeojson.gpx(_doc);
+      const chunks = lineChunk(geojson, segmentDistance, {
+        units: 'kilometers',
+      });
+      return {
+        segments: fp.map((x: any) => x.geometry.coordinates, chunks.features),
+        title: descriptionContent.gpx.metadata.name,
+        description: descriptionContent.gpx.metadata.desc,
+      };
+    } catch (err) {
+      return throwError(err);
+    }
+  }),
+  filter(({segments}: any) => fp.isArray(segments)),
+  map(({segments, title, description}: any) => ({
+    segments: fp.map((segment: any, index: number) => {
+      if (index !== 0) {
+        segment[0][2] = segment[1][2];
       }
-    }),
-    filter(({ segments }: any) => fp.isArray(segments)),
-    map(({ segments, title, description }: any) => ({
-      segments: fp.map((segment: any, index: number) => {
-        if (index !== 0) {
-          segment[0][2] = segment[1][2];
-        }
 
-        if (index !== segments.length - 1) {
-          segment[segment.length - 1][2] = segment[segment.length - 2][2];
-        }
+      if (index !== segments.length - 1) {
+        segment[segment.length - 1][2] = segment[segment.length - 2][2];
+      }
 
-        return segment;
-      }, segments),
-      title,
-      description,
-    })),
-    map(({ segments, title, description }: any) => ({
-      hikeData: {
-        description: [
-          {
-            languageKey: 'hu_HU',
-            title: (title || 'a downloaded hike ' + fp.now()).toString(),
-            fullDescription: description,
-            type: 'html',
-          },
-        ],
-        publicationState: 'published',
-      },
+      return segment;
+    }, segments),
+    title,
+    description,
+  })),
+  map(({segments, title, description}: any) => ({
+    hikeData: {
+      description: [
+        {
+          languageKey: 'hu_HU',
+          title: (title || 'a downloaded hike ' + fp.now()).toString(),
+          fullDescription: description,
+          type: 'html',
+        },
+      ],
+      publicationState: 'published',
+    },
+    segments,
+  })),
+  tap(() => console.log('Processing segments...')),
+  switchMap(
+    ({
+      hikeData,
       segments,
-    })),
-    tap(() => console.log('Processing segments...')),
-    /*switchMap(
-      ({
-        hikeData,
-        segments,
-      }: {
-        hikeData: Partial<HikeData>;
-        segments: Position[][];
-      }) =>
-        processSegments(segments).pipe(
-          tap(() => console.log('A segment is processed')),
-          toArray(),
-          tap((results: any[]) =>
-            console.log(`Processed ${results.length} segments`)
-          ),
-          delay(10000),
-          switchMap(() => getEnvironment(segments)),
-          switchMap(
-            ({
-              graphqlClient,
-              poiApiService,
-              route,
-              searchPolygon,
-              waypoints,
-              routeData,
-            }) =>
-              forkJoin([
-                getCityFromGoogle(route.startPoint),
-                resolveDataInPolygon<Poi>({
-                  searchPolygon,
-                  placeType: PlaceType.poi,
-                })({
-                  graphqlClient: graphqlClient.backendClient,
-                  queryExecutor: poiApiService.api.getWithQuery,
-                }),
-              ]).pipe(
-                map(([location, pois]) => ({ location, pois })),
-                map(sequenceS(E.either)),
-                switchMap(foldObservableEither),
-                map(({ location, pois }) =>
-                  pipe(
-                    CheckpointAdminFp.getCheckpoints(route, pois),
-                    checkpoints => ({
-                      ...hikeData,
-                      checkpoints,
-                      location,
-                      segments: waypoints,
-                      route: routeData,
-                    })
-                  )
-                ),
-                switchMap(newHike =>
-                  graphqlClient.backendClient.mutate(CreateHike, {
-                    input: newHike,
+    }: {
+      hikeData: Partial<HikeData>;
+      segments: Position[][];
+    }) =>
+      processSegments(segments).pipe(
+        tap(() => console.log('A segment is processed')),
+        toArray(),
+        tap((results: any[]) =>
+          console.log(`Processed ${results.length} segments`)
+        ),
+        delay(10000),
+        switchMap(() => getEnvironment(segments)),
+        switchMap(
+          ({
+            graphqlClient,
+            poiApiService,
+            route,
+            searchPolygon,
+            waypoints,
+            routeData,
+          }) =>
+            forkJoin([
+              getCityFromGoogle(route.startPoint),
+              resolveDataInPolygon<Poi>({
+                searchPolygon,
+                placeType: PlaceType.poi,
+              })({
+                graphqlClient: graphqlClient.backendClient,
+                queryExecutor: poiApiService.api.getWithQuery,
+              }),
+            ]).pipe(
+              map(([location, pois]) => ({ location, pois })),
+              map(sequenceS(E.either)),
+              switchMap(foldObservableEither),
+              map(({ location, pois }) =>
+                pipe(
+                  CheckpointAdminFp.getCheckpoints(route, pois),
+                  checkpoints => ({
+                    ...hikeData,
+                    checkpoints,
+                    location,
+                    segments: waypoints,
+                    route: routeData,
                   })
-                ),
-                tap(hike => console.log(`Hike created, id: ${hike.id}`))
-              )
-          ),
-          catchError(() => {
-            console.log('ERROR AT ROUTE ID ', routeId);
-            return of({});
-          })
-        )
-    ),
-    tap(() => console.log(`Hike upload result for route ${routeId} is OK`))*/
-  );
+                )
+              ),
+              switchMap(newHike =>
+                graphqlClient.backendClient.mutate(CreateHike, {
+                  input: newHike,
+                })
+              ),
+              tap(hike => console.log(`Hike created, id: ${hike.id}`))
+            )
+        ),
+        catchError(() => {
+          console.log('ERROR AT ROUTE ID ', routeId);
+          return of({});
+        })
+      )
+  ),
+  tap(() => console.log(`Hike upload result for route ${routeId} is OK`))
+);
 };
 
 console.log('STARTING...');
 
 from(hikeIds)
-  .pipe(mergeMap(routeId => fetchRoute(routeId), 1))
-  .subscribe(
-    x => console.log(`FINISHED WITH RESULT ${JSON.stringify(x, null, 2)}`),
-    //() => console.log(`ROUTE HANDLING FINISHED`),
-    err => console.log(`Errored with result ${JSON.stringify(err, null, 2)}`),
-  );
+.pipe(mergeMap(routeId => fetchRoute(routeId), 1))
+.subscribe(
+  x => console.log(`FINISHED WITH RESULT ${JSON.stringify(x, null, 2)}`),
+  //() => console.log(`ROUTE HANDLING FINISHED`),
+  err => console.log(`Errored with result ${JSON.stringify(err, null, 2)}`),
+);
+*/

@@ -34,7 +34,11 @@ export class yahaStack extends Stack {
       });
     }
 
-    new GraphqlNeo4jStack(scope, 'neo4j', {});
+    new GraphqlNeo4jStack(scope, 'neo4j', {
+      neo4jEndpoint: paramsStack.neo4jEndpoint,
+      neo4jUsername: secretsManagerStack.neo4jUsername,
+      neo4jPassword: secretsManagerStack.neo4jPassword,
+    });
   }
 }
 

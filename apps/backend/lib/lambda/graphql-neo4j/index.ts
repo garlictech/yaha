@@ -3,9 +3,20 @@ import { ApolloServer } from 'apollo-server-lambda';
 import neo4j from 'neo4j-driver';
 import { Neo4jGraphQL } from '@neo4j/graphql';
 
+const neo4jUsername = process.env.NEO4J_USERNAME || '';
+const neo4jPassword = process.env.NEO4J_PASSWORD || '';
+const neo4jUri = process.env.NEO4J_URI || '';
+
 const driver = neo4j.driver(
-  'bolt://52.91.166.161:7687',
-  neo4j.auth.basic('neo4j', 'firefighting-drums-accomplishment'),
+  neo4jUri,
+  neo4j.auth.basic(neo4jUsername, neo4jPassword),
+);
+
+console.log(
+  'Connecting to neo4j server ',
+  neo4jUri,
+  neo4jUsername,
+  neo4jPassword,
 );
 
 const schemaFilename = `${__dirname}/hiking-api.graphql`;
@@ -20,7 +31,7 @@ const server = new ApolloServer({
   playground: {
     endpoint: '/graphql',
   },
-  context: ({ req }) => ({ req }),
+  context: { driver, driverConfig: { database: 'yahaosm' } },
 });
 
 export const handler = server.createHandler();
