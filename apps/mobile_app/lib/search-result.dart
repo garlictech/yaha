@@ -4,12 +4,12 @@ import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
-class PreviousActivitiesPage extends StatefulWidget {
+class SearchResultPage extends StatefulWidget {
   @override
-  _PreviousActivitiesState createState() => _PreviousActivitiesState();
+  _SearchResultState createState() => _SearchResultState();
 }
 
-class _PreviousActivitiesState extends State<PreviousActivitiesPage> {
+class _SearchResultState extends State<SearchResultPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +37,7 @@ class _PreviousActivitiesState extends State<PreviousActivitiesPage> {
                               onPressed: () {},
                             ),
                             Text(
-                              'Previous activities',
+                              'Search results',
                               style: TextStyle(
                                   fontSize: YahaFontSizes.large,
                                   fontWeight: FontWeight.w600,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:yaha/yaha-border-radius.dart';
-import 'package:yaha/yaha-colors.dart';
-import 'package:yaha/yaha-font-sizes.dart';
-import 'package:yaha/yaha-space-sizes.dart';
+import 'package:yaha/utility/yaha-border-radius.dart';
+import 'package:yaha/utility/yaha-colors.dart';
+import 'package:yaha/utility/yaha-font-sizes.dart';
+import 'package:yaha/utility/yaha-space-sizes.dart';
 
 class HikeCard extends StatelessWidget {
   //final Color color;
@@ -52,8 +52,8 @@ class HikeCard extends StatelessWidget {
                   Text(
                     subTitle + ' ($distanceFromCurrentLocation km away)',
                     style: TextStyle(
-                      fontSize: YahaFontSizes.small,
-                      fontWeight: FontWeight.w500,
+                      fontSize: YahaFontSizes.medium,
+                      fontWeight: FontWeight.w600,
                       color: YahaColors.background,
                     ),
                   ),
