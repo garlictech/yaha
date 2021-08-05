@@ -29,7 +29,6 @@ class _EventDetailPageState extends State<EventDetailPage> {
                             left: YahaSpaceSizes.general,
                             right: YahaSpaceSizes.general),
                         child: Stack(
-                          //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Align(
                               alignment: Alignment.centerLeft,

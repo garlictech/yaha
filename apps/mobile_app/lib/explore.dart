@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:yaha/search-result.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-border-width.dart';
 import 'package:yaha/utility/yaha-colors.dart';
@@ -25,172 +24,179 @@ class _ExplorePageState extends State<ExplorePage> {
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
                 return SafeArea(
-                  child: Column(children: [
-                    Container(
-                      padding: EdgeInsets.all(YahaSpaceSizes.general),
-                      child: Text('Explore',
-                          style: TextStyle(
-                              fontSize: YahaFontSizes.large,
-                              fontWeight: FontWeight.w600,
-                              color: YahaColors.textColor)),
+                  child: Container(
+                    padding: EdgeInsets.only(
+                      left: YahaSpaceSizes.general,
+                      right: YahaSpaceSizes.general,
+                      top: YahaSpaceSizes.small,
                     ),
-                    Container(
-                      padding: EdgeInsets.all(YahaSpaceSizes.general),
-                      child: TextFormField(
-                        onTap: () {
-                          Navigator.of(this.context).push(
-                              new MaterialPageRoute<dynamic>(
-                                  builder: (BuildContext context) {
-                            return new SearchResultPage();
-                          }));
-                        },
-                        keyboardType: TextInputType.text,
-                        enableSuggestions: false,
-                        autocorrect: false,
-                        style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            color: YahaColors.textColor,
-                            fontSize: YahaFontSizes.small),
-                        decoration: InputDecoration(
-                            labelText: 'Search for hike',
-                            contentPadding:
-                                EdgeInsets.only(left: YahaSpaceSizes.medium),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(
-                                    YahaBorderRadius.small),
-                                borderSide: BorderSide(
-                                    color: YahaColors.textColor,
-                                    width: YahaBorderWidth.small)),
-                            focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(
-                                    YahaBorderRadius.small),
-                                borderSide: BorderSide(
-                                    color: YahaColors.secondary,
-                                    width: YahaBorderWidth.small))),
-                      ),
-                    ),
-                    Row(
+                    child: Column(
                       children: [
-                        Flexible(
-                          child: Container(
-                            padding: EdgeInsets.only(
-                                left: YahaSpaceSizes.general,
-                                right: YahaSpaceSizes.small),
-                            child: TextFormField(
-                              keyboardType: TextInputType.text,
-                              enableSuggestions: false,
-                              autocorrect: false,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  color: YahaColors.textColor,
-                                  fontSize: YahaFontSizes.small),
-                              decoration: InputDecoration(
-                                  suffixIcon: IconButton(
-                                    icon: Icon(
-                                      Icons.gps_not_fixed,
-                                      color: YahaColors.textColor,
-                                    ),
-                                    onPressed: () {},
-                                  ),
-                                  labelText: 'Search around location',
-                                  contentPadding: EdgeInsets.only(
-                                      left: YahaSpaceSizes.medium),
-                                  enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(
-                                          YahaBorderRadius.small),
-                                      borderSide: BorderSide(
-                                          color: YahaColors.textColor,
-                                          width: YahaBorderWidth.small)),
-                                  focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(
-                                          YahaBorderRadius.small),
-                                      borderSide: BorderSide(
-                                          color: YahaColors.secondary,
-                                          width: YahaBorderWidth.small))),
+                        Stack(
+                          alignment: AlignmentDirectional.center,
+                          children: [
+                            Align(
+                              alignment: Alignment.center,
+                              child: Container(
+                                child: Text(
+                                  'Explore',
+                                  style: TextStyle(
+                                      fontSize: YahaFontSizes.large,
+                                      fontWeight: FontWeight.w600,
+                                      color: YahaColors.textColor),
+                                ),
+                              ),
                             ),
+                            Align(
+                              alignment: Alignment.centerRight,
+                              child: Container(
+                                child: IconButton(
+                                  iconSize: YahaFontSizes.xxLarge,
+                                  icon: Image.asset(
+                                    'assets/images/filter-icon.png',
+                                    //width: 28.0,
+                                  ),
+                                  onPressed: () => showBarModalBottomSheet(
+                                    expand: false,
+                                    context: context,
+                                    builder: (context) {
+                                      return SingleChildScrollView(
+                                        controller:
+                                            ModalScrollController.of(context),
+                                        child: Container(
+                                          color: YahaColors.tertiaryAccentColor,
+                                          child: Column(
+                                            children: [
+                                              ListTile(
+                                                leading: Container(
+                                                  color: YahaColors
+                                                      .tertiaryAccentColor,
+                                                  child: InkWell(
+                                                      onTap: () {
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                      },
+                                                      child: Icon(Icons
+                                                          .arrow_back) // the arrow back icon
+                                                      ),
+                                                ),
+                                                title: Center(
+                                                    child: Text(
+                                                        "Filters") // Your desired title
+                                                    ),
+                                              ),
+                                              Container(
+                                                color: YahaColors.background,
+                                                child: FilterPage(),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Container(
+                          constraints: BoxConstraints(maxWidth: 400),
+                          padding: EdgeInsets.only(
+                              bottom: YahaSpaceSizes.general,
+                              top: YahaSpaceSizes.general),
+                          child: TextFormField(
+                            keyboardType: TextInputType.text,
+                            enableSuggestions: false,
+                            autocorrect: false,
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                color: YahaColors.textColor,
+                                fontSize: YahaFontSizes.small),
+                            decoration: InputDecoration(
+                                labelText: 'Search for hike',
+                                contentPadding: EdgeInsets.only(
+                                    left: YahaSpaceSizes.medium),
+                                enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        YahaBorderRadius.small),
+                                    borderSide: BorderSide(
+                                        color: YahaColors.textColor,
+                                        width: YahaBorderWidth.small)),
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        YahaBorderRadius.small),
+                                    borderSide: BorderSide(
+                                        color: YahaColors.secondary,
+                                        width: YahaBorderWidth.small))),
                           ),
                         ),
                         Container(
-                            padding: EdgeInsets.only(
-                                left: YahaSpaceSizes.small,
-                                right: YahaSpaceSizes.general),
-                            child: IconButton(
-                                iconSize: YahaFontSizes.xxLarge,
-                                icon: CircleAvatar(
-                                  backgroundColor: YahaColors.primary,
-                                  radius: YahaBorderRadius.poiLarge,
-                                  child: Icon(
-                                    Icons.filter_list,
-                                    color: YahaColors.background,
+                          constraints: BoxConstraints(maxWidth: 400),
+                          child: TextFormField(
+                            keyboardType: TextInputType.text,
+                            enableSuggestions: false,
+                            autocorrect: false,
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                color: YahaColors.textColor,
+                                fontSize: YahaFontSizes.small),
+                            decoration: InputDecoration(
+                                suffixIcon: IconButton(
+                                  icon: Icon(
+                                    Icons.gps_not_fixed,
+                                    color: YahaColors.textColor,
                                   ),
+                                  onPressed: () {},
                                 ),
-                                onPressed: () => showBarModalBottomSheet(
-                                      expand: false,
-                                      context: context,
-                                      builder: (context) {
-                                        return SingleChildScrollView(
-                                            controller:
-                                                ModalScrollController.of(
-                                                    context),
-                                            child: Container(
-                                                color: YahaColors
-                                                    .tertiaryAccentColor,
-                                                child: Column(children: [
-                                                  ListTile(
-                                                    leading: Container(
-                                                      color: YahaColors
-                                                          .tertiaryAccentColor,
-                                                      child: InkWell(
-                                                          onTap: () {
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
-                                                          },
-                                                          child: Icon(Icons
-                                                              .arrow_back) // the arrow back icon
-                                                          ),
-                                                    ),
-                                                    title: Center(
-                                                        child: Text(
-                                                            "Filters") // Your desired title
-                                                        ),
-                                                  ),
-                                                  Container(
-                                                      color:
-                                                          YahaColors.background,
-                                                      child: FilterPage())
-                                                ])));
-                                      },
-                                    ))),
-                      ],
-                    ),
-                    Container(
-                      padding: const EdgeInsets.all(YahaSpaceSizes.general),
-                      child: SizedBox(
-                        height: 50,
-                        width: 300,
-                        child: ElevatedButton.icon(
-                          icon: Icon(
-                            Icons.search,
-                            color: YahaColors.accentColor,
-                            size: YahaFontSizes.large,
-                          ),
-                          onPressed: () {},
-                          label: Text('Explore',
-                              style: TextStyle(
-                                fontSize: YahaFontSizes.small,
-                                fontWeight: FontWeight.w600,
-                              )),
-                          style: ElevatedButton.styleFrom(
-                            primary: YahaColors.primary,
-                            shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(
-                                    Radius.circular(YahaBorderRadius.general))),
+                                labelText: 'Search around location',
+                                contentPadding: EdgeInsets.only(
+                                    left: YahaSpaceSizes.medium),
+                                enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        YahaBorderRadius.small),
+                                    borderSide: BorderSide(
+                                        color: YahaColors.textColor,
+                                        width: YahaBorderWidth.small)),
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        YahaBorderRadius.small),
+                                    borderSide: BorderSide(
+                                        color: YahaColors.secondary,
+                                        width: YahaBorderWidth.small))),
                           ),
                         ),
-                      ),
+                        Container(
+                          padding: const EdgeInsets.only(
+                              top: YahaSpaceSizes.general),
+                          child: SizedBox(
+                            height: 50,
+                            width: 300,
+                            child: ElevatedButton.icon(
+                              icon: Icon(
+                                Icons.search,
+                                color: YahaColors.accentColor,
+                                size: YahaFontSizes.large,
+                              ),
+                              onPressed: () {},
+                              label: Text('Explore',
+                                  style: TextStyle(
+                                    fontSize: YahaFontSizes.small,
+                                    fontWeight: FontWeight.w600,
+                                  )),
+                              style: ElevatedButton.styleFrom(
+                                primary: YahaColors.primary,
+                                shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(
+                                            YahaBorderRadius.general))),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ]),
+                  ),
                 );
               },
               childCount: 1,
