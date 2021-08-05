@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:yaha/search-result.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-border-width.dart';
 import 'package:yaha/utility/yaha-colors.dart';
