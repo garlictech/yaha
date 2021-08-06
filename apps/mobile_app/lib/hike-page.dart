@@ -712,8 +712,6 @@ class _HikePageState extends State<HikePage> {
 SpeedDial buildSpeedDial() {
   return SpeedDial(
     /// both default to 16
-    marginEnd: 18,
-    marginBottom: 720,
     // animatedIcon: AnimatedIcons.menu_close,
     // animatedIconTheme: IconThemeData(size: 22.0),
     /// This is ignored if animatedIcon is non null
@@ -746,7 +744,6 @@ SpeedDial buildSpeedDial() {
     elevation: 8.0,
     shape: CircleBorder(),
 
-    orientation: SpeedDialOrientation.Down,
     // childMarginBottom: 2,
     // childMarginTop: 2,
     // gradientBoxShape: BoxShape.rectangle,
