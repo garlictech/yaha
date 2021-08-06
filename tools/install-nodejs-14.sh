@@ -10,3 +10,5 @@ tar -xvf $package_name.tar.gz -C $package_location
 rm -rfv $package_name.tar.gz
 
 echo "export PATH=$package_location/$package_name/bin:\$PATH" >> ~/.profile
+
+node --version
