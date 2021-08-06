@@ -15,5 +15,5 @@ echo "export PATH=$package_location/$package_name/bin:\$PATH" >> ~/.bashrc
 #export PATH=$package_location/$package_name/bin:\$PATH
 node --version
 which node
-ln -sf $package_location/$package_name/bin `which node`
+ln -sf $package_location/$package_name/bin/node `which node`
 node --version
