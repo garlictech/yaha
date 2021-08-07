@@ -38,7 +38,6 @@ dependencies:
   webview_flutter: ^2.0.8
   google_fonts: ^2.1.0
   logger: ^1.0.0
-  logger_flutter: ^0.0.1
   dartz: ^0.10.0-nullsafety.2
   toggle_switch: ^1.2.0
   functional_data: ^1.0.0
