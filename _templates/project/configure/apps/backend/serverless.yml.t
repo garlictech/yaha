@@ -8,6 +8,7 @@ frameworkVersion: ^2.16.1
 
 plugins:
   - serverless-bundle
+  - serverless-offline
 
 package:
   individually: true
@@ -23,6 +24,9 @@ custom:
     linting: false
     sourcemaps: true
     caching: true
+    copyFiles:
+      - from: ../../libs/neo4j-gql/backend/graphql/schema/hiking-api.graphql
+        to: lib/lambda/graphql-neo4j/hiking-api.graphql
 
   offline:
     useChildProcesses: true
@@ -38,3 +42,15 @@ functions:
 
   consumer-pre-signup:
     handler: lib/lambda/consumer-pre-signup/index.handler
+  
+  graphql-neo4j:
+    handler: lib/lambda/graphql-neo4j/index.handler
+    events:
+      - http:
+          path: graphql
+          method: post
+          cors: true
+      - http:
+          path: graphql
+          method: get
+          cors: true
