@@ -21,6 +21,8 @@ export class GraphqlNeo4jStack extends sst.Stack {
       'GraphqlNeo4jLambdaStack',
       {
         ...commonLambdaProps,
+        timeout: cdk.Duration.seconds(30),
+        memorySize: 512,
         handler: 'lib/lambda/graphql-neo4j/index.handler',
         code: lambda.Code.fromAsset(
           path.join(__dirname, '../../.serverless/graphql-neo4j.zip'),

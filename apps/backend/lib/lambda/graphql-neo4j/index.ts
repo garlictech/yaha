@@ -12,12 +12,7 @@ const driver = neo4j.driver(
   neo4j.auth.basic(neo4jUsername, neo4jPassword),
 );
 
-console.log(
-  'Connecting to neo4j server ',
-  neo4jUri,
-  neo4jUsername,
-  neo4jPassword,
-);
+console.log('Connecting to neo4j server ', neo4jUri);
 
 const schemaFilename = `${__dirname}/hiking-api.graphql`;
 
@@ -31,7 +26,7 @@ const server = new ApolloServer({
   playground: {
     endpoint: '/graphql',
   },
-  context: { driver, driverConfig: { database: 'yahaosm' } },
+  context: { driver, driverConfig: { database: 'neo4j' } },
 });
 
 export const handler = server.createHandler();
