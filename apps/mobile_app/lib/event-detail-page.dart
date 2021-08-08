@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:yaha/yaha-border-radius.dart';
-import 'package:yaha/yaha-border-width.dart';
-import 'package:yaha/yaha-box-sizes.dart';
-import 'package:yaha/yaha-colors.dart';
-import 'package:yaha/yaha-font-sizes.dart';
-import 'package:yaha/yaha-space-sizes.dart';
+import 'package:yaha/utility/yaha-border-radius.dart';
+import 'package:yaha/utility/yaha-border-width.dart';
+import 'package:yaha/utility/yaha-box-sizes.dart';
+import 'package:yaha/utility/yaha-colors.dart';
+import 'package:yaha/utility/yaha-font-sizes.dart';
+import 'package:yaha/utility/yaha-space-sizes.dart';
 
 class EventDetailPage extends StatefulWidget {
   @override
@@ -29,7 +29,6 @@ class _EventDetailPageState extends State<EventDetailPage> {
                             left: YahaSpaceSizes.general,
                             right: YahaSpaceSizes.general),
                         child: Stack(
-                          //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Align(
                               alignment: Alignment.centerLeft,
