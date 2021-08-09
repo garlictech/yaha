@@ -10764,10 +10764,10 @@ got@^9.6.0:
     to-readable-stream "^1.0.0"
     url-parse-lax "^3.0.0"
 
-gpx-builder@3.7.5:
-  version "3.7.5"
-  resolved "https://registry.yarnpkg.com/gpx-builder/-/gpx-builder-3.7.5.tgz#af44de281f741247749cd52180036cc75b92ad21"
-  integrity sha512-kEVQdLt5eJxm17Po+VOEzVW1SFK+UskICLiX7T9ea3E9TYlbsmj+Cx0OMuf7Usu5d9WJOkQD6dovmRwfS3bC7g==
+gpx-builder@3.7.6:
+  version "3.7.6"
+  resolved "https://registry.yarnpkg.com/gpx-builder/-/gpx-builder-3.7.6.tgz#4df470cb1a32c9ea9559fc397e4d616e4ae89bc8"
+  integrity sha512-rp4CH6Tsw43/yF1T8cwbgDBIn5XIjqbE1iniJKWgCCnHDIYiXV5jcqguIigOUH6DLCHRydm3N0qiykUPiKoWRQ==
   dependencies:
     "@babel/runtime" "^7.14.6"
     xmlbuilder "^15.1.1"
