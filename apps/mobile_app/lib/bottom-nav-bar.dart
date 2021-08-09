@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:yaha/hike-page.dart';
+import 'package:yaha/home/home-page-guest.dart';
 import 'package:yaha/previous-activities-page.dart';
-import 'package:yaha/profile-page.dart';
+import 'package:yaha/profile/profile-page.dart';
+import 'package:yaha/profile/statistics.dart';
 
 import 'package:yaha/utility/yaha-colors.dart';
 
@@ -54,7 +56,7 @@ class BottomNavBar extends StatelessWidget {
 }
 
 List<Widget> _buildScreens() {
-  return [HikePage(), ExplorePage(), PreviousActivitiesPage(), ProfilePage()];
+  return [HomePageGuest(), ExplorePage(), PreviousActivitiesPage(), ProfilePage()];
 }
 
 List<PersistentBottomNavBarItem> _navBarsItems() {

@@ -18,7 +18,7 @@ import 'package:yaha/hike-page.dart';
 
 import 'package:yaha/main.dart';
 import 'package:yaha/poi-page.dart';
-import 'package:yaha/profile-page.dart';
+import 'package:yaha/profile/profile-page.dart';
 import 'package:yaha/settings-page.dart';
 import 'package:yaha/track-page.dart';
 
