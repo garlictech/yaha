@@ -3471,7 +3471,7 @@
   resolved "https://registry.yarnpkg.com/@kwsites/promise-deferred/-/promise-deferred-1.1.1.tgz#8ace5259254426ccef57f3175bc64ed7095ed919"
   integrity sha512-GaHYm+c0O9MjZRu0ongGBRbinu8gVAMd2UZjji6jVmqKtZluZnptXGWhz1E8j8D2HJ3f/yMxKAUC0b+57wncIw==
 
-"@mapbox/togeojson@^0.16.0":
+"@mapbox/togeojson@0.16.0":
   version "0.16.0"
   resolved "https://registry.yarnpkg.com/@mapbox/togeojson/-/togeojson-0.16.0.tgz#5b283001078431821dc74e287acaf56a11ceb37c"
   integrity sha1-WygwAQeEMYIdx04oesr1ahHOs3w=
@@ -3485,7 +3485,7 @@
   resolved "https://registry.yarnpkg.com/@n1ru4l/graphql-live-query/-/graphql-live-query-0.7.1.tgz#c020d017c3ed6bcfdde49a7106ba035e4d0774f5"
   integrity sha512-5kJPe2FkPNsCGu9tocKIzUSNO986qAqdnbk8hIFqWlpVPBAmEAOYb1mr6PA18FYAlu7ojWm9Hm13k29aj2GGlQ==
 
-"@neo4j/graphql-ogm@^1.2.2":
+"@neo4j/graphql-ogm@1.2.4":
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/@neo4j/graphql-ogm/-/graphql-ogm-1.2.4.tgz#be37bb8fe3f998f5a1a5ed111f3902ef3dabec7c"
   integrity sha512-A3aT9KNIdgQFXwBoSpJ1hSiD6ZXU/dzH5cnn8TzoL6dpbuN+g3N/Y2gvOni4t4+2JPy0b78XjjLugfNU+g62wQ==
@@ -3495,7 +3495,7 @@
     camelcase "^6.2.0"
     pluralize "^8.0.0"
 
-"@neo4j/graphql@^1.2.2", "@neo4j/graphql@^1.2.4":
+"@neo4j/graphql@1.2.4", "@neo4j/graphql@^1.2.4":
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/@neo4j/graphql/-/graphql-1.2.4.tgz#6c3cb76f05f6b11afc0ea56392b62b64c041afad"
   integrity sha512-aEnGPlvn9MvMv8p50SuUiiSf4SvrIFG0ROxDe2BGBjlIiQuG7fMoUObAQgRTO6UDtXajmALN8HbsTm+jRl73uA==
@@ -4655,7 +4655,7 @@
     "@turf/helpers" "^6.5.0"
     "@turf/meta" "^6.5.0"
 
-"@turf/line-chunk@^6.5.0":
+"@turf/line-chunk@6.5.0":
   version "6.5.0"
   resolved "https://registry.yarnpkg.com/@turf/line-chunk/-/line-chunk-6.5.0.tgz#02cefa74564b9cf533a3ac8a5109c97cb7170d10"
   integrity sha512-i1FGE6YJaaYa+IJesTfyRRQZP31QouS+wh/pa6O3CC0q4T7LtHigyBSYjrbjSLfn2EVPYGlPCMFEqNWCOkC6zg==
@@ -5013,7 +5013,7 @@
   dependencies:
     "@types/request" "*"
 
-"@types/request-promise@^4.1.48":
+"@types/request-promise@4.1.48":
   version "4.1.48"
   resolved "https://registry.yarnpkg.com/@types/request-promise/-/request-promise-4.1.48.tgz#46f4225a58cefaa342c87fe5f2efb8ad3cb2c2e3"
   integrity sha512-sLsfxfwP5G3E3U64QXxKwA6ctsxZ7uKyl4I28pMj3JvV+ztWECRns73GL71KMOOJME5u1A5Vs5dkBqyiR1Zcnw==
@@ -5099,7 +5099,7 @@
   dependencies:
     "@types/node" "*"
 
-"@types/xmldom@^0.1.31":
+"@types/xmldom@0.1.31":
   version "0.1.31"
   resolved "https://registry.yarnpkg.com/@types/xmldom/-/xmldom-0.1.31.tgz#519b647cfc66debf82cdf50e49763c8fdee553d6"
   integrity sha512-bVy7s0nvaR5D1mT1a8ZkByHWNOGb6Vn4yi5TWhEdmyKlAG+08SA7Md6+jH+tYmMLueAwNeWvHHpeKrr6S4c4BA==
@@ -9894,7 +9894,7 @@ fast-safe-stringify@^2.0.4, fast-safe-stringify@^2.0.6, fast-safe-stringify@^2.0
   resolved "https://registry.yarnpkg.com/fast-safe-stringify/-/fast-safe-stringify-2.0.8.tgz#dc2af48c46cf712b683e849b2bbd446b32de936f"
   integrity sha512-lXatBjf3WPjmWD6DpIZxkeSsCOwqI0maYMpgDlx8g4U2qi4lbjA9oH/HD2a87G+KfsUmo5WbJFmqBZlPxtptag==
 
-fast-xml-parser@^3.19.0:
+fast-xml-parser@3.19.0:
   version "3.19.0"
   resolved "https://registry.yarnpkg.com/fast-xml-parser/-/fast-xml-parser-3.19.0.tgz#cb637ec3f3999f51406dd8ff0e6fc4d83e520d01"
   integrity sha512-4pXwmBplsCPv8FOY1WRakF970TjNGnGnfbOnLqjlYvMiF1SR3yOHyxMR/YCXpPTOspNF5gwudqktIP4VsWkvBg==
@@ -10764,7 +10764,7 @@ got@^9.6.0:
     to-readable-stream "^1.0.0"
     url-parse-lax "^3.0.0"
 
-gpx-builder@^3.7.3:
+gpx-builder@3.7.5:
   version "3.7.5"
   resolved "https://registry.yarnpkg.com/gpx-builder/-/gpx-builder-3.7.5.tgz#af44de281f741247749cd52180036cc75b92ad21"
   integrity sha512-kEVQdLt5eJxm17Po+VOEzVW1SFK+UskICLiX7T9ea3E9TYlbsmj+Cx0OMuf7Usu5d9WJOkQD6dovmRwfS3bC7g==
@@ -14590,7 +14590,7 @@ neo4j-driver-core@^4.3.2:
   resolved "https://registry.yarnpkg.com/neo4j-driver-core/-/neo4j-driver-core-4.3.2.tgz#18cdbf43a63b324914a56d1fec54acd41b1a01f3"
   integrity sha512-RFQAnIz/osp63msghEU1yNKZJOpyu99Ch/DU15o+RvdYTgvReewWXoThadnCzqfcuCrNqAq2lMC3SxDO284aSw==
 
-neo4j-driver@^4.3.1:
+neo4j-driver@4.3.2:
   version "4.3.2"
   resolved "https://registry.yarnpkg.com/neo4j-driver/-/neo4j-driver-4.3.2.tgz#5f5fc91f5b2496f7eb7917a69d8a101c13af01bc"
   integrity sha512-upU+EP3rEH029+2XBDG9GF406IILdckUx8D6oTyuIaH+La0aFI5Q8F52bXLDUVt9tmPx7GKO4kyb7EQSty4B9g==
@@ -16718,7 +16718,7 @@ request-promise-native@^1.0.8:
     stealthy-require "^1.1.1"
     tough-cookie "^2.3.3"
 
-request-promise@^4.2.6:
+request-promise@4.2.6:
   version "4.2.6"
   resolved "https://registry.yarnpkg.com/request-promise/-/request-promise-4.2.6.tgz#7e7e5b9578630e6f598e3813c0f8eb342a27f0a2"
   integrity sha512-HCHI3DJJUakkOr8fNoCc73E5nU5bqITjOYFMDrKHYOXWXrgD/SBaC7LjwuPymUprRyuF06UK7hd/lMHkmUXglQ==
@@ -17278,7 +17278,7 @@ serverless-bundle@4.4.0:
     webpack-node-externals "^2.5.2"
     webpack-permissions-plugin "^1.0.8"
 
-serverless-offline@^7.0.0:
+serverless-offline@7.1.0:
   version "7.1.0"
   resolved "https://registry.yarnpkg.com/serverless-offline/-/serverless-offline-7.1.0.tgz#33f904b69dd452e988a040f0108541f09d0a4a93"
   integrity sha512-ru58Zr1FeNU7JgqZrjkF+lNJBuDp/nA+izDzQxG4hSNoYpoHyNffmxAWc95WS9fGZZE6SLVUFl8sM3tJoOO9BA==
@@ -19824,7 +19824,7 @@ xmlchars@^2.2.0:
   resolved "https://registry.yarnpkg.com/xmlchars/-/xmlchars-2.2.0.tgz#060fe1bcb7f9c76fe2a17db86a9bc3ab894210cb"
   integrity sha512-JZnDKK8B0RCDw84FNdDAIpZK+JuJw+s7Lz8nksI7SIuU3UXJJslUthsi+uWBUYOwPFwW7W7PRLRfUKpxjtjFCw==
 
-xmldom@^0.6.0:
+xmldom@0.6.0:
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/xmldom/-/xmldom-0.6.0.tgz#43a96ecb8beece991cef382c08397d82d4d0c46f"
   integrity sha512-iAcin401y58LckRZ0TkI4k0VSM1Qg0KGSc3i8rU+xrxe19A/BN1zHyVSJY7uoutVlaTSzYyk/v5AmkewAP7jtg==
