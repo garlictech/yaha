@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:yaha/hike-page.dart';
 import 'package:yaha/home/home-page-guest.dart';
 import 'package:yaha/previous-activities-page.dart';
 import 'package:yaha/profile/profile-page.dart';
-import 'package:yaha/profile/statistics.dart';
 
 import 'package:yaha/utility/yaha-colors.dart';
 
