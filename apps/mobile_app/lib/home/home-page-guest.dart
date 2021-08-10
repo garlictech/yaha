@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yaha/home/explore-hike-box.dart';
 import 'package:yaha/profile/statistics.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-colors.dart';
@@ -88,27 +89,93 @@ class _HomePageGuestState extends State<HomePageGuest> {
                               Container(
                                 padding:
                                     EdgeInsets.only(top: YahaSpaceSizes.medium),
-                                height: MediaQuery.of(context).size.height,
-                                child: Statistics(),
-                              ),
-                              Container(
-                                alignment: Alignment.centerRight,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Text(
-                                      'Show more',
-                                      style: TextStyle(
-                                          fontSize: YahaFontSizes.small,
-                                          fontWeight: FontWeight.w500,
-                                          color: YahaColors.textColor),
-                                    ),
-                                    Icon(
-                                      Icons.chevron_right,
-                                      size: YahaFontSizes.xxLarge,
-                                    ),
-                                  ],
+                                height: 85,
+                                width: MediaQuery.of(context).size.width,
+                                child: Statistics(
+                                  hikes: 0,
+                                  km: 0,
+                                  hours: 0,
                                 ),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Container(
+                                    width: 135,
+                                    alignment: Alignment.centerRight,
+                                    child: TextButton(
+                                      onPressed: () {},
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'Show more',
+                                            style: TextStyle(
+                                                fontSize: YahaFontSizes.small,
+                                                fontWeight: FontWeight.w500,
+                                                color: YahaColors.textColor),
+                                          ),
+                                          Icon(
+                                            Icons.chevron_right,
+                                            size: YahaFontSizes.xxLarge,
+                                            color: YahaColors.textColor,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.only(top: YahaSpaceSizes.small),
+                          child: Column(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.only(
+                                    bottom: YahaSpaceSizes.medium),
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'Previous activities',
+                                  style: TextStyle(
+                                      fontSize: YahaFontSizes.small,
+                                      fontWeight: FontWeight.w600,
+                                      color: YahaColors.textColor),
+                                ),
+                              ),
+                              ExploreHikeBox(
+                                topTitle:
+                                    "You don’t have any activities yet. Once you complete a hike, you will see it here.",
+                                bottomTitle: "Isn’t it time you got outside?",
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.only(top: YahaSpaceSizes.large),
+                          child: Column(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.only(
+                                    bottom: YahaSpaceSizes.medium),
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'Continue hiking',
+                                  style: TextStyle(
+                                      fontSize: YahaFontSizes.small,
+                                      fontWeight: FontWeight.w600,
+                                      color: YahaColors.textColor),
+                                ),
+                              ),
+                              ExploreHikeBox(
+                                topTitle:
+                                    "You haven’t started any hikes yet. If you pause a hike you can continue it here.",
+                                bottomTitle: "Isn’t it time you got outside?",
                               ),
                             ],
                           ),

@@ -5,7 +5,16 @@ import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
 class Statistics extends StatelessWidget {
-  const Statistics({Key? key}) : super(key: key);
+  final int hikes;
+  final int km;
+  final int hours;
+
+  const Statistics({
+    Key? key,
+    required this.hikes,
+    required this.km,
+    required this.hours,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +33,7 @@ class Statistics extends StatelessWidget {
             children: [
               Column(
                 children: [
-                  Text('34',
+                  Text(hikes.toString(),
                       style: TextStyle(
                           fontSize: YahaFontSizes.medium,
                           fontWeight: FontWeight.w600,
@@ -39,7 +48,7 @@ class Statistics extends StatelessWidget {
               VerticalDivider(color: YahaColors.divider, thickness: 2),
               Column(
                 children: [
-                  Text('370',
+                  Text(km.toString(),
                       style: TextStyle(
                           fontSize: YahaFontSizes.medium,
                           fontWeight: FontWeight.w600,
@@ -54,7 +63,7 @@ class Statistics extends StatelessWidget {
               VerticalDivider(color: YahaColors.divider, thickness: 2),
               Column(
                 children: [
-                  Text('54',
+                  Text(hours.toString(),
                       style: TextStyle(
                           fontSize: YahaFontSizes.medium,
                           fontWeight: FontWeight.w600,
