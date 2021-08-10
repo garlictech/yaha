@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'package:vertical_card_pager/vertical_card_pager.dart';
 import 'package:yaha/hike/hike-card.dart';
 
 class HikeCardList extends StatefulWidget {
@@ -49,12 +48,7 @@ class _HikeCardListState extends State<HikeCardList> {
           children: <Widget>[
             Expanded(
               child: Container(
-                   padding: EdgeInsets.all(20),
-                  // child: VerticalCardPager(
-                  //   titles: titles,
-                  //   images: images,
-                  //   align: ALIGN.CENTER,
-                  // ),
+                  padding: EdgeInsets.all(20),
                   child: ListWheelScrollView(
                     itemExtent: 300,
                     children: images,
