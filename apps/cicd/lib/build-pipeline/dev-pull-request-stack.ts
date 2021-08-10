@@ -39,7 +39,6 @@ export class DevPullRequestBuildStack extends sst.Stack {
               commands: [
                 'chmod +x ./tools/*.sh',
                 `./tools/setup-aws-environment.sh`,
-                './tools/install-nodejs-14.sh',
                 'yarn --frozen-lockfile',
                 'npm install -g @aws-amplify/cli cowsay',
                 'git clone https://github.com/flutter/flutter.git -b stable --depth 1 /tmp/flutter',
