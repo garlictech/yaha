@@ -43,7 +43,6 @@ dependencies:
   functional_data: ^1.0.0
   modal_bottom_sheet: ^2.0.0
   syncfusion_flutter_sliders: ^19.2.49
-  vertical_card_pager: ^1.5.0
 
 flutter_native_splash:
   background_image: assets/images/splash-screen.png
