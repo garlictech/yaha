@@ -11,6 +11,7 @@ export class ParamsStack extends sst.Stack {
   public appleTeamId: string;
   public appleKeyId: string;
   public appleServiceId: string;
+  public neo4jEndpoint: string;
 
   constructor(scope: sst.App, id: string) {
     super(scope, id);
@@ -92,6 +93,19 @@ export class ParamsStack extends sst.Stack {
     new CfnOutput(this, 'appleServiceIdOutput', {
       value: this.appleServiceId,
       exportName: app.logicalPrefixedName('appleServiceId'),
+    });
+
+    this.neo4jEndpoint = ssm.StringParameter.fromStringParameterAttributes(
+      this,
+      'neo4jEndpointParam',
+      {
+        parameterName: `/${app.stage}-${rootAppName}/Neo4jEndpoint`,
+      },
+    ).stringValue;
+
+    new CfnOutput(this, 'neo4jEndpointOutput', {
+      value: this.neo4jEndpoint,
+      exportName: app.logicalPrefixedName('neo4jEndpoint'),
     });
   }
 }

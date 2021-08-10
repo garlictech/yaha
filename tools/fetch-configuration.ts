@@ -19,15 +19,13 @@ const mobileAppConfigurationFile = `${__dirname}/../apps/mobile_app/lib/awsconfi
 fs.mkdirSync(targetDir, { recursive: true });
 
 const generatedParams = [
-  //'YahaGraphqlApiKey',
-  //'YahaGraphqlApiUrl',
   'IdentityPoolId',
   'ConsumerWebUserPoolClientId',
   'ConsumerUserPoolDomain',
   'ConsumerUserPoolId',
 ].map(paramName => `/${prefix}/generated/${paramName}`);
 
-const fixParams = ['GoogleApiKey', 'FlickrApiKey'].map(
+const fixParams = ['GoogleApiKey', 'FlickrApiKey', 'Neo4jOsmEndpoint'].map(
   paramName => `/${prefix}/${paramName}`,
 );
 

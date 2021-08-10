@@ -19,6 +19,8 @@ export class SecretsManagerStack extends sst.Stack {
   public googleClientSecret: string;
   public facebookAppSecret: string;
   public appleSigninKey: string;
+  public neo4jUsername: string;
+  public neo4jPassword: string;
   public secretsManager: sm.ISecret;
 
   constructor(scope: sst.App, id: string, props?: sst.StackProps) {
@@ -51,6 +53,14 @@ export class SecretsManagerStack extends sst.Stack {
     const facebookAppSecret =
       this.secretsManager.secretValueFromJson('facebookAppSecret');
     this.facebookAppSecret = facebookAppSecret.toString();
+
+    const neo4jUsername =
+      this.secretsManager.secretValueFromJson('neo4jUsername');
+    this.neo4jUsername = neo4jUsername.toString();
+
+    const neo4jPassword =
+      this.secretsManager.secretValueFromJson('neo4jPassword');
+    this.neo4jPassword = neo4jPassword.toString();
 
     new CfnOutput(this, 'SecretsManager', {
       value: this.secretsManager.secretArn,
