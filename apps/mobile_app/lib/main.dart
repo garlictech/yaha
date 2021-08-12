@@ -26,6 +26,7 @@ class MyApp extends ConsumerWidget {
       title: 'Jaha',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+       
           primaryColor: YahaColors.primary,
           focusColor: YahaColors.primary,
           scaffoldBackgroundColor: YahaColors.background,
