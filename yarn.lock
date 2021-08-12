@@ -3847,10 +3847,10 @@
     webpack-merge "4.2.1"
     webpack-node-externals "1.7.2"
 
-"@nrwl/nx-cloud@12.3.8":
-  version "12.3.8"
-  resolved "https://registry.yarnpkg.com/@nrwl/nx-cloud/-/nx-cloud-12.3.8.tgz#efe5cf3d970fe4ebaa6d2e7f07d7f87bc88b8844"
-  integrity sha512-uOCydo2upopx0d439r2EqLPx9+SbXt5EcaWXT3txigD85Z78cZY2NmW5RYFk+t1OeAUCGz24Lp61Mseng7wJ0g==
+"@nrwl/nx-cloud@12.3.10":
+  version "12.3.10"
+  resolved "https://registry.yarnpkg.com/@nrwl/nx-cloud/-/nx-cloud-12.3.10.tgz#ced00d87b584eb40c1732089c1bc2df544b8a2cc"
+  integrity sha512-5ZychlcrcDrPEdpPOsH1/UcakunK9PzhgCQmrFA+fHXRxzRbLE4K/Mz8dyIs+1aloXhMoYPncHsnRRwxyLhjXQ==
   dependencies:
     axios "^0.21.1"
     chalk "4.1.0"
@@ -6332,22 +6332,7 @@ aws-sdk@*, aws-sdk@^2.761.0, aws-sdk@^2.834.0, aws-sdk@^2.848.0:
     uuid "3.3.2"
     xml2js "0.4.19"
 
-aws-sdk@2.966.0:
-  version "2.966.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.966.0.tgz#2e929cee510666bab43936e8726774af4a3a20dc"
-  integrity sha512-gxfur+ofp3WGRHecc1nlKKlrI5iiYET824/3YHjSlKsLhG1biz+hhMpz1xjA7M4cdzjuWdmGoy01CBqghet7Mg==
-  dependencies:
-    buffer "4.9.2"
-    events "1.1.1"
-    ieee754 "1.1.13"
-    jmespath "0.15.0"
-    querystring "0.2.0"
-    sax "1.2.1"
-    url "0.10.3"
-    uuid "3.3.2"
-    xml2js "0.4.19"
-
-aws-sdk@^2.966.0:
+aws-sdk@2.966.0, aws-sdk@^2.966.0:
   version "2.966.0"
   resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.966.0.tgz#2e929cee510666bab43936e8726774af4a3a20dc"
   integrity sha512-gxfur+ofp3WGRHecc1nlKKlrI5iiYET824/3YHjSlKsLhG1biz+hhMpz1xjA7M4cdzjuWdmGoy01CBqghet7Mg==
