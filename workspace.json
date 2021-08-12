@@ -162,11 +162,25 @@
             "cwd": "apps/mobile_app"
           }
         },
+        "test-ci": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "docker run --rm -v ${PWD}:/build -v /tmp/x:/root/.pub-cache --workdir /build 697486207432.dkr.ecr.us-east-1.amazonaws.com/anyupp-flutter flutter test",
+            "cwd": "apps/anyupp-mobile"
+          }
+        },
         "lint": {
           "executor": "@nrwl/workspace:run-commands",
           "options": {
             "command": "flutter analyze",
             "cwd": "apps/mobile_app"
+          }
+        },
+        "lint-ci": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "docker run --rm -v ${PWD}:/build -v /tmp/x:/root/.pub-cache --workdir /build  697486207432.dkr.ecr.us-east-1.amazonaws.com/anyupp-flutter flutter analyze",
+            "cwd": "apps/anyupp-mobile"
           }
         },
         "assemble": {
@@ -223,6 +237,13 @@
           "options": {
             "command": "flutter build apk",
             "cwd": "apps/mobile_app"
+          }
+        },
+        "buildApk-ci": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "docker run --rm -v ${PWD}:/build -v /tmp/x:/root/.pub-cache --workdir /build 697486207432.dkr.ecr.us-east-1.amazonaws.com/anyupp-flutter flutter build apk",
+            "cwd": "apps/anyupp-mobile"
           }
         },
         "buildAppbundle": {
