@@ -1,4 +1,10 @@
 ## ------ Generic types -----------------------------------------------------
+type Point {
+  lat: Number!
+  lon: Number!
+  ele: Number
+}
+
 enum PublicationState {
   draft
   published

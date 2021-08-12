@@ -24,9 +24,6 @@ export class DevPullRequestBuildStack extends sst.Stack {
       ],
     });
 
-    const generatedLibExcludes =
-      '--exclude=shared-config --exclude=yaha-gql-api --exclude=crud-gql-api';
-
     const project = new codebuild.Project(
       this,
       'Yaha:DEV Verify Pull Request',
@@ -36,25 +33,14 @@ export class DevPullRequestBuildStack extends sst.Stack {
           version: '0.2',
           phases: {
             install: {
-              commands: [
-                'chmod +x ./tools/*.sh',
-                `./tools/setup-aws-environment.sh`,
-                './tools/install-nodejs-14.sh',
-                'yarn --frozen-lockfile',
-                'npm install -g @aws-amplify/cli cowsay',
-                'git clone https://github.com/flutter/flutter.git -b stable --depth 1 /tmp/flutter',
-                'export PATH=$PATH:/tmp/flutter/bin',
-                'flutter doctor',
-                'npx cowsay "STARTING PR CHECK"',
-              ],
+              commands: ['apps/cicd/scripts/pr-install.sh'],
+              'runtime-versions': {
+                nodejs: 14,
+              },
             },
             build: {
               commands: [
-                `./tools/build-workspace.sh ${utils.appConfig.name} ${stage}`,
-                `yarn nx affected:lint --base=${stage} ${generatedLibExcludes}`,
-                `yarn nx affected:test --base=${stage} --exclude="integration-tests-universal" ${generatedLibExcludes}`,
-                `yarn nx buildApk mobile_app`,
-                'npx cowsay "YOUR PR IS SUPERCOOL!!!"',
+                `apps/cicd/scripts/pr-build.sh ${utils.appConfig.name} ${stage}`,
               ],
             },
           },
@@ -66,12 +52,15 @@ export class DevPullRequestBuildStack extends sst.Stack {
             variables: {
               NODE_OPTIONS:
                 '--unhandled-rejections=strict --max_old_space_size=8196',
+              GIT_DISCOVERY_ACROSS_FILESYSTEM: 1,
             },
+            'git-credential-helper': 'yes',
           },
         }),
         environment: {
-          buildImage: codebuild.LinuxBuildImage.AMAZON_LINUX_2_3,
+          buildImage: codebuild.LinuxBuildImage.STANDARD_5_0,
           computeType: codebuild.ComputeType.MEDIUM,
+          privileged: true,
         },
       },
     );

@@ -1,4 +1,11 @@
 # Add files here to ignore them from prettier formatting
-
 /dist
 /coverage
+.*
+cdk.out
+amplify
+generated
+cyreport
+build
+apps/mobile_app/assets
+
