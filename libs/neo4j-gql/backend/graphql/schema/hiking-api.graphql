@@ -1,8 +1,8 @@
 ## ------ Generic types -----------------------------------------------------
 type Point {
-  lat: Number!
-  lon: Number!
-  ele: Number
+  lat: Float!
+  lon: Float!
+  ele: Float
 }
 
 enum PublicationState {
@@ -84,7 +84,7 @@ type Poi {
   tags: [String!]
   sourceObject: [PoiSourceObject!]!
   address: String
-  phoneNumber: String
+  phoneFloat: String
   openingHours: String
 }
 
