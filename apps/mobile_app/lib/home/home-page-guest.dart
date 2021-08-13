@@ -101,7 +101,7 @@ class _HomePageGuestState extends State<HomePageGuest> {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   Container(
-                                    width: 135,
+                                    //width: 135,
                                     alignment: Alignment.centerRight,
                                     child: TextButton(
                                       onPressed: () {},
