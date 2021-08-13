@@ -1,10 +1,14 @@
+import 'package:dartz/dartz.dart' hide Lens;
+import 'package:json_annotation/json_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:functional_data/functional_data.dart';
+import 'package:yaha/core/local-storage-handler.dart';
 
 part 'app-settings-state.g.dart';
 
 @FunctionalData()
+@JsonSerializable()
 class ApplicationSettingsState extends $ApplicationSettingsState {
   final bool isEnglish;
   final bool isKm;
@@ -24,26 +28,51 @@ class ApplicationSettingsState extends $ApplicationSettingsState {
       this.temperatureInitialIndex = 0,
       this.timeFormatInitialIndex = 1,
       this.currentLanguageTitle = 'English'});
+
+  factory ApplicationSettingsState.fromJson(Map<String, dynamic> json) =>
+      _$ApplicationSettingsStateFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ApplicationSettingsStateToJson(this);
 }
 
 class ApplicationSettingsStateNotifier
     extends StateNotifier<ApplicationSettingsState> {
-  ApplicationSettingsStateNotifier() : super(ApplicationSettingsState());
+  static const localStorageKey = 'applicationSettings';
 
-  updateLanguage(bool newState, String title) =>
-      state = state.copyWith(isEnglish: newState, currentLanguageTitle: title);
+  final LocalStorageHandler localStorageHandler;
 
-  updateDistanceFormat(bool newState, int newInitialIndex) => state =
-      state.copyWith(isKm: newState, distanceInitialIndex: newInitialIndex);
+  ApplicationSettingsStateNotifier(ProviderReference ref)
+      : localStorageHandler = ref.read(localStorageHandlerProvider),
+        super(ApplicationSettingsState()) {
+    readSettingsFromLocalStore();
+  }
 
-  updateTemperatureFormat(bool newState, int newInitialIndex) => state = state
-      .copyWith(isCelsius: newState, temperatureInitialIndex: newInitialIndex);
+  updateLanguage(bool newState, String title) => _updateState(
+      state.copyWith(isEnglish: newState, currentLanguageTitle: title));
+
+  updateDistanceFormat(bool newState, int newInitialIndex) => _updateState(
+      state.copyWith(isKm: newState, distanceInitialIndex: newInitialIndex));
+
+  updateTemperatureFormat(bool newState, int newInitialIndex) =>
+      _updateState(state.copyWith(
+          isCelsius: newState, temperatureInitialIndex: newInitialIndex));
 
   updateTimeFormat(bool newState, int newInitialIndex) =>
-      state = state.copyWith(
-          isTimeFormat24: newState, timeFormatInitialIndex: newInitialIndex);
+      _updateState(state.copyWith(
+          isTimeFormat24: newState, timeFormatInitialIndex: newInitialIndex));
+
+  Future<void> readSettingsFromLocalStore() async {
+    (await localStorageHandler.getItem(localStorageKey))
+        .flatMap((x) => catching(() => ApplicationSettingsState.fromJson(x)))
+        .fold((_) => NoValueInLocalStorageGlitch(), (r) => state = r);
+  }
+
+  _updateState(newState) async {
+    state = newState;
+    await localStorageHandler.setItem(localStorageKey, state);
+  }
 }
 
 final applicationSettingsStateProvider = StateNotifierProvider<
     ApplicationSettingsStateNotifier,
-    ApplicationSettingsState>((_) => ApplicationSettingsStateNotifier());
+    ApplicationSettingsState>((ref) => ApplicationSettingsStateNotifier(ref));

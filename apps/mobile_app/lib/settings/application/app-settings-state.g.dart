@@ -179,3 +179,34 @@ class ApplicationSettingsState$ {
             currentLanguageTitle: currentLanguageTitle),
   );
 }
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+ApplicationSettingsState _$ApplicationSettingsStateFromJson(
+    Map<String, dynamic> json) {
+  return ApplicationSettingsState(
+    isEnglish: json['isEnglish'] as bool,
+    isKm: json['isKm'] as bool,
+    isCelsius: json['isCelsius'] as bool,
+    isTimeFormat24: json['isTimeFormat24'] as bool,
+    distanceInitialIndex: json['distanceInitialIndex'] as int,
+    temperatureInitialIndex: json['temperatureInitialIndex'] as int,
+    timeFormatInitialIndex: json['timeFormatInitialIndex'] as int,
+    currentLanguageTitle: json['currentLanguageTitle'] as String,
+  );
+}
+
+Map<String, dynamic> _$ApplicationSettingsStateToJson(
+        ApplicationSettingsState instance) =>
+    <String, dynamic>{
+      'isEnglish': instance.isEnglish,
+      'isKm': instance.isKm,
+      'isCelsius': instance.isCelsius,
+      'isTimeFormat24': instance.isTimeFormat24,
+      'distanceInitialIndex': instance.distanceInitialIndex,
+      'temperatureInitialIndex': instance.temperatureInitialIndex,
+      'timeFormatInitialIndex': instance.timeFormatInitialIndex,
+      'currentLanguageTitle': instance.currentLanguageTitle,
+    };
