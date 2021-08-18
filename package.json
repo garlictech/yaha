@@ -72,7 +72,7 @@
     "@nrwl/tao": "12.7.0",
     "@nrwl/workspace": "12.7.0",
     "@nxrocks/nx-flutter": "2.1.0",
-    "@serverless-stack/cli": "0.38.0",
+    "@serverless-stack/cli": "0.40.1",
     "@serverless-stack/resources": "0.38.0",
     "@types/aws-lambda": "8.10.82",
     "@types/cypress-cucumber-preprocessor": "4.0.1",
