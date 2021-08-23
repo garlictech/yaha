@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:yaha/home/explore-hike-box.dart';
+import 'package:yaha/home/show-more-button.dart';
 import 'package:yaha/profile/statistics.dart';
+import 'package:yaha/utility/challenge-box.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
+import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
@@ -97,38 +100,7 @@ class _HomePageGuestState extends State<HomePageGuest> {
                                   hours: 0,
                                 ),
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Container(
-                                    width: 135,
-                                    alignment: Alignment.centerRight,
-                                    child: TextButton(
-                                      onPressed: () {},
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            'Show more',
-                                            style: TextStyle(
-                                                fontSize: YahaFontSizes.small,
-                                                fontWeight: FontWeight.w500,
-                                                color: YahaColors.textColor),
-                                          ),
-                                          Icon(
-                                            Icons.chevron_right,
-                                            size: YahaFontSizes.xxLarge,
-                                            color: YahaColors.textColor,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                              ShowMoreButton(),
                             ],
                           ),
                         ),
@@ -177,6 +149,55 @@ class _HomePageGuestState extends State<HomePageGuest> {
                                     "You haven’t started any hikes yet. If you pause a hike you can continue it here.",
                                 bottomTitle: "Isn’t it time you got outside?",
                               ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.only(top: YahaSpaceSizes.large),
+                          child: Column(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.only(
+                                    bottom: YahaSpaceSizes.medium),
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'Current challenges',
+                                  style: TextStyle(
+                                      fontSize: YahaFontSizes.small,
+                                      fontWeight: FontWeight.w600,
+                                      color: YahaColors.textColor),
+                                ),
+                              ),
+                              Container(
+                                height: YahaBoxSizes.heightGeneral,
+                                child: ListView(
+                                  scrollDirection: Axis.horizontal,
+                                  children: [
+                                    Container(
+                                      padding: EdgeInsets.only(right: YahaSpaceSizes.general),
+                                      child: ChallengeBox(
+                                        title: 'Complete a hike at night',
+                                        icon:
+                                            'assets/images/nightlight_black_24dp@3x.png',
+                                      ),
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.only(right: YahaSpaceSizes.general),
+                                      child: ChallengeBox(
+                                        title: 'Complete a hike at night',
+                                        icon:
+                                            'assets/images/nightlight_black_24dp@3x.png',
+                                      ),
+                                    ),
+                                    ChallengeBox(
+                                      title: 'Complete a hike at night',
+                                      icon:
+                                          'assets/images/nightlight_black_24dp@3x.png',
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              ShowMoreButton(),
                             ],
                           ),
                         ),
