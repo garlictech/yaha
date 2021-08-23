@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:yaha/auth/auth-state.dart';
 import 'package:yaha/home/explore-hike-box.dart';
 import 'package:yaha/home/show-more-button.dart';
 import 'package:yaha/profile/statistics.dart';
 import 'package:yaha/utility/challenge-box.dart';
+import 'package:yaha/user/user-state.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
-class HomePageGuest extends StatefulWidget {
+class HomePageGuest extends ConsumerWidget {
   @override
-  _HomePageGuestState createState() => _HomePageGuestState();
-}
+  Widget build(BuildContext context, ScopedReader watch) {
+    AsyncValue userState = watch(userStateProvider);
+    final authState = watch(authStateProvider);
+    final authStateNotifier = watch(authStateProvider.notifier);
 
-class _HomePageGuestState extends State<HomePageGuest> {
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
         physics: BouncingScrollPhysics(),
@@ -39,28 +41,50 @@ class _HomePageGuestState extends State<HomePageGuest> {
                               child: Row(
                                 children: [
                                   Container(
-                                    height: 64,
-                                    width: 64,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(
-                                          YahaBorderRadius.xSmall),
-                                      child: Image.asset(
-                                        'assets/images/profile.png',
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
+                                      height: 64,
+                                      width: 64,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(
+                                            YahaBorderRadius.xSmall),
+                                        child: TextButton(
+                                            onPressed: () {
+                                              showAlertDialog(
+                                                  context, authStateNotifier);
+                                            },
+                                            child: userState.when(
+                                                loading: () =>
+                                                    const CircularProgressIndicator(),
+                                                error: (err, stack) =>
+                                                    Text('😱'),
+                                                data: (state) => Image.asset(
+                                                      state.avatarImage,
+                                                      fit: BoxFit.cover,
+                                                    ))),
+                                      )),
                                   Container(
-                                    padding: EdgeInsets.only(
-                                        left: YahaSpaceSizes.general),
-                                    child: Text(
-                                      'Welcome!',
-                                      style: TextStyle(
-                                          fontSize: YahaFontSizes.medium,
-                                          fontWeight: FontWeight.w600,
-                                          color: YahaColors.textColor),
-                                    ),
-                                  ),
+                                      padding: EdgeInsets.only(
+                                          left: YahaSpaceSizes.general),
+                                      child: userState.when(
+                                        loading: () =>
+                                            const CircularProgressIndicator(),
+                                        error: (err, stack) => Text('😱'),
+                                        data: (state) => Text(
+                                          'Hi ${state.nick}',
+                                          style: TextStyle(
+                                              fontSize: YahaFontSizes.medium,
+                                              fontWeight: FontWeight.w600,
+                                              color: YahaColors.textColor),
+                                        ),
+                                      )),
+                                  ...(authState.loggedIn
+                                      ? [
+                                          TextButton(
+                                            child: Text("Logout"),
+                                            onPressed: () =>
+                                                authStateNotifier.logout(),
+                                          )
+                                        ]
+                                      : [])
                                 ],
                               ),
                             ),
@@ -211,6 +235,32 @@ class _HomePageGuestState extends State<HomePageGuest> {
           ),
         ],
       ),
+    );
+  }
+
+  showAlertDialog(BuildContext context, authStateNotifier) {
+    Widget continueButton = TextButton(
+      child: Text("OK, I'm logged in"),
+      onPressed: () {
+        Navigator.of(context).pop();
+        authStateNotifier.loggedIn();
+      },
+    );
+
+    AlertDialog alert = AlertDialog(
+      title: Text("Login effect simulator"),
+      content:
+          Text("Ok, the login window was up, you logged in successfully.."),
+      actions: [
+        continueButton,
+      ],
+    );
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
     );
   }
 }
