@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yaha/auth/auth-state.dart';
+import 'package:yaha/hike/hike-card.dart';
 import 'package:yaha/home/explore-hike-box.dart';
 import 'package:yaha/home/show-more-button.dart';
 import 'package:yaha/profile/statistics.dart';
 import 'package:yaha/utility/challenge-box.dart';
 import 'package:yaha/user/user-state.dart';
+import 'package:yaha/utility/event-box.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
@@ -198,30 +200,178 @@ class HomePageGuest extends ConsumerWidget {
                                   scrollDirection: Axis.horizontal,
                                   children: [
                                     Container(
-                                      padding: EdgeInsets.only(right: YahaSpaceSizes.general),
+                                      padding: EdgeInsets.only(
+                                          right: YahaSpaceSizes.general),
                                       child: ChallengeBox(
                                         title: 'Complete a hike at night',
                                         icon:
-                                            'assets/images/nightlight_black_24dp@3x.png',
+                                            'assets/images/nightlight_black_24dp.png',
                                       ),
                                     ),
                                     Container(
-                                      padding: EdgeInsets.only(right: YahaSpaceSizes.general),
+                                      padding: EdgeInsets.only(
+                                          right: YahaSpaceSizes.general),
                                       child: ChallengeBox(
-                                        title: 'Complete a hike at night',
+                                        title: 'Take 10 pictures during a hike',
                                         icon:
-                                            'assets/images/nightlight_black_24dp@3x.png',
+                                            'assets/images/photo_camera_black_24dp.png',
                                       ),
                                     ),
                                     ChallengeBox(
                                       title: 'Complete a hike at night',
                                       icon:
-                                          'assets/images/nightlight_black_24dp@3x.png',
+                                          'assets/images/nightlight_black_24dp.png',
                                     ),
                                   ],
                                 ),
                               ),
                               ShowMoreButton(),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.only(top: YahaSpaceSizes.small),
+                          child: Column(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.only(
+                                    bottom: YahaSpaceSizes.medium),
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'Events starting next month',
+                                  style: TextStyle(
+                                      fontSize: YahaFontSizes.small,
+                                      fontWeight: FontWeight.w600,
+                                      color: YahaColors.textColor),
+                                ),
+                              ),
+                              Container(
+                                height: YahaBoxSizes.heightGeneral,
+                                child: ListView(
+                                  scrollDirection: Axis.horizontal,
+                                  children: [
+                                    Container(
+                                      padding: EdgeInsets.only(
+                                          right: YahaSpaceSizes.general),
+                                      child: EventBox(
+                                          background:
+                                              'assets/images/Nagy_Eged_iTura.png'),
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.only(
+                                          right: YahaSpaceSizes.general),
+                                      child: EventBox(
+                                          background:
+                                              'assets/images/bukki_batyus_barangolas.png'),
+                                    ),
+                                    EventBox(
+                                        background:
+                                            'assets/images/Nagy_Eged_iTura.png'),
+                                  ],
+                                ),
+                              ),
+                              ShowMoreButton(),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.only(top: YahaSpaceSizes.small),
+                          child: Column(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.only(
+                                    bottom: YahaSpaceSizes.medium),
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'Best hikes near you',
+                                  style: TextStyle(
+                                      fontSize: YahaFontSizes.small,
+                                      fontWeight: FontWeight.w600,
+                                      color: YahaColors.textColor),
+                                ),
+                              ),
+                              Container(
+                                height: YahaBoxSizes.heightMedium,
+                                child: ListView(
+                                  scrollDirection: Axis.horizontal,
+                                  children: [
+                                    Container(
+                                      padding: EdgeInsets.only(
+                                          right: YahaSpaceSizes.general),
+                                      width: YahaBoxSizes.widthMedium,
+                                      child: HikeCard(
+                                        title: 'Tura',
+                                        subTitle:
+                                            'Túrázás, vár, erdő, és barlang',
+                                        distanceFromCurrentLocation: 10,
+                                        backgroundImage:
+                                            'assets/images/tura.png',
+                                      ),
+                                    ),
+                                    Container(
+                                      width: YahaBoxSizes.widthMedium,
+                                      child: HikeCard(
+                                        title: 'Mátra',
+                                        subTitle:
+                                            'Mátra, erdős hegyek túrázáshoz',
+                                        distanceFromCurrentLocation: 10,
+                                        backgroundImage:
+                                            'assets/images/matra.png',
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.only(top: YahaSpaceSizes.large),
+                          child: Column(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.only(
+                                    bottom: YahaSpaceSizes.medium),
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'Best hikes of the world',
+                                  style: TextStyle(
+                                      fontSize: YahaFontSizes.small,
+                                      fontWeight: FontWeight.w600,
+                                      color: YahaColors.textColor),
+                                ),
+                              ),
+                              Container(
+                                height: YahaBoxSizes.heightMedium,
+                                child: ListView(
+                                  scrollDirection: Axis.horizontal,
+                                  children: [
+                                    Container(
+                                      padding: EdgeInsets.only(
+                                          right: YahaSpaceSizes.general),
+                                      width: YahaBoxSizes.widthMedium,
+                                      child: HikeCard(
+                                        title: 'Budapest',
+                                        subTitle: 'Várhegy, Duna, Lánchíd',
+                                        distanceFromCurrentLocation: 10,
+                                        backgroundImage:
+                                            'assets/images/budapest.png',
+                                      ),
+                                    ),
+                                    Container(
+                                      width: YahaBoxSizes.widthMedium,
+                                      child: HikeCard(
+                                        title: 'Balaton',
+                                        subTitle:
+                                            'Nagy édesvizű tó üdülővárosokkal',
+                                        distanceFromCurrentLocation: 10,
+                                        backgroundImage:
+                                            'assets/images/balaton.png',
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ],
                           ),
                         ),

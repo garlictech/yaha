@@ -5,17 +5,17 @@ import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
 class HikeCard extends StatelessWidget {
-  //final Color color;
   final String title;
   final String subTitle;
   final int distanceFromCurrentLocation;
+  final String backgroundImage;
 
   const HikeCard({
     Key? key,
-    //required this.color,
     required this.title,
     required this.subTitle,
     required this.distanceFromCurrentLocation,
+    required this.backgroundImage,
   }) : super(key: key);
 
   @override
@@ -24,11 +24,9 @@ class HikeCard extends StatelessWidget {
       body: ClipRRect(
         borderRadius: BorderRadius.circular(YahaBorderRadius.poiSmall),
         child: Container(
-          //color: color,
           decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('assets/images/Parlament.jpg'),
-                fit: BoxFit.cover),
+                image: AssetImage(backgroundImage), fit: BoxFit.cover),
           ),
           child: Align(
             alignment: Alignment.bottomLeft,
