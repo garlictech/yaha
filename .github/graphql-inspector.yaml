@@ -1,2 +1,2 @@
 branch: 'dev'
-schema: 'libs/schema-placeholder.graphql'
+schema: 'libs/neo4j-gql/backend/graphql/schema/hiking-api.graphql'

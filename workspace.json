@@ -162,10 +162,24 @@
             "cwd": "apps/mobile_app"
           }
         },
+        "test-ci": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "docker run --rm -v ${PWD}:/build -v /tmp/x:/root/.pub-cache --workdir /build 697486207432.dkr.ecr.us-east-1.amazonaws.com/yaha-flutter flutter test",
+            "cwd": "apps/mobile_app"
+          }
+        },
         "lint": {
           "executor": "@nrwl/workspace:run-commands",
           "options": {
             "command": "flutter analyze",
+            "cwd": "apps/mobile_app"
+          }
+        },
+        "lint-ci": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "docker run --rm -v ${PWD}:/build -v /tmp/x:/root/.pub-cache --workdir /build  697486207432.dkr.ecr.us-east-1.amazonaws.com/yaha-flutter flutter analyze",
             "cwd": "apps/mobile_app"
           }
         },
@@ -225,6 +239,13 @@
             "cwd": "apps/mobile_app"
           }
         },
+        "buildApk-ci": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "docker run --rm -v ${PWD}:/build -v /tmp/x:/root/.pub-cache --workdir /build 697486207432.dkr.ecr.us-east-1.amazonaws.com/yaha-flutter flutter build apk",
+            "cwd": "apps/mobile_app"
+          }
+        },
         "buildAppbundle": {
           "executor": "@nrwl/workspace:run-commands",
           "options": {
@@ -262,13 +283,66 @@
         }
       }
     },
+    "neo4j-gql-api": {
+      "root": "libs/neo4j-gql/api",
+      "sourceRoot": "libs/neo4j-gql/api/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/neo4j-gql/api/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/neo4j-gql/api"],
+          "options": {
+            "jestConfig": "libs/neo4j-gql/api/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              {
+                "command": "yarn graphql-codegen --config tools/graphql-codegen-neo4j.yml"
+              }
+            ]
+          },
+          "outputs": ["libs/neo4j-gql/api/src/lib/generated"]
+        }
+      }
+    },
+    "neo4j-gql-backend": {
+      "root": "libs/neo4j-gql/backend",
+      "sourceRoot": "libs/neo4j-gql/backend/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/neo4j-gql/backend/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/neo4j-gql/backend"],
+          "options": {
+            "jestConfig": "libs/neo4j-gql/backend/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "shared-config": {
       "root": "libs/shared/config",
       "sourceRoot": "libs/shared/config/src",
       "projectType": "library",
       "targets": {
         "config": {
-          "builder": "@nrwl/workspace:run-commands",
+          "executor": "@nrwl/workspace:run-commands",
           "options": {
             "commands": [
               "yarn ts-node ./tools/fetch-configuration.ts '{args.app}' '{args.stage}'",
@@ -277,13 +351,13 @@
           }
         },
         "lint": {
-          "builder": "@nrwl/linter:eslint",
+          "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/shared/config/**/*.ts"]
           }
         },
         "test": {
-          "builder": "@nrwl/jest:jest",
+          "executor": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/shared/config"],
           "options": {
             "jestConfig": "libs/shared/config/jest.config.js",
