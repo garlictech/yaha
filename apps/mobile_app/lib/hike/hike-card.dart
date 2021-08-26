@@ -7,14 +7,14 @@ import 'package:yaha/utility/yaha-space-sizes.dart';
 class HikeCard extends StatelessWidget {
   final String title;
   final String subTitle;
-  final int distanceFromCurrentLocation;
+  final int? distanceFromCurrentLocation;
   final String backgroundImage;
 
   const HikeCard({
     Key? key,
     required this.title,
     required this.subTitle,
-    required this.distanceFromCurrentLocation,
+    this.distanceFromCurrentLocation,
     required this.backgroundImage,
   }) : super(key: key);
 

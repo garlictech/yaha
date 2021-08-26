@@ -303,7 +303,7 @@ class HomePageGuest extends ConsumerWidget {
                                         title: 'Tura',
                                         subTitle:
                                             'Túrázás, vár, erdő, és barlang',
-                                        distanceFromCurrentLocation: 10,
+                                        //distanceFromCurrentLocation: 10,
                                         backgroundImage:
                                             'assets/images/tura.png',
                                       ),
@@ -314,7 +314,7 @@ class HomePageGuest extends ConsumerWidget {
                                         title: 'Mátra',
                                         subTitle:
                                             'Mátra, erdős hegyek túrázáshoz',
-                                        distanceFromCurrentLocation: 10,
+                                        //distanceFromCurrentLocation: 10,
                                         backgroundImage:
                                             'assets/images/matra.png',
                                       ),
@@ -353,7 +353,7 @@ class HomePageGuest extends ConsumerWidget {
                                       child: HikeCard(
                                         title: 'Budapest',
                                         subTitle: 'Várhegy, Duna, Lánchíd',
-                                        distanceFromCurrentLocation: 10,
+                                        //distanceFromCurrentLocation: 10,
                                         backgroundImage:
                                             'assets/images/budapest.png',
                                       ),
@@ -364,7 +364,7 @@ class HomePageGuest extends ConsumerWidget {
                                         title: 'Balaton',
                                         subTitle:
                                             'Nagy édesvizű tó üdülővárosokkal',
-                                        distanceFromCurrentLocation: 10,
+                                        //distanceFromCurrentLocation: 10,
                                         backgroundImage:
                                             'assets/images/balaton.png',
                                       ),
