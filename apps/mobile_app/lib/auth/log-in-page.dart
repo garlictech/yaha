@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
-import 'package:yaha/utility/yaha-border-width.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
+import 'package:yaha/utility/yaha-text-input-password.dart';
+import 'package:yaha/utility/yaha-text-input.dart';
 
 class LogInPage extends StatefulWidget {
   @override
@@ -12,8 +13,6 @@ class LogInPage extends StatefulWidget {
 }
 
 class _LogInPageState extends State<LogInPage> {
-  bool _passwordVisible = false;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,37 +58,12 @@ class _LogInPageState extends State<LogInPage> {
                   child: Column(
                     children: [
                       Container(
+                        constraints: BoxConstraints(maxWidth: 400),
                         padding: const EdgeInsets.only(
-                          top: YahaSpaceSizes.large,
-                        ),
-                        child: Container(
-                          constraints: BoxConstraints(maxWidth: 400),
-                          padding: const EdgeInsets.only(
-                              bottom: YahaSpaceSizes.general),
-                          child: TextFormField(
-                            keyboardType: TextInputType.emailAddress,
-                            autocorrect: false,
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                color: YahaColors.textColor,
-                                fontSize: YahaFontSizes.small),
-                            decoration: InputDecoration(
-                                labelText: 'Email',
-                                contentPadding: EdgeInsets.only(
-                                    left: YahaSpaceSizes.medium),
-                                enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(
-                                        YahaBorderRadius.small),
-                                    borderSide: BorderSide(
-                                        color: YahaColors.textColor,
-                                        width: YahaBorderWidth.small)),
-                                focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(
-                                        YahaBorderRadius.small),
-                                    borderSide: BorderSide(
-                                        color: YahaColors.secondary,
-                                        width: YahaBorderWidth.small))),
-                          ),
+                            top: YahaSpaceSizes.large,
+                            bottom: YahaSpaceSizes.general),
+                        child: YahaTextField(
+                          title: 'Email',
                         ),
                       ),
                       Container(
@@ -97,45 +71,7 @@ class _LogInPageState extends State<LogInPage> {
                         padding: const EdgeInsets.only(
                           bottom: YahaSpaceSizes.general,
                         ),
-                        child: TextFormField(
-                          keyboardType: TextInputType.text,
-                          obscureText: !_passwordVisible,
-                          enableSuggestions: false,
-                          autocorrect: false,
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              color: YahaColors.textColor,
-                              fontSize: YahaFontSizes.small),
-                          decoration: InputDecoration(
-                              labelText: 'Password',
-                              suffixIcon: IconButton(
-                                icon: Icon(
-                                  _passwordVisible
-                                      ? Icons.visibility_off_outlined
-                                      : Icons.visibility_outlined,
-                                  color: YahaColors.textColor,
-                                ),
-                                onPressed: () {
-                                  setState(() {
-                                    _passwordVisible = !_passwordVisible;
-                                  });
-                                },
-                              ),
-                              contentPadding:
-                                  EdgeInsets.only(left: YahaSpaceSizes.medium),
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(
-                                      YahaBorderRadius.small),
-                                  borderSide: BorderSide(
-                                      color: YahaColors.textColor,
-                                      width: YahaBorderWidth.small)),
-                              focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(
-                                      YahaBorderRadius.small),
-                                  borderSide: BorderSide(
-                                      color: YahaColors.secondary,
-                                      width: YahaBorderWidth.small))),
-                        ),
+                        child: YahaTextFieldPassword(title: 'Password'),
                       ),
                       Container(
                         child: SizedBox(
