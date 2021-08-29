@@ -12011,10 +12011,10 @@ got@^9.6.0:
     to-readable-stream "^1.0.0"
     url-parse-lax "^3.0.0"
 
-gpx-builder@3.7.7:
-  version "3.7.7"
-  resolved "https://registry.yarnpkg.com/gpx-builder/-/gpx-builder-3.7.7.tgz#8ec2e9dcff4a9028d0eacae359beb9704727a1a4"
-  integrity sha512-lt+8Ku4b+o35Zkr1aAxudRUKSTz4hziaTN56Fv8EP1HvZnBvAwtnoiQXfs7tzKXg55xyxAIgcRvNvjV+zQiVsQ==
+gpx-builder@3.7.8:
+  version "3.7.8"
+  resolved "https://registry.yarnpkg.com/gpx-builder/-/gpx-builder-3.7.8.tgz#16808063e0b0cc6993adf6de20de10f38d75c2cb"
+  integrity sha512-WGmatItB4Otziykot2+zmaAwr8+WF3aHTy4zM6kdibZMqfnYE9BLP5cQKwzER5dAibEeaClgTKYJObK0ox8XXA==
   dependencies:
     "@babel/runtime" "^7.14.6"
     xmlbuilder "^15.1.1"
