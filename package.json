@@ -35,7 +35,7 @@
   "private": true,
   "dependencies": {
     "@mapbox/togeojson": "0.16.0",
-    "@neo4j/graphql": "2.0.1",
+    "@neo4j/graphql": "2.1.0",
     "@neo4j/graphql-ogm": "1.2.4",
     "@turf/line-chunk": "6.5.0",
     "apollo-server-lambda": "2.25.2",
