@@ -6,8 +6,8 @@ import 'package:dartz/dartz.dart';
 import 'glitch.dart';
 
 class NoValueInLocalStorageGlitch extends Glitch {
-  NoValueInLocalStorageGlitch()
-      : super(message: "Unable to connect to internet");
+  NoValueInLocalStorageGlitch(String key)
+      : super(message: "No value in lical store with key $key");
 }
 
 class LocalStorageHandler {
