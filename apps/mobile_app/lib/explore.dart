@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
-import 'package:yaha/utility/yaha-border-width.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:yaha/utility/yaha-text-input-icon.dart';
 import 'package:yaha/utility/yaha-text-input.dart';
 
 import 'filter/filter-page.dart';
@@ -99,36 +99,9 @@ class _ExplorePageState extends State<ExplorePage> {
               child: YahaTextField(title: "Search for hike")),
           Container(
             constraints: BoxConstraints(maxWidth: 400),
-            child: TextFormField(
-              keyboardType: TextInputType.text,
-              enableSuggestions: false,
-              autocorrect: false,
-              style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  color: YahaColors.textColor,
-                  fontSize: YahaFontSizes.small),
-              decoration: InputDecoration(
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      Icons.gps_not_fixed,
-                      color: YahaColors.textColor,
-                    ),
-                    onPressed: () {},
-                  ),
-                  labelText: 'Search around location',
-                  contentPadding: EdgeInsets.only(left: YahaSpaceSizes.medium),
-                  enabledBorder: OutlineInputBorder(
-                      borderRadius:
-                          BorderRadius.circular(YahaBorderRadius.small),
-                      borderSide: BorderSide(
-                          color: YahaColors.textColor,
-                          width: YahaBorderWidth.small)),
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius:
-                          BorderRadius.circular(YahaBorderRadius.small),
-                      borderSide: BorderSide(
-                          color: YahaColors.primary,
-                          width: YahaBorderWidth.small))),
+            child: YahaTextFieldIcon(
+              title: 'Search around location',
+              icon: Icons.gps_not_fixed,
             ),
           ),
           Container(
