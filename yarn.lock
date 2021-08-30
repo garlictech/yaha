@@ -4137,10 +4137,10 @@
     lodash "^4.17.4"
     read-pkg-up "^7.0.0"
 
-"@serverless-stack/cli@0.40.4":
-  version "0.40.4"
-  resolved "https://registry.yarnpkg.com/@serverless-stack/cli/-/cli-0.40.4.tgz#eab0e9062f0bbbc443d3733a07b281eea5590db9"
-  integrity sha512-nWKGfj3PFQck/taN5NscMETb653XsabWd+mPnvfnA3z7DC2EYcVXSkXyX96PnUbiYc6NlOFWBuhMBoBBaezl8w==
+"@serverless-stack/cli@0.40.5":
+  version "0.40.5"
+  resolved "https://registry.yarnpkg.com/@serverless-stack/cli/-/cli-0.40.5.tgz#1f024bac865b4e6f1a57f1cb04e2c87508a2549d"
+  integrity sha512-5GtFFyUmIue06ZmjWlMXqsCoguyt7o9M8RRlzm5OHvl/p7FuqPXm+HyL55WgyUccZyjWgLAIWAbaDifFoEtvpA==
   dependencies:
     "@aws-cdk/aws-apigatewayv2" "1.114.0"
     "@aws-cdk/aws-dynamodb" "1.114.0"
@@ -4152,8 +4152,8 @@
     "@babel/eslint-plugin" "^7.11.3"
     "@babel/plugin-proposal-class-properties" "^7.10.4"
     "@babel/preset-env" "^7.10.4"
-    "@serverless-stack/core" "^0.40.4"
-    "@serverless-stack/resources" "^0.40.4"
+    "@serverless-stack/core" "^0.40.5"
+    "@serverless-stack/resources" "^0.40.5"
     "@types/jest" "^26.0.7"
     "@types/node" "^14.0.27"
     "@typescript-eslint/eslint-plugin" "^4.15.1"
@@ -4182,7 +4182,7 @@
     ws "^7.4.0"
     yargs "^15.4.1"
 
-"@serverless-stack/core@^0.40.4", "@serverless-stack/core@^0.40.5":
+"@serverless-stack/core@^0.40.5":
   version "0.40.5"
   resolved "https://registry.yarnpkg.com/@serverless-stack/core/-/core-0.40.5.tgz#e235e882868402c6efc956f63ee0b206e9ebf236"
   integrity sha512-Selz3Y7728hz4EKKSkKkyg53p3AgDjbxbyiAMAwn0RQPopA8pC9PDRhbn4pqWX7N4cWZCGtpKE/LiQBx3z+fzQ==
@@ -4196,65 +4196,7 @@
     fs-extra "^9.0.1"
     log4js "^6.3.0"
 
-"@serverless-stack/resources@0.40.4":
-  version "0.40.4"
-  resolved "https://registry.yarnpkg.com/@serverless-stack/resources/-/resources-0.40.4.tgz#ef9f1243bccf50b07f6f0f31ffc9d73b646cb5e9"
-  integrity sha512-iafSB1Xvjg5yuJt8x0EKnWql1kVnjAbuaRycqocx29qkSfshgoK0c2lNcPlbVSRSyQc9RBXutP6OCTJaffz1xQ==
-  dependencies:
-    "@aws-cdk/aws-apigateway" "1.114.0"
-    "@aws-cdk/aws-apigatewayv2" "1.114.0"
-    "@aws-cdk/aws-apigatewayv2-authorizers" "1.114.0"
-    "@aws-cdk/aws-apigatewayv2-integrations" "1.114.0"
-    "@aws-cdk/aws-appsync" "1.114.0"
-    "@aws-cdk/aws-autoscaling" "1.114.0"
-    "@aws-cdk/aws-certificatemanager" "1.114.0"
-    "@aws-cdk/aws-cloudfront" "1.114.0"
-    "@aws-cdk/aws-cloudfront-origins" "1.114.0"
-    "@aws-cdk/aws-cognito" "1.114.0"
-    "@aws-cdk/aws-dynamodb" "1.114.0"
-    "@aws-cdk/aws-ec2" "1.114.0"
-    "@aws-cdk/aws-elasticloadbalancingv2" "1.114.0"
-    "@aws-cdk/aws-events" "1.114.0"
-    "@aws-cdk/aws-events-targets" "1.114.0"
-    "@aws-cdk/aws-iam" "1.114.0"
-    "@aws-cdk/aws-kinesis" "1.114.0"
-    "@aws-cdk/aws-lambda" "1.114.0"
-    "@aws-cdk/aws-lambda-event-sources" "1.114.0"
-    "@aws-cdk/aws-lambda-nodejs" "1.114.0"
-    "@aws-cdk/aws-logs" "1.114.0"
-    "@aws-cdk/aws-rds" "1.114.0"
-    "@aws-cdk/aws-route53" "1.114.0"
-    "@aws-cdk/aws-route53-patterns" "1.114.0"
-    "@aws-cdk/aws-route53-targets" "1.114.0"
-    "@aws-cdk/aws-s3" "1.114.0"
-    "@aws-cdk/aws-s3-assets" "1.114.0"
-    "@aws-cdk/aws-s3-notifications" "1.114.0"
-    "@aws-cdk/aws-secretsmanager" "1.114.0"
-    "@aws-cdk/aws-sns" "1.114.0"
-    "@aws-cdk/aws-sns-subscriptions" "1.114.0"
-    "@aws-cdk/aws-sqs" "1.114.0"
-    "@aws-cdk/aws-ssm" "1.114.0"
-    "@aws-cdk/core" "1.114.0"
-    "@aws-cdk/cx-api" "1.114.0"
-    "@aws-cdk/lambda-layer-awscli" "1.114.0"
-    "@graphql-tools/load-files" "^6.3.2"
-    "@graphql-tools/merge" "^6.2.14"
-    "@serverless-stack/core" "^0.40.4"
-    "@types/jest" "^26.0.7"
-    archiver "^5.3.0"
-    chalk "^4.1.0"
-    cross-spawn "^7.0.3"
-    esbuild "^0.12.20"
-    eslint "^7.16.0"
-    fs-extra "^9.0.1"
-    glob "^7.1.7"
-    graphql "^15.5.1"
-    jest "^26.1.0"
-    ts-jest "^26.1.4"
-    typescript "^4.2.3"
-    zip-local "^0.3.4"
-
-"@serverless-stack/resources@^0.40.4":
+"@serverless-stack/resources@0.40.5", "@serverless-stack/resources@^0.40.5":
   version "0.40.5"
   resolved "https://registry.yarnpkg.com/@serverless-stack/resources/-/resources-0.40.5.tgz#154a4de73959748884fb2c9ea55da4b344829461"
   integrity sha512-2s9MabyAdcBypWm9SCqQRiJco4SxsJ23pu9FLTZxxtSCaHptvif2b3Ry1L/1j8RpEI5mxv03CIYs3D8MMp0CFw==
@@ -5011,9 +4953,9 @@
   integrity sha512-jhuKLIRrhvCPLqwPcx6INqmKeiA5EWrsCOPhrlFSrbrmU4ZMPjj5Ul/oLCMDO98XRUIwVm78xICz4EPCektzeQ==
 
 "@types/node@*", "@types/node@>=13.7.0":
-  version "16.7.6"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.7.6.tgz#8666478db8095aa66e25b7e469f3e7b53ea2855e"
-  integrity sha512-VESVNFoa/ahYA62xnLBjo5ur6gPsgEE5cNRy8SrdnkZ2nwJSW0kJ4ufbFr2zuU9ALtHM8juY53VcRoTA7htXSg==
+  version "16.7.7"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.7.7.tgz#73b345af160b495716cf7e2b54b68f701320f08b"
+  integrity sha512-bxWC4rgIF/FjM7JsPvpk6ZKGITgw27qsYCbi6h4kWZWYpchOLENgvFaRBZUc64Q/M1y+X2EteahRbyo8QFCKdw==
 
 "@types/node@14.17.12", "@types/node@^14.0.27", "@types/node@^14.14.31", "@types/node@^14.14.41":
   version "14.17.12"
@@ -5184,13 +5126,26 @@
   resolved "https://registry.yarnpkg.com/@types/zen-observable/-/zen-observable-0.8.3.tgz#781d360c282436494b32fe7d9f7f8e64b3118aa3"
   integrity sha512-fbF6oTd4sGGy0xjHPKAt+eS2CrxJ3+6gQ3FGcBoIJR2TLAyCkCyI8JqZNy+FeON0AhVgNJoUumVoZQjBFUqHkw==
 
-"@typescript-eslint/eslint-plugin@4.29.3", "@typescript-eslint/eslint-plugin@^4.15.1", "@typescript-eslint/eslint-plugin@^4.22.0":
+"@typescript-eslint/eslint-plugin@4.29.3":
   version "4.29.3"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-4.29.3.tgz#95cb8029a8bd8bd9c7f4ab95074a7cb2115adefa"
   integrity sha512-tBgfA3K/3TsZY46ROGvoRxQr1wBkclbVqRQep97MjVHJzcRBURRY3sNFqLk0/Xr//BY5hM9H2p/kp+6qim85SA==
   dependencies:
     "@typescript-eslint/experimental-utils" "4.29.3"
     "@typescript-eslint/scope-manager" "4.29.3"
+    debug "^4.3.1"
+    functional-red-black-tree "^1.0.1"
+    regexpp "^3.1.0"
+    semver "^7.3.5"
+    tsutils "^3.21.0"
+
+"@typescript-eslint/eslint-plugin@^4.15.1", "@typescript-eslint/eslint-plugin@^4.22.0":
+  version "4.30.0"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-4.30.0.tgz#4a0c1ae96b953f4e67435e20248d812bfa55e4fb"
+  integrity sha512-NgAnqk55RQ/SD+tZFD9aPwNSeHmDHHe5rtUyhIq0ZeCWZEvo4DK9rYz7v9HDuQZFvn320Ot+AikaCKMFKLlD0g==
+  dependencies:
+    "@typescript-eslint/experimental-utils" "4.30.0"
+    "@typescript-eslint/scope-manager" "4.30.0"
     debug "^4.3.1"
     functional-red-black-tree "^1.0.1"
     regexpp "^3.1.0"
@@ -5209,6 +5164,18 @@
     eslint-scope "^5.1.1"
     eslint-utils "^3.0.0"
 
+"@typescript-eslint/experimental-utils@4.30.0":
+  version "4.30.0"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/experimental-utils/-/experimental-utils-4.30.0.tgz#9e49704fef568432ae16fc0d6685c13d67db0fd5"
+  integrity sha512-K8RNIX9GnBsv5v4TjtwkKtqMSzYpjqAQg/oSphtxf3xxdt6T0owqnpojztjjTcatSteH3hLj3t/kklKx87NPqw==
+  dependencies:
+    "@types/json-schema" "^7.0.7"
+    "@typescript-eslint/scope-manager" "4.30.0"
+    "@typescript-eslint/types" "4.30.0"
+    "@typescript-eslint/typescript-estree" "4.30.0"
+    eslint-scope "^5.1.1"
+    eslint-utils "^3.0.0"
+
 "@typescript-eslint/experimental-utils@~4.28.3":
   version "4.28.5"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/experimental-utils/-/experimental-utils-4.28.5.tgz#66c28bef115b417cf9d80812a713e0e46bb42a64"
@@ -5221,7 +5188,7 @@
     eslint-scope "^5.1.1"
     eslint-utils "^3.0.0"
 
-"@typescript-eslint/parser@4.29.3", "@typescript-eslint/parser@^4.15.1", "@typescript-eslint/parser@^4.22.0":
+"@typescript-eslint/parser@4.29.3":
   version "4.29.3"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/parser/-/parser-4.29.3.tgz#2ac25535f34c0e98f50c0e6b28c679c2357d45f2"
   integrity sha512-jrHOV5g2u8ROghmspKoW7pN8T/qUzk0+DITun0MELptvngtMrwUJ1tv5zMI04CYVEUsSrN4jV7AKSv+I0y0EfQ==
@@ -5229,6 +5196,16 @@
     "@typescript-eslint/scope-manager" "4.29.3"
     "@typescript-eslint/types" "4.29.3"
     "@typescript-eslint/typescript-estree" "4.29.3"
+    debug "^4.3.1"
+
+"@typescript-eslint/parser@^4.15.1", "@typescript-eslint/parser@^4.22.0":
+  version "4.30.0"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/parser/-/parser-4.30.0.tgz#6abd720f66bd790f3e0e80c3be77180c8fcb192d"
+  integrity sha512-HJ0XuluSZSxeboLU7Q2VQ6eLlCwXPBOGnA7CqgBnz2Db3JRQYyBDJgQnop6TZ+rsbSx5gEdWhw4rE4mDa1FnZg==
+  dependencies:
+    "@typescript-eslint/scope-manager" "4.30.0"
+    "@typescript-eslint/types" "4.30.0"
+    "@typescript-eslint/typescript-estree" "4.30.0"
     debug "^4.3.1"
 
 "@typescript-eslint/scope-manager@4.28.5":
@@ -5247,6 +5224,14 @@
     "@typescript-eslint/types" "4.29.3"
     "@typescript-eslint/visitor-keys" "4.29.3"
 
+"@typescript-eslint/scope-manager@4.30.0":
+  version "4.30.0"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/scope-manager/-/scope-manager-4.30.0.tgz#1a3ffbb385b1a06be85cd5165a22324f069a85ee"
+  integrity sha512-VJ/jAXovxNh7rIXCQbYhkyV2Y3Ac/0cVHP/FruTJSAUUm4Oacmn/nkN5zfWmWFEanN4ggP0vJSHOeajtHq3f8A==
+  dependencies:
+    "@typescript-eslint/types" "4.30.0"
+    "@typescript-eslint/visitor-keys" "4.30.0"
+
 "@typescript-eslint/types@4.28.5":
   version "4.28.5"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/types/-/types-4.28.5.tgz#d33edf8e429f0c0930a7c3d44e9b010354c422e9"
@@ -5256,6 +5241,11 @@
   version "4.29.3"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/types/-/types-4.29.3.tgz#d7980c49aef643d0af8954c9f14f656b7fd16017"
   integrity sha512-s1eV1lKNgoIYLAl1JUba8NhULmf+jOmmeFO1G5MN/RBCyyzg4TIOfIOICVNC06lor+Xmy4FypIIhFiJXOknhIg==
+
+"@typescript-eslint/types@4.30.0":
+  version "4.30.0"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/types/-/types-4.30.0.tgz#fb9d9b0358426f18687fba82eb0b0f869780204f"
+  integrity sha512-YKldqbNU9K4WpTNwBqtAerQKLLW/X2A/j4yw92e3ZJYLx+BpKLeheyzoPfzIXHfM8BXfoleTdiYwpsvVPvHrDw==
 
 "@typescript-eslint/typescript-estree@4.28.5":
   version "4.28.5"
@@ -5283,6 +5273,19 @@
     semver "^7.3.5"
     tsutils "^3.21.0"
 
+"@typescript-eslint/typescript-estree@4.30.0":
+  version "4.30.0"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/typescript-estree/-/typescript-estree-4.30.0.tgz#ae57833da72a753f4846cd3053758c771670c2ac"
+  integrity sha512-6WN7UFYvykr/U0Qgy4kz48iGPWILvYL34xXJxvDQeiRE018B7POspNRVtAZscWntEPZpFCx4hcz/XBT+erenfg==
+  dependencies:
+    "@typescript-eslint/types" "4.30.0"
+    "@typescript-eslint/visitor-keys" "4.30.0"
+    debug "^4.3.1"
+    globby "^11.0.3"
+    is-glob "^4.0.1"
+    semver "^7.3.5"
+    tsutils "^3.21.0"
+
 "@typescript-eslint/visitor-keys@4.28.5":
   version "4.28.5"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/visitor-keys/-/visitor-keys-4.28.5.tgz#ffee2c602762ed6893405ee7c1144d9cc0a29675"
@@ -5297,6 +5300,14 @@
   integrity sha512-MGGfJvXT4asUTeVs0Q2m+sY63UsfnA+C/FDgBKV3itLBmM9H0u+URcneePtkd0at1YELmZK6HSolCqM4Fzs6yA==
   dependencies:
     "@typescript-eslint/types" "4.29.3"
+    eslint-visitor-keys "^2.0.0"
+
+"@typescript-eslint/visitor-keys@4.30.0":
+  version "4.30.0"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/visitor-keys/-/visitor-keys-4.30.0.tgz#a47c6272fc71b0c627d1691f68eaecf4ad71445e"
+  integrity sha512-pNaaxDt/Ol/+JZwzP7MqWc8PJQTUhZwoee/PVlQ+iYoYhagccvoHnC9e4l+C/krQYYkENxznhVSDwClIbZVxRw==
+  dependencies:
+    "@typescript-eslint/types" "4.30.0"
     eslint-visitor-keys "^2.0.0"
 
 "@webassemblyjs/ast@1.11.1":
@@ -11107,12 +11118,7 @@ graphql-ws@^5.0.0:
   resolved "https://registry.yarnpkg.com/graphql-ws/-/graphql-ws-5.4.1.tgz#76fb4c39dfa44a961546995b6bb5320726ff5f71"
   integrity sha512-maBduPneZOFYb3otLgc9/U+fU3f9MVXLKg6lVVLqA9BDQQ6YR7YhQO21Rf9+44IRBi4l8m35lynFMFQTzN3eAQ==
 
-graphql@15.5.1:
-  version "15.5.1"
-  resolved "https://registry.yarnpkg.com/graphql/-/graphql-15.5.1.tgz#f2f84415d8985e7b84731e7f3536f8bb9d383aad"
-  integrity sha512-FeTRX67T3LoE3LWAxxOlW2K3Bz+rMYAC18rRguK4wgXaTZMiJwSUwDmPFo3UadAKbzirKIg5Qy+sNJXbpPRnQw==
-
-graphql@^15.5.0, graphql@^15.5.1:
+graphql@15.5.2, graphql@^15.5.0, graphql@^15.5.1:
   version "15.5.2"
   resolved "https://registry.yarnpkg.com/graphql/-/graphql-15.5.2.tgz#efa19f8f2bf1a48eb7d5c85bf17e144ba8bb0480"
   integrity sha512-dZjLPWNQqYv0dqV2RNbiFed0LtSp6yd4jchsDGnuhDKa9OQHJYCfovaOEvY91w9gqbYO7Se9LKDTl3xxYva/3w==
