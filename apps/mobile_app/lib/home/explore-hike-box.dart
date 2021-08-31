@@ -20,8 +20,11 @@ class ExploreHikeBox extends StatelessWidget {
     return Column(
       children: [
         Container(
-          padding: EdgeInsets.all(YahaSpaceSizes.general),
-          height: 250,
+          padding: EdgeInsets.only(
+              top: YahaSpaceSizes.xLarge,
+              right: YahaSpaceSizes.general,
+              bottom: YahaSpaceSizes.xLarge,
+              left: YahaSpaceSizes.general),
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(YahaBorderRadius.general),

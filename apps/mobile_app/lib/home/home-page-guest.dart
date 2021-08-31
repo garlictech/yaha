@@ -118,7 +118,7 @@ class HomePageGuest extends ConsumerWidget {
                               Container(
                                 padding:
                                     EdgeInsets.only(top: YahaSpaceSizes.medium),
-                                height: 85,
+                                height: YahaBoxSizes.heigthXSmall,
                                 width: MediaQuery.of(context).size.width,
                                 child: Statistics(
                                   hikes: 0,

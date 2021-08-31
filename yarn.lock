@@ -4648,17 +4648,6 @@
     yargs "15.4.1"
     yargs-parser "20.0.0"
 
-"@nrwl/cli@12.7.2":
-  version "12.7.2"
-  resolved "https://registry.yarnpkg.com/@nrwl/cli/-/cli-12.7.2.tgz#7a7f0dae1959431763e3c37b54fa368141e549ba"
-  integrity sha512-MYzHFk/vfgFi6LVbKlBymBIA5fHm72ES9+FvNdYacwiyWlInuBVLAb6McX2zfY6gioxyUOUBPXuBvGxbGtb6qQ==
-  dependencies:
-    "@nrwl/tao" "12.7.2"
-    chalk "4.1.0"
-    v8-compile-cache "2.3.0"
-    yargs "15.4.1"
-    yargs-parser "20.0.0"
-
 "@nrwl/cypress@12.7.0":
   version "12.7.0"
   resolved "https://registry.yarnpkg.com/@nrwl/cypress/-/cypress-12.7.0.tgz#50b43810c7e5c0bb6f9cc9984d83ebc0373c1305"
@@ -4684,18 +4673,6 @@
   integrity sha512-9BfQ5H47EGzbecTD9KizPGZqbfNjwX24LKAu0TCAMkOvccaZ/hcxYNngYFG+2qGc8x5QmdM2IAt/LgO7IkB9YQ==
   dependencies:
     "@nrwl/tao" "12.7.0"
-    ejs "^3.1.5"
-    ignore "^5.0.4"
-    rxjs "^6.5.4"
-    semver "7.3.4"
-    tslib "^2.0.0"
-
-"@nrwl/devkit@12.7.2":
-  version "12.7.2"
-  resolved "https://registry.yarnpkg.com/@nrwl/devkit/-/devkit-12.7.2.tgz#3ea39590dc29d6aa6cf970bc195c99641ae0b0ec"
-  integrity sha512-Uk0DOkQ35sAMSMQPWNo+n4muDAueX651Seb66GSVbeHrFGNGPOM4X1iElYqocXevnMta1Q3xwragudXSdAnHkw==
-  dependencies:
-    "@nrwl/tao" "12.7.2"
     ejs "^3.1.5"
     ignore "^5.0.4"
     rxjs "^6.5.4"
@@ -4728,39 +4705,12 @@
     rxjs "^6.5.4"
     tslib "^2.0.0"
 
-"@nrwl/jest@12.7.2":
-  version "12.7.2"
-  resolved "https://registry.yarnpkg.com/@nrwl/jest/-/jest-12.7.2.tgz#5aecf205a5d221c7b49dc05825db1bda7e2de3ec"
-  integrity sha512-kfBgCtdvobkjVqcQMN5NrkZXOVJPxspRtmSpe0o4D5eTgPPYSAAgPhcGZJ5b3RVV7PetqGG75AgNL5L1GtodHA==
-  dependencies:
-    "@jest/reporters" "27.0.6"
-    "@jest/test-result" "27.0.6"
-    "@nrwl/devkit" "12.7.2"
-    chalk "4.1.0"
-    identity-obj-proxy "3.0.0"
-    jest-config "27.0.6"
-    jest-resolve "27.0.6"
-    jest-util "27.0.6"
-    rxjs "^6.5.4"
-    tslib "^2.0.0"
-
 "@nrwl/linter@12.7.0":
   version "12.7.0"
   resolved "https://registry.yarnpkg.com/@nrwl/linter/-/linter-12.7.0.tgz#4aa41ef091844b8de6e388023ab31f609ed39f77"
   integrity sha512-J61LYvo4bVshuZNLBNU7EHD5QDs2lidaNVNIxxNGr27xqIGxuMI+zrdRKvgHDNqr+jvZI+vooKEwdc+MkJjIhw==
   dependencies:
     "@nrwl/devkit" "12.7.0"
-    glob "7.1.4"
-    minimatch "3.0.4"
-    tmp "~0.2.1"
-    tslib "^2.0.0"
-
-"@nrwl/linter@12.7.2":
-  version "12.7.2"
-  resolved "https://registry.yarnpkg.com/@nrwl/linter/-/linter-12.7.2.tgz#db22b83ee74c6ed4bf953d0b833c5a28b20c6d63"
-  integrity sha512-dHuzxiOML8DvK5ed3o9P2vqyjFnRs+9+oyIC/ODGEupvDEKxDRemybTjuEAM30vMmDIJdHI/NOlEd/nxbW+6JA==
-  dependencies:
-    "@nrwl/devkit" "12.7.2"
     glob "7.1.4"
     minimatch "3.0.4"
     tmp "~0.2.1"
@@ -4809,22 +4759,6 @@
   version "12.7.0"
   resolved "https://registry.yarnpkg.com/@nrwl/tao/-/tao-12.7.0.tgz#7bbc04bf8a7cb25e55a2cae476266557e1752c72"
   integrity sha512-6w7KRSihG1BWwaM8iV+9k5YChpavrgb7Ump7LPlrVjSDD6E7bmrPMB5Xm7LEasQNHvqYwPwYc20onG8z8jxwRQ==
-  dependencies:
-    chalk "4.1.0"
-    enquirer "~2.3.6"
-    fs-extra "^9.1.0"
-    jsonc-parser "3.0.0"
-    rxjs "^6.5.4"
-    rxjs-for-await "0.0.2"
-    semver "7.3.4"
-    tmp "~0.2.1"
-    tslib "^2.0.0"
-    yargs-parser "20.0.0"
-
-"@nrwl/tao@12.7.2":
-  version "12.7.2"
-  resolved "https://registry.yarnpkg.com/@nrwl/tao/-/tao-12.7.2.tgz#73dd6a0bc7f64d9a823560c8aede0953c0a15dd5"
-  integrity sha512-LnylUSOznJ+EDmJWu7vvQTnAERPTjKRHznShTe6eMoaJUH0ds3WSGMBxLUulzN2P5dWqO9u26GWMZpInYWwkfA==
   dependencies:
     chalk "4.1.0"
     enquirer "~2.3.6"
@@ -13466,7 +13400,7 @@ jest-diff@^26.0.0, jest-diff@^26.6.2:
     jest-get-type "^26.3.0"
     pretty-format "^26.6.2"
 
-jest-diff@^27.0.0, jest-diff@^27.0.6:
+jest-diff@^27.0.6:
   version "27.0.6"
   resolved "https://registry.yarnpkg.com/jest-diff/-/jest-diff-27.0.6.tgz#4a7a19ee6f04ad70e0e3388f35829394a44c7b5e"
   integrity sha512-Z1mqgkTCSYaFgwTlP/NUiRzdqgxmmhzHY1Tq17zL94morOHfHu3K4bgSgl+CR4GLhpV8VxkuOYuIWnQ9LnFqmg==
@@ -17095,7 +17029,7 @@ pretty-format@^26.0.0, pretty-format@^26.6.2:
     ansi-styles "^4.0.0"
     react-is "^17.0.1"
 
-pretty-format@^27.0.0, pretty-format@^27.0.6:
+pretty-format@^27.0.6:
   version "27.0.6"
   resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-27.0.6.tgz#ab770c47b2c6f893a21aefc57b75da63ef49a11f"
   integrity sha512-8tGD7gBIENgzqA+UBzObyWqQ5B778VIFZA/S66cclyd5YkFLYs2Js7gxDKf0MXtTc9zcS7t1xhdfcElJ3YIvkQ==

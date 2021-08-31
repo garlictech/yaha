@@ -4,6 +4,7 @@ import 'package:yaha/utility/yaha-border-width.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
+import 'package:yaha/utility/yaha-image-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
 class ChallengeBox extends StatefulWidget {
@@ -41,7 +42,7 @@ class _ChallengeBoxState extends State<ChallengeBox> {
           children: [
             Image.asset(
               widget.icon,
-              width: 50,
+              width: YahaImagesSizes.widthSmall,
             ),
             Text(
               widget.title,

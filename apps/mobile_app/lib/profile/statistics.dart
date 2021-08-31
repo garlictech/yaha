@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
+import 'package:yaha/utility/yaha-border-width.dart';
+import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
@@ -20,7 +22,7 @@ class Statistics extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        height: 65,
+        height: YahaBoxSizes.heightXXSmall,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
           color: YahaColors.tertiaryAccentColor,
@@ -45,7 +47,8 @@ class Statistics extends StatelessWidget {
                           color: YahaColors.textColor)),
                 ],
               ),
-              VerticalDivider(color: YahaColors.divider, thickness: 2),
+              VerticalDivider(
+                  color: YahaColors.divider, thickness: YahaBorderWidth.small),
               Column(
                 children: [
                   Text(km.toString(),
@@ -60,7 +63,8 @@ class Statistics extends StatelessWidget {
                           color: YahaColors.textColor)),
                 ],
               ),
-              VerticalDivider(color: YahaColors.divider, thickness: 2),
+              VerticalDivider(
+                  color: YahaColors.divider, thickness: YahaBorderWidth.small),
               Column(
                 children: [
                   Text(hours.toString(),

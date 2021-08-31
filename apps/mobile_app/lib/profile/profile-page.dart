@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:yaha/profile/statistics.dart';
 import 'package:yaha/settings-page.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
+import 'package:yaha/utility/yaha-border-width.dart';
+import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
@@ -30,13 +32,13 @@ class _ProfilePageState extends State<ProfilePage> {
                       children: [
                         Container(
                           padding: const EdgeInsets.all(YahaSpaceSizes.general),
-                          height: 160,
-                          width: 160,
+                          height: YahaBoxSizes.heightGeneral,
+                          width: YahaBoxSizes.widthGeneral,
                           child: ClipRRect(
                             borderRadius:
                                 BorderRadius.circular(YahaBorderRadius.general),
                             child: Image.asset(
-                              'assets/images/profile.png',
+                              'assets/images/profile-authenticated.png',
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -69,7 +71,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                         Container(
                           padding: EdgeInsets.only(top: YahaSpaceSizes.general),
-                          height: 100,
+                          height: YahaBoxSizes.heigthXSmall,
                           width: MediaQuery.of(context).size.width,
                           child: Statistics(
                             hikes: 34,
@@ -89,6 +91,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               },
                               child: Container(
                                 margin: EdgeInsets.only(
+                                    top: YahaSpaceSizes.medium,
                                     bottom: YahaSpaceSizes.xSmall),
                                 child: Row(
                                   mainAxisAlignment:
@@ -108,7 +111,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                               ),
                             ),
-                            Divider(color: YahaColors.divider, thickness: 1),
+                            Divider(
+                                color: YahaColors.divider,
+                                thickness: YahaBorderWidth.xSmall),
                             Container(
                               margin: EdgeInsets.only(
                                   top: YahaSpaceSizes.small,
@@ -130,7 +135,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ],
                               ),
                             ),
-                            Divider(color: YahaColors.divider, thickness: 1),
+                            Divider(
+                                color: YahaColors.divider,
+                                thickness: YahaBorderWidth.xSmall),
                             Container(
                               margin: EdgeInsets.only(
                                   top: YahaSpaceSizes.small,
@@ -152,7 +159,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ],
                               ),
                             ),
-                            Divider(color: YahaColors.divider, thickness: 1),
+                            Divider(
+                                color: YahaColors.divider,
+                                thickness: YahaBorderWidth.xSmall),
                             Container(
                               margin: EdgeInsets.only(
                                   top: YahaSpaceSizes.small,
@@ -174,7 +183,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ],
                               ),
                             ),
-                            Divider(color: YahaColors.divider, thickness: 1),
+                            Divider(
+                                color: YahaColors.divider,
+                                thickness: YahaBorderWidth.xSmall),
                             Container(
                               margin: EdgeInsets.only(
                                   top: YahaSpaceSizes.small,
@@ -196,7 +207,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ],
                               ),
                             ),
-                            Divider(color: YahaColors.divider, thickness: 1),
+                            Divider(
+                                color: YahaColors.divider,
+                                thickness: YahaBorderWidth.xSmall),
                             Container(
                               margin: EdgeInsets.only(
                                   top: YahaSpaceSizes.small,

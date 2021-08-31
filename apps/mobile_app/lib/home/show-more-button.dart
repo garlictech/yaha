@@ -9,7 +9,6 @@ class ShowMoreButton extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         Container(
-          width: 135,
           alignment: Alignment.centerRight,
           child: TextButton(
             onPressed: () {},
