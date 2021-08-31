@@ -46,7 +46,7 @@
     "graphql": "15.5.2",
     "graphql-subscriptions": "1.2.1",
     "graphql-tag": "2.12.5",
-    "graphql-tools": "8.1.0",
+    "graphql-tools": "8.2.0",
     "lodash-es": "4.17.21",
     "neo4j-driver": "4.3.3",
     "rxjs": "7.1.0",
