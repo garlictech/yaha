@@ -1,8 +1,8 @@
 ## ------ Generic types -----------------------------------------------------
 type Point {
-  lat: Number!
-  lon: Number!
-  ele: Number
+  lat: Float!
+  lon: Float!
+  ele: Float
 }
 
 enum PublicationState {
