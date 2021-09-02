@@ -48,7 +48,7 @@ class _ChallengeBoxState extends State<ChallengeBox> {
               widget.title,
               style: TextStyle(
                 color: YahaColors.primary,
-                fontSize: YahaFontSizes.small,
+                fontSize: YahaFontSizes.xSmall,
                 fontWeight: FontWeight.w400,
               ),
               textAlign: TextAlign.center,

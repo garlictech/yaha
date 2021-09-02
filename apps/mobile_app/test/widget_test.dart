@@ -15,6 +15,7 @@ import 'package:yaha/bottom-nav-bar.dart';
 import 'package:yaha/event-detail-page.dart';
 import 'package:yaha/gallery.dart';
 import 'package:yaha/hike-page.dart';
+import 'package:yaha/home/home-page-guest.dart';
 
 import 'package:yaha/main.dart';
 import 'package:yaha/poi-page.dart';
@@ -85,6 +86,11 @@ void main() {
   });
   testWidgets('Bottom nav bar smoke test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: new BottomNavBar()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Guest home page smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetForTesting(child: new HomePageGuest()));
 
     await tester.pumpAndSettle();
   });
