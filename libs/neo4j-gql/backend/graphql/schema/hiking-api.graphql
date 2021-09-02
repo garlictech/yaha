@@ -84,7 +84,7 @@ type Poi {
   tags: [String!]
   sourceObject: [PoiSourceObject!]!
   address: String
-  phoneNumber: String
+  phoneFloat: String
   openingHours: String
 }
 
