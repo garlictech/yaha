@@ -9,71 +9,71 @@ part of 'user-state.dart';
 abstract class $UserState {
   const $UserState();
 
-  double get averageHikingSpeed;
+  String get avatarImage;
+  String get nick;
 
   UserState copyWith({
-    double? averageHikingSpeed,
+    String? avatarImage,
+    String? nick,
   }) =>
       UserState(
-        averageHikingSpeed: averageHikingSpeed ?? this.averageHikingSpeed,
+        avatarImage: avatarImage ?? this.avatarImage,
+        nick: nick ?? this.nick,
       );
 
   UserState copyUsing(void Function(UserState$Change change) mutator) {
     final change = UserState$Change._(
-      this.averageHikingSpeed,
+      this.avatarImage,
+      this.nick,
     );
     mutator(change);
     return UserState(
-      averageHikingSpeed: change.averageHikingSpeed,
+      avatarImage: change.avatarImage,
+      nick: change.nick,
     );
   }
 
   @override
-  String toString() => "UserState(averageHikingSpeed: $averageHikingSpeed)";
+  String toString() => "UserState(avatarImage: $avatarImage, nick: $nick)";
 
   @override
   // ignore: avoid_equals_and_hash_code_on_mutable_classes
   bool operator ==(Object other) =>
       other is UserState &&
       other.runtimeType == runtimeType &&
-      averageHikingSpeed == other.averageHikingSpeed;
+      avatarImage == other.avatarImage &&
+      nick == other.nick;
 
   @override
   // ignore: avoid_equals_and_hash_code_on_mutable_classes
   int get hashCode {
-    return averageHikingSpeed.hashCode;
+    var result = 17;
+    result = 37 * result + avatarImage.hashCode;
+    result = 37 * result + nick.hashCode;
+    return result;
   }
 }
 
 class UserState$Change {
   UserState$Change._(
-    this.averageHikingSpeed,
+    this.avatarImage,
+    this.nick,
   );
 
-  double averageHikingSpeed;
+  String avatarImage;
+  String nick;
 }
 
 // ignore: avoid_classes_with_only_static_members
 class UserState$ {
-  static final averageHikingSpeed = Lens<UserState, double>(
-    (averageHikingSpeedContainer) =>
-        averageHikingSpeedContainer.averageHikingSpeed,
-    (averageHikingSpeedContainer, averageHikingSpeed) =>
-        averageHikingSpeedContainer.copyWith(
-            averageHikingSpeed: averageHikingSpeed),
+  static final avatarImage = Lens<UserState, String>(
+    (avatarImageContainer) => avatarImageContainer.avatarImage,
+    (avatarImageContainer, avatarImage) =>
+        avatarImageContainer.copyWith(avatarImage: avatarImage),
+  );
+
+  static final nick = Lens<UserState, String>(
+    (nickContainer) => nickContainer.nick,
+    (nickContainer, nick) => nickContainer.copyWith(nick: nick),
   );
 }
-
-// **************************************************************************
-// JsonSerializableGenerator
-// **************************************************************************
-
-UserState _$UserStateFromJson(Map<String, dynamic> json) {
-  return UserState(
-    averageHikingSpeed: (json['averageHikingSpeed'] as num).toDouble(),
-  );
-}
-
-Map<String, dynamic> _$UserStateToJson(UserState instance) => <String, dynamic>{
-      'averageHikingSpeed': instance.averageHikingSpeed,
-    };

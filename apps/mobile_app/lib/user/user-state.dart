@@ -1,52 +1,32 @@
-import 'package:dartz/dartz.dart' hide Lens;
-import 'package:json_annotation/json_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:functional_data/functional_data.dart';
-import 'package:yaha/core/local-storage-handler.dart';
+import 'package:yaha/auth/auth-state.dart';
 
 part 'user-state.g.dart';
 
 @FunctionalData()
-@JsonSerializable()
 class UserState extends $UserState {
-  final double averageHikingSpeed;
+  final String avatarImage;
+  final String nick;
 
-  UserState({this.averageHikingSpeed = 4.0});
-
-  factory UserState.fromJson(Map<String, dynamic> json) =>
-      _$UserStateFromJson(json);
-
-  Map<String, dynamic> toJson() => _$UserStateToJson(this);
+  UserState(
+      {this.avatarImage = 'assets/images/profile-unauth.png',
+      this.nick = 'yahaer'});
 }
 
 class UserStateNotifier extends StateNotifier<UserState> {
-  static const localStorageKey = 'user';
+  UserStateNotifier() : super(UserState());
 
-  final LocalStorageHandler localStorageHandler;
-
-  UserStateNotifier(ProviderReference ref)
-      : localStorageHandler = ref.read(localStorageHandlerProvider),
-        super(UserState()) {
-    readSettingsFromLocalStore();
-  }
-
-  updateAverageHikingSpeed(double newSpeed) =>
-      _updateState(state.copyWith(averageHikingSpeed: newSpeed));
-
-  Future<void> readSettingsFromLocalStore() async {
-    (await localStorageHandler.getItem(localStorageKey))
-        .flatMap((x) => catching(() => UserState.fromJson(x)))
-        .fold((_) => NoValueInLocalStorageGlitch(localStorageKey),
-            (r) => state = r);
-  }
-
-  _updateState(newState) async {
-    state = newState;
-    await localStorageHandler.setItem(localStorageKey, state);
-  }
+  updateState(UserState newState) => state = newState;
 }
 
-final applicationSettingsStateProvider =
-    StateNotifierProvider<UserStateNotifier, UserState>(
-        (ref) => UserStateNotifier(ref));
+final userStateProvider = FutureProvider<UserState>((ref) async {
+  final authState = ref.watch(authStateProvider);
+
+  return authState.loggedIn
+      ? UserState(
+          avatarImage: 'assets/images/profile-authenticated.png',
+          nick: "Test Elek")
+      : UserState();
+});
