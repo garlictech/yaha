@@ -7,8 +7,13 @@ class AuthState {
   final LoginMethod? loginMethod;
   final String? error;
   final bool working;
+  final bool loggedIn;
 
-  AuthState({this.loginMethod, this.error, this.working = false});
+  AuthState(
+      {this.loginMethod,
+      this.error,
+      this.working = false,
+      this.loggedIn = false});
 }
 
 class AuthStateNotifier extends StateNotifier<AuthState> {
@@ -24,10 +29,12 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
 
   clearError() => state = AuthState(loginMethod: state.loginMethod);
 
-  loggedIn() => state = AuthState();
+  loggedIn() => state = AuthState(loggedIn: true);
 
   waiting() =>
       state = AuthState(loginMethod: state.loginMethod, error: state.error);
+
+  logout() => state = AuthState(loggedIn: false, error: null);
 }
 
 final authStateProvider = StateNotifierProvider<AuthStateNotifier, AuthState>(
