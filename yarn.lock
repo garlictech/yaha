@@ -2678,6 +2678,14 @@
     "@graphql-tools/utils" "^8.1.2"
     tslib "~2.3.0"
 
+"@graphql-tools/merge@^8.1.0":
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/merge/-/merge-8.1.0.tgz#e8bdf860f63880ff657cb85de4ac6ab078db67ab"
+  integrity sha512-Lza419UHgnn0w42wLpviHYmg/k42bdxTsguAaUwfrgMbJ99nyx8/1Owu1ij6k1bc5RN0YynS5N/rLGw7skw8vQ==
+  dependencies:
+    "@graphql-tools/utils" "^8.2.0"
+    tslib "~2.3.0"
+
 "@graphql-tools/optimize@^1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@graphql-tools/optimize/-/optimize-1.0.1.tgz#9933fffc5a3c63f95102b1cb6076fb16ac7bb22d"
@@ -2739,10 +2747,30 @@
     tslib "~2.2.0"
     value-or-promise "1.0.6"
 
-"@graphql-tools/url-loader@^7.0.11", "@graphql-tools/url-loader@^7.0.3":
-  version "7.0.12"
-  resolved "https://registry.yarnpkg.com/@graphql-tools/url-loader/-/url-loader-7.0.12.tgz#846e358d7e8b6a24b501778f42422007d175b134"
-  integrity sha512-CSGHi0Z2ow6QZp0yx+zVHGj/FpZ+e+HH4AWNI++w9nF8wEHDSd5ghPXpXz58KmqXTE5+Trf5zEjtIm/2mcDYBA==
+"@graphql-tools/schema@^8.0.2", "@graphql-tools/schema@^8.0.3":
+  version "8.0.3"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/schema/-/schema-8.0.3.tgz#504a6b279be52a278b9c8af90b710c9dcc9ff732"
+  integrity sha512-ufJH7r/RcetVPd3kKCZ16/JTRkOX8aB1yGbYnUjqWEIdYEZc3Fpg7AVlcliu2JlvwR+WSNlgWn2QK76QCsFFdA==
+  dependencies:
+    "@graphql-tools/merge" "7.0.0"
+    "@graphql-tools/utils" "8.0.2"
+    tslib "~2.3.0"
+    value-or-promise "1.0.10"
+
+"@graphql-tools/schema@^8.2.0":
+  version "8.2.0"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/schema/-/schema-8.2.0.tgz#ae75cbb2df6cee9ed6d89fce56be467ab23758dc"
+  integrity sha512-ufmI5mJQa8NJczzfkh0pUttKvspqDcT5LLakA3jUmOrrE4d4NVj6onZlazdTzF5sAepSNqanFnwhrxZpCAJMKg==
+  dependencies:
+    "@graphql-tools/merge" "^8.1.0"
+    "@graphql-tools/utils" "^8.2.0"
+    tslib "~2.3.0"
+    value-or-promise "1.0.10"
+
+"@graphql-tools/url-loader@^7.0.11":
+  version "7.0.11"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/url-loader/-/url-loader-7.0.11.tgz#4826c15efd4ac382e5e9aebdf0bba7d5c6da990c"
+  integrity sha512-4u+h5RtjJXaQjhfBdClreNWavBZqa0U92Cx3Z+zFvIsIYRrEboy7x+cH4QD9OEca/LuUcskJ4yyWllztz/ktow==
   dependencies:
     "@ardatan/fetch-event-source" "2.0.2"
     "@graphql-tools/delegate" "^8.1.1"
@@ -2789,6 +2817,20 @@
     "@ardatan/aggregate-error" "0.0.6"
     camel-case "4.1.2"
     tslib "~2.2.0"
+
+"@graphql-tools/utils@^8.1.1":
+  version "8.1.1"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/utils/-/utils-8.1.1.tgz#2ef056a1d6e1e909085e1115d3bb48f890c2a2b6"
+  integrity sha512-QbFNoBmBiZ+ej4y6mOv8Ba4lNhcrTEKXAhZ0f74AhdEXi7b9xbGUH/slO5JaSyp85sGQYIPmxjRPpXBjLklbmw==
+  dependencies:
+    tslib "~2.3.0"
+
+"@graphql-tools/utils@^8.2.0":
+  version "8.2.0"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/utils/-/utils-8.2.0.tgz#74e9e573a19ccb30e4c77acd8240153b59cf6d85"
+  integrity sha512-Fnl4DddmU1mq9DDI4UwKur+PNRQCYkr6NmgIAysbmM7noRmnleRRvDqyHDPje5SkBZ/hl0BxnEVU6Z3lMB52Bw==
+  dependencies:
+    tslib "~2.3.0"
 
 "@graphql-tools/wrap@^8.0.13":
   version "8.0.13"
@@ -6347,7 +6389,7 @@ aws-sdk@*, aws-sdk@^2.761.0, aws-sdk@^2.834.0, aws-sdk@^2.848.0, aws-sdk@^2.975.
     uuid "3.3.2"
     xml2js "0.4.19"
 
-aws-sdk@2.979.0:
+aws-sdk@2.979.0, aws-sdk@^2.979.0:
   version "2.979.0"
   resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.979.0.tgz#d0104fec763cc3eafb123e709f94866790109da4"
   integrity sha512-pKKhpYZwmihCvuH3757WHY8JQI9g2wvtF3s0aiyH2xCUmX/6uekhExz/utD4uqZP3m3PwKZPGQkQkH30DtHrPw==
@@ -10290,10 +10332,10 @@ filenamify@^4.3.0:
     strip-outer "^1.0.1"
     trim-repeated "^1.0.0"
 
-filesize@^7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/filesize/-/filesize-7.0.0.tgz#9d4b3ce384ec7731a9e68c64ee29fb4934ad657d"
-  integrity sha512-Wsstw+O1lZ9gVmOI1thyeQvODsaoId2qw14lCqIzUhoHKXX7T2hVpB7BR6SvgodMBgWccrx/y2eyV8L7tDmY6A==
+filesize@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/filesize/-/filesize-8.0.0.tgz#532db71cb8a04df7d403da054a28de1b648534e0"
+  integrity sha512-sb690gQx3y/5KZIztgWAKM/r4Hf1V3R8mkAE0OhasMw2FDYduFTYCji8YN9BVpsGoMxrHPFvia1BMxwfLHX+fQ==
 
 fill-range@^4.0.0:
   version "4.0.0"
@@ -11102,12 +11144,12 @@ graphql-tag@2.12.5, graphql-tag@^2.10.3, graphql-tag@^2.11.0, graphql-tag@^2.12.
   dependencies:
     tslib "^2.1.0"
 
-graphql-tools@8.1.0:
-  version "8.1.0"
-  resolved "https://registry.yarnpkg.com/graphql-tools/-/graphql-tools-8.1.0.tgz#47c1e0da4b93c09c3ef5f06cc2db82a19eb45308"
-  integrity sha512-HVUwPa1ZXGP6ez+lfneVEXEKPuNOrfrfuP+lV9qM3lD56q7ctTxONRNiUDlUYG8X4ch/f7bHhwNZ+s8v9p8bZQ==
+graphql-tools@8.2.0:
+  version "8.2.0"
+  resolved "https://registry.yarnpkg.com/graphql-tools/-/graphql-tools-8.2.0.tgz#493edc2760469f39d8334c6f20aa75ae91a7ab86"
+  integrity sha512-9axT/0exEzVCk+vMPykOPannlrA4VQNo6nuWgh25IJ5arPf92OKxvjSHAbm7dQIFmcWxE0hVvyD2rWHjDqZCgQ==
   dependencies:
-    "@graphql-tools/schema" "^8.0.0"
+    "@graphql-tools/schema" "^8.2.0"
     tslib "~2.3.0"
   optionalDependencies:
     "@apollo/client" "~3.2.5 || ~3.3.0 || ~3.4.0"
@@ -17630,10 +17672,10 @@ serverless-webpack@^5.4.1:
   optionalDependencies:
     ts-node ">= 8.3.0"
 
-serverless@2.56.0:
-  version "2.56.0"
-  resolved "https://registry.yarnpkg.com/serverless/-/serverless-2.56.0.tgz#713cd03bc3e97a6293967152884e2a12b9c5b23b"
-  integrity sha512-/nmD1aLe+rXZpTmnxzHogCt5qGGBrE+wce7LcLV1yNne+aymyCcL8vcLj2Ib2ukTXweWpr8MxAgdXVtbwY4EGA==
+serverless@2.57.0:
+  version "2.57.0"
+  resolved "https://registry.yarnpkg.com/serverless/-/serverless-2.57.0.tgz#74b5347f50969d81869762f53c92221d92e9999a"
+  integrity sha512-/gLzaqdisNlymMiQJMkFoACy7NXkOd7E67sbcOrENXuVb48QAS4PTT8VPkMNu6eQonlphGagbKhpqVmKzHJDmQ==
   dependencies:
     "@serverless/cli" "^1.5.2"
     "@serverless/components" "^3.16.0"
@@ -17643,7 +17685,7 @@ serverless@2.56.0:
     ajv "^6.12.6"
     ajv-keywords "^3.5.2"
     archiver "^5.3.0"
-    aws-sdk "^2.975.0"
+    aws-sdk "^2.979.0"
     bluebird "^3.7.2"
     boxen "^5.0.1"
     cachedir "^2.3.0"
@@ -17659,7 +17701,7 @@ serverless@2.56.0:
     essentials "^1.1.1"
     ext "^1.5.0"
     fastest-levenshtein "^1.0.12"
-    filesize "^7.0.0"
+    filesize "^8.0.0"
     fs-extra "^9.1.0"
     get-stdin "^8.0.0"
     globby "^11.0.4"
@@ -17684,7 +17726,7 @@ serverless@2.56.0:
     semver "^7.3.5"
     signal-exit "^3.0.3"
     tabtab "^3.0.2"
-    tar "^6.1.10"
+    tar "^6.1.11"
     timers-ext "^0.1.7"
     type "^2.5.0"
     untildify "^4.0.0"
@@ -18715,7 +18757,19 @@ tar@5.0.7:
     mkdirp "^0.5.0"
     yallist "^4.0.0"
 
-tar@^6.0.2, tar@^6.1.0, tar@^6.1.10, tar@^6.1.11:
+tar@^6.0.2, tar@^6.1.0, tar@^6.1.6:
+  version "6.1.6"
+  resolved "https://registry.yarnpkg.com/tar/-/tar-6.1.6.tgz#c23d797b0a1efe5d479b1490805c5443f3560c5d"
+  integrity sha512-oaWyu5dQbHaYcyZCTfyPpC+VmI62/OM2RTUYavTk1MDr1cwW5Boi3baeYQKiZbY2uSQJGr+iMOzb/JFxLrft+g==
+  dependencies:
+    chownr "^2.0.0"
+    fs-minipass "^2.0.0"
+    minipass "^3.0.0"
+    minizlib "^2.1.1"
+    mkdirp "^1.0.3"
+    yallist "^4.0.0"
+
+tar@^6.1.11:
   version "6.1.11"
   resolved "https://registry.yarnpkg.com/tar/-/tar-6.1.11.tgz#6760a38f003afa1b2ffd0ffe9e9abbd0eab3d621"
   integrity sha512-an/KZQzQUkZCkuoAA64hM92X0Urb6VpRhAFllDzz44U2mcD5scmT3zBc4VgVpkugF580+DQn8eAFSyoQt0tznA==
