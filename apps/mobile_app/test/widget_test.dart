@@ -15,6 +15,7 @@ import 'package:yaha/auth/sign-up-with-email-page.dart';
 import 'package:yaha/bottom-nav-bar.dart';
 import 'package:yaha/event-detail-page.dart';
 import 'package:yaha/explore.dart';
+import 'package:yaha/filter/filter-page.dart';
 import 'package:yaha/gallery.dart';
 import 'package:yaha/hike-page.dart';
 import 'package:yaha/home/home-page-guest.dart';
@@ -108,11 +109,11 @@ void main() {
 
     await tester.pumpAndSettle();
   });
-  /*testWidgets('Filter Page smoke test', (WidgetTester tester) async {
+  testWidgets('Filter Page smoke test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: new FilterPage()));
 
     await tester.pumpAndSettle();
-  });*/
+  });
   testWidgets('Explore Page smoke test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: new ExplorePage()));
 
