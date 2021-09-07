@@ -31,8 +31,10 @@ class HomePageGuest extends ConsumerWidget {
                 return SafeArea(
                   child: Container(
                     padding: EdgeInsets.only(
-                        left: YahaSpaceSizes.general,
-                        right: YahaSpaceSizes.general),
+                      left: YahaSpaceSizes.general,
+                      right: YahaSpaceSizes.general,
+                      top: YahaSpaceSizes.small,
+                    ),
                     child: Column(
                       children: [
                         Stack(
