@@ -9,17 +9,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:yaha/auth/log-in-page.dart';
 import 'package:yaha/auth/sign-up-page.dart';
 import 'package:yaha/auth/sign-up-with-email-page.dart';
 import 'package:yaha/bottom-nav-bar.dart';
 import 'package:yaha/event-detail-page.dart';
+import 'package:yaha/explore.dart';
+import 'package:yaha/filter/filter-page.dart';
 import 'package:yaha/gallery.dart';
 import 'package:yaha/hike-page.dart';
+import 'package:yaha/home/home-page-guest.dart';
 
 import 'package:yaha/main.dart';
 import 'package:yaha/poi-page.dart';
-import 'package:yaha/profile-page.dart';
+import 'package:yaha/previous-activities-page.dart';
+import 'package:yaha/profile/profile-page.dart';
 import 'package:yaha/settings-page.dart';
+import 'package:yaha/settings/application/application-page.dart';
 import 'package:yaha/track-page.dart';
 
 void main() {
@@ -55,6 +61,11 @@ void main() {
 
     await tester.pumpAndSettle();
   });
+  testWidgets('Application Page smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetForTesting(child: new ApplicationPage()));
+
+    await tester.pumpAndSettle();
+  });
   testWidgets('Sign Up Page smoke test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: new SignUpPage()));
 
@@ -64,6 +75,11 @@ void main() {
       (WidgetTester tester) async {
     await tester
         .pumpWidget(createWidgetForTesting(child: new SignUpWithEmailPage()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Log In Page smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetForTesting(child: new LogInPage()));
 
     await tester.pumpAndSettle();
   });
@@ -85,6 +101,26 @@ void main() {
   });
   testWidgets('Bottom nav bar smoke test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: new BottomNavBar()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Guest Home Page smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetForTesting(child: new HomePageGuest()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Filter Page smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetForTesting(child: new FilterPage()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Explore Page smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetForTesting(child: new ExplorePage()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Previous Activities Page smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetForTesting(child: new PreviousActivitiesPage()));
 
     await tester.pumpAndSettle();
   });
