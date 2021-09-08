@@ -25,8 +25,6 @@ class FilterPage extends ConsumerWidget {
 
     double _durationValue = filterSettingsState.searchRadius;
 
-    //double _currentSliderValue = 20;
-
     return Column(
       children: [
         Container(
@@ -44,18 +42,6 @@ class FilterPage extends ConsumerWidget {
                     fontSize: YahaFontSizes.small, color: YahaColors.textColor),
               )),
         ),
-        /*Slider(
-          value: _currentSliderValue,
-          min: 0,
-          max: 100,
-          divisions: 5,
-          label: _currentSliderValue.round().toString(),
-          onChanged: (double value) {
-            /*setState(() {
-              _currentSliderValue = value;
-            })*/;
-          },
-        ),*/
         Container(
           padding: EdgeInsets.only(
             left: YahaSpaceSizes.general,
@@ -163,7 +149,7 @@ class FilterPage extends ConsumerWidget {
           padding: const EdgeInsets.only(
               left: YahaSpaceSizes.general,
               right: YahaSpaceSizes.general,
-              bottom: YahaSpaceSizes.large),
+              bottom: YahaSpaceSizes.xLarge),
           child: ToggleSwitch(
             minWidth: 100,
             activeBgColor: [YahaColors.primary],
@@ -192,7 +178,7 @@ class FilterPage extends ConsumerWidget {
           ),
         ),
         Container(
-          padding: const EdgeInsets.all(YahaSpaceSizes.general),
+          padding: const EdgeInsets.only(bottom: YahaSpaceSizes.large),
           child: SizedBox(
             height: YahaBoxSizes.buttonHeight,
             width: YahaBoxSizes.buttonWidthBig,
