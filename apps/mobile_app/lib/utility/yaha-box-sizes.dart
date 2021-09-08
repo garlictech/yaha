@@ -23,5 +23,11 @@ class YahaBoxSizes {
   //WIDTH - toggle
   static const toggleWidth = 145.0;
 
+  //HEIGHT - back button
+  static const backButtonHeight = 44.0;
+
+  //WIDTH - back button
+  static const backButtonWidth = 44.0;
+
   const YahaBoxSizes();
 }
