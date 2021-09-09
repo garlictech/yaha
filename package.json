@@ -103,7 +103,7 @@
     "request-promise": "4.2.6",
     "semantic-release": "17.4.7",
     "serverless": "2.57.0",
-    "serverless-bundle": "5.0.0",
+    "serverless-bundle": "5.0.1",
     "serverless-offline": "8.1.0",
     "ts-jest": "27.0.5",
     "ts-node": "10.2.1",
