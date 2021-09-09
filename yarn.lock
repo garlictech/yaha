@@ -5029,15 +5029,20 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-16.7.10.tgz#7aa732cc47341c12a16b7d562f519c2383b6d4fc"
   integrity sha512-S63Dlv4zIPb8x6MMTgDq5WWRJQe56iBEY0O3SOFA9JrRienkOVDXSXBjjJw6HTNQYSE2JI6GMCR6LVbIMHJVvA==
 
-"@types/node@14.17.14", "@types/node@^14.0.27", "@types/node@^14.14.31", "@types/node@^14.14.41":
-  version "14.17.14"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.17.14.tgz#6fda9785b41570eb628bac27be4b602769a3f938"
-  integrity sha512-rsAj2u8Xkqfc332iXV12SqIsjVi07H479bOP4q94NAcjzmAvapumEhuVIt53koEf7JFrpjgNKjBga5Pnn/GL8A==
+"@types/node@14.17.15":
+  version "14.17.15"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.17.15.tgz#d5ebfb62a69074ebb85cbe0529ad917bb8f2bae8"
+  integrity sha512-D1sdW0EcSCmNdLKBGMYb38YsHUS6JcM7yQ6sLQ9KuZ35ck7LYCKE7kYFHOO59ayFOY3zobWVZxf4KXhYHcHYFA==
 
 "@types/node@^10.1.0", "@types/node@^10.17.60":
   version "10.17.60"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.17.60.tgz#35f3d6213daed95da7f0f73e75bcc6980e90597b"
   integrity sha512-F0KIgDJfy2nA3zMLmWGKxcH2ZVEtCZXHHdOQs2gSaQ27+lNeEfGxzkIw90aXswATX7AZ33tahPbzy6KAfUreVw==
+
+"@types/node@^14.0.27", "@types/node@^14.14.31", "@types/node@^14.14.41":
+  version "14.17.14"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.17.14.tgz#6fda9785b41570eb628bac27be4b602769a3f938"
+  integrity sha512-rsAj2u8Xkqfc332iXV12SqIsjVi07H479bOP4q94NAcjzmAvapumEhuVIt53koEf7JFrpjgNKjBga5Pnn/GL8A==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.1"
@@ -6427,10 +6432,10 @@ aws-sdk@*, aws-sdk@^2.761.0, aws-sdk@^2.834.0, aws-sdk@^2.848.0, aws-sdk@^2.979.
     uuid "3.3.2"
     xml2js "0.4.19"
 
-aws-sdk@2.983.0:
-  version "2.983.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.983.0.tgz#4c6d98d802b2cf159acbc105979b892b427b5fb3"
-  integrity sha512-i4QMJt5hEYzhoDzmbo0v+aAuHQPXM6ah15GBKObbxwYxmzK9wjMG+FH3DiWZZHdFsf3C+p1zDg4rIr63jmOeBw==
+aws-sdk@2.985.0:
+  version "2.985.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.985.0.tgz#d2831aaf091d685f0e53589eba236fa27f3f75e1"
+  integrity sha512-Al1oFENrrDeKRpxlklk5sONqzCgEkrhaJ1vtIfpLYYqhNlAY+ku/z1hG1+qSlvgmljGyn7T6/zAb2EcbbAFZLQ==
   dependencies:
     buffer "4.9.2"
     events "1.1.1"
