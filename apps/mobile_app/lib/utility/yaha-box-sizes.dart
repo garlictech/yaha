@@ -29,5 +29,13 @@ class YahaBoxSizes {
   //WIDTH - back button
   static const backButtonWidth = 44.0;
 
+  //WIDTH - hike outline boxes
+  static const checkpointWidthMax = 350.0;
+  static const sectionWidthMax = 300.0;
+
+  //HEIGHT - hike outline boxes
+  static const checkpointHeight = 90.0;
+  static const sectionHeight = 70.0;
+
   const YahaBoxSizes();
 }
