@@ -8,16 +8,20 @@ import 'package:yaha/utility/yaha-space-sizes.dart';
 
 class Checkpoint extends StatelessWidget {
   final String title;
+  final Color boxBackgorundColor;
   final Color backgroundColor;
   final IconData icon;
   final double iconSize;
+  final String estimatedArrival;
 
   const Checkpoint({
     Key? key,
     required this.title,
+    required this.boxBackgorundColor,
     required this.backgroundColor,
     required this.icon,
     required this.iconSize,
+    required this.estimatedArrival,
   }) : super(key: key);
 
   @override
@@ -30,7 +34,7 @@ class Checkpoint extends StatelessWidget {
           maxWidth: YahaBoxSizes.checkpointWidthMax,
         ),
         height: YahaBoxSizes.checkpointHeight,
-        color: backgroundColor.withOpacity(0.2),
+        color: boxBackgorundColor.withOpacity(0.2),
         child: Row(
           children: [
             POI(
@@ -38,7 +42,10 @@ class Checkpoint extends StatelessWidget {
                 icon: icon,
                 iconSize: iconSize),
             Container(
-              padding: EdgeInsets.only(left: YahaSpaceSizes.general),
+              padding: EdgeInsets.only(
+                left: YahaSpaceSizes.general,
+                right: YahaSpaceSizes.general,
+              ),
               child: Column(
                 children: [
                   Text(
@@ -49,9 +56,27 @@ class Checkpoint extends StatelessWidget {
                       color: YahaColors.textColor,
                     ),
                   ),
+                  Row(children: [
+
+                  ],),
                 ],
               ),
             ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  estimatedArrival,
+                  style: TextStyle(
+                    fontSize: YahaFontSizes.small,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                IconButton(
+                    onPressed: () {},
+                    icon: Icon(Icons.arrow_forward_ios_rounded))
+              ],
+            )
           ],
         ),
       ),

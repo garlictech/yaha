@@ -18,7 +18,7 @@ class YahaBackButton extends StatelessWidget {
           ),
         ),
         IconButton(
-          onPressed: () {},
+          onPressed: () => Navigator.of(context).pop(),
           icon: Icon(
             Icons.arrow_back_ios_rounded,
             size: 28.0,

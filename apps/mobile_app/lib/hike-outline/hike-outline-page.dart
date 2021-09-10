@@ -64,9 +64,11 @@ class _HikeOutlineState extends State<HikeOutlinePage> {
                       ),
                       Checkpoint(
                         title: "Home",
+                        boxBackgorundColor: YahaColors.secondary,
                         backgroundColor: YahaColors.secondary,
-                        icon: Icons.outlined_flag_outlined,
+                        icon: Icons.outlined_flag_rounded,
                         iconSize: 40,
+                        estimatedArrival: "11:30",
                       )
                     ],
                   ),

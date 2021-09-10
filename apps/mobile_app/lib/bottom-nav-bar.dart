@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaha/hike-outline/hike-outline-page.dart';
+import 'package:yaha/hike-page.dart';
 import 'package:yaha/home/home-page-guest.dart';
 import 'package:yaha/profile/profile-page.dart';
 
@@ -54,7 +54,7 @@ class BottomNavBar extends StatelessWidget {
 }
 
 List<Widget> _buildScreens() {
-  return [HomePageGuest(), ExplorePage(), HikeOutlinePage(), ProfilePage()];
+  return [HomePageGuest(), ExplorePage(), HikePage(), ProfilePage()];
 }
 
 List<PersistentBottomNavBarItem> _navBarsItems() {
