@@ -17,6 +17,7 @@ import 'package:yaha/event-detail-page.dart';
 import 'package:yaha/explore.dart';
 import 'package:yaha/filter/filter-page.dart';
 import 'package:yaha/gallery.dart';
+import 'package:yaha/hike-outline/hike-outline-page.dart';
 import 'package:yaha/hike-page.dart';
 import 'package:yaha/home/home-page-guest.dart';
 
@@ -121,6 +122,11 @@ void main() {
   });
   testWidgets('Previous Activities Page smoke test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: new PreviousActivitiesPage()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Hike Outline Page smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetForTesting(child: new HikeOutlinePage()));
 
     await tester.pumpAndSettle();
   });
