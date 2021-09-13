@@ -1,28 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:yaha/hike-outline/POI.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
-class Checkpoint extends StatelessWidget {
-  final String title;
-  final Color boxBackgorundColor;
-  final Color backgroundColor;
-  final IconData icon;
-  final double iconSize;
+// We have to move these classes somewhere else
+class RouteSectionModel {
   final String estimatedArrival;
+  final String routeLength;
 
-  const Checkpoint({
-    Key? key,
-    required this.title,
-    required this.boxBackgorundColor,
-    required this.backgroundColor,
-    required this.icon,
-    required this.iconSize,
+  const RouteSectionModel({
     required this.estimatedArrival,
-  }) : super(key: key);
+    required this.routeLength,
+  });
+}
+
+class RouteSection extends StatelessWidget {
+  final RouteSectionModel routeSectionModel;
+
+  const RouteSection({Key? key, required this.routeSectionModel})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,39 +32,29 @@ class Checkpoint extends StatelessWidget {
           maxWidth: YahaBoxSizes.checkpointWidthMax,
         ),
         height: YahaBoxSizes.checkpointHeight,
-        color: boxBackgorundColor.withOpacity(0.2),
+        color: Colors.grey.withOpacity(0.2),
         child: Row(
           children: [
-            POI(
-                backgroundColor: backgroundColor,
-                icon: icon,
-                iconSize: iconSize),
-            Container(
-              padding: EdgeInsets.only(
-                left: YahaSpaceSizes.general,
-                right: YahaSpaceSizes.general,
-              ),
-              child: Column(
-                children: [
-                  Text(
-                    title,
-                    style: TextStyle(
-                      fontSize: YahaFontSizes.medium,
-                      fontWeight: FontWeight.w600,
-                      color: YahaColors.textColor,
-                    ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  routeSectionModel.estimatedArrival,
+                  style: TextStyle(
+                    fontSize: YahaFontSizes.small,
+                    fontWeight: FontWeight.w400,
                   ),
-                  Row(children: [
-
-                  ],),
-                ],
-              ),
+                ),
+                IconButton(
+                    onPressed: () {},
+                    icon: Icon(Icons.arrow_forward_ios_rounded))
+              ],
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  estimatedArrival,
+                  routeSectionModel.routeLength,
                   style: TextStyle(
                     fontSize: YahaFontSizes.small,
                     fontWeight: FontWeight.w400,
