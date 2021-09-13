@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:yaha/gallery.dart';
+import 'package:yaha/hike-outline/hike-outline-page.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
@@ -679,7 +680,13 @@ class _HikePageState extends State<HikePage> {
                               color: YahaColors.accentColor,
                               size: YahaFontSizes.large,
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.of(this.context).push(
+                                  new MaterialPageRoute<dynamic>(
+                                      builder: (BuildContext context) {
+                                return new HikeOutlinePage();
+                              }));
+                            },
                             label: Text('Hike outline',
                                 style: TextStyle(
                                   fontSize: YahaFontSizes.small,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yaha/hike-outline/checkpoint.dart';
 import 'package:yaha/utility/buttons/back-button.dart';
 import 'package:yaha/utility/buttons/filter-button.dart';
 import 'package:yaha/utility/buttons/settings-button.dart';
@@ -29,6 +30,7 @@ class _HikeOutlineState extends State<HikeOutlinePage> {
                           left: YahaSpaceSizes.medium,
                           right: YahaSpaceSizes.medium,
                           top: YahaSpaceSizes.small,
+                          bottom: YahaSpaceSizes.large,
                         ),
                         child: Stack(
                           alignment: Alignment.center,
@@ -60,6 +62,14 @@ class _HikeOutlineState extends State<HikeOutlinePage> {
                           ],
                         ),
                       ),
+                      Checkpoint(
+                        title: "Home",
+                        boxBackgorundColor: YahaColors.secondary,
+                        backgroundColor: YahaColors.secondary,
+                        icon: Icons.outlined_flag_rounded,
+                        iconSize: 40,
+                        estimatedArrival: "11:30",
+                      )
                     ],
                   ),
                 );
