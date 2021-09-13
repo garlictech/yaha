@@ -3,6 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
+import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
@@ -28,9 +29,10 @@ class FilterPage extends ConsumerWidget {
       children: [
         Container(
           padding: EdgeInsets.only(
-              top: YahaSpaceSizes.general,
-              left: YahaSpaceSizes.large,
-              bottom: YahaSpaceSizes.general),
+            top: YahaSpaceSizes.general,
+            left: YahaSpaceSizes.large,
+            //bottom: YahaSpaceSizes.general,
+          ),
           child: SizedBox(
               width: double.infinity,
               child: Text(
@@ -42,15 +44,16 @@ class FilterPage extends ConsumerWidget {
         ),
         Container(
           padding: EdgeInsets.only(
-              left: YahaSpaceSizes.general,
-              right: YahaSpaceSizes.general,
-              bottom: YahaSpaceSizes.large),
+            left: YahaSpaceSizes.general,
+            right: YahaSpaceSizes.general,
+            bottom: YahaSpaceSizes.general,
+          ),
           child: SfRangeSlider(
             min: 0.0,
             max: 100.0,
             interval: 20,
             showTicks: false,
-            showLabels: true,
+            showLabels: false,
             enableTooltip: true,
             minorTicksPerInterval: 1,
             values: _lengthValues,
@@ -61,9 +64,9 @@ class FilterPage extends ConsumerWidget {
         ),
         Container(
           padding: EdgeInsets.only(
-              top: YahaSpaceSizes.general,
-              left: YahaSpaceSizes.large,
-              bottom: YahaSpaceSizes.general),
+            left: YahaSpaceSizes.large,
+            //bottom: YahaSpaceSizes.general,
+          ),
           child: SizedBox(
               width: double.infinity,
               child: Text(
@@ -75,15 +78,16 @@ class FilterPage extends ConsumerWidget {
         ),
         Container(
           padding: EdgeInsets.only(
-              left: YahaSpaceSizes.general,
-              right: YahaSpaceSizes.general,
-              bottom: YahaSpaceSizes.large),
+            left: YahaSpaceSizes.general,
+            right: YahaSpaceSizes.general,
+            bottom: YahaSpaceSizes.general,
+          ),
           child: SfRangeSlider(
             min: 0.0,
             max: 100.0,
             interval: 20,
-            showTicks: true,
-            showLabels: true,
+            showTicks: false,
+            showLabels: false,
             enableTooltip: true,
             minorTicksPerInterval: 1,
             values: _durationValues,
@@ -95,9 +99,9 @@ class FilterPage extends ConsumerWidget {
         ),
         Container(
           padding: EdgeInsets.only(
-              top: YahaSpaceSizes.general,
-              left: YahaSpaceSizes.large,
-              bottom: YahaSpaceSizes.general),
+            left: YahaSpaceSizes.large,
+            //bottom: YahaSpaceSizes.general,
+          ),
           child: SizedBox(
               width: double.infinity,
               child: Text(
@@ -109,16 +113,17 @@ class FilterPage extends ConsumerWidget {
         ),
         Container(
           padding: EdgeInsets.only(
-              left: YahaSpaceSizes.general,
-              right: YahaSpaceSizes.general,
-              bottom: YahaSpaceSizes.large),
+            left: YahaSpaceSizes.general,
+            right: YahaSpaceSizes.general,
+            bottom: YahaSpaceSizes.large,
+          ),
           child: SfSlider(
             min: 0.0,
             max: 100.0,
             value: _durationValue,
             interval: 20,
-            showTicks: true,
-            showLabels: true,
+            showTicks: false,
+            showLabels: false,
             enableTooltip: true,
             minorTicksPerInterval: 1,
             onChanged: (dynamic value) {
@@ -128,9 +133,9 @@ class FilterPage extends ConsumerWidget {
         ),
         Container(
           padding: EdgeInsets.only(
-              top: YahaSpaceSizes.general,
-              left: YahaSpaceSizes.large,
-              bottom: YahaSpaceSizes.general),
+            left: YahaSpaceSizes.large,
+            bottom: YahaSpaceSizes.general,
+          ),
           child: SizedBox(
               width: double.infinity,
               child: Text(
@@ -144,9 +149,9 @@ class FilterPage extends ConsumerWidget {
           padding: const EdgeInsets.only(
               left: YahaSpaceSizes.general,
               right: YahaSpaceSizes.general,
-              bottom: YahaSpaceSizes.large),
+              bottom: YahaSpaceSizes.xLarge),
           child: ToggleSwitch(
-            minWidth: 120,
+            minWidth: 100,
             activeBgColor: [YahaColors.primary],
             inactiveBgColor: YahaColors.accentColor,
             dividerColor: YahaColors.primary,
@@ -173,10 +178,10 @@ class FilterPage extends ConsumerWidget {
           ),
         ),
         Container(
-          padding: const EdgeInsets.all(YahaSpaceSizes.general),
+          padding: const EdgeInsets.only(bottom: YahaSpaceSizes.large),
           child: SizedBox(
-            height: 50,
-            width: 300,
+            height: YahaBoxSizes.buttonHeight,
+            width: YahaBoxSizes.buttonWidthBig,
             child: ElevatedButton(
               onPressed: () {},
               child: Text('Show results',

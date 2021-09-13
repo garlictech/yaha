@@ -6,8 +6,8 @@ import 'package:dartz/dartz.dart';
 import 'glitch.dart';
 
 class NoValueInLocalStorageGlitch extends Glitch {
-  NoValueInLocalStorageGlitch()
-      : super(message: "Unable to connect to internet");
+  NoValueInLocalStorageGlitch(String key)
+      : super(message: "No value in lical store with key $key");
 }
 
 class LocalStorageHandler {
@@ -16,10 +16,10 @@ class LocalStorageHandler {
     final value = prefs.getString(key);
 
     return Future.value((value == null
-            ? left<dynamic, dynamic>(NoValueInLocalStorageGlitch())
+            ? left<dynamic, dynamic>(NoValueInLocalStorageGlitch(key))
             : right<dynamic, dynamic>(value))
         .flatMap((x) => catching<dynamic>(() => json.decode(x))
-            .leftMap((x) => NoValueInLocalStorageGlitch())));
+            .leftMap((x) => NoValueInLocalStorageGlitch(key))));
   }
 
   Future setItem(String key, value) async {

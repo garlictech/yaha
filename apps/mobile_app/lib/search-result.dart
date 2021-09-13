@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yaha/hike/hike-card-list.dart';
+import 'package:yaha/utility/buttons/back-button.dart';
+import 'package:yaha/utility/buttons/filter-button.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
@@ -28,14 +30,7 @@ class _SearchResultState extends State<SearchResultPage> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            IconButton(
-                              iconSize: YahaFontSizes.xxLarge,
-                              icon: Icon(
-                                Icons.arrow_back_ios_rounded,
-                                color: YahaColors.textColor,
-                              ),
-                              onPressed: () {},
-                            ),
+                            YahaBackButton(),
                             Text(
                               'Search results',
                               style: TextStyle(
@@ -43,13 +38,7 @@ class _SearchResultState extends State<SearchResultPage> {
                                   fontWeight: FontWeight.w600,
                                   color: YahaColors.textColor),
                             ),
-                            IconButton(
-                              icon: Image.asset(
-                                'assets/images/filter-icon.png',
-                                width: 28.0,
-                              ),
-                              onPressed: () {},
-                            ),
+                            FilterButton(),
                           ],
                         ),
                       ),

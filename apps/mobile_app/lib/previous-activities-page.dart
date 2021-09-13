@@ -24,7 +24,9 @@ class _PreviousActivitiesState extends State<PreviousActivitiesPage> {
                     children: [
                       Container(
                         padding: const EdgeInsets.only(
-                            bottom: YahaSpaceSizes.general),
+                          bottom: YahaSpaceSizes.general,
+                          top: YahaSpaceSizes.small,
+                        ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
