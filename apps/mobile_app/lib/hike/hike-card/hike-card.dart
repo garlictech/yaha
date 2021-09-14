@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yaha/hike-page.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
@@ -23,39 +24,45 @@ class HikeCard extends StatelessWidget {
     return Scaffold(
       body: ClipRRect(
         borderRadius: BorderRadius.circular(YahaBorderRadius.poiSmall),
-        child: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage(backgroundImage), fit: BoxFit.cover),
-          ),
-          child: Align(
-            alignment: Alignment.bottomLeft,
-            child: Container(
-              padding: EdgeInsets.only(
-                left: YahaSpaceSizes.small,
-                bottom: YahaSpaceSizes.small,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: TextStyle(
-                      fontSize: YahaFontSizes.large,
-                      fontWeight: FontWeight.w700,
-                      color: YahaColors.background,
+        child: InkWell(
+          onTap: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => HikePage()));
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage(backgroundImage), fit: BoxFit.cover),
+            ),
+            child: Align(
+              alignment: Alignment.bottomLeft,
+              child: Container(
+                padding: EdgeInsets.only(
+                  left: YahaSpaceSizes.small,
+                  bottom: YahaSpaceSizes.small,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: TextStyle(
+                        fontSize: YahaFontSizes.large,
+                        fontWeight: FontWeight.w700,
+                        color: YahaColors.background,
+                      ),
                     ),
-                  ),
-                  Text(
-                    subTitle + ' ($distanceFromCurrentLocation km away)',
-                    style: TextStyle(
-                      fontSize: YahaFontSizes.medium,
-                      fontWeight: FontWeight.w600,
-                      color: YahaColors.background,
+                    Text(
+                      subTitle + ' ($distanceFromCurrentLocation km away)',
+                      style: TextStyle(
+                        fontSize: YahaFontSizes.medium,
+                        fontWeight: FontWeight.w600,
+                        color: YahaColors.background,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

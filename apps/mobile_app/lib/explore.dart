@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yaha/search-result.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
@@ -148,7 +149,12 @@ class _ExplorePageState extends State<ExplorePage> {
                       color: YahaColors.accentColor,
                       size: YahaFontSizes.large,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SearchResultPage()));
+                    },
                     label: Text('Explore',
                         style: TextStyle(
                           fontSize: YahaFontSizes.small,
