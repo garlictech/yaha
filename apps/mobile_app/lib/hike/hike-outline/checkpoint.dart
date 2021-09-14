@@ -3,6 +3,7 @@ import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
+import 'package:yaha/utility/yaha-icon-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
 import 'POI.dart';
@@ -51,16 +52,19 @@ class Checkpoint extends StatelessWidget {
             Container(
               padding: EdgeInsets.only(
                 left: YahaSpaceSizes.general,
-                right: YahaSpaceSizes.general,
+                right: YahaSpaceSizes.small,
               ),
               child: Column(
                 children: [
-                  Text(
-                    checkpointModel.title,
-                    style: TextStyle(
-                      fontSize: YahaFontSizes.medium,
-                      fontWeight: FontWeight.w600,
-                      color: YahaColors.textColor,
+                  Container(
+                    constraints: BoxConstraints(maxWidth: 180.0),
+                    child: Text(
+                      checkpointModel.title,
+                      style: TextStyle(
+                        fontSize: YahaFontSizes.medium,
+                        fontWeight: FontWeight.w600,
+                        color: YahaColors.textColor,
+                      ),
                     ),
                   ),
                   Row(
@@ -80,8 +84,13 @@ class Checkpoint extends StatelessWidget {
                   ),
                 ),
                 IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.arrow_forward_ios_rounded))
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    size: YahaIconSizes.medium,
+                    color: YahaColors.textColor,
+                  ),
+                ),
               ],
             )
           ],

@@ -22,10 +22,12 @@ class POI extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(YahaSpaceSizes.small),
         color: backgroundColor,
-        child: Icon(
-          icon,
-          size: iconSize,
-          color: YahaColors.background,
+        child: Container(
+          child: Icon(
+            icon,
+            size: iconSize,
+            color: YahaColors.background,
+          ),
         ),
       ),
     );

@@ -8,7 +8,7 @@ import 'route-section.dart';
 
 const List<Object> defaultNodeList = [
   CheckpointModel(
-    title: "START",
+    title: "Start",
     boxBackgorundColor: YahaColors.secondary,
     backgroundColor: YahaColors.secondary,
     icon: Icons.outlined_flag_rounded,
@@ -16,17 +16,33 @@ const List<Object> defaultNodeList = [
     estimatedArrival: "11:30",
   ),
   RouteSectionModel(
-    estimatedArrival: "11:30",
-    routeLength: "2.3 km",
+    routeLengthInTime: "8",
+    routeLengthInTimeMetrics: "min",
+    routeLength: "750",
+    routeLengthMetrics: "m",
   ),
   CheckpointModel(
-    title: "Something interesting",
-    boxBackgorundColor: Colors.cyan,
-    backgroundColor: Colors.cyan,
-    icon: Icons.outdoor_grill,
+    title: "Museum 1",
+    boxBackgorundColor: YahaColors.military,
+    backgroundColor: YahaColors.military,
+    icon: Icons.museum_rounded,
     iconSize: 40,
-    estimatedArrival: "12:30",
-  )
+    estimatedArrival: "11:38",
+  ),
+  RouteSectionModel(
+    routeLengthInTime: "5",
+    routeLengthInTimeMetrics: "min",
+    routeLength: "450",
+    routeLengthMetrics: "m",
+  ),
+  CheckpointModel(
+    title: "Museum 2",
+    boxBackgorundColor: YahaColors.military,
+    backgroundColor: YahaColors.military,
+    icon: Icons.museum_rounded,
+    iconSize: 40,
+    estimatedArrival: "11:43",
+  ),
 ];
 
 class HikeOutlineState {
