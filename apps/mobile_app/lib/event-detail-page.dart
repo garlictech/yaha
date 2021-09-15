@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yaha/utility/buttons/back-button.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-border-width.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
@@ -32,11 +33,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
                           children: [
                             Align(
                               alignment: Alignment.centerLeft,
-                              child: Icon(
-                                Icons.arrow_back_ios_rounded,
-                                size: 28.0,
-                                color: YahaColors.textColor,
-                              ),
+                              child: YahaBackButton(),
                             ),
                             Align(
                               alignment: Alignment.center,
