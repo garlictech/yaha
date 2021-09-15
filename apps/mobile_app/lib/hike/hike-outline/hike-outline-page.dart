@@ -7,6 +7,7 @@ import 'package:yaha/utility/buttons/settings-button.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
+import 'package:dotted_line/dotted_line.dart';
 
 import 'checkpoint.dart';
 import 'hike-outline-state.dart';
@@ -29,6 +30,15 @@ class HikeOutlinePage extends ConsumerWidget {
         return Checkpoint(checkpointModel: node);
       } else if (node is RouteSectionModel) {
         return RouteSection(routeSectionModel: node);
+      } else if (node is DottedLine) {
+        return DottedLine(
+          direction: Axis.vertical,
+          lineLength: 50.0,
+          lineThickness: 4.0,
+          dashRadius: 20.0,
+          dashGapLength: 5.0,
+          dashColor: YahaColors.textColor,
+        );
       } else {
         throw "Wrong data";
       }
