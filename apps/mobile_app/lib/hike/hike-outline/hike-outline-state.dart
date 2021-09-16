@@ -3,6 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:dotted_line/dotted_line.dart';
+import 'package:yaha/utility/yaha-space-sizes.dart';
 
 import 'checkpoint.dart';
 import 'route-section.dart';
@@ -15,6 +16,7 @@ const List<Object> defaultNodeList = [
     icon: Icons.outlined_flag_rounded,
     iconSize: 40,
     estimatedArrival: "11:30",
+    padding: YahaSpaceSizes.small,
   ),
   DottedLine(),
   RouteSectionModel(
@@ -31,6 +33,7 @@ const List<Object> defaultNodeList = [
     icon: Icons.museum_rounded,
     iconSize: 40,
     estimatedArrival: "11:38",
+    padding: YahaSpaceSizes.small,
   ),
   DottedLine(),
   RouteSectionModel(
@@ -47,6 +50,7 @@ const List<Object> defaultNodeList = [
     icon: Icons.museum_rounded,
     iconSize: 40,
     estimatedArrival: "11:43",
+    padding: YahaSpaceSizes.small,
   ),
 ];
 

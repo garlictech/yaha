@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-colors.dart';
-import 'package:yaha/utility/yaha-space-sizes.dart';
 
-class POI extends StatelessWidget {
+class Poi extends StatelessWidget {
   final Color backgroundColor;
   final IconData icon;
   final double iconSize;
+  final double padding;
 
-  const POI({
+  const Poi({
     Key? key,
     required this.backgroundColor,
     required this.icon,
     required this.iconSize,
+    required this.padding,
   }) : super(key: key);
 
   @override
@@ -20,13 +21,15 @@ class POI extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(YahaBorderRadius.poiLarge),
       child: Container(
-        padding: EdgeInsets.all(YahaSpaceSizes.small),
+        padding: EdgeInsets.all(padding),
         color: backgroundColor,
         child: Container(
-          child: Icon(
-            icon,
-            size: iconSize,
-            color: YahaColors.background,
+          child: Container(
+            child: Icon(
+              icon,
+              size: iconSize,
+              color: YahaColors.background,
+            ),
           ),
         ),
       ),

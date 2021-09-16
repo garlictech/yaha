@@ -138,6 +138,7 @@ class _ExplorePageState extends State<ExplorePage> {
                   icon: Icons.gps_not_fixed,
                 ),
               ),
+              
               Container(
                 padding: const EdgeInsets.only(top: YahaSpaceSizes.general),
                 child: SizedBox(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yaha/hike/hike-outline/route-section-poi-list-preview.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
@@ -97,6 +98,10 @@ class RouteSection extends StatelessWidget {
                   ],
                 ),
               ],
+            ),
+            Container(
+              padding: EdgeInsets.only(left: YahaSpaceSizes.medium),
+              child: RouteSectionPoiListPreview(),
             ),
             IconButton(
               onPressed: () {},

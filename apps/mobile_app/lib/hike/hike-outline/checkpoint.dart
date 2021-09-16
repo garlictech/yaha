@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yaha/hike/hike-outline/checkpoint-poi-list-preview.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
@@ -6,7 +7,7 @@ import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-icon-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
-import 'POI.dart';
+import 'poi.dart';
 
 // We have to move these classes somewhere else
 class CheckpointModel {
@@ -16,6 +17,7 @@ class CheckpointModel {
   final IconData icon;
   final double iconSize;
   final String estimatedArrival;
+  final double padding;
 
   const CheckpointModel({
     required this.title,
@@ -24,6 +26,7 @@ class CheckpointModel {
     required this.icon,
     required this.iconSize,
     required this.estimatedArrival,
+    required this.padding,
   });
 }
 
@@ -44,19 +47,24 @@ class Checkpoint extends StatelessWidget {
         height: YahaBoxSizes.checkpointHeight,
         color: checkpointModel.boxBackgorundColor.withOpacity(0.2),
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            POI(
-                backgroundColor: checkpointModel.backgroundColor,
-                icon: checkpointModel.icon,
-                iconSize: checkpointModel.iconSize),
+            Poi(
+              backgroundColor: checkpointModel.backgroundColor,
+              icon: checkpointModel.icon,
+              iconSize: checkpointModel.iconSize,
+              padding: checkpointModel.padding,
+            ),
             Container(
               padding: EdgeInsets.only(
                 left: YahaSpaceSizes.general,
-                right: YahaSpaceSizes.small,
+                right: YahaSpaceSizes.general,
               ),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
+                    padding: EdgeInsets.only(bottom: YahaSpaceSizes.xSmall),
                     constraints: BoxConstraints(maxWidth: 180.0),
                     child: Text(
                       checkpointModel.title,
@@ -67,9 +75,7 @@ class Checkpoint extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Row(
-                    children: [],
-                  ),
+                  CheckpointPoiListPreview(),
                 ],
               ),
             ),
