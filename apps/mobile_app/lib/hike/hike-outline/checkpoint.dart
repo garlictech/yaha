@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yaha/hike/hike-outline/checkpoint-poi-list-preview.dart';
+import 'package:yaha/hike/hike-outline/more-poi.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
@@ -90,7 +91,10 @@ class Checkpoint extends StatelessWidget {
                   ),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => MorePoi()));
+                  },
                   icon: Icon(
                     Icons.arrow_forward_ios_rounded,
                     size: YahaIconSizes.medium,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yaha/hike/hike-outline/route-section.dart';
+import 'package:yaha/hike/hike-outline/weather-astronomical-data.dart';
 import 'package:yaha/utility/buttons/back-button.dart';
 import 'package:yaha/utility/buttons/filter-button.dart';
 import 'package:yaha/utility/buttons/settings-button.dart';
@@ -32,12 +33,17 @@ class HikeOutlinePage extends ConsumerWidget {
         return RouteSection(routeSectionModel: node);
       } else if (node is DottedLine) {
         return DottedLine(
-          direction: Axis.vertical,
-          lineLength: 50.0,
-          lineThickness: 4.0,
-          dashRadius: 20.0,
-          dashGapLength: 5.0,
-          dashColor: YahaColors.textColor,
+          direction: node.direction,
+          lineLength: node.lineLength,
+          lineThickness: node.lineThickness,
+          dashRadius: node.dashRadius,
+          dashGapLength: node.dashGapLength,
+          dashColor: node.dashColor,
+        );
+      } else if (node is WeatherAstronomicalData) {
+        return WeatherAstronomicalData(
+          icon: node.icon,
+          text: node.text,
         );
       } else {
         throw "Wrong data";
