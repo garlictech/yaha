@@ -5,7 +5,6 @@ import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:yaha/utility/yaha-text-input-icon.dart';
 import 'package:yaha/utility/yaha-text-input.dart';
 
 import 'filter/filter-page.dart';
@@ -133,7 +132,7 @@ class _ExplorePageState extends State<ExplorePage> {
                   child: YahaTextField(title: "Search for hike")),
               Container(
                 constraints: BoxConstraints(maxWidth: 400),
-                child: YahaTextFieldIcon(
+                child: YahaTextField(
                   title: 'Search around location',
                   icon: Icons.gps_not_fixed,
                 ),
