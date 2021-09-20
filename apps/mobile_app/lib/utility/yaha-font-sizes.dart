@@ -1,5 +1,6 @@
 class YahaFontSizes {
   // YAHA THEME FONT SIZES
+  static const xSmall = 14.0;
   static const small = 16.0;
   static const medium = 20.0;
   static const large = 24.0;

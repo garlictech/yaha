@@ -17,6 +17,7 @@ abstract class $ApplicationSettingsState {
   int get temperatureInitialIndex;
   int get timeFormatInitialIndex;
   String get currentLanguageTitle;
+  double get averageHikingSpeed;
 
   ApplicationSettingsState copyWith({
     bool? isEnglish,
@@ -27,6 +28,7 @@ abstract class $ApplicationSettingsState {
     int? temperatureInitialIndex,
     int? timeFormatInitialIndex,
     String? currentLanguageTitle,
+    double? averageHikingSpeed,
   }) =>
       ApplicationSettingsState(
         isEnglish: isEnglish ?? this.isEnglish,
@@ -39,6 +41,7 @@ abstract class $ApplicationSettingsState {
         timeFormatInitialIndex:
             timeFormatInitialIndex ?? this.timeFormatInitialIndex,
         currentLanguageTitle: currentLanguageTitle ?? this.currentLanguageTitle,
+        averageHikingSpeed: averageHikingSpeed ?? this.averageHikingSpeed,
       );
 
   ApplicationSettingsState copyUsing(
@@ -52,6 +55,7 @@ abstract class $ApplicationSettingsState {
       this.temperatureInitialIndex,
       this.timeFormatInitialIndex,
       this.currentLanguageTitle,
+      this.averageHikingSpeed,
     );
     mutator(change);
     return ApplicationSettingsState(
@@ -63,12 +67,13 @@ abstract class $ApplicationSettingsState {
       temperatureInitialIndex: change.temperatureInitialIndex,
       timeFormatInitialIndex: change.timeFormatInitialIndex,
       currentLanguageTitle: change.currentLanguageTitle,
+      averageHikingSpeed: change.averageHikingSpeed,
     );
   }
 
   @override
   String toString() =>
-      "ApplicationSettingsState(isEnglish: $isEnglish, isKm: $isKm, isCelsius: $isCelsius, isTimeFormat24: $isTimeFormat24, distanceInitialIndex: $distanceInitialIndex, temperatureInitialIndex: $temperatureInitialIndex, timeFormatInitialIndex: $timeFormatInitialIndex, currentLanguageTitle: $currentLanguageTitle)";
+      "ApplicationSettingsState(isEnglish: $isEnglish, isKm: $isKm, isCelsius: $isCelsius, isTimeFormat24: $isTimeFormat24, distanceInitialIndex: $distanceInitialIndex, temperatureInitialIndex: $temperatureInitialIndex, timeFormatInitialIndex: $timeFormatInitialIndex, currentLanguageTitle: $currentLanguageTitle, averageHikingSpeed: $averageHikingSpeed)";
 
   @override
   // ignore: avoid_equals_and_hash_code_on_mutable_classes
@@ -82,7 +87,8 @@ abstract class $ApplicationSettingsState {
       distanceInitialIndex == other.distanceInitialIndex &&
       temperatureInitialIndex == other.temperatureInitialIndex &&
       timeFormatInitialIndex == other.timeFormatInitialIndex &&
-      currentLanguageTitle == other.currentLanguageTitle;
+      currentLanguageTitle == other.currentLanguageTitle &&
+      averageHikingSpeed == other.averageHikingSpeed;
 
   @override
   // ignore: avoid_equals_and_hash_code_on_mutable_classes
@@ -96,6 +102,7 @@ abstract class $ApplicationSettingsState {
     result = 37 * result + temperatureInitialIndex.hashCode;
     result = 37 * result + timeFormatInitialIndex.hashCode;
     result = 37 * result + currentLanguageTitle.hashCode;
+    result = 37 * result + averageHikingSpeed.hashCode;
     return result;
   }
 }
@@ -110,6 +117,7 @@ class ApplicationSettingsState$Change {
     this.temperatureInitialIndex,
     this.timeFormatInitialIndex,
     this.currentLanguageTitle,
+    this.averageHikingSpeed,
   );
 
   bool isEnglish;
@@ -120,6 +128,7 @@ class ApplicationSettingsState$Change {
   int temperatureInitialIndex;
   int timeFormatInitialIndex;
   String currentLanguageTitle;
+  double averageHikingSpeed;
 }
 
 // ignore: avoid_classes_with_only_static_members
@@ -178,6 +187,14 @@ class ApplicationSettingsState$ {
         currentLanguageTitleContainer.copyWith(
             currentLanguageTitle: currentLanguageTitle),
   );
+
+  static final averageHikingSpeed = Lens<ApplicationSettingsState, double>(
+    (averageHikingSpeedContainer) =>
+        averageHikingSpeedContainer.averageHikingSpeed,
+    (averageHikingSpeedContainer, averageHikingSpeed) =>
+        averageHikingSpeedContainer.copyWith(
+            averageHikingSpeed: averageHikingSpeed),
+  );
 }
 
 // **************************************************************************
@@ -193,6 +210,7 @@ ApplicationSettingsState _$ApplicationSettingsStateFromJson(
     isTimeFormat24: json['isTimeFormat24'] as bool,
     distanceInitialIndex: json['distanceInitialIndex'] as int,
     temperatureInitialIndex: json['temperatureInitialIndex'] as int,
+    averageHikingSpeed: (json['averageHikingSpeed'] as num).toDouble(),
     timeFormatInitialIndex: json['timeFormatInitialIndex'] as int,
     currentLanguageTitle: json['currentLanguageTitle'] as String,
   );
@@ -209,4 +227,5 @@ Map<String, dynamic> _$ApplicationSettingsStateToJson(
       'temperatureInitialIndex': instance.temperatureInitialIndex,
       'timeFormatInitialIndex': instance.timeFormatInitialIndex,
       'currentLanguageTitle': instance.currentLanguageTitle,
+      'averageHikingSpeed': instance.averageHikingSpeed,
     };

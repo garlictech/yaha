@@ -18,6 +18,7 @@ class ApplicationSettingsState extends $ApplicationSettingsState {
   final int temperatureInitialIndex;
   final int timeFormatInitialIndex;
   final String currentLanguageTitle;
+  final double averageHikingSpeed;
 
   ApplicationSettingsState(
       {this.isEnglish = true,
@@ -26,6 +27,7 @@ class ApplicationSettingsState extends $ApplicationSettingsState {
       this.isTimeFormat24 = true,
       this.distanceInitialIndex = 0,
       this.temperatureInitialIndex = 0,
+      this.averageHikingSpeed = 4.0,
       this.timeFormatInitialIndex = 1,
       this.currentLanguageTitle = 'English'});
 
@@ -61,10 +63,14 @@ class ApplicationSettingsStateNotifier
       _updateState(state.copyWith(
           isTimeFormat24: newState, timeFormatInitialIndex: newInitialIndex));
 
+  updateAverageHikingSpeed(double newSpeed) =>
+      _updateState(state.copyWith(averageHikingSpeed: newSpeed));
+
   Future<void> readSettingsFromLocalStore() async {
     (await localStorageHandler.getItem(localStorageKey))
         .flatMap((x) => catching(() => ApplicationSettingsState.fromJson(x)))
-        .fold((_) => NoValueInLocalStorageGlitch(), (r) => state = r);
+        .fold((_) => NoValueInLocalStorageGlitch(localStorageKey),
+            (r) => state = r);
   }
 
   _updateState(newState) async {
