@@ -18,7 +18,6 @@ import 'package:yaha/explore.dart';
 import 'package:yaha/filter/filter-page.dart';
 import 'package:yaha/gallery.dart';
 import 'package:yaha/hike-outline/hike-outline-page.dart';
-import 'package:yaha/hike-outline/settings/hike-outline-settings.dart';
 import 'package:yaha/hike-page.dart';
 import 'package:yaha/home/home-page-guest.dart';
 
