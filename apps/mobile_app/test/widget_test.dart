@@ -63,7 +63,8 @@ void main() {
     await tester.pumpAndSettle();
   });
   testWidgets('Application Page smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new ApplicationPage()));
+    await tester
+        .pumpWidget(createWidgetForTesting(child: new ApplicationPage()));
 
     await tester.pumpAndSettle();
   });
@@ -120,19 +121,17 @@ void main() {
 
     await tester.pumpAndSettle();
   });
-  testWidgets('Previous Activities Page smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new PreviousActivitiesPage()));
+  testWidgets('Previous Activities Page smoke test',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(
+        createWidgetForTesting(child: new PreviousActivitiesPage()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Hike Outline Page smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new HikeOutlinePage()));
+    await tester
+        .pumpWidget(createWidgetForTesting(child: new HikeOutlinePage()));
 
     await tester.pumpAndSettle();
   });
-  /*testWidgets('Hike Outline Settings smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new HikeOutlineSettings()));
-
-    await tester.pumpAndSettle();
-  });*/
 }

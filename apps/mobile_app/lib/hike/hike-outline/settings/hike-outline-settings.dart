@@ -12,30 +12,75 @@ class HikeOutlineSettings extends ConsumerWidget {
   Widget build(BuildContext context, ScopedReader watch) {
     return Container(
       padding: EdgeInsets.only(
-        top: YahaSpaceSizes.general,
+        top: YahaSpaceSizes.large,
         right: YahaSpaceSizes.general,
         bottom: YahaSpaceSizes.large,
         left: YahaSpaceSizes.general,
       ),
       child: Column(
         children: [
-          YahaTextField(
-            title: "Start",
-            icon: Icons.date_range_rounded,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                constraints: BoxConstraints(maxWidth: 330.0),
+                child: YahaTextField(
+                  title: "Start",
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.only(left: YahaSpaceSizes.small),
+                child: IconButton(
+                  onPressed: () {},
+                  icon: Icon(Icons.help_rounded),
+                  color: YahaColors.primary,
+                  iconSize: 28.0,
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Container(
+                constraints: BoxConstraints(maxWidth: 330.0),
+                padding: EdgeInsets.only(
+                  top: YahaSpaceSizes.general,
+                  bottom: YahaSpaceSizes.general,
+                ),
+                child: YahaTextField(title: "Average speed"),
+              ),
+              Container(
+                padding: EdgeInsets.only(left: YahaSpaceSizes.small),
+                child: IconButton(
+                  onPressed: () {},
+                  icon: Icon(Icons.help_rounded),
+                  color: YahaColors.primary,
+                  iconSize: 28.0,
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Container(
+                constraints: BoxConstraints(maxWidth: 330.0),
+                child: YahaTextField(
+                  title: "Finish",
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.only(left: YahaSpaceSizes.small),
+                child: IconButton(
+                  onPressed: () {},
+                  icon: Icon(Icons.help_rounded),
+                  color: YahaColors.primary,
+                  iconSize: 28.0,
+                ),
+              ),
+            ],
           ),
           Container(
-            padding: EdgeInsets.only(
-              top: YahaSpaceSizes.general,
-              bottom: YahaSpaceSizes.general,
-            ),
-            child: YahaTextField(title: "Average speed"),
-          ),
-          YahaTextField(
-            title: "Finish",
-            icon: Icons.date_range_rounded,
-          ),
-          Container(
-            padding: const EdgeInsets.only(top: YahaSpaceSizes.xLarge),
+            padding: const EdgeInsets.only(top: YahaSpaceSizes.xxLarge),
             child: SizedBox(
               height: YahaBoxSizes.buttonHeight,
               width: YahaBoxSizes.buttonWidthBig,

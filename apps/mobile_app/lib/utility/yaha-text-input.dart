@@ -119,11 +119,11 @@ class _YahaTextFieldState extends State<YahaTextField> {
             enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(YahaBorderRadius.general),
                 borderSide: BorderSide(
-                    color: YahaColors.textColor, width: YahaBorderWidth.small)),
+                    color: YahaColors.textColor, width: YahaBorderWidth.xSmall)),
             focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(YahaBorderRadius.general),
                 borderSide: BorderSide(
-                    color: YahaColors.primary, width: YahaBorderWidth.small))),
+                    color: YahaColors.primary, width: YahaBorderWidth.xSmall))),
       ),
     );
   }
