@@ -1,0 +1,215 @@
+import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:yaha/hike/hike-outline/route-section.dart';
+import 'package:yaha/hike/hike-outline/settings/hike-outline-settings.dart';
+import 'package:yaha/hike/hike-outline/weather-astronomical-data.dart';
+import 'package:yaha/utility/buttons/back-button.dart';
+import 'package:yaha/utility/buttons/settings-button.dart';
+import 'package:yaha/utility/yaha-border-radius.dart';
+import 'package:yaha/utility/yaha-box-sizes.dart';
+import 'package:yaha/utility/yaha-colors.dart';
+import 'package:yaha/utility/yaha-font-sizes.dart';
+import 'package:yaha/utility/yaha-space-sizes.dart';
+import 'package:dotted_line/dotted_line.dart';
+
+import 'checkpoint.dart';
+import 'hike-outline-state.dart';
+
+class HikeOutlinePage extends ConsumerWidget {
+  @override
+  Widget build(BuildContext context, ScopedReader watch) {
+    var hikeOutlineState = watch(hikeOutlineStateProvider);
+
+    return Scaffold(
+        body: hikeOutlineState.when(
+            loading: () => CircularProgressIndicator(),
+            error: (err, stack) => Text('😱'),
+            data: (state) => _createMainWidget(state)));
+  }
+
+  _createMainWidget(HikeOutlineState state) {
+    var nodes = state.nodeList.map((node) {
+      if (node is CheckpointModel) {
+        return Checkpoint(checkpointModel: node);
+      } else if (node is RouteSectionModel) {
+        return RouteSection(routeSectionModel: node);
+      } else if (node is DottedLine) {
+        return DottedLine(
+          direction: node.direction,
+          lineLength: node.lineLength,
+          lineThickness: node.lineThickness,
+          dashRadius: node.dashRadius,
+          dashGapLength: node.dashGapLength,
+          dashColor: node.dashColor,
+        );
+      } else if (node is WeatherAstronomicalData) {
+        return WeatherAstronomicalData(
+          icon: node.icon,
+          text: node.text,
+        );
+      } else {
+        throw "Wrong data";
+      }
+    });
+
+    return CustomScrollView(
+      physics: BouncingScrollPhysics(),
+      slivers: <Widget>[
+        SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (BuildContext context, int index) {
+              return SafeArea(
+                child: Column(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.only(
+                        left: YahaSpaceSizes.medium,
+                        right: YahaSpaceSizes.medium,
+                        top: YahaSpaceSizes.small,
+                        bottom: YahaSpaceSizes.large,
+                      ),
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: YahaBackButton(),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Text('Hike Outline',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: YahaFontSizes.large,
+                                    fontWeight: FontWeight.w600,
+                                    color: YahaColors.textColor)),
+                          ),
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: SettingsButton(),
+                          ),
+                          Positioned(
+                            right: 55.0,
+                            child: Align(
+                              alignment: Alignment.centerRight,
+                              child: Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(
+                                        YahaBorderRadius.small),
+                                    child: Container(
+                                      height: YahaBoxSizes.backButtonHeight,
+                                      width: YahaBoxSizes.backButtonWidth,
+                                      color: YahaColors.smallButtonsBackground,
+                                    ),
+                                  ),
+                                  IconButton(
+                                    onPressed: () => showBarModalBottomSheet(
+                                      expand: false,
+                                      useRootNavigator: true,
+                                      context: context,
+                                      builder: (context) {
+                                        return SingleChildScrollView(
+                                          controller:
+                                              ModalScrollController.of(context),
+                                          child: Container(
+                                            color:
+                                                YahaColors.tertiaryAccentColor,
+                                            child: Column(
+                                              children: [
+                                                Container(
+                                                  padding: EdgeInsets.only(
+                                                    left: YahaSpaceSizes.medium,
+                                                    right:
+                                                        YahaSpaceSizes.general,
+                                                  ),
+                                                  color: YahaColors
+                                                      .tertiaryAccentColor,
+                                                  child: Stack(
+                                                    alignment: Alignment.center,
+                                                    children: [
+                                                      Align(
+                                                        alignment: Alignment
+                                                            .centerLeft,
+                                                        child: TextButton(
+                                                          onPressed: () {},
+                                                          child: Text("Reset"),
+                                                          style: TextButton
+                                                              .styleFrom(
+                                                            primary: YahaColors
+                                                                .secondaryAccentColor,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      Align(
+                                                        alignment:
+                                                            Alignment.center,
+                                                        child: Text(
+                                                          "Customize hike",
+                                                          style: TextStyle(
+                                                            fontSize:
+                                                                YahaFontSizes
+                                                                    .small,
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                            color: YahaColors
+                                                                .textColor,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      Align(
+                                                        alignment: Alignment
+                                                            .centerRight,
+                                                        child: InkWell(
+                                                          onTap: () {
+                                                            Navigator.of(
+                                                                    context)
+                                                                .pop();
+                                                          },
+                                                          child: Icon(
+                                                            Icons
+                                                                .close_outlined,
+                                                            color: YahaColors
+                                                                .secondaryAccentColor,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Container(
+                                                  color: YahaColors.background,
+                                                  child: HikeOutlineSettings(),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                    icon: Image.asset(
+                                      'assets/images/filter-icon.png',
+                                      width: 26.0,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    ...nodes
+                  ],
+                ),
+              );
+            },
+            childCount: 1,
+          ),
+        ),
+      ],
+    );
+  }
+}

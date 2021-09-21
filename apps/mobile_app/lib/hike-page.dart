@@ -2,11 +2,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:yaha/gallery.dart';
-import 'package:yaha/hike-outline/hike-outline-page.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
+
+import 'hike/hike-outline/hike-outline-page.dart';
 
 class HikePage extends StatefulWidget {
   @override
