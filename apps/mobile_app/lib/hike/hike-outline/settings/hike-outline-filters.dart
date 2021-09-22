@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:yaha/hike/hike-outline/settings/poi-filters-list.dart';
+import 'package:yaha/utility/yaha-border-radius.dart';
+import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
@@ -74,6 +77,35 @@ class HikeOutlineFilters extends ConsumerWidget {
               ),
             ],
           ),
+          Container(
+            child: PoiFiltersList(),
+          ),
+          Container(
+            padding: const EdgeInsets.only(top: YahaSpaceSizes.xxLarge),
+            child: SizedBox(
+              height: YahaBoxSizes.buttonHeight,
+              width: YahaBoxSizes.buttonWidthBig,
+              child: ElevatedButton.icon(
+                icon: Icon(
+                  Icons.save_rounded,
+                  color: YahaColors.accentColor,
+                  size: YahaFontSizes.large,
+                ),
+                onPressed: () {},
+                label: Text('Save',
+                    style: TextStyle(
+                      fontSize: YahaFontSizes.small,
+                      fontWeight: FontWeight.w600,
+                    )),
+                style: ElevatedButton.styleFrom(
+                  primary: YahaColors.primary,
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(
+                          Radius.circular(YahaBorderRadius.general))),
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );
