@@ -55,8 +55,8 @@ const List<Object> defaultNodeList = [
   ),
   CheckpointModel(
     title: "Museum 1",
-    boxBackgorundColor: YahaColors.military,
-    backgroundColor: YahaColors.military,
+    boxBackgorundColor: YahaColors.generic,
+    backgroundColor: YahaColors.generic,
     icon: Icons.museum_rounded,
     iconSize: 40,
     estimatedArrival: "7:38",
@@ -98,8 +98,8 @@ const List<Object> defaultNodeList = [
   ),
   CheckpointModel(
     title: "Museum 2",
-    boxBackgorundColor: YahaColors.military,
-    backgroundColor: YahaColors.military,
+    boxBackgorundColor: YahaColors.generic,
+    backgroundColor: YahaColors.generic,
     icon: Icons.museum_rounded,
     iconSize: 40,
     estimatedArrival: "7:43",

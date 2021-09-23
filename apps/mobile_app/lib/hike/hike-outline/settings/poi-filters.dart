@@ -18,36 +18,32 @@ class PoiFilters extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(YahaBorderRadius.xSmall),
-      child: Container(
-        color: backgroundColor,
-        padding: EdgeInsets.only(
-          top: YahaSpaceSizes.xSmall,
-          right: YahaSpaceSizes.small,
-          bottom: YahaSpaceSizes.xSmall,
-          left: YahaSpaceSizes.small,
+    return Chip(
+      label: Container(
+        padding: EdgeInsets.only(left: YahaSpaceSizes.xSmall),
+        child: Text(
+          title,
+          style: TextStyle(
+            color: YahaColors.background,
+            fontSize: YahaFontSizes.xSmall,
+            fontWeight: FontWeight.w600,
+          ),
         ),
-        child: Row(
-          children: [
-            Icon(
-              icon,
-              color: YahaColors.background,
-              size: 28.0,
-            ),
-            Container(
-              padding: EdgeInsets.only(left: YahaSpaceSizes.xSmall),
-              child: Text(
-                title,
-                style: TextStyle(
-                  color: YahaColors.background,
-                  fontSize: YahaFontSizes.xSmall,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
-          ],
-        ),
+      ),
+      backgroundColor: backgroundColor,
+      avatar: Icon(
+        icon,
+        color: YahaColors.background,
+        size: 28.0,
+      ),
+      padding: EdgeInsets.only(left: YahaSpaceSizes.xSmall),
+      labelPadding: EdgeInsets.only(
+        top: YahaSpaceSizes.xxSmall,
+        right: YahaSpaceSizes.medium,
+        bottom: YahaSpaceSizes.xxSmall,
+      ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(YahaBorderRadius.xSmall),
       ),
     );
   }

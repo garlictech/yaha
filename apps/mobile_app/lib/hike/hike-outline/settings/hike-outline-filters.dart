@@ -5,6 +5,7 @@ import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
+import 'package:yaha/utility/yaha-icon-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
 class HikeOutlineFilters extends ConsumerWidget {
@@ -51,7 +52,7 @@ class HikeOutlineFilters extends ConsumerWidget {
                     onPressed: () {},
                     icon: Icon(Icons.help_rounded),
                     color: YahaColors.primary,
-                    iconSize: 28.0,
+                    iconSize: YahaIconSizes.small,
                   ),
                 ),
               ],
@@ -72,7 +73,7 @@ class HikeOutlineFilters extends ConsumerWidget {
                   onPressed: () {},
                   icon: Icon(Icons.help_rounded),
                   color: YahaColors.primary,
-                  iconSize: 28.0,
+                  iconSize: YahaIconSizes.small,
                 ),
               ),
             ],
@@ -81,7 +82,7 @@ class HikeOutlineFilters extends ConsumerWidget {
             child: PoiFiltersList(),
           ),
           Container(
-            padding: const EdgeInsets.only(top: YahaSpaceSizes.xxLarge),
+            padding: const EdgeInsets.only(top: YahaSpaceSizes.xLarge),
             child: SizedBox(
               height: YahaBoxSizes.buttonHeight,
               width: YahaBoxSizes.buttonWidthBig,

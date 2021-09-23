@@ -81,7 +81,7 @@ class HikeOutlinePage extends ConsumerWidget {
                             child: Text('Hike Outline',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    fontSize: YahaFontSizes.large,
+                                    fontSize: YahaFontSizes.medium,
                                     fontWeight: FontWeight.w600,
                                     color: YahaColors.textColor)),
                           ),
