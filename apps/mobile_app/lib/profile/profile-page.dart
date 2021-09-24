@@ -113,7 +113,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                             Divider(
                                 color: YahaColors.divider,
-                                thickness: YahaBorderWidth.xSmall),
+                                thickness: YahaBorderWidth.xxSmall),
                             Container(
                               margin: EdgeInsets.only(
                                   top: YahaSpaceSizes.small,
@@ -137,7 +137,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                             Divider(
                                 color: YahaColors.divider,
-                                thickness: YahaBorderWidth.xSmall),
+                                thickness: YahaBorderWidth.xxSmall),
                             Container(
                               margin: EdgeInsets.only(
                                   top: YahaSpaceSizes.small,
@@ -161,7 +161,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                             Divider(
                                 color: YahaColors.divider,
-                                thickness: YahaBorderWidth.xSmall),
+                                thickness: YahaBorderWidth.xxSmall),
                             Container(
                               margin: EdgeInsets.only(
                                   top: YahaSpaceSizes.small,
@@ -185,7 +185,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                             Divider(
                                 color: YahaColors.divider,
-                                thickness: YahaBorderWidth.xSmall),
+                                thickness: YahaBorderWidth.xxSmall),
                             Container(
                               margin: EdgeInsets.only(
                                   top: YahaSpaceSizes.small,
@@ -209,7 +209,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                             Divider(
                                 color: YahaColors.divider,
-                                thickness: YahaBorderWidth.xSmall),
+                                thickness: YahaBorderWidth.xxSmall),
                             Container(
                               margin: EdgeInsets.only(
                                   top: YahaSpaceSizes.small,

@@ -6,7 +6,7 @@ import 'poi.dart';
 
 const List<Object> defaultPoiPreviewList = [
   Poi(
-    backgroundColor: YahaColors.military,
+    backgroundColor: YahaColors.generic,
     icon: Icons.museum_rounded,
     iconSize: 24,
     padding: YahaSpaceSizes.xSmall,
