@@ -54,11 +54,13 @@ import 'package:yaha/utility/yaha-space-sizes.dart';
 class YahaTextField extends StatefulWidget {
   final String title;
   final IconData? icon;
+  final controller;
 
   const YahaTextField({
     Key? key,
     required this.title,
     this.icon,
+    this.controller,
   }) : super(key: key);
 
   @override
@@ -89,6 +91,7 @@ class _YahaTextFieldState extends State<YahaTextField> {
   Widget build(BuildContext context) {
     return Container(
       child: TextFormField(
+        controller: widget.controller,
         focusNode: _focusNode,
         onTap: _requestFocus,
         keyboardType: TextInputType.text,

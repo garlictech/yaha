@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:yaha/hike-page.dart';
-import 'package:yaha/home/home-page-guest.dart';
 import 'package:yaha/poi-page.dart';
 import 'package:yaha/profile/profile-page.dart';
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:yaha/settings/application/app-settings-state.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
@@ -9,8 +10,14 @@ import 'package:yaha/utility/yaha-space-sizes.dart';
 import 'package:yaha/utility/yaha-text-input.dart';
 
 class HikeOutlineSettings extends ConsumerWidget {
+  final myController = TextEditingController();
+
   @override
   Widget build(BuildContext context, ScopedReader watch) {
+    var appSettingsState = watch(applicationSettingsStateProvider);
+    var appSettingsStateNotifier =
+        watch(applicationSettingsStateProvider.notifier);
+
     return Container(
       padding: EdgeInsets.only(
         top: YahaSpaceSizes.large,
@@ -25,9 +32,13 @@ class HikeOutlineSettings extends ConsumerWidget {
             children: [
               Expanded(
                 child: Container(
-                  constraints: BoxConstraints(maxWidth: 330.0,),
+                  constraints: BoxConstraints(
+                    maxWidth: 330.0,
+                  ),
                   child: YahaTextField(
-                    title: "Start",
+                    title: appSettingsState.startTime,
+                    //title: 'Start',
+                    controller: myController,
                   ),
                 ),
               ),
@@ -51,7 +62,9 @@ class HikeOutlineSettings extends ConsumerWidget {
                     top: YahaSpaceSizes.general,
                     bottom: YahaSpaceSizes.general,
                   ),
-                  child: YahaTextField(title: "Average speed"),
+                  child: YahaTextField(
+                    title: appSettingsState.averageHikingSpeed.toString(),
+                  ),
                 ),
               ),
               Container(
@@ -97,7 +110,11 @@ class HikeOutlineSettings extends ConsumerWidget {
                   color: YahaColors.accentColor,
                   size: YahaFontSizes.large,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  appSettingsStateNotifier.updateAverageHikingSpeed(5);
+                  //appSettingsStateNotifier.updateusualStartTime(11);
+                  appSettingsStateNotifier.updatestartTime(myController.toString());
+                },
                 label: Text('Save',
                     style: TextStyle(
                       fontSize: YahaFontSizes.small,
