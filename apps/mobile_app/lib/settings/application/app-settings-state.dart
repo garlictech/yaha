@@ -18,8 +18,9 @@ class ApplicationSettingsState extends $ApplicationSettingsState {
   final int temperatureInitialIndex;
   final int timeFormatInitialIndex;
   final String startTime;
+  final String finishTime;
   final String currentLanguageTitle;
-  final double averageHikingSpeed;
+  final String averageHikingSpeed;
 
   ApplicationSettingsState(
       {this.isEnglish = true,
@@ -28,9 +29,10 @@ class ApplicationSettingsState extends $ApplicationSettingsState {
       this.isTimeFormat24 = true,
       this.distanceInitialIndex = 0,
       this.temperatureInitialIndex = 0,
-      this.averageHikingSpeed = 4.0,
+      this.averageHikingSpeed = '4',
       this.timeFormatInitialIndex = 1,
-      this.startTime = '9',
+      this.startTime = '1',
+      this.finishTime = '2',
       this.currentLanguageTitle = 'English'});
 
   factory ApplicationSettingsState.fromJson(Map<String, dynamic> json) =>
@@ -65,11 +67,14 @@ class ApplicationSettingsStateNotifier
       _updateState(state.copyWith(
           isTimeFormat24: newState, timeFormatInitialIndex: newInitialIndex));
 
-  updateAverageHikingSpeed(double newSpeed) =>
+  updateAverageHikingSpeed(String newSpeed) =>
       _updateState(state.copyWith(averageHikingSpeed: newSpeed));
 
-  updatestartTime(String newStartTime) =>
+  updateStartTime(String newStartTime) =>
       _updateState(state.copyWith(startTime: newStartTime));
+
+  updateFinishTime(String newFinishTime) =>
+      _updateState(state.copyWith(finishTime: newFinishTime));
 
   Future<void> readSettingsFromLocalStore() async {
     (await localStorageHandler.getItem(localStorageKey))
