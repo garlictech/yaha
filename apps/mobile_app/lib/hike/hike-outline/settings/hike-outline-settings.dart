@@ -10,11 +10,12 @@ import 'package:yaha/utility/yaha-space-sizes.dart';
 import 'package:yaha/utility/yaha-text-input.dart';
 
 class HikeOutlineSettings extends ConsumerWidget {
-  final myController = TextEditingController();
+  final startTimeController = TextEditingController();
+  final averageSpeedController = TextEditingController();
+  final finishTimeController = TextEditingController();
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    var appSettingsState = watch(applicationSettingsStateProvider);
     var appSettingsStateNotifier =
         watch(applicationSettingsStateProvider.notifier);
 
@@ -36,9 +37,8 @@ class HikeOutlineSettings extends ConsumerWidget {
                     maxWidth: 330.0,
                   ),
                   child: YahaTextField(
-                    title: appSettingsState.startTime,
-                    //title: 'Start',
-                    controller: myController,
+                    title: 'Start',
+                    controller: startTimeController,
                   ),
                 ),
               ),
@@ -63,7 +63,8 @@ class HikeOutlineSettings extends ConsumerWidget {
                     bottom: YahaSpaceSizes.general,
                   ),
                   child: YahaTextField(
-                    title: appSettingsState.averageHikingSpeed.toString(),
+                    title: 'Average speed',
+                    controller: averageSpeedController,
                   ),
                 ),
               ),
@@ -85,6 +86,7 @@ class HikeOutlineSettings extends ConsumerWidget {
                   constraints: BoxConstraints(maxWidth: 330.0),
                   child: YahaTextField(
                     title: "Finish",
+                    controller: finishTimeController,
                   ),
                 ),
               ),
@@ -111,9 +113,7 @@ class HikeOutlineSettings extends ConsumerWidget {
                   size: YahaFontSizes.large,
                 ),
                 onPressed: () {
-                  appSettingsStateNotifier.updateAverageHikingSpeed(5);
-                  //appSettingsStateNotifier.updateusualStartTime(11);
-                  appSettingsStateNotifier.updatestartTime(myController.toString());
+                  appSettingsStateNotifier.updatestartTime(startTimeController.text);
                 },
                 label: Text('Save',
                     style: TextStyle(

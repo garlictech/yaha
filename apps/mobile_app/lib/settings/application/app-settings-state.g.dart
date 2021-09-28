@@ -16,7 +16,6 @@ abstract class $ApplicationSettingsState {
   int get distanceInitialIndex;
   int get temperatureInitialIndex;
   int get timeFormatInitialIndex;
-  int get ususalStartTime;
   String get startTime;
   String get currentLanguageTitle;
   double get averageHikingSpeed;
@@ -29,7 +28,6 @@ abstract class $ApplicationSettingsState {
     int? distanceInitialIndex,
     int? temperatureInitialIndex,
     int? timeFormatInitialIndex,
-    int? ususalStartTime,
     String? startTime,
     String? currentLanguageTitle,
     double? averageHikingSpeed,
@@ -44,7 +42,6 @@ abstract class $ApplicationSettingsState {
             temperatureInitialIndex ?? this.temperatureInitialIndex,
         timeFormatInitialIndex:
             timeFormatInitialIndex ?? this.timeFormatInitialIndex,
-        ususalStartTime: ususalStartTime ?? this.ususalStartTime,
         startTime: startTime ?? this.startTime,
         currentLanguageTitle: currentLanguageTitle ?? this.currentLanguageTitle,
         averageHikingSpeed: averageHikingSpeed ?? this.averageHikingSpeed,
@@ -60,7 +57,6 @@ abstract class $ApplicationSettingsState {
       this.distanceInitialIndex,
       this.temperatureInitialIndex,
       this.timeFormatInitialIndex,
-      this.ususalStartTime,
       this.startTime,
       this.currentLanguageTitle,
       this.averageHikingSpeed,
@@ -74,7 +70,6 @@ abstract class $ApplicationSettingsState {
       distanceInitialIndex: change.distanceInitialIndex,
       temperatureInitialIndex: change.temperatureInitialIndex,
       timeFormatInitialIndex: change.timeFormatInitialIndex,
-      ususalStartTime: change.ususalStartTime,
       startTime: change.startTime,
       currentLanguageTitle: change.currentLanguageTitle,
       averageHikingSpeed: change.averageHikingSpeed,
@@ -83,7 +78,7 @@ abstract class $ApplicationSettingsState {
 
   @override
   String toString() =>
-      "ApplicationSettingsState(isEnglish: $isEnglish, isKm: $isKm, isCelsius: $isCelsius, isTimeFormat24: $isTimeFormat24, distanceInitialIndex: $distanceInitialIndex, temperatureInitialIndex: $temperatureInitialIndex, timeFormatInitialIndex: $timeFormatInitialIndex, ususalStartTime: $ususalStartTime, startTime: $startTime, currentLanguageTitle: $currentLanguageTitle, averageHikingSpeed: $averageHikingSpeed)";
+      "ApplicationSettingsState(isEnglish: $isEnglish, isKm: $isKm, isCelsius: $isCelsius, isTimeFormat24: $isTimeFormat24, distanceInitialIndex: $distanceInitialIndex, temperatureInitialIndex: $temperatureInitialIndex, timeFormatInitialIndex: $timeFormatInitialIndex, startTime: $startTime, currentLanguageTitle: $currentLanguageTitle, averageHikingSpeed: $averageHikingSpeed)";
 
   @override
   // ignore: avoid_equals_and_hash_code_on_mutable_classes
@@ -97,7 +92,6 @@ abstract class $ApplicationSettingsState {
       distanceInitialIndex == other.distanceInitialIndex &&
       temperatureInitialIndex == other.temperatureInitialIndex &&
       timeFormatInitialIndex == other.timeFormatInitialIndex &&
-      ususalStartTime == other.ususalStartTime &&
       startTime == other.startTime &&
       currentLanguageTitle == other.currentLanguageTitle &&
       averageHikingSpeed == other.averageHikingSpeed;
@@ -113,7 +107,6 @@ abstract class $ApplicationSettingsState {
     result = 37 * result + distanceInitialIndex.hashCode;
     result = 37 * result + temperatureInitialIndex.hashCode;
     result = 37 * result + timeFormatInitialIndex.hashCode;
-    result = 37 * result + ususalStartTime.hashCode;
     result = 37 * result + startTime.hashCode;
     result = 37 * result + currentLanguageTitle.hashCode;
     result = 37 * result + averageHikingSpeed.hashCode;
@@ -130,7 +123,6 @@ class ApplicationSettingsState$Change {
     this.distanceInitialIndex,
     this.temperatureInitialIndex,
     this.timeFormatInitialIndex,
-    this.ususalStartTime,
     this.startTime,
     this.currentLanguageTitle,
     this.averageHikingSpeed,
@@ -143,7 +135,6 @@ class ApplicationSettingsState$Change {
   int distanceInitialIndex;
   int temperatureInitialIndex;
   int timeFormatInitialIndex;
-  int ususalStartTime;
   String startTime;
   String currentLanguageTitle;
   double averageHikingSpeed;
@@ -198,12 +189,6 @@ class ApplicationSettingsState$ {
             timeFormatInitialIndex: timeFormatInitialIndex),
   );
 
-  static final ususalStartTime = Lens<ApplicationSettingsState, int>(
-    (ususalStartTimeContainer) => ususalStartTimeContainer.ususalStartTime,
-    (ususalStartTimeContainer, ususalStartTime) =>
-        ususalStartTimeContainer.copyWith(ususalStartTime: ususalStartTime),
-  );
-
   static final startTime = Lens<ApplicationSettingsState, String>(
     (startTimeContainer) => startTimeContainer.startTime,
     (startTimeContainer, startTime) =>
@@ -242,7 +227,6 @@ ApplicationSettingsState _$ApplicationSettingsStateFromJson(
     temperatureInitialIndex: json['temperatureInitialIndex'] as int,
     averageHikingSpeed: (json['averageHikingSpeed'] as num).toDouble(),
     timeFormatInitialIndex: json['timeFormatInitialIndex'] as int,
-    ususalStartTime: json['ususalStartTime'] as int,
     startTime: json['startTime'] as String,
     currentLanguageTitle: json['currentLanguageTitle'] as String,
   );
@@ -258,7 +242,6 @@ Map<String, dynamic> _$ApplicationSettingsStateToJson(
       'distanceInitialIndex': instance.distanceInitialIndex,
       'temperatureInitialIndex': instance.temperatureInitialIndex,
       'timeFormatInitialIndex': instance.timeFormatInitialIndex,
-      'ususalStartTime': instance.ususalStartTime,
       'startTime': instance.startTime,
       'currentLanguageTitle': instance.currentLanguageTitle,
       'averageHikingSpeed': instance.averageHikingSpeed,

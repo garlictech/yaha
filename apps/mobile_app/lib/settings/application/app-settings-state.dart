@@ -17,7 +17,6 @@ class ApplicationSettingsState extends $ApplicationSettingsState {
   final int distanceInitialIndex;
   final int temperatureInitialIndex;
   final int timeFormatInitialIndex;
-  final int ususalStartTime;
   final String startTime;
   final String currentLanguageTitle;
   final double averageHikingSpeed;
@@ -31,7 +30,6 @@ class ApplicationSettingsState extends $ApplicationSettingsState {
       this.temperatureInitialIndex = 0,
       this.averageHikingSpeed = 4.0,
       this.timeFormatInitialIndex = 1,
-      this.ususalStartTime = 8,
       this.startTime = '9',
       this.currentLanguageTitle = 'English'});
 
@@ -69,9 +67,6 @@ class ApplicationSettingsStateNotifier
 
   updateAverageHikingSpeed(double newSpeed) =>
       _updateState(state.copyWith(averageHikingSpeed: newSpeed));
-
-  updateusualStartTime(int newTime) =>
-      _updateState(state.copyWith(ususalStartTime: newTime));
 
   updatestartTime(String newStartTime) =>
       _updateState(state.copyWith(startTime: newStartTime));
