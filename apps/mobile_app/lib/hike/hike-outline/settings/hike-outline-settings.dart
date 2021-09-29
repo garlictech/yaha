@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yaha/settings/application/app-settings-state.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
+import 'package:yaha/utility/yaha-border-width.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
@@ -14,10 +15,11 @@ class HikeOutlineSettings extends ConsumerWidget {
   final startTimeController = TextEditingController();
   final averageSpeedController = TextEditingController();
   final finishTimeController = TextEditingController();
-  //DateTime dateTime = DateTime.now();
+  final DateTime dateTime = DateTime.now();
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {
+    var appSettingsState = watch(applicationSettingsStateProvider);
     var appSettingsStateNotifier =
         watch(applicationSettingsStateProvider.notifier);
 
@@ -38,9 +40,38 @@ class HikeOutlineSettings extends ConsumerWidget {
                   constraints: BoxConstraints(
                     maxWidth: 330.0,
                   ),
-                  child: YahaTextField(
-                    title: 'Start',
+                  child: TextFormField(
                     controller: startTimeController,
+                    onTap: () => appSettingsStateNotifier
+                        .updateStartTimePickerVisibility(true),
+                    onEditingComplete: () => appSettingsStateNotifier
+                        .updateStartTimePickerVisibility(false),
+                    keyboardType: TextInputType.text,
+                    enableSuggestions: false,
+                    autocorrect: false,
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        color: YahaColors.textColor,
+                        fontSize: YahaFontSizes.small),
+                    decoration: InputDecoration(
+                      focusColor: YahaColors.military,
+                      labelText: appSettingsState.startTime.toString(),
+                      labelStyle: TextStyle(color: YahaColors.textColor),
+                      contentPadding:
+                          EdgeInsets.only(left: YahaSpaceSizes.medium),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius:
+                              BorderRadius.circular(YahaBorderRadius.general),
+                          borderSide: BorderSide(
+                              color: YahaColors.textColor,
+                              width: YahaBorderWidth.xSmall)),
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius:
+                              BorderRadius.circular(YahaBorderRadius.general),
+                          borderSide: BorderSide(
+                              color: YahaColors.primary,
+                              width: YahaBorderWidth.xSmall)),
+                    ),
                   ),
                 ),
               ),
@@ -54,6 +85,21 @@ class HikeOutlineSettings extends ConsumerWidget {
                 ),
               ),
             ],
+          ),
+          Container(
+            padding: EdgeInsets.only(top: YahaSpaceSizes.small),
+            child: Visibility(
+              visible: appSettingsState.startTimePickerVisibility,
+              child: SizedBox(
+                height: 200,
+                child: CupertinoDatePicker(
+                  initialDateTime: dateTime,
+                  mode: CupertinoDatePickerMode.dateAndTime,
+                  onDateTimeChanged: (newDateTime) =>
+                      appSettingsStateNotifier.updateStartTime(newDateTime),
+                ),
+              ),
+            ),
           ),
           Row(
             children: [
@@ -85,21 +131,14 @@ class HikeOutlineSettings extends ConsumerWidget {
             children: [
               Expanded(
                 child: Container(
+                  padding: EdgeInsets.only(top: YahaSpaceSizes.small),
                   constraints: BoxConstraints(maxWidth: 330.0),
-                  child: YahaTextField(
-                    title: "Finish",
+                  child: TextFormField(
                     controller: finishTimeController,
-                  ),
-                  /*TextFormField(
-                    controller: finishTimeController,
-                    onTap: () {
-                      CupertinoDatePicker(
-                        initialDateTime: dateTime,
-                        mode: CupertinoDatePickerMode.dateAndTime,
-                        onDateTimeChanged: (dateTime) =>
-                            setState(() => this.dateTime = dateTime),
-                      );
-                    },
+                    onTap: () => appSettingsStateNotifier
+                        .updateFinishTimePickerVisibility(true),
+                    onEditingComplete: () => appSettingsStateNotifier
+                        .updateFinishTimePickerVisibility(false),
                     keyboardType: TextInputType.text,
                     enableSuggestions: false,
                     autocorrect: false,
@@ -109,7 +148,7 @@ class HikeOutlineSettings extends ConsumerWidget {
                         fontSize: YahaFontSizes.small),
                     decoration: InputDecoration(
                       focusColor: YahaColors.military,
-                      labelText: 'Finish',
+                      labelText: appSettingsState.finishTime.toString(),
                       labelStyle: TextStyle(color: YahaColors.textColor),
                       contentPadding:
                           EdgeInsets.only(left: YahaSpaceSizes.medium),
@@ -126,7 +165,7 @@ class HikeOutlineSettings extends ConsumerWidget {
                               color: YahaColors.primary,
                               width: YahaBorderWidth.xSmall)),
                     ),
-                  ),*/
+                  ),
                 ),
               ),
               Container(
@@ -141,6 +180,21 @@ class HikeOutlineSettings extends ConsumerWidget {
             ],
           ),
           Container(
+            padding: EdgeInsets.only(top: YahaSpaceSizes.small),
+            child: Visibility(
+              visible: appSettingsState.finishTimePickerVisibility,
+              child: SizedBox(
+                height: 200,
+                child: CupertinoDatePicker(
+                  initialDateTime: dateTime,
+                  mode: CupertinoDatePickerMode.dateAndTime,
+                  onDateTimeChanged: (newDateTime) =>
+                      appSettingsStateNotifier.updateFinishTime(newDateTime),
+                ),
+              ),
+            ),
+          ),
+          Container(
             padding: const EdgeInsets.only(top: YahaSpaceSizes.xLarge),
             child: SizedBox(
               height: YahaBoxSizes.buttonHeight,
@@ -153,11 +207,7 @@ class HikeOutlineSettings extends ConsumerWidget {
                 ),
                 onPressed: () {
                   appSettingsStateNotifier
-                      .updateStartTime(startTimeController.text);
-                  appSettingsStateNotifier
                       .updateAverageHikingSpeed(averageSpeedController.text);
-                  appSettingsStateNotifier
-                      .updateFinishTime(finishTimeController.text);
                 },
                 label: Text('Save',
                     style: TextStyle(
