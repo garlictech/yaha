@@ -16,8 +16,12 @@ abstract class $ApplicationSettingsState {
   int get distanceInitialIndex;
   int get temperatureInitialIndex;
   int get timeFormatInitialIndex;
+  DateTime? get startTime;
+  DateTime? get finishTime;
+  bool get startTimePickerVisibility;
+  bool get finishTimePickerVisibility;
   String get currentLanguageTitle;
-  double get averageHikingSpeed;
+  String get averageHikingSpeed;
 
   ApplicationSettingsState copyWith({
     bool? isEnglish,
@@ -27,8 +31,12 @@ abstract class $ApplicationSettingsState {
     int? distanceInitialIndex,
     int? temperatureInitialIndex,
     int? timeFormatInitialIndex,
+    DateTime? startTime,
+    DateTime? finishTime,
+    bool? startTimePickerVisibility,
+    bool? finishTimePickerVisibility,
     String? currentLanguageTitle,
-    double? averageHikingSpeed,
+    String? averageHikingSpeed,
   }) =>
       ApplicationSettingsState(
         isEnglish: isEnglish ?? this.isEnglish,
@@ -40,6 +48,12 @@ abstract class $ApplicationSettingsState {
             temperatureInitialIndex ?? this.temperatureInitialIndex,
         timeFormatInitialIndex:
             timeFormatInitialIndex ?? this.timeFormatInitialIndex,
+        startTime: startTime ?? this.startTime,
+        finishTime: finishTime ?? this.finishTime,
+        startTimePickerVisibility:
+            startTimePickerVisibility ?? this.startTimePickerVisibility,
+        finishTimePickerVisibility:
+            finishTimePickerVisibility ?? this.finishTimePickerVisibility,
         currentLanguageTitle: currentLanguageTitle ?? this.currentLanguageTitle,
         averageHikingSpeed: averageHikingSpeed ?? this.averageHikingSpeed,
       );
@@ -54,6 +68,10 @@ abstract class $ApplicationSettingsState {
       this.distanceInitialIndex,
       this.temperatureInitialIndex,
       this.timeFormatInitialIndex,
+      this.startTime,
+      this.finishTime,
+      this.startTimePickerVisibility,
+      this.finishTimePickerVisibility,
       this.currentLanguageTitle,
       this.averageHikingSpeed,
     );
@@ -66,6 +84,10 @@ abstract class $ApplicationSettingsState {
       distanceInitialIndex: change.distanceInitialIndex,
       temperatureInitialIndex: change.temperatureInitialIndex,
       timeFormatInitialIndex: change.timeFormatInitialIndex,
+      startTime: change.startTime,
+      finishTime: change.finishTime,
+      startTimePickerVisibility: change.startTimePickerVisibility,
+      finishTimePickerVisibility: change.finishTimePickerVisibility,
       currentLanguageTitle: change.currentLanguageTitle,
       averageHikingSpeed: change.averageHikingSpeed,
     );
@@ -73,7 +95,7 @@ abstract class $ApplicationSettingsState {
 
   @override
   String toString() =>
-      "ApplicationSettingsState(isEnglish: $isEnglish, isKm: $isKm, isCelsius: $isCelsius, isTimeFormat24: $isTimeFormat24, distanceInitialIndex: $distanceInitialIndex, temperatureInitialIndex: $temperatureInitialIndex, timeFormatInitialIndex: $timeFormatInitialIndex, currentLanguageTitle: $currentLanguageTitle, averageHikingSpeed: $averageHikingSpeed)";
+      "ApplicationSettingsState(isEnglish: $isEnglish, isKm: $isKm, isCelsius: $isCelsius, isTimeFormat24: $isTimeFormat24, distanceInitialIndex: $distanceInitialIndex, temperatureInitialIndex: $temperatureInitialIndex, timeFormatInitialIndex: $timeFormatInitialIndex, startTime: $startTime, finishTime: $finishTime, startTimePickerVisibility: $startTimePickerVisibility, finishTimePickerVisibility: $finishTimePickerVisibility, currentLanguageTitle: $currentLanguageTitle, averageHikingSpeed: $averageHikingSpeed)";
 
   @override
   // ignore: avoid_equals_and_hash_code_on_mutable_classes
@@ -87,6 +109,10 @@ abstract class $ApplicationSettingsState {
       distanceInitialIndex == other.distanceInitialIndex &&
       temperatureInitialIndex == other.temperatureInitialIndex &&
       timeFormatInitialIndex == other.timeFormatInitialIndex &&
+      startTime == other.startTime &&
+      finishTime == other.finishTime &&
+      startTimePickerVisibility == other.startTimePickerVisibility &&
+      finishTimePickerVisibility == other.finishTimePickerVisibility &&
       currentLanguageTitle == other.currentLanguageTitle &&
       averageHikingSpeed == other.averageHikingSpeed;
 
@@ -101,6 +127,10 @@ abstract class $ApplicationSettingsState {
     result = 37 * result + distanceInitialIndex.hashCode;
     result = 37 * result + temperatureInitialIndex.hashCode;
     result = 37 * result + timeFormatInitialIndex.hashCode;
+    result = 37 * result + startTime.hashCode;
+    result = 37 * result + finishTime.hashCode;
+    result = 37 * result + startTimePickerVisibility.hashCode;
+    result = 37 * result + finishTimePickerVisibility.hashCode;
     result = 37 * result + currentLanguageTitle.hashCode;
     result = 37 * result + averageHikingSpeed.hashCode;
     return result;
@@ -116,6 +146,10 @@ class ApplicationSettingsState$Change {
     this.distanceInitialIndex,
     this.temperatureInitialIndex,
     this.timeFormatInitialIndex,
+    this.startTime,
+    this.finishTime,
+    this.startTimePickerVisibility,
+    this.finishTimePickerVisibility,
     this.currentLanguageTitle,
     this.averageHikingSpeed,
   );
@@ -127,8 +161,12 @@ class ApplicationSettingsState$Change {
   int distanceInitialIndex;
   int temperatureInitialIndex;
   int timeFormatInitialIndex;
+  DateTime? startTime;
+  DateTime? finishTime;
+  bool startTimePickerVisibility;
+  bool finishTimePickerVisibility;
   String currentLanguageTitle;
-  double averageHikingSpeed;
+  String averageHikingSpeed;
 }
 
 // ignore: avoid_classes_with_only_static_members
@@ -180,6 +218,35 @@ class ApplicationSettingsState$ {
             timeFormatInitialIndex: timeFormatInitialIndex),
   );
 
+  static final startTime = Lens<ApplicationSettingsState, DateTime?>(
+    (startTimeContainer) => startTimeContainer.startTime,
+    (startTimeContainer, startTime) =>
+        startTimeContainer.copyWith(startTime: startTime),
+  );
+
+  static final finishTime = Lens<ApplicationSettingsState, DateTime?>(
+    (finishTimeContainer) => finishTimeContainer.finishTime,
+    (finishTimeContainer, finishTime) =>
+        finishTimeContainer.copyWith(finishTime: finishTime),
+  );
+
+  static final startTimePickerVisibility = Lens<ApplicationSettingsState, bool>(
+    (startTimePickerVisibilityContainer) =>
+        startTimePickerVisibilityContainer.startTimePickerVisibility,
+    (startTimePickerVisibilityContainer, startTimePickerVisibility) =>
+        startTimePickerVisibilityContainer.copyWith(
+            startTimePickerVisibility: startTimePickerVisibility),
+  );
+
+  static final finishTimePickerVisibility =
+      Lens<ApplicationSettingsState, bool>(
+    (finishTimePickerVisibilityContainer) =>
+        finishTimePickerVisibilityContainer.finishTimePickerVisibility,
+    (finishTimePickerVisibilityContainer, finishTimePickerVisibility) =>
+        finishTimePickerVisibilityContainer.copyWith(
+            finishTimePickerVisibility: finishTimePickerVisibility),
+  );
+
   static final currentLanguageTitle = Lens<ApplicationSettingsState, String>(
     (currentLanguageTitleContainer) =>
         currentLanguageTitleContainer.currentLanguageTitle,
@@ -188,7 +255,7 @@ class ApplicationSettingsState$ {
             currentLanguageTitle: currentLanguageTitle),
   );
 
-  static final averageHikingSpeed = Lens<ApplicationSettingsState, double>(
+  static final averageHikingSpeed = Lens<ApplicationSettingsState, String>(
     (averageHikingSpeedContainer) =>
         averageHikingSpeedContainer.averageHikingSpeed,
     (averageHikingSpeedContainer, averageHikingSpeed) =>
@@ -210,8 +277,12 @@ ApplicationSettingsState _$ApplicationSettingsStateFromJson(
     isTimeFormat24: json['isTimeFormat24'] as bool,
     distanceInitialIndex: json['distanceInitialIndex'] as int,
     temperatureInitialIndex: json['temperatureInitialIndex'] as int,
-    averageHikingSpeed: (json['averageHikingSpeed'] as num).toDouble(),
+    averageHikingSpeed: json['averageHikingSpeed'] as String,
     timeFormatInitialIndex: json['timeFormatInitialIndex'] as int,
+    startTime: json['startTime'],
+    finishTime: json['finishTime'],
+    startTimePickerVisibility: json['startTimePickerVisibility'] as bool,
+    finishTimePickerVisibility: json['finishTimePickerVisibility'] as bool,
     currentLanguageTitle: json['currentLanguageTitle'] as String,
   );
 }
@@ -226,6 +297,10 @@ Map<String, dynamic> _$ApplicationSettingsStateToJson(
       'distanceInitialIndex': instance.distanceInitialIndex,
       'temperatureInitialIndex': instance.temperatureInitialIndex,
       'timeFormatInitialIndex': instance.timeFormatInitialIndex,
+      'startTime': instance.startTime?.toIso8601String(),
+      'finishTime': instance.finishTime?.toIso8601String(),
+      'startTimePickerVisibility': instance.startTimePickerVisibility,
+      'finishTimePickerVisibility': instance.finishTimePickerVisibility,
       'currentLanguageTitle': instance.currentLanguageTitle,
       'averageHikingSpeed': instance.averageHikingSpeed,
     };

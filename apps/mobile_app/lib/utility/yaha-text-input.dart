@@ -53,8 +53,15 @@ import 'package:yaha/utility/yaha-space-sizes.dart';
 
 class YahaTextField extends StatefulWidget {
   final String title;
+  final IconData? icon;
+  final controller;
 
-  const YahaTextField({Key? key, required this.title}) : super(key: key);
+  const YahaTextField({
+    Key? key,
+    required this.title,
+    this.icon,
+    this.controller,
+  }) : super(key: key);
 
   @override
   _YahaTextFieldState createState() => _YahaTextFieldState();
@@ -84,6 +91,7 @@ class _YahaTextFieldState extends State<YahaTextField> {
   Widget build(BuildContext context) {
     return Container(
       child: TextFormField(
+        controller: widget.controller,
         focusNode: _focusNode,
         onTap: _requestFocus,
         keyboardType: TextInputType.text,
@@ -96,6 +104,14 @@ class _YahaTextFieldState extends State<YahaTextField> {
         cursorColor:
             _focusNode.hasFocus ? YahaColors.primary : YahaColors.textColor,
         decoration: InputDecoration(
+            suffixIcon: IconButton(
+              icon: Icon(
+                widget.icon,
+                color: YahaColors.primary,
+                size: 28.0,
+              ),
+              onPressed: () {},
+            ),
             focusColor: YahaColors.military,
             labelText: widget.title,
             labelStyle: TextStyle(
@@ -104,13 +120,13 @@ class _YahaTextFieldState extends State<YahaTextField> {
                     : YahaColors.textColor),
             contentPadding: EdgeInsets.only(left: YahaSpaceSizes.medium),
             enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(YahaBorderRadius.small),
+                borderRadius: BorderRadius.circular(YahaBorderRadius.general),
                 borderSide: BorderSide(
-                    color: YahaColors.textColor, width: YahaBorderWidth.small)),
+                    color: YahaColors.textColor, width: YahaBorderWidth.xSmall)),
             focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(YahaBorderRadius.small),
+                borderRadius: BorderRadius.circular(YahaBorderRadius.general),
                 borderSide: BorderSide(
-                    color: YahaColors.primary, width: YahaBorderWidth.small))),
+                    color: YahaColors.primary, width: YahaBorderWidth.xSmall))),
       ),
     );
   }

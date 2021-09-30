@@ -77,13 +77,13 @@ class _YahaTextFieldPasswordState extends State<YahaTextFieldPassword> {
             ),
             contentPadding: EdgeInsets.only(left: YahaSpaceSizes.medium),
             enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(YahaBorderRadius.small),
+                borderRadius: BorderRadius.circular(YahaBorderRadius.general),
                 borderSide: BorderSide(
-                    color: YahaColors.textColor, width: YahaBorderWidth.small)),
+                    color: YahaColors.textColor, width: YahaBorderWidth.xSmall)),
             focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(YahaBorderRadius.small),
+                borderRadius: BorderRadius.circular(YahaBorderRadius.general),
                 borderSide: BorderSide(
-                    color: YahaColors.primary, width: YahaBorderWidth.small))),
+                    color: YahaColors.primary, width: YahaBorderWidth.xSmall))),
       ),
     );
   }

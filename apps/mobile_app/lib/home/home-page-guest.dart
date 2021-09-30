@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yaha/auth/auth-state.dart';
-import 'package:yaha/hike/hike-card.dart';
+import 'package:yaha/hike/hike-card/hike-card.dart';
 import 'package:yaha/home/explore-hike-box.dart';
 import 'package:yaha/home/show-more-button.dart';
 import 'package:yaha/profile/statistics.dart';
@@ -42,7 +42,7 @@ class HomePageGuest extends ConsumerWidget {
                           children: [
                             Align(
                               alignment: Alignment.centerLeft,
-                              child: Row(
+                              child: Row (
                                 children: [
                                   Container(
                                       height: 64,
@@ -67,13 +67,13 @@ class HomePageGuest extends ConsumerWidget {
                                       )),
                                   Container(
                                       padding: EdgeInsets.only(
-                                          left: YahaSpaceSizes.general),
+                                          left: YahaSpaceSizes.medium),
                                       child: userState.when(
                                         loading: () =>
                                             const CircularProgressIndicator(),
                                         error: (err, stack) => Text('😱'),
                                         data: (state) => Text(
-                                          'Hi ${state.nick}',
+                                          'Hi ${state.nick}!',
                                           style: TextStyle(
                                               fontSize: YahaFontSizes.medium,
                                               fontWeight: FontWeight.w600,
@@ -112,7 +112,7 @@ class HomePageGuest extends ConsumerWidget {
                                 child: Text(
                                   'Statistics',
                                   style: TextStyle(
-                                      fontSize: YahaFontSizes.small,
+                                      fontSize: YahaFontSizes.medium,
                                       fontWeight: FontWeight.w600,
                                       color: YahaColors.textColor),
                                 ),
@@ -143,7 +143,7 @@ class HomePageGuest extends ConsumerWidget {
                                 child: Text(
                                   'Previous activities',
                                   style: TextStyle(
-                                      fontSize: YahaFontSizes.small,
+                                      fontSize: YahaFontSizes.medium,
                                       fontWeight: FontWeight.w600,
                                       color: YahaColors.textColor),
                                 ),
@@ -167,7 +167,7 @@ class HomePageGuest extends ConsumerWidget {
                                 child: Text(
                                   'Continue hiking',
                                   style: TextStyle(
-                                      fontSize: YahaFontSizes.small,
+                                      fontSize: YahaFontSizes.medium,
                                       fontWeight: FontWeight.w600,
                                       color: YahaColors.textColor),
                                 ),
@@ -191,7 +191,7 @@ class HomePageGuest extends ConsumerWidget {
                                 child: Text(
                                   'Current challenges',
                                   style: TextStyle(
-                                      fontSize: YahaFontSizes.small,
+                                      fontSize: YahaFontSizes.medium,
                                       fontWeight: FontWeight.w600,
                                       color: YahaColors.textColor),
                                 ),
@@ -242,7 +242,7 @@ class HomePageGuest extends ConsumerWidget {
                                 child: Text(
                                   'Events starting next month',
                                   style: TextStyle(
-                                      fontSize: YahaFontSizes.small,
+                                      fontSize: YahaFontSizes.medium,
                                       fontWeight: FontWeight.w600,
                                       color: YahaColors.textColor),
                                 ),
@@ -287,7 +287,7 @@ class HomePageGuest extends ConsumerWidget {
                                 child: Text(
                                   'Best hikes near you',
                                   style: TextStyle(
-                                      fontSize: YahaFontSizes.small,
+                                      fontSize: YahaFontSizes.medium,
                                       fontWeight: FontWeight.w600,
                                       color: YahaColors.textColor),
                                 ),
@@ -338,7 +338,7 @@ class HomePageGuest extends ConsumerWidget {
                                 child: Text(
                                   'Best hikes of the world',
                                   style: TextStyle(
-                                      fontSize: YahaFontSizes.small,
+                                      fontSize: YahaFontSizes.medium,
                                       fontWeight: FontWeight.w600,
                                       color: YahaColors.textColor),
                                 ),
