@@ -29,42 +29,55 @@ class HikeCard extends StatelessWidget {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => HikePage()));
           },
-          child: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage(backgroundImage), fit: BoxFit.cover),
-            ),
-            child: Align(
-              alignment: Alignment.bottomLeft,
-              child: Container(
-                padding: EdgeInsets.only(
-                  left: YahaSpaceSizes.small,
-                  bottom: YahaSpaceSizes.small,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      title,
-                      style: TextStyle(
-                        fontSize: YahaFontSizes.large,
-                        fontWeight: FontWeight.w700,
-                        color: YahaColors.background,
+          child: Stack(
+            children: [
+              Align(
+                alignment: Alignment.center,
+                child: ColorFiltered(
+                  colorFilter: ColorFilter.mode(
+                      Colors.black.withOpacity(0.35), BlendMode.darken),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage(backgroundImage),
+                        fit: BoxFit.cover,
                       ),
                     ),
-                    Text(
-                      subTitle + ' ($distanceFromCurrentLocation km away)',
-                      style: TextStyle(
-                        fontSize: YahaFontSizes.medium,
-                        fontWeight: FontWeight.w600,
-                        color: YahaColors.background,
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ),
-            ),
+              Align(
+                alignment: Alignment.bottomLeft,
+                child: Container(
+                  padding: EdgeInsets.only(
+                    left: YahaSpaceSizes.small,
+                    bottom: YahaSpaceSizes.small,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        title,
+                        style: TextStyle(
+                          fontSize: YahaFontSizes.medium,
+                          fontWeight: FontWeight.w700,
+                          color: YahaColors.background,
+                        ),
+                      ),
+                      Text(
+                        subTitle + ' ($distanceFromCurrentLocation km away)',
+                        style: TextStyle(
+                          fontSize: YahaFontSizes.small,
+                          fontWeight: FontWeight.w600,
+                          color: YahaColors.background,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),

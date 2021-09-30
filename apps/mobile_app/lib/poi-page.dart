@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yaha/gallery.dart';
+import 'package:yaha/hike/hike-outline/poi.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
@@ -38,7 +39,7 @@ class _PoiPageState extends State<PoiPage> {
                             Text('Hungarian\nNational Museum',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    fontSize: YahaFontSizes.xLarge,
+                                    fontSize: YahaFontSizes.medium,
                                     fontWeight: FontWeight.w600,
                                     color: YahaColors.textColor)),
                             Icon(Icons.comment,
@@ -47,23 +48,21 @@ class _PoiPageState extends State<PoiPage> {
                           ],
                         ),
                         Container(
-                          padding: const EdgeInsets.only(
-                              top: YahaSpaceSizes.general,
-                              bottom: YahaSpaceSizes.general),
-                          child: CircleAvatar(
-                              backgroundColor: YahaColors.tourism,
-                              radius: YahaBorderRadius.poiLarge,
-                              child: Icon(Icons.museum,
-                                  color: YahaColors.accentColor,
-                                  size: YahaFontSizes.xxxLarge)),
-                        ),
+                            padding: const EdgeInsets.only(
+                                top: YahaSpaceSizes.general,
+                                bottom: YahaSpaceSizes.general),
+                            child: Poi(
+                                backgroundColor: YahaColors.generic,
+                                icon: Icons.museum_rounded,
+                                iconSize: 48,
+                                padding: YahaSpaceSizes.small)),
                         Container(
                           padding: const EdgeInsets.only(
                               bottom: YahaSpaceSizes.general),
                           child: Text(
                               'The Hungarian National Museum (Hungarian: Magyar Nemzeti Múzeum) was founded in 1802 and is the national museum for the history, art, and archaeology of Hungary.',
                               style: TextStyle(
-                                  fontSize: YahaFontSizes.medium,
+                                  fontSize: YahaFontSizes.small,
                                   fontWeight: FontWeight.w400,
                                   color: YahaColors.textColor)),
                         ),
@@ -83,7 +82,7 @@ class _PoiPageState extends State<PoiPage> {
                         ),
                         Container(
                           padding: const EdgeInsets.only(
-                              bottom: YahaSpaceSizes.general),
+                              bottom: YahaSpaceSizes.medium),
                           child: Row(
                             children: [
                               Container(
@@ -106,7 +105,7 @@ class _PoiPageState extends State<PoiPage> {
                         ),
                         Container(
                           padding: const EdgeInsets.only(
-                              bottom: YahaSpaceSizes.general),
+                              bottom: YahaSpaceSizes.medium),
                           child: Row(
                             children: [
                               Container(
@@ -143,7 +142,7 @@ class _PoiPageState extends State<PoiPage> {
                             width: MediaQuery.of(context).size.width,
                             child: Gallery()),
                         Container(
-                          padding: const EdgeInsets.all(YahaSpaceSizes.general),
+                          padding: const EdgeInsets.only(top: YahaSpaceSizes.xLarge),
                           child: SizedBox(
                             height: 50,
                             width: 300,
