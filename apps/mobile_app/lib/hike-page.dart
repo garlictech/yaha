@@ -103,8 +103,8 @@ class _HikePageState extends State<HikePage> {
                           width: MediaQuery.of(context).size.width,
                           child: Gallery()),
                       Container(
-                        height: 300,
                         child: GridView.count(
+                          shrinkWrap: true,
                           primary: false,
                           padding: const EdgeInsets.only(
                             bottom: YahaSpaceSizes.general,
@@ -115,7 +115,7 @@ class _HikePageState extends State<HikePage> {
                           children: <Widget>[
                             Container(
                               padding:
-                                  const EdgeInsets.all(YahaSpaceSizes.general),
+                                  const EdgeInsets.all(YahaSpaceSizes.small),
                               child: Column(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,
@@ -146,7 +146,7 @@ class _HikePageState extends State<HikePage> {
                             ),
                             Container(
                               padding:
-                                  const EdgeInsets.all(YahaSpaceSizes.general),
+                                  const EdgeInsets.all(YahaSpaceSizes.small),
                               child: Column(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,
@@ -177,7 +177,7 @@ class _HikePageState extends State<HikePage> {
                             ),
                             Container(
                               padding:
-                                  const EdgeInsets.all(YahaSpaceSizes.general),
+                                  const EdgeInsets.all(YahaSpaceSizes.small),
                               child: Column(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,
@@ -208,7 +208,7 @@ class _HikePageState extends State<HikePage> {
                             ),
                             Container(
                               padding:
-                                  const EdgeInsets.all(YahaSpaceSizes.general),
+                                  const EdgeInsets.all(YahaSpaceSizes.small),
                               child: Column(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,
@@ -239,7 +239,7 @@ class _HikePageState extends State<HikePage> {
                             ),
                             Container(
                               padding:
-                                  const EdgeInsets.all(YahaSpaceSizes.general),
+                                  const EdgeInsets.all(YahaSpaceSizes.small),
                               child: Column(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,
@@ -270,7 +270,7 @@ class _HikePageState extends State<HikePage> {
                             ),
                             Container(
                               padding:
-                                  const EdgeInsets.all(YahaSpaceSizes.general),
+                                  const EdgeInsets.all(YahaSpaceSizes.small),
                               child: Column(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,
@@ -301,6 +301,7 @@ class _HikePageState extends State<HikePage> {
                       ),
                       Container(
                         padding: const EdgeInsets.only(
+                            top: YahaSpaceSizes.small,
                             bottom: YahaSpaceSizes.small),
                         child: Column(
                           children: [
