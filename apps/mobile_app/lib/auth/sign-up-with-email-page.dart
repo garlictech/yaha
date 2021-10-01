@@ -24,7 +24,9 @@ class _SignUpWithEmailPageState extends State<SignUpWithEmailPage> {
               "New to Yaha?",
               textAlign: TextAlign.center,
               style: TextStyle(
-                  fontSize: YahaFontSizes.xLarge, fontWeight: FontWeight.w700),
+                fontSize: YahaFontSizes.large,
+                fontWeight: FontWeight.w700,
+              ),
             ),
             Container(
               padding: const EdgeInsets.only(top: 3.0),
@@ -32,8 +34,9 @@ class _SignUpWithEmailPageState extends State<SignUpWithEmailPage> {
                 "Create an account.",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                    fontSize: YahaFontSizes.xLarge,
-                    fontWeight: FontWeight.w700),
+                  fontSize: YahaFontSizes.large,
+                  fontWeight: FontWeight.w700,
+                 ),
               ),
             ),
           ],

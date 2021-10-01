@@ -1,10 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yaha/settings/application/application-page.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
+import 'package:yaha/utility/yaha-icon-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
-
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -274,27 +275,57 @@ class _SettingsPageState extends State<SettingsPage> {
                               ),
                               Divider(
                                   color: YahaColors.divider, thickness: 0.5),
-                              Container(
-                                padding: const EdgeInsets.only(
-                                    left: YahaSpaceSizes.general,
-                                    top: YahaSpaceSizes.small,
-                                    right: YahaSpaceSizes.general,
-                                    bottom: YahaSpaceSizes.small),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text('Log out',
-                                        style: TextStyle(
-                                            fontSize: YahaFontSizes.small,
-                                            fontWeight: FontWeight.w400,
-                                            color: YahaColors.error)),
-                                    Icon(
-                                      Icons.exit_to_app_rounded,
-                                      color: YahaColors.error,
-                                      size: YahaFontSizes.xxLarge,
-                                    )
-                                  ],
+                              InkWell(
+                                onTap: () => showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return CupertinoAlertDialog(
+                                        title: Stack(
+                                          alignment: Alignment.center,
+                                          children: [
+                                            Align(
+                                              alignment: Alignment.center,
+                                              child: Text(
+                                                'Log in',
+                                                style: TextStyle(
+                                                  color: YahaColors.textColor,
+                                                  fontSize: YahaFontSizes.medium,
+                                                ),
+                                              ),
+                                            ),
+                                            Align(
+                                              alignment: Alignment.centerRight,
+                                              child: Icon(
+                                                Icons.close_rounded,
+                                                size: YahaIconSizes.large,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      );
+                                    }),
+                                child: Container(
+                                  padding: const EdgeInsets.only(
+                                      left: YahaSpaceSizes.general,
+                                      top: YahaSpaceSizes.small,
+                                      right: YahaSpaceSizes.general,
+                                      bottom: YahaSpaceSizes.small),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text('Log out',
+                                          style: TextStyle(
+                                              fontSize: YahaFontSizes.small,
+                                              fontWeight: FontWeight.w400,
+                                              color: YahaColors.error)),
+                                      Icon(
+                                        Icons.exit_to_app_rounded,
+                                        color: YahaColors.error,
+                                        size: YahaFontSizes.xxLarge,
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ),
                               Container(

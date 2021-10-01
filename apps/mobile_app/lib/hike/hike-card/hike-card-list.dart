@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaha/hike/hike-card.dart';
+import 'package:yaha/hike/hike-card/hike-card.dart';
 
 class HikeCardList extends StatefulWidget {
   @override
