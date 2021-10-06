@@ -1,18 +1,22 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:yaha/auth/login-with-email-popup.dart';
+import 'package:yaha/settings/application/app-settings-state.dart';
 import 'package:yaha/utility/buttons/back-button.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
-import 'package:yaha/utility/yaha-text-input-password.dart';
-import 'package:yaha/utility/yaha-text-input.dart';
 
 class LogInPopup extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
+    var appSettingsState = watch(applicationSettingsStateProvider);
+    var appSettingsStateNotifier =
+        watch(applicationSettingsStateProvider.notifier);
+
     return Scaffold(
       body: CustomScrollView(
         physics: BouncingScrollPhysics(),
@@ -48,33 +52,44 @@ class LogInPopup extends ConsumerWidget {
                           ],
                         ),
                         Container(
-                          constraints: BoxConstraints(maxWidth: 400),
                           padding: const EdgeInsets.only(
-                              top: YahaSpaceSizes.general,
-                              bottom: YahaSpaceSizes.general),
-                          child: YahaTextField(
-                            title: 'Email',
-                          ),
-                        ),
-                        Container(
-                          constraints: BoxConstraints(maxWidth: 400),
-                          padding: const EdgeInsets.only(
-                            bottom: YahaSpaceSizes.general,
-                          ),
-                          child: YahaTextFieldPassword(title: 'Password'),
-                        ),
-                        Container(
+                              top: YahaSpaceSizes.xxLarge),
                           child: SizedBox(
-                            width: YahaBoxSizes.buttonWidthBig,
                             height: YahaBoxSizes.buttonHeight,
+                            width: YahaBoxSizes.buttonWidthBig,
                             child: ElevatedButton(
-                              child: Text(
-                                'Log in',
-                                style: TextStyle(
-                                    fontSize: YahaFontSizes.small,
-                                    fontWeight: FontWeight.w600),
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            LogInWithEmailPopup()));
+                              },
+                              child: Stack(
+                                children: [
+                                  Container(
+                                    padding: const EdgeInsets.only(left: 4.0),
+                                    child: Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Icon(
+                                        Icons.mail_outline_rounded,
+                                        color: YahaColors.accentColor,
+                                        size: YahaFontSizes.xLarge,
+                                      ),
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      'Log in with email',
+                                      style: TextStyle(
+                                        fontSize: YahaFontSizes.small,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                              onPressed: () {},
                               style: ElevatedButton.styleFrom(
                                 primary: YahaColors.primary,
                                 shape: const RoundedRectangleBorder(
@@ -86,49 +101,8 @@ class LogInPopup extends ConsumerWidget {
                           ),
                         ),
                         Container(
-                          alignment: Alignment.center,
-                          padding:
-                              const EdgeInsets.only(top: YahaSpaceSizes.medium),
-                          child: Text(
-                            'Forgot password?',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                color: YahaColors.primary,
-                                fontSize: YahaFontSizes.small),
-                          ),
-                        ),
-                        Container(
-                          constraints: BoxConstraints(maxWidth: 400),
-                          padding: EdgeInsets.only(
-                              top: YahaSpaceSizes.xLarge,
-                              bottom: YahaSpaceSizes.xLarge),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Divider(
-                                  color: YahaColors.textColor,
-                                  thickness: 2.0,
-                                  endIndent: 6.0,
-                                ),
-                              ),
-                              Text(
-                                'OR',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: YahaFontSizes.small),
-                              ),
-                              Expanded(
-                                child: Divider(
-                                  color: YahaColors.textColor,
-                                  thickness: 2.0,
-                                  indent: 6.0,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
                           padding: const EdgeInsets.only(
+                              top: YahaSpaceSizes.medium,
                               bottom: YahaSpaceSizes.medium),
                           child: SizedBox(
                             height: YahaBoxSizes.buttonHeight,
@@ -251,50 +225,60 @@ class LogInPopup extends ConsumerWidget {
                           ),
                         ),
                         Container(
+                          width: YahaBoxSizes.buttonWidthBig,
                           padding:
                               EdgeInsets.only(bottom: YahaSpaceSizes.small),
-                          child: RichText(
-                            text: TextSpan(
-                              style: TextStyle(
-                                  color: YahaColors.textColor,
-                                  fontSize: YahaFontSizes.small),
-                              children: [
-                                TextSpan(
-                                  text: 'I accept ',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w400,
+                          child: Row(
+                            children: [
+                              Checkbox(
+                                  fillColor: MaterialStateProperty.resolveWith(
+                                      (states) => YahaColors.textColor),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        YahaBorderRadius.checkboxSmall),
+                                  ),
+                                  value: appSettingsState.isChecked,
+                                  onChanged: (value) => appSettingsStateNotifier
+                                      .updateCheckboxState(value)),
+                              Expanded(
+                                child: RichText(
+                                  text: TextSpan(
+                                    style: TextStyle(
+                                        color: YahaColors.textColor,
+                                        fontSize: YahaFontSizes.small),
+                                    children: [
+                                      TextSpan(
+                                        text: 'I accept ',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                          text: 'Terms & Conditions ',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w500,
+                                              decoration:
+                                                  TextDecoration.underline),
+                                          recognizer: TapGestureRecognizer()
+                                            ..onTap = () {}),
+                                      TextSpan(
+                                        text: 'and ',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                          text: 'Privacy Policy',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w500,
+                                              decoration:
+                                                  TextDecoration.underline),
+                                          recognizer: TapGestureRecognizer()
+                                            ..onTap = () {}),
+                                    ],
                                   ),
                                 ),
-                                TextSpan(
-                                    text: 'Terms & Conditions',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w500,
-                                        decoration: TextDecoration.underline),
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {}),
-                              ],
-                            ),
-                          ),
-                        ),
-                        RichText(
-                          text: TextSpan(
-                            style: TextStyle(
-                                color: YahaColors.textColor,
-                                fontSize: YahaFontSizes.small),
-                            children: [
-                              TextSpan(
-                                text: 'I accept ',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                ),
                               ),
-                              TextSpan(
-                                  text: 'Privacy Policy',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      decoration: TextDecoration.underline),
-                                  recognizer: TapGestureRecognizer()
-                                    ..onTap = () {}),
                             ],
                           ),
                         ),
