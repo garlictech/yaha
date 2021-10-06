@@ -23,6 +23,7 @@ class ApplicationSettingsState extends $ApplicationSettingsState {
   final bool finishTimePickerVisibility;
   final String currentLanguageTitle;
   final String averageHikingSpeed;
+  final bool isChecked;
 
   ApplicationSettingsState(
       {this.isEnglish = true,
@@ -37,7 +38,8 @@ class ApplicationSettingsState extends $ApplicationSettingsState {
       finishTime,
       this.startTimePickerVisibility = false,
       this.finishTimePickerVisibility = false,
-      this.currentLanguageTitle = 'English'})
+      this.currentLanguageTitle = 'English',
+      this.isChecked = false})
       : this.finishTime = (finishTime != null ? finishTime : DateTime.now()),
         this.startTime = (startTime != null ? startTime : DateTime.now());
 
@@ -89,6 +91,9 @@ class ApplicationSettingsStateNotifier
   updateFinishTimePickerVisibility(bool newFinishTimePickerVisibility) =>
       _updateState(state.copyWith(
           finishTimePickerVisibility: newFinishTimePickerVisibility));
+
+  updateCheckboxState(bool? value) =>
+      _updateState(state.copyWith(isChecked: value!));
 
   Future<void> readSettingsFromLocalStore() async {
     (await localStorageHandler.getItem(localStorageKey))

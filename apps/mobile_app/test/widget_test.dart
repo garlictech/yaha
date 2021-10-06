@@ -10,6 +10,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yaha/auth/log-in-page.dart';
+import 'package:yaha/auth/login-popup.dart';
+import 'package:yaha/auth/login-with-email-popup.dart';
 import 'package:yaha/auth/sign-up-page.dart';
 import 'package:yaha/auth/sign-up-with-email-page.dart';
 import 'package:yaha/bottom-nav-bar.dart';
@@ -131,6 +133,17 @@ void main() {
   testWidgets('Hike Outline Page smoke test', (WidgetTester tester) async {
     await tester
         .pumpWidget(createWidgetForTesting(child: new HikeOutlinePage()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Login Popup smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetForTesting(child: new LogInPopup()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Login With Email Popup smoke test', (WidgetTester tester) async {
+    await tester
+        .pumpWidget(createWidgetForTesting(child: new LogInWithEmailPopup()));
 
     await tester.pumpAndSettle();
   });
