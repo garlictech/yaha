@@ -6,8 +6,6 @@ import 'package:yaha/hike/hike-outline/settings/hike-outline-filters.dart';
 import 'package:yaha/hike/hike-outline/settings/hike-outline-settings.dart';
 import 'package:yaha/hike/hike-outline/weather-astronomical-data.dart';
 import 'package:yaha/utility/buttons/back-button.dart';
-import 'package:yaha/utility/yaha-border-radius.dart';
-import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
@@ -87,203 +85,165 @@ class HikeOutlinePage extends ConsumerWidget {
                           ),
                           Align(
                             alignment: Alignment.centerRight,
-                            child: Stack(
-                              alignment: Alignment.center,
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(
-                                      YahaBorderRadius.small),
-                                  child: Container(
-                                    height: YahaBoxSizes.backButtonHeight,
-                                    width: YahaBoxSizes.backButtonWidth,
-                                    color: YahaColors.smallButtonsBackground,
-                                  ),
-                                ),
-                                IconButton(
-                                  onPressed: () => showBarModalBottomSheet(
-                                    expand: false,
-                                    backgroundColor: YahaColors.background,
-                                    useRootNavigator: true,
-                                    context: context,
-                                    builder: (context) {
-                                      return SingleChildScrollView(
-                                        controller:
-                                            ModalScrollController.of(context),
-                                        child: Column(
-                                          children: [
-                                            Container(
-                                              padding: EdgeInsets.only(
-                                                left: YahaSpaceSizes.medium,
-                                                right: YahaSpaceSizes.general,
+                            child: IconButton(
+                              onPressed: () => showBarModalBottomSheet(
+                                expand: false,
+                                backgroundColor: YahaColors.background,
+                                useRootNavigator: true,
+                                context: context,
+                                builder: (context) {
+                                  return SingleChildScrollView(
+                                    controller:
+                                        ModalScrollController.of(context),
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          padding: EdgeInsets.only(
+                                            left: YahaSpaceSizes.small,
+                                            right: YahaSpaceSizes.medium,
+                                          ),
+                                          color: YahaColors.accentColor,
+                                          child: Stack(
+                                            alignment: Alignment.center,
+                                            children: [
+                                              Align(
+                                                alignment: Alignment.centerLeft,
+                                                child: TextButton(
+                                                  onPressed: () {},
+                                                  child: Text("Reset"),
+                                                  style: TextButton.styleFrom(
+                                                    primary: YahaColors
+                                                        .secondaryAccentColor,
+                                                  ),
+                                                ),
                                               ),
-                                              color: YahaColors
-                                                  .tertiaryAccentColor,
-                                              child: Stack(
+                                              Align(
                                                 alignment: Alignment.center,
-                                                children: [
-                                                  Align(
-                                                    alignment:
-                                                        Alignment.centerLeft,
-                                                    child: TextButton(
-                                                      onPressed: () {},
-                                                      child: Text("Reset"),
-                                                      style:
-                                                          TextButton.styleFrom(
-                                                        primary: YahaColors
-                                                            .secondaryAccentColor,
-                                                      ),
-                                                    ),
+                                                child: Text(
+                                                  "Customize hike",
+                                                  style: TextStyle(
+                                                    fontSize:
+                                                        YahaFontSizes.small,
+                                                    fontWeight: FontWeight.w600,
+                                                    color: YahaColors.textColor,
                                                   ),
-                                                  Align(
-                                                    alignment: Alignment.center,
-                                                    child: Text(
-                                                      "Customize hike",
-                                                      style: TextStyle(
-                                                        fontSize:
-                                                            YahaFontSizes.small,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        color: YahaColors
-                                                            .textColor,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Align(
-                                                    alignment:
-                                                        Alignment.centerRight,
-                                                    child: InkWell(
-                                                      onTap: () {
-                                                        Navigator.of(context)
-                                                            .pop();
-                                                      },
-                                                      child: Icon(
-                                                        Icons.close_outlined,
-                                                        color: YahaColors
-                                                            .secondaryAccentColor,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
+                                                ),
                                               ),
-                                            ),
-                                            Container(
-                                              color: YahaColors.background,
-                                              child: HikeOutlineSettings(),
-                                            ),
-                                          ],
+                                              Align(
+                                                alignment:
+                                                    Alignment.centerRight,
+                                                child: InkWell(
+                                                  onTap: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  child: Icon(
+                                                    Icons.close_outlined,
+                                                    color: YahaColors
+                                                        .secondaryAccentColor,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                      );
-                                    },
-                                  ),
-                                  icon: Icon(
-                                    Icons.settings_outlined,
-                                    size: 28.0,
-                                    color: YahaColors.textColor,
-                                  ),
-                                ),
-                              ],
+                                        Container(
+                                          color: YahaColors.background,
+                                          child: HikeOutlineSettings(),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                              ),
+                              icon: Icon(
+                                Icons.settings_outlined,
+                                size: 28.0,
+                                color: YahaColors.textColor,
+                              ),
                             ),
                           ),
                           Positioned(
                             right: 55.0,
                             child: Align(
                               alignment: Alignment.centerRight,
-                              child: Stack(
-                                alignment: Alignment.center,
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(
-                                        YahaBorderRadius.small),
-                                    child: Container(
-                                      height: YahaBoxSizes.backButtonHeight,
-                                      width: YahaBoxSizes.backButtonWidth,
-                                      color: YahaColors.smallButtonsBackground,
-                                    ),
-                                  ),
-                                  IconButton(
-                                    onPressed: () => showBarModalBottomSheet(
-                                      expand: false,
-                                      backgroundColor: YahaColors.background,
-                                      useRootNavigator: true,
-                                      context: context,
-                                      builder: (context) {
-                                        return SingleChildScrollView(
-                                          controller:
-                                              ModalScrollController.of(context),
-                                          child: Column(
-                                            children: [
-                                              Container(
-                                                padding: EdgeInsets.only(
-                                                  left: YahaSpaceSizes.medium,
-                                                  right: YahaSpaceSizes.general,
+                              child: IconButton(
+                                onPressed: () => showBarModalBottomSheet(
+                                  expand: false,
+                                  backgroundColor: YahaColors.background,
+                                  useRootNavigator: true,
+                                  context: context,
+                                  builder: (context) {
+                                    return SingleChildScrollView(
+                                      controller:
+                                          ModalScrollController.of(context),
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            padding: EdgeInsets.only(
+                                              left: YahaSpaceSizes.small,
+                                              right: YahaSpaceSizes.medium,
+                                            ),
+                                            color: YahaColors.accentColor,
+                                            child: Stack(
+                                              alignment: Alignment.center,
+                                              children: [
+                                                Align(
+                                                  alignment:
+                                                      Alignment.centerLeft,
+                                                  child: TextButton(
+                                                    onPressed: () {},
+                                                    child: Text("Reset"),
+                                                    style: TextButton.styleFrom(
+                                                      primary: YahaColors
+                                                          .secondaryAccentColor,
+                                                    ),
+                                                  ),
                                                 ),
-                                                color: YahaColors
-                                                    .tertiaryAccentColor,
-                                                child: Stack(
+                                                Align(
                                                   alignment: Alignment.center,
-                                                  children: [
-                                                    Align(
-                                                      alignment:
-                                                          Alignment.centerLeft,
-                                                      child: TextButton(
-                                                        onPressed: () {},
-                                                        child: Text("Reset"),
-                                                        style: TextButton
-                                                            .styleFrom(
-                                                          primary: YahaColors
-                                                              .secondaryAccentColor,
-                                                        ),
-                                                      ),
+                                                  child: Text(
+                                                    "Customize hike outline",
+                                                    style: TextStyle(
+                                                      fontSize:
+                                                          YahaFontSizes.small,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color:
+                                                          YahaColors.textColor,
                                                     ),
-                                                    Align(
-                                                      alignment:
-                                                          Alignment.center,
-                                                      child: Text(
-                                                        "Customize hike outline",
-                                                        style: TextStyle(
-                                                          fontSize:
-                                                              YahaFontSizes
-                                                                  .small,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          color: YahaColors
-                                                              .textColor,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    Align(
-                                                      alignment:
-                                                          Alignment.centerRight,
-                                                      child: InkWell(
-                                                        onTap: () {
-                                                          Navigator.of(context)
-                                                              .pop();
-                                                        },
-                                                        child: Icon(
-                                                          Icons.close_outlined,
-                                                          color: YahaColors
-                                                              .secondaryAccentColor,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
+                                                  ),
                                                 ),
-                                              ),
-                                              Container(
-                                                color: YahaColors.background,
-                                                child: HikeOutlineFilters(),
-                                              ),
-                                            ],
+                                                Align(
+                                                  alignment:
+                                                      Alignment.centerRight,
+                                                  child: InkWell(
+                                                    onTap: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                    child: Icon(
+                                                      Icons.close_outlined,
+                                                      color: YahaColors
+                                                          .secondaryAccentColor,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                        );
-                                      },
-                                    ),
-                                    icon: Image.asset(
-                                      'assets/images/filter-icon.png',
-                                      width: 26.0,
-                                    ),
-                                  ),
-                                ],
+                                          Container(
+                                            color: YahaColors.background,
+                                            child: HikeOutlineFilters(),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                ),
+                                icon: Image.asset(
+                                  'assets/images/filter-icon.png',
+                                  width: 26.0,
+                                ),
                               ),
                             ),
                           ),

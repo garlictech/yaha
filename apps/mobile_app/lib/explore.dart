@@ -3,6 +3,7 @@ import 'package:yaha/search-result.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
+import 'package:yaha/utility/yaha-icon-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:yaha/utility/yaha-text-input.dart';
@@ -36,7 +37,7 @@ class _ExplorePageState extends State<ExplorePage> {
                       child: Text(
                         'Explore',
                         style: TextStyle(
-                            fontSize: YahaFontSizes.large,
+                            fontSize: YahaFontSizes.medium,
                             fontWeight: FontWeight.w600,
                             color: YahaColors.textColor),
                       ),
@@ -49,7 +50,7 @@ class _ExplorePageState extends State<ExplorePage> {
                         iconSize: YahaFontSizes.xxLarge,
                         icon: Image.asset(
                           'assets/images/filter-icon.png',
-                          //width: 28.0,
+                          width: YahaIconSizes.medium,
                         ),
                         onPressed: () => showBarModalBottomSheet(
                           expand: false,
@@ -59,7 +60,7 @@ class _ExplorePageState extends State<ExplorePage> {
                             return SingleChildScrollView(
                               controller: ModalScrollController.of(context),
                               child: Container(
-                                color: YahaColors.tertiaryAccentColor,
+                                color: YahaColors.accentColor,
                                 child: Column(
                                   children: [
                                     Container(
@@ -67,7 +68,7 @@ class _ExplorePageState extends State<ExplorePage> {
                                         left: YahaSpaceSizes.medium,
                                         right: YahaSpaceSizes.general,
                                       ),
-                                      color: YahaColors.tertiaryAccentColor,
+                                      color: YahaColors.accentColor,
                                       child: Stack(
                                         alignment: Alignment.center,
                                         children: [

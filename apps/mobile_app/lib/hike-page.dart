@@ -27,22 +27,36 @@ class _HikePageState extends State<HikePage> {
         physics: BouncingScrollPhysics(),
         slivers: <Widget>[
           SliverAppBar(
+            stretch: false,
             pinned: true,
             snap: true,
             floating: true,
             expandedHeight: 240.0,
             flexibleSpace: FlexibleSpaceBar(
-              titlePadding: EdgeInsets.only(left: 60.0, bottom: 8.0),
+              titlePadding: EdgeInsets.only(
+                  left: YahaSpaceSizes.general, bottom: YahaSpaceSizes.small),
               centerTitle: false,
-              title: Container(
-                // child: Flexible(
-                //   flex: 1,
-                child: Text('Budapest',
+              title: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Budapest',
                     textAlign: TextAlign.left,
                     style: TextStyle(
+                        color: YahaColors.background,
                         fontWeight: FontWeight.w700,
-                        fontSize: YahaFontSizes.xLarge)),
-                // ),
+                        fontSize: YahaFontSizes.large),
+                  ),
+                  Text(
+                    'Várhegy, Duna, Lánchíd',
+                    style: TextStyle(
+                        color: YahaColors.background,
+                        fontSize: YahaFontSizes.xSmall,
+                        fontWeight: FontWeight.w500),
+                  ),
+                ],
               ),
               background: Image.asset(
                 'assets/images/Budapest-dark.png',
@@ -459,7 +473,7 @@ class _HikePageState extends State<HikePage> {
                           ],
                         ),
                         decoration: BoxDecoration(
-                          color: YahaColors.tertiaryAccentColor,
+                          color: YahaColors.accentColor,
                           borderRadius:
                               BorderRadius.circular(YahaBorderRadius.general),
                         ),
