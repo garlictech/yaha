@@ -1,20 +1,18 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:yaha/auth/login-with-email-popup.dart';
-import 'package:yaha/auth/signup-popup.dart';
+import 'package:yaha/auth/login-popup.dart';
 import 'package:yaha/settings/application/app-settings-state.dart';
-import 'package:yaha/utility/buttons/apple-button.dart';
 import 'package:yaha/utility/buttons/back-button.dart';
-import 'package:yaha/utility/buttons/facebook-button.dart';
-import 'package:yaha/utility/buttons/google-button.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
+import 'package:yaha/utility/yaha-text-input-password.dart';
+import 'package:yaha/utility/yaha-text-input.dart';
 
-class LogInPopup extends ConsumerWidget {
+class SignUpWithEmailPopup extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     var appSettingsState = watch(applicationSettingsStateProvider);
@@ -46,7 +44,7 @@ class LogInPopup extends ConsumerWidget {
                             Align(
                               alignment: Alignment.center,
                               child: Text(
-                                'Log in',
+                                'Sign up with email',
                                 style: TextStyle(
                                     fontSize: YahaFontSizes.medium,
                                     fontWeight: FontWeight.w600,
@@ -56,44 +54,46 @@ class LogInPopup extends ConsumerWidget {
                           ],
                         ),
                         Container(
+                          constraints: BoxConstraints(maxWidth: 400),
                           padding: const EdgeInsets.only(
-                              top: YahaSpaceSizes.xxLarge),
+                              top: YahaSpaceSizes.xxLarge,
+                              bottom: YahaSpaceSizes.general),
+                          child: YahaTextField(title: 'Name'),
+                        ),
+                        Container(
+                          constraints: BoxConstraints(maxWidth: 400),
+                          padding: const EdgeInsets.only(
+                              bottom: YahaSpaceSizes.general),
+                          child: YahaTextField(
+                            title: 'Email',
+                          ),
+                        ),
+                        Container(
+                          constraints: BoxConstraints(maxWidth: 400),
+                          padding: const EdgeInsets.only(
+                              bottom: YahaSpaceSizes.general),
+                          child: YahaTextFieldPassword(title: 'Password'),
+                        ),
+                        Container(
+                          constraints: BoxConstraints(maxWidth: 400),
+                          padding: const EdgeInsets.only(
+                              bottom: YahaSpaceSizes.large),
+                          child: YahaTextFieldPassword(
+                            title: 'Password again',
+                          ),
+                        ),
+                        Container(
                           child: SizedBox(
-                            height: YahaBoxSizes.buttonHeight,
                             width: YahaBoxSizes.buttonWidthBig,
+                            height: YahaBoxSizes.buttonHeight,
                             child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            LogInWithEmailPopup()));
-                              },
-                              child: Stack(
-                                children: [
-                                  Container(
-                                    padding: const EdgeInsets.only(left: 4.0),
-                                    child: Align(
-                                      alignment: Alignment.centerLeft,
-                                      child: Icon(
-                                        Icons.mail_outline_rounded,
-                                        color: YahaColors.accentColor,
-                                        size: YahaFontSizes.xLarge,
-                                      ),
-                                    ),
-                                  ),
-                                  Align(
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      'Log in with email',
-                                      style: TextStyle(
-                                        fontSize: YahaFontSizes.small,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                              child: Text(
+                                'Sign up',
+                                style: TextStyle(
+                                    fontSize: YahaFontSizes.small,
+                                    fontWeight: FontWeight.w600),
                               ),
+                              onPressed: () {},
                               style: ElevatedButton.styleFrom(
                                 primary: YahaColors.primary,
                                 shape: const RoundedRectangleBorder(
@@ -105,28 +105,22 @@ class LogInPopup extends ConsumerWidget {
                           ),
                         ),
                         Container(
-                            padding: const EdgeInsets.only(
-                                top: YahaSpaceSizes.medium,
-                                bottom: YahaSpaceSizes.medium),
-                            child: FacebookButton(
-                              title: 'Log in with Facebook',
-                            )),
-                        Container(
-                            padding: const EdgeInsets.only(
-                                bottom: YahaSpaceSizes.medium),
-                            child: GoogleButton(
-                              title: 'Log in with Google',
-                            )),
-                        Container(
-                            padding: const EdgeInsets.only(
-                                bottom: YahaSpaceSizes.large),
-                            child: AppleButton(
-                              title: 'Log in with Apple',
-                            )),
+                          alignment: Alignment.center,
+                          padding:
+                              const EdgeInsets.only(top: YahaSpaceSizes.medium),
+                          child: Text(
+                            'Forgot password?',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                color: YahaColors.primary,
+                                fontSize: YahaFontSizes.small),
+                          ),
+                        ),
                         Container(
                           width: YahaBoxSizes.buttonWidthBig,
-                          padding:
-                              EdgeInsets.only(bottom: YahaSpaceSizes.small),
+                          padding: EdgeInsets.only(
+                              bottom: YahaSpaceSizes.small,
+                              top: YahaSpaceSizes.large),
                           child: Row(
                             children: [
                               Checkbox(
@@ -182,6 +176,7 @@ class LogInPopup extends ConsumerWidget {
                           ),
                         ),
                         Container(
+                          alignment: FractionalOffset.bottomCenter,
                           padding: EdgeInsets.only(top: YahaSpaceSizes.general),
                           child: RichText(
                             text: TextSpan(
@@ -190,13 +185,13 @@ class LogInPopup extends ConsumerWidget {
                                   fontSize: YahaFontSizes.small),
                               children: [
                                 TextSpan(
-                                  text: "Don't have an account? ",
+                                  text: "Already have an account? ",
                                   style: TextStyle(
                                     fontWeight: FontWeight.w400,
                                   ),
                                 ),
                                 TextSpan(
-                                    text: 'Sign up',
+                                    text: 'Log in',
                                     style: TextStyle(
                                       fontWeight: FontWeight.w600,
                                       color: YahaColors.primary,
@@ -207,7 +202,7 @@ class LogInPopup extends ConsumerWidget {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    SignUpPopup()));
+                                                    LogInPopup()));
                                       }),
                               ],
                             ),
