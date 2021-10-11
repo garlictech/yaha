@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaha/hike/hike-card-list.dart';
+import 'package:yaha/hike/hike-card/hike-card-list.dart';
 import 'package:yaha/utility/buttons/back-button.dart';
 import 'package:yaha/utility/buttons/filter-button.dart';
 import 'package:yaha/utility/yaha-colors.dart';

@@ -2,11 +2,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:yaha/gallery.dart';
-import 'package:yaha/hike-outline/hike-outline-page.dart';
+import 'package:yaha/hike/hike-outline/poi.dart';
+import 'package:yaha/hike/hike-outline/settings/poi-filters.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
+import 'package:yaha/utility/yaha-border-width.dart';
+import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
+import 'package:yaha/utility/yaha-icon-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
+
+import 'hike/hike-outline/hike-outline-page.dart';
 
 class HikePage extends StatefulWidget {
   @override
@@ -35,7 +41,7 @@ class _HikePageState extends State<HikePage> {
                     textAlign: TextAlign.left,
                     style: TextStyle(
                         fontWeight: FontWeight.w700,
-                        fontSize: YahaFontSizes.xxLarge)),
+                        fontSize: YahaFontSizes.xLarge)),
                 // ),
               ),
               background: Image.asset(
@@ -49,13 +55,16 @@ class _HikePageState extends State<HikePage> {
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
                 return Container(
-                  margin:
-                      EdgeInsets.symmetric(vertical: YahaSpaceSizes.general),
+                  padding: EdgeInsets.only(
+                    left: YahaSpaceSizes.general,
+                    right: YahaSpaceSizes.general,
+                    top: YahaSpaceSizes.general,
+                  ),
                   child: Column(
                     children: [
                       SizedBox(
-                        height: 50,
-                        width: 300,
+                        height: YahaBoxSizes.buttonHeight,
+                        width: YahaBoxSizes.buttonWidthBig,
                         child: ElevatedButton.icon(
                           icon: Icon(
                             Icons.play_circle_rounded,
@@ -77,7 +86,9 @@ class _HikePageState extends State<HikePage> {
                         ),
                       ),
                       Container(
-                        padding: const EdgeInsets.all(YahaSpaceSizes.general),
+                        padding: const EdgeInsets.only(
+                            top: YahaSpaceSizes.general,
+                            bottom: YahaSpaceSizes.general),
                         child: Text(
                             'It is the capital of Hungary on the banks of the Danube, the home of the 19th century Chain Bridge, the Old Town of Buda and Castle Hill.',
                             style: TextStyle(
@@ -86,26 +97,31 @@ class _HikePageState extends State<HikePage> {
                                 color: YahaColors.textColor)),
                       ),
                       Container(
-                          padding: const EdgeInsets.all(YahaSpaceSizes.general),
-                          height: 220.0,
+                          margin: const EdgeInsets.only(
+                              bottom: YahaSpaceSizes.large),
+                          height: YahaBoxSizes.heightMedium,
                           width: MediaQuery.of(context).size.width,
                           child: Gallery()),
                       Container(
-                        height: 300,
                         child: GridView.count(
+                          shrinkWrap: true,
                           primary: false,
-                          padding: const EdgeInsets.all(YahaSpaceSizes.general),
-                          crossAxisSpacing: 5,
-                          mainAxisSpacing: 5,
+                          padding: const EdgeInsets.only(
+                            bottom: YahaSpaceSizes.general,
+                          ),
+                          crossAxisSpacing: YahaSpaceSizes.medium,
+                          mainAxisSpacing: YahaSpaceSizes.medium,
                           crossAxisCount: 3,
                           children: <Widget>[
                             Container(
                               padding:
-                                  const EdgeInsets.all(YahaSpaceSizes.medium),
+                                  const EdgeInsets.all(YahaSpaceSizes.small),
                               child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 children: [
                                   Icon(Icons.hiking_rounded,
-                                      size: YahaFontSizes.xLarge,
+                                      size: YahaIconSizes.large,
                                       color: YahaColors.secondaryAccentColor),
                                   Text("24.3km",
                                       style: TextStyle(
@@ -130,11 +146,13 @@ class _HikePageState extends State<HikePage> {
                             ),
                             Container(
                               padding:
-                                  const EdgeInsets.all(YahaSpaceSizes.medium),
+                                  const EdgeInsets.all(YahaSpaceSizes.small),
                               child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 children: [
                                   Icon(Icons.trending_up_rounded,
-                                      size: YahaFontSizes.xLarge,
+                                      size: YahaIconSizes.large,
                                       color: YahaColors.secondaryAccentColor),
                                   Text("576m",
                                       style: TextStyle(
@@ -159,11 +177,13 @@ class _HikePageState extends State<HikePage> {
                             ),
                             Container(
                               padding:
-                                  const EdgeInsets.all(YahaSpaceSizes.medium),
+                                  const EdgeInsets.all(YahaSpaceSizes.small),
                               child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 children: [
                                   Icon(Icons.trending_down_rounded,
-                                      size: YahaFontSizes.xLarge,
+                                      size: YahaIconSizes.large,
                                       color: YahaColors.secondaryAccentColor),
                                   Text("1.2km",
                                       style: TextStyle(
@@ -188,11 +208,13 @@ class _HikePageState extends State<HikePage> {
                             ),
                             Container(
                               padding:
-                                  const EdgeInsets.all(YahaSpaceSizes.medium),
+                                  const EdgeInsets.all(YahaSpaceSizes.small),
                               child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 children: [
                                   Icon(Icons.watch_later_rounded,
-                                      size: YahaFontSizes.xLarge,
+                                      size: YahaIconSizes.large,
                                       color: YahaColors.secondaryAccentColor),
                                   Text("6h",
                                       style: TextStyle(
@@ -217,11 +239,13 @@ class _HikePageState extends State<HikePage> {
                             ),
                             Container(
                               padding:
-                                  const EdgeInsets.all(YahaSpaceSizes.medium),
+                                  const EdgeInsets.all(YahaSpaceSizes.small),
                               child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 children: [
                                   Icon(Icons.emoji_events_rounded,
-                                      size: YahaFontSizes.xLarge,
+                                      size: YahaIconSizes.large,
                                       color: YahaColors.secondaryAccentColor),
                                   Text("240",
                                       style: TextStyle(
@@ -246,11 +270,13 @@ class _HikePageState extends State<HikePage> {
                             ),
                             Container(
                               padding:
-                                  const EdgeInsets.all(YahaSpaceSizes.medium),
+                                  const EdgeInsets.all(YahaSpaceSizes.small),
                               child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 children: [
                                   Icon(Icons.stars_rounded,
-                                      size: YahaFontSizes.xLarge,
+                                      size: YahaIconSizes.large,
                                       color: YahaColors.secondary),
                                   Text("Medium",
                                       style: TextStyle(
@@ -275,8 +301,8 @@ class _HikePageState extends State<HikePage> {
                       ),
                       Container(
                         padding: const EdgeInsets.only(
-                            top: YahaSpaceSizes.general,
-                            left: YahaSpaceSizes.general),
+                            top: YahaSpaceSizes.small,
+                            bottom: YahaSpaceSizes.small),
                         child: Column(
                           children: [
                             SizedBox(
@@ -292,74 +318,43 @@ class _HikePageState extends State<HikePage> {
                         ),
                       ),
                       Container(
-                        padding: const EdgeInsets.all(YahaSpaceSizes.general),
-                        child: Row(
+                        child: Wrap(
+                          direction: Axis.horizontal,
+                          spacing: YahaSpaceSizes.medium,
+                          runSpacing: YahaSpaceSizes.xSmall,
                           children: [
-                            Container(
-                              margin: const EdgeInsets.only(
-                                  right: YahaSpaceSizes.small),
-                              child: SizedBox(
-                                height: 50,
-                                width: 180,
-                                child: ElevatedButton.icon(
-                                  icon: Icon(
-                                    Icons.museum,
-                                    color: YahaColors.accentColor,
-                                    size: YahaFontSizes.large,
-                                  ),
-                                  onPressed: () {},
-                                  label: Text('Museum',
-                                      style: TextStyle(
-                                        fontSize: YahaFontSizes.small,
-                                        fontWeight: FontWeight.w600,
-                                      )),
-                                  style: ElevatedButton.styleFrom(
-                                    primary: YahaColors.tourism,
-                                    shape: const RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(9))),
-                                  ),
-                                ),
-                              ),
+                            PoiFilters(
+                              backgroundColor: YahaColors.generic,
+                              icon: Icons.location_city_rounded,
+                              title: "Generic",
+                            ),
+                            PoiFilters(
+                              backgroundColor: YahaColors.amenity,
+                              icon: Icons.fastfood_rounded,
+                              title: "Amenity",
+                            ),
+                            PoiFilters(
+                              backgroundColor: YahaColors.natural,
+                              icon: Icons.park_rounded,
+                              title: "Natural",
+                            ),
+                            PoiFilters(
+                              backgroundColor: YahaColors.emergency,
+                              icon: Icons.local_hospital_rounded,
+                              title: "Emergency",
+                            ),
+                            PoiFilters(
+                              backgroundColor: YahaColors.publicTransport,
+                              icon: Icons.commute_rounded,
+                              title: "Public Transport",
                             ),
                           ],
                         ),
                       ),
-                      Row(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.only(
-                                left: YahaSpaceSizes.general),
-                            child: SizedBox(
-                              height: 50,
-                              width: 130,
-                              child: ElevatedButton.icon(
-                                icon: Icon(
-                                  Icons.park,
-                                  color: YahaColors.accentColor,
-                                  size: YahaFontSizes.large,
-                                ),
-                                onPressed: () {},
-                                label: Text('Park',
-                                    style: TextStyle(
-                                      fontSize: YahaFontSizes.small,
-                                      fontWeight: FontWeight.w600,
-                                    )),
-                                style: ElevatedButton.styleFrom(
-                                  primary: YahaColors.natural,
-                                  shape: const RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(9))),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
                       Container(
                         padding: const EdgeInsets.only(
-                            top: YahaSpaceSizes.small,
-                            left: YahaSpaceSizes.general),
+                          top: YahaSpaceSizes.small,
+                        ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
@@ -377,8 +372,9 @@ class _HikePageState extends State<HikePage> {
                       ),
                       Container(
                         padding: const EdgeInsets.only(
-                            top: YahaSpaceSizes.general,
-                            left: YahaSpaceSizes.general),
+                          top: YahaSpaceSizes.general,
+                          bottom: YahaSpaceSizes.medium,
+                        ),
                         child: Column(
                           children: [
                             SizedBox(
@@ -394,51 +390,39 @@ class _HikePageState extends State<HikePage> {
                         ),
                       ),
                       Container(
-                        height: 200,
+                        padding: EdgeInsets.all(YahaSpaceSizes.general),
                         width: MediaQuery.of(context).size.width,
-                        margin: const EdgeInsets.all(YahaSpaceSizes.general),
                         child: Column(
                           children: [
-                            Container(
-                              padding: const EdgeInsets.only(
-                                  top: YahaSpaceSizes.general,
-                                  left: YahaSpaceSizes.general),
-                              child: Row(
-                                children: [
-                                  CircleAvatar(
-                                    backgroundColor: YahaColors.tourism,
-                                    radius: YahaBorderRadius.poiSmall,
-                                    child: Icon(
-                                      Icons.location_city_rounded,
-                                      size: YahaFontSizes.large,
-                                      color: YahaColors.accentColor,
-                                    ),
-                                  ),
-                                  Container(
-                                    padding: const EdgeInsets.only(
-                                        left: YahaSpaceSizes.small),
-                                    child: Text("Hungarian Parliament Building",
-                                        style: TextStyle(
-                                            fontSize: YahaFontSizes.small,
-                                            color: YahaColors.textColor)),
-                                  ),
-                                ],
-                              ),
+                            Row(
+                              children: [
+                                Poi(
+                                  backgroundColor: YahaColors.generic,
+                                  icon: Icons.location_city_rounded,
+                                  iconSize: YahaIconSizes.small,
+                                  padding: YahaSpaceSizes.xSmall,
+                                ),
+                                Container(
+                                  padding: const EdgeInsets.only(
+                                      left: YahaSpaceSizes.small),
+                                  child: Text("Hungarian Parliament Building",
+                                      style: TextStyle(
+                                          fontSize: YahaFontSizes.small,
+                                          color: YahaColors.textColor)),
+                                ),
+                              ],
                             ),
                             Container(
                               padding: const EdgeInsets.only(
-                                  top: YahaSpaceSizes.general,
-                                  left: YahaSpaceSizes.general),
+                                  top: YahaSpaceSizes.medium),
                               child: Row(
                                 children: [
-                                  CircleAvatar(
-                                      backgroundColor: YahaColors.tourism,
-                                      radius: YahaBorderRadius.poiSmall,
-                                      child: Icon(
-                                        Icons.museum,
-                                        size: YahaFontSizes.large,
-                                        color: YahaColors.accentColor,
-                                      )),
+                                  Poi(
+                                    backgroundColor: YahaColors.generic,
+                                    icon: Icons.museum,
+                                    iconSize: YahaIconSizes.small,
+                                    padding: YahaSpaceSizes.xSmall,
+                                  ),
                                   Container(
                                     padding: const EdgeInsets.only(
                                         left: YahaSpaceSizes.small),
@@ -452,18 +436,15 @@ class _HikePageState extends State<HikePage> {
                             ),
                             Container(
                               padding: const EdgeInsets.only(
-                                  top: YahaSpaceSizes.general,
-                                  left: YahaSpaceSizes.general),
+                                  top: YahaSpaceSizes.medium),
                               child: Row(
                                 children: [
-                                  CircleAvatar(
-                                      backgroundColor: YahaColors.amenity,
-                                      radius: YahaBorderRadius.poiSmall,
-                                      child: Icon(
-                                        Icons.pool_rounded,
-                                        size: YahaFontSizes.large,
-                                        color: YahaColors.accentColor,
-                                      )),
+                                  Poi(
+                                    backgroundColor: YahaColors.amenity,
+                                    icon: Icons.pool_rounded,
+                                    iconSize: YahaIconSizes.small,
+                                    padding: YahaSpaceSizes.xSmall,
+                                  ),
                                   Container(
                                     padding: const EdgeInsets.only(
                                         left: YahaSpaceSizes.small),
@@ -484,9 +465,8 @@ class _HikePageState extends State<HikePage> {
                         ),
                       ),
                       Container(
-                        padding: const EdgeInsets.only(
-                            top: YahaSpaceSizes.small,
-                            left: YahaSpaceSizes.general),
+                        padding:
+                            const EdgeInsets.only(top: YahaSpaceSizes.small),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
@@ -504,8 +484,8 @@ class _HikePageState extends State<HikePage> {
                       ),
                       Container(
                         height: 340,
+                        margin: EdgeInsets.only(top: YahaSpaceSizes.large),
                         width: MediaQuery.of(context).size.width,
-                        margin: const EdgeInsets.all(YahaSpaceSizes.general),
                         child: ClipRRect(
                           borderRadius:
                               BorderRadius.circular(YahaBorderRadius.general),
@@ -516,61 +496,47 @@ class _HikePageState extends State<HikePage> {
                         ),
                       ),
                       Container(
-                        padding: const EdgeInsets.only(
-                            top: YahaSpaceSizes.general,
-                            left: YahaSpaceSizes.general),
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              width: double.infinity,
-                              child: Text('Weather',
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                      fontSize: YahaFontSizes.medium,
-                                      fontWeight: FontWeight.w600,
-                                      color: YahaColors.textColor)),
-                            ),
-                          ],
+                        padding:
+                            const EdgeInsets.only(top: YahaSpaceSizes.large),
+                        child: SizedBox(
+                          width: double.infinity,
+                          child: Text('Weather',
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                  fontSize: YahaFontSizes.medium,
+                                  fontWeight: FontWeight.w600,
+                                  color: YahaColors.textColor)),
                         ),
                       ),
                       Container(
-                        height: 160,
+                        height: 145,
                         child: GridView.count(
                           primary: false,
-                          padding: const EdgeInsets.only(
-                              top: YahaSpaceSizes.general,
-                              left: YahaSpaceSizes.general,
-                              right: YahaSpaceSizes.general),
-                          crossAxisSpacing: 5,
-                          mainAxisSpacing: 5,
+                          padding:
+                              const EdgeInsets.only(top: YahaSpaceSizes.medium),
+                          crossAxisSpacing: YahaSpaceSizes.general,
                           crossAxisCount: 3,
                           children: <Widget>[
                             Container(
                               padding:
-                                  const EdgeInsets.all(YahaSpaceSizes.small),
+                                  const EdgeInsets.all(YahaSpaceSizes.medium),
                               child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 children: [
-                                  Container(
-                                    padding: const EdgeInsets.all(
-                                        YahaSpaceSizes.xSmall),
-                                    child: const Text(
-                                      'Wed',
-                                      style: TextStyle(
-                                          fontSize: YahaFontSizes.small),
-                                    ),
+                                  Text(
+                                    'Wed',
+                                    style: TextStyle(
+                                        fontSize: YahaFontSizes.small),
                                   ),
-                                  const Icon(Icons.wb_sunny,
+                                  Icon(Icons.wb_sunny,
                                       size: YahaFontSizes.xLarge,
                                       color: Colors.yellow),
-                                  Container(
-                                    padding: const EdgeInsets.all(
-                                        YahaSpaceSizes.xSmall),
-                                    child: const Text(
-                                      '19 | 12',
-                                      style: TextStyle(
-                                          fontSize: YahaFontSizes.small),
-                                    ),
-                                  )
+                                  Text(
+                                    '19 | 12',
+                                    style: TextStyle(
+                                        fontSize: YahaFontSizes.small),
+                                  ),
                                 ],
                               ),
                               decoration: BoxDecoration(
@@ -587,30 +553,24 @@ class _HikePageState extends State<HikePage> {
                             ),
                             Container(
                               padding:
-                                  const EdgeInsets.all(YahaSpaceSizes.small),
+                                  const EdgeInsets.all(YahaSpaceSizes.medium),
                               child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 children: [
-                                  Container(
-                                    padding: const EdgeInsets.all(
-                                        YahaSpaceSizes.xSmall),
-                                    child: const Text(
-                                      'Wed',
-                                      style: TextStyle(
-                                          fontSize: YahaFontSizes.small),
-                                    ),
+                                  Text(
+                                    'Wed',
+                                    style: TextStyle(
+                                        fontSize: YahaFontSizes.small),
                                   ),
                                   Icon(Icons.cloud,
                                       size: YahaFontSizes.xLarge,
                                       color: YahaColors.accentColor),
-                                  Container(
-                                    padding: const EdgeInsets.all(
-                                        YahaSpaceSizes.xSmall),
-                                    child: const Text(
-                                      '19 | 12',
-                                      style: TextStyle(
-                                          fontSize: YahaFontSizes.small),
-                                    ),
-                                  )
+                                  Text(
+                                    '19 | 12',
+                                    style: TextStyle(
+                                        fontSize: YahaFontSizes.small),
+                                  ),
                                 ],
                               ),
                               decoration: BoxDecoration(
@@ -626,54 +586,47 @@ class _HikePageState extends State<HikePage> {
                                   )),
                             ),
                             Container(
-                              padding: const EdgeInsets.all(3),
-                              child: Container(
-                                padding: const EdgeInsets.only(
-                                    top: YahaSpaceSizes.general,
-                                    left: YahaSpaceSizes.small,
-                                    right: YahaSpaceSizes.small,
-                                    bottom: YahaSpaceSizes.general),
-                                child: Text(
-                                  'The day of your hike',
-                                  style: TextStyle(
-                                      color: YahaColors.textColor,
-                                      fontSize: YahaFontSizes.small),
-                                ),
+                              alignment: Alignment.center,
+                              padding:
+                                  const EdgeInsets.all(YahaSpaceSizes.small),
+                              child: Text(
+                                'The day of your hike',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: YahaColors.textColor,
+                                    fontSize: YahaFontSizes.small),
                               ),
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                      YahaBorderRadius.general),
-                                  border: Border.all(
-                                      width: 2.0, color: YahaColors.textColor)),
+                                borderRadius: BorderRadius.circular(
+                                    YahaBorderRadius.general),
+                                border: Border.all(
+                                    width: YahaBorderWidth.small,
+                                    color: YahaColors.textColor),
+                              ),
                             ),
                           ],
                         ),
                       ),
-                      Container(
-                        padding: const EdgeInsets.only(
-                            top: 0,
-                            right: YahaSpaceSizes.general,
-                            bottom: YahaSpaceSizes.general),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text('Show more',
-                                style: TextStyle(
-                                    fontSize: YahaFontSizes.small,
-                                    fontWeight: FontWeight.w500,
-                                    color: YahaColors.textColor)),
-                            Icon(
-                              Icons.chevron_right,
-                              size: YahaFontSizes.xxLarge,
-                            ),
-                          ],
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text('Show more',
+                              style: TextStyle(
+                                  fontSize: YahaFontSizes.small,
+                                  fontWeight: FontWeight.w500,
+                                  color: YahaColors.textColor)),
+                          Icon(
+                            Icons.chevron_right,
+                            size: YahaFontSizes.xxLarge,
+                          ),
+                        ],
                       ),
                       Container(
-                        padding: const EdgeInsets.all(YahaSpaceSizes.general),
+                        padding:
+                            const EdgeInsets.only(top: YahaSpaceSizes.large),
                         child: SizedBox(
-                          height: 50,
-                          width: 300,
+                          height: YahaBoxSizes.buttonHeight,
+                          width: YahaBoxSizes.buttonWidthBig,
                           child: ElevatedButton.icon(
                             icon: Icon(
                               Icons.timeline,

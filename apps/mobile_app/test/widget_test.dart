@@ -10,6 +10,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yaha/auth/log-in-page.dart';
+import 'package:yaha/auth/login-popup.dart';
+import 'package:yaha/auth/login-with-email-popup.dart';
 import 'package:yaha/auth/sign-up-page.dart';
 import 'package:yaha/auth/sign-up-with-email-page.dart';
 import 'package:yaha/bottom-nav-bar.dart';
@@ -17,8 +19,8 @@ import 'package:yaha/event-detail-page.dart';
 import 'package:yaha/explore.dart';
 import 'package:yaha/filter/filter-page.dart';
 import 'package:yaha/gallery.dart';
-import 'package:yaha/hike-outline/hike-outline-page.dart';
 import 'package:yaha/hike-page.dart';
+import 'package:yaha/hike/hike-outline/hike-outline-page.dart';
 import 'package:yaha/home/home-page-guest.dart';
 
 import 'package:yaha/main.dart';
@@ -63,7 +65,8 @@ void main() {
     await tester.pumpAndSettle();
   });
   testWidgets('Application Page smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new ApplicationPage()));
+    await tester
+        .pumpWidget(createWidgetForTesting(child: new ApplicationPage()));
 
     await tester.pumpAndSettle();
   });
@@ -120,13 +123,27 @@ void main() {
 
     await tester.pumpAndSettle();
   });
-  testWidgets('Previous Activities Page smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new PreviousActivitiesPage()));
+  testWidgets('Previous Activities Page smoke test',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(
+        createWidgetForTesting(child: new PreviousActivitiesPage()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Hike Outline Page smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new HikeOutlinePage()));
+    await tester
+        .pumpWidget(createWidgetForTesting(child: new HikeOutlinePage()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Login Popup smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetForTesting(child: new LogInPopup()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Login With Email Popup smoke test', (WidgetTester tester) async {
+    await tester
+        .pumpWidget(createWidgetForTesting(child: new LogInWithEmailPopup()));
 
     await tester.pumpAndSettle();
   });
