@@ -4,6 +4,7 @@ import 'package:yaha/hike/hike-outline/poi.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
+import 'package:yaha/utility/yaha-icon-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
 class PoiPage extends StatefulWidget {
@@ -33,7 +34,7 @@ class _PoiPageState extends State<PoiPage> {
                           children: [
                             Icon(
                               Icons.arrow_back_ios_rounded,
-                              size: YahaFontSizes.large,
+                              size: YahaIconSizes.medium,
                               color: YahaColors.textColor,
                             ),
                             Text('Hungarian\nNational Museum',
@@ -42,8 +43,8 @@ class _PoiPageState extends State<PoiPage> {
                                     fontSize: YahaFontSizes.medium,
                                     fontWeight: FontWeight.w600,
                                     color: YahaColors.textColor)),
-                            Icon(Icons.comment,
-                                size: YahaFontSizes.large,
+                            Icon(Icons.comment_outlined,
+                                size: YahaIconSizes.medium,
                                 color: YahaColors.textColor),
                           ],
                         ),

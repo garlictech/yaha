@@ -5,6 +5,7 @@ import 'package:yaha/settings/application/application-page.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
+import 'package:yaha/utility/yaha-icon-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -20,7 +21,7 @@ class _SettingsPageState extends State<SettingsPage> {
           backgroundColor: YahaColors.background,
           title: const Text('Settings',
               style: TextStyle(
-                  fontSize: YahaFontSizes.large,
+                  fontSize: YahaFontSizes.medium,
                   fontWeight: FontWeight.w600,
                   color: YahaColors.textColor)),
           leading: IconButton(
@@ -28,6 +29,7 @@ class _SettingsPageState extends State<SettingsPage> {
             icon: Icon(
               Icons.arrow_back_ios_rounded,
               color: YahaColors.textColor,
+              size: YahaIconSizes.medium,
             ),
             onPressed: () => Navigator.of(context).pop(),
           )),
@@ -62,7 +64,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                   fontWeight: FontWeight.w600,
                                   color: YahaColors.textColor)),
                           decoration: BoxDecoration(
-                              color: YahaColors.tertiaryAccentColor),
+                              color: YahaColors.accentColor),
                           height: 56.0,
                         ),
                         Container(
@@ -192,7 +194,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                   fontWeight: FontWeight.w600,
                                   color: YahaColors.textColor)),
                           decoration: BoxDecoration(
-                              color: YahaColors.tertiaryAccentColor),
+                              color: YahaColors.accentColor),
                           height: 56.0,
                         ),
                         Container(

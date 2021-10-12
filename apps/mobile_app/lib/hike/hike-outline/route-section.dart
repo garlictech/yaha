@@ -38,7 +38,7 @@ class RouteSection extends StatelessWidget {
           maxWidth: YahaBoxSizes.sectionWidthMax,
         ),
         height: YahaBoxSizes.sectionHeight,
-        color: YahaColors.tertiaryAccentColor,
+        color: YahaColors.accentColor,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
