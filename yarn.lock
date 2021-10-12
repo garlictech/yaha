@@ -5858,10 +5858,15 @@
   dependencies:
     "@types/node" "*"
 
-"@types/aws-lambda@*", "@types/aws-lambda@8.10.83", "@types/aws-lambda@^8.10.31":
+"@types/aws-lambda@*", "@types/aws-lambda@^8.10.31":
   version "8.10.83"
   resolved "https://registry.yarnpkg.com/@types/aws-lambda/-/aws-lambda-8.10.83.tgz#66db06cedb7476e860e8655e4387fd2e4385433a"
   integrity sha512-7YsLv/B8rF7K7jYAGmYBxLq3QU+hQV7qNJBMcSCmJCTcXuzoTKGBX8d4v9CsVs0SOKBSAErXG7rtk8jVxiP30g==
+
+"@types/aws-lambda@8.10.84":
+  version "8.10.84"
+  resolved "https://registry.yarnpkg.com/@types/aws-lambda/-/aws-lambda-8.10.84.tgz#b1f391ceeb6908b28d8416d93f27afe8d1348d4e"
+  integrity sha512-5V78eLtmN0d4RA14hKDwcsMQRl3JotQJlhGFDBo/jdE2TyDFRaYwB/UmMUC4SzhSvRGn+YMkh7jGPnXi8COAng==
 
 "@types/aws-serverless-express@3.3.5":
   version "3.3.5"
