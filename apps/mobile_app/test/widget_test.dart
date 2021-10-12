@@ -14,6 +14,8 @@ import 'package:yaha/auth/login-popup.dart';
 import 'package:yaha/auth/login-with-email-popup.dart';
 import 'package:yaha/auth/sign-up-page.dart';
 import 'package:yaha/auth/sign-up-with-email-page.dart';
+import 'package:yaha/auth/signup-popup.dart';
+import 'package:yaha/auth/signup-with-email-popup.dart';
 import 'package:yaha/bottom-nav-bar.dart';
 import 'package:yaha/event-detail-page.dart';
 import 'package:yaha/explore.dart';
@@ -144,6 +146,18 @@ void main() {
   testWidgets('Login With Email Popup smoke test', (WidgetTester tester) async {
     await tester
         .pumpWidget(createWidgetForTesting(child: new LogInWithEmailPopup()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Sign Up Popup smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetForTesting(child: new SignUpPopup()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Sign Up With Email Popup smoke test',
+      (WidgetTester tester) async {
+    await tester
+        .pumpWidget(createWidgetForTesting(child: new SignUpWithEmailPopup()));
 
     await tester.pumpAndSettle();
   });

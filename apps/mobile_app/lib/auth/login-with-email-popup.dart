@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:yaha/auth/signup-popup.dart';
 import 'package:yaha/settings/application/app-settings-state.dart';
 import 'package:yaha/utility/buttons/back-button.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
@@ -183,7 +184,13 @@ class LogInWithEmailPopup extends ConsumerWidget {
                                       color: YahaColors.primary,
                                     ),
                                     recognizer: TapGestureRecognizer()
-                                      ..onTap = () {}),
+                                      ..onTap = () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    SignUpPopup()));
+                                      }),
                               ],
                             ),
                           ),
