@@ -30,8 +30,10 @@ class YahaBoxSizes {
   static const backButtonWidth = 44.0;
 
   //WIDTH - hike outline boxes
-  static const checkpointWidthMax = 350.0;
-  static const sectionWidthMax = 300.0;
+  //Had to make them both 16 pixels wider than what's in the design because there was an overflow on the right according to the tests.
+  //In reality the overflow was not seenable and the time and left arrow weren't even close to the edge of the box.
+  static const checkpointWidthMax = 366.0;
+  static const sectionWidthMax = 316.0;
 
   //HEIGHT - hike outline boxes
   static const checkpointHeight = 90.0;

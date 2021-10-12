@@ -4,6 +4,7 @@ import 'package:yaha/utility/yaha-border-width.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
+import 'package:yaha/utility/yaha-icon-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -24,7 +25,7 @@ class ApplicationPage extends ConsumerWidget {
           backgroundColor: YahaColors.background,
           title: const Text('Application',
               style: TextStyle(
-                  fontSize: YahaFontSizes.large,
+                  fontSize: YahaFontSizes.medium,
                   fontWeight: FontWeight.w600,
                   color: YahaColors.textColor)),
           leading: IconButton(
@@ -32,6 +33,7 @@ class ApplicationPage extends ConsumerWidget {
             icon: Icon(
               Icons.arrow_back_ios_rounded,
               color: YahaColors.textColor,
+              size: YahaIconSizes.medium,
             ),
             onPressed: () => Navigator.of(context).pop(),
           )),
@@ -56,8 +58,8 @@ class ApplicationPage extends ConsumerWidget {
                                   fontSize: YahaFontSizes.medium,
                                   fontWeight: FontWeight.w600,
                                   color: YahaColors.textColor)),
-                          decoration: BoxDecoration(
-                              color: YahaColors.tertiaryAccentColor),
+                          decoration:
+                              BoxDecoration(color: YahaColors.accentColor),
                         ),
                         Container(
                           margin: const EdgeInsets.only(
@@ -86,7 +88,7 @@ class ApplicationPage extends ConsumerWidget {
                                     size: YahaFontSizes.xxLarge),
                                 style: const TextStyle(
                                     color: YahaColors.textColor,
-                                    fontSize: YahaFontSizes.medium),
+                                    fontSize: YahaFontSizes.small),
                                 underline: Container(
                                   height: 0,
                                 ),
@@ -118,8 +120,8 @@ class ApplicationPage extends ConsumerWidget {
                                   fontSize: YahaFontSizes.medium,
                                   fontWeight: FontWeight.w600,
                                   color: YahaColors.textColor)),
-                          decoration: BoxDecoration(
-                              color: YahaColors.tertiaryAccentColor),
+                          decoration:
+                              BoxDecoration(color: YahaColors.accentColor),
                           height: 56.0,
                         ),
                         Container(
