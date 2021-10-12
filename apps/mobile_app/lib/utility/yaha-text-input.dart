@@ -91,6 +91,14 @@ class _YahaTextFieldState extends State<YahaTextField> {
   Widget build(BuildContext context) {
     return Container(
       child: TextFormField(
+        validator: (value) {
+          if(value!.isNotEmpty && value.length > 2) {
+            return null;
+          } else {
+            return 'Not good';
+          }
+        },
+
         controller: widget.controller,
         focusNode: _focusNode,
         onTap: _requestFocus,
