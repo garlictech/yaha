@@ -87,7 +87,16 @@ class LogInWithEmailPopup extends ConsumerWidget {
                                 onPressed: () {
                                   if (!_formKey.currentState!.validate()) {
                                     return;
-                                  } Scaffold.of(context).showSnackBar(SnackBar(content: Text('Everything is good')));
+                                  }
+                                  showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: Container(
+                                              alignment: Alignment.center,
+                                              child: Text('You are logged in')),
+                                        );
+                                      });
                                 },
                                 style: ElevatedButton.styleFrom(
                                   primary: YahaColors.primary,
@@ -101,8 +110,8 @@ class LogInWithEmailPopup extends ConsumerWidget {
                           ),
                           Container(
                             alignment: Alignment.center,
-                            padding:
-                                const EdgeInsets.only(top: YahaSpaceSizes.medium),
+                            padding: const EdgeInsets.only(
+                                top: YahaSpaceSizes.medium),
                             child: Text(
                               'Forgot password?',
                               style: TextStyle(
@@ -119,15 +128,17 @@ class LogInWithEmailPopup extends ConsumerWidget {
                             child: Row(
                               children: [
                                 Checkbox(
-                                    fillColor: MaterialStateProperty.resolveWith(
-                                        (states) => YahaColors.textColor),
+                                    fillColor:
+                                        MaterialStateProperty.resolveWith(
+                                            (states) => YahaColors.textColor),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(
                                           YahaBorderRadius.checkboxSmall),
                                     ),
                                     value: appSettingsState.isChecked,
-                                    onChanged: (value) => appSettingsStateNotifier
-                                        .updateCheckboxState(value)),
+                                    onChanged: (value) =>
+                                        appSettingsStateNotifier
+                                            .updateCheckboxState(value)),
                                 Expanded(
                                   child: RichText(
                                     text: TextSpan(
@@ -172,7 +183,8 @@ class LogInWithEmailPopup extends ConsumerWidget {
                           ),
                           Container(
                             alignment: FractionalOffset.bottomCenter,
-                            padding: EdgeInsets.only(top: YahaSpaceSizes.general),
+                            padding:
+                                EdgeInsets.only(top: YahaSpaceSizes.general),
                             child: RichText(
                               text: TextSpan(
                                 style: TextStyle(

@@ -43,6 +43,16 @@ class _YahaTextFieldPasswordState extends State<YahaTextFieldPassword> {
   Widget build(BuildContext context) {
     return Container(
       child: TextFormField(
+        validator: (value) {
+          if (value!.contains(RegExp(
+              r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$'))) {
+            return null;
+          } else if (value.isEmpty) {
+            return 'Please enter a password';
+          } else {
+            return 'Not valid password';
+          }
+        },
         focusNode: _focusNode,
         onTap: _requestFocus,
         keyboardType: TextInputType.text,
@@ -56,34 +66,45 @@ class _YahaTextFieldPasswordState extends State<YahaTextFieldPassword> {
         cursorColor:
             _focusNode.hasFocus ? YahaColors.primary : YahaColors.textColor,
         decoration: InputDecoration(
-            focusColor: YahaColors.military,
-            labelText: widget.title,
-            labelStyle: TextStyle(
-                color: _focusNode.hasFocus
-                    ? YahaColors.primary
-                    : YahaColors.textColor),
-            suffixIcon: IconButton(
-              icon: Icon(
-                _passwordVisible
-                    ? Icons.visibility_off_outlined
-                    : Icons.visibility_outlined,
-                color: YahaColors.textColor,
-              ),
-              onPressed: () {
-                setState(() {
-                  _passwordVisible = !_passwordVisible;
-                });
-              },
+          focusColor: YahaColors.military,
+          labelText: widget.title,
+          labelStyle: TextStyle(
+              color: _focusNode.hasFocus
+                  ? YahaColors.primary
+                  : YahaColors.textColor),
+          suffixIcon: IconButton(
+            icon: Icon(
+              _passwordVisible
+                  ? Icons.visibility_off_outlined
+                  : Icons.visibility_outlined,
+              color: YahaColors.textColor,
             ),
-            contentPadding: EdgeInsets.only(left: YahaSpaceSizes.medium),
-            enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(YahaBorderRadius.general),
-                borderSide: BorderSide(
-                    color: YahaColors.textColor, width: YahaBorderWidth.xSmall)),
-            focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(YahaBorderRadius.general),
-                borderSide: BorderSide(
-                    color: YahaColors.primary, width: YahaBorderWidth.xSmall))),
+            onPressed: () {
+              setState(() {
+                _passwordVisible = !_passwordVisible;
+              });
+            },
+          ),
+          contentPadding: EdgeInsets.only(left: YahaSpaceSizes.medium),
+          enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(YahaBorderRadius.general),
+              borderSide: BorderSide(
+                  color: YahaColors.textColor, width: YahaBorderWidth.xSmall)),
+          focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(YahaBorderRadius.general),
+              borderSide: BorderSide(
+                  color: YahaColors.primary, width: YahaBorderWidth.xSmall)),
+          errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(YahaBorderRadius.general),
+              borderSide: BorderSide(
+                  color: YahaColors.error, width: YahaBorderWidth.xSmall)),
+          focusedErrorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(YahaBorderRadius.general),
+              borderSide: BorderSide(
+                  color: YahaColors.error, width: YahaBorderWidth.xSmall)),
+          errorStyle: TextStyle(
+              fontSize: YahaFontSizes.xSmall, fontWeight: FontWeight.w500),
+        ),
       ),
     );
   }
