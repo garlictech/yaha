@@ -4565,10 +4565,10 @@
     camelcase "^6.2.0"
     pluralize "^8.0.0"
 
-"@neo4j/graphql@2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@neo4j/graphql/-/graphql-2.2.0.tgz#081748a3939b25b9e41e99cfa11c8fc4395669c6"
-  integrity sha512-1daG0yOznJwlXgjxpiWS3tjFw3f6FOenmkOvUPLLl0eLU7KlnlUL9lmKdCPILr6wJUYYwVWqjP8qm9ooeIX5Sg==
+"@neo4j/graphql@2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@neo4j/graphql/-/graphql-2.3.0.tgz#46d5bdbf24f9f66f84888e91f784c5d390535437"
+  integrity sha512-O2nmJsDRFb7xqQfF6sTez03UoV4DKk9UIkVR0YvrWEYf+UXBIHwxMESvXkVZ5P/bqk1Q2MuFHMSRkwlaJxvO4A==
   dependencies:
     "@graphql-tools/merge" "6.2.14"
     "@graphql-tools/schema" "^7.1.5"
