@@ -5,12 +5,12 @@ import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
-class YahaTextField extends StatefulWidget {
+class YahaTextFieldEmail extends StatefulWidget {
   final String title;
   final IconData? icon;
   final controller;
 
-  const YahaTextField({
+  const YahaTextFieldEmail({
     Key? key,
     required this.title,
     this.icon,
@@ -18,10 +18,10 @@ class YahaTextField extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _YahaTextFieldState createState() => _YahaTextFieldState();
+  _YahaTextFieldEmailState createState() => _YahaTextFieldEmailState();
 }
 
-class _YahaTextFieldState extends State<YahaTextField> {
+class _YahaTextFieldEmailState extends State<YahaTextFieldEmail> {
   FocusNode _focusNode = new FocusNode();
   @override
   void initState() {
@@ -45,6 +45,17 @@ class _YahaTextFieldState extends State<YahaTextField> {
   Widget build(BuildContext context) {
     return Container(
       child: TextFormField(
+        validator: (value) {
+          if (value!.isNotEmpty &&
+              value.contains(RegExp(
+                  r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+"))) {
+            return null;
+          } else if (value.isEmpty) {
+            return 'Please enter your email address';
+          } else {
+            return 'Please enter a valid email address';
+          }
+        },
         controller: widget.controller,
         focusNode: _focusNode,
         onTap: _requestFocus,

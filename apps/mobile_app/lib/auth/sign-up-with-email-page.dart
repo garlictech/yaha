@@ -5,6 +5,7 @@ import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 import 'package:yaha/utility/yaha-text-input-password.dart';
+import 'package:yaha/utility/yaha-text-input-email.dart';
 import 'package:yaha/utility/yaha-text-input.dart';
 
 class SignUpWithEmailPage extends StatefulWidget {
@@ -76,7 +77,7 @@ class _SignUpWithEmailPageState extends State<SignUpWithEmailPage> {
                         padding: const EdgeInsets.only(
                             top: YahaSpaceSizes.small,
                             bottom: YahaSpaceSizes.medium),
-                        child: YahaTextField(title: 'Email'),
+                        child: YahaTextFieldEmail(title: 'Email'),
                       ),
                       Container(
                         constraints: BoxConstraints(maxWidth: 400),
