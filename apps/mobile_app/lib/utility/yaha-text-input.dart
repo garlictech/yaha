@@ -45,6 +45,17 @@ class _YahaTextFieldState extends State<YahaTextField> {
   Widget build(BuildContext context) {
     return Container(
       child: TextFormField(
+        validator: (value) {
+          if (value!.isNotEmpty &&
+              value.contains(RegExp(
+                  r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+"))) {
+            return null;
+          } else if (value.isEmpty) {
+            return 'Please enter your email address';
+          } else {
+            return 'Please enter a valid email address';
+          }
+        },
         controller: widget.controller,
         focusNode: _focusNode,
         onTap: _requestFocus,
