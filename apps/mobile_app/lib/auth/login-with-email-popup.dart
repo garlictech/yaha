@@ -4,13 +4,14 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yaha/auth/signup-popup.dart';
 import 'package:yaha/settings/application/app-settings-state.dart';
 import 'package:yaha/utility/buttons/back-button.dart';
+import 'package:yaha/utility/pop-ups/success-popup.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 import 'package:yaha/utility/yaha-text-input-password.dart';
-import 'package:yaha/utility/yaha-text-input.dart';
+import 'package:yaha/utility/yaha-text-input-email.dart';
 
 class LogInWithEmailPopup extends ConsumerWidget {
   final _formKey = GlobalKey<FormState>();
@@ -62,7 +63,7 @@ class LogInWithEmailPopup extends ConsumerWidget {
                             padding: const EdgeInsets.only(
                                 top: YahaSpaceSizes.xxLarge,
                                 bottom: YahaSpaceSizes.general),
-                            child: YahaTextField(
+                            child: YahaTextFieldEmail(
                               title: 'Email',
                             ),
                           ),
@@ -91,10 +92,10 @@ class LogInWithEmailPopup extends ConsumerWidget {
                                   showDialog(
                                       context: context,
                                       builder: (BuildContext context) {
-                                        return AlertDialog(
-                                          title: Container(
-                                              alignment: Alignment.center,
-                                              child: Text('You are logged in')),
+                                        return SuccessPopup(
+                                          title: 'Welcome back!',
+                                          content: 'You are logged in now.',
+                                          buttonTitle: 'Go to dashboard',
                                         );
                                       });
                                 },
