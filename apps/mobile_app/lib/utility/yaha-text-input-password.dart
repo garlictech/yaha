@@ -7,10 +7,12 @@ import 'package:yaha/utility/yaha-space-sizes.dart';
 
 class YahaTextFieldPassword extends StatefulWidget {
   final String title;
+  final Function? onEditingComplete;
 
   const YahaTextFieldPassword({
     Key? key,
     required this.title,
+    this.onEditingComplete,
   }) : super(key: key);
 
   @override

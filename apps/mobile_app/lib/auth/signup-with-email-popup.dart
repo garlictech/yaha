@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yaha/auth/login-popup.dart';
+import 'package:yaha/auth/signup-state.dart';
 import 'package:yaha/settings/application/app-settings-state.dart';
 import 'package:yaha/utility/buttons/back-button.dart';
 import 'package:yaha/utility/pop-ups/success-popup.dart';
@@ -21,6 +22,9 @@ class SignUpWithEmailPopup extends ConsumerWidget {
     var appSettingsState = watch(applicationSettingsStateProvider);
     var appSettingsStateNotifier =
         watch(applicationSettingsStateProvider.notifier);
+
+    final passwordMismatch = signupStateProvider
+        .select((signupState) => signupState.state.passwordMismatch);
 
     return Scaffold(
       body: CustomScrollView(
