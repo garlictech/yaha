@@ -5,7 +5,7 @@ import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 import 'package:yaha/utility/yaha-text-input-password.dart';
-import 'package:yaha/utility/yaha-text-input.dart';
+import 'package:yaha/utility/yaha-text-input-email.dart';
 
 class LogInPage extends StatefulWidget {
   @override
@@ -62,7 +62,7 @@ class _LogInPageState extends State<LogInPage> {
                         padding: const EdgeInsets.only(
                             top: YahaSpaceSizes.large,
                             bottom: YahaSpaceSizes.general),
-                        child: YahaTextField(
+                        child: YahaTextFieldEmail(
                           title: 'Email',
                         ),
                       ),

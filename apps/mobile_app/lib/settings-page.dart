@@ -1,10 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yaha/auth/login-popup.dart';
 import 'package:yaha/settings/application/application-page.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
+import 'package:yaha/utility/yaha-icon-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
-
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -19,7 +21,7 @@ class _SettingsPageState extends State<SettingsPage> {
           backgroundColor: YahaColors.background,
           title: const Text('Settings',
               style: TextStyle(
-                  fontSize: YahaFontSizes.large,
+                  fontSize: YahaFontSizes.medium,
                   fontWeight: FontWeight.w600,
                   color: YahaColors.textColor)),
           leading: IconButton(
@@ -27,6 +29,7 @@ class _SettingsPageState extends State<SettingsPage> {
             icon: Icon(
               Icons.arrow_back_ios_rounded,
               color: YahaColors.textColor,
+              size: YahaIconSizes.medium,
             ),
             onPressed: () => Navigator.of(context).pop(),
           )),
@@ -61,7 +64,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                   fontWeight: FontWeight.w600,
                                   color: YahaColors.textColor)),
                           decoration: BoxDecoration(
-                              color: YahaColors.tertiaryAccentColor),
+                              color: YahaColors.accentColor),
                           height: 56.0,
                         ),
                         Container(
@@ -191,7 +194,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                   fontWeight: FontWeight.w600,
                                   color: YahaColors.textColor)),
                           decoration: BoxDecoration(
-                              color: YahaColors.tertiaryAccentColor),
+                              color: YahaColors.accentColor),
                           height: 56.0,
                         ),
                         Container(
@@ -272,29 +275,35 @@ class _SettingsPageState extends State<SettingsPage> {
                                   ],
                                 ),
                               ),
-                              Divider(
-                                  color: YahaColors.divider, thickness: 0.5),
-                              Container(
-                                padding: const EdgeInsets.only(
-                                    left: YahaSpaceSizes.general,
-                                    top: YahaSpaceSizes.small,
-                                    right: YahaSpaceSizes.general,
-                                    bottom: YahaSpaceSizes.small),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text('Log out',
-                                        style: TextStyle(
-                                            fontSize: YahaFontSizes.small,
-                                            fontWeight: FontWeight.w400,
-                                            color: YahaColors.error)),
-                                    Icon(
-                                      Icons.exit_to_app_rounded,
-                                      color: YahaColors.error,
-                                      size: YahaFontSizes.xxLarge,
-                                    )
-                                  ],
+                              Visibility(
+                                visible: false,
+                                child: Divider(
+                                    color: YahaColors.divider, thickness: 0.5),
+                              ),
+                              Visibility(
+                                visible: false,
+                                child: Container(
+                                  padding: const EdgeInsets.only(
+                                      left: YahaSpaceSizes.general,
+                                      top: YahaSpaceSizes.small,
+                                      right: YahaSpaceSizes.general,
+                                      bottom: YahaSpaceSizes.small),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text('Log out',
+                                          style: TextStyle(
+                                              fontSize: YahaFontSizes.small,
+                                              fontWeight: FontWeight.w400,
+                                              color: YahaColors.error)),
+                                      Icon(
+                                        Icons.exit_to_app_rounded,
+                                        color: YahaColors.error,
+                                        size: YahaFontSizes.xxLarge,
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ),
                               Container(
@@ -303,14 +312,15 @@ class _SettingsPageState extends State<SettingsPage> {
                                 child: SizedBox(
                                   height: 50,
                                   width: 400,
-                                  child: ElevatedButton.icon(
-                                    icon: Icon(
-                                      Icons.star,
-                                      color: YahaColors.accentColor,
-                                      size: YahaFontSizes.large,
-                                    ),
-                                    onPressed: () {},
-                                    label: Text('Upgrade to premium',
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  LogInPopup()));
+                                    },
+                                    child: Text('Log in',
                                         style: TextStyle(
                                           fontSize: YahaFontSizes.small,
                                           fontWeight: FontWeight.w600,

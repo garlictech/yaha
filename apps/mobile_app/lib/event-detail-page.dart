@@ -40,7 +40,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
                               child: Text('Eger Csillaga\n Teljesítménytúra',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                      fontSize: YahaFontSizes.large,
+                                      fontSize: YahaFontSizes.medium,
                                       fontWeight: FontWeight.w600,
                                       color: YahaColors.textColor)),
                             ),
