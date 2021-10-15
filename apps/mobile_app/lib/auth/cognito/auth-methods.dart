@@ -1,6 +1,5 @@
-enum LoginMethod { FACEBOOK, GOOGLE, PHONE, APPLE, ANONYMOUS, EMAIL, UNKNOWN }
-
-final loginProviderMap = {
+enum AuthMethod { FACEBOOK, GOOGLE, PHONE, APPLE, ANONYMOUS, EMAIL, UNKNOWN }
+/*final loginProviderMap = {
   LoginMethod.FACEBOOK: 'Facebook',
   LoginMethod.GOOGLE: 'Google',
   LoginMethod.APPLE: 'SignInWithApple'
@@ -39,4 +38,4 @@ class LoginMethodUtils {
         return LoginMethod.UNKNOWN;
     }
   }
-}
+}*/

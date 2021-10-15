@@ -23,8 +23,11 @@ class SignUpWithEmailPopup extends ConsumerWidget {
     var appSettingsStateNotifier =
         watch(applicationSettingsStateProvider.notifier);
 
-    final passwordMismatch = signupStateProvider
-        .select((signupState) => signupState.state.passwordMismatch);
+    final signupState = watch(signupStateProvider);
+    final signupStateNotifier = watch(signupStateProvider.notifier);
+
+    final bool passwordMismatch =
+        signupState.password != signupState.passwordAgain;
 
     return Scaffold(
       body: CustomScrollView(
@@ -72,19 +75,25 @@ class SignUpWithEmailPopup extends ConsumerWidget {
                             ),
                           ),
                           Container(
-                            constraints: BoxConstraints(maxWidth: 400),
-                            padding: const EdgeInsets.only(
-                                bottom: YahaSpaceSizes.general),
-                            child: YahaTextFieldPassword(title: 'Password'),
-                          ),
+                              constraints: BoxConstraints(maxWidth: 400),
+                              padding: const EdgeInsets.only(
+                                  bottom: YahaSpaceSizes.general),
+                              child: YahaTextFieldPassword(
+                                  title: 'Password',
+                                  onChanged: (value) =>
+                                      signupStateNotifier.setPassword(value))),
                           Container(
-                            constraints: BoxConstraints(maxWidth: 400),
-                            padding: const EdgeInsets.only(
-                                bottom: YahaSpaceSizes.large),
-                            child: YahaTextFieldPassword(
-                              title: 'Password again',
-                            ),
-                          ),
+                              constraints: BoxConstraints(maxWidth: 400),
+                              padding: const EdgeInsets.only(
+                                  bottom: YahaSpaceSizes.large),
+                              child: YahaTextFieldPassword(
+                                title: 'Password again',
+                                onChanged: (value) =>
+                                    signupStateNotifier.setPasswordAgain(value),
+                              )),
+                          passwordMismatch
+                              ? Text("Password mismatch")
+                              : Container(),
                           Container(
                             child: SizedBox(
                               width: YahaBoxSizes.buttonWidthBig,

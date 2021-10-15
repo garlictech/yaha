@@ -7,20 +7,26 @@ import 'package:yaha/utility/yaha-space-sizes.dart';
 
 class YahaTextFieldPassword extends StatefulWidget {
   final String title;
-  final Function? onEditingComplete;
+  final Function? onChanged;
 
   const YahaTextFieldPassword({
     Key? key,
     required this.title,
-    this.onEditingComplete,
+    this.onChanged,
   }) : super(key: key);
 
   @override
-  _YahaTextFieldPasswordState createState() => _YahaTextFieldPasswordState();
+  _YahaTextFieldPasswordState createState() =>
+      _YahaTextFieldPasswordState(onChanged: onChanged);
 }
 
 class _YahaTextFieldPasswordState extends State<YahaTextFieldPassword> {
   bool _passwordVisible = false;
+  final Function? onChanged;
+
+  _YahaTextFieldPasswordState({
+    required this.onChanged,
+  });
 
   FocusNode _focusNode = new FocusNode();
   @override
@@ -57,6 +63,7 @@ class _YahaTextFieldPasswordState extends State<YahaTextFieldPassword> {
         },
         focusNode: _focusNode,
         onTap: _requestFocus,
+        onChanged: (value) => onChanged?.call(value),
         keyboardType: TextInputType.text,
         obscureText: !_passwordVisible,
         enableSuggestions: false,

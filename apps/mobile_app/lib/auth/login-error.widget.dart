@@ -40,7 +40,7 @@ class LoginErrorWidget extends ConsumerWidget {
                 ),
               ),
               onPressed: () {
-                authStateNotifier.clearError();
+                //           authStateNotifier.clearError();
               },
             ),
           ],

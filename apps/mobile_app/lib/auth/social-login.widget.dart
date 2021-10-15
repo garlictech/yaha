@@ -9,10 +9,10 @@ import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:yaha/app-config.dart';
+import 'package:yaha/auth/oauth2-provider.dart';
 import 'package:yaha/core/logger.dart';
 import 'auth-state.dart';
 //import 'auth_repository.dart';
-import 'cognito/login_methods.dart';
 import 'login-error.widget.dart';
 
 class Deps {
@@ -20,17 +20,10 @@ class Deps {
   static final String signinCallback = AppConfig.signinCallback;
   static final String userPoolClientId = AppConfig.userPoolClientId;
   static final String userPoolDomain = AppConfig.userPoolDomain;
-  final AuthStateNotifier stateNotifier;
-
-  Deps({
-    required this.stateNotifier,
-  });
 }
 
 @immutable
 class SocialLoginWidget extends ConsumerWidget {
-  final String title = "fasz";
-  final LoginMethod method = LoginMethod.FACEBOOK;
   final Completer<WebViewController> _webViewController =
       Completer<WebViewController>();
 
@@ -38,22 +31,10 @@ class SocialLoginWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    String provider = getCognitoProviderName(method);
     final authStateNotifier = watch(authStateProvider.notifier);
     final authState = watch(authStateProvider);
     final error = authState.error;
-    final loginMethod = authState.loginMethod;
-    final working = authState.working;
-    final deps = Deps(stateNotifier: authStateNotifier);
-
-    final url = '${AppConfig.userPoolDomain}/oauth2/authorize?'
-        'identity_provider=$provider&'
-        'redirect_uri=${AppConfig.signinCallback}&'
-        'response_type=CODE&'
-        'client_id=${AppConfig.userPoolClientId}&'
-        'scope=email%20openid%20profile%20aws.cognito.signin.user.admin';
-
-    logger.d('Social login url: $url');
+    final oAuth2Support = watch(oauth2SupportProvider);
 
     return Scaffold(
         appBar: AppBar(
@@ -71,7 +52,7 @@ class SocialLoginWidget extends ConsumerWidget {
                 ),
               ),
               child: BackButton(
-                onPressed: () => authStateNotifier.finishSocialLogin(),
+                onPressed: () => authStateNotifier.cancelLogin(),
               ),
             ),
           ),
@@ -79,25 +60,25 @@ class SocialLoginWidget extends ConsumerWidget {
           iconTheme: IconThemeData(),
           title: Text(
             "signin",
-            //trans("login.email.signIn"),
             style: GoogleFonts.poppins(
               color: Colors.black,
             ),
           ),
         ),
         body: Stack(children: [
-          working ? Center(child: CircularProgressIndicator()) : Container(),
+          authState.working
+              ? Center(child: CircularProgressIndicator())
+              : Container(),
           error != null ? LoginErrorWidget(error: error) : Container(),
-          loginMethod != null
+          authState.ongoingAuthMethod != null
               ? WebView(
-                  initialUrl: url,
+                  initialUrl: oAuth2Support.authorizeUrl(),
                   javascriptMode: JavascriptMode.unrestricted,
                   onWebViewCreated: (WebViewController webViewController) {
                     _webViewController.complete(webViewController);
-                    authStateNotifier.waiting();
                   },
                   navigationDelegate: (NavigationRequest request) =>
-                      signUserInWithAuthCode(request)(deps),
+                      signUserInWithAuthCode(request),
                   gestureNavigationEnabled: true,
                 )
               : Container()
@@ -150,11 +131,11 @@ class SocialLoginWidget extends ConsumerWidget {
                     dynamic payload = idToken.decodePayload();
                     String username = payload['cognito:username'];
                     Deps.l.v('username: $username');
-                    deps.stateNotifier.loggedIn();
+                    //deps.stateNotifier.loggedIn();
                   }))
               .fold((body) {
             Deps.l.e('Cognito error happened: $body');
-            deps.stateNotifier.errorHappened(JsonEncoder().convert(body));
+            //deps.stateNotifier.errorHappened(JsonEncoder().convert(body));
           }, (r) => null);
 
           return NavigationDecision.prevent;

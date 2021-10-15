@@ -7,7 +7,7 @@ import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'cognito/login_methods.dart';
+import 'cognito/auth-methods.dart';
 import 'sign-up-with-email-page.dart';
 import 'social-login.widget.dart';
 
@@ -16,7 +16,7 @@ class SignUpPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     final authState = watch(authStateProvider);
-    final loginMethod = authState.loginMethod;
+    final loginMethod = authState.ongoingAuthMethod;
 
     if (loginMethod != null) {
       return SocialLoginWidget();
@@ -167,8 +167,8 @@ class SignUpPageBase extends ConsumerWidget {
                           //color: YahaColors.accentColor,
                           //size: YahaFontSizes.large,
                           //),
-                          onPressed: () => authStateNotifier
-                              .startSocialLogin(LoginMethod.FACEBOOK),
+                          onPressed: () =>
+                              authStateNotifier.loginWith(AuthMethod.FACEBOOK),
                           //label: Text('Sign up with Facebook',
                           //style: TextStyle(
                           //fontSize: YahaFontSizes.small,
@@ -210,8 +210,8 @@ class SignUpPageBase extends ConsumerWidget {
                               ),
                             ],
                           ),
-                          onPressed: () => authStateNotifier
-                              .startSocialLogin(LoginMethod.GOOGLE),
+                          onPressed: () =>
+                              authStateNotifier.loginWith(AuthMethod.GOOGLE),
                           style: ElevatedButton.styleFrom(
                             primary: YahaColors.google,
                             shape: const RoundedRectangleBorder(
@@ -256,8 +256,8 @@ class SignUpPageBase extends ConsumerWidget {
                           //'assets/images/apple_logo@3x.png',
                           //height: 25.0,
                           //),
-                          onPressed: () => authStateNotifier
-                              .startSocialLogin(LoginMethod.GOOGLE),
+                          onPressed: () =>
+                              authStateNotifier.loginWith(AuthMethod.GOOGLE),
                           //label: Text('Sign up with Apple',
                           //style: TextStyle(
                           //fontSize: YahaFontSizes.small,
