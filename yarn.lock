@@ -5438,21 +5438,6 @@
     ws "^7.4.0"
     yargs "^15.4.1"
 
-"@serverless-stack/core@^0.46.0":
-  version "0.46.0"
-  resolved "https://registry.yarnpkg.com/@serverless-stack/core/-/core-0.46.0.tgz#ef46b9c89bb1317a3ca6a9c38d91da5a01d65046"
-  integrity sha512-gMa5xlmdiTavC8pKMLSWA3R85rjo+zxZBYS53zmHmCZ/HFaGL25ZyEvqJjBBFe6PfqYdfP+Eep+QYLyf1J5UdQ==
-  dependencies:
-    aws-cdk "1.126.0"
-    aws-sdk "^2.761.0"
-    chalk "^4.1.0"
-    cross-spawn "^7.0.3"
-    dotenv "^10.0.0"
-    dotenv-expand "^5.1.0"
-    fs-extra "^9.0.1"
-    log4js "^6.3.0"
-    typescript "^4.4.3"
-
 "@serverless-stack/core@^0.46.1":
   version "0.46.1"
   resolved "https://registry.yarnpkg.com/@serverless-stack/core/-/core-0.46.1.tgz#a498e8aa1c5e0e17522556d2a175341265f919da"
@@ -5464,6 +5449,22 @@
     cross-spawn "^7.0.3"
     dotenv "^10.0.0"
     dotenv-expand "^5.1.0"
+    fs-extra "^9.0.1"
+    log4js "^6.3.0"
+    typescript "^4.4.3"
+
+"@serverless-stack/core@^0.47.0":
+  version "0.47.0"
+  resolved "https://registry.yarnpkg.com/@serverless-stack/core/-/core-0.47.0.tgz#a0a80c74d0d5c5e2b0ca4f1d6620edfbd0ddcd22"
+  integrity sha512-jPma8Ru2s0pAsvr0gjepXObGJXDzjQjY1/JREU2ylAJ+yqT8cVTCLsOjOX0Xpy4neX8Qyttq0gLxEcJT8r48HA==
+  dependencies:
+    aws-cdk "1.126.0"
+    aws-sdk "^2.761.0"
+    chalk "^4.1.0"
+    cross-spawn "^7.0.3"
+    dotenv "^10.0.0"
+    dotenv-expand "^5.1.0"
+    express "^4.17.1"
     fs-extra "^9.0.1"
     log4js "^6.3.0"
     typescript "^4.4.3"
@@ -5501,10 +5502,10 @@
     path-to-regexp "^6.1.0"
     send "^0.17.1"
 
-"@serverless-stack/resources@0.46.0":
-  version "0.46.0"
-  resolved "https://registry.yarnpkg.com/@serverless-stack/resources/-/resources-0.46.0.tgz#bfa452e71b084f56360b2cb8872eb52be2d97529"
-  integrity sha512-gux5XB+KDwgytF84TdGII/I+kZxSjf+00GgmXyJU655xyUCjnFv3UuWeXsgEe2A/HC9n4O5fB8At+xGJZcP0ug==
+"@serverless-stack/resources@0.47.0":
+  version "0.47.0"
+  resolved "https://registry.yarnpkg.com/@serverless-stack/resources/-/resources-0.47.0.tgz#66bfa65930aa2cccbd5b449d50badc91181b229d"
+  integrity sha512-SI9Jyr7EBtclsIzNvxHop2pEXj27mRwzTCsbqp71MMaFK9JtRWmxAAQ8I4++7mDD9rIxp+8YT5oJLi/nP9Gd4A==
   dependencies:
     "@aws-cdk/aws-apigateway" "1.126.0"
     "@aws-cdk/aws-apigatewayv2" "1.126.0"
@@ -5544,7 +5545,7 @@
     "@aws-cdk/lambda-layer-awscli" "1.126.0"
     "@graphql-tools/load-files" "^6.3.2"
     "@graphql-tools/merge" "^6.2.14"
-    "@serverless-stack/core" "^0.46.0"
+    "@serverless-stack/core" "^0.47.0"
     "@serverless-stack/nextjs-lambda" "^0.1.9"
     "@types/jest" "^26.0.7"
     archiver "^5.3.0"
