@@ -4,6 +4,7 @@ import 'package:yaha/auth/auth-state.dart';
 import 'package:yaha/hike/hike-card/hike-card.dart';
 import 'package:yaha/home/explore-hike-box.dart';
 import 'package:yaha/home/show-more-button.dart';
+import 'package:yaha/profile/challenges/challenges.dart';
 import 'package:yaha/profile/statistics.dart';
 import 'package:yaha/utility/challenge-box.dart';
 import 'package:yaha/user/user-state.dart';
@@ -42,7 +43,7 @@ class HomePageGuest extends ConsumerWidget {
                           children: [
                             Align(
                               alignment: Alignment.centerLeft,
-                              child: Row (
+                              child: Row(
                                 children: [
                                   Container(
                                       height: 64,
@@ -206,8 +207,7 @@ class HomePageGuest extends ConsumerWidget {
                                           right: YahaSpaceSizes.general),
                                       child: ChallengeBox(
                                         title: 'Complete a hike at night',
-                                        icon:
-                                            'assets/images/nightlight_black_24dp.png',
+                                        icon: 'assets/images/half_moon.png',
                                       ),
                                     ),
                                     Container(
@@ -215,19 +215,53 @@ class HomePageGuest extends ConsumerWidget {
                                           right: YahaSpaceSizes.general),
                                       child: ChallengeBox(
                                         title: 'Take 10 pictures during a hike',
-                                        icon:
-                                            'assets/images/photo_camera_black_24dp.png',
+                                        icon: 'assets/images/photo_camera.png',
                                       ),
                                     ),
                                     ChallengeBox(
                                       title: 'Complete a hike at night',
-                                      icon:
-                                          'assets/images/nightlight_black_24dp.png',
+                                      icon: 'assets/images/half_moon.png',
                                     ),
                                   ],
                                 ),
                               ),
-                              ShowMoreButton(),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Container(
+                                    alignment: Alignment.centerRight,
+                                    child: TextButton(
+                                      onPressed: () {
+                                        Navigator.push(context,
+                                            MaterialPageRoute(builder:
+                                                (BuildContext context) {
+                                          return Challenges();
+                                        }));
+                                      },
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'Show more',
+                                            style: TextStyle(
+                                                fontSize: YahaFontSizes.small,
+                                                fontWeight: FontWeight.w500,
+                                                color: YahaColors.textColor),
+                                          ),
+                                          Icon(
+                                            Icons.chevron_right,
+                                            size: YahaFontSizes.xxLarge,
+                                            color: YahaColors.textColor,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                         ),
