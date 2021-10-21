@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yaha/profile/statistics.dart';
+import 'package:yaha/profile/statistics/statistics-page.dart';
 import 'package:yaha/settings-page.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-border-width.dart';
@@ -162,25 +163,34 @@ class _ProfilePageState extends State<ProfilePage> {
                             Divider(
                                 color: YahaColors.divider,
                                 thickness: YahaBorderWidth.xxSmall),
-                            Container(
-                              margin: EdgeInsets.only(
-                                  top: YahaSpaceSizes.small,
-                                  bottom: YahaSpaceSizes.xSmall),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text('Statistics',
-                                      style: TextStyle(
-                                          fontSize: YahaFontSizes.small,
-                                          fontWeight: FontWeight.w400,
-                                          color: YahaColors.textColor)),
-                                  Icon(
-                                    Icons.chevron_right_rounded,
-                                    color: YahaColors.primary,
-                                    size: YahaFontSizes.xxLarge,
-                                  )
-                                ],
+                            InkWell(
+                              onTap: () {
+                                Navigator.of(this.context).push(
+                                    new MaterialPageRoute<dynamic>(
+                                        builder: (BuildContext context) {
+                                  return new StatisticsPage();
+                                }));
+                              },
+                              child: Container(
+                                margin: EdgeInsets.only(
+                                    top: YahaSpaceSizes.small,
+                                    bottom: YahaSpaceSizes.xSmall),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text('Statistics',
+                                        style: TextStyle(
+                                            fontSize: YahaFontSizes.small,
+                                            fontWeight: FontWeight.w400,
+                                            color: YahaColors.textColor)),
+                                    Icon(
+                                      Icons.chevron_right_rounded,
+                                      color: YahaColors.primary,
+                                      size: YahaFontSizes.xxLarge,
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                             Divider(

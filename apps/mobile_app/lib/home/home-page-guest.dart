@@ -7,8 +7,8 @@ import 'package:yaha/home/show-more-button.dart';
 import 'package:yaha/profile/challenges/challenges.dart';
 import 'package:yaha/profile/events/event-detail-page.dart';
 import 'package:yaha/profile/events/events.dart';
-import 'package:yaha/profile/profile-page.dart';
 import 'package:yaha/profile/statistics.dart';
+import 'package:yaha/profile/statistics/statistics-page.dart';
 import 'package:yaha/utility/challenge-box.dart';
 import 'package:yaha/user/user-state.dart';
 import 'package:yaha/utility/event-box.dart';
@@ -132,7 +132,9 @@ class HomePageGuest extends ConsumerWidget {
                                   hours: 0,
                                 ),
                               ),
-                              ShowMoreButton(nextScreen: ProfilePage()),
+                              ShowMoreButton(
+                                nextScreen: StatisticsPage(),
+                              ),
                             ],
                           ),
                         ),

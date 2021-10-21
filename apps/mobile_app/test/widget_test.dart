@@ -35,6 +35,7 @@ import 'package:yaha/profile/challenges/my-challenges.dart';
 import 'package:yaha/profile/events/events.dart';
 import 'package:yaha/profile/events/ongoing-events.dart';
 import 'package:yaha/profile/profile-page.dart';
+import 'package:yaha/profile/statistics/statistics-page.dart';
 import 'package:yaha/settings-page.dart';
 import 'package:yaha/settings/application/application-page.dart';
 import 'package:yaha/track-page.dart';
@@ -194,6 +195,11 @@ void main() {
   });
   testWidgets('Ongoing Events Page smoke test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: new OngoingEvents()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Statistics Page smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetForTesting(child: new StatisticsPage()));
 
     await tester.pumpAndSettle();
   });
