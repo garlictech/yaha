@@ -18,51 +18,32 @@ class AllChallenges extends ConsumerWidget {
                     crossAxisCount: 2,
                     shrinkWrap: true,
                     primary: false,
-                    childAspectRatio: 1.1,
-                    crossAxisSpacing: YahaSpaceSizes.xSmall,
+                    crossAxisSpacing: YahaSpaceSizes.general,
                     mainAxisSpacing: YahaSpaceSizes.general,
                     children: [
-                      Container(
-                        padding: EdgeInsets.only(right: YahaSpaceSizes.general),
-                        child: ChallengeBox(
-                          title: 'Walk 50km',
-                          icon: 'assets/images/hiking_person.png',
-                        ),
+                      ChallengeBox(
+                        title: 'Walk 50km',
+                        icon: 'assets/images/hiking_person.png',
                       ),
-                      Container(
-                        padding: EdgeInsets.only(right: YahaSpaceSizes.general),
-                        child: ChallengeBox(
-                          title: 'Walk 100km',
-                          icon: 'assets/images/hiking_person.png',
-                        ),
+                      ChallengeBox(
+                        title: 'Walk 100km',
+                        icon: 'assets/images/hiking_person.png',
                       ),
-                      Container(
-                        padding: EdgeInsets.only(right: YahaSpaceSizes.general),
-                        child: ChallengeBox(
-                          title: 'Complete a hike at night',
-                          icon: 'assets/images/half_moon.png',
-                        ),
+                      ChallengeBox(
+                        title: 'Complete a hike at night',
+                        icon: 'assets/images/half_moon.png',
                       ),
-                      Container(
-                        padding: EdgeInsets.only(right: YahaSpaceSizes.general),
-                        child: ChallengeBox(
-                          title: 'Take 10 pictures during a hike',
-                          icon: 'assets/images/photo_camera.png',
-                        ),
+                      ChallengeBox(
+                        title: 'Take 10 pictures during a hike',
+                        icon: 'assets/images/photo_camera.png',
                       ),
-                      Container(
-                        padding: EdgeInsets.only(right: YahaSpaceSizes.general),
-                        child: ChallengeBox(
-                          title: 'Complete 5 hikes',
-                          icon: 'assets/images/format_list_bulleted.png',
-                        ),
+                      ChallengeBox(
+                        title: 'Complete 5 hikes',
+                        icon: 'assets/images/format_list_bulleted.png',
                       ),
-                      Container(
-                        padding: EdgeInsets.only(right: YahaSpaceSizes.general),
-                        child: ChallengeBox(
-                          title: 'Complete 10 hikes',
-                          icon: 'assets/images/format_list_bulleted.png',
-                        ),
+                      ChallengeBox(
+                        title: 'Complete 10 hikes',
+                        icon: 'assets/images/format_list_bulleted.png',
                       ),
                     ],
                   ),

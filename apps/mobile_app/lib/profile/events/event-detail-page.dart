@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yaha/utility/buttons/back-button.dart';
+import 'package:yaha/utility/event-box.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-border-width.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
@@ -55,26 +56,11 @@ class _EventDetailPageState extends State<EventDetailPage> {
                         padding: const EdgeInsets.only(
                             top: YahaSpaceSizes.general,
                             bottom: YahaSpaceSizes.general),
-                        child: Container(
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                width: YahaBorderWidth.medium,
-                                color: YahaColors.primary,
-                              ),
-                              borderRadius: BorderRadius.circular(
-                                  YahaBorderRadius.general)),
-                          child: ClipRRect(
-                            borderRadius:
-                                BorderRadius.circular(YahaBorderRadius.general),
-                            child: Image.asset(
-                              'assets/images/EgerCsillaga.jpeg',
-                              fit: BoxFit.cover,
-                              height: YahaBoxSizes.heightSmall,
-                              width: YahaBoxSizes.widthSmall,
-                              semanticLabel:
-                                  "Eger Csillaga Teljesítménytúra logó",
-                            ),
-                          ),
+                        child: EventBox(
+                          background: 'assets/images/eger-csillaga.png',
+                          height: YahaBoxSizes.heightSmall,
+                          width: YahaBoxSizes.widthSmall,
+                          nextScreen: EventDetailPage(),
                         ),
                       ),
                       Column(

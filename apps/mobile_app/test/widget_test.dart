@@ -17,7 +17,8 @@ import 'package:yaha/auth/sign-up-with-email-page.dart';
 import 'package:yaha/auth/signup-popup.dart';
 import 'package:yaha/auth/signup-with-email-popup.dart';
 import 'package:yaha/bottom-nav-bar.dart';
-import 'package:yaha/event-detail-page.dart';
+import 'package:yaha/profile/events/all-events.dart';
+import 'package:yaha/profile/events/event-detail-page.dart';
 import 'package:yaha/explore.dart';
 import 'package:yaha/filter/filter-page.dart';
 import 'package:yaha/gallery.dart';
@@ -31,6 +32,8 @@ import 'package:yaha/previous-activities-page.dart';
 import 'package:yaha/profile/challenges/all-challenges.dart';
 import 'package:yaha/profile/challenges/challenges.dart';
 import 'package:yaha/profile/challenges/my-challenges.dart';
+import 'package:yaha/profile/events/events.dart';
+import 'package:yaha/profile/events/ongoing-events.dart';
 import 'package:yaha/profile/profile-page.dart';
 import 'package:yaha/settings-page.dart';
 import 'package:yaha/settings/application/application-page.dart';
@@ -176,6 +179,21 @@ void main() {
   });
   testWidgets('My Challenges Page smoke test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: new MyChallenges()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Events Page smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetForTesting(child: new Events()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('All Events Page smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetForTesting(child: new AllEvents()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Ongoing Events Page smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetForTesting(child: new OngoingEvents()));
 
     await tester.pumpAndSettle();
   });

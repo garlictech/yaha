@@ -5,6 +5,9 @@ import 'package:yaha/hike/hike-card/hike-card.dart';
 import 'package:yaha/home/explore-hike-box.dart';
 import 'package:yaha/home/show-more-button.dart';
 import 'package:yaha/profile/challenges/challenges.dart';
+import 'package:yaha/profile/events/event-detail-page.dart';
+import 'package:yaha/profile/events/events.dart';
+import 'package:yaha/profile/profile-page.dart';
 import 'package:yaha/profile/statistics.dart';
 import 'package:yaha/utility/challenge-box.dart';
 import 'package:yaha/user/user-state.dart';
@@ -129,7 +132,7 @@ class HomePageGuest extends ConsumerWidget {
                                   hours: 0,
                                 ),
                               ),
-                              ShowMoreButton(),
+                              ShowMoreButton(nextScreen: ProfilePage()),
                             ],
                           ),
                         ),
@@ -225,43 +228,7 @@ class HomePageGuest extends ConsumerWidget {
                                   ],
                                 ),
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Container(
-                                    alignment: Alignment.centerRight,
-                                    child: TextButton(
-                                      onPressed: () {
-                                        Navigator.push(context,
-                                            MaterialPageRoute(builder:
-                                                (BuildContext context) {
-                                          return Challenges();
-                                        }));
-                                      },
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            'Show more',
-                                            style: TextStyle(
-                                                fontSize: YahaFontSizes.small,
-                                                fontWeight: FontWeight.w500,
-                                                color: YahaColors.textColor),
-                                          ),
-                                          Icon(
-                                            Icons.chevron_right,
-                                            size: YahaFontSizes.xxLarge,
-                                            color: YahaColors.textColor,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                              ShowMoreButton(nextScreen: Challenges()),
                             ],
                           ),
                         ),
@@ -291,22 +258,31 @@ class HomePageGuest extends ConsumerWidget {
                                           right: YahaSpaceSizes.general),
                                       child: EventBox(
                                           background:
-                                              'assets/images/Nagy_Eged_iTura.png'),
+                                              'assets/images/nagy-egedi-itura.png',
+                                          height: YahaBoxSizes.heightGeneral,
+                                          width: YahaBoxSizes.widthGeneral,
+                                          nextScreen: EventDetailPage()),
                                     ),
                                     Container(
                                       padding: EdgeInsets.only(
                                           right: YahaSpaceSizes.general),
                                       child: EventBox(
                                           background:
-                                              'assets/images/bukki_batyus_barangolas.png'),
+                                              'assets/images/bukki-batyus-barangolas.png',
+                                          height: YahaBoxSizes.heightGeneral,
+                                          width: YahaBoxSizes.widthGeneral,
+                                          nextScreen: EventDetailPage()),
                                     ),
                                     EventBox(
                                         background:
-                                            'assets/images/Nagy_Eged_iTura.png'),
+                                            'assets/images/nagy-egedi-itura.png',
+                                        height: YahaBoxSizes.heightGeneral,
+                                        width: YahaBoxSizes.widthGeneral,
+                                        nextScreen: EventDetailPage()),
                                   ],
                                 ),
                               ),
-                              ShowMoreButton(),
+                              ShowMoreButton(nextScreen: Events()),
                             ],
                           ),
                         ),

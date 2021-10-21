@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:yaha/utility/challenge-box.dart';
+import 'package:yaha/profile/events/event-detail-page.dart';
+import 'package:yaha/utility/event-box.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
-class MyChallenges extends ConsumerWidget {
+class OngoingEvents extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     return Scaffold(
@@ -21,14 +22,16 @@ class MyChallenges extends ConsumerWidget {
                     crossAxisSpacing: YahaSpaceSizes.general,
                     mainAxisSpacing: YahaSpaceSizes.general,
                     children: [
-                      ChallengeBox(
-                        title: 'Walk 50km',
-                        icon: 'assets/images/hiking_person.png',
-                      ),
-                      ChallengeBox(
-                        title: 'Complete 10 hikes',
-                        icon: 'assets/images/format_list_bulleted.png',
-                      ),
+                      EventBox(
+                          background: 'assets/images/nagy-egedi-itura.png',
+                          nextScreen: EventDetailPage()),
+                      EventBox(
+                          background:
+                              'assets/images/bukki-batyus-barangolas.png',
+                          nextScreen: EventDetailPage()),
+                      EventBox(
+                          background: 'assets/images/eger-csillaga.png',
+                          nextScreen: EventDetailPage()),
                     ],
                   ),
                 );
