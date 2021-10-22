@@ -17,6 +17,7 @@ import 'package:yaha/auth/sign-up-with-email-page.dart';
 import 'package:yaha/auth/signup-popup.dart';
 import 'package:yaha/auth/signup-with-email-popup.dart';
 import 'package:yaha/bottom-nav-bar.dart';
+import 'package:yaha/profile/bookmarked-hikes.dart';
 import 'package:yaha/profile/events/all-events.dart';
 import 'package:yaha/profile/events/event-detail-page.dart';
 import 'package:yaha/explore.dart';
@@ -36,6 +37,7 @@ import 'package:yaha/profile/events/events.dart';
 import 'package:yaha/profile/events/ongoing-events.dart';
 import 'package:yaha/profile/profile-page.dart';
 import 'package:yaha/profile/statistics/statistics-page.dart';
+import 'package:yaha/profile/time-capsules/time-capsules.dart';
 import 'package:yaha/settings-page.dart';
 import 'package:yaha/settings/application/application-page.dart';
 import 'package:yaha/track-page.dart';
@@ -199,7 +201,19 @@ void main() {
     await tester.pumpAndSettle();
   });
   testWidgets('Statistics Page smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new StatisticsPage()));
+    await tester
+        .pumpWidget(createWidgetForTesting(child: new StatisticsPage()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('TimeCapsules Page smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetForTesting(child: new TimeCapsules()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Bookmarked Hikes Page smoke test', (WidgetTester tester) async {
+    await tester
+        .pumpWidget(createWidgetForTesting(child: new BookmarkedHikes()));
 
     await tester.pumpAndSettle();
   });
