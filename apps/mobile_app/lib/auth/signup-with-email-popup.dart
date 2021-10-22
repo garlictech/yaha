@@ -85,15 +85,29 @@ class SignUpWithEmailPopup extends ConsumerWidget {
                           Container(
                               constraints: BoxConstraints(maxWidth: 400),
                               padding: const EdgeInsets.only(
-                                  bottom: YahaSpaceSizes.large),
+                                  bottom: YahaSpaceSizes.small),
                               child: YahaTextFieldPassword(
                                 title: 'Password again',
                                 onChanged: (value) =>
                                     signupStateNotifier.setPasswordAgain(value),
                               )),
                           passwordMismatch
-                              ? Text("Password mismatch")
-                              : Container(),
+                              ? Container(
+                                  alignment: Alignment.centerLeft,
+                                  padding: EdgeInsets.only(
+                                      bottom: YahaSpaceSizes.large),
+                                  child: Text(
+                                    "Password and password again is not matching",
+                                    style: TextStyle(
+                                        color: YahaColors.error,
+                                        fontSize: YahaFontSizes.xSmall,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                )
+                              : Container(
+                                  padding: EdgeInsets.only(
+                                      bottom: YahaSpaceSizes.large),
+                                ),
                           Container(
                             child: SizedBox(
                               width: YahaBoxSizes.buttonWidthBig,
