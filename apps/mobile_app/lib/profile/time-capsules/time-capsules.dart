@@ -16,7 +16,7 @@ class TimeCapsules extends StatelessWidget {
           leading: YahaBackButton(),
           backgroundColor: YahaColors.background,
           title: Text(
-            'Events',
+            'TimeCapsules',
             style: TextStyle(
                 color: YahaColors.textColor,
                 fontSize: YahaFontSizes.medium,
