@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:yaha/auth/auth-state.dart';
+import 'package:yaha/auth/domain/auth-state.dart';
 import 'package:yaha/hike/hike-card/hike-card.dart';
 import 'package:yaha/home/explore-hike-box.dart';
 import 'package:yaha/home/show-more-button.dart';
@@ -42,7 +42,7 @@ class HomePageGuest extends ConsumerWidget {
                           children: [
                             Align(
                               alignment: Alignment.centerLeft,
-                              child: Row (
+                              child: Row(
                                 children: [
                                   Container(
                                       height: 64,

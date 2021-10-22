@@ -18,8 +18,11 @@ export class yahaStack extends Stack {
 
     new CognitoStack(scope, 'cognito', {
       adminSiteUrl: 'https://admin.yaha.com',
-      googleClientId: paramsStack.googleClientId,
-      googleClientSecret: secretsManagerStack.googleClientSecret,
+      //googleClientId: paramsStack.googleClientId,
+      googleClientId:
+        '431626171394-q0aom5l91nvapiq4ni1fbcvsaksl2cqh.apps.googleusercontent.com',
+      //googleClientSecret: secretsManagerStack.googleClientSecret,
+      googleClientSecret: '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',
       facebookClientId: paramsStack.facebookAppId,
       facebookClientSecret: secretsManagerStack.facebookAppSecret,
       appleSigninKey: secretsManagerStack.appleSigninKey,

@@ -15,8 +15,8 @@ import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
-import 'auth-state.dart';
 import 'cognito/auth-methods.dart';
+import 'domain/auth-state.dart';
 
 class LogInPopup extends ConsumerWidget {
   @override
@@ -26,7 +26,7 @@ class LogInPopup extends ConsumerWidget {
         watch(applicationSettingsStateProvider.notifier);
     final authState = watch(authStateProvider);
 
-    return authState.ongoingAuthMethod == AuthMethod.FACEBOOK
+    return authState.ongoingAuthMethod != null
         ? SocialLoginWidget()
         : Scaffold(
             body: CustomScrollView(

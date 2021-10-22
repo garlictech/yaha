@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:yaha/auth/cognito/auth-methods.dart';
+import 'package:yaha/auth/domain/auth-state.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 
-class GoogleButton extends StatelessWidget {
+class GoogleButton extends ConsumerWidget {
   final String title;
 
   const GoogleButton({
@@ -13,7 +16,8 @@ class GoogleButton extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ScopedReader watch) {
+    var authNotifier = watch(authStateProvider.notifier);
     return SizedBox(
       height: YahaBoxSizes.buttonHeight,
       width: YahaBoxSizes.buttonWidthBig,
@@ -39,7 +43,9 @@ class GoogleButton extends StatelessWidget {
             ),
           ],
         ),
-        onPressed: () {},
+        onPressed: () {
+          authNotifier.loginWith(AuthMethod.GOOGLE);
+        },
         style: ElevatedButton.styleFrom(
           primary: YahaColors.google,
           shape: const RoundedRectangleBorder(

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'auth-state.dart';
 
 class LoginErrorWidget extends ConsumerWidget {
   final String error;
@@ -10,8 +9,6 @@ class LoginErrorWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    final authStateNotifier = watch(authStateProvider.notifier);
-
     return Container(
       child: Center(
         child: Column(

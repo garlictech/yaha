@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:yaha/auth/auth-state.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
@@ -8,6 +7,7 @@ import 'package:yaha/utility/yaha-space-sizes.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'cognito/auth-methods.dart';
+import 'domain/auth-state.dart';
 import 'sign-up-with-email-page.dart';
 import 'social-login.widget.dart';
 

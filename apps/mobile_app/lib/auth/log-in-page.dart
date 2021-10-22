@@ -159,7 +159,7 @@ class _LogInPageState extends State<LogInPage> {
                                 Align(
                                   alignment: Alignment.center,
                                   child: Text(
-                                    'XXX Sign up with Facebook',
+                                    'Sign up with Facebook',
                                     style: TextStyle(
                                       fontSize: YahaFontSizes.small,
                                       fontWeight: FontWeight.w600,
