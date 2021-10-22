@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:yaha/event-detail-page.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-border-width.dart';
-import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 
 class EventBox extends StatefulWidget {
   final String background;
+  final double? height;
+  final double? width;
+  final Widget nextScreen;
 
   const EventBox({
     Key? key,
     required this.background,
+    this.height,
+    this.width,
+    required this.nextScreen,
   }) : super(key: key);
 
   @override
@@ -23,11 +27,11 @@ class _EventBoxState extends State<EventBox> {
     return InkWell(
       onTap: () {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => EventDetailPage()));
+            MaterialPageRoute(builder: (context) => widget.nextScreen));
       },
       child: Container(
-        width: YahaBoxSizes.widthGeneral,
-        //height: YahaBoxSizes.heightGeneral,
+        width: widget.width,
+        height: widget.height,
         decoration: BoxDecoration(
           border: Border.all(
             color: YahaColors.primary,

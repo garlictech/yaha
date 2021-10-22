@@ -26,7 +26,7 @@ class _ChallengeBoxState extends State<ChallengeBox> {
   Widget build(BuildContext context) {
     return Container(
       width: YahaBoxSizes.widthGeneral,
-      //height: YahaBoxSizes.heightGeneral,
+      height: YahaBoxSizes.heightGeneral,
       decoration: BoxDecoration(
         border: Border.all(
           color: YahaColors.primary,
@@ -49,7 +49,7 @@ class _ChallengeBoxState extends State<ChallengeBox> {
               style: TextStyle(
                 color: YahaColors.primary,
                 fontSize: YahaFontSizes.xSmall,
-                fontWeight: FontWeight.w400,
+                fontWeight: FontWeight.w500,
               ),
               textAlign: TextAlign.center,
             ),

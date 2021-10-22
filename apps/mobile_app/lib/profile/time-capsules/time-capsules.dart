@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:yaha/profile/challenges/all-challenges.dart';
-import 'package:yaha/profile/challenges/my-challenges.dart';
 import 'package:yaha/utility/buttons/back-button.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
-class Challenges extends StatelessWidget {
-  const Challenges({Key? key}) : super(key: key);
+class TimeCapsules extends StatelessWidget {
+  const TimeCapsules({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +16,7 @@ class Challenges extends StatelessWidget {
           leading: YahaBackButton(),
           backgroundColor: YahaColors.background,
           title: Text(
-            'Challenges',
+            'TimeCapsules',
             style: TextStyle(
                 color: YahaColors.textColor,
                 fontSize: YahaFontSizes.medium,
@@ -29,8 +27,8 @@ class Challenges extends StatelessWidget {
             unselectedLabelColor: YahaColors.textColor,
             indicatorColor: YahaColors.primary,
             tabs: [
-              Tab(text: 'All challenges'),
-              Tab(text: 'My challenges'),
+              Tab(text: 'Found TimeCapsules'),
+              Tab(text: 'My TimeCapsules'),
             ],
           ),
         ),
@@ -39,12 +37,6 @@ class Challenges extends StatelessWidget {
               left: YahaSpaceSizes.medium,
               right: YahaSpaceSizes.medium,
               top: YahaSpaceSizes.large),
-          child: TabBarView(
-            children: [
-              AllChallenges(),
-              MyChallenges(),
-            ],
-          ),
         ),
       ),
     );

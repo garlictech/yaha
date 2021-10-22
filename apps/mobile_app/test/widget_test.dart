@@ -17,7 +17,9 @@ import 'package:yaha/auth/sign-up-with-email-page.dart';
 import 'package:yaha/auth/signup-popup.dart';
 import 'package:yaha/auth/signup-with-email-popup.dart';
 import 'package:yaha/bottom-nav-bar.dart';
-import 'package:yaha/event-detail-page.dart';
+import 'package:yaha/profile/bookmarked-hikes.dart';
+import 'package:yaha/profile/events/all-events.dart';
+import 'package:yaha/profile/events/event-detail-page.dart';
 import 'package:yaha/explore.dart';
 import 'package:yaha/filter/filter-page.dart';
 import 'package:yaha/gallery.dart';
@@ -28,7 +30,14 @@ import 'package:yaha/home/home-page-guest.dart';
 import 'package:yaha/main.dart';
 import 'package:yaha/poi-page.dart';
 import 'package:yaha/previous-activities-page.dart';
+import 'package:yaha/profile/challenges/all-challenges.dart';
+import 'package:yaha/profile/challenges/challenges.dart';
+import 'package:yaha/profile/challenges/my-challenges.dart';
+import 'package:yaha/profile/events/events.dart';
+import 'package:yaha/profile/events/ongoing-events.dart';
 import 'package:yaha/profile/profile-page.dart';
+import 'package:yaha/profile/statistics/statistics-page.dart';
+import 'package:yaha/profile/time-capsules/time-capsules.dart';
 import 'package:yaha/settings-page.dart';
 import 'package:yaha/settings/application/application-page.dart';
 import 'package:yaha/track-page.dart';
@@ -158,6 +167,53 @@ void main() {
       (WidgetTester tester) async {
     await tester
         .pumpWidget(createWidgetForTesting(child: new SignUpWithEmailPopup()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Challenges Page smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetForTesting(child: new Challenges()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('All Challenges Page smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetForTesting(child: new AllChallenges()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('My Challenges Page smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetForTesting(child: new MyChallenges()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Events Page smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetForTesting(child: new Events()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('All Events Page smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetForTesting(child: new AllEvents()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Ongoing Events Page smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetForTesting(child: new OngoingEvents()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Statistics Page smoke test', (WidgetTester tester) async {
+    await tester
+        .pumpWidget(createWidgetForTesting(child: new StatisticsPage()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('TimeCapsules Page smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetForTesting(child: new TimeCapsules()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Bookmarked Hikes Page smoke test', (WidgetTester tester) async {
+    await tester
+        .pumpWidget(createWidgetForTesting(child: new BookmarkedHikes()));
 
     await tester.pumpAndSettle();
   });
