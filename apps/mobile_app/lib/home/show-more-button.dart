@@ -3,6 +3,9 @@ import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 
 class ShowMoreButton extends StatelessWidget {
+  final Widget nextScreen;
+  const ShowMoreButton({Key? key, required this.nextScreen}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -11,7 +14,10 @@ class ShowMoreButton extends StatelessWidget {
         Container(
           alignment: Alignment.centerRight,
           child: TextButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => nextScreen));
+            },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.center,

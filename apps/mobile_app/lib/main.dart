@@ -8,7 +8,7 @@ import 'package:yaha/utility/yaha-colors.dart';
 
 import 'auth/sign-up-page.dart';
 import 'bottom-nav-bar.dart';
-import 'event-detail-page.dart';
+import 'profile/events/event-detail-page.dart';
 
 import 'explore.dart';
 import 'hike-page.dart';

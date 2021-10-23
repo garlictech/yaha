@@ -4,7 +4,11 @@ import 'package:yaha/auth/domain/auth-state.dart';
 import 'package:yaha/hike/hike-card/hike-card.dart';
 import 'package:yaha/home/explore-hike-box.dart';
 import 'package:yaha/home/show-more-button.dart';
+import 'package:yaha/profile/challenges/challenges.dart';
+import 'package:yaha/profile/events/event-detail-page.dart';
+import 'package:yaha/profile/events/events.dart';
 import 'package:yaha/profile/statistics.dart';
+import 'package:yaha/profile/statistics/statistics-page.dart';
 import 'package:yaha/utility/challenge-box.dart';
 import 'package:yaha/user/user-state.dart';
 import 'package:yaha/utility/event-box.dart';
@@ -128,7 +132,9 @@ class HomePageGuest extends ConsumerWidget {
                                   hours: 0,
                                 ),
                               ),
-                              ShowMoreButton(),
+                              ShowMoreButton(
+                                nextScreen: StatisticsPage(),
+                              ),
                             ],
                           ),
                         ),
@@ -206,8 +212,7 @@ class HomePageGuest extends ConsumerWidget {
                                           right: YahaSpaceSizes.general),
                                       child: ChallengeBox(
                                         title: 'Complete a hike at night',
-                                        icon:
-                                            'assets/images/nightlight_black_24dp.png',
+                                        icon: 'assets/images/half_moon.png',
                                       ),
                                     ),
                                     Container(
@@ -215,19 +220,17 @@ class HomePageGuest extends ConsumerWidget {
                                           right: YahaSpaceSizes.general),
                                       child: ChallengeBox(
                                         title: 'Take 10 pictures during a hike',
-                                        icon:
-                                            'assets/images/photo_camera_black_24dp.png',
+                                        icon: 'assets/images/photo_camera.png',
                                       ),
                                     ),
                                     ChallengeBox(
                                       title: 'Complete a hike at night',
-                                      icon:
-                                          'assets/images/nightlight_black_24dp.png',
+                                      icon: 'assets/images/half_moon.png',
                                     ),
                                   ],
                                 ),
                               ),
-                              ShowMoreButton(),
+                              ShowMoreButton(nextScreen: Challenges()),
                             ],
                           ),
                         ),
@@ -257,22 +260,31 @@ class HomePageGuest extends ConsumerWidget {
                                           right: YahaSpaceSizes.general),
                                       child: EventBox(
                                           background:
-                                              'assets/images/Nagy_Eged_iTura.png'),
+                                              'assets/images/nagy-egedi-itura.png',
+                                          height: YahaBoxSizes.heightGeneral,
+                                          width: YahaBoxSizes.widthGeneral,
+                                          nextScreen: EventDetailPage()),
                                     ),
                                     Container(
                                       padding: EdgeInsets.only(
                                           right: YahaSpaceSizes.general),
                                       child: EventBox(
                                           background:
-                                              'assets/images/bukki_batyus_barangolas.png'),
+                                              'assets/images/bukki-batyus-barangolas.png',
+                                          height: YahaBoxSizes.heightGeneral,
+                                          width: YahaBoxSizes.widthGeneral,
+                                          nextScreen: EventDetailPage()),
                                     ),
                                     EventBox(
                                         background:
-                                            'assets/images/Nagy_Eged_iTura.png'),
+                                            'assets/images/nagy-egedi-itura.png',
+                                        height: YahaBoxSizes.heightGeneral,
+                                        width: YahaBoxSizes.widthGeneral,
+                                        nextScreen: EventDetailPage()),
                                   ],
                                 ),
                               ),
-                              ShowMoreButton(),
+                              ShowMoreButton(nextScreen: Events()),
                             ],
                           ),
                         ),
