@@ -1,10 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:yaha/auth/signup-with-email-popup.dart';
-import 'package:yaha/auth/views/apple-button.dart';
-import 'package:yaha/auth/views/facebook-button.dart';
-import 'package:yaha/auth/views/google-button.dart';
 import 'package:yaha/settings/application/app-settings-state.dart';
 import 'package:yaha/utility/buttons/back-button.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
@@ -13,16 +9,22 @@ import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
-import 'cognito/auth-methods.dart';
-import 'login-screen.dart';
-import 'views/social-login-screen.dart';
+import '../presenters/login-screen-presenter.dart';
 
-class SignUpPopup extends ConsumerWidget {
+import 'apple-button.dart';
+import 'facebook-button.dart';
+import 'google-button.dart';
+import 'login-with-email-popup.dart';
+import 'signup-popup.dart';
+
+class LogInScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     var appSettingsState = watch(applicationSettingsStateProvider);
     var appSettingsStateNotifier =
         watch(applicationSettingsStateProvider.notifier);
+
+    final presenter = watch(loginScreenMVPProvider.notifier);
 
     return Scaffold(
       body: CustomScrollView(
@@ -49,7 +51,7 @@ class SignUpPopup extends ConsumerWidget {
                             Align(
                               alignment: Alignment.center,
                               child: Text(
-                                'Sign up',
+                                'Log in',
                                 style: TextStyle(
                                     fontSize: YahaFontSizes.medium,
                                     fontWeight: FontWeight.w600,
@@ -70,7 +72,7 @@ class SignUpPopup extends ConsumerWidget {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            SignUpWithEmailPopup()));
+                                            LogInWithEmailPopup()));
                               },
                               child: Stack(
                                 children: [
@@ -88,7 +90,7 @@ class SignUpPopup extends ConsumerWidget {
                                   Align(
                                     alignment: Alignment.center,
                                     child: Text(
-                                      'Sign up with email',
+                                      'Log in with email',
                                       style: TextStyle(
                                         fontSize: YahaFontSizes.small,
                                         fontWeight: FontWeight.w600,
@@ -112,23 +114,22 @@ class SignUpPopup extends ConsumerWidget {
                                 top: YahaSpaceSizes.medium,
                                 bottom: YahaSpaceSizes.medium),
                             child: FacebookButton(
-                                title: 'Sign up with Facebook',
-                                onPressed: () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => SocialLoginScreen(
-                                            method: AuthMethod.FACEBOOK))))),
+                                title: 'Log in with Facebook',
+                                onPressed: () =>
+                                    presenter.doFacebookLogin(context))),
                         Container(
                             padding: const EdgeInsets.only(
                                 bottom: YahaSpaceSizes.medium),
                             child: GoogleButton(
-                              title: 'Sign up with Google',
+                              title: 'Log in with Google',
+                              onPressed: () => presenter.doGoogleLogin(context),
                             )),
                         Container(
                             padding: const EdgeInsets.only(
                                 bottom: YahaSpaceSizes.large),
                             child: AppleButton(
-                              title: 'Sign up with Apple',
+                              title: 'Log in with Apple',
+                              onPressed: () => presenter.doAppleLogin(context),
                             )),
                         Container(
                           width: YahaBoxSizes.buttonWidthBig,
@@ -197,13 +198,13 @@ class SignUpPopup extends ConsumerWidget {
                                   fontSize: YahaFontSizes.small),
                               children: [
                                 TextSpan(
-                                  text: "Already have an account? ",
+                                  text: "Don't have an account? ",
                                   style: TextStyle(
                                     fontWeight: FontWeight.w400,
                                   ),
                                 ),
                                 TextSpan(
-                                    text: 'Log in',
+                                    text: 'Sign up',
                                     style: TextStyle(
                                       fontWeight: FontWeight.w600,
                                       color: YahaColors.primary,
@@ -214,7 +215,7 @@ class SignUpPopup extends ConsumerWidget {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    LogInScreen()));
+                                                    SignUpPopup()));
                                       }),
                               ],
                             ),

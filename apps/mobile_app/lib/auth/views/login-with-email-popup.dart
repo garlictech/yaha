@@ -1,7 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:yaha/auth/signup-state.dart';
 import 'package:yaha/settings/application/app-settings-state.dart';
 import 'package:yaha/utility/buttons/back-button.dart';
 import 'package:yaha/utility/pop-ups/success-popup.dart';
@@ -13,9 +12,9 @@ import 'package:yaha/utility/yaha-space-sizes.dart';
 import 'package:yaha/utility/yaha-text-input-password.dart';
 import 'package:yaha/utility/yaha-text-input-email.dart';
 
-import 'login-screen.dart';
+import 'signup-popup.dart';
 
-class SignUpWithEmailPopup extends ConsumerWidget {
+class LogInWithEmailPopup extends ConsumerWidget {
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -23,12 +22,6 @@ class SignUpWithEmailPopup extends ConsumerWidget {
     var appSettingsState = watch(applicationSettingsStateProvider);
     var appSettingsStateNotifier =
         watch(applicationSettingsStateProvider.notifier);
-
-    final signupState = watch(signupStateProvider);
-    final signupStateNotifier = watch(signupStateProvider.notifier);
-
-    final bool passwordMismatch =
-        signupState.password != signupState.passwordAgain;
 
     return Scaffold(
       body: CustomScrollView(
@@ -57,7 +50,7 @@ class SignUpWithEmailPopup extends ConsumerWidget {
                               Align(
                                 alignment: Alignment.center,
                                 child: Text(
-                                  'Sign up with email',
+                                  'Log in with email',
                                   style: TextStyle(
                                       fontSize: YahaFontSizes.medium,
                                       fontWeight: FontWeight.w600,
@@ -76,32 +69,19 @@ class SignUpWithEmailPopup extends ConsumerWidget {
                             ),
                           ),
                           Container(
-                              constraints: BoxConstraints(maxWidth: 400),
-                              padding: const EdgeInsets.only(
-                                  bottom: YahaSpaceSizes.general),
-                              child: YahaTextFieldPassword(
-                                  title: 'Password',
-                                  onChanged: (value) =>
-                                      signupStateNotifier.setPassword(value))),
-                          Container(
-                              constraints: BoxConstraints(maxWidth: 400),
-                              padding: const EdgeInsets.only(
-                                  bottom: YahaSpaceSizes.large),
-                              child: YahaTextFieldPassword(
-                                title: 'Password again',
-                                onChanged: (value) =>
-                                    signupStateNotifier.setPasswordAgain(value),
-                              )),
-                          passwordMismatch
-                              ? Text("Password mismatch")
-                              : Container(),
+                            constraints: BoxConstraints(maxWidth: 400),
+                            padding: const EdgeInsets.only(
+                              bottom: YahaSpaceSizes.general,
+                            ),
+                            child: YahaTextFieldPassword(title: 'Password'),
+                          ),
                           Container(
                             child: SizedBox(
                               width: YahaBoxSizes.buttonWidthBig,
                               height: YahaBoxSizes.buttonHeight,
                               child: ElevatedButton(
                                 child: Text(
-                                  'Sign up',
+                                  'Log in',
                                   style: TextStyle(
                                       fontSize: YahaFontSizes.small,
                                       fontWeight: FontWeight.w600),
@@ -114,10 +94,10 @@ class SignUpWithEmailPopup extends ConsumerWidget {
                                       context: context,
                                       builder: (BuildContext context) {
                                         return SuccessPopup(
-                                            title: 'Hurray!',
-                                            content:
-                                                'Welcome to Yaha!\nThanks for choosing us.',
-                                            buttonTitle: 'Go to dashboard');
+                                          title: 'Welcome back!',
+                                          content: 'You are logged in now.',
+                                          buttonTitle: 'Go to dashboard',
+                                        );
                                       });
                                 },
                                 style: ElevatedButton.styleFrom(
@@ -214,13 +194,13 @@ class SignUpWithEmailPopup extends ConsumerWidget {
                                     fontSize: YahaFontSizes.small),
                                 children: [
                                   TextSpan(
-                                    text: "Already have an account? ",
+                                    text: "Don't have an account? ",
                                     style: TextStyle(
                                       fontWeight: FontWeight.w400,
                                     ),
                                   ),
                                   TextSpan(
-                                      text: 'Log in',
+                                      text: 'Sign up',
                                       style: TextStyle(
                                         fontWeight: FontWeight.w600,
                                         color: YahaColors.primary,
@@ -231,7 +211,7 @@ class SignUpWithEmailPopup extends ConsumerWidget {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      LogInScreen()));
+                                                      SignUpPopup()));
                                         }),
                                 ],
                               ),

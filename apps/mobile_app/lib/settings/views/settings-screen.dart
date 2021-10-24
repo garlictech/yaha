@@ -2,18 +2,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yaha/settings/application/application-page.dart';
-import 'package:yaha/settings/viewmodels/settings-screen-viewmodel.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-icon-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
+import '../presenters/settings-screen-presenter.dart';
+
 class SettingsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    final modelView = watch(settingsScreenViewModelProvider);
-    final presenter = watch(settingsScreenViewModelProvider.notifier);
+    final viewModel = watch(settingsScreenMVPProvider);
+    final presenter = watch(settingsScreenMVPProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(
@@ -280,7 +281,7 @@ class SettingsScreen extends ConsumerWidget {
                                     color: YahaColors.divider, thickness: 0.5),
                               ),
                               Visibility(
-                                visible: modelView.loggedIn,
+                                visible: viewModel.loggedIn,
                                 child: Container(
                                   padding: const EdgeInsets.only(
                                       left: YahaSpaceSizes.general,
@@ -291,11 +292,13 @@ class SettingsScreen extends ConsumerWidget {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text('Log out',
-                                          style: TextStyle(
-                                              fontSize: YahaFontSizes.small,
-                                              fontWeight: FontWeight.w400,
-                                              color: YahaColors.error)),
+                                      InkWell(
+                                          onTap: presenter.doLogout,
+                                          child: Text('Log out',
+                                              style: TextStyle(
+                                                  fontSize: YahaFontSizes.small,
+                                                  fontWeight: FontWeight.w400,
+                                                  color: YahaColors.error))),
                                       Icon(
                                         Icons.exit_to_app_rounded,
                                         color: YahaColors.error,
@@ -306,7 +309,7 @@ class SettingsScreen extends ConsumerWidget {
                                 ),
                               ),
                               Visibility(
-                                  visible: !modelView.loggedIn,
+                                  visible: !viewModel.loggedIn,
                                   child: Container(
                                     padding: const EdgeInsets.all(
                                         YahaSpaceSizes.general),

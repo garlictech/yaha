@@ -3,9 +3,11 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/app-config.dart';
-import 'package:yaha/auth/cognito/auth-methods.dart';
-import 'package:yaha/auth/domain/oauth2-entity.dart';
-import 'package:yaha/auth/domain/repositories/oauth2-repository.dart';
+
+import '../entities/oauth2-entity.dart';
+import '../utils/auth-methods.dart';
+
+import 'oauth2-repository.dart';
 
 class CognitoOAuth2Repository extends OAuth2Repository {
   static final _authProviderMap = {

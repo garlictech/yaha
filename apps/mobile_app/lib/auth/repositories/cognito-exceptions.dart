@@ -1,7 +1,7 @@
 import 'package:yaha/core/core.dart';
 import 'package:flutter/services.dart';
 
-class LoginException extends AppException {
+class CognitoException extends AppException {
   static const CODE = 'LOGIN_EXCEPTION';
 
   static const UNKNOWN_ERROR = 'UNKNOWN_ERROR';
@@ -40,25 +40,25 @@ class LoginException extends AppException {
 
   static const INVALID_ANONYMUS_USER = 'INVALID_ANONYMUS_USER';
 
-  LoginException({
+  CognitoException({
     code,
     subCode,
     message,
     details,
   }) : super(code: code, subCode: subCode, message: message, details: details);
 
-  factory LoginException.fromPlatformException(PlatformException pe) {
-    return LoginException(
-      code: LoginException.CODE,
+  factory CognitoException.fromPlatformException(PlatformException pe) {
+    return CognitoException(
+      code: CognitoException.CODE,
       subCode: AppException.peCode(pe),
       message: AppException.peMessage(pe),
       details: AppException.peDetails(pe),
     );
   }
 
-  factory LoginException.fromException(String code, Exception e) {
-    return LoginException(
-        code: LoginException.CODE,
+  factory CognitoException.fromException(String code, Exception e) {
+    return CognitoException(
+        code: CognitoException.CODE,
         subCode: code,
         message: e.toString(),
         details: e.runtimeType);
@@ -66,6 +66,6 @@ class LoginException extends AppException {
 
   @override
   String toString() {
-    return 'LoginException[code=$code, subCode=$subCode, message=$message, details=$details]';
+    return 'CognitoException[code=$code, subCode=$subCode, message=$message, details=$details]';
   }
 }

@@ -6,13 +6,15 @@ import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'cognito/auth-methods.dart';
-import 'domain/auth-state.dart';
+
+import '../states/auth-state.dart';
+import '../utils/auth-methods.dart';
+
 import 'sign-up-with-email-page.dart';
-import 'views/social-login-screen.dart';
+import 'social-login-screen.dart';
 
 @immutable
-class SignUpPage extends ConsumerWidget {
+class SignupScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     final authState = watch(authStateProvider);
@@ -21,13 +23,13 @@ class SignUpPage extends ConsumerWidget {
     if (loginMethod != null) {
       return SocialLoginScreen(method: loginMethod);
     } else {
-      return SignUpPageBase();
+      return SignupScreenBase();
     }
   }
 }
 
 @immutable
-class SignUpPageBase extends ConsumerWidget {
+class SignupScreenBase extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     final authStateNotifier = watch(authStateProvider.notifier);

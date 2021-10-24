@@ -1,6 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yaha/auth/cognito/auth-methods.dart';
+import '../utils/auth-methods.dart';
 
 import 'oauth2-state.dart';
 

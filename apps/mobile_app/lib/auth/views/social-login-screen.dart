@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:yaha/auth/cognito/auth-methods.dart';
+import '../utils/auth-methods.dart';
 import 'oauth2-webview.dart';
 
 @immutable

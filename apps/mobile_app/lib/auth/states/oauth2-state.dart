@@ -2,9 +2,8 @@ import 'package:dartz/dartz.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:yaha/auth/entities/oauth2-entity.dart';
 import 'package:yaha/core/local-storage-handler.dart';
-
-import 'oauth2-entity.dart';
 
 part 'oauth2-state.g.dart';
 
@@ -39,6 +38,10 @@ class OAuth2StateNotifier extends StateNotifier<OAuth2State> {
 
   setTokens(OAuth2Entity? tokens) {
     _updateState(OAuth2State(tokens: tokens));
+  }
+
+  clearTokens() {
+    _updateState(OAuth2State());
   }
 
   Future<void> _readSettingsFromLocalStore() async {
