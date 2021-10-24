@@ -5,7 +5,7 @@ import * as sst from '@serverless-stack/resources';
 const rootAppName = 'yaha';
 
 export class ParamsStack extends sst.Stack {
-  //public googleClientId: string;
+  public googleClientId: string;
   public facebookAppId: string;
   public googleApiKey: string;
   public appleTeamId: string;
@@ -17,7 +17,7 @@ export class ParamsStack extends sst.Stack {
     super(scope, id);
     const app = this.node.root as sst.App;
 
-    /*this.googleClientId = ssm.StringParameter.fromStringParameterAttributes(
+    this.googleClientId = ssm.StringParameter.fromStringParameterAttributes(
       this,
       'googleClientIdParam',
       {
@@ -29,7 +29,7 @@ export class ParamsStack extends sst.Stack {
       value: this.googleClientId,
       exportName: app.logicalPrefixedName('googleClientId'),
     });
-*/
+
     this.facebookAppId = ssm.StringParameter.fromStringParameterAttributes(
       this,
       'facebookAppIdParam',

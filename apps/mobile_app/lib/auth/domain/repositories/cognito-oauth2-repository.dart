@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:amazon_cognito_identity_dart_2/cognito.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -52,7 +50,7 @@ class CognitoOAuth2Repository extends OAuth2Repository {
                 ? right(response.data)
                 : left(response.data))
             .flatMap((response) => catching(() {
-                  final tokenRepository = json.decode(response);
+                  final tokenRepository = response;
                   return [
                     CognitoAccessToken(tokenRepository['access_token'])
                         .getJwtToken(),

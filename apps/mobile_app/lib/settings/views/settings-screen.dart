@@ -1,21 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:yaha/auth/login-popup.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yaha/settings/application/application-page.dart';
+import 'package:yaha/settings/viewmodels/settings-screen-viewmodel.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-icon-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
-class SettingsPage extends StatefulWidget {
+class SettingsScreen extends ConsumerWidget {
   @override
-  _SettingsPageState createState() => _SettingsPageState();
-}
+  Widget build(BuildContext context, ScopedReader watch) {
+    final modelView = watch(settingsScreenViewModelProvider);
+    final presenter = watch(settingsScreenViewModelProvider.notifier);
 
-class _SettingsPageState extends State<SettingsPage> {
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
           backgroundColor: YahaColors.background,
@@ -63,8 +62,8 @@ class _SettingsPageState extends State<SettingsPage> {
                                   fontSize: YahaFontSizes.medium,
                                   fontWeight: FontWeight.w600,
                                   color: YahaColors.textColor)),
-                          decoration: BoxDecoration(
-                              color: YahaColors.accentColor),
+                          decoration:
+                              BoxDecoration(color: YahaColors.accentColor),
                           height: 56.0,
                         ),
                         Container(
@@ -124,7 +123,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                   color: YahaColors.divider, thickness: 0.5),
                               InkWell(
                                 onTap: () {
-                                  Navigator.of(this.context).push(
+                                  Navigator.of(context).push(
                                       new MaterialPageRoute<dynamic>(
                                           builder: (BuildContext context) {
                                     return new ApplicationPage();
@@ -193,8 +192,8 @@ class _SettingsPageState extends State<SettingsPage> {
                                   fontSize: YahaFontSizes.medium,
                                   fontWeight: FontWeight.w600,
                                   color: YahaColors.textColor)),
-                          decoration: BoxDecoration(
-                              color: YahaColors.accentColor),
+                          decoration:
+                              BoxDecoration(color: YahaColors.accentColor),
                           height: 56.0,
                         ),
                         Container(
@@ -281,7 +280,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                     color: YahaColors.divider, thickness: 0.5),
                               ),
                               Visibility(
-                                visible: false,
+                                visible: modelView.loggedIn,
                                 child: Container(
                                   padding: const EdgeInsets.only(
                                       left: YahaSpaceSizes.general,
@@ -306,35 +305,33 @@ class _SettingsPageState extends State<SettingsPage> {
                                   ),
                                 ),
                               ),
-                              Container(
-                                padding: const EdgeInsets.all(
-                                    YahaSpaceSizes.general),
-                                child: SizedBox(
-                                  height: 50,
-                                  width: 400,
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  LogInPopup()));
-                                    },
-                                    child: Text('Log in',
-                                        style: TextStyle(
-                                          fontSize: YahaFontSizes.small,
-                                          fontWeight: FontWeight.w600,
-                                        )),
-                                    style: ElevatedButton.styleFrom(
-                                      primary: YahaColors.primary,
-                                      shape: const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(
-                                                  YahaBorderRadius.general))),
+                              Visibility(
+                                  visible: !modelView.loggedIn,
+                                  child: Container(
+                                    padding: const EdgeInsets.all(
+                                        YahaSpaceSizes.general),
+                                    child: SizedBox(
+                                      height: 50,
+                                      width: 400,
+                                      child: ElevatedButton(
+                                        onPressed: () =>
+                                            presenter.doLogin(context),
+                                        child: Text('Log in',
+                                            style: TextStyle(
+                                              fontSize: YahaFontSizes.small,
+                                              fontWeight: FontWeight.w600,
+                                            )),
+                                        style: ElevatedButton.styleFrom(
+                                          primary: YahaColors.primary,
+                                          shape: const RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(
+                                                      YahaBorderRadius
+                                                          .general))),
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                ),
-                              ),
+                                  ))
                             ],
                           ),
                         ),

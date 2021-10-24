@@ -3,12 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yaha/auth/login-with-email-popup.dart';
 import 'package:yaha/auth/signup-popup.dart';
-import 'package:yaha/auth/social-login.widget.dart';
 import 'package:yaha/settings/application/app-settings-state.dart';
-import 'package:yaha/utility/buttons/apple-button.dart';
 import 'package:yaha/utility/buttons/back-button.dart';
-import 'package:yaha/utility/buttons/facebook-button.dart';
-import 'package:yaha/utility/buttons/google-button.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
@@ -17,8 +13,12 @@ import 'package:yaha/utility/yaha-space-sizes.dart';
 
 import 'cognito/auth-methods.dart';
 import 'domain/auth-state.dart';
+import 'views/apple-button.dart';
+import 'views/facebook-button.dart';
+import 'views/google-button.dart';
+import 'views/social-login-screen.dart';
 
-class LogInPopup extends ConsumerWidget {
+class LogInScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     var appSettingsState = watch(applicationSettingsStateProvider);
@@ -27,7 +27,8 @@ class LogInPopup extends ConsumerWidget {
     final authState = watch(authStateProvider);
 
     return authState.ongoingAuthMethod != null
-        ? SocialLoginWidget()
+        ? SocialLoginScreen(
+            method: authState.ongoingAuthMethod ?? AuthMethod.FACEBOOK)
         : Scaffold(
             body: CustomScrollView(
               physics: BouncingScrollPhysics(),
@@ -117,8 +118,14 @@ class LogInPopup extends ConsumerWidget {
                                       top: YahaSpaceSizes.medium,
                                       bottom: YahaSpaceSizes.medium),
                                   child: FacebookButton(
-                                    title: 'Log in with Facebook',
-                                  )),
+                                      title: 'Log in with Facebook',
+                                      onPressed: () => Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  SocialLoginScreen(
+                                                      method: AuthMethod
+                                                          .FACEBOOK))))),
                               Container(
                                   padding: const EdgeInsets.only(
                                       bottom: YahaSpaceSizes.medium),

@@ -1,7 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:yaha/auth/login-popup.dart';
 import 'package:yaha/auth/signup-state.dart';
 import 'package:yaha/settings/application/app-settings-state.dart';
 import 'package:yaha/utility/buttons/back-button.dart';
@@ -13,6 +12,8 @@ import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 import 'package:yaha/utility/yaha-text-input-password.dart';
 import 'package:yaha/utility/yaha-text-input-email.dart';
+
+import 'login-screen.dart';
 
 class SignUpWithEmailPopup extends ConsumerWidget {
   final _formKey = GlobalKey<FormState>();
@@ -230,7 +231,7 @@ class SignUpWithEmailPopup extends ConsumerWidget {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      LogInPopup()));
+                                                      LogInScreen()));
                                         }),
                                 ],
                               ),

@@ -39,7 +39,7 @@ export class CognitoStack extends Stack {
       this.consumerUserPool,
     );
 
-    /*  const googleIdProvider = new cognito.UserPoolIdentityProviderGoogle(
+    const googleIdProvider = new cognito.UserPoolIdentityProviderGoogle(
       this,
       'Google',
       {
@@ -56,7 +56,7 @@ export class CognitoStack extends Stack {
         scopes: ['profile', 'email', 'openid'],
       },
     );
-*/
+
     const facebookIdProvider = new cognito.UserPoolIdentityProviderFacebook(
       this,
       'Facebook',
@@ -93,10 +93,10 @@ export class CognitoStack extends Stack {
     const { consumerWebClient, consumerNativeClient } =
       this.createConsumerUserPoolClient(app, this.consumerUserPool);
 
-    //consumerWebClient.node.addDependency(googleIdProvider);
+    consumerWebClient.node.addDependency(googleIdProvider);
     consumerWebClient.node.addDependency(facebookIdProvider);
     consumerWebClient.node.addDependency(appleIdProvider);
-    //consumerNativeClient.node.addDependency(googleIdProvider);
+    consumerNativeClient.node.addDependency(googleIdProvider);
     consumerNativeClient.node.addDependency(facebookIdProvider);
     consumerNativeClient.node.addDependency(appleIdProvider);
 

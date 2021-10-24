@@ -1,24 +1,17 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter/material.dart';
-import 'package:yaha/auth/cognito/auth-methods.dart';
-import 'package:yaha/auth/domain/auth-state.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 
-class FacebookButton extends ConsumerWidget {
+class FacebookButton extends StatelessWidget {
+  final Function onPressed;
   final String title;
 
-  const FacebookButton({
-    Key? key,
-    required this.title,
-  }) : super(key: key);
+  FacebookButton({required this.onPressed, required this.title});
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    var authNotifier = watch(authStateProvider.notifier);
-
+  Widget build(BuildContext context) {
     return SizedBox(
       height: YahaBoxSizes.buttonHeight,
       width: YahaBoxSizes.buttonWidthBig,
@@ -47,9 +40,7 @@ class FacebookButton extends ConsumerWidget {
             ),
           ],
         ),
-        onPressed: () {
-          authNotifier.loginWith(AuthMethod.FACEBOOK);
-        },
+        onPressed: () => onPressed.call(),
         style: ElevatedButton.styleFrom(
           primary: YahaColors.facebook,
           shape: const RoundedRectangleBorder(

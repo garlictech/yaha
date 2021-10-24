@@ -1,18 +1,21 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:yaha/auth/login-popup.dart';
 import 'package:yaha/auth/signup-with-email-popup.dart';
+import 'package:yaha/auth/views/apple-button.dart';
+import 'package:yaha/auth/views/facebook-button.dart';
+import 'package:yaha/auth/views/google-button.dart';
 import 'package:yaha/settings/application/app-settings-state.dart';
-import 'package:yaha/utility/buttons/apple-button.dart';
 import 'package:yaha/utility/buttons/back-button.dart';
-import 'package:yaha/utility/buttons/facebook-button.dart';
-import 'package:yaha/utility/buttons/google-button.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
+
+import 'cognito/auth-methods.dart';
+import 'login-screen.dart';
+import 'views/social-login-screen.dart';
 
 class SignUpPopup extends ConsumerWidget {
   @override
@@ -109,8 +112,12 @@ class SignUpPopup extends ConsumerWidget {
                                 top: YahaSpaceSizes.medium,
                                 bottom: YahaSpaceSizes.medium),
                             child: FacebookButton(
-                              title: 'Sign up with Facebook',
-                            )),
+                                title: 'Sign up with Facebook',
+                                onPressed: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => SocialLoginScreen(
+                                            method: AuthMethod.FACEBOOK))))),
                         Container(
                             padding: const EdgeInsets.only(
                                 bottom: YahaSpaceSizes.medium),
@@ -207,7 +214,7 @@ class SignUpPopup extends ConsumerWidget {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    LogInPopup()));
+                                                    LogInScreen()));
                                       }),
                               ],
                             ),

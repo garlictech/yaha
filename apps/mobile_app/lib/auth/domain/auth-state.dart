@@ -2,6 +2,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/auth/cognito/auth-methods.dart';
 
+import 'oauth2-state.dart';
+
 class AuthState {
   final AuthMethod? ongoingAuthMethod;
   final String? error;
@@ -16,7 +18,7 @@ class AuthState {
 }
 
 class AuthStateNotifier extends StateNotifier<AuthState> {
-  AuthStateNotifier() : super(AuthState());
+  AuthStateNotifier(bool loggedIn) : super(AuthState(loggedIn: loggedIn));
 
   loginWith(AuthMethod method) =>
       state = AuthState(ongoingAuthMethod: method, working: true);
@@ -31,5 +33,8 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
   logout() => state = AuthState(loggedIn: false, error: null);
 }
 
-final authStateProvider = StateNotifierProvider<AuthStateNotifier, AuthState>(
-    (_) => AuthStateNotifier());
+final authStateProvider =
+    StateNotifierProvider<AuthStateNotifier, AuthState>((ref) {
+  final oAuth2State = ref.watch(oAuth2StateProvider);
+  return AuthStateNotifier(oAuth2State.loggedIn);
+});

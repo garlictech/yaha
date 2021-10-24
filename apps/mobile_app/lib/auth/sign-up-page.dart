@@ -9,7 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'cognito/auth-methods.dart';
 import 'domain/auth-state.dart';
 import 'sign-up-with-email-page.dart';
-import 'social-login.widget.dart';
+import 'views/social-login-screen.dart';
 
 @immutable
 class SignUpPage extends ConsumerWidget {
@@ -19,7 +19,7 @@ class SignUpPage extends ConsumerWidget {
     final loginMethod = authState.ongoingAuthMethod;
 
     if (loginMethod != null) {
-      return SocialLoginWidget();
+      return SocialLoginScreen(method: loginMethod);
     } else {
       return SignUpPageBase();
     }
