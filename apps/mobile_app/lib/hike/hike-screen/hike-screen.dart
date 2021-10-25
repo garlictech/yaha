@@ -4,6 +4,8 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:yaha/gallery.dart';
 import 'package:yaha/hike/hike-outline/poi.dart';
 import 'package:yaha/hike/hike-outline/settings/poi-filters.dart';
+import 'package:yaha/hike/hike-screen/places-on-route-screen.dart';
+import 'package:yaha/utility/buttons/show-more-button.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-border-width.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
@@ -12,14 +14,14 @@ import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-icon-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
-import 'hike/hike-outline/hike-outline-page.dart';
+import '../hike-outline/hike-outline-page.dart';
 
-class HikePage extends StatefulWidget {
+class HikeScreen extends StatefulWidget {
   @override
-  _HikePageState createState() => _HikePageState();
+  _HikeScreenState createState() => _HikeScreenState();
 }
 
-class _HikePageState extends State<HikePage> {
+class _HikeScreenState extends State<HikeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -479,23 +481,11 @@ class _HikePageState extends State<HikePage> {
                         ),
                       ),
                       Container(
-                        padding:
-                            const EdgeInsets.only(top: YahaSpaceSizes.small),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text('Show more',
-                                style: TextStyle(
-                                    fontSize: YahaFontSizes.small,
-                                    fontWeight: FontWeight.w500,
-                                    color: YahaColors.textColor)),
-                            Icon(
-                              Icons.chevron_right,
-                              size: YahaFontSizes.xxLarge,
-                            ),
-                          ],
-                        ),
-                      ),
+                          padding:
+                              const EdgeInsets.only(top: YahaSpaceSizes.small),
+                          child: ShowMoreButton(
+                            nextScreen: PlacesOnRouteScreen(),
+                          )),
                       Container(
                         height: 340,
                         margin: EdgeInsets.only(top: YahaSpaceSizes.large),

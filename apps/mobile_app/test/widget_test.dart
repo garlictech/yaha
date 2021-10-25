@@ -17,13 +17,14 @@ import 'package:yaha/auth/sign-up-with-email-page.dart';
 import 'package:yaha/auth/signup-popup.dart';
 import 'package:yaha/auth/signup-with-email-popup.dart';
 import 'package:yaha/bottom-nav-bar.dart';
+import 'package:yaha/hike/hike-screen/places-on-route-screen.dart';
 import 'package:yaha/profile/bookmarked-hikes.dart';
 import 'package:yaha/profile/events/all-events.dart';
 import 'package:yaha/profile/events/event-detail-page.dart';
 import 'package:yaha/explore.dart';
 import 'package:yaha/filter/filter-page.dart';
 import 'package:yaha/gallery.dart';
-import 'package:yaha/hike-page.dart';
+import 'package:yaha/hike/hike-screen/hike-screen.dart';
 import 'package:yaha/hike/hike-outline/hike-outline-page.dart';
 import 'package:yaha/home/home-page-guest.dart';
 
@@ -56,7 +57,7 @@ void main() {
   }
 
   testWidgets('Hike Page smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new HikePage()));
+    await tester.pumpWidget(createWidgetForTesting(child: new HikeScreen()));
 
     await tester.pumpAndSettle();
   });
@@ -214,6 +215,13 @@ void main() {
   testWidgets('Bookmarked Hikes Page smoke test', (WidgetTester tester) async {
     await tester
         .pumpWidget(createWidgetForTesting(child: new BookmarkedHikes()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Most Interesting Places on Route Screen smoke test',
+      (WidgetTester tester) async {
+    await tester
+        .pumpWidget(createWidgetForTesting(child: new PlacesOnRouteScreen()));
 
     await tester.pumpAndSettle();
   });

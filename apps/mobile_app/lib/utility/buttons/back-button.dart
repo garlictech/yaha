@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yaha/utility/yaha-colors.dart';
+import 'package:yaha/utility/yaha-icon-sizes.dart';
 
 class YahaBackButton extends StatelessWidget {
   @override
@@ -8,7 +9,7 @@ class YahaBackButton extends StatelessWidget {
       onPressed: () => Navigator.of(context).pop(),
       icon: Icon(
         Icons.arrow_back_ios_rounded,
-        size: 28.0,
+        size: YahaIconSizes.medium,
         color: YahaColors.textColor,
       ),
     );

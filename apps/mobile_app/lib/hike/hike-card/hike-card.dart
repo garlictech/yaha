@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaha/hike-page.dart';
+import 'package:yaha/hike/hike-screen/hike-screen.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
@@ -27,7 +27,7 @@ class HikeCard extends StatelessWidget {
         child: InkWell(
           onTap: () {
             Navigator.push(
-                context, MaterialPageRoute(builder: (context) => HikePage()));
+                context, MaterialPageRoute(builder: (context) => HikeScreen()));
           },
           child: Stack(
             children: [
