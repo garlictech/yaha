@@ -1,20 +1,26 @@
+import 'package:functional_data/functional_data.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../utils/auth-methods.dart';
 
 import 'oauth2-state.dart';
 
-class AuthState {
+part 'auth-state.g.dart';
+
+@FunctionalData()
+class AuthState extends $AuthState {
   final AuthMethod? ongoingAuthMethod;
   final String? error;
   final bool working;
   final bool loggedIn;
+  final bool termsAccepted;
 
   AuthState(
       {this.ongoingAuthMethod,
       this.error,
       this.working = false,
-      this.loggedIn = false});
+      this.loggedIn = false,
+      this.termsAccepted = false});
 }
 
 class AuthStateNotifier extends StateNotifier<AuthState> {
@@ -28,9 +34,11 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
   errorHappened(String error) =>
       state = AuthState(working: false, error: error);
 
-  loggedIn() => state = AuthState(loggedIn: true);
+  loggedIn() => state = AuthState(loggedIn: true, termsAccepted: true);
 
   logout() => state = AuthState(loggedIn: false, error: null);
+
+  setTermsAccepted(bool accepted) => state.copyWith(termsAccepted: accepted);
 }
 
 final authStateProvider =

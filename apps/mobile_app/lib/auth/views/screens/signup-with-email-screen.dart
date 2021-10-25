@@ -1,7 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:yaha/settings/application/app-settings-state.dart';
 import 'package:yaha/utility/buttons/back-button.dart';
 import 'package:yaha/utility/pop-ups/success-popup.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
@@ -12,23 +11,17 @@ import 'package:yaha/utility/yaha-space-sizes.dart';
 import 'package:yaha/utility/yaha-text-input-password.dart';
 import 'package:yaha/utility/yaha-text-input-email.dart';
 
-import '../states/signup-state.dart';
-import 'login-screen.dart';
+import '../../presenters/signup-with-email-screen-presenter.dart';
 
-class SignUpWithEmailPopup extends ConsumerWidget {
+class SignupWithEmailScreen extends ConsumerWidget {
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    final appSettingsState = watch(applicationSettingsStateProvider);
-    final appSettingsStateNotifier =
-        watch(applicationSettingsStateProvider.notifier);
+    final viewModel = watch(signupWithEmailMVPProvider(context));
+    final presenter = watch(signupWithEmailMVPProvider(context).notifier);
 
-    final signupState = watch(signupStateProvider);
-    final signupStateNotifier = watch(signupStateProvider.notifier);
-
-    final bool passwordMismatch =
-        signupState.password != signupState.passwordAgain;
+    final bool passwordMismatch = !viewModel.passwordsMatch;
 
     return Scaffold(
       body: CustomScrollView(
@@ -82,7 +75,7 @@ class SignUpWithEmailPopup extends ConsumerWidget {
                               child: YahaTextFieldPassword(
                                   title: 'Password',
                                   onChanged: (value) =>
-                                      signupStateNotifier.setPassword(value))),
+                                      presenter.setPassword(value))),
                           Container(
                               constraints: BoxConstraints(maxWidth: 400),
                               padding: const EdgeInsets.only(
@@ -90,7 +83,7 @@ class SignUpWithEmailPopup extends ConsumerWidget {
                               child: YahaTextFieldPassword(
                                 title: 'Password again',
                                 onChanged: (value) =>
-                                    signupStateNotifier.setPasswordAgain(value),
+                                    presenter.setPasswordAgain(value),
                               )),
                           passwordMismatch
                               ? Container(
@@ -171,10 +164,9 @@ class SignUpWithEmailPopup extends ConsumerWidget {
                                       borderRadius: BorderRadius.circular(
                                           YahaBorderRadius.checkboxSmall),
                                     ),
-                                    value: appSettingsState.isChecked,
+                                    value: viewModel.termsAccepted,
                                     onChanged: (value) =>
-                                        appSettingsStateNotifier
-                                            .updateCheckboxState(value)),
+                                        presenter.termsAccepted = value),
                                 Expanded(
                                   child: RichText(
                                     text: TextSpan(
@@ -240,13 +232,7 @@ class SignUpWithEmailPopup extends ConsumerWidget {
                                         color: YahaColors.primary,
                                       ),
                                       recognizer: TapGestureRecognizer()
-                                        ..onTap = () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      LogInScreen()));
-                                        }),
+                                        ..onTap = presenter.doLogin),
                                 ],
                               ),
                             ),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
-import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 
 class SocialButton extends StatelessWidget {

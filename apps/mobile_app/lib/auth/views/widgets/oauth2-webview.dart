@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:yaha/app-config.dart';
-import '../repositories/cognito-oauth2-repository.dart';
-import '../states/oauth2-state.dart';
-import '../utils/auth-methods.dart';
+import '../../repositories/cognito-oauth2-repository.dart';
+import '../../states/oauth2-state.dart';
+import '../../utils/auth-methods.dart';
 
 class OAuth2Webview extends ConsumerWidget {
   final AuthMethod _authMethod;

@@ -1,7 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:yaha/settings/application/app-settings-state.dart';
 import 'package:yaha/utility/buttons/back-button.dart';
 import 'package:yaha/utility/pop-ups/success-popup.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
@@ -12,16 +11,15 @@ import 'package:yaha/utility/yaha-space-sizes.dart';
 import 'package:yaha/utility/yaha-text-input-password.dart';
 import 'package:yaha/utility/yaha-text-input-email.dart';
 
-import 'signup-popup.dart';
+import '../../presenters/login-with-email-screen-presenter.dart';
 
-class LogInWithEmailPopup extends ConsumerWidget {
+class LogInWithEmailScreen extends ConsumerWidget {
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    var appSettingsState = watch(applicationSettingsStateProvider);
-    var appSettingsStateNotifier =
-        watch(applicationSettingsStateProvider.notifier);
+    final viewModel = watch(loginWithEmailMVPProvider(context));
+    final presenter = watch(loginWithEmailMVPProvider(context).notifier);
 
     return Scaffold(
       body: CustomScrollView(
@@ -137,10 +135,9 @@ class LogInWithEmailPopup extends ConsumerWidget {
                                       borderRadius: BorderRadius.circular(
                                           YahaBorderRadius.checkboxSmall),
                                     ),
-                                    value: appSettingsState.isChecked,
+                                    value: viewModel.termsAccepted,
                                     onChanged: (value) =>
-                                        appSettingsStateNotifier
-                                            .updateCheckboxState(value)),
+                                        presenter.termsAccepted = value),
                                 Expanded(
                                   child: RichText(
                                     text: TextSpan(
@@ -206,13 +203,7 @@ class LogInWithEmailPopup extends ConsumerWidget {
                                         color: YahaColors.primary,
                                       ),
                                       recognizer: TapGestureRecognizer()
-                                        ..onTap = () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      SignUpPopup()));
-                                        }),
+                                        ..onTap = presenter.doSignup),
                                 ],
                               ),
                             ),

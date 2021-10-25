@@ -4,7 +4,7 @@ import 'package:yaha/profile/profile-page.dart';
 import 'package:yaha/track-page.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'auth/views/signup-screen.dart';
+import 'auth/views/screens/signup-screen.dart';
 import 'profile/events/event-detail-page.dart';
 import 'settings/views/settings-screen.dart';
 

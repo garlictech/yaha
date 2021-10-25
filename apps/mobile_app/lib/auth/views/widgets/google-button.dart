@@ -1,4 +1,4 @@
-import 'package:yaha/auth/views/social-button.dart';
+import 'social-button.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 
 class GoogleButton extends SocialButton {
