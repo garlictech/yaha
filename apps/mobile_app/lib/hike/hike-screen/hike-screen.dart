@@ -4,7 +4,7 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:yaha/gallery.dart';
 import 'package:yaha/hike/hike-outline/poi.dart';
 import 'package:yaha/hike/hike-outline/settings/poi-filters.dart';
-import 'package:yaha/hike/hike-screen/places-on-route-screen.dart';
+import 'package:yaha/hike/hike-screen/most-interesting-place-on-route/places-on-route-screen.dart';
 import 'package:yaha/utility/buttons/show-more-button.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-border-width.dart';
