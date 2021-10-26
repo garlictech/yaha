@@ -1,17 +1,23 @@
+import 'package:webview_flutter/webview_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:yaha/utility/buttons/back-button.dart';
 
-import '../widgets/oauth2-webview.dart';
 import '../../utils/auth-methods.dart';
+import '../../presenters/social-login-screen-presenter.dart';
 
 @immutable
-class SocialLoginScreen extends StatelessWidget {
+class SocialLoginScreen extends ConsumerWidget {
   final AuthMethod method;
 
   SocialLoginScreen({required this.method}) : super();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ScopedReader watch) {
+    final presenter = watch(socialLoginScreenMVPProvider(context).notifier);
+    final viewModel = watch(socialLoginScreenMVPProvider(context));
+
     return Scaffold(
         appBar: AppBar(
           leading: Container(
@@ -27,9 +33,7 @@ class SocialLoginScreen extends StatelessWidget {
                   width: 1,
                 ),
               ),
-              child: BackButton(
-                onPressed: () {},
-              ),
+              child: YahaBackButton(),
             ),
           ),
           elevation: 0.0,
@@ -41,6 +45,17 @@ class SocialLoginScreen extends StatelessWidget {
             ),
           ),
         ),
-        body: Stack(children: [OAuth2Webview(method)]));
+        body: Stack(children: [
+          viewModel.loggedIn
+              ? Text("You have logged in successfully")
+              : WebView(
+                  initialUrl: presenter.getAuthorizeUrl(method),
+                  javascriptMode: JavascriptMode.unrestricted,
+                  userAgent: "random",
+                  navigationDelegate: (NavigationRequest request) =>
+                      presenter.processRequests(method)(request),
+                  gestureNavigationEnabled: true,
+                )
+        ]));
   }
 }
