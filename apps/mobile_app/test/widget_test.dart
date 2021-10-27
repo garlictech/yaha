@@ -9,13 +9,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:yaha/auth/log-in-page.dart';
-import 'package:yaha/auth/login-popup.dart';
-import 'package:yaha/auth/login-with-email-popup.dart';
-import 'package:yaha/auth/sign-up-page.dart';
-import 'package:yaha/auth/sign-up-with-email-page.dart';
-import 'package:yaha/auth/signup-popup.dart';
-import 'package:yaha/auth/signup-with-email-popup.dart';
+import 'package:yaha/auth/views/screens/login-screen.dart';
+import 'package:yaha/auth/views/screens/login-with-email-screen.dart';
+import 'package:yaha/auth/views/screens/signup-screen.dart';
+import 'package:yaha/auth/views/screens/signup-with-email-screen.dart';
 import 'package:yaha/bottom-nav-bar.dart';
 import 'package:yaha/profile/bookmarked-hikes.dart';
 import 'package:yaha/profile/events/all-events.dart';
@@ -38,8 +35,8 @@ import 'package:yaha/profile/events/ongoing-events.dart';
 import 'package:yaha/profile/profile-page.dart';
 import 'package:yaha/profile/statistics/statistics-page.dart';
 import 'package:yaha/profile/time-capsules/time-capsules.dart';
-import 'package:yaha/settings-page.dart';
 import 'package:yaha/settings/application/application-page.dart';
+import 'package:yaha/settings/views/settings-screen.dart';
 import 'package:yaha/track-page.dart';
 
 void main() {
@@ -71,7 +68,8 @@ void main() {
     await tester.pumpAndSettle();
   });
   testWidgets('Settings Page smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new SettingsPage()));
+    await tester
+        .pumpWidget(createWidgetForTesting(child: new SettingsScreen()));
 
     await tester.pumpAndSettle();
   });
@@ -82,19 +80,19 @@ void main() {
     await tester.pumpAndSettle();
   });
   testWidgets('Sign Up Page smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new SignUpPage()));
+    await tester.pumpWidget(createWidgetForTesting(child: new SignupScreen()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Sign Up With Email Page smoke test',
       (WidgetTester tester) async {
     await tester
-        .pumpWidget(createWidgetForTesting(child: new SignUpWithEmailPage()));
+        .pumpWidget(createWidgetForTesting(child: new SignupWithEmailScreen()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Log In Page smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new LogInPage()));
+    await tester.pumpWidget(createWidgetForTesting(child: new LogInScreen()));
 
     await tester.pumpAndSettle();
   });
@@ -148,25 +146,25 @@ void main() {
     await tester.pumpAndSettle();
   });
   testWidgets('Login Popup smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new LogInPopup()));
+    await tester.pumpWidget(createWidgetForTesting(child: new LogInScreen()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Login With Email Popup smoke test', (WidgetTester tester) async {
     await tester
-        .pumpWidget(createWidgetForTesting(child: new LogInWithEmailPopup()));
+        .pumpWidget(createWidgetForTesting(child: new LogInWithEmailScreen()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Sign Up Popup smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new SignUpPopup()));
+    await tester.pumpWidget(createWidgetForTesting(child: new SignupScreen()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Sign Up With Email Popup smoke test',
       (WidgetTester tester) async {
     await tester
-        .pumpWidget(createWidgetForTesting(child: new SignUpWithEmailPopup()));
+        .pumpWidget(createWidgetForTesting(child: new SignupWithEmailScreen()));
 
     await tester.pumpAndSettle();
   });
