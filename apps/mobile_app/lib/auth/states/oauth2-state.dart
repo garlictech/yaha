@@ -12,10 +12,7 @@ class OAuth2State {
   final OAuth2Entity? tokens;
   final bool _loggedIn;
 
-  OAuth2State({this.tokens}) : _loggedIn = tokens != null {
-    print("STATE: $_loggedIn");
-    print("token: ${tokens?.idToken}");
-  }
+  OAuth2State({this.tokens}) : _loggedIn = tokens != null;
 
   get loggedIn => _loggedIn;
 

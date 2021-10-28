@@ -81,17 +81,20 @@ void main() {
   });
   testWidgets('Sign Up Page smoke test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: new SignupScreen()));
-
     await tester.pumpAndSettle();
   });
-  testWidgets('Sign Up With Email Page smoke test',
+  /*testWidgets('Sign Up With Email Page smoke test',
       (WidgetTester tester) async {
+    await tester.pumpWidget(ProviderScope(child: MyApp()));
     await tester
         .pumpWidget(createWidgetForTesting(child: new SignupWithEmailScreen()));
 
     await tester.pumpAndSettle();
   });
+*/
+
   testWidgets('Log In Page smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(ProviderScope(child: MyApp()));
     await tester.pumpWidget(createWidgetForTesting(child: new LogInScreen()));
 
     await tester.pumpAndSettle();
@@ -145,29 +148,35 @@ void main() {
 
     await tester.pumpAndSettle();
   });
-  testWidgets('Login Popup smoke test', (WidgetTester tester) async {
+  testWidgets('Login Screen smoke test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: new LogInScreen()));
 
     await tester.pumpAndSettle();
   });
-  testWidgets('Login With Email Popup smoke test', (WidgetTester tester) async {
+  /*testWidgets('Login With Email Screen smoke test',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(ProviderScope(child: MyApp()));
     await tester
         .pumpWidget(createWidgetForTesting(child: new LogInWithEmailScreen()));
 
     await tester.pumpAndSettle();
-  });
-  testWidgets('Sign Up Popup smoke test', (WidgetTester tester) async {
+  });*/
+  testWidgets('Sign Up Screen smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(ProviderScope(child: MyApp()));
     await tester.pumpWidget(createWidgetForTesting(child: new SignupScreen()));
 
     await tester.pumpAndSettle();
   });
-  testWidgets('Sign Up With Email Popup smoke test',
+  /*testWidgets('Sign Up With Email Screen smoke test',
       (WidgetTester tester) async {
+    await tester.pumpWidget(ProviderScope(child: MyApp()));
+
     await tester
         .pumpWidget(createWidgetForTesting(child: new SignupWithEmailScreen()));
 
     await tester.pumpAndSettle();
   });
+  */
   testWidgets('Challenges Page smoke test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: new Challenges()));
 
