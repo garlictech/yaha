@@ -106,7 +106,7 @@
     "serverless-bundle": "5.0.2",
     "serverless-offline": "8.2.0",
     "ts-jest": "27.0.7",
-    "ts-node": "10.3.1",
+    "ts-node": "10.4.0",
     "typescript": "4.4.4",
     "xmldom": "0.6.0"
   },
