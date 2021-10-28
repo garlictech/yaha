@@ -334,10 +334,12 @@ class _HikeScreenState extends State<HikeScreen> {
                         ),
                       ),
                       Container(
+                        width: MediaQuery.of(context).size.width,
                         child: Wrap(
                           direction: Axis.horizontal,
                           spacing: YahaSpaceSizes.medium,
                           runSpacing: YahaSpaceSizes.xSmall,
+                          alignment: WrapAlignment.start,
                           children: [
                             PoiFilters(
                               backgroundColor: YahaColors.generic,

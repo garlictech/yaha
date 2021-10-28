@@ -39,6 +39,7 @@ import 'package:yaha/profile/events/ongoing-events.dart';
 import 'package:yaha/profile/profile-page.dart';
 import 'package:yaha/profile/statistics/statistics-page.dart';
 import 'package:yaha/profile/time-capsules/time-capsules.dart';
+import 'package:yaha/profile/views/screens/event-prize-screen.dart';
 import 'package:yaha/settings-page.dart';
 import 'package:yaha/settings/application/application-page.dart';
 import 'package:yaha/track-page.dart';
@@ -212,7 +213,8 @@ void main() {
 
     await tester.pumpAndSettle();
   });
-  testWidgets('Bookmarked Hikes Screen smoke test', (WidgetTester tester) async {
+  testWidgets('Bookmarked Hikes Screen smoke test',
+      (WidgetTester tester) async {
     await tester
         .pumpWidget(createWidgetForTesting(child: new BookmarkedHikes()));
 
@@ -222,6 +224,12 @@ void main() {
       (WidgetTester tester) async {
     await tester
         .pumpWidget(createWidgetForTesting(child: new PlacesOnRouteScreen()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Event Prize Screen smoke test', (WidgetTester tester) async {
+    await tester
+        .pumpWidget(createWidgetForTesting(child: new EventPrizeScreen()));
 
     await tester.pumpAndSettle();
   });
