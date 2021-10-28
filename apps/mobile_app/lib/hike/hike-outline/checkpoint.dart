@@ -49,36 +49,41 @@ class Checkpoint extends StatelessWidget {
         color: checkpointModel.boxBackgorundColor.withOpacity(0.2),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Poi(
-              backgroundColor: checkpointModel.backgroundColor,
-              icon: checkpointModel.icon,
-              iconSize: checkpointModel.iconSize,
-              padding: checkpointModel.padding,
-            ),
-            Container(
-              padding: EdgeInsets.only(
-                left: YahaSpaceSizes.general,
-                right: YahaSpaceSizes.general,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    padding: EdgeInsets.only(bottom: YahaSpaceSizes.xSmall),
-                    constraints: BoxConstraints(maxWidth: 180.0),
-                    child: Text(
-                      checkpointModel.title,
-                      style: TextStyle(
-                        fontSize: YahaFontSizes.medium,
-                        fontWeight: FontWeight.w600,
-                        color: YahaColors.textColor,
-                      ),
-                    ),
+            Row(
+              children: [
+                Poi(
+                  backgroundColor: checkpointModel.backgroundColor,
+                  icon: checkpointModel.icon,
+                  iconSize: checkpointModel.iconSize,
+                  padding: checkpointModel.padding,
+                ),
+                Container(
+                  padding: EdgeInsets.only(
+                    left: YahaSpaceSizes.general,
+                    right: YahaSpaceSizes.general,
                   ),
-                  CheckpointPoiListPreview(),
-                ],
-              ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        padding: EdgeInsets.only(bottom: YahaSpaceSizes.xSmall),
+                        constraints: BoxConstraints(maxWidth: 180.0),
+                        child: Text(
+                          checkpointModel.title,
+                          style: TextStyle(
+                            fontSize: YahaFontSizes.medium,
+                            fontWeight: FontWeight.w600,
+                            color: YahaColors.textColor,
+                          ),
+                        ),
+                      ),
+                      CheckpointPoiListPreview(),
+                    ],
+                  ),
+                ),
+              ],
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yaha/profile/views/screens/event-prize-screen.dart';
 import 'package:yaha/utility/buttons/back-button.dart';
 import 'package:yaha/utility/event-box.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
@@ -157,80 +158,121 @@ class _EventDetailPageState extends State<EventDetailPage> {
                       ),
                       Row(
                         children: [
-                          Container(
-                            padding: const EdgeInsets.only(
-                                left: YahaSpaceSizes.general,
-                                right: YahaSpaceSizes.general),
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          EventPrizeScreen()));
+                            },
                             child: Container(
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                    width: YahaBorderWidth.small,
-                                    color: YahaColors.primary,
-                                  ),
+                              height: YahaBoxSizes.heightXXXSmall,
+                              padding: const EdgeInsets.only(
+                                  left: YahaSpaceSizes.general,
+                                  right: YahaSpaceSizes.general),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                      width: YahaBorderWidth.small,
+                                      color: YahaColors.primary,
+                                    ),
+                                    borderRadius: BorderRadius.circular(
+                                        YahaBorderRadius.xSmall)),
+                                child: ClipRRect(
                                   borderRadius: BorderRadius.circular(
-                                      YahaBorderRadius.xSmall)),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(
-                                    YahaBorderRadius.xSmall),
-                                child: Image.asset(
-                                    'assets/images/lynx-brooch.png',
-                                    fit: BoxFit.cover),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.only(
-                                right: YahaSpaceSizes.general),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                    width: YahaBorderWidth.small,
-                                    color: YahaColors.primary,
-                                  ),
-                                  borderRadius: BorderRadius.circular(
-                                      YahaBorderRadius.xSmall)),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(
-                                    YahaBorderRadius.xSmall),
-                                child: Image.asset(
-                                    'assets/images/deer-brooch.png',
-                                    fit: BoxFit.cover),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.only(
-                                right: YahaSpaceSizes.general),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                    width: YahaBorderWidth.small,
-                                    color: YahaColors.primary,
-                                  ),
-                                  borderRadius: BorderRadius.circular(
-                                      YahaBorderRadius.xSmall)),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(
-                                    YahaBorderRadius.xSmall),
-                                child: Image.asset(
-                                    'assets/images/flower-brooch.png',
-                                    fit: BoxFit.cover),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                                border: Border.all(
-                                  width: YahaBorderWidth.small,
-                                  color: YahaColors.primary,
+                                      YahaBorderRadius.xSmall),
+                                  child: Image.asset(
+                                      'assets/images/lynx-brooch.png',
+                                      fit: BoxFit.cover),
                                 ),
+                              ),
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          EventPrizeScreen()));
+                            },
+                            child: Container(
+                              height: YahaBoxSizes.heightXXXSmall,
+                              padding: const EdgeInsets.only(
+                                  right: YahaSpaceSizes.general),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                      width: YahaBorderWidth.small,
+                                      color: YahaColors.primary,
+                                    ),
+                                    borderRadius: BorderRadius.circular(
+                                        YahaBorderRadius.xSmall)),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(
+                                      YahaBorderRadius.xSmall),
+                                  child: Image.asset(
+                                      'assets/images/deer-brooch.png',
+                                      fit: BoxFit.cover),
+                                ),
+                              ),
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          EventPrizeScreen()));
+                            },
+                            child: Container(
+                              height: YahaBoxSizes.heightXXXSmall,
+                              padding: const EdgeInsets.only(
+                                  right: YahaSpaceSizes.general),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                      width: YahaBorderWidth.small,
+                                      color: YahaColors.primary,
+                                    ),
+                                    borderRadius: BorderRadius.circular(
+                                        YahaBorderRadius.xSmall)),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(
+                                      YahaBorderRadius.xSmall),
+                                  child: Image.asset(
+                                      'assets/images/flower-brooch.png',
+                                      fit: BoxFit.cover),
+                                ),
+                              ),
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          EventPrizeScreen()));
+                            },
+                            child: Container(
+                              height: YahaBoxSizes.heightXXXSmall,
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                    width: YahaBorderWidth.small,
+                                    color: YahaColors.primary,
+                                  ),
+                                  borderRadius: BorderRadius.circular(
+                                      YahaBorderRadius.xSmall)),
+                              child: ClipRRect(
                                 borderRadius: BorderRadius.circular(
-                                    YahaBorderRadius.xSmall)),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(
-                                  YahaBorderRadius.xSmall),
-                              child: Image.asset('assets/images/paw-brooch.png',
-                                  fit: BoxFit.cover),
+                                    YahaBorderRadius.xSmall),
+                                child: Image.asset(
+                                    'assets/images/adventurers-paw.png',
+                                    fit: BoxFit.cover),
+                              ),
                             ),
                           ),
                         ],

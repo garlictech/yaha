@@ -12,13 +12,14 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yaha/auth/views/screens/login-screen.dart';
 import 'package:yaha/auth/views/screens/signup-screen.dart';
 import 'package:yaha/bottom-nav-bar.dart';
+import 'package:yaha/hike/hike-screen/most-interesting-place-on-route/places-on-route-screen.dart';
 import 'package:yaha/profile/bookmarked-hikes.dart';
 import 'package:yaha/profile/events/all-events.dart';
 import 'package:yaha/profile/events/event-detail-page.dart';
 import 'package:yaha/explore.dart';
 import 'package:yaha/filter/filter-page.dart';
 import 'package:yaha/gallery.dart';
-import 'package:yaha/hike-page.dart';
+import 'package:yaha/hike/hike-screen/hike-screen.dart';
 import 'package:yaha/hike/hike-outline/hike-outline-page.dart';
 import 'package:yaha/home/home-page-guest.dart';
 
@@ -33,6 +34,7 @@ import 'package:yaha/profile/events/ongoing-events.dart';
 import 'package:yaha/profile/profile-page.dart';
 import 'package:yaha/profile/statistics/statistics-page.dart';
 import 'package:yaha/profile/time-capsules/time-capsules.dart';
+import 'package:yaha/profile/views/screens/event-prize-screen.dart';
 import 'package:yaha/settings/application/application-page.dart';
 import 'package:yaha/settings/views/settings-screen.dart';
 import 'package:yaha/track-page.dart';
@@ -50,17 +52,17 @@ void main() {
     ));
   }
 
-  testWidgets('Hike Page smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new HikePage()));
+  testWidgets('Hike Screen smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetForTesting(child: new HikeScreen()));
 
     await tester.pumpAndSettle();
   });
-  testWidgets('Poi Page smoke test', (WidgetTester tester) async {
+  testWidgets('Poi Screen smoke test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: new PoiPage()));
 
     await tester.pumpAndSettle();
   });
-  testWidgets('Profile Page smoke test', (WidgetTester tester) async {
+  testWidgets('Profile Screen smoke test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: new ProfilePage()));
 
     await tester.pumpAndSettle();
@@ -71,7 +73,7 @@ void main() {
 
     await tester.pumpAndSettle();
   });
-  testWidgets('Application Page smoke test', (WidgetTester tester) async {
+  testWidgets('Application Screen smoke test', (WidgetTester tester) async {
     await tester
         .pumpWidget(createWidgetForTesting(child: new ApplicationPage()));
 
@@ -81,7 +83,7 @@ void main() {
     await tester.pumpWidget(createWidgetForTesting(child: new SignupScreen()));
     await tester.pumpAndSettle();
   });
-  /*testWidgets('Sign Up With Email Page smoke test',
+  /*testWidgets('Sign Up With Email Screen smoke test',
       (WidgetTester tester) async {
     await tester.pumpWidget(ProviderScope(child: MyApp()));
     await tester
@@ -94,21 +96,20 @@ void main() {
   testWidgets('Log In Page smoke test', (WidgetTester tester) async {
     await tester.pumpWidget(ProviderScope(child: MyApp()));
     await tester.pumpWidget(createWidgetForTesting(child: new LogInScreen()));
-
     await tester.pumpAndSettle();
   });
-  testWidgets('Event Detail Page smoke test', (WidgetTester tester) async {
+  testWidgets('Event Detail Screen smoke test', (WidgetTester tester) async {
     await tester
         .pumpWidget(createWidgetForTesting(child: new EventDetailPage()));
 
     await tester.pumpAndSettle();
   });
-  testWidgets('Track Page smoke test', (WidgetTester tester) async {
+  testWidgets('Track Screen smoke test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: new TrackPage()));
 
     await tester.pumpAndSettle();
   });
-  testWidgets('Gallery smoke test', (WidgetTester tester) async {
+  testWidgets('Gallery widget smoke test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: new Gallery()));
 
     await tester.pumpAndSettle();
@@ -118,29 +119,29 @@ void main() {
 
     await tester.pumpAndSettle();
   });
-  testWidgets('Guest Home Page smoke test', (WidgetTester tester) async {
+  testWidgets('Guest Home Screen smoke test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: new HomePageGuest()));
 
     await tester.pumpAndSettle();
   });
-  testWidgets('Filter Page smoke test', (WidgetTester tester) async {
+  testWidgets('Filter Screen smoke test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: new FilterPage()));
 
     await tester.pumpAndSettle();
   });
-  testWidgets('Explore Page smoke test', (WidgetTester tester) async {
+  testWidgets('Explore Screen smoke test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: new ExplorePage()));
 
     await tester.pumpAndSettle();
   });
-  testWidgets('Previous Activities Page smoke test',
+  testWidgets('Previous Activities Screen smoke test',
       (WidgetTester tester) async {
     await tester.pumpWidget(
         createWidgetForTesting(child: new PreviousActivitiesPage()));
 
     await tester.pumpAndSettle();
   });
-  testWidgets('Hike Outline Page smoke test', (WidgetTester tester) async {
+  testWidgets('Hike Outline Screen smoke test', (WidgetTester tester) async {
     await tester
         .pumpWidget(createWidgetForTesting(child: new HikeOutlinePage()));
 
@@ -175,50 +176,64 @@ void main() {
     await tester.pumpAndSettle();
   });
   */
-  testWidgets('Challenges Page smoke test', (WidgetTester tester) async {
+  testWidgets('Challenges Screen smoke test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: new Challenges()));
 
     await tester.pumpAndSettle();
   });
-  testWidgets('All Challenges Page smoke test', (WidgetTester tester) async {
+  testWidgets('All Challenges Screen smoke test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: new AllChallenges()));
 
     await tester.pumpAndSettle();
   });
-  testWidgets('My Challenges Page smoke test', (WidgetTester tester) async {
+  testWidgets('My Challenges Screen smoke test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: new MyChallenges()));
 
     await tester.pumpAndSettle();
   });
-  testWidgets('Events Page smoke test', (WidgetTester tester) async {
+  testWidgets('Events Screen smoke test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: new Events()));
 
     await tester.pumpAndSettle();
   });
-  testWidgets('All Events Page smoke test', (WidgetTester tester) async {
+  testWidgets('All Events Screen smoke test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: new AllEvents()));
 
     await tester.pumpAndSettle();
   });
-  testWidgets('Ongoing Events Page smoke test', (WidgetTester tester) async {
+  testWidgets('Ongoing Events Screen smoke test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: new OngoingEvents()));
 
     await tester.pumpAndSettle();
   });
-  testWidgets('Statistics Page smoke test', (WidgetTester tester) async {
+  testWidgets('Statistics Screen smoke test', (WidgetTester tester) async {
     await tester
         .pumpWidget(createWidgetForTesting(child: new StatisticsPage()));
 
     await tester.pumpAndSettle();
   });
-  testWidgets('TimeCapsules Page smoke test', (WidgetTester tester) async {
+  testWidgets('TimeCapsules Screen smoke test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: new TimeCapsules()));
 
     await tester.pumpAndSettle();
   });
-  testWidgets('Bookmarked Hikes Page smoke test', (WidgetTester tester) async {
+  testWidgets('Bookmarked Hikes Screen smoke test',
+      (WidgetTester tester) async {
     await tester
         .pumpWidget(createWidgetForTesting(child: new BookmarkedHikes()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Most Interesting Places on Route Screen smoke test',
+      (WidgetTester tester) async {
+    await tester
+        .pumpWidget(createWidgetForTesting(child: new PlacesOnRouteScreen()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Event Prize Screen smoke test', (WidgetTester tester) async {
+    await tester
+        .pumpWidget(createWidgetForTesting(child: new EventPrizeScreen()));
 
     await tester.pumpAndSettle();
   });
