@@ -10,7 +10,7 @@ import 'settings/views/settings-screen.dart';
 
 import 'bottom-nav-bar.dart';
 import 'explore.dart';
-import 'hike-page.dart';
+import 'hike/hike-screen/hike-screen.dart';
 
 void main() {
   runApp(ProviderScope(child: MyApp()));
@@ -31,7 +31,7 @@ class MyApp extends ConsumerWidget {
       home: BottomNavBar(),
       initialRoute: '/',
       routes: {
-        '/hike': (context) => HikePage(),
+        '/hike': (context) => HikeScreen(),
         '/profile': (context) => ProfilePage(),
         '/event': (context) => EventDetailPage(),
         '/poi': (context) => PoiPage(),
