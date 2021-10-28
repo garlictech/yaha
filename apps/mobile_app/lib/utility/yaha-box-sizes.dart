@@ -1,5 +1,6 @@
 class YahaBoxSizes {
   //HEIGHT - general
+  static const heightXXXSmall = 50.0;
   static const heightXXSmall = 65.0;
   static const heigthXSmall = 85.0;
   static const heightSmall = 120.0;
@@ -7,6 +8,7 @@ class YahaBoxSizes {
   static const heightMedium = 220.0;
 
   //WIDTH - general
+  static const widthXXXSmall = 50.0;
   static const widthXXSmall = 65.0;
   static const widthXSmall = 85.0;
   static const widthSmall = 120.0;

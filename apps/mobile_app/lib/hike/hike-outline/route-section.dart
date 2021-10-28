@@ -41,67 +41,72 @@ class RouteSection extends StatelessWidget {
         color: YahaColors.accentColor,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
-              padding: EdgeInsets.only(right: YahaSpaceSizes.medium),
-              child: Icon(
-                Icons.hiking_rounded,
-                size: YahaIconSizes.large,
-                color: YahaColors.textColor,
-              ),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
+            Row(
               children: [
                 Container(
-                  padding: EdgeInsets.only(bottom: YahaSpaceSizes.xxSmall),
-                  child: Row(
-                    children: [
-                      Text(
-                        routeSectionModel.routeLength,
-                        style: TextStyle(
-                          fontSize: YahaFontSizes.small,
-                          fontWeight: FontWeight.w600,
-                          color: YahaColors.textColor,
-                        ),
-                      ),
-                      Text(
-                        routeSectionModel.routeLengthMetrics,
-                        style: TextStyle(
-                          fontSize: YahaFontSizes.small,
-                          fontWeight: FontWeight.w400,
-                          color: YahaColors.textColor,
-                        ),
-                      ),
-                    ],
+                  padding: EdgeInsets.only(right: YahaSpaceSizes.medium),
+                  child: Icon(
+                    Icons.hiking_rounded,
+                    size: YahaIconSizes.large,
+                    color: YahaColors.textColor,
                   ),
                 ),
-                Row(
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      routeSectionModel.routeLengthInTime,
-                      style: TextStyle(
-                        fontSize: YahaFontSizes.small,
-                        fontWeight: FontWeight.w600,
-                        color: YahaColors.textColor,
+                    Container(
+                      padding: EdgeInsets.only(bottom: YahaSpaceSizes.xxSmall),
+                      child: Row(
+                        children: [
+                          Text(
+                            routeSectionModel.routeLength,
+                            style: TextStyle(
+                              fontSize: YahaFontSizes.small,
+                              fontWeight: FontWeight.w600,
+                              color: YahaColors.textColor,
+                            ),
+                          ),
+                          Text(
+                            routeSectionModel.routeLengthMetrics,
+                            style: TextStyle(
+                              fontSize: YahaFontSizes.small,
+                              fontWeight: FontWeight.w400,
+                              color: YahaColors.textColor,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    Text(
-                      routeSectionModel.routeLengthInTimeMetrics,
-                      style: TextStyle(
-                        fontSize: YahaFontSizes.small,
-                        fontWeight: FontWeight.w400,
-                        color: YahaColors.textColor,
-                      ),
+                    Row(
+                      children: [
+                        Text(
+                          routeSectionModel.routeLengthInTime,
+                          style: TextStyle(
+                            fontSize: YahaFontSizes.small,
+                            fontWeight: FontWeight.w600,
+                            color: YahaColors.textColor,
+                          ),
+                        ),
+                        Text(
+                          routeSectionModel.routeLengthInTimeMetrics,
+                          style: TextStyle(
+                            fontSize: YahaFontSizes.small,
+                            fontWeight: FontWeight.w400,
+                            color: YahaColors.textColor,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
+                Container(
+                  padding: EdgeInsets.only(left: YahaSpaceSizes.medium),
+                  child: RouteSectionPoiListPreview(),
+                ),
               ],
-            ),
-            Container(
-              padding: EdgeInsets.only(left: YahaSpaceSizes.medium),
-              child: RouteSectionPoiListPreview(),
             ),
             IconButton(
               onPressed: () {},

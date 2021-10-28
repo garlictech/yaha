@@ -11,7 +11,7 @@ import 'bottom-nav-bar.dart';
 import 'profile/events/event-detail-page.dart';
 
 import 'explore.dart';
-import 'hike-page.dart';
+import 'hike/hike-screen/hike-screen.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 void main() {
@@ -34,7 +34,7 @@ class MyApp extends ConsumerWidget {
       home: BottomNavBar(),
       initialRoute: '/',
       routes: {
-        '/hike': (context) => HikePage(),
+        '/hike': (context) => HikeScreen(),
         '/profile': (context) => ProfilePage(),
         '/event': (context) => EventDetailPage(),
         '/poi': (context) => PoiPage(),
