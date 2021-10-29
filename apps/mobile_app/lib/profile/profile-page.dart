@@ -5,7 +5,7 @@ import 'package:yaha/profile/events/events.dart';
 import 'package:yaha/profile/statistics.dart';
 import 'package:yaha/profile/statistics/statistics-page.dart';
 import 'package:yaha/profile/time-capsules/time-capsules.dart';
-import 'package:yaha/settings-page.dart';
+import 'package:yaha/settings/views/settings-screen.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-border-width.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
@@ -91,7 +91,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 Navigator.of(this.context).push(
                                     new MaterialPageRoute<dynamic>(
                                         builder: (BuildContext context) {
-                                  return new SettingsPage();
+                                  return new SettingsScreen();
                                 }));
                               },
                               child: Container(

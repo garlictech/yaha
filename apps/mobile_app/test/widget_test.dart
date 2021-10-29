@@ -9,13 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:yaha/auth/log-in-page.dart';
-import 'package:yaha/auth/login-popup.dart';
-import 'package:yaha/auth/login-with-email-popup.dart';
-import 'package:yaha/auth/sign-up-page.dart';
-import 'package:yaha/auth/sign-up-with-email-page.dart';
-import 'package:yaha/auth/signup-popup.dart';
-import 'package:yaha/auth/signup-with-email-popup.dart';
+import 'package:yaha/auth/views/screens/login-screen.dart';
+import 'package:yaha/auth/views/screens/signup-screen.dart';
 import 'package:yaha/bottom-nav-bar.dart';
 import 'package:yaha/hike/hike-screen/most-interesting-place-on-route/places-on-route-screen.dart';
 import 'package:yaha/profile/bookmarked-hikes.dart';
@@ -40,8 +35,8 @@ import 'package:yaha/profile/profile-page.dart';
 import 'package:yaha/profile/statistics/statistics-page.dart';
 import 'package:yaha/profile/time-capsules/time-capsules.dart';
 import 'package:yaha/profile/views/screens/event-prize-screen.dart';
-import 'package:yaha/settings-page.dart';
 import 'package:yaha/settings/application/application-page.dart';
+import 'package:yaha/settings/views/settings-screen.dart';
 import 'package:yaha/track-page.dart';
 
 void main() {
@@ -72,8 +67,9 @@ void main() {
 
     await tester.pumpAndSettle();
   });
-  testWidgets('Settings Screen smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new SettingsPage()));
+  testWidgets('Settings Page smoke test', (WidgetTester tester) async {
+    await tester
+        .pumpWidget(createWidgetForTesting(child: new SettingsScreen()));
 
     await tester.pumpAndSettle();
   });
@@ -83,21 +79,23 @@ void main() {
 
     await tester.pumpAndSettle();
   });
-  testWidgets('Sign Up Screen smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new SignUpPage()));
-
+  testWidgets('Sign Up Page smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetForTesting(child: new SignupScreen()));
     await tester.pumpAndSettle();
   });
-  testWidgets('Sign Up With Email Screen smoke test',
+  /*testWidgets('Sign Up With Email Screen smoke test',
       (WidgetTester tester) async {
+    await tester.pumpWidget(ProviderScope(child: MyApp()));
     await tester
-        .pumpWidget(createWidgetForTesting(child: new SignUpWithEmailPage()));
+        .pumpWidget(createWidgetForTesting(child: new SignupWithEmailScreen()));
 
     await tester.pumpAndSettle();
   });
-  testWidgets('Log In Screen smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new LogInPage()));
+*/
 
+  testWidgets('Log In Page smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(ProviderScope(child: MyApp()));
+    await tester.pumpWidget(createWidgetForTesting(child: new LogInScreen()));
     await tester.pumpAndSettle();
   });
   testWidgets('Event Detail Screen smoke test', (WidgetTester tester) async {
@@ -149,29 +147,35 @@ void main() {
 
     await tester.pumpAndSettle();
   });
-  testWidgets('Login Popup smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new LogInPopup()));
+  testWidgets('Login Screen smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetForTesting(child: new LogInScreen()));
 
     await tester.pumpAndSettle();
   });
-  testWidgets('Login With Email Popup smoke test', (WidgetTester tester) async {
-    await tester
-        .pumpWidget(createWidgetForTesting(child: new LogInWithEmailPopup()));
-
-    await tester.pumpAndSettle();
-  });
-  testWidgets('Sign Up Popup smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new SignUpPopup()));
-
-    await tester.pumpAndSettle();
-  });
-  testWidgets('Sign Up With Email Popup smoke test',
+  /*testWidgets('Login With Email Screen smoke test',
       (WidgetTester tester) async {
+    await tester.pumpWidget(ProviderScope(child: MyApp()));
     await tester
-        .pumpWidget(createWidgetForTesting(child: new SignUpWithEmailPopup()));
+        .pumpWidget(createWidgetForTesting(child: new LogInWithEmailScreen()));
+
+    await tester.pumpAndSettle();
+  });*/
+  testWidgets('Sign Up Screen smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(ProviderScope(child: MyApp()));
+    await tester.pumpWidget(createWidgetForTesting(child: new SignupScreen()));
 
     await tester.pumpAndSettle();
   });
+  /*testWidgets('Sign Up With Email Screen smoke test',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(ProviderScope(child: MyApp()));
+
+    await tester
+        .pumpWidget(createWidgetForTesting(child: new SignupWithEmailScreen()));
+
+    await tester.pumpAndSettle();
+  });
+  */
   testWidgets('Challenges Screen smoke test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: new Challenges()));
 

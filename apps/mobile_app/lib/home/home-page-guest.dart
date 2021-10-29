@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:yaha/auth/auth-state.dart';
+import 'package:yaha/auth/states/auth-state.dart';
 import 'package:yaha/hike/hike-card/hike-card.dart';
 import 'package:yaha/home/explore-hike-box.dart';
 import 'package:yaha/utility/buttons/show-more-button.dart';
