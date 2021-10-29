@@ -22,7 +22,6 @@ abstract class $ApplicationSettingsState {
   bool get finishTimePickerVisibility;
   String get currentLanguageTitle;
   String get averageHikingSpeed;
-  bool get isChecked;
 
   ApplicationSettingsState copyWith({
     bool? isEnglish,
@@ -38,7 +37,6 @@ abstract class $ApplicationSettingsState {
     bool? finishTimePickerVisibility,
     String? currentLanguageTitle,
     String? averageHikingSpeed,
-    bool? isChecked,
   }) =>
       ApplicationSettingsState(
         isEnglish: isEnglish ?? this.isEnglish,
@@ -58,7 +56,6 @@ abstract class $ApplicationSettingsState {
             finishTimePickerVisibility ?? this.finishTimePickerVisibility,
         currentLanguageTitle: currentLanguageTitle ?? this.currentLanguageTitle,
         averageHikingSpeed: averageHikingSpeed ?? this.averageHikingSpeed,
-        isChecked: isChecked ?? this.isChecked,
       );
 
   ApplicationSettingsState copyUsing(
@@ -77,7 +74,6 @@ abstract class $ApplicationSettingsState {
       this.finishTimePickerVisibility,
       this.currentLanguageTitle,
       this.averageHikingSpeed,
-      this.isChecked,
     );
     mutator(change);
     return ApplicationSettingsState(
@@ -94,13 +90,12 @@ abstract class $ApplicationSettingsState {
       finishTimePickerVisibility: change.finishTimePickerVisibility,
       currentLanguageTitle: change.currentLanguageTitle,
       averageHikingSpeed: change.averageHikingSpeed,
-      isChecked: change.isChecked,
     );
   }
 
   @override
   String toString() =>
-      "ApplicationSettingsState(isEnglish: $isEnglish, isKm: $isKm, isCelsius: $isCelsius, isTimeFormat24: $isTimeFormat24, distanceInitialIndex: $distanceInitialIndex, temperatureInitialIndex: $temperatureInitialIndex, timeFormatInitialIndex: $timeFormatInitialIndex, startTime: $startTime, finishTime: $finishTime, startTimePickerVisibility: $startTimePickerVisibility, finishTimePickerVisibility: $finishTimePickerVisibility, currentLanguageTitle: $currentLanguageTitle, averageHikingSpeed: $averageHikingSpeed, isChecked: $isChecked)";
+      "ApplicationSettingsState(isEnglish: $isEnglish, isKm: $isKm, isCelsius: $isCelsius, isTimeFormat24: $isTimeFormat24, distanceInitialIndex: $distanceInitialIndex, temperatureInitialIndex: $temperatureInitialIndex, timeFormatInitialIndex: $timeFormatInitialIndex, startTime: $startTime, finishTime: $finishTime, startTimePickerVisibility: $startTimePickerVisibility, finishTimePickerVisibility: $finishTimePickerVisibility, currentLanguageTitle: $currentLanguageTitle, averageHikingSpeed: $averageHikingSpeed)";
 
   @override
   // ignore: avoid_equals_and_hash_code_on_mutable_classes
@@ -119,8 +114,7 @@ abstract class $ApplicationSettingsState {
       startTimePickerVisibility == other.startTimePickerVisibility &&
       finishTimePickerVisibility == other.finishTimePickerVisibility &&
       currentLanguageTitle == other.currentLanguageTitle &&
-      averageHikingSpeed == other.averageHikingSpeed &&
-      isChecked == other.isChecked;
+      averageHikingSpeed == other.averageHikingSpeed;
 
   @override
   // ignore: avoid_equals_and_hash_code_on_mutable_classes
@@ -139,7 +133,6 @@ abstract class $ApplicationSettingsState {
     result = 37 * result + finishTimePickerVisibility.hashCode;
     result = 37 * result + currentLanguageTitle.hashCode;
     result = 37 * result + averageHikingSpeed.hashCode;
-    result = 37 * result + isChecked.hashCode;
     return result;
   }
 }
@@ -159,7 +152,6 @@ class ApplicationSettingsState$Change {
     this.finishTimePickerVisibility,
     this.currentLanguageTitle,
     this.averageHikingSpeed,
-    this.isChecked,
   );
 
   bool isEnglish;
@@ -175,7 +167,6 @@ class ApplicationSettingsState$Change {
   bool finishTimePickerVisibility;
   String currentLanguageTitle;
   String averageHikingSpeed;
-  bool isChecked;
 }
 
 // ignore: avoid_classes_with_only_static_members
@@ -271,12 +262,6 @@ class ApplicationSettingsState$ {
         averageHikingSpeedContainer.copyWith(
             averageHikingSpeed: averageHikingSpeed),
   );
-
-  static final isChecked = Lens<ApplicationSettingsState, bool>(
-    (isCheckedContainer) => isCheckedContainer.isChecked,
-    (isCheckedContainer, isChecked) =>
-        isCheckedContainer.copyWith(isChecked: isChecked),
-  );
 }
 
 // **************************************************************************
@@ -299,7 +284,6 @@ ApplicationSettingsState _$ApplicationSettingsStateFromJson(
     startTimePickerVisibility: json['startTimePickerVisibility'] as bool,
     finishTimePickerVisibility: json['finishTimePickerVisibility'] as bool,
     currentLanguageTitle: json['currentLanguageTitle'] as String,
-    isChecked: json['isChecked'] as bool,
   );
 }
 
@@ -319,5 +303,4 @@ Map<String, dynamic> _$ApplicationSettingsStateToJson(
       'finishTimePickerVisibility': instance.finishTimePickerVisibility,
       'currentLanguageTitle': instance.currentLanguageTitle,
       'averageHikingSpeed': instance.averageHikingSpeed,
-      'isChecked': instance.isChecked,
     };
