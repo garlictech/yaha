@@ -315,8 +315,8 @@ class SettingsScreen extends ConsumerWidget {
                                     padding: const EdgeInsets.all(
                                         YahaSpaceSizes.general),
                                     child: SizedBox(
-                                      height: 50,
-                                      width: 400,
+                                      height: YahaBoxSizes.buttonHeight,
+                                      width: YahaBoxSizes.buttonWidthBig,
                                       child: ElevatedButton(
                                         onPressed: () =>
                                             presenter.doLogin(context),
