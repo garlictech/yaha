@@ -51,9 +51,10 @@ dependencies:
   flutter_riverpod: ^0.14.0+3
   dio: ^4.0.0
   equatable: ^2.0.3
-  amplify_flutter: ^0.2.6
-  amplify_datastore: ^0.2.6
-  amplify_auth_cognito: ^0.2.6
+  flutter_verification_code: ^1.1.0
+  #amplify_flutter: ^0.2.6
+  #amplify_datastore: ^0.2.6
+  #amplify_auth_cognito: ^0.2.6
 
 flutter_icons:
   android: true

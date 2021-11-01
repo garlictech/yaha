@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yaha/settings/application/application-page.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
+import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-icon-sizes.dart';
@@ -314,8 +315,8 @@ class SettingsScreen extends ConsumerWidget {
                                     padding: const EdgeInsets.all(
                                         YahaSpaceSizes.general),
                                     child: SizedBox(
-                                      height: 50,
-                                      width: 400,
+                                      height: YahaBoxSizes.buttonHeight,
+                                      width: YahaBoxSizes.buttonWidthBig,
                                       child: ElevatedButton(
                                         onPressed: () =>
                                             presenter.doLogin(context),
