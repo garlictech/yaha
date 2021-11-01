@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:yaha/profile/events/event-detail-page.dart';
-import 'package:yaha/utility/event-box.dart';
+import 'package:yaha/profile/events/views/screens/event-detail-screen.dart';
+import 'package:yaha/profile/events/views/widgets/event-box.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
 class AllEvents extends ConsumerWidget {
@@ -24,23 +24,23 @@ class AllEvents extends ConsumerWidget {
                     children: [
                       EventBox(
                           background: 'assets/images/nagy-egedi-itura.png',
-                          nextScreen: EventDetailPage()),
+                          nextScreen: EventDetailScreen()),
                       EventBox(
                           background:
                               'assets/images/bukki-batyus-barangolas.png',
-                          nextScreen: EventDetailPage()),
+                          nextScreen: EventDetailScreen()),
                       EventBox(
                           background: 'assets/images/nagy-egedi-tura-kupa.png',
-                          nextScreen: EventDetailPage()),
+                          nextScreen: EventDetailScreen()),
                       EventBox(
                           background: 'assets/images/bukk-instant-kupa.png',
-                          nextScreen: EventDetailPage()),
+                          nextScreen: EventDetailScreen()),
                       EventBox(
                           background: 'assets/images/bukki-kihivas.png',
-                          nextScreen: EventDetailPage()),
+                          nextScreen: EventDetailScreen()),
                       EventBox(
                           background: 'assets/images/eger-csillaga.png',
-                          nextScreen: EventDetailPage()),
+                          nextScreen: EventDetailScreen()),
                     ],
                   ),
                 );

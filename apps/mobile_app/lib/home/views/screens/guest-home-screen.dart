@@ -2,16 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yaha/auth/states/auth-state.dart';
 import 'package:yaha/hike/hike-card/hike-card.dart';
-import 'package:yaha/home/explore-hike-box.dart';
+import 'package:yaha/home/views/widgets/explore-hike-box.dart';
+import 'package:yaha/home/views/screens/best-hikes-near-you-screen.dart';
+import 'package:yaha/home/views/screens/best-hikes-of-the-world-screen.dart';
+import 'package:yaha/profile/challenges/views/screens/challenge-detail-screen.dart';
+import 'package:yaha/profile/challenges/views/screens/challenges.dart';
+import 'package:yaha/profile/events/views/screens/events.dart';
 import 'package:yaha/utility/buttons/show-more-button.dart';
-import 'package:yaha/profile/challenges/challenges.dart';
-import 'package:yaha/profile/events/event-detail-page.dart';
-import 'package:yaha/profile/events/events.dart';
+import 'package:yaha/profile/events/views/screens/event-detail-screen.dart';
 import 'package:yaha/profile/statistics.dart';
 import 'package:yaha/profile/statistics/statistics-page.dart';
-import 'package:yaha/utility/challenge-box.dart';
+import 'package:yaha/profile/challenges/views/widgets/challenge-box.dart';
 import 'package:yaha/user/user-state.dart';
-import 'package:yaha/utility/event-box.dart';
+import 'package:yaha/profile/events/views/widgets/event-box.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
@@ -213,6 +216,7 @@ class HomePageGuest extends ConsumerWidget {
                                       child: ChallengeBox(
                                         title: 'Complete a hike at night',
                                         icon: 'assets/images/half_moon.png',
+                                        nextScreen: ChallengeDetailScreen(),
                                       ),
                                     ),
                                     Container(
@@ -221,11 +225,13 @@ class HomePageGuest extends ConsumerWidget {
                                       child: ChallengeBox(
                                         title: 'Take 10 pictures during a hike',
                                         icon: 'assets/images/photo_camera.png',
+                                        nextScreen: ChallengeDetailScreen(),
                                       ),
                                     ),
                                     ChallengeBox(
                                       title: 'Complete a hike at night',
                                       icon: 'assets/images/half_moon.png',
+                                      nextScreen: ChallengeDetailScreen(),
                                     ),
                                   ],
                                 ),
@@ -263,7 +269,7 @@ class HomePageGuest extends ConsumerWidget {
                                               'assets/images/nagy-egedi-itura.png',
                                           height: YahaBoxSizes.heightGeneral,
                                           width: YahaBoxSizes.widthGeneral,
-                                          nextScreen: EventDetailPage()),
+                                          nextScreen: EventDetailScreen()),
                                     ),
                                     Container(
                                       padding: EdgeInsets.only(
@@ -273,14 +279,14 @@ class HomePageGuest extends ConsumerWidget {
                                               'assets/images/bukki-batyus-barangolas.png',
                                           height: YahaBoxSizes.heightGeneral,
                                           width: YahaBoxSizes.widthGeneral,
-                                          nextScreen: EventDetailPage()),
+                                          nextScreen: EventDetailScreen()),
                                     ),
                                     EventBox(
                                         background:
                                             'assets/images/nagy-egedi-itura.png',
                                         height: YahaBoxSizes.heightGeneral,
                                         width: YahaBoxSizes.widthGeneral,
-                                        nextScreen: EventDetailPage()),
+                                        nextScreen: EventDetailScreen()),
                                   ],
                                 ),
                               ),
@@ -336,11 +342,12 @@ class HomePageGuest extends ConsumerWidget {
                                   ],
                                 ),
                               ),
+                              ShowMoreButton(nextScreen: BestHikesNearYou())
                             ],
                           ),
                         ),
                         Container(
-                          padding: EdgeInsets.only(top: YahaSpaceSizes.large),
+                          padding: EdgeInsets.only(top: YahaSpaceSizes.small),
                           child: Column(
                             children: [
                               Container(
@@ -386,6 +393,7 @@ class HomePageGuest extends ConsumerWidget {
                                   ],
                                 ),
                               ),
+                              ShowMoreButton(nextScreen: BestHikesOfTheWorld())
                             ],
                           ),
                         ),

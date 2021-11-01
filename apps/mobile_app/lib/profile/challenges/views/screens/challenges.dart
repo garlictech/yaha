@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:yaha/profile/events/all-events.dart';
-import 'package:yaha/profile/events/ongoing-events.dart';
+import 'package:yaha/profile/challenges/views/screens/all-challenges.dart';
+import 'package:yaha/profile/challenges/views/screens/my-challenges.dart';
 import 'package:yaha/utility/buttons/back-button.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
-class Events extends StatelessWidget {
-  const Events({Key? key}) : super(key: key);
+class Challenges extends StatelessWidget {
+  const Challenges({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class Events extends StatelessWidget {
           leading: YahaBackButton(),
           backgroundColor: YahaColors.background,
           title: Text(
-            'Events',
+            'Challenges',
             style: TextStyle(
                 color: YahaColors.textColor,
                 fontSize: YahaFontSizes.medium,
@@ -29,8 +29,8 @@ class Events extends StatelessWidget {
             unselectedLabelColor: YahaColors.textColor,
             indicatorColor: YahaColors.primary,
             tabs: [
-              Tab(text: 'All events'),
-              Tab(text: 'Ongoig events'),
+              Tab(text: 'All challenges'),
+              Tab(text: 'My challenges'),
             ],
           ),
         ),
@@ -41,8 +41,8 @@ class Events extends StatelessWidget {
               top: YahaSpaceSizes.large),
           child: TabBarView(
             children: [
-              AllEvents(),
-              OngoingEvents(),
+              AllChallenges(),
+              MyChallenges(),
             ],
           ),
         ),

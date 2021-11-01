@@ -5,7 +5,7 @@ import 'package:yaha/track-page.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'auth/views/screens/signup-screen.dart';
-import 'profile/events/event-detail-page.dart';
+import 'profile/events/views/screens/event-detail-screen.dart';
 import 'settings/views/settings-screen.dart';
 
 import 'bottom-nav-bar.dart';
@@ -33,7 +33,7 @@ class MyApp extends ConsumerWidget {
       routes: {
         '/hike': (context) => HikeScreen(),
         '/profile': (context) => ProfilePage(),
-        '/event': (context) => EventDetailPage(),
+        '/event': (context) => EventDetailScreen(),
         '/poi': (context) => PoiPage(),
         '/settings': (context) => SettingsScreen(),
         '/signup': (context) => SignupScreen(),
