@@ -60,8 +60,9 @@ class SignupConfirmationScreen extends ConsumerWidget {
                             ),
                           ),
                         ),
+                        //VerificationCode(onCompleted: onCompleted, onEditing: onEditing),
                         VerificationCode(
-                            onCompleted: onCompleted, onEditing: onEditing),
+                            onCompleted: (_value) {}, onEditing: (_value) {}),
                         Container(
                           padding: const EdgeInsets.only(
                               top: YahaSpaceSizes.xxLarge),
