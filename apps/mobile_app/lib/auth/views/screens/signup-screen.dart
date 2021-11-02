@@ -6,6 +6,7 @@ import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
+import 'package:yaha/utility/yaha-icon-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
 import '../../presenters/signup-screen-presenter.dart';
@@ -64,13 +65,13 @@ class SignupScreen extends ConsumerWidget {
                               child: Stack(
                                 children: [
                                   Container(
-                                    padding: const EdgeInsets.only(left: 4.0),
+                                    padding: const EdgeInsets.only(left: 3.0),
                                     child: Align(
                                       alignment: Alignment.centerLeft,
                                       child: Icon(
                                         Icons.mail_outline_rounded,
                                         color: YahaColors.accentColor,
-                                        size: YahaFontSizes.xLarge,
+                                        size: YahaIconSizes.large,
                                       ),
                                     ),
                                   ),

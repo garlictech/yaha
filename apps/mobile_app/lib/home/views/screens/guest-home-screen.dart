@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yaha/auth/states/auth-state.dart';
+import 'package:yaha/explore.dart';
 import 'package:yaha/hike/hike-card/hike-card.dart';
 import 'package:yaha/home/views/widgets/explore-hike-box.dart';
 import 'package:yaha/home/views/screens/best-hikes-near-you-screen.dart';
@@ -161,6 +162,7 @@ class HomePageGuest extends ConsumerWidget {
                                 topTitle:
                                     "You don’t have any activities yet. Once you complete a hike, you will see it here.",
                                 bottomTitle: "Isn’t it time you got outside?",
+                                onPressed: ExplorePage(),
                               ),
                             ],
                           ),
@@ -185,6 +187,7 @@ class HomePageGuest extends ConsumerWidget {
                                 topTitle:
                                     "You haven’t started any hikes yet. If you pause a hike you can continue it here.",
                                 bottomTitle: "Isn’t it time you got outside?",
+                                onPressed: ExplorePage(),
                               ),
                             ],
                           ),

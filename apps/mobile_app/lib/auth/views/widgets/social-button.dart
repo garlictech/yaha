@@ -8,12 +8,16 @@ class SocialButton extends StatelessWidget {
   final String title;
   final String iconPath;
   final Color buttonColor;
+  final double iconSize;
+  final double leftPadding;
 
   SocialButton(
       {required this.onPressed,
       required this.title,
       required this.iconPath,
-      required this.buttonColor});
+      required this.buttonColor,
+      required this.iconSize,
+      required this.leftPadding});
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +30,10 @@ class SocialButton extends StatelessWidget {
             Align(
               alignment: Alignment.centerLeft,
               child: Container(
-                padding: const EdgeInsets.only(left: 5.0),
+                padding: EdgeInsets.only(left: leftPadding),
                 child: Image.asset(
                   iconPath,
-                  height: 28.0,
+                  height: iconSize,
                 ),
               ),
             ),
