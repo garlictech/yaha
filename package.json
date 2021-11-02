@@ -43,7 +43,7 @@
     "aws-sdk": "2.1019.0",
     "fp-ts": "2.11.5",
     "gpx-builder": "3.8.0",
-    "graphql": "16.0.0",
+    "graphql": "16.0.1",
     "graphql-subscriptions": "1.2.1",
     "graphql-tag": "2.12.5",
     "graphql-tools": "8.2.0",
