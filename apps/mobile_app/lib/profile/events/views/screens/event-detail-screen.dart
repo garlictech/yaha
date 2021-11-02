@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:yaha/profile/views/screens/event-prize-screen.dart';
+import 'package:yaha/profile/events/views/screens/event-prize-screen.dart';
 import 'package:yaha/utility/buttons/back-button.dart';
-import 'package:yaha/utility/event-box.dart';
+import 'package:yaha/profile/events/views/widgets/event-box.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-border-width.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
@@ -9,12 +9,12 @@ import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
-class EventDetailPage extends StatefulWidget {
+class EventDetailScreen extends StatefulWidget {
   @override
-  _EventDetailPageState createState() => _EventDetailPageState();
+  _EventDetailScreenState createState() => _EventDetailScreenState();
 }
 
-class _EventDetailPageState extends State<EventDetailPage> {
+class _EventDetailScreenState extends State<EventDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,10 +46,6 @@ class _EventDetailPageState extends State<EventDetailPage> {
                                       fontWeight: FontWeight.w600,
                                       color: YahaColors.textColor)),
                             ),
-                            //Container(
-                            //width: 32.0,
-                            //height: 0.0,
-                            //),
                           ],
                         ),
                       ),
@@ -61,7 +57,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
                           background: 'assets/images/eger-csillaga.png',
                           height: YahaBoxSizes.heightSmall,
                           width: YahaBoxSizes.widthSmall,
-                          nextScreen: EventDetailPage(),
+                          nextScreen: EventDetailScreen(),
                         ),
                       ),
                       Column(
@@ -145,7 +141,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
                         alignment: Alignment.centerLeft,
                         child: Container(
                           padding: const EdgeInsets.only(
-                              bottom: YahaSpaceSizes.general,
+                              bottom: YahaSpaceSizes.small,
                               left: YahaSpaceSizes.general),
                           child: Text(
                             'Prizes',

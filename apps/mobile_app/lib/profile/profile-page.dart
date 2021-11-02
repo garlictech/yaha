@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yaha/profile/bookmarked-hikes.dart';
-import 'package:yaha/profile/challenges/challenges.dart';
-import 'package:yaha/profile/events/events.dart';
+import 'package:yaha/profile/challenges/views/screens/challenges.dart';
+import 'package:yaha/profile/events/views/screens/events.dart';
 import 'package:yaha/profile/statistics.dart';
 import 'package:yaha/profile/statistics/statistics-page.dart';
 import 'package:yaha/profile/time-capsules/time-capsules.dart';

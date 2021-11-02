@@ -13,28 +13,31 @@ import 'package:yaha/auth/views/screens/login-screen.dart';
 import 'package:yaha/auth/views/screens/signup-screen.dart';
 import 'package:yaha/bottom-nav-bar.dart';
 import 'package:yaha/hike/hike-screen/most-interesting-place-on-route/places-on-route-screen.dart';
+import 'package:yaha/home/views/screens/best-hikes-near-you-screen.dart';
+import 'package:yaha/home/views/screens/best-hikes-of-the-world-screen.dart';
 import 'package:yaha/profile/bookmarked-hikes.dart';
-import 'package:yaha/profile/events/all-events.dart';
-import 'package:yaha/profile/events/event-detail-page.dart';
+import 'package:yaha/profile/challenges/views/screens/all-challenges.dart';
+import 'package:yaha/profile/challenges/views/screens/challenge-detail-screen.dart';
+import 'package:yaha/profile/challenges/views/screens/challenges.dart';
+import 'package:yaha/profile/challenges/views/screens/my-challenges.dart';
+import 'package:yaha/profile/events/views/screens/all-events.dart';
+import 'package:yaha/profile/events/views/screens/event-detail-screen.dart';
 import 'package:yaha/explore.dart';
 import 'package:yaha/filter/filter-page.dart';
 import 'package:yaha/gallery.dart';
 import 'package:yaha/hike/hike-screen/hike-screen.dart';
 import 'package:yaha/hike/hike-outline/hike-outline-page.dart';
-import 'package:yaha/home/home-page-guest.dart';
+import 'package:yaha/home/views/screens/guest-home-screen.dart';
 
 import 'package:yaha/main.dart';
 import 'package:yaha/poi-page.dart';
 import 'package:yaha/previous-activities-page.dart';
-import 'package:yaha/profile/challenges/all-challenges.dart';
-import 'package:yaha/profile/challenges/challenges.dart';
-import 'package:yaha/profile/challenges/my-challenges.dart';
-import 'package:yaha/profile/events/events.dart';
-import 'package:yaha/profile/events/ongoing-events.dart';
+import 'package:yaha/profile/events/views/screens/event-prize-screen.dart';
+import 'package:yaha/profile/events/views/screens/events.dart';
+import 'package:yaha/profile/events/views/screens/ongoing-events.dart';
 import 'package:yaha/profile/profile-page.dart';
 import 'package:yaha/profile/statistics/statistics-page.dart';
 import 'package:yaha/profile/time-capsules/time-capsules.dart';
-import 'package:yaha/profile/views/screens/event-prize-screen.dart';
 import 'package:yaha/settings/application/application-page.dart';
 import 'package:yaha/settings/views/settings-screen.dart';
 import 'package:yaha/track-page.dart';
@@ -100,7 +103,7 @@ void main() {
   });
   testWidgets('Event Detail Screen smoke test', (WidgetTester tester) async {
     await tester
-        .pumpWidget(createWidgetForTesting(child: new EventDetailPage()));
+        .pumpWidget(createWidgetForTesting(child: new EventDetailScreen()));
 
     await tester.pumpAndSettle();
   });
@@ -234,6 +237,27 @@ void main() {
   testWidgets('Event Prize Screen smoke test', (WidgetTester tester) async {
     await tester
         .pumpWidget(createWidgetForTesting(child: new EventPrizeScreen()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Challenge Detail Screen smoke test',
+      (WidgetTester tester) async {
+    await tester
+        .pumpWidget(createWidgetForTesting(child: new ChallengeDetailScreen()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Best Hike Near You Screen smoke test',
+      (WidgetTester tester) async {
+    await tester
+        .pumpWidget(createWidgetForTesting(child: new BestHikesNearYou()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Best Hike of The World Screen smoke test',
+      (WidgetTester tester) async {
+    await tester
+        .pumpWidget(createWidgetForTesting(child: new BestHikesOfTheWorld()));
 
     await tester.pumpAndSettle();
   });
