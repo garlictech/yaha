@@ -5,6 +5,7 @@ import 'package:yaha/gallery.dart';
 import 'package:yaha/hike/hike-outline/poi.dart';
 import 'package:yaha/hike/hike-outline/settings/poi-filters.dart';
 import 'package:yaha/hike/hike-screen/most-interesting-place-on-route/places-on-route-screen.dart';
+import 'package:yaha/hike/views/screens/weather-screen.dart';
 import 'package:yaha/utility/buttons/show-more-button.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-border-width.dart';
@@ -515,7 +516,7 @@ class _HikeScreenState extends State<HikeScreen> {
                         ),
                       ),
                       Container(
-                        height: 145,
+                        height: 120,
                         child: GridView.count(
                           primary: false,
                           padding:
@@ -528,7 +529,7 @@ class _HikeScreenState extends State<HikeScreen> {
                                   const EdgeInsets.all(YahaSpaceSizes.medium),
                               child: Column(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     'Wed',
@@ -538,10 +539,23 @@ class _HikeScreenState extends State<HikeScreen> {
                                   Icon(Icons.wb_sunny,
                                       size: YahaFontSizes.xLarge,
                                       color: Colors.yellow),
-                                  Text(
-                                    '19 | 12',
-                                    style: TextStyle(
-                                        fontSize: YahaFontSizes.small),
+                                  RichText(
+                                    text: TextSpan(
+                                      style: TextStyle(
+                                          color: YahaColors.textColor,
+                                          fontSize: YahaFontSizes.small),
+                                      children: [
+                                        TextSpan(
+                                          text: '19 ',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                        TextSpan(
+                                          text: '| 12',
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ],
                               ),
@@ -562,7 +576,7 @@ class _HikeScreenState extends State<HikeScreen> {
                                   const EdgeInsets.all(YahaSpaceSizes.medium),
                               child: Column(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     'Wed',
@@ -572,10 +586,23 @@ class _HikeScreenState extends State<HikeScreen> {
                                   Icon(Icons.cloud,
                                       size: YahaFontSizes.xLarge,
                                       color: YahaColors.accentColor),
-                                  Text(
-                                    '19 | 12',
-                                    style: TextStyle(
-                                        fontSize: YahaFontSizes.small),
+                                  RichText(
+                                    text: TextSpan(
+                                      style: TextStyle(
+                                          color: YahaColors.textColor,
+                                          fontSize: YahaFontSizes.small),
+                                      children: [
+                                        TextSpan(
+                                          text: '19 ',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                        TextSpan(
+                                          text: '| 12',
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ],
                               ),
@@ -613,20 +640,7 @@ class _HikeScreenState extends State<HikeScreen> {
                           ],
                         ),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Text('Show more',
-                              style: TextStyle(
-                                  fontSize: YahaFontSizes.small,
-                                  fontWeight: FontWeight.w500,
-                                  color: YahaColors.textColor)),
-                          Icon(
-                            Icons.chevron_right,
-                            size: YahaFontSizes.xxLarge,
-                          ),
-                        ],
-                      ),
+                      ShowMoreButton(nextScreen: WeatherScreen()),
                       Container(
                         padding:
                             const EdgeInsets.only(top: YahaSpaceSizes.large),
