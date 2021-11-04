@@ -8,11 +8,13 @@ import 'package:yaha/utility/yaha-space-sizes.dart';
 class ExploreHikeBox extends StatelessWidget {
   final String topTitle;
   final String bottomTitle;
+  final Widget onPressed;
 
   const ExploreHikeBox({
     Key? key,
     required this.topTitle,
     required this.bottomTitle,
+    required this.onPressed,
   }) : super(key: key);
 
   @override
@@ -60,7 +62,10 @@ class ExploreHikeBox extends StatelessWidget {
                         fontSize: YahaFontSizes.small,
                         fontWeight: FontWeight.w600),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => onPressed));
+                  },
                   style: ElevatedButton.styleFrom(
                     primary: YahaColors.primary,
                     shape: const RoundedRectangleBorder(

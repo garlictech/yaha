@@ -1,3 +1,6 @@
+import 'package:yaha/utility/yaha-icon-sizes.dart';
+import 'package:yaha/utility/yaha-space-sizes.dart';
+
 import 'social-button.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 
@@ -7,5 +10,7 @@ class FacebookButton extends SocialButton {
             onPressed: onPressed,
             title: title,
             iconPath: 'assets/images/facebook_logo@3x.png',
-            buttonColor: YahaColors.facebook);
+            buttonColor: YahaColors.facebook,
+            iconSize: YahaIconSizes.medium,
+            leftPadding: YahaSpaceSizes.xSmall);
 }
