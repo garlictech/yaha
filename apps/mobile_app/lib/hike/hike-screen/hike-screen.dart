@@ -5,6 +5,7 @@ import 'package:yaha/gallery.dart';
 import 'package:yaha/hike/hike-outline/poi.dart';
 import 'package:yaha/hike/hike-outline/settings/poi-filters.dart';
 import 'package:yaha/hike/hike-screen/most-interesting-place-on-route/places-on-route-screen.dart';
+import 'package:yaha/hike/views/screens/more-poi-screen.dart';
 import 'package:yaha/hike/views/screens/weather-screen.dart';
 import 'package:yaha/utility/buttons/show-more-button.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
@@ -374,20 +375,7 @@ class _HikeScreenState extends State<HikeScreen> {
                         padding: const EdgeInsets.only(
                           top: YahaSpaceSizes.small,
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text('Show more',
-                                style: TextStyle(
-                                    fontSize: YahaFontSizes.small,
-                                    fontWeight: FontWeight.w500,
-                                    color: YahaColors.textColor)),
-                            Icon(
-                              Icons.chevron_right,
-                              size: YahaFontSizes.xxLarge,
-                            ),
-                          ],
-                        ),
+                        child: ShowMoreButton(nextScreen: MorePoiScreen()),
                       ),
                       Container(
                         padding: const EdgeInsets.only(

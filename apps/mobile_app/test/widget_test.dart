@@ -13,6 +13,7 @@ import 'package:yaha/auth/views/screens/login-screen.dart';
 import 'package:yaha/auth/views/screens/signup-screen.dart';
 import 'package:yaha/bottom-nav-bar.dart';
 import 'package:yaha/hike/hike-screen/most-interesting-place-on-route/places-on-route-screen.dart';
+import 'package:yaha/hike/views/screens/more-poi-screen.dart';
 import 'package:yaha/hike/views/screens/weather-screen.dart';
 import 'package:yaha/home/views/screens/best-hikes-near-you-screen.dart';
 import 'package:yaha/home/views/screens/best-hikes-of-the-world-screen.dart';
@@ -264,6 +265,11 @@ void main() {
   });
   testWidgets('Weather Screen smoke test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: new WeatherScreen()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('More Poi Screen smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetForTesting(child: new MorePoiScreen()));
 
     await tester.pumpAndSettle();
   });

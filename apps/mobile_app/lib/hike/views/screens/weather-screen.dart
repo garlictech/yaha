@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:yaha/hike/views/widgets/weather-column-tile-widget.dart';
+import 'package:yaha/hike/views/widgets/weather-row-tile-widget.dart';
 import 'package:yaha/utility/buttons/back-button.dart';
 import 'package:yaha/utility/yaha-border-width.dart';
 import 'package:yaha/utility/yaha-colors.dart';
@@ -71,10 +73,9 @@ class WeatherScreen extends ConsumerWidget {
                               padding: const EdgeInsets.only(
                                   top: YahaSpaceSizes.large,
                                   bottom: YahaSpaceSizes.large),
-                              child: Icon(
-                                Icons.wb_sunny_rounded,
-                                color: Colors.yellow,
-                                size: 100,
+                              child: Image.asset(
+                                'assets/images/sunny.png',
+                                height: 100,
                               ),
                             ),
                             Padding(
@@ -122,12 +123,96 @@ class WeatherScreen extends ConsumerWidget {
                             Padding(
                               padding: const EdgeInsets.only(
                                   top: YahaSpaceSizes.general,
-                                  bottom: YahaSpaceSizes.general),
+                                  bottom: YahaSpaceSizes.small),
                               child: Divider(
                                 color: YahaColors.textColor,
                                 thickness: YahaBorderWidth.xxxSmall,
                               ),
-                            )
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                WeatherRowTile(
+                                  time: 'Now',
+                                  icon: 'assets/images/sunny.png',
+                                  degree: '25º',
+                                ),
+                                WeatherRowTile(
+                                  time: '16',
+                                  icon: 'assets/images/sunny.png',
+                                  degree: '24º',
+                                ),
+                                WeatherRowTile(
+                                  time: '17',
+                                  icon: 'assets/images/sunny.png',
+                                  degree: '22º',
+                                ),
+                                WeatherRowTile(
+                                  time: '18',
+                                  icon: 'assets/images/overcast.png',
+                                  degree: '20º',
+                                ),
+                                WeatherRowTile(
+                                  time: '19',
+                                  icon: 'assets/images/overcast.png',
+                                  degree: '19º',
+                                ),
+                                WeatherRowTile(
+                                  time: '19:59',
+                                  icon: 'assets/images/sunset.png',
+                                  degree: 'Sunset',
+                                ),
+                              ],
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: YahaSpaceSizes.small,
+                                  bottom: YahaSpaceSizes.small),
+                              child: Divider(
+                                color: YahaColors.textColor,
+                                thickness: YahaBorderWidth.xxxSmall,
+                              ),
+                            ),
+                            Column(
+                              children: [
+                                WeatherColumnTile(
+                                  day: 'Tuesday',
+                                  icon: 'assets/images/sunny.png',
+                                  maxDegree: '27',
+                                  minDegree: '18',
+                                ),
+                                WeatherColumnTile(
+                                  day: 'Wednesday',
+                                  icon: 'assets/images/sunny.png',
+                                  maxDegree: '25',
+                                  minDegree: '15',
+                                ),
+                                WeatherColumnTile(
+                                  day: 'Thursday',
+                                  icon: 'assets/images/overcast.png',
+                                  maxDegree: '22',
+                                  minDegree: '16',
+                                ),
+                                WeatherColumnTile(
+                                  day: 'Friday',
+                                  icon: 'assets/images/rainy.png',
+                                  maxDegree: '19',
+                                  minDegree: '13',
+                                ),
+                                WeatherColumnTile(
+                                  day: 'Saturday',
+                                  icon: 'assets/images/rainy.png',
+                                  maxDegree: '18',
+                                  minDegree: '14',
+                                ),
+                                WeatherColumnTile(
+                                  day: 'Sunday',
+                                  icon: 'assets/images/sunny.png',
+                                  maxDegree: '24',
+                                  minDegree: '16',
+                                ),
+                              ],
+                            ),
                           ],
                         ),
                       )
