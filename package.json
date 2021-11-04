@@ -48,7 +48,7 @@
     "graphql-tag": "2.12.5",
     "graphql-tools": "8.2.0",
     "lodash-es": "4.17.21",
-    "neo4j-driver": "4.3.4",
+    "neo4j-driver": "4.3.5",
     "rxjs": "7.4.0",
     "tslib": "2.3.1"
   },
