@@ -7926,10 +7926,10 @@ aws-sdk@*, aws-sdk@^2.761.0, aws-sdk@^2.834.0, aws-sdk@^2.848.0:
     uuid "3.3.2"
     xml2js "0.4.19"
 
-aws-sdk@2.1019.0:
-  version "2.1019.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.1019.0.tgz#3859bcadcabc02aa7c663ee3aca42eb1345c8251"
-  integrity sha512-mnL9CROb3JHdAIbwjy0yr7Lj76KVA8+LyDFexIq/J/YtjbqdfEsb/KdeQIGEBCdlOqUrcJmeD0GcklZ4ve6fnQ==
+aws-sdk@2.1021.0:
+  version "2.1021.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.1021.0.tgz#00b9251f9d9c36adf6c47f0d5fb4aeb47ef2148e"
+  integrity sha512-UT8YOh6Qb0vo27vSzXQQvl5ACAk2PGbPm6Qq7pLeGfGiqYlCY2ru77finzp8Jj8J4ilfK05AlJ1F8mZ1ZjqF9Q==
   dependencies:
     buffer "4.9.2"
     events "1.1.1"
@@ -13007,10 +13007,10 @@ graphql-request@^3.3.0:
     extract-files "^9.0.0"
     form-data "^3.0.0"
 
-graphql-subscriptions@1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/graphql-subscriptions/-/graphql-subscriptions-1.2.1.tgz#2142b2d729661ddf967b7388f7cf1dd4cf2e061d"
-  integrity sha512-95yD/tKi24q8xYa7Q9rhQN16AYj5wPbrb8tmHGM3WRc9EBmWrG/0kkMl+tQG8wcEuE9ibR4zyOM31p5Sdr2v4g==
+graphql-subscriptions@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/graphql-subscriptions/-/graphql-subscriptions-2.0.0.tgz#11ec181d475852d8aec879183e8e1eb94f2eb79a"
+  integrity sha512-s6k2b8mmt9gF9pEfkxsaO1lTxaySfKoEJzEfmwguBbQ//Oq23hIXCfR1hm4kdh5hnR20RdwB+s3BCb+0duHSZA==
   dependencies:
     iterall "^1.3.0"
 
@@ -17595,27 +17595,27 @@ neo-async@^2.5.0, neo-async@^2.6.0, neo-async@^2.6.1, neo-async@^2.6.2:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
-neo4j-driver-bolt-connection@^4.3.4:
-  version "4.3.4"
-  resolved "https://registry.yarnpkg.com/neo4j-driver-bolt-connection/-/neo4j-driver-bolt-connection-4.3.4.tgz#de642bb6a62ffc6ae2e280dccf21395b4d1705a2"
-  integrity sha512-yxbvwGav+N7EYjcEAINqL6D3CZV+ee2qLInpAhx+iNurwbl3zqtBGiVP79SZ+7tU++y3Q1fW5ofikH06yc+LqQ==
+neo4j-driver-bolt-connection@^4.3.5:
+  version "4.3.5"
+  resolved "https://registry.yarnpkg.com/neo4j-driver-bolt-connection/-/neo4j-driver-bolt-connection-4.3.5.tgz#bc0c032e82609aaa763a6550b66728548cd782be"
+  integrity sha512-r+wpg1pUuS6Nz6W6aF0EwcZfN0FG0jfC9FDNcFZtps3LUTVfu4eR5c5ZXWu2Wz1wBMlJ5IoKXdX5MDhE/82ADg==
   dependencies:
-    neo4j-driver-core "^4.3.4"
+    neo4j-driver-core "^4.3.5"
     text-encoding-utf-8 "^1.0.2"
 
-neo4j-driver-core@^4.3.4:
-  version "4.3.4"
-  resolved "https://registry.yarnpkg.com/neo4j-driver-core/-/neo4j-driver-core-4.3.4.tgz#b445a4fbf94dce8441075099bd6ac3133c1cf5ee"
-  integrity sha512-3tn3j6IRUNlpXeehZ9Xv7dLTZPB4a7APaoJ+xhQyMmYQO3ujDM4RFHc0pZcG+GokmaltT5pUCIPTDYx6ODdhcA==
+neo4j-driver-core@^4.3.5:
+  version "4.3.5"
+  resolved "https://registry.yarnpkg.com/neo4j-driver-core/-/neo4j-driver-core-4.3.5.tgz#cda48d95aebf477106c2d60ec9f82f45b8118a91"
+  integrity sha512-K7qAc73ewjKc2iwe764Bq+Rm/IkDhEbo3D57EOTu5pXuZS+EOUU5avKIIncfniop9Xcle/hODx6dtiyasUPvOw==
 
-neo4j-driver@4.3.4:
-  version "4.3.4"
-  resolved "https://registry.yarnpkg.com/neo4j-driver/-/neo4j-driver-4.3.4.tgz#a54f0562f868ee94dff7509df74e3eb2c1f95a85"
-  integrity sha512-AGrsFFqnoZv4KhJdmKt4mOBV5mnxmV3+/t8KJTOM68jQuEWoy+RlmAaRRaCSU4eY586OFN/R8lg9MrJpZdSFjw==
+neo4j-driver@4.3.5:
+  version "4.3.5"
+  resolved "https://registry.yarnpkg.com/neo4j-driver/-/neo4j-driver-4.3.5.tgz#45278539bcdcf6926ced05c35af24527de3e5252"
+  integrity sha512-1swAxa3+SmhPJayX9wpoNurwldUusyXQJzRktKyd/KH5GneJJ1OXR1MxKyGeyTOS+Z7WETMFi+ZFvOW0LS0xzw==
   dependencies:
     "@babel/runtime" "^7.5.5"
-    neo4j-driver-bolt-connection "^4.3.4"
-    neo4j-driver-core "^4.3.4"
+    neo4j-driver-bolt-connection "^4.3.5"
+    neo4j-driver-core "^4.3.5"
     rxjs "^6.6.3"
 
 nerf-dart@^1.0.0:
