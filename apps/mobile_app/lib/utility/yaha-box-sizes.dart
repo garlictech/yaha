@@ -6,6 +6,7 @@ class YahaBoxSizes {
   static const heightSmall = 120.0;
   static const heightGeneral = 160.0;
   static const heightMedium = 220.0;
+  static const categoryTitleBoxHeight = 56.0;
 
   //WIDTH - general
   static const widthXXXSmall = 50.0;

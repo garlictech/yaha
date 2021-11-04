@@ -66,7 +66,7 @@ class SettingsScreen extends ConsumerWidget {
                                   color: YahaColors.textColor)),
                           decoration:
                               BoxDecoration(color: YahaColors.accentColor),
-                          height: 56.0,
+                          height: YahaBoxSizes.categoryTitleBoxHeight,
                         ),
                         Container(
                           child: Column(
@@ -196,7 +196,7 @@ class SettingsScreen extends ConsumerWidget {
                                   color: YahaColors.textColor)),
                           decoration:
                               BoxDecoration(color: YahaColors.accentColor),
-                          height: 56.0,
+                          height: YahaBoxSizes.categoryTitleBoxHeight,
                         ),
                         Container(
                           child: Column(
