@@ -9,13 +9,15 @@ class PoiCategoryTitleBox extends StatelessWidget {
   final IconData icon;
   final String title;
   final double iconBottomPadding;
+  final Color backgroundColor;
 
-  const PoiCategoryTitleBox(
-      {Key? key,
-      required this.icon,
-      required this.title,
-      required this.iconBottomPadding})
-      : super(key: key);
+  const PoiCategoryTitleBox({
+    Key? key,
+    required this.icon,
+    required this.title,
+    required this.iconBottomPadding,
+    required this.backgroundColor,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +43,7 @@ class PoiCategoryTitleBox extends StatelessWidget {
                   color: YahaColors.background)),
         ],
       ),
-      decoration: BoxDecoration(color: YahaColors.generic),
+      decoration: BoxDecoration(color: backgroundColor),
       height: YahaBoxSizes.categoryTitleBoxHeight,
     );
   }
