@@ -23,15 +23,11 @@ class PlacesOnRouteScreen extends ConsumerWidget {
   _createMainWidget(PlacesOnRouteState state) {
     var nodes = state.nodeList.map((node) {
       if (node is PlaceWidget) {
-        return Padding(
-          padding: const EdgeInsets.only(
-              left: YahaSpaceSizes.general, right: YahaSpaceSizes.general),
-          child: PlaceWidget(
-            poiColor: node.poiColor,
-            poiIcon: node.poiIcon,
-            title: node.title,
-            distanceFromStart: node.distanceFromStart,
-          ),
+        return PlaceWidget(
+          poiColor: node.poiColor,
+          poiIcon: node.poiIcon,
+          title: node.title,
+          distanceFromStart: node.distanceFromStart,
         );
       } else if (node is Padding) {
         return Padding(
@@ -49,6 +45,20 @@ class PlacesOnRouteScreen extends ConsumerWidget {
     });
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: YahaColors.background,
+        elevation: 0,
+        title: Text(
+          'Most interesting places\non route',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: YahaFontSizes.medium,
+            color: YahaColors.textColor,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        leading: YahaBackButton(),
+      ),
       body: CustomScrollView(
         physics: BouncingScrollPhysics(),
         slivers: <Widget>[
@@ -56,34 +66,11 @@ class PlacesOnRouteScreen extends ConsumerWidget {
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
                 return SafeArea(
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: YahaSpaceSizes.large),
-                        child: Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: YahaBackButton(),
-                            ),
-                            Align(
-                              alignment: Alignment.center,
-                              child: Text(
-                                'Most interesting places\non route',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: YahaFontSizes.medium,
-                                  color: YahaColors.textColor,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      ...nodes
-                    ],
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: YahaSpaceSizes.general),
+                    child: Column(
+                      children: [...nodes],
+                    ),
                   ),
                 );
               },

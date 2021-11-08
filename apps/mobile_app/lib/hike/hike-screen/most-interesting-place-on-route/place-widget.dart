@@ -23,53 +23,57 @@ class PlaceWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {},
-      child: Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              Poi(
-                  backgroundColor: poiColor,
-                  icon: poiIcon,
-                  iconSize: YahaIconSizes.medium,
-                  padding: YahaSpaceSizes.xSmall),
-              Padding(
-                padding: const EdgeInsets.only(left: YahaSpaceSizes.small),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(bottom: YahaSpaceSizes.xSmall),
-                      child: Text(
-                        title,
+      child: Padding(
+        padding: const EdgeInsets.only(
+            left: YahaSpaceSizes.general, right: YahaSpaceSizes.general),
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                Poi(
+                    backgroundColor: poiColor,
+                    icon: poiIcon,
+                    iconSize: YahaIconSizes.medium,
+                    padding: YahaSpaceSizes.xSmall),
+                Padding(
+                  padding: const EdgeInsets.only(left: YahaSpaceSizes.small),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            bottom: YahaSpaceSizes.xSmall),
+                        child: Text(
+                          title,
+                          style: TextStyle(
+                            fontSize: YahaFontSizes.small,
+                            color: YahaColors.textColor,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        'Distance from start: ${distanceFromStart}m',
                         style: TextStyle(
                           fontSize: YahaFontSizes.small,
                           color: YahaColors.textColor,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w400,
                         ),
                       ),
-                    ),
-                    Text(
-                      'Distance from start: ${distanceFromStart}m',
-                      style: TextStyle(
-                        fontSize: YahaFontSizes.small,
-                        color: YahaColors.textColor,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-          Icon(
-            Icons.arrow_forward_ios_rounded,
-            size: YahaIconSizes.medium,
-            color: YahaColors.textColor,
-          ),
-        ],
+              ],
+            ),
+            Icon(
+              Icons.arrow_forward_ios_rounded,
+              size: YahaIconSizes.medium,
+              color: YahaColors.textColor,
+            ),
+          ],
+        ),
       ),
     );
   }

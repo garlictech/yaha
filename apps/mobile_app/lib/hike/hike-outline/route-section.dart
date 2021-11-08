@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yaha/hike/hike-outline/route-section-poi-list-preview.dart';
+import 'package:yaha/hike/views/screens/more-poi-screen.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
@@ -109,7 +110,10 @@ class RouteSection extends StatelessWidget {
               ],
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => MorePoiScreen()));
+              },
               icon: Icon(
                 Icons.arrow_forward_ios_rounded,
                 size: YahaIconSizes.medium,
