@@ -5,10 +5,24 @@ import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
-class StatisticsPage extends ConsumerWidget {
+class StatisticsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: YahaColors.background,
+        elevation: 0,
+        title: Text(
+          'Statistics',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: YahaFontSizes.medium,
+            color: YahaColors.textColor,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        leading: YahaBackButton(),
+      ),
       body: CustomScrollView(
         physics: BouncingScrollPhysics(),
         slivers: <Widget>[
@@ -18,28 +32,9 @@ class StatisticsPage extends ConsumerWidget {
                 return SafeArea(
                   child: Column(
                     children: [
-                      Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: YahaBackButton(),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Text(
-                              'Statistics',
-                              style: TextStyle(
-                                  color: YahaColors.textColor,
-                                  fontSize: YahaFontSizes.medium,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                          )
-                        ],
-                      ),
                       Container(
                         padding: EdgeInsets.only(
-                            top: YahaSpaceSizes.xLarge,
+                            top: YahaSpaceSizes.general,
                             left: YahaSpaceSizes.general,
                             right: YahaSpaceSizes.general),
                         child: Column(
