@@ -1,21 +1,50 @@
 import 'package:flutter/material.dart';
 import 'package:yaha/gallery.dart';
 import 'package:yaha/hike/hike-outline/poi.dart';
+import 'package:yaha/hike/views/screens/comments-screen.dart';
+import 'package:yaha/utility/buttons/back-button.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-icon-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
-class PoiPage extends StatefulWidget {
+class PoiScreen extends StatefulWidget {
   @override
-  _PoiPageState createState() => _PoiPageState();
+  _PoiScreenState createState() => _PoiScreenState();
 }
 
-class _PoiPageState extends State<PoiPage> {
+class _PoiScreenState extends State<PoiScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: YahaColors.background,
+        elevation: 0,
+        title: Text(
+          'Hungarian\nNational Museum',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: YahaFontSizes.medium,
+            color: YahaColors.textColor,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        leading: YahaBackButton(),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: YahaSpaceSizes.medium),
+            child: IconButton(
+              icon: Icon(Icons.comment_outlined,
+                  size: YahaIconSizes.medium, color: YahaColors.textColor),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => CommmentsScreen()));
+              },
+            ),
+          ),
+        ],
+      ),
       body: CustomScrollView(
         physics: BouncingScrollPhysics(),
         slivers: <Widget>[
@@ -24,30 +53,11 @@ class _PoiPageState extends State<PoiPage> {
               (BuildContext context, int index) {
                 return SafeArea(
                   child: Container(
-                    padding: const EdgeInsets.all(YahaSpaceSizes.general),
+                    padding: const EdgeInsets.only(
+                        left: YahaSpaceSizes.general,
+                        right: YahaSpaceSizes.general),
                     child: Column(
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment
-                              .spaceBetween, //Center Row contents horizontally,
-
-                          children: [
-                            Icon(
-                              Icons.arrow_back_ios_rounded,
-                              size: YahaIconSizes.medium,
-                              color: YahaColors.textColor,
-                            ),
-                            Text('Hungarian\nNational Museum',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontSize: YahaFontSizes.medium,
-                                    fontWeight: FontWeight.w600,
-                                    color: YahaColors.textColor)),
-                            Icon(Icons.comment_outlined,
-                                size: YahaIconSizes.medium,
-                                color: YahaColors.textColor),
-                          ],
-                        ),
                         Container(
                             padding: const EdgeInsets.only(
                                 top: YahaSpaceSizes.general,
@@ -143,7 +153,8 @@ class _PoiPageState extends State<PoiPage> {
                             width: MediaQuery.of(context).size.width,
                             child: Gallery()),
                         Container(
-                          padding: const EdgeInsets.only(top: YahaSpaceSizes.xLarge),
+                          padding:
+                              const EdgeInsets.only(top: YahaSpaceSizes.xLarge),
                           child: SizedBox(
                             height: 50,
                             width: 300,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yaha/hike/hike-outline/poi.dart';
+import 'package:yaha/hike/views/screens/poi-screen.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-icon-sizes.dart';
@@ -22,7 +23,10 @@ class PlaceWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => PoiScreen()));
+      },
       child: Padding(
         padding: const EdgeInsets.only(
             left: YahaSpaceSizes.general, right: YahaSpaceSizes.general),

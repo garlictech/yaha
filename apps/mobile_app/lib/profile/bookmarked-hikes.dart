@@ -10,6 +10,20 @@ class BookmarkedHikes extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: YahaColors.background,
+        elevation: 0,
+        title: Text(
+          'Bookmarked hikes',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: YahaFontSizes.medium,
+            color: YahaColors.textColor,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        leading: YahaBackButton(),
+      ),
       body: CustomScrollView(
         physics: BouncingScrollPhysics(),
         slivers: <Widget>[
@@ -19,29 +33,9 @@ class BookmarkedHikes extends ConsumerWidget {
                 return SafeArea(
                   child: Column(
                     children: [
-                      Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: YahaBackButton(),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Text(
-                              'Bookmarked hikes',
-                              style: TextStyle(
-                                fontSize: YahaFontSizes.medium,
-                                color: YahaColors.textColor,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
                       Padding(
                         padding: const EdgeInsets.only(
-                            top: YahaSpaceSizes.xLarge,
+                            top: YahaSpaceSizes.general,
                             right: YahaSpaceSizes.general,
                             left: YahaSpaceSizes.general),
                         child: GridView.count(

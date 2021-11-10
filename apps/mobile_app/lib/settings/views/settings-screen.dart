@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:yaha/settings/application/application-page.dart';
+import 'package:yaha/settings/application/application-screen.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
@@ -19,6 +19,7 @@ class SettingsScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
+          elevation: 0,
           backgroundColor: YahaColors.background,
           title: const Text('Settings',
               style: TextStyle(
@@ -128,7 +129,7 @@ class SettingsScreen extends ConsumerWidget {
                                   Navigator.of(context).push(
                                       new MaterialPageRoute<dynamic>(
                                           builder: (BuildContext context) {
-                                    return new ApplicationPage();
+                                    return new ApplicationScreen();
                                   }));
                                 },
                                 child: Container(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaha/poi-page.dart';
+import 'package:yaha/hike/views/screens/poi-screen.dart';
 import 'package:yaha/profile/profile-page.dart';
 import 'package:yaha/track-page.dart';
 import 'package:yaha/utility/yaha-colors.dart';
@@ -34,7 +34,7 @@ class MyApp extends ConsumerWidget {
         '/hike': (context) => HikeScreen(),
         '/profile': (context) => ProfilePage(),
         '/event': (context) => EventDetailScreen(),
-        '/poi': (context) => PoiPage(),
+        '/poi': (context) => PoiScreen(),
         '/settings': (context) => SettingsScreen(),
         '/signup': (context) => SignupScreen(),
         '/track': (context) => TrackPage(),

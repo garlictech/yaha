@@ -13,7 +13,7 @@ import 'package:flutter/widgets.dart';
 import 'app-settings-state.dart';
 
 // ignore: must_be_immutable
-class ApplicationPage extends ConsumerWidget {
+class ApplicationScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     var appSettingsState = watch(applicationSettingsStateProvider);
@@ -22,6 +22,7 @@ class ApplicationPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
+          elevation: 0,
           backgroundColor: YahaColors.background,
           title: const Text('Application',
               style: TextStyle(
