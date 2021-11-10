@@ -6,15 +6,35 @@ import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
-class SearchResultPage extends StatefulWidget {
+class SearchResultsScreen extends StatefulWidget {
   @override
   _SearchResultState createState() => _SearchResultState();
 }
 
-class _SearchResultState extends State<SearchResultPage> {
+class _SearchResultState extends State<SearchResultsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: YahaColors.background,
+        elevation: 0,
+        title: Text(
+          'Search results',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: YahaFontSizes.medium,
+            color: YahaColors.textColor,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        leading: YahaBackButton(),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: YahaSpaceSizes.xSmall),
+            child: FilterButton(),
+          )
+        ],
+      ),
       body: CustomScrollView(
         physics: BouncingScrollPhysics(),
         slivers: <Widget>[
@@ -24,33 +44,6 @@ class _SearchResultState extends State<SearchResultPage> {
                 return SafeArea(
                   child: Column(
                     children: [
-                      Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: YahaBackButton(),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Text(
-                              'Search results',
-                              style: TextStyle(
-                                  fontSize: YahaFontSizes.medium,
-                                  fontWeight: FontWeight.w600,
-                                  color: YahaColors.textColor),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                right: YahaSpaceSizes.xSmall),
-                            child: Align(
-                              alignment: Alignment.centerRight,
-                              child: FilterButton(),
-                            ),
-                          ),
-                        ],
-                      ),
                       /*Container(
                           //height: MediaQuery.of(context).size.height,
                           height: 800,
@@ -58,7 +51,7 @@ class _SearchResultState extends State<SearchResultPage> {
                         ),*/
                       Padding(
                         padding: const EdgeInsets.only(
-                            top: YahaSpaceSizes.xLarge,
+                            top: YahaSpaceSizes.general,
                             right: YahaSpaceSizes.general,
                             left: YahaSpaceSizes.general),
                         child: GridView.count(

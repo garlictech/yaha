@@ -16,7 +16,7 @@ import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-icon-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
-import '../hike-outline/hike-outline-page.dart';
+import '../hike-outline/hike-outline-screen.dart';
 
 class HikeScreen extends StatefulWidget {
   @override
@@ -40,32 +40,50 @@ class _HikeScreenState extends State<HikeScreen> {
               titlePadding: EdgeInsets.only(
                   left: YahaSpaceSizes.general, bottom: YahaSpaceSizes.small),
               centerTitle: false,
-              title: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
+              title: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'Budapest',
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                        color: YahaColors.background,
-                        fontWeight: FontWeight.w700,
-                        fontSize: YahaFontSizes.large),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Budapest',
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                            color: YahaColors.background,
+                            fontWeight: FontWeight.w700,
+                            fontSize: YahaFontSizes.large),
+                      ),
+                      Text(
+                        'Várhegy, Duna, Lánchíd',
+                        style: TextStyle(
+                            color: YahaColors.background,
+                            fontSize: YahaFontSizes.xSmall,
+                            fontWeight: FontWeight.w500),
+                      ),
+                    ],
                   ),
-                  Text(
-                    'Várhegy, Duna, Lánchíd',
-                    style: TextStyle(
-                        color: YahaColors.background,
-                        fontSize: YahaFontSizes.xSmall,
-                        fontWeight: FontWeight.w500),
+                  Padding(
+                    padding: const EdgeInsets.only(right: YahaSpaceSizes.small),
+                    child: Icon(
+                      Icons.bookmark_rounded,
+                      color: YahaColors.accentColor,
+                      size: YahaIconSizes.medium,
+                    ),
                   ),
                 ],
               ),
-              background: Image.asset(
-                'assets/images/Budapest-dark.png',
-                fit: BoxFit.fill,
-                width: MediaQuery.of(context).size.width,
+              background: ColorFiltered(
+                colorFilter: ColorFilter.mode(
+                    Colors.black.withOpacity(0.20), BlendMode.darken),
+                child: Image.asset(
+                  'assets/images/Budapest-dark.png',
+                  fit: BoxFit.fill,
+                  width: MediaQuery.of(context).size.width,
+                ),
               ),
             ),
           ),
@@ -493,140 +511,133 @@ class _HikeScreenState extends State<HikeScreen> {
                       Container(
                         padding:
                             const EdgeInsets.only(top: YahaSpaceSizes.large),
-                        child: SizedBox(
-                          width: double.infinity,
-                          child: Text('Weather',
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                  fontSize: YahaFontSizes.medium,
-                                  fontWeight: FontWeight.w600,
-                                  color: YahaColors.textColor)),
-                        ),
+                        alignment: Alignment.centerLeft,
+                        child: Text('Weather',
+                            style: TextStyle(
+                                fontSize: YahaFontSizes.medium,
+                                fontWeight: FontWeight.w600,
+                                color: YahaColors.textColor)),
                       ),
-                      Container(
-                        height: 120,
-                        child: GridView.count(
-                          primary: false,
-                          padding:
-                              const EdgeInsets.only(top: YahaSpaceSizes.medium),
-                          crossAxisSpacing: YahaSpaceSizes.general,
-                          crossAxisCount: 3,
-                          children: <Widget>[
-                            Container(
-                              padding:
-                                  const EdgeInsets.all(YahaSpaceSizes.medium),
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'Wed',
+                      GridView.count(
+                        shrinkWrap: true,
+                        primary: false,
+                        padding: const EdgeInsets.only(
+                            top: YahaSpaceSizes.medium,
+                            bottom: YahaSpaceSizes.small),
+                        crossAxisSpacing: YahaSpaceSizes.general,
+                        crossAxisCount: 3,
+                        children: <Widget>[
+                          Container(
+                            padding:
+                                const EdgeInsets.all(YahaSpaceSizes.medium),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Wed',
+                                  style:
+                                      TextStyle(fontSize: YahaFontSizes.small),
+                                ),
+                                Icon(Icons.wb_sunny,
+                                    size: YahaFontSizes.xLarge,
+                                    color: Colors.yellow),
+                                RichText(
+                                  text: TextSpan(
                                     style: TextStyle(
+                                        color: YahaColors.textColor,
                                         fontSize: YahaFontSizes.small),
-                                  ),
-                                  Icon(Icons.wb_sunny,
-                                      size: YahaFontSizes.xLarge,
-                                      color: Colors.yellow),
-                                  RichText(
-                                    text: TextSpan(
-                                      style: TextStyle(
-                                          color: YahaColors.textColor,
-                                          fontSize: YahaFontSizes.small),
-                                      children: [
-                                        TextSpan(
-                                          text: '19 ',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w600,
-                                          ),
+                                    children: [
+                                      TextSpan(
+                                        text: '19 ',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w600,
                                         ),
-                                        TextSpan(
-                                          text: '| 12',
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                      YahaBorderRadius.general),
-                                  gradient: LinearGradient(
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomCenter,
-                                    colors: [
-                                      Colors.red.shade300,
-                                      Colors.orange.shade300,
+                                      ),
+                                      TextSpan(
+                                        text: '| 12',
+                                      ),
                                     ],
-                                  )),
-                            ),
-                            Container(
-                              padding:
-                                  const EdgeInsets.all(YahaSpaceSizes.medium),
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'Wed',
-                                    style: TextStyle(
-                                        fontSize: YahaFontSizes.small),
                                   ),
-                                  Icon(Icons.cloud,
-                                      size: YahaFontSizes.xLarge,
-                                      color: YahaColors.accentColor),
-                                  RichText(
-                                    text: TextSpan(
-                                      style: TextStyle(
-                                          color: YahaColors.textColor,
-                                          fontSize: YahaFontSizes.small),
-                                      children: [
-                                        TextSpan(
-                                          text: '19 ',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                        ),
-                                        TextSpan(
-                                          text: '| 12',
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                      YahaBorderRadius.general),
-                                  gradient: LinearGradient(
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomCenter,
-                                    colors: [
-                                      Colors.green.shade100,
-                                      Colors.blue.shade200,
-                                    ],
-                                  )),
+                                ),
+                              ],
                             ),
-                            Container(
-                              alignment: Alignment.center,
-                              padding:
-                                  const EdgeInsets.all(YahaSpaceSizes.small),
-                              child: Text(
-                                'The day of your hike',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: YahaColors.textColor,
-                                    fontSize: YahaFontSizes.small),
-                              ),
-                              decoration: BoxDecoration(
+                            decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(
                                     YahaBorderRadius.general),
-                                border: Border.all(
-                                    width: YahaBorderWidth.small,
-                                    color: YahaColors.textColor),
-                              ),
+                                gradient: LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  colors: [
+                                    Colors.red.shade300,
+                                    Colors.orange.shade300,
+                                  ],
+                                )),
+                          ),
+                          Container(
+                            padding:
+                                const EdgeInsets.all(YahaSpaceSizes.medium),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Wed',
+                                  style:
+                                      TextStyle(fontSize: YahaFontSizes.small),
+                                ),
+                                Icon(Icons.cloud,
+                                    size: YahaFontSizes.xLarge,
+                                    color: YahaColors.accentColor),
+                                RichText(
+                                  text: TextSpan(
+                                    style: TextStyle(
+                                        color: YahaColors.textColor,
+                                        fontSize: YahaFontSizes.small),
+                                    children: [
+                                      TextSpan(
+                                        text: '19 ',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text: '| 12',
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(
+                                    YahaBorderRadius.general),
+                                gradient: LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  colors: [
+                                    Colors.green.shade100,
+                                    Colors.blue.shade200,
+                                  ],
+                                )),
+                          ),
+                          Container(
+                            alignment: Alignment.center,
+                            padding: const EdgeInsets.all(YahaSpaceSizes.small),
+                            child: Text(
+                              'The day of your hike',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: YahaColors.textColor,
+                                  fontSize: YahaFontSizes.small),
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(
+                                  YahaBorderRadius.general),
+                              border: Border.all(
+                                  width: YahaBorderWidth.small,
+                                  color: YahaColors.textColor),
+                            ),
+                          ),
+                        ],
                       ),
                       ShowMoreButton(nextScreen: WeatherScreen()),
                       Container(
@@ -645,7 +656,7 @@ class _HikeScreenState extends State<HikeScreen> {
                               Navigator.of(this.context).push(
                                   new MaterialPageRoute<dynamic>(
                                       builder: (BuildContext context) {
-                                return new HikeOutlinePage();
+                                return new HikeOutlineScreen();
                               }));
                             },
                             label: Text('Hike outline',
@@ -702,7 +713,7 @@ SpeedDial buildSpeedDial() {
     /// If true user is forced to close dial manually
     /// by tapping main button and overlay is not rendered.
     closeManually: false,
-    curve: Curves.bounceIn,
+    curve: Curves.easeInOut,
     overlayColor: YahaColors.textColor,
     overlayOpacity: 0.5,
     onOpen: () => print('OPENING DIAL'),
@@ -728,7 +739,7 @@ SpeedDial buildSpeedDial() {
         child: Icon(Icons.settings_rounded, color: YahaColors.accentColor),
         backgroundColor: YahaColors.primary,
         label: 'Settings',
-        labelStyle: TextStyle(fontSize: YahaFontSizes.medium),
+        labelStyle: TextStyle(fontSize: YahaFontSizes.small),
         onTap: () => print('FIRST CHILD'),
         onLongPress: () => print('FIRST CHILD LONG PRESS'),
       ),
@@ -736,23 +747,23 @@ SpeedDial buildSpeedDial() {
         child: Icon(Icons.comment_rounded, color: YahaColors.accentColor),
         backgroundColor: YahaColors.primary,
         label: 'Comment',
-        labelStyle: TextStyle(fontSize: YahaFontSizes.medium),
+        labelStyle: TextStyle(fontSize: YahaFontSizes.small),
         onTap: () => print('SECOND CHILD'),
         onLongPress: () => print('SECOND CHILD LONG PRESS'),
       ),
-      SpeedDialChild(
+      /*SpeedDialChild(
         child: Icon(Icons.bookmark_rounded, color: YahaColors.accentColor),
         backgroundColor: YahaColors.primary,
         label: 'Bookmark',
-        labelStyle: TextStyle(fontSize: YahaFontSizes.medium),
+        labelStyle: TextStyle(fontSize: YahaFontSizes.small),
         onTap: () => print('THIRD CHILD'),
         onLongPress: () => print('THIRD CHILD LONG PRESS'),
-      ),
+      ),*/
       SpeedDialChild(
         child: Icon(Icons.download_rounded, color: YahaColors.accentColor),
         backgroundColor: YahaColors.primary,
         label: 'Download',
-        labelStyle: TextStyle(fontSize: YahaFontSizes.medium),
+        labelStyle: TextStyle(fontSize: YahaFontSizes.small),
         onTap: () => print('THIRD CHILD'),
         onLongPress: () => print('THIRD CHILD LONG PRESS'),
       ),

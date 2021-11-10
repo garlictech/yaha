@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaha/search-result.dart';
+import 'package:yaha/search-results-screen.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
@@ -155,7 +155,7 @@ class _ExplorePageState extends State<ExplorePage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => SearchResultPage()));
+                                builder: (context) => SearchResultsScreen()));
                       },
                       label: Text('Explore',
                           style: TextStyle(

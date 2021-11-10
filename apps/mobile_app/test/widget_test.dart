@@ -28,7 +28,7 @@ import 'package:yaha/explore.dart';
 import 'package:yaha/filter/filter-page.dart';
 import 'package:yaha/gallery.dart';
 import 'package:yaha/hike/hike-screen/hike-screen.dart';
-import 'package:yaha/hike/hike-outline/hike-outline-page.dart';
+import 'package:yaha/hike/hike-outline/hike-outline-screen.dart';
 import 'package:yaha/home/views/screens/guest-home-screen.dart';
 
 import 'package:yaha/main.dart';
@@ -38,8 +38,9 @@ import 'package:yaha/profile/events/views/screens/event-prize-screen.dart';
 import 'package:yaha/profile/events/views/screens/events.dart';
 import 'package:yaha/profile/events/views/screens/ongoing-events.dart';
 import 'package:yaha/profile/profile-page.dart';
-import 'package:yaha/profile/statistics/statistics-page.dart';
+import 'package:yaha/profile/statistics/statistics-screen.dart';
 import 'package:yaha/profile/time-capsules/time-capsules.dart';
+import 'package:yaha/search-results-screen.dart';
 import 'package:yaha/settings/application/application-page.dart';
 import 'package:yaha/settings/views/settings-screen.dart';
 import 'package:yaha/track-page.dart';
@@ -148,7 +149,7 @@ void main() {
   });
   testWidgets('Hike Outline Screen smoke test', (WidgetTester tester) async {
     await tester
-        .pumpWidget(createWidgetForTesting(child: new HikeOutlinePage()));
+        .pumpWidget(createWidgetForTesting(child: new HikeOutlineScreen()));
 
     await tester.pumpAndSettle();
   });
@@ -213,7 +214,7 @@ void main() {
   });
   testWidgets('Statistics Screen smoke test', (WidgetTester tester) async {
     await tester
-        .pumpWidget(createWidgetForTesting(child: new StatisticsPage()));
+        .pumpWidget(createWidgetForTesting(child: new StatisticsScreen()));
 
     await tester.pumpAndSettle();
   });
@@ -270,6 +271,12 @@ void main() {
   });
   testWidgets('More Poi Screen smoke test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: new MorePoiScreen()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Search Results Screen smoke test', (WidgetTester tester) async {
+    await tester
+        .pumpWidget(createWidgetForTesting(child: new SearchResultsScreen()));
 
     await tester.pumpAndSettle();
   });
