@@ -4,6 +4,7 @@ import 'package:yaha/hike/hike-outline/poi.dart';
 import 'package:yaha/hike/views/screens/comments-screen.dart';
 import 'package:yaha/utility/buttons/back-button.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
+import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-icon-sizes.dart';
@@ -152,12 +153,13 @@ class _PoiScreenState extends State<PoiScreen> {
                             height: 220.0,
                             width: MediaQuery.of(context).size.width,
                             child: Gallery()),
-                        Container(
-                          padding:
-                              const EdgeInsets.only(top: YahaSpaceSizes.xLarge),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              top: YahaSpaceSizes.xLarge,
+                              bottom: YahaSpaceSizes.general),
                           child: SizedBox(
-                            height: 50,
-                            width: 300,
+                            height: YahaBoxSizes.buttonHeight,
+                            width: YahaBoxSizes.buttonWidthBig,
                             child: ElevatedButton.icon(
                               icon: Icon(
                                 Icons.add,

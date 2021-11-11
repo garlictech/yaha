@@ -632,9 +632,10 @@ class _HikeScreenState extends State<HikeScreen> {
                         ],
                       ),
                       ShowMoreButton(nextScreen: WeatherScreen()),
-                      Container(
-                        padding:
-                            const EdgeInsets.only(top: YahaSpaceSizes.large),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            top: YahaSpaceSizes.large,
+                            bottom: YahaSpaceSizes.general),
                         child: SizedBox(
                           height: YahaBoxSizes.buttonHeight,
                           width: YahaBoxSizes.buttonWidthBig,
