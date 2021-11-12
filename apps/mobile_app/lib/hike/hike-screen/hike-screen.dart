@@ -66,14 +66,6 @@ class _HikeScreenState extends State<HikeScreen> {
                       ),
                     ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: YahaSpaceSizes.small),
-                    child: Icon(
-                      Icons.bookmark_rounded,
-                      color: YahaColors.accentColor,
-                      size: YahaIconSizes.medium,
-                    ),
-                  ),
                 ],
               ),
               background: ColorFiltered(
@@ -640,9 +632,10 @@ class _HikeScreenState extends State<HikeScreen> {
                         ],
                       ),
                       ShowMoreButton(nextScreen: WeatherScreen()),
-                      Container(
-                        padding:
-                            const EdgeInsets.only(top: YahaSpaceSizes.large),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            top: YahaSpaceSizes.large,
+                            bottom: YahaSpaceSizes.general),
                         child: SizedBox(
                           height: YahaBoxSizes.buttonHeight,
                           width: YahaBoxSizes.buttonWidthBig,
@@ -738,32 +731,35 @@ SpeedDial buildSpeedDial() {
       SpeedDialChild(
         child: Icon(Icons.settings_rounded, color: YahaColors.accentColor),
         backgroundColor: YahaColors.primary,
-        label: 'Settings',
-        labelStyle: TextStyle(fontSize: YahaFontSizes.small),
+        /*label: 'Settings',
+        labelStyle: TextStyle(
+            fontSize: YahaFontSizes.small, color: YahaColors.textColor),*/
         onTap: () => print('FIRST CHILD'),
         onLongPress: () => print('FIRST CHILD LONG PRESS'),
       ),
       SpeedDialChild(
         child: Icon(Icons.comment_rounded, color: YahaColors.accentColor),
         backgroundColor: YahaColors.primary,
-        label: 'Comment',
-        labelStyle: TextStyle(fontSize: YahaFontSizes.small),
+        /*label: 'Comment',
+        labelStyle: TextStyle(
+            fontSize: YahaFontSizes.small, color: YahaColors.textColor),*/
         onTap: () => print('SECOND CHILD'),
         onLongPress: () => print('SECOND CHILD LONG PRESS'),
       ),
-      /*SpeedDialChild(
+      SpeedDialChild(
         child: Icon(Icons.bookmark_rounded, color: YahaColors.accentColor),
         backgroundColor: YahaColors.primary,
-        label: 'Bookmark',
-        labelStyle: TextStyle(fontSize: YahaFontSizes.small),
+        /*label: 'Bookmark',
+        labelStyle: TextStyle(fontSize: YahaFontSizes.small),*/
         onTap: () => print('THIRD CHILD'),
         onLongPress: () => print('THIRD CHILD LONG PRESS'),
-      ),*/
+      ),
       SpeedDialChild(
         child: Icon(Icons.download_rounded, color: YahaColors.accentColor),
         backgroundColor: YahaColors.primary,
-        label: 'Download',
-        labelStyle: TextStyle(fontSize: YahaFontSizes.small),
+        /*label: 'Download',
+        labelStyle: TextStyle(
+            fontSize: YahaFontSizes.small, color: YahaColors.textColor),*/
         onTap: () => print('THIRD CHILD'),
         onLongPress: () => print('THIRD CHILD LONG PRESS'),
       ),
