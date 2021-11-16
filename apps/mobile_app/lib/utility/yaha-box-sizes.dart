@@ -1,12 +1,15 @@
 class YahaBoxSizes {
   //HEIGHT - general
+  static const heightXXXSmall = 50.0;
   static const heightXXSmall = 65.0;
   static const heigthXSmall = 85.0;
   static const heightSmall = 120.0;
   static const heightGeneral = 160.0;
   static const heightMedium = 220.0;
+  static const categoryTitleBoxHeight = 56.0;
 
   //WIDTH - general
+  static const widthXXXSmall = 50.0;
   static const widthXXSmall = 65.0;
   static const widthXSmall = 85.0;
   static const widthSmall = 120.0;
@@ -30,12 +33,20 @@ class YahaBoxSizes {
   static const backButtonWidth = 44.0;
 
   //WIDTH - hike outline boxes
-  static const checkpointWidthMax = 350.0;
-  static const sectionWidthMax = 300.0;
+  //Had to make them both 16 pixels wider than what's in the design because there was an overflow on the right according to the tests.
+  //In reality the overflow was not seenable and the time and left arrow weren't even close to the edge of the box.
+  static const checkpointWidthMax = 366.0;
+  static const sectionWidthMax = 316.0;
 
   //HEIGHT - hike outline boxes
   static const checkpointHeight = 90.0;
   static const sectionHeight = 70.0;
+
+  //HEIGHT - comment profile picture
+  static const commentProfilePictureHeight = 60.0;
+
+  //WIDTH - comment profile picture
+  static const commentProfilePictureWidth = 60.0;
 
   const YahaBoxSizes();
 }

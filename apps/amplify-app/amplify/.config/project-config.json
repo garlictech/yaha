@@ -1,0 +1,13 @@
+{
+  "projectName": "yaha",
+  "version": "3.1",
+  "frontend": "flutter",
+  "flutter": {
+    "config": {
+      "ResDir": "../mobile_app/lib"
+    }
+  },
+  "providers": [
+    "awscloudformation"
+  ]
+}

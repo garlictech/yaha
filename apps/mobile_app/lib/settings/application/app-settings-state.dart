@@ -17,8 +17,12 @@ class ApplicationSettingsState extends $ApplicationSettingsState {
   final int distanceInitialIndex;
   final int temperatureInitialIndex;
   final int timeFormatInitialIndex;
+  final DateTime? startTime;
+  final DateTime? finishTime;
+  final bool startTimePickerVisibility;
+  final bool finishTimePickerVisibility;
   final String currentLanguageTitle;
-  final double averageHikingSpeed;
+  final String averageHikingSpeed;
 
   ApplicationSettingsState(
       {this.isEnglish = true,
@@ -27,9 +31,15 @@ class ApplicationSettingsState extends $ApplicationSettingsState {
       this.isTimeFormat24 = true,
       this.distanceInitialIndex = 0,
       this.temperatureInitialIndex = 0,
-      this.averageHikingSpeed = 4.0,
+      this.averageHikingSpeed = '4',
       this.timeFormatInitialIndex = 1,
-      this.currentLanguageTitle = 'English'});
+      startTime,
+      finishTime,
+      this.startTimePickerVisibility = false,
+      this.finishTimePickerVisibility = false,
+      this.currentLanguageTitle = 'English'})
+      : this.finishTime = (finishTime != null ? finishTime : DateTime.now()),
+        this.startTime = (startTime != null ? startTime : DateTime.now());
 
   factory ApplicationSettingsState.fromJson(Map<String, dynamic> json) =>
       _$ApplicationSettingsStateFromJson(json);
@@ -63,8 +73,22 @@ class ApplicationSettingsStateNotifier
       _updateState(state.copyWith(
           isTimeFormat24: newState, timeFormatInitialIndex: newInitialIndex));
 
-  updateAverageHikingSpeed(double newSpeed) =>
+  updateAverageHikingSpeed(String newSpeed) =>
       _updateState(state.copyWith(averageHikingSpeed: newSpeed));
+
+  updateStartTime(DateTime newStartTime) =>
+      _updateState(state.copyWith(startTime: newStartTime));
+
+  updateFinishTime(DateTime newFinishTime) =>
+      _updateState(state.copyWith(finishTime: newFinishTime));
+
+  updateStartTimePickerVisibility(bool newStartTimePickerVisibility) =>
+      _updateState(state.copyWith(
+          startTimePickerVisibility: newStartTimePickerVisibility));
+
+  updateFinishTimePickerVisibility(bool newFinishTimePickerVisibility) =>
+      _updateState(state.copyWith(
+          finishTimePickerVisibility: newFinishTimePickerVisibility));
 
   Future<void> readSettingsFromLocalStore() async {
     (await localStorageHandler.getItem(localStorageKey))

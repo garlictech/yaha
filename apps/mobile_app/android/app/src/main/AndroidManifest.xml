@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 package="com.example.mobile_app">
-  <application android:label="mobile_app"
+  <application android:label="Yaha"
   android:icon="@mipmap/ic_launcher">
     <activity android:name=".MainActivity"
     android:launchMode="singleTop"
