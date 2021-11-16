@@ -6,13 +6,13 @@ import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-icon-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
-class PlaceWidget extends StatelessWidget {
+class PoiListTileWidget extends StatelessWidget {
   final Color poiColor;
   final IconData poiIcon;
   final String title;
   final int? distanceFromStart;
 
-  const PlaceWidget({
+  const PoiListTileWidget({
     Key? key,
     required this.poiColor,
     required this.poiIcon,
