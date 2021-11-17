@@ -240,6 +240,12 @@ void main() {
 
     await tester.pumpAndSettle();
   });
+  testWidgets('TimeCapsule Screen smoke test', (WidgetTester tester) async {
+    await tester
+        .pumpWidget(createWidgetForTesting(child: new TimeCapsulesScreen()));
+
+    await tester.pumpAndSettle();
+  });
   testWidgets('Bookmarked Hikes Screen smoke test',
       (WidgetTester tester) async {
     await tester

@@ -10,6 +10,7 @@ const List<Object> defaultPoiPreviewList = [
     icon: Icons.museum_rounded,
     iconSize: 24,
     padding: YahaSpaceSizes.xSmall,
+    radius: 19,
   ),
   SizedBox(),
   Poi(
@@ -17,6 +18,7 @@ const List<Object> defaultPoiPreviewList = [
     icon: Icons.fastfood_rounded,
     iconSize: 24,
     padding: YahaSpaceSizes.xSmall,
+    radius: 19,
   ),
   SizedBox(),
   Poi(
@@ -24,6 +26,7 @@ const List<Object> defaultPoiPreviewList = [
     icon: Icons.shopping_cart_rounded,
     iconSize: 24,
     padding: YahaSpaceSizes.xSmall,
+    radius: 19,
   ),
   SizedBox(),
   Poi(
@@ -31,6 +34,7 @@ const List<Object> defaultPoiPreviewList = [
     icon: Icons.park_rounded,
     iconSize: 24,
     padding: YahaSpaceSizes.xSmall,
+    radius: 19,
   ),
 ];
 
@@ -45,11 +49,11 @@ class CheckpointPoiListPreview extends StatelessWidget {
           icon: node.icon,
           iconSize: node.iconSize,
           padding: node.padding,
+          radius: node.radius,
         );
       } else if (node is SizedBox) {
         return SizedBox(width: 10.0);
-      }
-      else {
+      } else {
         throw "Wrong data";
       }
     });

@@ -18,6 +18,7 @@ const List<Object> defaultNodeList = [
     iconSize: 40,
     estimatedArrival: "7:30",
     padding: YahaSpaceSizes.small,
+    radius: 32,
   ),
   DottedLine(
     direction: Axis.vertical,
@@ -61,6 +62,7 @@ const List<Object> defaultNodeList = [
     iconSize: 40,
     estimatedArrival: "7:38",
     padding: YahaSpaceSizes.small,
+    radius: 32,
   ),
   DottedLine(
     direction: Axis.vertical,
@@ -104,6 +106,7 @@ const List<Object> defaultNodeList = [
     iconSize: 40,
     estimatedArrival: "7:43",
     padding: YahaSpaceSizes.small,
+    radius: 32,
   ),
 ];
 

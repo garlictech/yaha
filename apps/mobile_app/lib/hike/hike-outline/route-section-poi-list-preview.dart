@@ -10,6 +10,7 @@ const List<Object> defaultPoiPreviewList = [
     icon: Icons.bakery_dining_rounded,
     iconSize: 24,
     padding: YahaSpaceSizes.xSmall,
+    radius: 20,
   ),
   SizedBox(),
   Poi(
@@ -17,6 +18,7 @@ const List<Object> defaultPoiPreviewList = [
     icon: Icons.park_rounded,
     iconSize: 24,
     padding: YahaSpaceSizes.xSmall,
+    radius: 20,
   ),
   SizedBox(),
   Poi(
@@ -24,6 +26,7 @@ const List<Object> defaultPoiPreviewList = [
     icon: Icons.sports_bar_rounded,
     iconSize: 24,
     padding: YahaSpaceSizes.xSmall,
+    radius: 20,
   ),
 ];
 
@@ -38,6 +41,7 @@ class RouteSectionPoiListPreview extends StatelessWidget {
           icon: node.icon,
           iconSize: node.iconSize,
           padding: node.padding,
+          radius: node.radius,
         );
       } else if (node is SizedBox) {
         return SizedBox(width: 10.0);
