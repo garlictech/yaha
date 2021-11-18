@@ -5,18 +5,20 @@ import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-icon-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
-class PoiCategoryTitleBox extends StatelessWidget {
-  final IconData icon;
+class ListSectionTitleBox extends StatelessWidget {
+  final IconData? icon;
   final String title;
-  final double iconBottomPadding;
   final Color backgroundColor;
+  final Color titleColor;
+  final bool iconVisibility;
 
-  const PoiCategoryTitleBox({
+  const ListSectionTitleBox({
     Key? key,
-    required this.icon,
+    this.icon,
     required this.title,
-    required this.iconBottomPadding,
     required this.backgroundColor,
+    required this.titleColor,
+    required this.iconVisibility,
   }) : super(key: key);
 
   @override
@@ -27,20 +29,25 @@ class PoiCategoryTitleBox extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Padding(
-            padding: EdgeInsets.only(
-                right: YahaSpaceSizes.small, bottom: iconBottomPadding),
-            child: Icon(
-              icon,
-              size: YahaIconSizes.large,
-              color: YahaColors.background,
+          Visibility(
+            visible: iconVisibility,
+            child: Padding(
+              padding: EdgeInsets.only(
+                  right: YahaSpaceSizes.small, bottom: YahaSpaceSizes.xxSmall),
+              child: Icon(
+                icon,
+                size: YahaIconSizes.large,
+                color: YahaColors.background,
+              ),
             ),
           ),
-          Text(title,
-              style: TextStyle(
-                  fontSize: YahaFontSizes.medium,
-                  fontWeight: FontWeight.w600,
-                  color: YahaColors.background)),
+          Text(
+            title,
+            style: TextStyle(
+                fontSize: YahaFontSizes.medium,
+                fontWeight: FontWeight.w600,
+                color: titleColor),
+          ),
         ],
       ),
       decoration: BoxDecoration(color: backgroundColor),

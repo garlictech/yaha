@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/hike/hike-outline/weather-astronomical-data.dart';
+import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:dotted_line/dotted_line.dart';
+import 'package:yaha/utility/yaha-icon-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
 import 'checkpoint.dart';
@@ -15,9 +17,10 @@ const List<Object> defaultNodeList = [
     boxBackgorundColor: YahaColors.secondary,
     backgroundColor: YahaColors.secondary,
     icon: Icons.outlined_flag_rounded,
-    iconSize: 40,
+    iconSize: YahaIconSizes.xxLarge,
     estimatedArrival: "7:30",
     padding: YahaSpaceSizes.small,
+    radius: YahaBoxSizes.circleAvatarRadiusLarge,
   ),
   DottedLine(
     direction: Axis.vertical,
@@ -58,9 +61,10 @@ const List<Object> defaultNodeList = [
     boxBackgorundColor: YahaColors.generic,
     backgroundColor: YahaColors.generic,
     icon: Icons.museum_rounded,
-    iconSize: 40,
+    iconSize: YahaIconSizes.xxLarge,
     estimatedArrival: "7:38",
     padding: YahaSpaceSizes.small,
+    radius: YahaBoxSizes.circleAvatarRadiusLarge,
   ),
   DottedLine(
     direction: Axis.vertical,
@@ -101,9 +105,10 @@ const List<Object> defaultNodeList = [
     boxBackgorundColor: YahaColors.generic,
     backgroundColor: YahaColors.generic,
     icon: Icons.museum_rounded,
-    iconSize: 40,
+    iconSize: YahaIconSizes.xxLarge,
     estimatedArrival: "7:43",
     padding: YahaSpaceSizes.small,
+    radius: YahaBoxSizes.circleAvatarRadiusLarge,
   ),
 ];
 

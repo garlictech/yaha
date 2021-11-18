@@ -64,10 +64,12 @@ class _PoiScreenState extends State<PoiScreen> {
                                 top: YahaSpaceSizes.general,
                                 bottom: YahaSpaceSizes.general),
                             child: Poi(
-                                backgroundColor: YahaColors.generic,
-                                icon: Icons.museum_rounded,
-                                iconSize: 48,
-                                padding: YahaSpaceSizes.small)),
+                              backgroundColor: YahaColors.generic,
+                              icon: Icons.museum_rounded,
+                              iconSize: 48,
+                              padding: YahaSpaceSizes.small,
+                              radius: 40,
+                            )),
                         Container(
                           padding: const EdgeInsets.only(
                               bottom: YahaSpaceSizes.general),

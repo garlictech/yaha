@@ -40,7 +40,9 @@ import 'package:yaha/profile/events/views/screens/events.dart';
 import 'package:yaha/profile/events/views/screens/ongoing-events.dart';
 import 'package:yaha/profile/profile-page.dart';
 import 'package:yaha/profile/statistics/statistics-screen.dart';
-import 'package:yaha/profile/time-capsules/time-capsules.dart';
+import 'package:yaha/profile/time-capsules/views/screens/found-timecapsules-screen.dart';
+import 'package:yaha/profile/time-capsules/views/screens/my-timecapsules-screen.dart';
+import 'package:yaha/profile/time-capsules/views/screens/timecapsules-screen.dart';
 import 'package:yaha/search-results-screen.dart';
 import 'package:yaha/settings/application/application-screen.dart';
 import 'package:yaha/settings/views/settings-screen.dart';
@@ -220,7 +222,27 @@ void main() {
     await tester.pumpAndSettle();
   });
   testWidgets('TimeCapsules Screen smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new TimeCapsules()));
+    await tester
+        .pumpWidget(createWidgetForTesting(child: new TimeCapsulesScreen()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Found TimeCapsules Screen smoke test',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(
+        createWidgetForTesting(child: new FoundTimeCapsulesScreen()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('My TimeCapsules Screen smoke test', (WidgetTester tester) async {
+    await tester
+        .pumpWidget(createWidgetForTesting(child: new MyTimeCapsulesScreen()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('TimeCapsule Screen smoke test', (WidgetTester tester) async {
+    await tester
+        .pumpWidget(createWidgetForTesting(child: new TimeCapsulesScreen()));
 
     await tester.pumpAndSettle();
   });

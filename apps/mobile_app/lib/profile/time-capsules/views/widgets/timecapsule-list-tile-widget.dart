@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:yaha/hike/hike-outline/poi.dart';
-import 'package:yaha/hike/views/screens/poi-screen.dart';
+import 'package:yaha/profile/time-capsules/views/screens/timecapsule-details-screen.dart';
+import 'package:yaha/profile/time-capsules/views/widgets/poi-with-image-widget.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-icon-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
-class PlaceWidget extends StatelessWidget {
-  final Color poiColor;
-  final IconData poiIcon;
-  final String title;
-  final int? distanceFromStart;
+class TimeCapsuleListTileWidget extends StatelessWidget {
+  final String date;
+  final String secondLine;
+  final bool whoPlacedItVisibility;
+  final bool contentVisibility;
 
-  const PlaceWidget({
+  const TimeCapsuleListTileWidget({
     Key? key,
-    required this.poiColor,
-    required this.poiIcon,
-    required this.title,
-    required this.distanceFromStart,
+    required this.date,
+    required this.secondLine,
+    required this.whoPlacedItVisibility,
+    required this.contentVisibility,
   }) : super(key: key);
 
   @override
@@ -25,7 +25,14 @@ class PlaceWidget extends StatelessWidget {
     return InkWell(
       onTap: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => PoiScreen()));
+          context,
+          MaterialPageRoute(
+            builder: (context) => TimeCapsuleDetailsScreen(
+              whoPlacedItVisibility: whoPlacedItVisibility,
+              contentVisibility: contentVisibility,
+            ),
+          ),
+        );
       },
       child: Padding(
         padding: const EdgeInsets.only(
@@ -36,11 +43,12 @@ class PlaceWidget extends StatelessWidget {
           children: [
             Row(
               children: [
-                Poi(
-                    backgroundColor: poiColor,
-                    icon: poiIcon,
-                    iconSize: YahaIconSizes.medium,
-                    padding: YahaSpaceSizes.xSmall),
+                PoiWithImageWidget(
+                  backgroundColor: YahaColors.timeCapsule,
+                  image: 'assets/images/timecapsule.png',
+                  radius: 19,
+                  padding: YahaSpaceSizes.xSmall,
+                ),
                 Padding(
                   padding: const EdgeInsets.only(left: YahaSpaceSizes.small),
                   child: Column(
@@ -50,7 +58,7 @@ class PlaceWidget extends StatelessWidget {
                         padding: const EdgeInsets.only(
                             bottom: YahaSpaceSizes.xSmall),
                         child: Text(
-                          title,
+                          'TimeCapsule',
                           style: TextStyle(
                             fontSize: YahaFontSizes.small,
                             color: YahaColors.textColor,
@@ -59,7 +67,8 @@ class PlaceWidget extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'Distance from start: ${distanceFromStart}m',
+                        /*'${secondLine}: ${date}',*/
+                        secondLine + ': ' + date,
                         style: TextStyle(
                           fontSize: YahaFontSizes.small,
                           color: YahaColors.textColor,

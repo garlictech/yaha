@@ -4,7 +4,7 @@ import 'package:yaha/profile/challenges/views/screens/challenges.dart';
 import 'package:yaha/profile/events/views/screens/events.dart';
 import 'package:yaha/profile/statistics.dart';
 import 'package:yaha/profile/statistics/statistics-screen.dart';
-import 'package:yaha/profile/time-capsules/time-capsules.dart';
+import 'package:yaha/profile/time-capsules/views/screens/timecapsules-screen.dart';
 import 'package:yaha/settings/views/settings-screen.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-border-width.dart';
@@ -223,7 +223,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 Navigator.of(this.context).push(
                                     new MaterialPageRoute<dynamic>(
                                         builder: (BuildContext context) {
-                                  return new TimeCapsules();
+                                  return new TimeCapsulesScreen();
                                 }));
                               },
                               child: Container(

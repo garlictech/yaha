@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:yaha/profile/time-capsules/views/screens/found-timecapsules-screen.dart';
+import 'package:yaha/profile/time-capsules/views/screens/my-timecapsules-screen.dart';
 import 'package:yaha/utility/buttons/back-button.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
-import 'package:yaha/utility/yaha-space-sizes.dart';
 
-class TimeCapsules extends StatelessWidget {
-  const TimeCapsules({Key? key}) : super(key: key);
+class TimeCapsulesScreen extends StatelessWidget {
+  const TimeCapsulesScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,11 +33,11 @@ class TimeCapsules extends StatelessWidget {
             ],
           ),
         ),
-        body: Container(
-          padding: EdgeInsets.only(
-              left: YahaSpaceSizes.medium,
-              right: YahaSpaceSizes.medium,
-              top: YahaSpaceSizes.large),
+        body: TabBarView(
+          children: [
+            FoundTimeCapsulesScreen(),
+            MyTimeCapsulesScreen(),
+          ],
         ),
       ),
     );

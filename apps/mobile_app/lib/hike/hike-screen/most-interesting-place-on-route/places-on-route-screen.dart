@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:yaha/hike/hike-screen/most-interesting-place-on-route/place-widget.dart';
+import 'package:yaha/hike/hike-screen/most-interesting-place-on-route/poi-list-tile-widget.dart';
 import 'package:yaha/hike/hike-screen/most-interesting-place-on-route/places-on-route-state.dart';
 import 'package:yaha/utility/buttons/back-button.dart';
 import 'package:yaha/utility/yaha-border-width.dart';
@@ -22,8 +22,8 @@ class PlacesOnRouteScreen extends ConsumerWidget {
 
   _createMainWidget(PlacesOnRouteState state) {
     var nodes = state.nodeList.map((node) {
-      if (node is PlaceWidget) {
-        return PlaceWidget(
+      if (node is PoiListTileWidget) {
+        return PoiListTileWidget(
           poiColor: node.poiColor,
           poiIcon: node.poiIcon,
           title: node.title,
