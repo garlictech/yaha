@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaha/profile/time-capsules/views/screens/timecapsule-screen.dart';
+import 'package:yaha/profile/time-capsules/views/screens/timecapsule-details-screen.dart';
 import 'package:yaha/profile/time-capsules/views/widgets/poi-with-image-widget.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
@@ -9,19 +9,30 @@ import 'package:yaha/utility/yaha-space-sizes.dart';
 class TimeCapsuleListTileWidget extends StatelessWidget {
   final String date;
   final String secondLine;
+  final bool whoPlacedItVisibility;
+  final bool contentVisibility;
 
   const TimeCapsuleListTileWidget({
     Key? key,
     required this.date,
     required this.secondLine,
+    required this.whoPlacedItVisibility,
+    required this.contentVisibility,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => TimeCapsuleScreen()));
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => TimeCapsuleDetailsScreen(
+              whoPlacedItVisibility: whoPlacedItVisibility,
+              contentVisibility: contentVisibility,
+            ),
+          ),
+        );
       },
       child: Padding(
         padding: const EdgeInsets.only(
@@ -56,7 +67,8 @@ class TimeCapsuleListTileWidget extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '${secondLine}: ${date}',
+                        /*'${secondLine}: ${date}',*/
+                        secondLine + ': ' + date,
                         style: TextStyle(
                           fontSize: YahaFontSizes.small,
                           color: YahaColors.textColor,

@@ -30,6 +30,8 @@ class MyTimeCapsulesScreen extends ConsumerWidget {
                         child: TimeCapsuleListTileWidget(
                           date: '12.11.2021',
                           secondLine: 'Placed it',
+                          whoPlacedItVisibility: false,
+                          contentVisibility: true,
                         ),
                       ),
                       Padding(
@@ -43,6 +45,8 @@ class MyTimeCapsulesScreen extends ConsumerWidget {
                       TimeCapsuleListTileWidget(
                         date: '19.11.2021',
                         secondLine: 'Placed it',
+                        whoPlacedItVisibility: false,
+                        contentVisibility: true,
                       ),
                       Padding(
                         padding: const EdgeInsets.only(
@@ -58,6 +62,8 @@ class MyTimeCapsulesScreen extends ConsumerWidget {
                         child: TimeCapsuleListTileWidget(
                           date: '29.11.2021',
                           secondLine: 'Placed it',
+                          whoPlacedItVisibility: false,
+                          contentVisibility: true,
                         ),
                       ),
                       ListSectionTitleBox(
@@ -71,6 +77,8 @@ class MyTimeCapsulesScreen extends ConsumerWidget {
                         child: TimeCapsuleListTileWidget(
                           date: '05.12.2021',
                           secondLine: 'Placed it',
+                          whoPlacedItVisibility: false,
+                          contentVisibility: true,
                         ),
                       ),
                     ],

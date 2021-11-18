@@ -39,9 +39,9 @@ class PoiListTileWidget extends StatelessWidget {
                 Poi(
                   backgroundColor: poiColor,
                   icon: poiIcon,
-                  iconSize: YahaIconSizes.medium,
+                  iconSize: YahaIconSizes.small,
                   padding: YahaSpaceSizes.xSmall,
-                  radius: 19,
+                  radius: 18,
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: YahaSpaceSizes.small),

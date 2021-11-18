@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
+import 'package:yaha/utility/yaha-icon-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
 import 'poi.dart';
@@ -8,33 +10,33 @@ const List<Object> defaultPoiPreviewList = [
   Poi(
     backgroundColor: YahaColors.generic,
     icon: Icons.museum_rounded,
-    iconSize: 24,
+    iconSize: YahaIconSizes.small,
     padding: YahaSpaceSizes.xSmall,
-    radius: 19,
+    radius: YahaBoxSizes.circleAvatarRadiusSmall,
   ),
   SizedBox(),
   Poi(
     backgroundColor: YahaColors.amenity,
     icon: Icons.fastfood_rounded,
-    iconSize: 24,
+    iconSize: YahaIconSizes.small,
     padding: YahaSpaceSizes.xSmall,
-    radius: 19,
+    radius: YahaBoxSizes.circleAvatarRadiusSmall,
   ),
   SizedBox(),
   Poi(
     backgroundColor: YahaColors.amenity,
     icon: Icons.shopping_cart_rounded,
-    iconSize: 24,
+    iconSize: YahaIconSizes.small,
     padding: YahaSpaceSizes.xSmall,
-    radius: 19,
+    radius: YahaBoxSizes.circleAvatarRadiusSmall,
   ),
   SizedBox(),
   Poi(
     backgroundColor: YahaColors.natural,
     icon: Icons.park_rounded,
-    iconSize: 24,
+    iconSize: YahaIconSizes.small,
     padding: YahaSpaceSizes.xSmall,
-    radius: 19,
+    radius: YahaBoxSizes.circleAvatarRadiusSmall,
   ),
 ];
 

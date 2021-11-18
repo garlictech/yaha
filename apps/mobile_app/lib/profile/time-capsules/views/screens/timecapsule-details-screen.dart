@@ -8,7 +8,16 @@ import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-icon-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
-class TimeCapsuleScreen extends ConsumerWidget {
+class TimeCapsuleDetailsScreen extends ConsumerWidget {
+  final bool whoPlacedItVisibility;
+  final bool contentVisibility;
+
+  const TimeCapsuleDetailsScreen({
+    Key? key,
+    required this.whoPlacedItVisibility,
+    required this.contentVisibility,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     return Scaffold(
@@ -191,37 +200,40 @@ class TimeCapsuleScreen extends ConsumerWidget {
                             ],
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              top: YahaSpaceSizes.general,
-                              bottom: YahaSpaceSizes.small),
-                          child: Row(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.only(
-                                    right: YahaSpaceSizes.small),
-                                child: Icon(
-                                  Icons.person_rounded,
-                                  color: YahaColors.textColor,
-                                  size: YahaIconSizes.medium,
+                        Visibility(
+                          visible: whoPlacedItVisibility,
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                top: YahaSpaceSizes.general,
+                                bottom: YahaSpaceSizes.small),
+                            child: Row(
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.only(
+                                      right: YahaSpaceSizes.small),
+                                  child: Icon(
+                                    Icons.person_rounded,
+                                    color: YahaColors.textColor,
+                                    size: YahaIconSizes.medium,
+                                  ),
                                 ),
-                              ),
-                              RichText(
-                                text: TextSpan(
-                                  style: TextStyle(
-                                      color: YahaColors.textColor,
-                                      fontSize: YahaFontSizes.small),
-                                  children: [
-                                    TextSpan(
-                                      text: 'Who',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w700),
-                                    ),
-                                    TextSpan(text: ' placed it: John Doe')
-                                  ],
+                                RichText(
+                                  text: TextSpan(
+                                    style: TextStyle(
+                                        color: YahaColors.textColor,
+                                        fontSize: YahaFontSizes.small),
+                                    children: [
+                                      TextSpan(
+                                        text: 'Who',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w700),
+                                      ),
+                                      TextSpan(text: ' placed it: John Doe')
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                         Padding(
@@ -256,25 +268,45 @@ class TimeCapsuleScreen extends ConsumerWidget {
                             ],
                           ),
                         ),
-                        Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  bottom: YahaSpaceSizes.xSmall),
-                              child: Icon(
+                        Visibility(
+                          visible: contentVisibility,
+                          child: Column(
+                            children: [
+                              Icon(
                                 Icons.email_rounded,
                                 size: YahaIconSizes.xxLarge,
                                 color: YahaColors.textColor,
                               ),
-                            ),
-                            Text(
-                              'Content',
-                              style: TextStyle(
-                                  color: YahaColors.textColor,
-                                  fontSize: YahaFontSizes.medium,
-                                  fontWeight: FontWeight.w700),
-                            ),
-                          ],
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    bottom: YahaSpaceSizes.small,
+                                    top: YahaSpaceSizes.xSmall),
+                                child: Text(
+                                  'Content',
+                                  style: TextStyle(
+                                      color: YahaColors.textColor,
+                                      fontSize: YahaFontSizes.medium,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    bottom: YahaSpaceSizes.small),
+                                child: Text(
+                                  'The content of the TimeCapsule goes here. It can be a text entry or some pictures.',
+                                  style: TextStyle(
+                                      color: YahaColors.textColor,
+                                      fontSize: YahaFontSizes.small),
+                                ),
+                              ),
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(
+                                    YahaBorderRadius.general),
+                                child: Image.asset(
+                                    'assets/images/time-capsule-picture.jpg'),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
