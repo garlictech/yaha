@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:yaha/presenters/comments/comments-screen-presenter.dart';
 import 'package:yaha/utility/buttons/back-button.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
@@ -12,6 +13,9 @@ import '../widgets/comment-widget.dart';
 class CommmentsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
+    final viewModel = watch(commentsScreenMVPProvider);
+    final presenter = watch(commentsScreenMVPProvider.notifier);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: YahaColors.background,
@@ -34,7 +38,9 @@ class CommmentsScreen extends ConsumerWidget {
               child: IconButton(
                 icon: Icon(Icons.add_rounded,
                     size: YahaIconSizes.large, color: YahaColors.textColor),
-                onPressed: () {},
+                onPressed: () {
+                  presenter.toggleCommentInput();
+                },
               ),
             ),
           ),
@@ -54,39 +60,10 @@ class CommmentsScreen extends ConsumerWidget {
                         top: YahaSpaceSizes.general),
                     child: Column(
                       children: [
-                        Comment(
-                          profilePicture:
-                              'assets/images/profile-authenticated.png',
-                          name: 'John Doe',
-                          date: '2021.04.05',
-                          commment: 'This is a rather short comment.',
-                        ),
-                        Comment(
-                          profilePicture:
-                              'assets/images/profile-authenticated.png',
-                          name: 'John Doe',
-                          date: '2021.04.06',
-                          commment:
-                              'This is a little bit longer comment than the first one was.',
-                        ),
-                        Comment(
-                          profilePicture:
-                              'assets/images/profile-authenticated.png',
-                          name: 'John Doe',
-                          date: '2021.04.07',
-                          commment:
-                              'This is a really really super duper long multi-line comment from Jonh Doe because he liked the hike so much.',
-                        ),
-                        Comment(
-                          profilePicture:
-                              'assets/images/profile-authenticated.png',
-                          name: 'John Doe',
-                          date: '2021.04.08',
-                          commment:
-                              'This is the looooooongest comment on the whole screen. It is soooooo loooong that it takes up more than three lines and it is really tiring to read it.',
-                        ),
+                        ...viewModel.comments.map(
+                            (comment) => CommentWidget(commentEntity: comment)),
                         Visibility(
-                          visible: true,
+                          visible: viewModel.commentInputShown,
                           child: Column(
                             children: [
                               Row(
@@ -121,6 +98,7 @@ class CommmentsScreen extends ConsumerWidget {
                                   borderRadius: BorderRadius.circular(
                                       YahaBorderRadius.general),
                                   child: TextField(
+                                    controller: viewModel.newCommentController,
                                     cursorColor: YahaColors.textColor,
                                     maxLines: 10,
                                     decoration: InputDecoration(
@@ -142,7 +120,11 @@ class CommmentsScreen extends ConsumerWidget {
                                       color: YahaColors.accentColor,
                                       size: YahaFontSizes.large,
                                     ),
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      presenter.sendComment(
+                                          body: viewModel
+                                              .newCommentController.text);
+                                    },
                                     label: Text('Send',
                                         style: TextStyle(
                                           fontSize: YahaFontSizes.small,

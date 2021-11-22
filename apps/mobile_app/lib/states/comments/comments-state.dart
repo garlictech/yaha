@@ -1,48 +1,40 @@
 import 'package:functional_data/functional_data.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yaha/utils/auth/auth-methods.dart';
+import 'package:yaha/entities/comments/comment.dart';
 
-import 'oauth2-state.dart';
-
-part 'auth-state.g.dart';
+part 'comments-state.g.dart';
 
 @FunctionalData()
-class AuthState extends $AuthState {
-  final AuthMethod? ongoingAuthMethod;
-  final String? error;
-  final bool working;
-  final bool loggedIn;
-  final bool termsAccepted;
+class CommentsState extends $CommentsState {
+  final List<Comment> comments;
 
-  AuthState(
-      {this.ongoingAuthMethod,
-      this.error,
-      this.working = false,
-      this.loggedIn = false,
-      this.termsAccepted = false});
+  CommentsState({this.comments = const []});
 }
 
-class AuthStateNotifier extends StateNotifier<AuthState> {
-  AuthStateNotifier(bool loggedIn) : super(AuthState(loggedIn: loggedIn));
+class CommentsStateNotifier extends StateNotifier<CommentsState> {
+  CommentsStateNotifier(List<Comment> initialComments)
+      : super(CommentsState(comments: initialComments));
 
-  loginWith(AuthMethod method) =>
-      state = AuthState(ongoingAuthMethod: method, working: true);
-
-  cancelLogin() => state = AuthState();
-
-  errorHappened(String error) =>
-      state = AuthState(working: false, error: error);
-
-  loggedIn() => state = AuthState(loggedIn: true, termsAccepted: true);
-
-  logout() => state = AuthState(loggedIn: false, error: null);
-
-  setTermsAccepted(bool accepted) => state.copyWith(termsAccepted: accepted);
+  addComment(Comment newComment) {
+    return state = state.copyWith(comments: [...state.comments, newComment]);
+  }
 }
 
-final authStateProvider =
-    StateNotifierProvider<AuthStateNotifier, AuthState>((ref) {
-  final oAuth2State = ref.watch(oAuth2StateProvider);
-  return AuthStateNotifier(oAuth2State.loggedIn);
+final commentsStateProvider =
+    StateNotifierProvider<CommentsStateNotifier, CommentsState>((ref) {
+  return CommentsStateNotifier([
+    Comment(
+        ownerName: "John Doe",
+        profilePicture: 'https://i.pravatar.cc/50',
+        date: DateTime.now().toString(),
+        body: "The best hike ever",
+        ownerId: "owner1"),
+    Comment(
+        body: "And placed a time capsule.",
+        ownerId: "owner2",
+        ownerName: "Brian Doe",
+        profilePicture: 'https://i.pravatar.cc/50',
+        date: DateTime.now().toString())
+  ]);
 });

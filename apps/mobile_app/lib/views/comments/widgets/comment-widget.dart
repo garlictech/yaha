@@ -1,24 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:yaha/entities/comments/comment.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
-class Comment extends ConsumerWidget {
-  final String profilePicture;
-  final String name;
-  final String date;
-  final String commment;
+class CommentWidget extends ConsumerWidget {
+  final Comment commentEntity;
 
-  const Comment(
-      {Key? key,
-      required this.profilePicture,
-      required this.name,
-      required this.date,
-      required this.commment})
-      : super(key: key);
+  const CommentWidget({
+    Key? key,
+    required this.commentEntity,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {
@@ -33,7 +28,7 @@ class Comment extends ConsumerWidget {
                 width: YahaBoxSizes.commentProfilePictureWidth,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(YahaBorderRadius.small),
-                  child: Image.asset(profilePicture),
+                  child: Image.network(commentEntity.profilePicture),
                 ),
               ),
               Padding(
@@ -42,7 +37,7 @@ class Comment extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      name,
+                      commentEntity.ownerName,
                       style: TextStyle(
                           fontSize: YahaFontSizes.small,
                           color: YahaColors.textColor,
@@ -52,7 +47,7 @@ class Comment extends ConsumerWidget {
                       padding:
                           const EdgeInsets.only(top: YahaSpaceSizes.xxSmall),
                       child: Text(
-                        date,
+                        commentEntity.date,
                         style: TextStyle(
                             fontSize: YahaFontSizes.xSmall,
                             color: YahaColors.textColor,
@@ -78,7 +73,7 @@ class Comment extends ConsumerWidget {
                 width: MediaQuery.of(context).size.width,
                 constraints:
                     BoxConstraints(maxHeight: YahaBoxSizes.heightGeneral),
-                child: Text(commment),
+                child: Text(commentEntity.body),
               ),
             ),
           ),

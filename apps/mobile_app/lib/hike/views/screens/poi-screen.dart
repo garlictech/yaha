@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yaha/gallery.dart';
 import 'package:yaha/hike/hike-outline/poi.dart';
-import 'package:yaha/hike/views/screens/comments-screen.dart';
 import 'package:yaha/utility/buttons/back-button.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
@@ -9,6 +8,7 @@ import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-icon-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
+import 'package:yaha/views/comments/screens/comments-screen.dart';
 
 class PoiScreen extends StatefulWidget {
   @override
