@@ -1,7 +1,7 @@
 import 'package:functional_data/functional_data.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../utils/auth-methods.dart';
+import 'package:yaha/utils/auth/auth-methods.dart';
 
 import 'oauth2-state.dart';
 

@@ -2,10 +2,9 @@ import 'package:webview_flutter/webview_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:yaha/presenters/auth/social-login-screen-presenter.dart';
 import 'package:yaha/utility/buttons/back-button.dart';
-
-import '../../utils/auth-methods.dart';
-import '../../presenters/social-login-screen-presenter.dart';
+import 'package:yaha/utils/auth/auth-methods.dart';
 
 @immutable
 class SocialLoginScreen extends ConsumerWidget {

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:yaha/viewmodels/auth/login-screen-viewmodel.dart';
+import 'package:yaha/views/auth/screens/login-with-email-screen.dart';
+import 'package:yaha/views/auth/screens/signup-screen.dart';
 
-import '../views/screens/signup-screen.dart';
-import '../views/screens/login-with-email-screen.dart';
-import '../viewmodels/login-screen-viewmodel.dart';
 import 'social-login-mixin.dart';
 import 'terms-accepted-mixin.dart';
 

@@ -3,9 +3,8 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/app-config.dart';
-
-import '../entities/oauth2-entity.dart';
-import '../utils/auth-methods.dart';
+import 'package:yaha/entities/auth/oauth2-entity.dart';
+import 'package:yaha/utils/auth/auth-methods.dart';
 
 import 'oauth2-repository.dart';
 

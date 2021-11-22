@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import '../entities/oauth2-entity.dart';
+import 'package:yaha/entities/auth/oauth2-entity.dart';
 
 abstract class OAuth2Repository {
   String getAuthorizeUrl();

@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:yaha/presenters/auth/signup-screen-presenter.dart';
 import 'package:yaha/utility/buttons/back-button.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
@@ -9,16 +10,15 @@ import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-icon-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
-import '../../presenters/login-screen-presenter.dart';
 import '../widgets/apple-button.dart';
 import '../widgets/facebook-button.dart';
 import '../widgets/google-button.dart';
 
-class LogInScreen extends ConsumerWidget {
+class SignupScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    final viewModel = watch(loginScreenMVPProvider(context));
-    final presenter = watch(loginScreenMVPProvider(context).notifier);
+    final viewModel = watch(signupScreenMVPProvider(context));
+    final presenter = watch(signupScreenMVPProvider(context).notifier);
 
     return Scaffold(
       body: CustomScrollView(
@@ -45,7 +45,7 @@ class LogInScreen extends ConsumerWidget {
                             Align(
                               alignment: Alignment.center,
                               child: Text(
-                                'Log in',
+                                'Sign up',
                                 style: TextStyle(
                                     fontSize: YahaFontSizes.medium,
                                     fontWeight: FontWeight.w600,
@@ -61,7 +61,7 @@ class LogInScreen extends ConsumerWidget {
                             height: YahaBoxSizes.buttonHeight,
                             width: YahaBoxSizes.buttonWidthBig,
                             child: ElevatedButton(
-                              onPressed: presenter.doEmailLogin,
+                              onPressed: presenter.doEmailSignup,
                               child: Stack(
                                 children: [
                                   Container(
@@ -71,14 +71,14 @@ class LogInScreen extends ConsumerWidget {
                                       child: Icon(
                                         Icons.mail_outline_rounded,
                                         color: YahaColors.accentColor,
-                                        size: YahaIconSizes.large
+                                        size: YahaIconSizes.large,
                                       ),
                                     ),
                                   ),
                                   Align(
                                     alignment: Alignment.center,
                                     child: Text(
-                                      'Log in with email',
+                                      'Sign up with email',
                                       style: TextStyle(
                                         fontSize: YahaFontSizes.small,
                                         fontWeight: FontWeight.w600,
@@ -102,20 +102,20 @@ class LogInScreen extends ConsumerWidget {
                                 top: YahaSpaceSizes.medium,
                                 bottom: YahaSpaceSizes.medium),
                             child: FacebookButton(
-                                title: 'Log in with Facebook',
+                                title: 'Sign up with Facebook',
                                 onPressed: presenter.doFacebookLogin)),
                         Container(
                             padding: const EdgeInsets.only(
                                 bottom: YahaSpaceSizes.medium),
                             child: GoogleButton(
-                              title: 'Log in with Google',
+                              title: 'Sign up with Google',
                               onPressed: presenter.doGoogleLogin,
                             )),
                         Container(
                             padding: const EdgeInsets.only(
                                 bottom: YahaSpaceSizes.large),
                             child: AppleButton(
-                              title: 'Log in with Apple',
+                              title: 'Sign up with Apple',
                               onPressed: presenter.doAppleLogin,
                             )),
                         Container(
@@ -185,19 +185,19 @@ class LogInScreen extends ConsumerWidget {
                                   fontSize: YahaFontSizes.small),
                               children: [
                                 TextSpan(
-                                  text: "Don't have an account? ",
+                                  text: "Already have an account? ",
                                   style: TextStyle(
                                     fontWeight: FontWeight.w400,
                                   ),
                                 ),
                                 TextSpan(
-                                    text: 'Sign up',
+                                    text: 'Log in',
                                     style: TextStyle(
                                       fontWeight: FontWeight.w600,
                                       color: YahaColors.primary,
                                     ),
                                     recognizer: TapGestureRecognizer()
-                                      ..onTap = presenter.doSignup),
+                                      ..onTap = presenter.doLogin),
                               ],
                             ),
                           ),

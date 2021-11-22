@@ -1,5 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:yaha/auth/states/auth-state.dart';
+import 'package:yaha/states/auth/auth-state.dart';
 
 mixin TermsAccepted {
   late final ProviderReference _ref;

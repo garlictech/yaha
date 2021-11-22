@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:yaha/viewmodels/auth/login-with-email-screen-viewmodel.dart';
+import 'package:yaha/views/auth/screens/signup-screen.dart';
 import 'social-login-mixin.dart';
-import '../views/screens/signup-screen.dart';
-import '../viewmodels/login-with-email-screen-viewmodel.dart';
 import 'terms-accepted-mixin.dart';
 
 class LoginWithEmailPresenter extends StateNotifier<LoginWithEmailViewmodel>

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yaha/auth/presenters/terms-accepted-mixin.dart';
-
-import '../views/screens/login-screen.dart';
-import '../viewmodels/signup-screen-viewmodel.dart';
-import '../views/screens/signup-with-email-screen.dart';
+import 'package:yaha/presenters/auth/terms-accepted-mixin.dart';
+import 'package:yaha/viewmodels/auth/signup-screen-viewmodel.dart';
+import 'package:yaha/views/auth/screens/login-screen.dart';
+import 'package:yaha/views/auth/screens/signup-with-email-screen.dart';
 import 'social-login-mixin.dart';
 
 class SignupScreenPresenter extends StateNotifier<SignupScreenViewModel>

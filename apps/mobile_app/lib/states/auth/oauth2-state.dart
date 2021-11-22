@@ -2,8 +2,8 @@ import 'package:dartz/dartz.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:yaha/auth/entities/oauth2-entity.dart';
 import 'package:yaha/core/local-storage-handler.dart';
+import 'package:yaha/entities/auth/oauth2-entity.dart';
 
 part 'oauth2-state.g.dart';
 

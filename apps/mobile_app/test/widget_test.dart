@@ -9,8 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:yaha/auth/views/screens/login-screen.dart';
-import 'package:yaha/auth/views/screens/signup-screen.dart';
 import 'package:yaha/bottom-nav-bar.dart';
 import 'package:yaha/hike/hike-screen/most-interesting-place-on-route/places-on-route-screen.dart';
 import 'package:yaha/hike/views/screens/comments-screen.dart';
@@ -47,6 +45,8 @@ import 'package:yaha/search-results-screen.dart';
 import 'package:yaha/settings/application/application-screen.dart';
 import 'package:yaha/settings/views/settings-screen.dart';
 import 'package:yaha/track-page.dart';
+import 'package:yaha/views/auth/screens/login-screen.dart';
+import 'package:yaha/views/auth/screens/signup-screen.dart';
 
 void main() {
   testWidgets('Yaha main smoke test', (WidgetTester tester) async {

@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:yaha/app-config.dart';
-import 'package:yaha/auth/viewmodels/social-login-screen-viewmodel.dart';
-
-import '../states/oauth2-state.dart';
-import '../utils/auth-methods.dart';
-import '../repositories/cognito-oauth2-repository.dart';
+import 'package:yaha/repositories/auth/cognito-oauth2-repository.dart';
+import 'package:yaha/states/auth/oauth2-state.dart';
+import 'package:yaha/utils/auth/auth-methods.dart';
+import 'package:yaha/viewmodels/auth/social-login-screen-viewmodel.dart';
 
 class SocialLoginScreenPresenter
     extends StateNotifier<SocialLoginScreenViewModel> {
