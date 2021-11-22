@@ -11,14 +11,17 @@ abstract class $SignupWithEmailViewmodel {
 
   String get password;
   String get passwordAgain;
+  bool get termsAccepted;
 
   SignupWithEmailViewmodel copyWith({
     String? password,
     String? passwordAgain,
+    bool? termsAccepted,
   }) =>
       SignupWithEmailViewmodel(
         password: password ?? this.password,
         passwordAgain: passwordAgain ?? this.passwordAgain,
+        termsAccepted: termsAccepted ?? this.termsAccepted,
       );
 
   SignupWithEmailViewmodel copyUsing(
@@ -26,17 +29,19 @@ abstract class $SignupWithEmailViewmodel {
     final change = SignupWithEmailViewmodel$Change._(
       this.password,
       this.passwordAgain,
+      this.termsAccepted,
     );
     mutator(change);
     return SignupWithEmailViewmodel(
       password: change.password,
       passwordAgain: change.passwordAgain,
+      termsAccepted: change.termsAccepted,
     );
   }
 
   @override
   String toString() =>
-      "SignupWithEmailViewmodel(password: $password, passwordAgain: $passwordAgain)";
+      "SignupWithEmailViewmodel(password: $password, passwordAgain: $passwordAgain, termsAccepted: $termsAccepted)";
 
   @override
   // ignore: avoid_equals_and_hash_code_on_mutable_classes
@@ -44,7 +49,8 @@ abstract class $SignupWithEmailViewmodel {
       other is SignupWithEmailViewmodel &&
       other.runtimeType == runtimeType &&
       password == other.password &&
-      passwordAgain == other.passwordAgain;
+      passwordAgain == other.passwordAgain &&
+      termsAccepted == other.termsAccepted;
 
   @override
   // ignore: avoid_equals_and_hash_code_on_mutable_classes
@@ -52,6 +58,7 @@ abstract class $SignupWithEmailViewmodel {
     var result = 17;
     result = 37 * result + password.hashCode;
     result = 37 * result + passwordAgain.hashCode;
+    result = 37 * result + termsAccepted.hashCode;
     return result;
   }
 }
@@ -60,10 +67,12 @@ class SignupWithEmailViewmodel$Change {
   SignupWithEmailViewmodel$Change._(
     this.password,
     this.passwordAgain,
+    this.termsAccepted,
   );
 
   String password;
   String passwordAgain;
+  bool termsAccepted;
 }
 
 // ignore: avoid_classes_with_only_static_members
@@ -78,5 +87,11 @@ class SignupWithEmailViewmodel$ {
     (passwordAgainContainer) => passwordAgainContainer.passwordAgain,
     (passwordAgainContainer, passwordAgain) =>
         passwordAgainContainer.copyWith(passwordAgain: passwordAgain),
+  );
+
+  static final termsAccepted = Lens<SignupWithEmailViewmodel, bool>(
+    (termsAcceptedContainer) => termsAcceptedContainer.termsAccepted,
+    (termsAcceptedContainer, termsAccepted) =>
+        termsAcceptedContainer.copyWith(termsAccepted: termsAccepted),
   );
 }
