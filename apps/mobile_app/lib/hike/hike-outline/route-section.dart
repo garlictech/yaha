@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yaha/hike/hike-outline/route-section-poi-list-preview.dart';
+import 'package:yaha/hike/views/screens/more-poi-screen.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
@@ -41,70 +42,78 @@ class RouteSection extends StatelessWidget {
         color: YahaColors.accentColor,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
-              padding: EdgeInsets.only(right: YahaSpaceSizes.medium),
-              child: Icon(
-                Icons.hiking_rounded,
-                size: YahaIconSizes.large,
-                color: YahaColors.textColor,
-              ),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
+            Row(
               children: [
                 Container(
-                  padding: EdgeInsets.only(bottom: YahaSpaceSizes.xxSmall),
-                  child: Row(
-                    children: [
-                      Text(
-                        routeSectionModel.routeLength,
-                        style: TextStyle(
-                          fontSize: YahaFontSizes.small,
-                          fontWeight: FontWeight.w600,
-                          color: YahaColors.textColor,
-                        ),
-                      ),
-                      Text(
-                        routeSectionModel.routeLengthMetrics,
-                        style: TextStyle(
-                          fontSize: YahaFontSizes.small,
-                          fontWeight: FontWeight.w400,
-                          color: YahaColors.textColor,
-                        ),
-                      ),
-                    ],
+                  padding: EdgeInsets.only(right: YahaSpaceSizes.medium),
+                  child: Icon(
+                    Icons.hiking_rounded,
+                    size: YahaIconSizes.large,
+                    color: YahaColors.textColor,
                   ),
                 ),
-                Row(
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      routeSectionModel.routeLengthInTime,
-                      style: TextStyle(
-                        fontSize: YahaFontSizes.small,
-                        fontWeight: FontWeight.w600,
-                        color: YahaColors.textColor,
+                    Container(
+                      padding: EdgeInsets.only(bottom: YahaSpaceSizes.xxSmall),
+                      child: Row(
+                        children: [
+                          Text(
+                            routeSectionModel.routeLength,
+                            style: TextStyle(
+                              fontSize: YahaFontSizes.small,
+                              fontWeight: FontWeight.w600,
+                              color: YahaColors.textColor,
+                            ),
+                          ),
+                          Text(
+                            routeSectionModel.routeLengthMetrics,
+                            style: TextStyle(
+                              fontSize: YahaFontSizes.small,
+                              fontWeight: FontWeight.w400,
+                              color: YahaColors.textColor,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    Text(
-                      routeSectionModel.routeLengthInTimeMetrics,
-                      style: TextStyle(
-                        fontSize: YahaFontSizes.small,
-                        fontWeight: FontWeight.w400,
-                        color: YahaColors.textColor,
-                      ),
+                    Row(
+                      children: [
+                        Text(
+                          routeSectionModel.routeLengthInTime,
+                          style: TextStyle(
+                            fontSize: YahaFontSizes.small,
+                            fontWeight: FontWeight.w600,
+                            color: YahaColors.textColor,
+                          ),
+                        ),
+                        Text(
+                          routeSectionModel.routeLengthInTimeMetrics,
+                          style: TextStyle(
+                            fontSize: YahaFontSizes.small,
+                            fontWeight: FontWeight.w400,
+                            color: YahaColors.textColor,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
+                Container(
+                  padding: EdgeInsets.only(left: YahaSpaceSizes.medium),
+                  child: RouteSectionPoiListPreview(),
+                ),
               ],
             ),
-            Container(
-              padding: EdgeInsets.only(left: YahaSpaceSizes.medium),
-              child: RouteSectionPoiListPreview(),
-            ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => MorePoiScreen()));
+              },
               icon: Icon(
                 Icons.arrow_forward_ios_rounded,
                 size: YahaIconSizes.medium,

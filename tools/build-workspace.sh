@@ -18,3 +18,4 @@ yarn nx config shared-config --app=$APPNAME --stage=$STAGE
 #fi
 
 yarn nx build backend --app=$APPNAME --stage=$STAGE --skip-nx-cache
+#yarn nx build-schema mobile_app --env=$ENVNAME --mode=$MODE

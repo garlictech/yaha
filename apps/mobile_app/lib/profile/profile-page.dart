@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:yaha/profile/bookmarked-hikes.dart';
+import 'package:yaha/profile/challenges/views/screens/challenges.dart';
+import 'package:yaha/profile/events/views/screens/events.dart';
 import 'package:yaha/profile/statistics.dart';
-import 'package:yaha/settings-page.dart';
+import 'package:yaha/profile/statistics/statistics-screen.dart';
+import 'package:yaha/profile/time-capsules/views/screens/timecapsules-screen.dart';
+import 'package:yaha/settings/views/settings-screen.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-border-width.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
@@ -86,7 +91,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 Navigator.of(this.context).push(
                                     new MaterialPageRoute<dynamic>(
                                         builder: (BuildContext context) {
-                                  return new SettingsPage();
+                                  return new SettingsScreen();
                                 }));
                               },
                               child: Container(
@@ -114,121 +119,166 @@ class _ProfilePageState extends State<ProfilePage> {
                             Divider(
                                 color: YahaColors.divider,
                                 thickness: YahaBorderWidth.xxSmall),
-                            Container(
-                              margin: EdgeInsets.only(
-                                  top: YahaSpaceSizes.small,
-                                  bottom: YahaSpaceSizes.xSmall),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text('Events',
-                                      style: TextStyle(
-                                          fontSize: YahaFontSizes.small,
-                                          fontWeight: FontWeight.w400,
-                                          color: YahaColors.textColor)),
-                                  Icon(
-                                    Icons.chevron_right_rounded,
-                                    color: YahaColors.primary,
-                                    size: YahaFontSizes.xxLarge,
-                                  )
-                                ],
+                            InkWell(
+                              onTap: () {
+                                Navigator.of(this.context).push(
+                                    new MaterialPageRoute<dynamic>(
+                                        builder: (BuildContext context) {
+                                  return new Events();
+                                }));
+                              },
+                              child: Container(
+                                margin: EdgeInsets.only(
+                                    top: YahaSpaceSizes.small,
+                                    bottom: YahaSpaceSizes.xSmall),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text('Events',
+                                        style: TextStyle(
+                                            fontSize: YahaFontSizes.small,
+                                            fontWeight: FontWeight.w400,
+                                            color: YahaColors.textColor)),
+                                    Icon(
+                                      Icons.chevron_right_rounded,
+                                      color: YahaColors.primary,
+                                      size: YahaFontSizes.xxLarge,
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                             Divider(
                                 color: YahaColors.divider,
                                 thickness: YahaBorderWidth.xxSmall),
-                            Container(
-                              margin: EdgeInsets.only(
-                                  top: YahaSpaceSizes.small,
-                                  bottom: YahaSpaceSizes.xSmall),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text('Challanges',
-                                      style: TextStyle(
-                                          fontSize: YahaFontSizes.small,
-                                          fontWeight: FontWeight.w400,
-                                          color: YahaColors.textColor)),
-                                  Icon(
-                                    Icons.chevron_right_rounded,
-                                    color: YahaColors.primary,
-                                    size: YahaFontSizes.xxLarge,
-                                  )
-                                ],
+                            InkWell(
+                              onTap: () {
+                                Navigator.of(this.context).push(
+                                    new MaterialPageRoute<dynamic>(
+                                        builder: (BuildContext context) {
+                                  return new Challenges();
+                                }));
+                              },
+                              child: Container(
+                                margin: EdgeInsets.only(
+                                    top: YahaSpaceSizes.small,
+                                    bottom: YahaSpaceSizes.xSmall),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text('Challanges',
+                                        style: TextStyle(
+                                            fontSize: YahaFontSizes.small,
+                                            fontWeight: FontWeight.w400,
+                                            color: YahaColors.textColor)),
+                                    Icon(
+                                      Icons.chevron_right_rounded,
+                                      color: YahaColors.primary,
+                                      size: YahaFontSizes.xxLarge,
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                             Divider(
                                 color: YahaColors.divider,
                                 thickness: YahaBorderWidth.xxSmall),
-                            Container(
-                              margin: EdgeInsets.only(
-                                  top: YahaSpaceSizes.small,
-                                  bottom: YahaSpaceSizes.xSmall),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text('Statistics',
-                                      style: TextStyle(
-                                          fontSize: YahaFontSizes.small,
-                                          fontWeight: FontWeight.w400,
-                                          color: YahaColors.textColor)),
-                                  Icon(
-                                    Icons.chevron_right_rounded,
-                                    color: YahaColors.primary,
-                                    size: YahaFontSizes.xxLarge,
-                                  )
-                                ],
+                            InkWell(
+                              onTap: () {
+                                Navigator.of(this.context).push(
+                                    new MaterialPageRoute<dynamic>(
+                                        builder: (BuildContext context) {
+                                  return new StatisticsScreen();
+                                }));
+                              },
+                              child: Container(
+                                margin: EdgeInsets.only(
+                                    top: YahaSpaceSizes.small,
+                                    bottom: YahaSpaceSizes.xSmall),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text('Statistics',
+                                        style: TextStyle(
+                                            fontSize: YahaFontSizes.small,
+                                            fontWeight: FontWeight.w400,
+                                            color: YahaColors.textColor)),
+                                    Icon(
+                                      Icons.chevron_right_rounded,
+                                      color: YahaColors.primary,
+                                      size: YahaFontSizes.xxLarge,
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                             Divider(
                                 color: YahaColors.divider,
                                 thickness: YahaBorderWidth.xxSmall),
-                            Container(
-                              margin: EdgeInsets.only(
-                                  top: YahaSpaceSizes.small,
-                                  bottom: YahaSpaceSizes.xSmall),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text('TimeCapsules',
-                                      style: TextStyle(
-                                          fontSize: YahaFontSizes.small,
-                                          fontWeight: FontWeight.w400,
-                                          color: YahaColors.textColor)),
-                                  Icon(
-                                    Icons.chevron_right_rounded,
-                                    color: YahaColors.primary,
-                                    size: YahaFontSizes.xxLarge,
-                                  )
-                                ],
+                            InkWell(
+                              onTap: () {
+                                Navigator.of(this.context).push(
+                                    new MaterialPageRoute<dynamic>(
+                                        builder: (BuildContext context) {
+                                  return new TimeCapsulesScreen();
+                                }));
+                              },
+                              child: Container(
+                                margin: EdgeInsets.only(
+                                    top: YahaSpaceSizes.small,
+                                    bottom: YahaSpaceSizes.xSmall),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text('TimeCapsules',
+                                        style: TextStyle(
+                                            fontSize: YahaFontSizes.small,
+                                            fontWeight: FontWeight.w400,
+                                            color: YahaColors.textColor)),
+                                    Icon(
+                                      Icons.chevron_right_rounded,
+                                      color: YahaColors.primary,
+                                      size: YahaFontSizes.xxLarge,
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                             Divider(
                                 color: YahaColors.divider,
                                 thickness: YahaBorderWidth.xxSmall),
-                            Container(
-                              margin: EdgeInsets.only(
-                                  top: YahaSpaceSizes.small,
-                                  bottom: YahaSpaceSizes.xSmall),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text('Bookmarked hikes',
-                                      style: TextStyle(
-                                          fontSize: YahaFontSizes.small,
-                                          fontWeight: FontWeight.w400,
-                                          color: YahaColors.textColor)),
-                                  Icon(
-                                    Icons.chevron_right_rounded,
-                                    color: YahaColors.primary,
-                                    size: YahaFontSizes.xxLarge,
-                                  )
-                                ],
+                            InkWell(
+                              onTap: () {
+                                Navigator.of(this.context).push(
+                                    new MaterialPageRoute<dynamic>(
+                                        builder: (BuildContext context) {
+                                  return new BookmarkedHikes();
+                                }));
+                              },
+                              child: Container(
+                                margin: EdgeInsets.only(
+                                    top: YahaSpaceSizes.small,
+                                    bottom: YahaSpaceSizes.xSmall),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text('Bookmarked hikes',
+                                        style: TextStyle(
+                                            fontSize: YahaFontSizes.small,
+                                            fontWeight: FontWeight.w400,
+                                            color: YahaColors.textColor)),
+                                    Icon(
+                                      Icons.chevron_right_rounded,
+                                      color: YahaColors.primary,
+                                      size: YahaFontSizes.xxLarge,
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                           ],

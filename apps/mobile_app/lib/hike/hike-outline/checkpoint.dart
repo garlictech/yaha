@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yaha/hike/hike-outline/checkpoint-poi-list-preview.dart';
-import 'package:yaha/hike/hike-outline/more-poi.dart';
+import 'package:yaha/hike/views/screens/more-poi-screen.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
@@ -19,6 +19,7 @@ class CheckpointModel {
   final double iconSize;
   final String estimatedArrival;
   final double padding;
+  final double radius;
 
   const CheckpointModel({
     required this.title,
@@ -28,6 +29,7 @@ class CheckpointModel {
     required this.iconSize,
     required this.estimatedArrival,
     required this.padding,
+    required this.radius,
   });
 }
 
@@ -49,36 +51,42 @@ class Checkpoint extends StatelessWidget {
         color: checkpointModel.boxBackgorundColor.withOpacity(0.2),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Poi(
-              backgroundColor: checkpointModel.backgroundColor,
-              icon: checkpointModel.icon,
-              iconSize: checkpointModel.iconSize,
-              padding: checkpointModel.padding,
-            ),
-            Container(
-              padding: EdgeInsets.only(
-                left: YahaSpaceSizes.general,
-                right: YahaSpaceSizes.general,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    padding: EdgeInsets.only(bottom: YahaSpaceSizes.xSmall),
-                    constraints: BoxConstraints(maxWidth: 180.0),
-                    child: Text(
-                      checkpointModel.title,
-                      style: TextStyle(
-                        fontSize: YahaFontSizes.medium,
-                        fontWeight: FontWeight.w600,
-                        color: YahaColors.textColor,
-                      ),
-                    ),
+            Row(
+              children: [
+                Poi(
+                  backgroundColor: checkpointModel.backgroundColor,
+                  icon: checkpointModel.icon,
+                  iconSize: checkpointModel.iconSize,
+                  padding: checkpointModel.padding,
+                  radius: checkpointModel.radius,
+                ),
+                Container(
+                  padding: EdgeInsets.only(
+                    left: YahaSpaceSizes.general,
+                    right: YahaSpaceSizes.general,
                   ),
-                  CheckpointPoiListPreview(),
-                ],
-              ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        padding: EdgeInsets.only(bottom: YahaSpaceSizes.xSmall),
+                        constraints: BoxConstraints(maxWidth: 180.0),
+                        child: Text(
+                          checkpointModel.title,
+                          style: TextStyle(
+                            fontSize: YahaFontSizes.medium,
+                            fontWeight: FontWeight.w600,
+                            color: YahaColors.textColor,
+                          ),
+                        ),
+                      ),
+                      CheckpointPoiListPreview(),
+                    ],
+                  ),
+                ),
+              ],
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -92,8 +100,10 @@ class Checkpoint extends StatelessWidget {
                 ),
                 IconButton(
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => MorePoi()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MorePoiScreen()));
                   },
                   icon: Icon(
                     Icons.arrow_forward_ios_rounded,
