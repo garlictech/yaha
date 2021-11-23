@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:yaha/hike/hike-outline/views/widgets/timecapsule-on-hike-outline-widget.dart';
 import 'package:yaha/hike/hike-outline/weather-astronomical-data.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
@@ -68,7 +69,16 @@ const List<Object> defaultNodeList = [
   ),
   DottedLine(
     direction: Axis.vertical,
-    lineLength: 50.0,
+    lineLength: 40.0,
+    lineThickness: 4.0,
+    dashRadius: 20.0,
+    dashGapLength: 5.0,
+    dashColor: YahaColors.textColor,
+  ),
+  TimeCapsuleOnHikeOutlineScreen(text: 'TimeCapsule nearby'),
+  DottedLine(
+    direction: Axis.vertical,
+    lineLength: 40.0,
     lineThickness: 4.0,
     dashRadius: 20.0,
     dashGapLength: 5.0,
