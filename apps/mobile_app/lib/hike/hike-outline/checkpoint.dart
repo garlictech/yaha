@@ -40,80 +40,86 @@ class Checkpoint extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(YahaBorderRadius.general),
-      child: Container(
-        padding: EdgeInsets.all(YahaSpaceSizes.small),
-        constraints: BoxConstraints(
-          maxWidth: YahaBoxSizes.checkpointWidthMax,
-        ),
-        height: YahaBoxSizes.checkpointHeight,
-        color: checkpointModel.boxBackgorundColor.withOpacity(0.2),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                Poi(
-                  backgroundColor: checkpointModel.backgroundColor,
-                  icon: checkpointModel.icon,
-                  iconSize: checkpointModel.iconSize,
-                  padding: checkpointModel.padding,
-                  radius: checkpointModel.radius,
-                ),
-                Container(
-                  padding: EdgeInsets.only(
-                    left: YahaSpaceSizes.general,
-                    right: YahaSpaceSizes.general,
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => MorePoiScreen()));
+      },
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(YahaBorderRadius.general),
+        child: Container(
+          padding: EdgeInsets.all(YahaSpaceSizes.small),
+          constraints: BoxConstraints(
+            maxWidth: YahaBoxSizes.checkpointWidthMax,
+          ),
+          height: YahaBoxSizes.checkpointHeight,
+          color: checkpointModel.boxBackgorundColor.withOpacity(0.2),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Poi(
+                    backgroundColor: checkpointModel.backgroundColor,
+                    icon: checkpointModel.icon,
+                    iconSize: checkpointModel.iconSize,
+                    padding: checkpointModel.padding,
+                    radius: checkpointModel.radius,
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        padding: EdgeInsets.only(bottom: YahaSpaceSizes.xSmall),
-                        constraints: BoxConstraints(maxWidth: 180.0),
-                        child: Text(
-                          checkpointModel.title,
-                          style: TextStyle(
-                            fontSize: YahaFontSizes.medium,
-                            fontWeight: FontWeight.w600,
-                            color: YahaColors.textColor,
+                  Container(
+                    padding: EdgeInsets.only(
+                      left: YahaSpaceSizes.general,
+                      right: YahaSpaceSizes.general,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          padding:
+                              EdgeInsets.only(bottom: YahaSpaceSizes.xSmall),
+                          constraints: BoxConstraints(maxWidth: 180.0),
+                          child: Text(
+                            checkpointModel.title,
+                            style: TextStyle(
+                              fontSize: YahaFontSizes.medium,
+                              fontWeight: FontWeight.w600,
+                              color: YahaColors.textColor,
+                            ),
                           ),
                         ),
+                        CheckpointPoiListPreview(),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                    top: YahaSpaceSizes.xxSmall, right: YahaSpaceSizes.xxSmall),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      checkpointModel.estimatedArrival,
+                      style: TextStyle(
+                        fontSize: YahaFontSizes.small,
+                        fontWeight: FontWeight.w400,
                       ),
-                      CheckpointPoiListPreview(),
-                    ],
-                  ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: YahaSpaceSizes.small),
+                      child: Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        size: YahaIconSizes.medium,
+                        color: YahaColors.textColor,
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  checkpointModel.estimatedArrival,
-                  style: TextStyle(
-                    fontSize: YahaFontSizes.small,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-                IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => MorePoiScreen()));
-                  },
-                  icon: Icon(
-                    Icons.arrow_forward_ios_rounded,
-                    size: YahaIconSizes.medium,
-                    color: YahaColors.textColor,
-                  ),
-                ),
-              ],
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );
