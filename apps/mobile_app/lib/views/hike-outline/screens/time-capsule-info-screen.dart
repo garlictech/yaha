@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:yaha/profile/time-capsules/views/widgets/poi-with-image-widget.dart';
 import 'package:yaha/utility/buttons/back-button.dart';
-import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
-import 'package:yaha/utility/yaha-icon-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
 class TimeCapsuleInfoScreen extends StatelessWidget {
@@ -40,183 +38,76 @@ class TimeCapsuleInfoScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         Container(
-                            padding: const EdgeInsets.only(
-                                top: YahaSpaceSizes.general,
-                                bottom: YahaSpaceSizes.general),
-                            child: PoiWithImageWidget(
-                              backgroundColor: YahaColors.timeCapsule,
-                              image: 'assets/images/timecapsule.png',
-                              radius: 40,
-                              padding: YahaSpaceSizes.small,
-                            )),
-                        Container(
                           padding: const EdgeInsets.only(
-                              bottom: YahaSpaceSizes.small),
-                          child: Row(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.only(
-                                    right: YahaSpaceSizes.small),
-                                child: Icon(
-                                  Icons.watch_later_rounded,
-                                  color: YahaColors.textColor,
-                                  size: YahaIconSizes.medium,
-                                ),
-                              ),
-                              RichText(
-                                text: TextSpan(
-                                  style: TextStyle(
-                                      color: YahaColors.textColor,
-                                      fontSize: YahaFontSizes.small),
-                                  children: [
-                                    TextSpan(
-                                      text: 'When',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w700),
-                                    ),
-                                    TextSpan(
-                                        text: ' did you find it: 12.11.2021')
-                                  ],
-                                ),
-                              ),
-                            ],
+                              top: YahaSpaceSizes.small,
+                              bottom: YahaSpaceSizes.general),
+                          child: PoiWithImageWidget(
+                            backgroundColor: YahaColors.timeCapsule,
+                            image: 'assets/images/timecapsule.png',
+                            radius: 40,
+                            padding: YahaSpaceSizes.small,
                           ),
                         ),
-                        Container(
-                          padding: const EdgeInsets.only(
-                              bottom: YahaSpaceSizes.small),
+                        Align(
+                          alignment: Alignment.centerLeft,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Row(
-                                children: [
-                                  Container(
-                                    padding: const EdgeInsets.only(
-                                        right: YahaSpaceSizes.small),
-                                    child: Icon(
-                                      Icons.place_rounded,
-                                      color: YahaColors.textColor,
-                                      size: YahaIconSizes.medium,
-                                    ),
-                                  ),
-                                  RichText(
-                                    text: TextSpan(
-                                      style: TextStyle(
-                                          color: YahaColors.textColor,
-                                          fontSize: YahaFontSizes.small),
-                                      children: [
-                                        TextSpan(
-                                          text: 'Where',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w700),
-                                        ),
-                                        TextSpan(text: ' did you find it:')
-                                      ],
-                                    ),
-                                  ),
-                                ],
+                              Text(
+                                'What is a TimeCapsule?',
+                                style: TextStyle(
+                                    color: YahaColors.textColor,
+                                    fontSize: YahaFontSizes.small,
+                                    fontWeight: FontWeight.w600),
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(
-                                    left: 39, top: YahaSpaceSizes.xSmall),
-                                child: RichText(
-                                  text: TextSpan(
-                                    style: TextStyle(
-                                        color: YahaColors.textColor,
-                                        fontSize: YahaFontSizes.small),
-                                    children: [
-                                      TextSpan(
-                                        text: 'Hike:',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w700),
-                                      ),
-                                      TextSpan(text: ' Budapest')
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 39, top: YahaSpaceSizes.xSmall),
-                                child: RichText(
-                                  text: TextSpan(
-                                    style: TextStyle(
-                                        color: YahaColors.textColor,
-                                        fontSize: YahaFontSizes.small),
-                                    children: [
-                                      TextSpan(
-                                        text: 'Latitude:',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w700),
-                                      ),
-                                      TextSpan(text: ' 47.4979937')
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 39,
                                     top: YahaSpaceSizes.xSmall,
                                     bottom: YahaSpaceSizes.general),
-                                child: RichText(
-                                  text: TextSpan(
-                                    style: TextStyle(
-                                        color: YahaColors.textColor,
-                                        fontSize: YahaFontSizes.small),
-                                    children: [
-                                      TextSpan(
-                                        text: 'Longitude:',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w700),
-                                      ),
-                                      TextSpan(text: ' 19.0403594')
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                height: 340,
-                                width: MediaQuery.of(context).size.width,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(
-                                      YahaBorderRadius.general),
-                                  child: Image.asset(
-                                    'assets/images/poi_page.png',
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              bottom: YahaSpaceSizes.general),
-                          child: Row(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.only(
-                                    right: YahaSpaceSizes.small),
-                                child: Icon(
-                                  Icons.people_rounded,
-                                  color: YahaColors.textColor,
-                                  size: YahaIconSizes.medium,
-                                ),
-                              ),
-                              RichText(
-                                text: TextSpan(
+                                child: Text(
+                                  'A TimeCapsule is the digital version of a real time capsule. You can leave a message or some pictures for the future in it.',
                                   style: TextStyle(
                                       color: YahaColors.textColor,
-                                      fontSize: YahaFontSizes.small),
-                                  children: [
-                                    TextSpan(
-                                      text: 'How many',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w700),
-                                    ),
-                                    TextSpan(text: ' users have found it: 124')
-                                  ],
+                                      fontSize: YahaFontSizes.small,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                              ),
+                              Text(
+                                'How does it work?',
+                                style: TextStyle(
+                                    color: YahaColors.textColor,
+                                    fontSize: YahaFontSizes.small,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    top: YahaSpaceSizes.xSmall,
+                                    bottom: YahaSpaceSizes.general),
+                                child: Text(
+                                  'You can place a TimeCapsule during your hike at the exact coordinates where you are at the time you place it.\nOther hikers can only open your TimeCapsule and see its content if they’re exactly at the same coordinates where you placed it. They can only see the content as long as they stay there.',
+                                  style: TextStyle(
+                                      color: YahaColors.textColor,
+                                      fontSize: YahaFontSizes.small,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                              ),
+                              Text(
+                                'Can you delete a TimeCapsule after you placed it?',
+                                style: TextStyle(
+                                    color: YahaColors.textColor,
+                                    fontSize: YahaFontSizes.small,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    top: YahaSpaceSizes.xSmall,
+                                    bottom: YahaSpaceSizes.general),
+                                child: Text(
+                                  'The short answer is no.',
+                                  style: TextStyle(
+                                      color: YahaColors.textColor,
+                                      fontSize: YahaFontSizes.small,
+                                      fontWeight: FontWeight.w400),
                                 ),
                               ),
                             ],

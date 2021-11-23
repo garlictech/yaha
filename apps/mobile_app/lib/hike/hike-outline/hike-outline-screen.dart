@@ -4,6 +4,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:yaha/hike/hike-outline/route-section.dart';
 import 'package:yaha/hike/hike-outline/settings/hike-outline-filters.dart';
 import 'package:yaha/hike/hike-outline/settings/hike-outline-settings.dart';
+import 'package:yaha/hike/hike-outline/views/widgets/timecapsule-on-hike-outline-widget.dart';
 import 'package:yaha/hike/hike-outline/weather-astronomical-data.dart';
 import 'package:yaha/utility/buttons/back-button.dart';
 import 'package:yaha/utility/yaha-colors.dart';
@@ -205,6 +206,10 @@ class HikeOutlineScreen extends ConsumerWidget {
       } else if (node is WeatherAstronomicalData) {
         return WeatherAstronomicalData(
           icon: node.icon,
+          text: node.text,
+        );
+      } else if (node is TimeCapsuleOnHikeOutlineScreen) {
+        return TimeCapsuleOnHikeOutlineScreen(
           text: node.text,
         );
       } else {
