@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yaha/search-results-screen.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
+import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-icon-sizes.dart';
@@ -143,8 +144,8 @@ class _ExplorePageState extends State<ExplorePage> {
                 Container(
                   padding: const EdgeInsets.only(top: YahaSpaceSizes.general),
                   child: SizedBox(
-                    height: 50,
-                    width: 300,
+                    height: YahaBoxSizes.buttonHeight,
+                    width: YahaBoxSizes.buttonWidthBig,
                     child: ElevatedButton.icon(
                       icon: Icon(
                         Icons.search,

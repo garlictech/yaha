@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:yaha/hike/views/screens/poi-screen.dart';
 import 'package:yaha/profile/profile-page.dart';
-import 'package:yaha/track-page.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yaha/views/auth/screens/signup-screen.dart';
+import 'package:yaha/views/track/screens/tracking.dart';
 import 'profile/events/views/screens/event-detail-screen.dart';
 import 'settings/views/settings-screen.dart';
 
@@ -37,7 +37,7 @@ class MyApp extends ConsumerWidget {
         '/poi': (context) => PoiScreen(),
         '/settings': (context) => SettingsScreen(),
         '/signup': (context) => SignupScreen(),
-        '/track': (context) => TrackPage(),
+        '/track': (context) => TrackingScreen(),
         '/explore': (context) => ExplorePage(),
       },
     );

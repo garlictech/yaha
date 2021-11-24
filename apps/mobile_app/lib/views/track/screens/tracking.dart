@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:yaha/profile/events/views/screens/all-events.dart';
-import 'package:yaha/profile/events/views/screens/ongoing-events.dart';
-import 'package:yaha/utility/buttons/back-button.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
-import 'package:yaha/utility/yaha-space-sizes.dart';
+import 'package:yaha/views/track/screens/tracking-data-screen.dart';
+import 'package:yaha/views/track/screens/tracking-map-screen.dart';
+import 'package:yaha/views/track/screens/tracking-timecapsule-screen.dart';
+import 'package:yaha/views/track/screens/tracking-timeline-screen.dart';
 
-class Events extends StatelessWidget {
-  const Events({Key? key}) : super(key: key);
+class TrackingScreen extends StatelessWidget {
+  const TrackingScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2,
+      length: 4,
       child: Scaffold(
         appBar: AppBar(
-          leading: YahaBackButton(),
+          //leading: YahaBackButton(),
           backgroundColor: YahaColors.background,
           title: Text(
-            'Events',
+            'Track',
             style: TextStyle(
                 color: YahaColors.textColor,
                 fontSize: YahaFontSizes.medium,
@@ -28,26 +28,26 @@ class Events extends StatelessWidget {
             labelColor: YahaColors.primary,
             unselectedLabelColor: YahaColors.textColor,
             indicatorColor: YahaColors.primary,
+            labelPadding: EdgeInsets.only(left: 22, right: 22),
+            isScrollable: true,
             unselectedLabelStyle: TextStyle(fontWeight: FontWeight.w500),
             labelStyle: TextStyle(
                 fontWeight: FontWeight.w600, fontSize: YahaFontSizes.xSmall),
             tabs: [
-              Tab(text: 'All events'),
-              Tab(text: 'Ongoig events'),
+              Tab(text: 'Map'),
+              Tab(text: 'Timeline'),
+              Tab(text: 'Data'),
+              Tab(text: 'TimeCapsule')
             ],
           ),
         ),
-        body: Container(
-          padding: EdgeInsets.only(
-              left: YahaSpaceSizes.medium,
-              right: YahaSpaceSizes.medium,
-              top: YahaSpaceSizes.large),
-          child: TabBarView(
-            children: [
-              AllEvents(),
-              OngoingEvents(),
-            ],
-          ),
+        body: TabBarView(
+          children: [
+            TrackingMapScreen(),
+            TrackingTimelineScreen(),
+            TrackingDataScreen(),
+            TrackingTimeCapsuleScreen(),
+          ],
         ),
       ),
     );

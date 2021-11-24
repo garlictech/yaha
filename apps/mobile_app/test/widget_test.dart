@@ -44,9 +44,13 @@ import 'package:yaha/profile/time-capsules/views/screens/timecapsules-screen.dar
 import 'package:yaha/search-results-screen.dart';
 import 'package:yaha/settings/application/application-screen.dart';
 import 'package:yaha/settings/views/settings-screen.dart';
-import 'package:yaha/track-page.dart';
 import 'package:yaha/views/auth/screens/login-screen.dart';
 import 'package:yaha/views/auth/screens/signup-screen.dart';
+import 'package:yaha/views/track/screens/tracking-data-screen.dart';
+import 'package:yaha/views/track/screens/tracking-map-screen.dart';
+import 'package:yaha/views/track/screens/tracking-timecapsule-screen.dart';
+import 'package:yaha/views/track/screens/tracking-timeline-screen.dart';
+import 'package:yaha/views/track/screens/tracking.dart';
 
 void main() {
   testWidgets('Yaha main smoke test', (WidgetTester tester) async {
@@ -114,7 +118,8 @@ void main() {
     await tester.pumpAndSettle();
   });
   testWidgets('Track Screen smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new TrackPage()));
+    await tester
+        .pumpWidget(createWidgetForTesting(child: new TrackingScreen()));
 
     await tester.pumpAndSettle();
   });
@@ -306,6 +311,38 @@ void main() {
   testWidgets('Comments Screen smoke test', (WidgetTester tester) async {
     await tester
         .pumpWidget(createWidgetForTesting(child: new CommentsScreen()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Tracking Screen smoke test', (WidgetTester tester) async {
+    await tester
+        .pumpWidget(createWidgetForTesting(child: new TrackingScreen()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Tracking Map Screen smoke test', (WidgetTester tester) async {
+    await tester
+        .pumpWidget(createWidgetForTesting(child: new TrackingMapScreen()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Tracking Timeline Screen smoke test',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(
+        createWidgetForTesting(child: new TrackingTimelineScreen()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Tracking Data Screen smoke test', (WidgetTester tester) async {
+    await tester
+        .pumpWidget(createWidgetForTesting(child: new TrackingDataScreen()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Tracking TimeCapsule Screen smoke test',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(
+        createWidgetForTesting(child: new TrackingTimeCapsuleScreen()));
 
     await tester.pumpAndSettle();
   });
