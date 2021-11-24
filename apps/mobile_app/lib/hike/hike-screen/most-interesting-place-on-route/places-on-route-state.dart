@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yaha/hike/hike-screen/most-interesting-place-on-route/place-widget.dart';
+import 'package:yaha/hike/hike-screen/most-interesting-place-on-route/poi-list-tile-widget.dart';
 import 'package:yaha/utility/yaha-border-width.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
 const List<Object> defaultNodeList = [
-  PlaceWidget(
+  PoiListTileWidget(
     poiColor: YahaColors.amenity,
     poiIcon: Icons.outlined_flag_rounded,
     title: 'Hungarian Parliament Building',
@@ -19,7 +19,7 @@ const List<Object> defaultNodeList = [
     child:
         Divider(color: YahaColors.divider, thickness: YahaBorderWidth.xxSmall),
   ),
-  PlaceWidget(
+  PoiListTileWidget(
     poiColor: YahaColors.generic,
     poiIcon: Icons.museum,
     title: 'Hungarian National Museum',
@@ -31,7 +31,7 @@ const List<Object> defaultNodeList = [
     child:
         Divider(color: YahaColors.divider, thickness: YahaBorderWidth.xxSmall),
   ),
-  PlaceWidget(
+  PoiListTileWidget(
     poiColor: YahaColors.amenity,
     poiIcon: Icons.pool_rounded,
     title: 'Széchenyi Thermal Bath',
@@ -43,7 +43,7 @@ const List<Object> defaultNodeList = [
     child:
         Divider(color: YahaColors.divider, thickness: YahaBorderWidth.xxSmall),
   ),
-  PlaceWidget(
+  PoiListTileWidget(
     poiColor: YahaColors.generic,
     poiIcon: Icons.location_city_rounded,
     title: 'Buda Castle & Castle Hill',
@@ -55,7 +55,7 @@ const List<Object> defaultNodeList = [
     child:
         Divider(color: YahaColors.divider, thickness: YahaBorderWidth.xxSmall),
   ),
-  PlaceWidget(
+  PoiListTileWidget(
     poiColor: YahaColors.generic,
     poiIcon: Icons.location_city_rounded,
     title: "St. Stephen's Basilica",

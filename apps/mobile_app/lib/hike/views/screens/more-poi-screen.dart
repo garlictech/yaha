@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:yaha/hike/hike-screen/most-interesting-place-on-route/place-widget.dart';
-import 'package:yaha/hike/views/widgets/poi-category-title-box-widget.dart';
+import 'package:yaha/hike/hike-screen/most-interesting-place-on-route/poi-list-tile-widget.dart';
+import 'package:yaha/hike/views/widgets/list-section-title-box-widget.dart';
 import 'package:yaha/utility/buttons/back-button.dart';
 import 'package:yaha/utility/yaha-border-width.dart';
 import 'package:yaha/utility/yaha-colors.dart';
@@ -37,33 +37,35 @@ class MorePoiScreen extends ConsumerWidget {
                     padding: const EdgeInsets.only(top: YahaSpaceSizes.small),
                     child: Column(
                       children: [
-                        PoiCategoryTitleBox(
+                        ListSectionTitleBox(
                           icon: Icons.museum,
                           title: 'Museum',
-                          iconBottomPadding: YahaSpaceSizes.xxSmall,
                           backgroundColor: YahaColors.generic,
+                          titleColor: YahaColors.background,
+                          iconVisibility: true,
                         ),
                         Padding(
                           padding: const EdgeInsets.only(
                               top: YahaSpaceSizes.medium,
                               bottom: YahaSpaceSizes.medium),
-                          child: PlaceWidget(
+                          child: PoiListTileWidget(
                             poiColor: YahaColors.generic,
                             poiIcon: Icons.museum,
                             title: 'Hungarian National Museum',
                             distanceFromStart: 1300,
                           ),
                         ),
-                        PoiCategoryTitleBox(
+                        ListSectionTitleBox(
                           icon: Icons.location_city_rounded,
                           title: 'Sights',
-                          iconBottomPadding: YahaSpaceSizes.xxSmall,
                           backgroundColor: YahaColors.generic,
+                          titleColor: YahaColors.background,
+                          iconVisibility: true,
                         ),
                         Padding(
                           padding:
                               const EdgeInsets.only(top: YahaSpaceSizes.medium),
-                          child: PlaceWidget(
+                          child: PoiListTileWidget(
                             poiColor: YahaColors.secondary,
                             poiIcon: Icons.outlined_flag_rounded,
                             title: 'Hungarian Parliament Building',
@@ -78,7 +80,7 @@ class MorePoiScreen extends ConsumerWidget {
                               color: YahaColors.divider,
                               thickness: YahaBorderWidth.xxSmall),
                         ),
-                        PlaceWidget(
+                        PoiListTileWidget(
                           poiColor: YahaColors.generic,
                           poiIcon: Icons.location_city_rounded,
                           title: 'Buda Castle & Castle Hill',
@@ -92,7 +94,7 @@ class MorePoiScreen extends ConsumerWidget {
                               color: YahaColors.divider,
                               thickness: YahaBorderWidth.xxSmall),
                         ),
-                        PlaceWidget(
+                        PoiListTileWidget(
                           poiColor: YahaColors.generic,
                           poiIcon: Icons.location_city_rounded,
                           title: "St. Stephen's Basilica",
@@ -109,23 +111,24 @@ class MorePoiScreen extends ConsumerWidget {
                         Padding(
                           padding: const EdgeInsets.only(
                               bottom: YahaSpaceSizes.medium),
-                          child: PlaceWidget(
+                          child: PoiListTileWidget(
                             poiColor: YahaColors.generic,
                             poiIcon: Icons.location_city_rounded,
                             title: "Fisherman's Bastion",
                             distanceFromStart: 2500,
                           ),
                         ),
-                        PoiCategoryTitleBox(
+                        ListSectionTitleBox(
                           icon: Icons.fastfood_rounded,
                           title: 'Food',
-                          iconBottomPadding: YahaSpaceSizes.xxSmall,
                           backgroundColor: YahaColors.amenity,
+                          titleColor: YahaColors.background,
+                          iconVisibility: true,
                         ),
                         Padding(
                           padding:
                               const EdgeInsets.only(top: YahaSpaceSizes.medium),
-                          child: PlaceWidget(
+                          child: PoiListTileWidget(
                             poiColor: YahaColors.amenity,
                             poiIcon: Icons.fastfood_rounded,
                             title: "McDonald's Nyugati",
@@ -140,7 +143,7 @@ class MorePoiScreen extends ConsumerWidget {
                               color: YahaColors.divider,
                               thickness: YahaBorderWidth.xxSmall),
                         ),
-                        PlaceWidget(
+                        PoiListTileWidget(
                           poiColor: YahaColors.amenity,
                           poiIcon: Icons.fastfood_rounded,
                           title: "Burger King",

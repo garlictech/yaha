@@ -418,6 +418,7 @@ class _HikeScreenState extends State<HikeScreen> {
                                   icon: Icons.location_city_rounded,
                                   iconSize: YahaIconSizes.small,
                                   padding: YahaSpaceSizes.xSmall,
+                                  radius: 19,
                                 ),
                                 Container(
                                   padding: const EdgeInsets.only(
@@ -439,6 +440,7 @@ class _HikeScreenState extends State<HikeScreen> {
                                     icon: Icons.museum,
                                     iconSize: YahaIconSizes.small,
                                     padding: YahaSpaceSizes.xSmall,
+                                    radius: 19,
                                   ),
                                   Container(
                                     padding: const EdgeInsets.only(
@@ -461,6 +463,7 @@ class _HikeScreenState extends State<HikeScreen> {
                                     icon: Icons.pool_rounded,
                                     iconSize: YahaIconSizes.small,
                                     padding: YahaSpaceSizes.xSmall,
+                                    radius: 19,
                                   ),
                                   Container(
                                     padding: const EdgeInsets.only(

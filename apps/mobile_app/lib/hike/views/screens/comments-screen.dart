@@ -9,7 +9,7 @@ import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-icon-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
-class CommmentsScreen extends ConsumerWidget {
+class CommentsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     return Scaffold(

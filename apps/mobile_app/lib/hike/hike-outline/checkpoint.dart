@@ -19,6 +19,7 @@ class CheckpointModel {
   final double iconSize;
   final String estimatedArrival;
   final double padding;
+  final double radius;
 
   const CheckpointModel({
     required this.title,
@@ -28,6 +29,7 @@ class CheckpointModel {
     required this.iconSize,
     required this.estimatedArrival,
     required this.padding,
+    required this.radius,
   });
 }
 
@@ -58,6 +60,7 @@ class Checkpoint extends StatelessWidget {
                   icon: checkpointModel.icon,
                   iconSize: checkpointModel.iconSize,
                   padding: checkpointModel.padding,
+                  radius: checkpointModel.radius,
                 ),
                 Container(
                   padding: EdgeInsets.only(
@@ -97,8 +100,10 @@ class Checkpoint extends StatelessWidget {
                 ),
                 IconButton(
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => MorePoiScreen()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MorePoiScreen()));
                   },
                   icon: Icon(
                     Icons.arrow_forward_ios_rounded,

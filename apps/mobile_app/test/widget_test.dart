@@ -9,8 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:yaha/auth/views/screens/login-screen.dart';
-import 'package:yaha/auth/views/screens/signup-screen.dart';
 import 'package:yaha/bottom-nav-bar.dart';
 import 'package:yaha/hike/hike-screen/most-interesting-place-on-route/places-on-route-screen.dart';
 import 'package:yaha/hike/views/screens/comments-screen.dart';
@@ -40,11 +38,15 @@ import 'package:yaha/profile/events/views/screens/events.dart';
 import 'package:yaha/profile/events/views/screens/ongoing-events.dart';
 import 'package:yaha/profile/profile-page.dart';
 import 'package:yaha/profile/statistics/statistics-screen.dart';
-import 'package:yaha/profile/time-capsules/time-capsules.dart';
+import 'package:yaha/profile/time-capsules/views/screens/found-timecapsules-screen.dart';
+import 'package:yaha/profile/time-capsules/views/screens/my-timecapsules-screen.dart';
+import 'package:yaha/profile/time-capsules/views/screens/timecapsules-screen.dart';
 import 'package:yaha/search-results-screen.dart';
 import 'package:yaha/settings/application/application-screen.dart';
 import 'package:yaha/settings/views/settings-screen.dart';
 import 'package:yaha/track-page.dart';
+import 'package:yaha/views/auth/screens/login-screen.dart';
+import 'package:yaha/views/auth/screens/signup-screen.dart';
 
 void main() {
   testWidgets('Yaha main smoke test', (WidgetTester tester) async {
@@ -220,7 +222,27 @@ void main() {
     await tester.pumpAndSettle();
   });
   testWidgets('TimeCapsules Screen smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new TimeCapsules()));
+    await tester
+        .pumpWidget(createWidgetForTesting(child: new TimeCapsulesScreen()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Found TimeCapsules Screen smoke test',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(
+        createWidgetForTesting(child: new FoundTimeCapsulesScreen()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('My TimeCapsules Screen smoke test', (WidgetTester tester) async {
+    await tester
+        .pumpWidget(createWidgetForTesting(child: new MyTimeCapsulesScreen()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('TimeCapsule Screen smoke test', (WidgetTester tester) async {
+    await tester
+        .pumpWidget(createWidgetForTesting(child: new TimeCapsulesScreen()));
 
     await tester.pumpAndSettle();
   });
@@ -283,7 +305,7 @@ void main() {
   });
   testWidgets('Comments Screen smoke test', (WidgetTester tester) async {
     await tester
-        .pumpWidget(createWidgetForTesting(child: new CommmentsScreen()));
+        .pumpWidget(createWidgetForTesting(child: new CommentsScreen()));
 
     await tester.pumpAndSettle();
   });

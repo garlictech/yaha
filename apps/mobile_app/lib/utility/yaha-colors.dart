@@ -20,15 +20,17 @@ class YahaColors {
 
 // POI COLORS
   static const Color emergency = const Color(0xFFEF5350);
-  static const Color generic = const Color(0xFF78909C); 
+  static const Color generic = const Color(0xFF78909C);
   static const Color amenity = const Color(0xFFFC6100);
   static const Color natural = const Color(0xFF5AA35D);
   static const Color manMade = const Color(0xFF45A39A);
   static const Color military = const Color(0xFFAD1457);
-  static const Color tourism = const Color(0xFFF7A414);
+  static const Color tourism = const Color(0XFF5684D2);
   static const Color leisure = const Color(0xFFAB47BC);
   static const Color historic = const Color(0xFF8D6E63);
   static const Color publicTransport = const Color(0XFF5A5AA3);
+  static const Color timeCapsule = const Color(0xFFF7A414);
+  static const Color timeCapsuleBackground = const Color(0XFFFDEDD0);
 
   // AUTH BUTTON COLORS
   static const Color facebook = const Color(0xFF3B5998);

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yaha/gallery.dart';
 import 'package:yaha/hike/hike-outline/poi.dart';
-import 'package:yaha/hike/views/screens/comments-screen.dart';
 import 'package:yaha/utility/buttons/back-button.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
@@ -9,6 +8,7 @@ import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-icon-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
+import 'package:yaha/views/comments/screens/comments-screen.dart';
 
 class PoiScreen extends StatefulWidget {
   @override
@@ -40,7 +40,7 @@ class _PoiScreenState extends State<PoiScreen> {
                   size: YahaIconSizes.medium, color: YahaColors.textColor),
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => CommmentsScreen()));
+                    MaterialPageRoute(builder: (context) => CommentsScreen()));
               },
             ),
           ),
@@ -64,10 +64,12 @@ class _PoiScreenState extends State<PoiScreen> {
                                 top: YahaSpaceSizes.general,
                                 bottom: YahaSpaceSizes.general),
                             child: Poi(
-                                backgroundColor: YahaColors.generic,
-                                icon: Icons.museum_rounded,
-                                iconSize: 48,
-                                padding: YahaSpaceSizes.small)),
+                              backgroundColor: YahaColors.generic,
+                              icon: Icons.museum_rounded,
+                              iconSize: 48,
+                              padding: YahaSpaceSizes.small,
+                              radius: 40,
+                            )),
                         Container(
                           padding: const EdgeInsets.only(
                               bottom: YahaSpaceSizes.general),

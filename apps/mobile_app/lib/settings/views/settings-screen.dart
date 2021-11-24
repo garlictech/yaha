@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:yaha/hike/views/widgets/list-section-title-box-widget.dart';
 import 'package:yaha/settings/application/application-screen.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
@@ -54,20 +55,11 @@ class SettingsScreen extends ConsumerWidget {
                         //           fontWeight: FontWeight.w600,
                         //           color: YahaColors.textColor)),
                         // ),
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          padding: const EdgeInsets.only(
-                              left: YahaSpaceSizes.general,
-                              top: YahaSpaceSizes.medium,
-                              bottom: YahaSpaceSizes.medium),
-                          child: Text('Account',
-                              style: TextStyle(
-                                  fontSize: YahaFontSizes.medium,
-                                  fontWeight: FontWeight.w600,
-                                  color: YahaColors.textColor)),
-                          decoration:
-                              BoxDecoration(color: YahaColors.accentColor),
-                          height: YahaBoxSizes.categoryTitleBoxHeight,
+                        ListSectionTitleBox(
+                          title: 'Account',
+                          backgroundColor: YahaColors.accentColor,
+                          titleColor: YahaColors.textColor,
+                          iconVisibility: false,
                         ),
                         Container(
                           child: Column(
@@ -184,20 +176,11 @@ class SettingsScreen extends ConsumerWidget {
                             ],
                           ),
                         ),
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          padding: const EdgeInsets.only(
-                              left: YahaSpaceSizes.general,
-                              top: YahaSpaceSizes.medium,
-                              bottom: YahaSpaceSizes.medium),
-                          child: Text('Support',
-                              style: TextStyle(
-                                  fontSize: YahaFontSizes.medium,
-                                  fontWeight: FontWeight.w600,
-                                  color: YahaColors.textColor)),
-                          decoration:
-                              BoxDecoration(color: YahaColors.accentColor),
-                          height: YahaBoxSizes.categoryTitleBoxHeight,
+                        ListSectionTitleBox(
+                          title: 'Support',
+                          backgroundColor: YahaColors.accentColor,
+                          titleColor: YahaColors.textColor,
+                          iconVisibility: false,
                         ),
                         Container(
                           child: Column(

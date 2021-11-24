@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:yaha/auth/states/auth-state.dart';
 import 'package:yaha/explore.dart';
 import 'package:yaha/hike/hike-card/hike-card.dart';
 import 'package:yaha/home/views/widgets/explore-hike-box.dart';
@@ -9,6 +8,7 @@ import 'package:yaha/home/views/screens/best-hikes-of-the-world-screen.dart';
 import 'package:yaha/profile/challenges/views/screens/challenge-detail-screen.dart';
 import 'package:yaha/profile/challenges/views/screens/challenges.dart';
 import 'package:yaha/profile/events/views/screens/events.dart';
+import 'package:yaha/states/auth/auth-state.dart';
 import 'package:yaha/utility/buttons/show-more-button.dart';
 import 'package:yaha/profile/events/views/screens/event-detail-screen.dart';
 import 'package:yaha/profile/statistics.dart';

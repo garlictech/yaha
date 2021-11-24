@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import 'package:yaha/auth/states/auth-state.dart';
-import 'package:yaha/auth/use-cases/auth-use-cases-provider.dart';
-import 'package:yaha/auth/use-cases/auth-use-cases.dart';
-import 'package:yaha/auth/views/screens/login-screen.dart';
+import 'package:yaha/states/auth/auth-state.dart';
+import 'package:yaha/use-cases/auth/auth-use-cases-provider.dart';
+import 'package:yaha/use-cases/auth/auth-use-cases.dart';
+import 'package:yaha/views/auth/screens/login-screen.dart';
 import '../viewmodels/settings-screen-viewmodel.dart';
 
 class SettingsScreenPresenter extends StateNotifier<SettingsScreenViewModel> {
