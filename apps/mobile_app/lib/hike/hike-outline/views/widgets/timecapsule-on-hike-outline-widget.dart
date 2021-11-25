@@ -3,6 +3,7 @@ import 'package:yaha/profile/time-capsules/views/widgets/poi-with-image-widget.d
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
+import 'package:yaha/views/hike-outline/screens/time-capsule-info-screen.dart';
 
 class TimeCapsuleOnHikeOutlineScreen extends StatelessWidget {
   final String text;
@@ -30,7 +31,12 @@ class TimeCapsuleOnHikeOutlineScreen extends StatelessWidget {
           Container(
             padding: EdgeInsets.only(left: YahaSpaceSizes.small),
             child: GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => TimeCapsuleInfoScreen()));
+              },
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
