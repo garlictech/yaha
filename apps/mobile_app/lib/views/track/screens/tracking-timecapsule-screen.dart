@@ -7,8 +7,16 @@ import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-icon-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
+import 'package:yaha/views/track/screens/leave-a-timecapsule-screen.dart';
 
 class TrackingTimeCapsuleScreen extends ConsumerWidget {
+  final int collectedTimeCapsules;
+
+  const TrackingTimeCapsuleScreen({
+    Key? key,
+    required this.collectedTimeCapsules,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     return Scaffold(
@@ -58,7 +66,8 @@ class TrackingTimeCapsuleScreen extends ConsumerWidget {
                               top: YahaSpaceSizes.xLarge,
                               bottom: YahaSpaceSizes.xSmall),
                           child: Text(
-                            'Collected TimeCapsules:',
+                            'Collected TimeCapsules: ' +
+                                collectedTimeCapsules.toString(),
                             style: TextStyle(
                                 fontSize: YahaFontSizes.small,
                                 fontWeight: FontWeight.w600,
@@ -104,7 +113,15 @@ class TrackingTimeCapsuleScreen extends ConsumerWidget {
                                 'assets/images/timecapsule.png',
                                 width: YahaIconSizes.large,
                               ),*/
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        LeaveATimeCapsuleScreen(),
+                                  ),
+                                );
+                              },
                               child: Text(
                                 'Leave a TimeCapsule',
                                 style: TextStyle(

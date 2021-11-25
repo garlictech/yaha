@@ -46,6 +46,7 @@ import 'package:yaha/settings/application/application-screen.dart';
 import 'package:yaha/settings/views/settings-screen.dart';
 import 'package:yaha/views/auth/screens/login-screen.dart';
 import 'package:yaha/views/auth/screens/signup-screen.dart';
+import 'package:yaha/views/track/screens/leave-a-timecapsule-screen.dart';
 import 'package:yaha/views/track/screens/tracking-data-screen.dart';
 import 'package:yaha/views/track/screens/tracking-map-screen.dart';
 import 'package:yaha/views/track/screens/tracking-timecapsule-screen.dart';
@@ -341,8 +342,15 @@ void main() {
   });
   testWidgets('Tracking TimeCapsule Screen smoke test',
       (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetForTesting(
+        child: new TrackingTimeCapsuleScreen(collectedTimeCapsules: 4)));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Leave a TimeCapsule Screen smoke test',
+      (WidgetTester tester) async {
     await tester.pumpWidget(
-        createWidgetForTesting(child: new TrackingTimeCapsuleScreen()));
+        createWidgetForTesting(child: new LeaveATimeCapsuleScreen()));
 
     await tester.pumpAndSettle();
   });

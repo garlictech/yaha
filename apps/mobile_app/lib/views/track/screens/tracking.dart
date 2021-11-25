@@ -46,7 +46,7 @@ class TrackingScreen extends StatelessWidget {
             TrackingMapScreen(),
             TrackingTimelineScreen(),
             TrackingDataScreen(),
-            TrackingTimeCapsuleScreen(),
+            TrackingTimeCapsuleScreen(collectedTimeCapsules: 4),
           ],
         ),
       ),
