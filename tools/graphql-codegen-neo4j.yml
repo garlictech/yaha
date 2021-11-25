@@ -1,6 +1,5 @@
 overwrite: true
 schema: libs/neo4j-gql/backend/graphql/schema/*.graphql
-#documents: libs/anyupp-gql/backend/src/graphql/documents/*.graphql
 generates:
   libs/neo4j-gql/api/src/lib/generated/yaha-api.ts:
     hooks:

@@ -322,7 +322,7 @@
           "options": {
             "commands": [
               {
-                "command": "yarn graphql-codegen --config tools/graphql-codegen-neo4j.yml"
+                "command": "./tools/build-schema-api.sh '{args.stage}'"
               }
             ]
           },
