@@ -97,7 +97,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               child: Container(
                                 margin: EdgeInsets.only(
                                     top: YahaSpaceSizes.medium,
-                                    bottom: YahaSpaceSizes.xSmall),
+                                    bottom: YahaSpaceSizes.small),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -130,7 +130,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               child: Container(
                                 margin: EdgeInsets.only(
                                     top: YahaSpaceSizes.small,
-                                    bottom: YahaSpaceSizes.xSmall),
+                                    bottom: YahaSpaceSizes.small),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -163,7 +163,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               child: Container(
                                 margin: EdgeInsets.only(
                                     top: YahaSpaceSizes.small,
-                                    bottom: YahaSpaceSizes.xSmall),
+                                    bottom: YahaSpaceSizes.small),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -196,7 +196,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               child: Container(
                                 margin: EdgeInsets.only(
                                     top: YahaSpaceSizes.small,
-                                    bottom: YahaSpaceSizes.xSmall),
+                                    bottom: YahaSpaceSizes.small),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -229,7 +229,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               child: Container(
                                 margin: EdgeInsets.only(
                                     top: YahaSpaceSizes.small,
-                                    bottom: YahaSpaceSizes.xSmall),
+                                    bottom: YahaSpaceSizes.small),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -262,7 +262,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               child: Container(
                                 margin: EdgeInsets.only(
                                     top: YahaSpaceSizes.small,
-                                    bottom: YahaSpaceSizes.xSmall),
+                                    bottom: YahaSpaceSizes.small),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,

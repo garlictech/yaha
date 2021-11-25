@@ -150,9 +150,8 @@ class SignupScreen extends ConsumerWidget {
                                       TextSpan(
                                           text: 'Terms & Conditions ',
                                           style: TextStyle(
-                                              fontWeight: FontWeight.w500,
-                                              decoration:
-                                                  TextDecoration.underline),
+                                              fontWeight: FontWeight.w600,
+                                              color: YahaColors.primary),
                                           recognizer: TapGestureRecognizer()
                                             ..onTap = () {}),
                                       TextSpan(
@@ -164,9 +163,8 @@ class SignupScreen extends ConsumerWidget {
                                       TextSpan(
                                           text: 'Privacy Policy',
                                           style: TextStyle(
-                                              fontWeight: FontWeight.w500,
-                                              decoration:
-                                                  TextDecoration.underline),
+                                              fontWeight: FontWeight.w600,
+                                              color: YahaColors.primary),
                                           recognizer: TapGestureRecognizer()
                                             ..onTap = () {}),
                                     ],
