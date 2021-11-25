@@ -1,0 +1,107 @@
+## ------ Generic types -----------------------------------------------------
+
+enum PublicationState {
+  draft
+  published
+  archived
+}
+
+# ------ TEXTUAL DESCRIPTION -----------------------------------------------------
+enum TextualDescriptionType {
+  markdown
+  html
+}
+
+type TextualDescription {
+  languageKey: String!
+  title: String
+  summary: String
+  fullDescription: String
+  type: TextualDescriptionType!
+}
+
+# ------ HIKE -----------------------------------------------------
+type BoundingBox {
+  NorthEast: Point!
+  SouthWest: Point!
+}
+
+type RouteData {
+  distance: Int!
+  uphill: Int!
+  downhill: Int!
+  track: [[Float!]!]!
+  bigBuffer: [[[Float!]!]!]!
+  smallBuffer: [[[Float!]!]!]!
+  averageTime: Int!
+  score: Int!
+  difficulty: Int!
+  bounds: BoundingBox!
+  isRoundTrip: Boolean!
+  poiSearchBox: BoundingBox!
+}
+
+type HikeStop {
+  poiId: ID!
+  description: [TextualDescription!]
+}
+
+enum PoiSource {
+  google
+  wikipedia
+  osmAmenity
+  osmNatural
+  osmRoute
+  osmPublicTransport
+  osmEmergency
+  osmHistoric
+  osmLeisure
+  osmManMade
+  osmMilitary
+  osmShop
+  osmTourism
+  mapillary
+  flickr
+}
+
+type PoiSourceObject {
+  objectType: PoiSource!
+  languageKey: String
+  objectId: String!
+  url: String
+}
+
+type Poi {
+  id: ID! @id
+  location: Point!
+  types: [String!]
+  description: [TextualDescription!]!
+  tags: [String!]
+  sourceObject: [PoiSourceObject!]!
+  address: String
+  phoneFloat: String
+  openingHours: String
+}
+
+union Checkpoint = Poi | Point
+
+type Hike {
+  id: ID! @id
+  description: [TextualDescription!]!
+  location: String!
+  publicationState: PublicationState!
+  featured: Boolean
+  rate: String
+  offlineMap: String
+  featuredStops: [HikeStop]
+  checkpoints: [Checkpoint]
+  tags: [String!]
+  route: RouteData!
+  startPoint: Point!
+  endPoint: Point!
+}
+type Point {
+  lat: Float!
+  lon: Float!
+  ele: Float
+}
