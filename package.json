@@ -101,7 +101,7 @@
     "prettier": "2.4.1",
     "pretty-quick": "3.1.2",
     "request-promise": "4.2.6",
-    "semantic-release": "18.0.0",
+    "semantic-release": "18.0.1",
     "serverless": "2.66.2",
     "serverless-bundle": "5.1.0",
     "serverless-offline": "8.3.0",
