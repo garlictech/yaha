@@ -6,5 +6,7 @@ class YahaIconSizes {
   static const xxLarge = 40.0;
   static const xxxLarge = 50.0;
 
+  static const uploadIcon = 88.0;
+
   const YahaIconSizes();
 }

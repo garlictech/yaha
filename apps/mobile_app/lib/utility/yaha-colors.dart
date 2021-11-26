@@ -18,6 +18,8 @@ class YahaColors {
 
   static const Color background = const Color(0xFFFCFCFC);
 
+  static const Color grey200 = const Color(0xFFDAD9D8);
+
 // POI COLORS
   static const Color emergency = const Color(0xFFEF5350);
   static const Color generic = const Color(0xFF78909C); 

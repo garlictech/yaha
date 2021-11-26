@@ -27,6 +27,9 @@ class TimeCapsulesScreen extends StatelessWidget {
             labelColor: YahaColors.primary,
             unselectedLabelColor: YahaColors.textColor,
             indicatorColor: YahaColors.primary,
+            unselectedLabelStyle: TextStyle(fontWeight: FontWeight.w500),
+            labelStyle: TextStyle(
+                fontWeight: FontWeight.w600, fontSize: YahaFontSizes.xSmall),
             tabs: [
               Tab(text: 'Found TimeCapsules'),
               Tab(text: 'My TimeCapsules'),

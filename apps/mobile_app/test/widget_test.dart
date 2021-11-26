@@ -1,8 +1,4 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility that Flutter provides. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
+// This is a basic Flutter widget test.  To perform an interaction with a widget in your test, use the WidgetTester utility that Flutter provides. For example, you can send tap and scroll gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
 import 'package:network_image_mock/network_image_mock.dart';
@@ -44,10 +40,15 @@ import 'package:yaha/profile/time-capsules/views/screens/timecapsules-screen.dar
 import 'package:yaha/search-results-screen.dart';
 import 'package:yaha/settings/application/application-screen.dart';
 import 'package:yaha/settings/views/settings-screen.dart';
-import 'package:yaha/track-page.dart';
 import 'package:yaha/views/auth/screens/login-screen.dart';
 import 'package:yaha/views/auth/screens/signup-screen.dart';
-import 'package:yaha/views/comments/screens/comments-screen.dart';
+import 'package:yaha/views/track/screens/leave-a-timecapsule-screen.dart';
+import 'package:yaha/views/track/screens/tracking-data-screen.dart';
+import 'package:yaha/views/track/screens/tracking-map-screen.dart';
+import 'package:yaha/views/track/screens/tracking-timecapsule-screen.dart';
+import 'package:yaha/views/track/screens/tracking-timeline-screen.dart';
+import 'package:yaha/views/track/screens/tracking.dart';
+import 'package:yaha/views/comments/screens/commments-screen.dart';
 import 'package:yaha/views/hike-outline/screens/time-capsule-info-screen.dart';
 
 void main() {
@@ -116,7 +117,8 @@ void main() {
     await tester.pumpAndSettle();
   });
   testWidgets('Track Screen smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new TrackPage()));
+    await tester
+        .pumpWidget(createWidgetForTesting(child: new TrackingScreen()));
 
     await tester.pumpAndSettle();
   });
@@ -313,5 +315,44 @@ void main() {
 
       await tester.pumpAndSettle();
     });
+  });
+  testWidgets('Leave a TimeCapsule Screen smoke test',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(
+        createWidgetForTesting(child: new LeaveATimeCapsuleScreen()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Tracking Screen smoke test', (WidgetTester tester) async {
+    await tester
+        .pumpWidget(createWidgetForTesting(child: new TrackingScreen()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Tracking Map Screen smoke test', (WidgetTester tester) async {
+    await tester
+        .pumpWidget(createWidgetForTesting(child: new TrackingMapScreen()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Tracking Timeline Screen smoke test',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(
+        createWidgetForTesting(child: new TrackingTimelineScreen()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Tracking Data Screen smoke test', (WidgetTester tester) async {
+    await tester
+        .pumpWidget(createWidgetForTesting(child: new TrackingDataScreen()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Tracking TimeCapsule Screen smoke test',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetForTesting(
+        child: new TrackingTimeCapsuleScreen(collectedTimeCapsules: 4)));
+
+    await tester.pumpAndSettle();
   });
 }

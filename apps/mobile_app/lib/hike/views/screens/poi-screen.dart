@@ -9,7 +9,7 @@ import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-icon-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
-import 'package:yaha/views/comments/screens/comments-screen.dart';
+import 'package:yaha/views/comments/screens/commments-screen.dart';
 
 class PoiScreen extends ConsumerWidget {
   /*final int openingHoursChevronQuarterTurns;

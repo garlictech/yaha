@@ -6,7 +6,7 @@ class YahaSpaceSizes {
   static const medium = 15.0;
 
   static const general = 20.0;
-
+  static const semiLarge = 30.0;
   static const large = 35.0;
   static const xLarge = 40.0;
   static const xxLarge = 60.0;
