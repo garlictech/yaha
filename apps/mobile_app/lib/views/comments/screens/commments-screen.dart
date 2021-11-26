@@ -10,7 +10,7 @@ import 'package:yaha/utility/yaha-icon-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 import '../widgets/comment-widget.dart';
 
-class CommentsScreen extends ConsumerWidget {
+class CommmentsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     final viewModel = watch(commentsScreenMVPProvider);

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yaha/gallery.dart';
 import 'package:yaha/hike/hike-outline/poi.dart';
 import 'package:yaha/utility/buttons/back-button.dart';
@@ -8,16 +9,18 @@ import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-icon-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
-import 'package:yaha/views/comments/screens/comments-screen.dart';
+import 'package:yaha/views/comments/screens/commments-screen.dart';
 
-class PoiScreen extends StatefulWidget {
-  @override
-  _PoiScreenState createState() => _PoiScreenState();
-}
+class PoiScreen extends ConsumerWidget {
+  /*final int openingHoursChevronQuarterTurns;
 
-class _PoiScreenState extends State<PoiScreen> {
+  const PoiScreen({
+    Key? key,
+    required this.openingHoursChevronQuarterTurns,
+  }) : super(key: key);*/
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ScopedReader watch) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: YahaColors.background,
@@ -40,7 +43,7 @@ class _PoiScreenState extends State<PoiScreen> {
                   size: YahaIconSizes.medium, color: YahaColors.textColor),
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => CommentsScreen()));
+                    MaterialPageRoute(builder: (context) => CommmentsScreen()));
               },
             ),
           ),
@@ -113,7 +116,12 @@ class _PoiScreenState extends State<PoiScreen> {
                                       fontSize: YahaFontSizes.small,
                                       fontWeight: FontWeight.w400,
                                       color: YahaColors.textColor)),
-                              Icon(Icons.expand_more),
+                              RotatedBox(
+                                quarterTurns: 0,
+                                child: GestureDetector(
+                                    onTap: () {},
+                                    child: Icon(Icons.expand_more)),
+                              ),
                             ],
                           ),
                         ),

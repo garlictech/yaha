@@ -12,7 +12,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yaha/bottom-nav-bar.dart';
 import 'package:yaha/hike/hike-screen/most-interesting-place-on-route/places-on-route-screen.dart';
-import 'package:yaha/hike/views/screens/comments-screen.dart';
 import 'package:yaha/hike/views/screens/more-poi-screen.dart';
 import 'package:yaha/hike/views/screens/weather-screen.dart';
 import 'package:yaha/home/views/screens/best-hikes-near-you-screen.dart';
@@ -53,6 +52,8 @@ import 'package:yaha/views/track/screens/tracking-map-screen.dart';
 import 'package:yaha/views/track/screens/tracking-timecapsule-screen.dart';
 import 'package:yaha/views/track/screens/tracking-timeline-screen.dart';
 import 'package:yaha/views/track/screens/tracking.dart';
+import 'package:yaha/views/comments/screens/commments-screen.dart';
+import 'package:yaha/views/hike-outline/screens/time-capsule-info-screen.dart';
 
 void main() {
   testWidgets('Yaha main smoke test', (WidgetTester tester) async {
@@ -247,9 +248,10 @@ void main() {
 
     await tester.pumpAndSettle();
   });
-  testWidgets('TimeCapsule Screen smoke test', (WidgetTester tester) async {
+  testWidgets('TimeCapsule Info Screen smoke test',
+      (WidgetTester tester) async {
     await tester
-        .pumpWidget(createWidgetForTesting(child: new TimeCapsulesScreen()));
+        .pumpWidget(createWidgetForTesting(child: new TimeCapsuleInfoScreen()));
 
     await tester.pumpAndSettle();
   });
@@ -313,7 +315,7 @@ void main() {
   testWidgets('Comments Screen smoke test', (WidgetTester tester) async {
     mockNetworkImagesFor(() async {
       await tester
-          .pumpWidget(createWidgetForTesting(child: new CommentsScreen()));
+          .pumpWidget(createWidgetForTesting(child: new CommmentsScreen()));
 
       await tester.pumpAndSettle();
     });
