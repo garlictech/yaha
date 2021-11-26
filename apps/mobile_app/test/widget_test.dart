@@ -313,7 +313,7 @@ void main() {
   testWidgets('Comments Screen smoke test', (WidgetTester tester) async {
     mockNetworkImagesFor(() async {
       await tester
-          .pumpWidget(createWidgetForTesting(child: new CommmentsScreen()));
+          .pumpWidget(createWidgetForTesting(child: new CommentsScreen()));
 
       await tester.pumpAndSettle();
     });
