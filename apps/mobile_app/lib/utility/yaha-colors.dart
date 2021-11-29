@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class YahaColors {
   // YAHA THEME COLORS
   static const Color primary = const Color(0xFF007D46); // DIFFICULTY - EASY
+  static const Color lightGreen = const Color(0xFF6EC341);
   static const Color secondary = const Color(0xFF0091FC); // DIFFICULTY - MEDIUM
   static const Color warning = const Color(0xFFF5B800);
   static const Color error = const Color(0xFFD32F2F); // DIFFICULTY - HARD

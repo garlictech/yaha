@@ -1,14 +1,18 @@
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:yaha/hike/hike-outline/checkpoint.dart';
 import 'package:yaha/hike/hike-outline/route-section.dart';
 import 'package:yaha/hike/hike-outline/views/widgets/timecapsule-on-hike-outline-widget.dart';
 import 'package:yaha/hike/hike-outline/weather-astronomical-data.dart';
+import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
+import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-icon-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 import 'package:yaha/views/track/tracking-timeline-state.dart';
+import 'package:yaha/views/track/widgets/tracking-rating-widget.dart';
 
 class TrackingTimelineScreen extends ConsumerWidget {
   @override
@@ -75,7 +79,68 @@ class TrackingTimelineScreen extends ConsumerWidget {
                             Padding(
                               padding: const EdgeInsets.only(top: 5),
                               child: IconButton(
-                                onPressed: () {},
+                                onPressed: () => showBarModalBottomSheet(
+                                  expand: false,
+                                  backgroundColor: YahaColors.background,
+                                  useRootNavigator: true,
+                                  context: context,
+                                  builder: (context) {
+                                    return SingleChildScrollView(
+                                      controller:
+                                          ModalScrollController.of(context),
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            height: YahaBoxSizes.heightXXXSmall,
+                                            padding: EdgeInsets.only(
+                                              left: YahaSpaceSizes.small,
+                                              right: YahaSpaceSizes.medium,
+                                            ),
+                                            color: YahaColors.accentColor,
+                                            child: Stack(
+                                              alignment: Alignment.center,
+                                              children: [
+                                                Align(
+                                                  alignment: Alignment.center,
+                                                  child: Text(
+                                                    "Rating",
+                                                    style: TextStyle(
+                                                      fontSize:
+                                                          YahaFontSizes.small,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color:
+                                                          YahaColors.textColor,
+                                                    ),
+                                                  ),
+                                                ),
+                                                Align(
+                                                  alignment:
+                                                      Alignment.centerRight,
+                                                  child: InkWell(
+                                                    onTap: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                    child: Icon(
+                                                      Icons.close_outlined,
+                                                      color: YahaColors
+                                                          .secondaryAccentColor,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Container(
+                                            color: YahaColors.background,
+                                            child: TrackingRatingWidget(),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                ),
                                 icon: Icon(
                                   Icons.rate_review_rounded,
                                   size: YahaIconSizes.medium,

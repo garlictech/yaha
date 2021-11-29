@@ -8,5 +8,7 @@ class YahaIconSizes {
 
   static const uploadIcon = 88.0;
 
+  static const ratingIcon = 45.0;
+
   const YahaIconSizes();
 }
