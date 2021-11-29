@@ -73,7 +73,7 @@
     "@nrwl/workspace": "13.2.3",
     "@nxrocks/nx-flutter": "3.0.0",
     "@serverless-stack/cli": "0.50.3",
-    "@serverless-stack/resources": "0.50.3",
+    "@serverless-stack/resources": "0.53.2",
     "@types/aws-lambda": "8.10.85",
     "@types/cypress-cucumber-preprocessor": "4.0.1",
     "@types/googlemaps": "3.43.3",
