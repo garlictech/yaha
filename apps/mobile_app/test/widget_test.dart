@@ -343,8 +343,21 @@ void main() {
     await tester.pumpAndSettle();
   });
   testWidgets('Tracking Data Screen smoke test', (WidgetTester tester) async {
-    await tester
-        .pumpWidget(createWidgetForTesting(child: new TrackingDataScreen()));
+    await tester.pumpWidget(createWidgetForTesting(
+        child: new TrackingDataScreen(
+      durationHours: 2,
+      durationMins: 1,
+      calories: 59,
+      actualSpeed: 8,
+      averageSpeed: 5,
+      distanceToNext: 1.2,
+      timeToNext: 15,
+      distanceToFinish: 8,
+      timeToFinishHours: 5,
+      timeToFinishMins: 13,
+      distance: 12,
+      timeCapsules: 4,
+    )));
 
     await tester.pumpAndSettle();
   });
