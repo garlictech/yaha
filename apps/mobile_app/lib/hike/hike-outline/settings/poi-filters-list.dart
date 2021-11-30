@@ -71,11 +71,15 @@ class PoiFiltersList extends StatelessWidget {
       }
     });
 
-    return Wrap(
-      direction: Axis.horizontal,
-      spacing: YahaSpaceSizes.medium,
-      runSpacing: YahaSpaceSizes.xSmall,
-      children: [...nodes],
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      child: Wrap(
+        direction: Axis.horizontal,
+        spacing: YahaSpaceSizes.medium,
+        runSpacing: YahaSpaceSizes.xSmall,
+        alignment: WrapAlignment.start,
+        children: [...nodes],
+      ),
     );
   }
 }

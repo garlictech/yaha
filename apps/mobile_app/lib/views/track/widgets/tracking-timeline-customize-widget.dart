@@ -8,7 +8,7 @@ import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-icon-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
-class HikeOutlineFilters extends ConsumerWidget {
+class TrackingTimelineCustomizeWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     return Container(
@@ -101,9 +101,7 @@ class HikeOutlineFilters extends ConsumerWidget {
               ),
             ],
           ),
-          Container(
-            child: PoiFiltersList(),
-          ),
+          PoiFiltersList(),
           Container(
             padding: const EdgeInsets.only(top: YahaSpaceSizes.xLarge),
             child: SizedBox(
