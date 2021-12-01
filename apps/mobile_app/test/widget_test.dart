@@ -43,6 +43,8 @@ import 'package:yaha/settings/views/settings-screen.dart';
 import 'package:yaha/views/auth/screens/login-screen.dart';
 import 'package:yaha/views/auth/screens/signup-screen.dart';
 import 'package:yaha/views/track/screens/leave-a-timecapsule-screen.dart';
+import 'package:yaha/views/track/screens/timecapsule-comments-screen.dart';
+import 'package:yaha/views/track/screens/timecapsule-in-track-mode-screen.dart';
 import 'package:yaha/views/track/screens/tracking-data-screen.dart';
 import 'package:yaha/views/track/screens/tracking-map-screen.dart';
 import 'package:yaha/views/track/screens/tracking-timecapsule-screen.dart';
@@ -380,6 +382,22 @@ void main() {
   testWidgets('Tracking Rating Widget smoke test', (WidgetTester tester) async {
     await tester
         .pumpWidget(createWidgetForTesting(child: new TrackingRatingWidget()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('TimeCapsule Comments Screen smoke test',
+      (WidgetTester tester) async {
+    mockNetworkImagesFor(() async {
+      await tester.pumpWidget(
+          createWidgetForTesting(child: new TimeCapsuleCommentsScreen()));
+
+      await tester.pumpAndSettle();
+    });
+  });
+  testWidgets('TimeCapsule in Track Mode smoke test',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(
+        createWidgetForTesting(child: new TimeCapsuleInTrackModeScreen()));
 
     await tester.pumpAndSettle();
   });
