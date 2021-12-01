@@ -34,13 +34,36 @@ class HikeOutlineFilters extends ConsumerWidget {
           ),
           Container(
             padding: EdgeInsets.only(
-              top: YahaSpaceSizes.general,
-              bottom: YahaSpaceSizes.general,
+              top: YahaSpaceSizes.medium,
+              bottom: YahaSpaceSizes.xxSmall,
             ),
             child: Row(
               children: [
                 Text(
                   'Show natural phenomenons',
+                  style: TextStyle(
+                    fontSize: YahaFontSizes.small,
+                    color: YahaColors.textColor,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                Container(
+                  child: IconButton(
+                    onPressed: () {},
+                    icon: Icon(Icons.help_rounded),
+                    color: YahaColors.primary,
+                    iconSize: YahaIconSizes.small,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: YahaSpaceSizes.general),
+            child: Row(
+              children: [
+                Text(
+                  'Show TimeCapsules',
                   style: TextStyle(
                     fontSize: YahaFontSizes.small,
                     color: YahaColors.textColor,

@@ -72,9 +72,10 @@ class ApplicationScreen extends ConsumerWidget {
                               left: YahaSpaceSizes.xSmall,
                               right: YahaSpaceSizes.xSmall),
                           width: YahaBoxSizes.buttonWidthBig,
+                          height: YahaBoxSizes.buttonHeight,
                           decoration: BoxDecoration(
                               border: Border.all(
-                                width: YahaBorderWidth.small,
+                                width: YahaBorderWidth.xSmall,
                                 color: YahaColors.textColor,
                               ),
                               borderRadius: BorderRadius.circular(
