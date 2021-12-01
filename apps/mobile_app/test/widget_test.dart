@@ -50,6 +50,8 @@ import 'package:yaha/views/track/screens/tracking-timeline-screen.dart';
 import 'package:yaha/views/track/screens/tracking.dart';
 import 'package:yaha/views/comments/screens/commments-screen.dart';
 import 'package:yaha/views/hike-outline/screens/time-capsule-info-screen.dart';
+import 'package:yaha/views/track/widgets/tracking-rating-widget.dart';
+import 'package:yaha/views/track/widgets/tracking-timeline-customize-widget.dart';
 
 void main() {
   testWidgets('Yaha main smoke test', (WidgetTester tester) async {
@@ -365,6 +367,19 @@ void main() {
       (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(
         child: new TrackingTimeCapsuleScreen(collectedTimeCapsules: 4)));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Tracking Customize Timeline Widget smoke test',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(
+        createWidgetForTesting(child: new TrackingTimelineCustomizeWidget()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Tracking Rating Widget smoke test', (WidgetTester tester) async {
+    await tester
+        .pumpWidget(createWidgetForTesting(child: new TrackingRatingWidget()));
 
     await tester.pumpAndSettle();
   });
