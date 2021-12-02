@@ -5842,10 +5842,10 @@
     camelcase "^6.2.0"
     pluralize "^8.0.0"
 
-"@neo4j/graphql@2.4.0":
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/@neo4j/graphql/-/graphql-2.4.0.tgz#20cd6535b0affb554ccb493200c3450211cc5967"
-  integrity sha512-UeEFpwusDS/Q57HAdgI+mwoxsNdoFKklRzFoqVTYeDkpkKFfuUb0iUzaAoPTopiz5sOWwlPhHV32rctuBODDUA==
+"@neo4j/graphql@2.5.0":
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/@neo4j/graphql/-/graphql-2.5.0.tgz#39dbdde712887fb26128d6589f239f8aa7bb86b3"
+  integrity sha512-KU6alVxrKVCf7HtM3NbnGD4yO+Nwe1HtZXs5XZ4TRebQEBVC55i7BGW9YVGv0LJvbg9RTXVYmKx59Xpx7F7pJA==
   dependencies:
     "@graphql-tools/merge" "6.2.14"
     "@graphql-tools/schema" "^7.1.5"
@@ -5854,7 +5854,7 @@
     debug "^4.3.2"
     deep-equal "^2.0.5"
     dot-prop "^6.0.1"
-    graphql-compose "^9.0.2"
+    graphql-compose "^9.0.4"
     graphql-parse-resolve-info "^4.12.0"
     graphql-relay "^0.8.0"
     jsonwebtoken "^8.5.1"
@@ -7745,7 +7745,7 @@
   resolved "https://registry.yarnpkg.com/@types/normalize-package-data/-/normalize-package-data-2.4.1.tgz#d3357479a0fdfdd5907fe67e17e0a85c906e1301"
   integrity sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==
 
-"@types/object-path@^0.11.0":
+"@types/object-path@0.11.1":
   version "0.11.1"
   resolved "https://registry.yarnpkg.com/@types/object-path/-/object-path-0.11.1.tgz#eea5b357518597fc9c0a067ea3147f599fc1514f"
   integrity sha512-219LSCO9HPcoXcRTC6DbCs0FRhZgBnEMzf16RRqkT40WbkKx3mOeQuz3e2XqbfhOz/AHfbru0kzB1n1RCAsIIg==
@@ -14354,14 +14354,14 @@ graphql-compose@^7.25.1:
     graphql-type-json "0.3.2"
     object-path "0.11.5"
 
-graphql-compose@^9.0.2:
-  version "9.0.2"
-  resolved "https://registry.yarnpkg.com/graphql-compose/-/graphql-compose-9.0.2.tgz#f029ff1ceaec65655a847521996109ac0e0a076e"
-  integrity sha512-K6tyyoPQ/UGM2nol0avooh95UMI8DxLv7PaM4JL3ZDaTzbocrUDwzAl3UUYeBucovn9ZNntctUNU7pTrvxViMA==
+graphql-compose@^9.0.4:
+  version "9.0.4"
+  resolved "https://registry.yarnpkg.com/graphql-compose/-/graphql-compose-9.0.4.tgz#b4b584cbbdf7df123fe3d7e3ee913e1918c8ecb7"
+  integrity sha512-Cvu+efr6qB6Q7XRoXvTShsFNptW9UWG6XW1fPBIa95BCyi/8lH7ZLVPJTy+vKTLhViJZ7uw/MoJ1FPkUGu+S4Q==
   dependencies:
-    "@types/object-path" "^0.11.0"
+    "@types/object-path" "0.11.1"
     graphql-type-json "0.3.2"
-    object-path "0.11.5"
+    object-path "0.11.8"
 
 graphql-config@^4.1.0:
   version "4.1.0"
@@ -20127,6 +20127,11 @@ object-path@0.11.5:
   version "0.11.5"
   resolved "https://registry.yarnpkg.com/object-path/-/object-path-0.11.5.tgz#d4e3cf19601a5140a55a16ad712019a9c50b577a"
   integrity sha512-jgSbThcoR/s+XumvGMTMf81QVBmah+/Q7K7YduKeKVWL7N111unR2d6pZZarSk6kY/caeNxUDyxOvMWyzoU2eg==
+
+object-path@0.11.8:
+  version "0.11.8"
+  resolved "https://registry.yarnpkg.com/object-path/-/object-path-0.11.8.tgz#ed002c02bbdd0070b78a27455e8ae01fc14d4742"
+  integrity sha512-YJjNZrlXJFM42wTBn6zgOJVar9KFJvzx6sTWDte8sWZF//cnjl0BxHNpfZx+ZffXX63A9q0b1zsFiBX4g4X5KA==
 
 object-path@^0.11.4:
   version "0.11.7"
