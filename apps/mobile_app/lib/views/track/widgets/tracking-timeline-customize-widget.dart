@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yaha/hike/hike-outline/settings/poi-filters-list.dart';
+import 'package:yaha/presenters/track/tracking-timeline-customize-widget-presenter.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
@@ -11,6 +12,10 @@ import 'package:yaha/utility/yaha-space-sizes.dart';
 class TrackingTimelineCustomizeWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
+    final viewModel = watch(trackingTimelineCustomizeWidgetMVPProvider);
+    final presenter =
+        watch(trackingTimelineCustomizeWidgetMVPProvider.notifier);
+
     return Material(
       child: Padding(
         padding: EdgeInsets.only(
@@ -30,6 +35,10 @@ class TrackingTimelineCustomizeWidget extends ConsumerWidget {
                     color: YahaColors.textColor,
                     fontWeight: FontWeight.w400,
                   ),
+                ),
+                Switch.adaptive(
+                  value: viewModel.showPois,
+                  onChanged: presenter.togglePoiSwitch(),
                 ),
               ],
             ),
