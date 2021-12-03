@@ -18,7 +18,7 @@ import 'package:yaha/views/track/widgets/tracking-timeline-customize-widget.dart
 class TrackingTimelineScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    var trackingTimelineState = watch(trackingTimelineStateProvider);
+    final trackingTimelineState = watch(trackingTimelineStateProvider);
 
     return Scaffold(
         body: trackingTimelineState.when(

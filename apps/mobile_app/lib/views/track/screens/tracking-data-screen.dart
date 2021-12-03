@@ -49,10 +49,11 @@ class TrackingDataScreen extends ConsumerWidget {
                         left: YahaSpaceSizes.general,
                         right: YahaSpaceSizes.general,
                         top: YahaSpaceSizes.general),
-                    child: Column(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -107,6 +108,156 @@ class TrackingDataScreen extends ConsumerWidget {
                                 ),
                               ],
                             ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: YahaSpaceSizes.xLarge,
+                                  bottom: YahaSpaceSizes.xLarge),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.baseline,
+                                    textBaseline: TextBaseline.alphabetic,
+                                    children: [
+                                      Text(
+                                        actualSpeed.toString(),
+                                        style: TextStyle(
+                                            color: YahaColors.textColor,
+                                            fontSize: YahaFontSizes
+                                                .trackingDataNumbers,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                      Text(
+                                        'km/h',
+                                        style: TextStyle(
+                                            color: YahaColors.textColor,
+                                            fontSize: YahaFontSizes.medium,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                    ],
+                                  ),
+                                  Text(
+                                    'ACTUAL SPEED',
+                                    style: TextStyle(
+                                        fontSize: YahaFontSizes.small,
+                                        fontWeight: FontWeight.w500,
+                                        color: YahaColors.grey600),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Row(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.baseline,
+                                  textBaseline: TextBaseline.alphabetic,
+                                  children: [
+                                    Text(
+                                      distanceToNext.toString(),
+                                      style: TextStyle(
+                                          color: YahaColors.textColor,
+                                          fontSize:
+                                              YahaFontSizes.trackingDataNumbers,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                    Text(
+                                      'km',
+                                      style: TextStyle(
+                                          color: YahaColors.textColor,
+                                          fontSize: YahaFontSizes.medium,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                  ],
+                                ),
+                                Text(
+                                  'DISTANCE TO NEXT',
+                                  style: TextStyle(
+                                      fontSize: YahaFontSizes.small,
+                                      fontWeight: FontWeight.w500,
+                                      color: YahaColors.grey600),
+                                )
+                              ],
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: YahaSpaceSizes.xLarge,
+                                  bottom: YahaSpaceSizes.xLarge),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.baseline,
+                                    textBaseline: TextBaseline.alphabetic,
+                                    children: [
+                                      Text(
+                                        distanceToFinish.toString(),
+                                        style: TextStyle(
+                                            color: YahaColors.textColor,
+                                            fontSize: YahaFontSizes
+                                                .trackingDataNumbers,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                      Text(
+                                        'km',
+                                        style: TextStyle(
+                                            color: YahaColors.textColor,
+                                            fontSize: YahaFontSizes.medium,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                    ],
+                                  ),
+                                  Text(
+                                    'DISTANCE TO FINISH',
+                                    style: TextStyle(
+                                        fontSize: YahaFontSizes.small,
+                                        fontWeight: FontWeight.w500,
+                                        color: YahaColors.grey600),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Row(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.baseline,
+                                  textBaseline: TextBaseline.alphabetic,
+                                  children: [
+                                    Text(
+                                      distance.toString(),
+                                      style: TextStyle(
+                                          color: YahaColors.textColor,
+                                          fontSize:
+                                              YahaFontSizes.trackingDataNumbers,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                    Text(
+                                      'km',
+                                      style: TextStyle(
+                                          color: YahaColors.textColor,
+                                          fontSize: YahaFontSizes.medium,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                  ],
+                                ),
+                                Text(
+                                  'DISTANCE',
+                                  style: TextStyle(
+                                      fontSize: YahaFontSizes.small,
+                                      fontWeight: FontWeight.w500,
+                                      color: YahaColors.grey600),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                        Column(
+                          children: [
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
@@ -141,50 +292,11 @@ class TrackingDataScreen extends ConsumerWidget {
                                 ),
                               ],
                             ),
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              top: YahaSpaceSizes.xLarge,
-                              bottom: YahaSpaceSizes.xLarge),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.baseline,
-                                    textBaseline: TextBaseline.alphabetic,
-                                    children: [
-                                      Text(
-                                        actualSpeed.toString(),
-                                        style: TextStyle(
-                                            color: YahaColors.textColor,
-                                            fontSize: YahaFontSizes
-                                                .trackingDataNumbers,
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                      Text(
-                                        'km/h',
-                                        style: TextStyle(
-                                            color: YahaColors.textColor,
-                                            fontSize: YahaFontSizes.medium,
-                                            fontWeight: FontWeight.w500),
-                                      ),
-                                    ],
-                                  ),
-                                  Text(
-                                    'ACTUAL SPEED',
-                                    style: TextStyle(
-                                        fontSize: YahaFontSizes.small,
-                                        fontWeight: FontWeight.w500,
-                                        color: YahaColors.grey600),
-                                  ),
-                                ],
-                              ),
-                              Column(
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: YahaSpaceSizes.xLarge,
+                                  bottom: YahaSpaceSizes.xLarge),
+                              child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Row(
@@ -218,45 +330,6 @@ class TrackingDataScreen extends ConsumerWidget {
                                   ),
                                 ],
                               ),
-                            ],
-                          ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Row(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.baseline,
-                                  textBaseline: TextBaseline.alphabetic,
-                                  children: [
-                                    Text(
-                                      distanceToNext.toString(),
-                                      style: TextStyle(
-                                          color: YahaColors.textColor,
-                                          fontSize:
-                                              YahaFontSizes.trackingDataNumbers,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                    Text(
-                                      'km',
-                                      style: TextStyle(
-                                          color: YahaColors.textColor,
-                                          fontSize: YahaFontSizes.medium,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                  ],
-                                ),
-                                Text(
-                                  'DISTANCE TO NEXT',
-                                  style: TextStyle(
-                                      fontSize: YahaFontSizes.small,
-                                      fontWeight: FontWeight.w500,
-                                      color: YahaColors.grey600),
-                                )
-                              ],
                             ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -292,50 +365,11 @@ class TrackingDataScreen extends ConsumerWidget {
                                 ),
                               ],
                             ),
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              top: YahaSpaceSizes.xLarge,
-                              bottom: YahaSpaceSizes.xLarge),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.baseline,
-                                    textBaseline: TextBaseline.alphabetic,
-                                    children: [
-                                      Text(
-                                        distanceToFinish.toString(),
-                                        style: TextStyle(
-                                            color: YahaColors.textColor,
-                                            fontSize: YahaFontSizes
-                                                .trackingDataNumbers,
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                      Text(
-                                        'km',
-                                        style: TextStyle(
-                                            color: YahaColors.textColor,
-                                            fontSize: YahaFontSizes.medium,
-                                            fontWeight: FontWeight.w500),
-                                      ),
-                                    ],
-                                  ),
-                                  Text(
-                                    'DISTANCE TO FINISH',
-                                    style: TextStyle(
-                                        fontSize: YahaFontSizes.small,
-                                        fontWeight: FontWeight.w500,
-                                        color: YahaColors.grey600),
-                                  ),
-                                ],
-                              ),
-                              Column(
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: YahaSpaceSizes.xLarge,
+                                  bottom: YahaSpaceSizes.xLarge),
+                              child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Row(
@@ -388,45 +422,6 @@ class TrackingDataScreen extends ConsumerWidget {
                                   ),
                                 ],
                               ),
-                            ],
-                          ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Row(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.baseline,
-                                  textBaseline: TextBaseline.alphabetic,
-                                  children: [
-                                    Text(
-                                      distance.toString(),
-                                      style: TextStyle(
-                                          color: YahaColors.textColor,
-                                          fontSize:
-                                              YahaFontSizes.trackingDataNumbers,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                    Text(
-                                      'km',
-                                      style: TextStyle(
-                                          color: YahaColors.textColor,
-                                          fontSize: YahaFontSizes.medium,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                  ],
-                                ),
-                                Text(
-                                  'DISTANCE',
-                                  style: TextStyle(
-                                      fontSize: YahaFontSizes.small,
-                                      fontWeight: FontWeight.w500,
-                                      color: YahaColors.grey600),
-                                )
-                              ],
                             ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.center,

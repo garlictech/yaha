@@ -1,11 +1,13 @@
-class TrackingTimelineCustomizeWidgetViewmodel {
+class TrackingTimelineCustomizeWidgetViewModel {
   final bool showPois;
   final bool showNaturalPhenomenons;
   final bool showTimeCapsules;
 
-  TrackingTimelineCustomizeWidgetViewmodel({
+  TrackingTimelineCustomizeWidgetViewModel({
     this.showPois = false,
     this.showNaturalPhenomenons = false,
     this.showTimeCapsules = false,
   });
+
+  dispose() {}
 }
