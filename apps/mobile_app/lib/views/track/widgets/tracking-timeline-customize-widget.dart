@@ -19,7 +19,7 @@ class TrackingTimelineCustomizeWidget extends ConsumerWidget {
     return Material(
       child: Padding(
         padding: EdgeInsets.only(
-          top: YahaSpaceSizes.large,
+          top: YahaSpaceSizes.general,
           right: YahaSpaceSizes.general,
           bottom: YahaSpaceSizes.large,
           left: YahaSpaceSizes.general,
@@ -27,6 +27,7 @@ class TrackingTimelineCustomizeWidget extends ConsumerWidget {
         child: Column(
           children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   'Show POIs between checkpoints',
@@ -38,32 +39,44 @@ class TrackingTimelineCustomizeWidget extends ConsumerWidget {
                 ),
                 Switch.adaptive(
                   value: viewModel.showPois,
-                  onChanged: presenter.togglePoiSwitch(),
+                  onChanged: (_value) => presenter.togglePoiSwitch(),
+                  activeColor: YahaColors.primary,
                 ),
               ],
             ),
             Container(
               padding: EdgeInsets.only(
-                top: YahaSpaceSizes.medium,
-                bottom: YahaSpaceSizes.xxSmall,
+                top: YahaSpaceSizes.xSmall,
+                bottom: YahaSpaceSizes.xSmall,
               ),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'Show natural phenomenons',
-                    style: TextStyle(
-                      fontSize: YahaFontSizes.small,
-                      color: YahaColors.textColor,
-                      fontWeight: FontWeight.w400,
-                    ),
+                  Row(
+                    children: [
+                      Text(
+                        'Show natural phenomenons',
+                        style: TextStyle(
+                          fontSize: YahaFontSizes.small,
+                          color: YahaColors.textColor,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      Container(
+                        child: IconButton(
+                          onPressed: () {},
+                          icon: Icon(Icons.help_rounded),
+                          color: YahaColors.primary,
+                          iconSize: YahaIconSizes.small,
+                        ),
+                      ),
+                    ],
                   ),
-                  Container(
-                    child: IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.help_rounded),
-                      color: YahaColors.primary,
-                      iconSize: YahaIconSizes.small,
-                    ),
+                  Switch.adaptive(
+                    value: viewModel.showNaturalPhenomenons,
+                    onChanged: (_value) =>
+                        presenter.toggleNaturalPhenomenonsSwitch(),
+                    activeColor: YahaColors.primary,
                   ),
                 ],
               ),
@@ -71,22 +84,32 @@ class TrackingTimelineCustomizeWidget extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.only(bottom: YahaSpaceSizes.general),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'Show TimeCapsules',
-                    style: TextStyle(
-                      fontSize: YahaFontSizes.small,
-                      color: YahaColors.textColor,
-                      fontWeight: FontWeight.w400,
-                    ),
+                  Row(
+                    children: [
+                      Text(
+                        'Show TimeCapsules',
+                        style: TextStyle(
+                          fontSize: YahaFontSizes.small,
+                          color: YahaColors.textColor,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      Container(
+                        child: IconButton(
+                          onPressed: () {},
+                          icon: Icon(Icons.help_rounded),
+                          color: YahaColors.primary,
+                          iconSize: YahaIconSizes.small,
+                        ),
+                      ),
+                    ],
                   ),
-                  Container(
-                    child: IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.help_rounded),
-                      color: YahaColors.primary,
-                      iconSize: YahaIconSizes.small,
-                    ),
+                  Switch.adaptive(
+                    value: viewModel.showTimeCapsules,
+                    onChanged: (_value) => presenter.toggleTimeCapsulesSwitch(),
+                    activeColor: YahaColors.primary,
                   ),
                 ],
               ),

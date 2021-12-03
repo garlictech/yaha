@@ -43,6 +43,7 @@ import 'package:yaha/settings/views/settings-screen.dart';
 import 'package:yaha/views/auth/screens/login-screen.dart';
 import 'package:yaha/views/auth/screens/signup-screen.dart';
 import 'package:yaha/views/track/screens/leave-a-timecapsule-screen.dart';
+import 'package:yaha/views/track/screens/summary-screen.dart';
 import 'package:yaha/views/track/screens/timecapsule-comments-screen.dart';
 import 'package:yaha/views/track/screens/timecapsule-in-track-mode-screen.dart';
 import 'package:yaha/views/track/screens/tracking-data-screen.dart';
@@ -398,6 +399,22 @@ void main() {
       (WidgetTester tester) async {
     await tester.pumpWidget(
         createWidgetForTesting(child: new TimeCapsuleInTrackModeScreen()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Summary Screen smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetForTesting(
+        child: new SummaryScreen(
+      length: 12,
+      averageSpeed: 5,
+      uphill: 2,
+      calories: 890,
+      durationHours: 3,
+      durationMins: 1,
+      checkpoints: 10,
+      downhill: 10,
+      points: 12,
+    )));
 
     await tester.pumpAndSettle();
   });
