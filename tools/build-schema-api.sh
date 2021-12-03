@@ -2,11 +2,24 @@
 set -e
 IFS='|'
 
-STAGE=$1
+ENVNAME=$1
+APPNAME=yahabackend
 
-yarn graphql-codegen --config tools/graphql-codegen-neo4j.yml
+echo
+echo 'Compile schema with amplify'
+echo '=============================='
+pushd apps/backend > /dev/null
+amplify api gql-compile
+popd > /dev/null
+#amplify api gql-compile --allow-destructive-graphql-schema-updates
+#amplify codegen
+
+echo
+echo 'Generate typescript api'
+echo '=============================='
+yarn graphql-codegen --config tools/graphql-codegen.yml
+echo 'Done.'
 
 echo "Preparing schema for graphql schema checker..."
-cat libs/neo4j-gql/backend/graphql/schema/hiking-api.graphql \
-libs/neo4j-gql/backend/graphql/schema/neo4j-types.graphql \
-> .github/graphql-inspector-artifacts/schema.graphql
+cat apps/backend/amplify/backend/api/yahabackend/build/schema.graphql \
+  > .github/graphql-inspector-artifacts/schema.graphql

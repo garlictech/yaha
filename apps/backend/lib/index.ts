@@ -3,8 +3,10 @@ import { CognitoStack } from './app/cognito-stack';
 import { GraphqlNeo4jStack } from './app/graphql-neo4j-stack';
 import { ParamsStack } from './app/params-stack';
 import { SecretsManagerStack } from './app/secretsmanager-stack';
-//import { AppsyncAppStack } from './app/appsync-app-stack';
 import { SeederStack } from './app/seeder-stack';
+import * as ec2 from '@aws-cdk/aws-ec2';
+import { NeptuneApiStack } from './app/neptune-stack';
+import { LambdaStack } from './app/lambda-stack';
 
 export class yahaStack extends Stack {
   constructor(scope: App, id: string) {
@@ -13,8 +15,20 @@ export class yahaStack extends Stack {
       scope,
       'SecretsManagerStack',
     );
+    const vpc = new ec2.Vpc(this, 'YahaVpc');
+
+    const neptuneStack = new NeptuneApiStack(scope, 'neptune', {
+      vpc,
+    });
 
     const paramsStack = new ParamsStack(scope, 'ParamsStack');
+
+    new LambdaStack(scope, 'LambdaStack', {
+      secretsManager: secretsManagerStack.secretsManager,
+      neptuneReaderAddress: neptuneStack.readerAddress,
+      neptuneWriterAddress: neptuneStack.writerAddress,
+      vpc,
+    });
 
     new CognitoStack(scope, 'cognito', {
       adminSiteUrl: 'https://admin.yaha.com',

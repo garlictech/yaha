@@ -1,3 +1,4 @@
+## ------ Generic types -----------------------------------------------------
 interface Node {
   id: ID!
   label: ValidDataLabels
@@ -24,6 +25,7 @@ enum PublicationState {
   archived
 }
 
+# ------ TEXTUAL DESCRIPTION -----------------------------------------------------
 enum TextualDescriptionType {
   markdown
   html
@@ -38,5 +40,11 @@ type TextualDescription {
 }
 
 type Query {
-  getNode(input: GetNodeInput!): Node @aws_iam @aws_cognito_user_pools @aws_api_key
+  # The graph parts
+  getNode(input: GetNodeInput!): Node
+    @aws_iam
+    @aws_cognito_user_pools
+    @aws_api_key
+    @function(name: "${env}-yaha-neptune-resolvers")
+
 }

@@ -4,8 +4,9 @@ module.exports = {
     '<rootDir>/apps/backend',
     '<rootDir>/libs/shared/utils',
     '<rootDir>/libs/shared/config',
-    '<rootDir>/libs/neo4j-gql/api',
-    '<rootDir>/libs/neo4j-gql/backend',
+    '<rootDir>/libs/neptune-gql',
+    '<rootDir>/libs/gql-api',
+    '<rootDir>/libs/shared/graphql/api-client',
   ],
   modulePaths: ['<rootDir>'],
 };

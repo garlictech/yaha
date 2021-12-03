@@ -17,7 +17,16 @@ import * as fp from 'lodash/fp';
 import neo4j from 'neo4j-driver';
 import * as rp from 'request-promise';
 import { defer, from, Observable, throwError } from 'rxjs';
-import { filter, map, mergeMap, switchMap, tap } from 'rxjs/operators';
+import {
+  filter,
+  map,
+  mergeMap,
+  shareReplay,
+  switchMap,
+  take,
+  tap,
+  withLatestFrom,
+} from 'rxjs/operators';
 import * as DOMParser from 'xmldom';
 import { BaseBuilder, buildGPX } from 'gpx-builder';
 //
@@ -44,13 +53,13 @@ const remoteDriver = neo4j.driver(
 
 const remoteSession = remoteDriver.session();
 
-const getCoordinates = (): Observable<any> =>
+const getCoordinates = (osmWayId: number): Observable<any> =>
   defer(() => {
     return from(
-      session.run(
+      driver.session().run(
         `
       MATCH (n:OSMWay)-[:TAGS]->(t:OSMTags)
-      WHERE t.route = "hiking"
+      WHERE n.way_osm_id = ${osmWayId}
       WITH n LIMIT 1
       MATCH (n)-[:FIRST_NODE]->(p1:OSMWayNode)
       MATCH (p1)-[:NEXT *1..]->(p2:OSMWayNode)
@@ -68,35 +77,111 @@ const getCoordinates = (): Observable<any> =>
     ),
   );
 
-const getGpx = getCoordinates().pipe(
-  tap(console.log),
+const fetchHikeOsmId = defer(() => {
+  return from(
+    driver.session().run(
+      `
+MATCH (n:OSMWay)-[:TAGS]->(t:OSMTags)
+WHERE t.route = "hiking"
+WITH n LIMIT 10
+RETURN n
+      `,
+    ),
+  );
+}).pipe(
   map(
     flow(
-      fp.map((coordinate: any) => {
-        return new Waypoint(coordinate[0], coordinate[1], {
-          ele: 0,
-        });
-      }),
-      segmentPoints => {
-        const gpxData = new BaseBuilder();
-        gpxData.setSegmentPoints(segmentPoints);
-        return buildGPX(gpxData.toObject());
-      },
+      result => result.records,
+      fp.map((record: any) => record._fields[0].properties.way_osm_id.low),
     ),
   ),
-  tap(data => fs.writeFileSync('lofasz.gpx', data)),
-  tap(() => console.log('Finished.')),
+  take(1),
+  shareReplay(1),
 );
 
-getGpx.subscribe();
+const getProperties = (osmWayId: number) =>
+  defer(() => {
+    return from(
+      driver.session().run(
+        `
+MATCH (n:OSMWay)-[:TAGS]->(t:OSMTags)
+WHERE n.way_osm_id = ${osmWayId}
+RETURN t
+      `,
+      ),
+    );
+  }).pipe(
+    map(
+      flow(
+        result => result.records,
+        fp.map((record: any) => record._fields[0].properties),
+        fp.first,
+        (result: any) => ({
+          description: {
+            languageKey: 'hu',
+            title: result.name,
+            summary: result['description:hu'],
+            type: 'markdown',
+          },
+          osmWayId,
+        }),
+      ),
+    ),
+    tap(x => console.warn(JSON.stringify(x, null, 2))),
+    take(1),
+    //  shareReplay(1),
+  );
 
-const createHike = getCoordinates().pipe(
+const getName = (osmWayId: number) =>
+  getProperties(osmWayId).pipe(
+    map(properties => properties.description.title),
+    //shareReplay(),
+  );
+
+const getGpx = (osmWayId: number) =>
+  getCoordinates(osmWayId).pipe(
+    map(
+      flow(
+        fp.map((coordinate: any) => {
+          return new Waypoint(coordinate[0], coordinate[1], {
+            ele: 0,
+          });
+        }),
+        segmentPoints => {
+          const gpxData = new BaseBuilder();
+          gpxData.setSegmentPoints(segmentPoints);
+          return buildGPX(gpxData.toObject());
+        },
+      ),
+    ),
+    withLatestFrom(getName(osmWayId)),
+    tap(([data, name]) => fs.writeFileSync(`${name.gpx}`, data)),
+    map(segmentPoints => segmentPoints[0]),
+  );
+
+fetchHikeOsmId
+  .pipe(
+    switchMap(from),
+    mergeMap((osmWayId: number) =>
+      getProperties(osmWayId).pipe(
+        tap(result =>
+          console.log('Hike found:', JSON.stringify(result, null, 2)),
+        ),
+        switchMap(() => getGpx(osmWayId)),
+      ),
+    ),
+  )
+  .subscribe();
+
+//getGpx.subscribe();
+
+/*const createHike = getCoordinates().pipe(
   map(
     coordinates => `
 
     `,
   ),
-);
+);*/
 //const schemaFilename = `${__dirname}/../libs/neo4j-gql/backend/graphql/schema/hiking-api.graphql`;
 
 //export const typeDefs = fs.readFileSync(schemaFilename).toString('utf-8');
