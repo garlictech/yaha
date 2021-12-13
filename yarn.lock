@@ -7380,10 +7380,10 @@
     node-addon-api "3.2.1"
     node-gyp "8.1.0"
 
-"@serverless-stack/cli@0.53.3":
-  version "0.53.3"
-  resolved "https://registry.yarnpkg.com/@serverless-stack/cli/-/cli-0.53.3.tgz#0538b385ce10bdadd213d59046709dd18547b349"
-  integrity sha512-6PU2uCTnZkYSgaczM/oQlwh+JkAQK+rD2Anl82Oo3cslqYV3+HMlQxorjT+ip212X+saLn2OhbgqpprgxdchDQ==
+"@serverless-stack/cli@0.54.2":
+  version "0.54.2"
+  resolved "https://registry.yarnpkg.com/@serverless-stack/cli/-/cli-0.54.2.tgz#0ae15635a797a20ecc86106c8dff89902c44482e"
+  integrity sha512-SEYHECVUJgxUW9RMj2s79VD7XSIyAHl0PBiCG7u1kHx74jBDyvTGQVklZjRq5qArftVMsVvtyuRp6/gwMyxu3g==
   dependencies:
     "@aws-cdk/aws-apigatewayv2" "1.132.0"
     "@aws-cdk/aws-dynamodb" "1.132.0"
@@ -7396,8 +7396,8 @@
     "@babel/plugin-proposal-class-properties" "^7.10.4"
     "@babel/preset-env" "^7.10.4"
     "@serverless-stack/aws-lambda-ric" "^2.0.8"
-    "@serverless-stack/core" "^0.53.3"
-    "@serverless-stack/resources" "^0.53.3"
+    "@serverless-stack/core" "^0.54.2"
+    "@serverless-stack/resources" "^0.54.2"
     "@types/jest" "^27.0.2"
     "@types/node" "^14.0.27"
     "@typescript-eslint/eslint-plugin" "^4.15.1"
@@ -7414,7 +7414,7 @@
     esbuild "^0.12.20"
     esbuild-runner "^2.2.1"
     eslint "^7.16.0"
-    eslint-config-serverless-stack "^0.53.3"
+    eslint-config-serverless-stack "^0.54.2"
     express "^4.17.1"
     fast-safe-stringify "^2.0.6"
     fs-extra "^9.0.1"
@@ -7425,6 +7425,7 @@
     open "^8.4.0"
     promise.allsettled "^1.0.2"
     prompts "^2.4.1"
+    remeda "^0.0.32"
     source-map-support "^0.5.19"
     ts-jest "^26.1.4"
     typescript "^4.4.3"
@@ -7448,24 +7449,30 @@
     log4js "^6.3.0"
     typescript "^4.4.3"
 
-"@serverless-stack/core@^0.53.3":
-  version "0.53.3"
-  resolved "https://registry.yarnpkg.com/@serverless-stack/core/-/core-0.53.3.tgz#5cad06b12c1b2fb85575d5da271d5cf099a256b1"
-  integrity sha512-4sNvkY2c0hQb+4cvsC8emRnM3WZeD2pg/b74LwLYWhMWJMXIvlN4fRBOPjFs2TrtAhrdcl9yCBj9TIAaKDeWyA==
+"@serverless-stack/core@^0.54.2":
+  version "0.54.2"
+  resolved "https://registry.yarnpkg.com/@serverless-stack/core/-/core-0.54.2.tgz#0cdd84363d1cf75485d9f3d2704b4a3ac4d1766f"
+  integrity sha512-PRuPi9icrE1hSkVIBiOPSLtllvZWfyIOvO6ev9H5obWv9qyHznxNOVCvudpl2nHP77sHeXVXmcRuwmkGkPPipQ==
   dependencies:
+    "@types/picomatch" "^2.3.0"
     aws-cdk "1.132.0"
     aws-sdk "^2.761.0"
     chalk "^4.1.0"
+    chokidar "^3.5.2"
     cross-spawn "^7.0.3"
+    dataloader "^2.0.0"
     dotenv "^10.0.0"
     dotenv-expand "^5.1.0"
     express "^4.17.1"
     fs-extra "^9.0.1"
     js-yaml "^4.1.0"
     log4js "^6.3.0"
+    picomatch "^2.3.0"
+    remeda "^0.0.32"
     stun "^2.1.0"
     typescript "^4.4.3"
     uuid "^8.3.2"
+    xstate "^4.26.1"
 
 "@serverless-stack/nextjs-core@^0.1.9":
   version "0.1.9"
@@ -7559,10 +7566,10 @@
     typescript "^4.4.3"
     zip-local "^0.3.4"
 
-"@serverless-stack/resources@^0.53.3":
-  version "0.53.3"
-  resolved "https://registry.yarnpkg.com/@serverless-stack/resources/-/resources-0.53.3.tgz#860b535c4b0f73bb8a55ad27cec0362495bb8039"
-  integrity sha512-xkSyCU99H7duBIvlI3adJBPn/0sgJ53urwm92Q/XRCiqdRBQm96gg4pdsQ4LoCitk1MGCPVupwEcdCrMLlaJ3A==
+"@serverless-stack/resources@^0.54.2":
+  version "0.54.2"
+  resolved "https://registry.yarnpkg.com/@serverless-stack/resources/-/resources-0.54.2.tgz#f2b7e94f0ab79a5f7d1d2b868b35e4c604c8824a"
+  integrity sha512-fF2KFcrWc1segmd2TDp2e1s1P3I73gyGQ0TGpl6Dr5MH92hlmKKgor2rXcuNRu7/vrISU3GxMM2agnnt19RhRw==
   dependencies:
     "@aws-cdk/aws-apigateway" "1.132.0"
     "@aws-cdk/aws-apigatewayv2" "1.132.0"
@@ -7602,7 +7609,7 @@
     "@aws-cdk/lambda-layer-awscli" "1.132.0"
     "@graphql-tools/load-files" "^6.3.2"
     "@graphql-tools/merge" "^6.2.14"
-    "@serverless-stack/core" "^0.53.3"
+    "@serverless-stack/core" "^0.54.2"
     "@serverless-stack/nextjs-lambda" "^0.1.9"
     "@types/jest" "^26.0.7"
     archiver "^5.3.0"
@@ -8451,6 +8458,11 @@
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/@types/parse-json/-/parse-json-4.0.0.tgz#2f8bb441434d163b35fb8ffdccd7138927ffb8c0"
   integrity sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==
+
+"@types/picomatch@^2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@types/picomatch/-/picomatch-2.3.0.tgz#75db5e75a713c5a83d5b76780c3da84a82806003"
+  integrity sha512-O397rnSS9iQI4OirieAtsDqvCj4+3eY1J+EPdNTKuHuRWIfUoGyzX294o8C4KJYaLqgSrd2o60c5EqCU8Zv02g==
 
 "@types/prettier@^2.0.0", "@types/prettier@^2.1.5":
   version "2.3.2"
@@ -12485,7 +12497,7 @@ data-urls@^2.0.0:
     whatwg-mimetype "^2.3.0"
     whatwg-url "^8.0.0"
 
-dataloader@2.0.0:
+dataloader@2.0.0, dataloader@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/dataloader/-/dataloader-2.0.0.tgz#41eaf123db115987e21ca93c005cd7753c55fe6f"
   integrity sha512-YzhyDAwA4TaQIhM5go+vCLmU0UikghC/t9DTQYZR2M/UvZ1MdOhPezSDZcjj9uqQJOMqjLcpWtyW2iNINdlatQ==
@@ -13664,10 +13676,10 @@ eslint-config-prettier@8.3.0:
   resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-8.3.0.tgz#f7471b20b6fe8a9a9254cc684454202886a2dd7a"
   integrity sha512-BgZuLUSeKzvlL/VUjx/Yb787VQ26RU3gGjA3iiFvdsp/2bMfVIWUVP7tjxtjS0e+HP409cPlPvNkQloz8C91ew==
 
-eslint-config-serverless-stack@^0.53.3:
-  version "0.53.3"
-  resolved "https://registry.yarnpkg.com/eslint-config-serverless-stack/-/eslint-config-serverless-stack-0.53.3.tgz#3b502b9a359779b0400fab4b28a813c006a53243"
-  integrity sha512-XBdbUVIHCT1vAox6iJBhLBtPfpadNJASnhSaDMoWJQp180RGxDWFjgyoCthzipcFa3/a2akCG0ocy+Vudi4Log==
+eslint-config-serverless-stack@^0.54.2:
+  version "0.54.2"
+  resolved "https://registry.yarnpkg.com/eslint-config-serverless-stack/-/eslint-config-serverless-stack-0.54.2.tgz#bf28d057b95d9b91b6f08d86347ff5b6b9cb8008"
+  integrity sha512-h5I5AEnFu+oPVHkvyBkovFwGtMmmBvAwNYnrYxnOvmmvfmCGf77RSKqYgoNInUXUJOhNYfVmjLYIb55QwcjBsg==
   dependencies:
     "@babel/eslint-parser" "^7.11.3"
     "@babel/plugin-proposal-class-properties" "^7.10.4"
@@ -21656,7 +21668,7 @@ picocolors@^1.0.0:
   resolved "https://registry.yarnpkg.com/picocolors/-/picocolors-1.0.0.tgz#cb5bdc74ff3f51892236eaf79d68bc44564ab81c"
   integrity sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==
 
-picomatch@^2.0.4, picomatch@^2.2.1, picomatch@^2.2.3:
+picomatch@^2.0.4, picomatch@^2.2.1, picomatch@^2.2.3, picomatch@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/picomatch/-/picomatch-2.3.0.tgz#f1f061de8f6a4bf022892e2d128234fb98302972"
   integrity sha512-lY1Q/PiJGC2zOv/z391WOTD+Z02bCgsFfvxoXXf6h7kv9o+WmsmzYqrAwY63sNgOxE4xEdq0WyUnXfKeBrSvYw==
@@ -22663,6 +22675,11 @@ relay-runtime@11.0.2:
     "@babel/runtime" "^7.0.0"
     fbjs "^3.0.0"
     invariant "^2.2.4"
+
+remeda@^0.0.32:
+  version "0.0.32"
+  resolved "https://registry.yarnpkg.com/remeda/-/remeda-0.0.32.tgz#668e5d3b8a5c9edb1a19f33d5df805dd1e7d299c"
+  integrity sha512-FEdl8ONpqY7AvvMHG5WYdomc0mGf2khHPUDu6QvNkOq4Wjkw5BvzWM4QyksAQ/US1sFIIRG8TVBn6iJx6HbRrA==
 
 remedial@^1.0.7:
   version "1.0.8"
@@ -26191,6 +26208,11 @@ xss@^1.0.8:
   dependencies:
     commander "^2.20.3"
     cssfilter "0.0.10"
+
+xstate@^4.26.1:
+  version "4.26.1"
+  resolved "https://registry.yarnpkg.com/xstate/-/xstate-4.26.1.tgz#4fc1afd153f88cf302a9ee2b758f6629e6a829b6"
+  integrity sha512-JLofAEnN26l/1vbODgsDa+Phqa61PwDlxWu8+2pK+YbXf+y9pQSDLRvcYH2H1kkeUBA5fGp+xFL/zfE8jNMw4g==
 
 xtend@^4.0.0, xtend@^4.0.1, xtend@^4.0.2, xtend@~4.0.1:
   version "4.0.2"
