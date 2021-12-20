@@ -7390,10 +7390,10 @@
     node-addon-api "3.2.1"
     node-gyp "8.1.0"
 
-"@serverless-stack/cli@0.54.2":
-  version "0.54.2"
-  resolved "https://registry.yarnpkg.com/@serverless-stack/cli/-/cli-0.54.2.tgz#0ae15635a797a20ecc86106c8dff89902c44482e"
-  integrity sha512-SEYHECVUJgxUW9RMj2s79VD7XSIyAHl0PBiCG7u1kHx74jBDyvTGQVklZjRq5qArftVMsVvtyuRp6/gwMyxu3g==
+"@serverless-stack/cli@0.54.3":
+  version "0.54.3"
+  resolved "https://registry.yarnpkg.com/@serverless-stack/cli/-/cli-0.54.3.tgz#77c1cf6850f90c15c7cdd2ea1fd66b69b2602cd0"
+  integrity sha512-pIq3lvJ6GLl6849QIcIq/oIQof5i3KnomMfLaF2ZfWg2x1OFlFG67A0N6INeNCW8c8t+8vPyOH+EBFYPCZu1sw==
   dependencies:
     "@aws-cdk/aws-apigatewayv2" "1.132.0"
     "@aws-cdk/aws-dynamodb" "1.132.0"
@@ -7406,8 +7406,8 @@
     "@babel/plugin-proposal-class-properties" "^7.10.4"
     "@babel/preset-env" "^7.10.4"
     "@serverless-stack/aws-lambda-ric" "^2.0.8"
-    "@serverless-stack/core" "^0.54.2"
-    "@serverless-stack/resources" "^0.54.2"
+    "@serverless-stack/core" "^0.54.3"
+    "@serverless-stack/resources" "^0.54.3"
     "@types/jest" "^27.0.2"
     "@types/node" "^14.0.27"
     "@typescript-eslint/eslint-plugin" "^4.15.1"
@@ -7424,7 +7424,7 @@
     esbuild "^0.12.20"
     esbuild-runner "^2.2.1"
     eslint "^7.16.0"
-    eslint-config-serverless-stack "^0.54.2"
+    eslint-config-serverless-stack "^0.54.3"
     express "^4.17.1"
     fast-safe-stringify "^2.0.6"
     fs-extra "^9.0.1"
@@ -7459,10 +7459,10 @@
     log4js "^6.3.0"
     typescript "^4.4.3"
 
-"@serverless-stack/core@^0.54.2":
-  version "0.54.2"
-  resolved "https://registry.yarnpkg.com/@serverless-stack/core/-/core-0.54.2.tgz#0cdd84363d1cf75485d9f3d2704b4a3ac4d1766f"
-  integrity sha512-PRuPi9icrE1hSkVIBiOPSLtllvZWfyIOvO6ev9H5obWv9qyHznxNOVCvudpl2nHP77sHeXVXmcRuwmkGkPPipQ==
+"@serverless-stack/core@^0.54.3":
+  version "0.54.3"
+  resolved "https://registry.yarnpkg.com/@serverless-stack/core/-/core-0.54.3.tgz#b42ebfc3875276df4d83a1fe8ad9660ced2f3617"
+  integrity sha512-iRhTkl/LsHsRrLL+ZlAyyhHQPiCDluXEM/+mOoRTjjFpB8gRJVbU36paQZhyUpHTbV/Fc3DsE7sy1z9cr4tHRw==
   dependencies:
     "@types/picomatch" "^2.3.0"
     aws-cdk "1.132.0"
@@ -7576,10 +7576,10 @@
     typescript "^4.4.3"
     zip-local "^0.3.4"
 
-"@serverless-stack/resources@^0.54.2":
-  version "0.54.2"
-  resolved "https://registry.yarnpkg.com/@serverless-stack/resources/-/resources-0.54.2.tgz#f2b7e94f0ab79a5f7d1d2b868b35e4c604c8824a"
-  integrity sha512-fF2KFcrWc1segmd2TDp2e1s1P3I73gyGQ0TGpl6Dr5MH92hlmKKgor2rXcuNRu7/vrISU3GxMM2agnnt19RhRw==
+"@serverless-stack/resources@^0.54.3":
+  version "0.54.3"
+  resolved "https://registry.yarnpkg.com/@serverless-stack/resources/-/resources-0.54.3.tgz#6fabb97ca70261213e783f03d9a10da9ea820834"
+  integrity sha512-m4FIOtZFvpD4BwAB/EKN3CeoTYi2/vWeAAKvdVGrgS89nndJ9/prBoTkREVdk73l0yBfuNRbT3AL2ptrTlk/SA==
   dependencies:
     "@aws-cdk/aws-apigateway" "1.132.0"
     "@aws-cdk/aws-apigatewayv2" "1.132.0"
@@ -7619,7 +7619,7 @@
     "@aws-cdk/lambda-layer-awscli" "1.132.0"
     "@graphql-tools/load-files" "^6.3.2"
     "@graphql-tools/merge" "^6.2.14"
-    "@serverless-stack/core" "^0.54.2"
+    "@serverless-stack/core" "^0.54.3"
     "@serverless-stack/nextjs-lambda" "^0.1.9"
     "@types/jest" "^26.0.7"
     archiver "^5.3.0"
@@ -13600,10 +13600,10 @@ eslint-config-prettier@8.3.0:
   resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-8.3.0.tgz#f7471b20b6fe8a9a9254cc684454202886a2dd7a"
   integrity sha512-BgZuLUSeKzvlL/VUjx/Yb787VQ26RU3gGjA3iiFvdsp/2bMfVIWUVP7tjxtjS0e+HP409cPlPvNkQloz8C91ew==
 
-eslint-config-serverless-stack@^0.54.2:
-  version "0.54.2"
-  resolved "https://registry.yarnpkg.com/eslint-config-serverless-stack/-/eslint-config-serverless-stack-0.54.2.tgz#bf28d057b95d9b91b6f08d86347ff5b6b9cb8008"
-  integrity sha512-h5I5AEnFu+oPVHkvyBkovFwGtMmmBvAwNYnrYxnOvmmvfmCGf77RSKqYgoNInUXUJOhNYfVmjLYIb55QwcjBsg==
+eslint-config-serverless-stack@^0.54.3:
+  version "0.54.3"
+  resolved "https://registry.yarnpkg.com/eslint-config-serverless-stack/-/eslint-config-serverless-stack-0.54.3.tgz#dce2f9d9ee1636516222e788a92795234c9650ca"
+  integrity sha512-WkR7NZET0ynn2zvED8FuK5F2PGul+NHg7Ee1LLI0XE7rHxYRu2ttk6vYzQXaHfC1vOfHgNw0yEhGLxIHecqZpA==
   dependencies:
     "@babel/eslint-parser" "^7.11.3"
     "@babel/plugin-proposal-class-properties" "^7.10.4"
