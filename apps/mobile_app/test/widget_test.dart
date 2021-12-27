@@ -43,6 +43,9 @@ import 'package:yaha/settings/views/settings-screen.dart';
 import 'package:yaha/views/auth/screens/login-screen.dart';
 import 'package:yaha/views/auth/screens/signup-screen.dart';
 import 'package:yaha/views/track/screens/leave-a-timecapsule-screen.dart';
+import 'package:yaha/views/track/screens/summary-screen.dart';
+import 'package:yaha/views/track/screens/timecapsule-comments-screen.dart';
+import 'package:yaha/views/track/screens/timecapsule-in-track-mode-screen.dart';
 import 'package:yaha/views/track/screens/tracking-data-screen.dart';
 import 'package:yaha/views/track/screens/tracking-map-screen.dart';
 import 'package:yaha/views/track/screens/tracking-timecapsule-screen.dart';
@@ -50,6 +53,8 @@ import 'package:yaha/views/track/screens/tracking-timeline-screen.dart';
 import 'package:yaha/views/track/screens/tracking.dart';
 import 'package:yaha/views/comments/screens/commments-screen.dart';
 import 'package:yaha/views/hike-outline/screens/time-capsule-info-screen.dart';
+import 'package:yaha/views/track/widgets/tracking-rating-widget.dart';
+import 'package:yaha/views/track/widgets/tracking-timeline-customize-widget.dart';
 
 void main() {
   testWidgets('Yaha main smoke test', (WidgetTester tester) async {
@@ -343,8 +348,21 @@ void main() {
     await tester.pumpAndSettle();
   });
   testWidgets('Tracking Data Screen smoke test', (WidgetTester tester) async {
-    await tester
-        .pumpWidget(createWidgetForTesting(child: new TrackingDataScreen()));
+    await tester.pumpWidget(createWidgetForTesting(
+        child: new TrackingDataScreen(
+      durationHours: 2,
+      durationMins: 1,
+      calories: 59,
+      actualSpeed: 8,
+      averageSpeed: 5,
+      distanceToNext: 1.2,
+      timeToNext: 15,
+      distanceToFinish: 8,
+      timeToFinishHours: 5,
+      timeToFinishMins: 13,
+      distance: 12,
+      timeCapsules: 4,
+    )));
 
     await tester.pumpAndSettle();
   });
@@ -352,6 +370,51 @@ void main() {
       (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(
         child: new TrackingTimeCapsuleScreen(collectedTimeCapsules: 4)));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Tracking Customize Timeline Widget smoke test',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(
+        createWidgetForTesting(child: new TrackingTimelineCustomizeWidget()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Tracking Rating Widget smoke test', (WidgetTester tester) async {
+    await tester
+        .pumpWidget(createWidgetForTesting(child: new TrackingRatingWidget()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('TimeCapsule Comments Screen smoke test',
+      (WidgetTester tester) async {
+    mockNetworkImagesFor(() async {
+      await tester.pumpWidget(
+          createWidgetForTesting(child: new TimeCapsuleCommentsScreen()));
+
+      await tester.pumpAndSettle();
+    });
+  });
+  testWidgets('TimeCapsule in Track Mode smoke test',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(
+        createWidgetForTesting(child: new TimeCapsuleInTrackModeScreen()));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('Summary Screen smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetForTesting(
+        child: new SummaryScreen(
+      length: 12,
+      averageSpeed: 5,
+      uphill: 2,
+      calories: 890,
+      durationHours: 3,
+      durationMins: 1,
+      checkpoints: 10,
+      downhill: 10,
+      points: 12,
+    )));
 
     await tester.pumpAndSettle();
   });

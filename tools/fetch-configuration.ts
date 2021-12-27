@@ -8,15 +8,21 @@ import { bindNodeCallback, Observable, combineLatest } from 'rxjs';
 
 const region = process.env.AWS_REGION;
 const client = new AWS.SSM({ region });
-const project = process.argv[2];
-const stage = process.argv[3];
-const prefix = `${stage}-${project}`;
-
+const environment = process.argv[2];
 const targetDir = `${__dirname}/../libs/shared/config/src/lib/generated`;
 const targetFile = `${targetDir}/config.json`;
-const mobileAppConfigurationFile = `${__dirname}/../apps/mobile_app/lib/awsconfiguration.dart`;
 
+const amplifyMetaConfigFile = `${__dirname}/../apps/amplify-app/amplify/backend/amplify-meta.json`;
+//const mobileAppConfigurationFile = `${__dirname}/../apps/mobile_app/lib/awsconfiguration.dart`;
+
+//--- Read generated crud amplify backend (meta-) config
+/*const amplifyConfig = JSON.parse(
+  fs.readFileSync(amplifyMetaConfigFile, 'utf8'),
+);
+*/
 fs.mkdirSync(targetDir, { recursive: true });
+
+const prefix = `${environment}-yaha`;
 
 const generatedParams = [
   'IdentityPoolId',
@@ -61,9 +67,26 @@ pipe(
         fs.writeFileSync(targetFile, JSON.stringify(config, null, 2));
         console.log(`Config written to ${targetFile}`);
       }),
-      fp.tap(config => {
+      fp.tap(_config => {
+        /*const apiKeyName = Object.keys(amplifyConfig['api'])[0];
+        if (!amplifyConfig['storage']) {
+          throw Error(
+            'No bucket configured for this Amplify environment! amplify-meta.json must have a "bucket": section.',
+          );
+        }
+        const bucketKeyName = Object.keys(amplifyConfig['storage'])[0];
         config['Region'] = region;
-        config['Stage'] = stage;
+        config['Stage'] = environment;
+        config['CrudGraphqlApiUrl'] =
+          amplifyConfig['api'][apiKeyName]['output'][
+          'GraphQLAPIEndpointOutput'
+          ];
+        config['CrudGraphqlApiKey'] =
+          amplifyConfig['api'][apiKeyName]['output']['GraphQLAPIKeyOutput'];
+        config['S3BucketName'] =
+          amplifyConfig['storage'][bucketKeyName]['output']['BucketName'];
+        console.log(config);
+
         fs.writeFileSync(
           mobileAppConfigurationFile,
           `const AWSCONFIG = '''${JSON.stringify(config, null, 2)}''';`,
@@ -71,6 +94,7 @@ pipe(
         console.log(
           `Mobile application config written to ${mobileAppConfigurationFile}`,
         );
+        */
       }),
     ),
   ),

@@ -1,6 +1,7 @@
 import { Context, Handler } from 'aws-lambda';
 import { Observable } from 'rxjs';
-import { getNodeResolver, createNeptuneDeps } from './lambda-resolvers/neptune';
+import { getNodeResolver } from './resolver/get-node';
+import { createNeptuneDeps } from './resolver/utils';
 
 export interface YahaRequest {
   typeName: string;

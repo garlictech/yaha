@@ -53,14 +53,6 @@ cdk.out
 /libs/yaha-gql/api/src/lib/generated
 /libs/crud-gql/api/src/lib/generated/
 
-
-
-# The generated files with hygen
-apps/backend/sst.json
-apps/backend/serverless.yml
-apps/crud-backend/.graphqlconfig.yml
-tools/graphql-codegen-crud.yml
-
 #amplify
 amplify/\#current-cloud-backend
 amplify/.config/local-*

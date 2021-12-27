@@ -52,5 +52,8 @@ class YahaBoxSizes {
   static const circleAvatarRadiusSmall = 18.0;
   static const circleAvatarRadiusLarge = 32.0;
 
+  //MAX WIDTH
+  static const maxWidth400 = 400.0;
+
   const YahaBoxSizes();
 }

@@ -2,20 +2,12 @@
 set -e
 IFS='|'
 
-APPNAME=$1
-STAGE=$2
+ENVNAME=$1
+MODE="${2:-ci}"
 
-HYGEN_OVERWRITE=1 yarn hygen project configure --app=$APPNAME
-yarn nx config shared-config --app=$APPNAME --stage=$STAGE
-#yarn nx build neo4j-gql-api
+AWS_ACCOUNT=$(aws sts get-caller-identity --query Account --output text)
+aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin ${AWS_ACCOUNT}.dkr.ecr.$AWS_REGION.amazonaws.com
 
-#if [ $STAGE = 'dev' ]; then
-#  yarn nx build admin --skip-nx-cache
-#elif [ $STAGE = 'prod' ]; then
-#  yarn nx build admin --configuration=production --skip-nx-cache
-#else
-#  yarn nx build admin --configuration=$STAGE --skip-nx-cache
-#fi
-
-yarn nx build backend --app=$APPNAME --stage=$STAGE --skip-nx-cache
-#yarn nx build-schema mobile_app --env=$ENVNAME --mode=$MODE
+yarn nx config gql-api --env=$ENVNAME
+yarn nx config shared-config --env=$ENVNAME
+yarn nx build backend --env=$ENVNAME

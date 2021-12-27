@@ -8,5 +8,7 @@ class YahaFontSizes {
   static const xxLarge = 32.0;
   static const xxxLarge = 56.0;
 
+  static const trackingDataNumbers = 46.0;
+
   const YahaFontSizes();
 }

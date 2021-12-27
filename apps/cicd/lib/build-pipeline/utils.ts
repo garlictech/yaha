@@ -46,7 +46,7 @@ export const configurePermissions = (
     'AdminNativeUserPoolClientId',
     'AdminUserPoolId',
     'AdminUserPoolDomain',
-    'CrudApiAppId',*/
+    'AmplifyAppId',*/
   ].map(paramName => `/${prefix}/generated/${paramName}`);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

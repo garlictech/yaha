@@ -16,7 +16,7 @@ X=$(aws ssm put-parameter \
   --type String \
   --overwrite \
   --value ${APPID} \
-  --name "/${STAGE}-${APPNAME}/generated/CrudApiAppId")
+  --name "/${STAGE}-${APPNAME}/generated/AmplifyAppId")
 
 rm -f libs/crud-gql/api/src/lib/generated/api.ts
 yarn graphql-codegen --config tools/graphql-codegen-crud.yml

@@ -100,3 +100,31 @@ type Hike {
   startPoint: Point!
   endPoint: Point!
 }
+
+### THE GRAPH BASED API
+interface Node {
+  id: ID!
+  label: ValidDataLabels
+}
+
+interface HierarchicalNode {
+  parent: ID
+  children: [ID]
+}
+
+enum ValidDataLabels {
+  Hike
+}
+
+input GetNodeInput {
+  id: ID!
+  label: ValidDataLabels!
+}
+
+type Query {
+  getNode(input: GetNodeInput!): Node
+    @aws_iam
+    @aws_cognito_user_pools
+    @aws_api_key
+    @function(name: "${env}-anyupp-graphql-resolvers")
+}

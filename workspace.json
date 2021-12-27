@@ -7,6 +7,15 @@
       "projectType": "application",
       "prefix": "backend",
       "targets": {
+        "config": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "cwd": "apps/backend",
+            "parallel": false,
+            "commands": ["../../tools/pull-amplify-app.sh '{args.env}'"]
+          },
+          "outputs": ["apps/backend/amplify", "libs/gql-api/src/lib/generated"]
+        },
         "build": {
           "executor": "@nrwl/workspace:run-commands",
           "options": {
@@ -156,7 +165,7 @@
           }
         }
       },
-      "tags": []
+      "tags": ["layer:repository"]
     },
     "mobile_app": {
       "root": "apps/mobile_app",
@@ -350,7 +359,7 @@
           }
         }
       },
-      "tags": []
+      "tags": ["layer:repository"]
     },
     "shared-config": {
       "root": "libs/shared/config",
@@ -361,8 +370,8 @@
           "executor": "@nrwl/workspace:run-commands",
           "options": {
             "commands": [
-              "yarn ts-node ./tools/fetch-configuration.ts '{args.app}' '{args.stage}'",
-              "yarn ts-node ./tools/get-secrets.ts 'yaha' '{args.stage}'"
+              "yarn ts-node ./tools/fetch-configuration.ts '{args.env}'",
+              "yarn ts-node ./tools/get-secrets.ts '{args.env}'"
             ]
           }
         },
@@ -426,7 +435,7 @@
           }
         }
       },
-      "tags": ["type:utils", "platform:universal"]
+      "tags": ["type:utils", "platform:nodejs"]
     }
   }
 }

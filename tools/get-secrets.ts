@@ -3,10 +3,14 @@ import { pipe } from 'fp-ts/lib/function';
 import * as fp from 'lodash/fp';
 import * as fs from 'fs';
 
-const project = process.argv[2];
-const stage = process.argv[3];
+const project = 'yaha';
+const environment = process.argv[2];
 
-const secretName = `/${project}/${stage}/secrets`;
+const secretEnvironment = ['dev', 'qa', 'staging', 'prod'].includes(environment)
+  ? environment
+  : 'dev';
+
+const secretName = `${project}-${secretEnvironment}-secrets`;
 const targetDir = `${__dirname}/../libs/shared/config/src/lib/generated`;
 //const androidKeyStoreTargetFile = `${__dirname}/../apps/yaha/android/yaha-keystore.jks`;
 //const androidKeyPropertiesTargetFile = `${__dirname}/../apps/yaha/android/key.properties`;

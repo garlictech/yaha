@@ -1,73 +1,73 @@
 {
   "root": true,
-  "ignorePatterns": ["**/*"],
-  "plugins": ["unused-imports", "@nrwl/nx"],
+  "ignorePatterns": [
+    "**/*"
+  ],
+  "plugins": [
+    "unused-imports",
+    "@nrwl/nx"
+  ],
+  "nx-enforce-module-boundaries": [
+    "error",
+    {
+      "enforceBuildableLibDependency": true,
+      "allow": [],
+      "depConstraints": [
+        {
+          "sourceTag": "platform:nodejs",
+          "onlyDependOnLibsWithTags": [
+            "platform:nodejs"
+          ]
+        },
+        {
+          "sourceTag": "type:backend",
+          "onlyDependOnLibsWithTags": [
+            "type:utils",
+            "type:backend"
+          ]
+        },
+        {
+          "sourceTag": "type:utils",
+          "onlyDependOnLibsWithTags": [
+            "type:utils"
+          ]
+        },
+        {
+          "sourceTag": "layer:repository",
+          "onlyDependOnLibsWithTags": [
+            "layer:entity",
+            "layer:repository"
+          ]
+        },
+        {
+          "sourceTag": "type:integration-tests",
+          "onlyDependOnLibsWithTags": [
+            "*"
+          ]
+        }
+      ]
+    }
+  ],
   "overrides": [
     {
-      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "files": [
+        "*.ts",
+        "*.tsx",
+        "*.js",
+        "*.jsx"
+      ],
       "rules": {
-        "unused-imports/no-unused-imports-ts": 2,
-        "@nrwl/nx/enforce-module-boundaries": [
-          "error",
-          {
-            "enforceBuildableLibDependency": true,
-            "allow": [],
-            "depConstraints": [
-              {
-                "sourceTag": "platform:universal",
-                "onlyDependOnLibsWithTags": ["platform:universal"]
-              },
-              {
-                "sourceTag": "platform:angular",
-                "onlyDependOnLibsWithTags": [
-                  "platform:universal",
-                  "platform:angular",
-                  "platform:flutter"
-                ]
-              },
-              {
-                "sourceTag": "platform:ionic",
-                "onlyDependOnLibsWithTags": [
-                  "platform:universal",
-                  "platform:angular"
-                ]
-              },
-              {
-                "sourceTag": "type:ui",
-                "onlyDependOnLibsWithTags": ["type:ui", "type:utils"]
-              },
-              {
-                "sourceTag": "type:data-access",
-                "onlyDependOnLibsWithTags": ["type:data-access", "type:utils"]
-              },
-              {
-                "sourceTag": "type:utils",
-                "onlyDependOnLibsWithTags": ["type:utils"]
-              },
-              {
-                "sourceTag": "type:feature",
-                "onlyDependOnLibsWithTags": ["type:utils"]
-              },
-              {
-                "sourceTag": "type:backend",
-                "onlyDependOnLibsWithTags": [
-                  "type:feature",
-                  "type:utils",
-                  "type:backend"
-                ]
-              },
-              {
-                "sourceTag": "type:integration-tests",
-                "onlyDependOnLibsWithTags": ["*"]
-              }
-            ]
-          }
-        ]
+        "unused-imports/no-unused-imports-ts": 2
       }
     },
     {
-      "files": ["*.ts", "*.tsx"],
-      "extends": ["plugin:@nrwl/nx/typescript"],
+      "files": [
+        "*.ts",
+        "*.tsx"
+      ],
+      "extends": [
+        "plugin:@nrwl/nx/typescript"
+      ],
       "parserOptions": {
         "project": "./tsconfig.*?.json"
       },
@@ -82,8 +82,13 @@
       }
     },
     {
-      "files": ["*.js", "*.jsx"],
-      "extends": ["plugin:@nrwl/nx/javascript"],
+      "files": [
+        "*.js",
+        "*.jsx"
+      ],
+      "extends": [
+        "plugin:@nrwl/nx/javascript"
+      ],
       "rules": {}
     }
   ]

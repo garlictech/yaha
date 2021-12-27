@@ -104,8 +104,8 @@ class HikeOutlineScreen extends ConsumerWidget {
                   },
                 ),
                 icon: Image.asset(
-                  'assets/images/filter-icon.png',
-                  width: 26.0,
+                  'assets/images/filter-icon-filled.png',
+                  width: 24.0,
                 ),
               ),
             ),
@@ -175,7 +175,7 @@ class HikeOutlineScreen extends ConsumerWidget {
                 },
               ),
               icon: Icon(
-                Icons.settings_outlined,
+                Icons.settings_rounded,
                 size: 28.0,
                 color: YahaColors.textColor,
               ),

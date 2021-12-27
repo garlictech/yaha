@@ -1,8 +1,5 @@
----
-to: apps/backend/serverless.yml
----
 org: garlictech
-service: <%= app %>
+service: yaha
 configValidationMode: error
 frameworkVersion: ^2.16.1
 
@@ -18,7 +15,7 @@ custom:
   # commands. Or falls back to what we have set in the provider section.
   stage: ${opt:stage, self:provider.stage}
   # Name of the SST app that's deploying our infrastructure
-  sstApp: ${self:custom.stage}-<%= app %>
+  sstApp: ${self:custom.stage}-yaha
   bundle:
     packager: yarn
     linting: false
@@ -42,7 +39,7 @@ functions:
 
   consumer-pre-signup:
     handler: lib/lambda/consumer-pre-signup/index.handler
-  
+
   graphql-neo4j:
     handler: lib/lambda/graphql-neo4j/index.handler
     events:
