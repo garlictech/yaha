@@ -39,14 +39,11 @@ export const configurePermissions = (
     'ConsumerNativeUserPoolClientId',
     'ConsumerUserPoolDomain',
     'IdentityPoolId',
-    /*    'YahaGraphqlApiKey',
-    'YahaGraphqlApiUrl',
-    'AdminSiteUrl',
     'AdminWebUserPoolClientId',
     'AdminNativeUserPoolClientId',
     'AdminUserPoolId',
     'AdminUserPoolDomain',
-    'AmplifyAppId',*/
+    'AmplifyApiAppId',
   ].map(paramName => `/${prefix}/generated/${paramName}`);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -105,19 +102,6 @@ export const createBuildProject = (
       privileged: true,
     },
   });
-};
-
-export const configurePipeline = (
-  stack: sst.Stack,
-  stage: string,
-): { adminSiteUrl: string } => {
-  const adminSiteUrl = ssm.StringParameter.fromStringParameterName(
-    stack,
-    'AdminSiteUrlParamDev',
-    `/${stage}-${appConfig.name}/generated/AdminSiteUrl`,
-  ).stringValue;
-
-  return { adminSiteUrl };
 };
 
 export const configurePipelineNotifications = (
@@ -299,28 +283,13 @@ export const createCommonDevPipeline = (
         commands: ['apps/cicd/scripts/stage-install.sh'],
       },
       build: {
-        commands: [
-          `./tools/build-workspace.sh ${appConfig.name} ${stage}`,
-          `yarn nx deploy backend --stage=${stage} --app=${appConfig.name}`,
-          `yarn nx buildApk-ci mobile_app`,
-        ],
+        commands: [`apps/cicd/scripts/dev-build.sh ${stage} $CI`],
       },
       post_build: {
         commands: [
-          'tar -cvf ${CODEBUILD_RESOLVED_SOURCE_VERSION}.tgz apps/mobile_app/lib/awsconfiguration.dart',
-          `aws s3 cp \${CODEBUILD_RESOLVED_SOURCE_VERSION}.tgz s3://${getAppcenterArtifactBucketName(
+          `apps/cicd/scripts/dev-post_build.sh ${stage} ${utils.getAppcenterArtifactBucketName(
             stage,
-          )}/`,
-          `echo 'Pushing Android APK to appcenter'`,
-          `./tools/publish-to-appcenter.sh ${stage} android`,
-          `echo 'Triggering ios app build in appcenter...'`,
-          `./tools/trigger-appcenter-builds.sh ${stage} ios`,
-          // `yarn nx test integration-tests-universal --codeCoverage --coverageReporters=clover`,
-          // `yarn nx test integration-tests-angular --codeCoverage --coverageReporters=clover`,
-          //`yarn nx e2e-remote admin-e2e --headless --baseUrl=${adminSiteUrl}`,
-          //'yarn ts-node --project ./tools/tsconfig.tools.json -r tsconfig-paths/register ./tools/seed-execute.ts',
-          //'yarn cucumber:report',
-          //'yarn cypress:generate:html:report',
+          )}`,
         ],
       },
     },

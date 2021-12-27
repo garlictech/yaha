@@ -9,11 +9,11 @@ echo "ENVNAME=$ENVNAME"
 echo "EDITORNAME=$EDITORNAME"
 echo "AWS_PROFILE=$AWS_PROFILE"
 
-APPID=$(aws ssm get-parameter --name "/${ENVNAME}-yaha/generated/CrudApiAppId" | \
+APPID=$(aws ssm get-parameter --name "/${ENVNAME}-yaha/generated/AmplifyApiAppId" | \
   jq -r '.Parameter.Value')
 echo "APPID=$APPID"
 
-USERPOOLID=$(aws ssm get-parameter --name "/${ENVNAME}-yaha/generated/AdminUserPoolId" | \
+USERPOOLID=$(aws ssm get-parameter --name "/${ENVNAME}-yaha/generated/ConsumerUserPoolId" | \
   jq -r '.Parameter.Value')
 echo "USERPOOLID=$USERPOOLID"
 
@@ -21,19 +21,16 @@ IDENTITYPOOLID=$(aws ssm get-parameter --name "/${ENVNAME}-yaha/generated/Identi
   jq -r '.Parameter.Value')
 echo "IDENTITYPOOLID=$IDENTITYPOOLID"
 
-WEBCLIENTID=$(aws ssm get-parameter --name "/${ENVNAME}-yaha/generated/AdminWebUserPoolClientId" | \
+WEBCLIENTID=$(aws ssm get-parameter --name "/${ENVNAME}-yaha/generated/ConsumerWebUserPoolClientId" | \
   jq -r '.Parameter.Value')
 echo "WEBCLIENTID=$WEBCLIENTID"
 
-NATIVECLIENTID=$(aws ssm get-parameter --name "/${ENVNAME}-yaha/generated/AdminNativeUserPoolClientId" | \
+NATIVECLIENTID=$(aws ssm get-parameter --name "/${ENVNAME}-yaha/generated/ConsumerNativeUserPoolClientId" | \
   jq -r '.Parameter.Value')
 echo "NATIVECLIENTID=$NATIVECLIENTID"
 
-ANGULARCONFIG="{\
-\"SourceDir\":\"../../libs/crud-gql/api/src/lib/generated\",\
-\"DistributionDir\":\"../../dist/apps/admin\",\
-\"BuildCommand\":\"yarn nx build admin\",\
-\"StartCommand\":\"yarn nx serve admin\"\
+FLUTTERCONFIG="{\
+\"SourceDir\":\"./lib\"\
 }"
 
 AUTHCONFIG="{\
@@ -57,9 +54,8 @@ AMPLIFY="{\
 }"
 
 FRONTEND="{\
-\"frontend\":\"javascript\",\
-\"framework\":\"none\",\
-\"config\":$ANGULARCONFIG\
+\"frontend\":\"flutter\",\
+\"config\":$FLUTTERCONFIG\
 }"
 
 PROVIDERS="{\
@@ -78,3 +74,17 @@ amplify pull \
 --yes
 
 amplify env checkout $ENVNAME
+
+# ----------------------------------------------------------
+# Generate crud config
+# ----------------------------------------------------------
+AMPLIFY_CONFIG_FILE=../../libs/gql-api/src/lib/generated/amplify-api-config.ts
+
+printf "Generating ${AMPLIFY_CONFIG_FILE}...\n"
+
+echo "
+export const AmplifyApiConfig = {
+  appId: '${APPID}',
+  appsyncApiId: '${API_ID}'
+}
+" > ${AMPLIFY_CONFIG_FILE}

@@ -10,35 +10,19 @@ export class StagingBuildPipelineStack extends sst.Stack {
       ...props,
       buildProjectPhases: {
         install: {
-          commands: [
-            'chmod +x ./tools/*.sh',
-            `./tools/setup-aws-environment.sh`,
-            './tools/install-nodejs-14.sh',
-            'yarn --frozen-lockfile',
-            'npm install -g @aws-amplify/cli appcenter-cli',
-          ],
+          commands: ['apps/cicd/scripts/stage-install.sh'],
+          'runtime-versions': {
+            nodejs: 14,
+          },
         },
         build: {
-          commands: [
-            `./tools/build-workspace.sh ${utils.appConfig.name} ${stage}`,
-            'git clone https://github.com/flutter/flutter.git -b stable --depth 1 /tmp/flutter',
-            `yarn nx deploy crud-backend`,
-            `yarn nx deploy backend --stage=${stage} --app=${utils.appConfig.name}`,
-            'export PATH=$PATH:/tmp/flutter/bin',
-            'flutter doctor',
-            `yarn nx buildApk yaha`,
-          ],
+          commands: [`apps/cicd/scripts/prod-build.sh ${stage} $CI`],
         },
         post_build: {
           commands: [
-            'tar -cvf ${CODEBUILD_RESOLVED_SOURCE_VERSION}.tgz apps/yaha/lib/awsconfiguration.dart',
-            `aws s3 cp \${CODEBUILD_RESOLVED_SOURCE_VERSION}.tgz s3://${utils.getAppcenterArtifactBucketName(
+            `apps/cicd/scripts/prod-post_build.sh ${stage} ${utils.getAppcenterArtifactBucketName(
               stage,
-            )}/`,
-            `echo 'Pushing Android APK to appcenter'`,
-            `./tools/publish-to-appcenter.sh ${stage} android`,
-            `echo 'Triggering ios app build in appcenter...'`,
-            `./tools/trigger-appcenter-builds.sh ${stage} ios`,
+            )}`,
           ],
         },
       },

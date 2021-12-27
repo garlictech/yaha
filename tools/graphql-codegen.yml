@@ -1,6 +1,7 @@
 overwrite: true
 schema:
-  - apps/backend/amplify/backend/api/yahabackend/build/schema.graphql
+  - apps/backend/amplify/backend/api/yaha/build/schema.graphql
+  - libs/gql-api/src/schema/aws.graphql
     #documents:
     #- libs/gql-api/src/gql-documents/*.graphql
 generates:

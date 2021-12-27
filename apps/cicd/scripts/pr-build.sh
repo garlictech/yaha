@@ -2,14 +2,14 @@
 set -e
 
 APPNAME=$1
-STAGE=$2
+ENVNAME=$2
 
-generatedLibExcludes="--exclude=shared-config --exclude=yaha-gql-api --exclude=crud-gql-api"
+excludes="--exclude=shared-config --exclude=mobile_app"
 
-./tools/build-workspace.sh ${APPNAME} ${STAGE}
+./tools/build-workspace.sh ${APPNAME} ${ENVNAME}
 #yarn nx format:check 
-yarn nx affected:lint --base=${STAGE} --exclude="mobile_app" ${generatedLibExcludes}
-yarn nx affected:test --base=${STAGE} --exclude="integration-tests-universal" --exclude="mobile_app" ${generatedLibExcludes} --codeCoverage --coverageReporters=clover
+yarn nx affected:lint --base=${ENVNAME} ${generatedLibExcludes}
+yarn nx affected:test --base=${ENVNAME} ${generatedLibExcludes} --codeCoverage --coverageReporters=clover
 yarn nx lint-ci mobile_app
 yarn nx test-ci mobile_app
 yarn nx buildApk-ci mobile_app

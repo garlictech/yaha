@@ -13,54 +13,8 @@ export interface Scalars {
   Boolean: boolean;
   Int: number;
   Float: number;
-}
-
-export interface GetNodeInput {
-  id: Scalars['ID'];
-  label: ValidDataLabels;
-}
-
-export interface Node {
-  id: Scalars['ID'];
-  label?: Maybe<ValidDataLabels>;
-}
-
-export interface Point {
-  ele?: Maybe<Scalars['Float']>;
-  lat: Scalars['Float'];
-  lon: Scalars['Float'];
-}
-
-export enum PublicationState {
-  archived = 'archived',
-  draft = 'draft',
-  published = 'published'
-}
-
-export interface Query {
-  getNode?: Maybe<Node>;
-}
-
-
-export interface QueryGetNodeArgs {
-  input: GetNodeInput;
-}
-
-export interface TextualDescription {
-  fullDescription?: Maybe<Scalars['String']>;
-  languageKey: Scalars['String'];
-  summary?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
-  type: TextualDescriptionType;
-}
-
-export enum TextualDescriptionType {
-  html = 'html',
-  markdown = 'markdown'
-}
-
-export enum ValidDataLabels {
-  hike = 'Hike'
+  AWSDateTime: string;
+  AWSTimestamp: unknown;
 }
 
 

@@ -7,7 +7,7 @@ STAGE=$2
 EDITORNAME=${EDITORNAME:-vim}
 AWS_PROFILE=${AWS_PROFILE:-default}
 
-APPID=$(aws ssm get-parameter --name "/${STAGE}-${APPNAME}/generated/CrudApiAppId" | \
+APPID=$(aws ssm get-parameter --name "/${STAGE}-${APPNAME}/generated/AmplifyAppId" | \
   jq -r '.Parameter.Value')
 
 USERPOOLID=$(aws ssm get-parameter --name "/${STAGE}-${APPNAME}/generated/AdminUserPoolId" | \
