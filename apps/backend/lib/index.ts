@@ -1,6 +1,6 @@
 import { App, Stack } from '@serverless-stack/resources';
 import { CognitoStack } from './app/cognito-stack';
-import { GraphqlNeo4jStack } from './app/graphql-neo4j-stack';
+//import { GraphqlNeo4jStack } from './app/graphql-neo4j-stack';
 import { ParamsStack } from './app/params-stack';
 import { SecretsManagerStack } from './app/secretsmanager-stack';
 import { SeederStack } from './app/seeder-stack';
@@ -48,11 +48,12 @@ export class yahaStack extends Stack {
       });
     }
 
-    new GraphqlNeo4jStack(scope, 'neo4j', {
+    /*    new GraphqlNeo4jStack(scope, 'neo4j', {
       neo4jEndpoint: paramsStack.neo4jEndpoint,
       neo4jUsername: secretsManagerStack.neo4jUsername,
       neo4jPassword: secretsManagerStack.neo4jPassword,
     });
+    */
   }
 }
 

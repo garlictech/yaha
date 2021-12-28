@@ -124,10 +124,10 @@ input GetNodeInput {
   label: ValidDataLabels!
 }
 
-#type Query {
-#  getNode(input: GetNodeInput!): Node
-#    @aws_iam
-#    @aws_cognito_user_pools
-#    @aws_api_key
-#    @function(name: "${env}-anyupp-graphql-resolvers")
-#}
+type Query {
+  getNode(input: GetNodeInput!): Node
+    @aws_iam
+    @aws_cognito_user_pools
+    @aws_api_key
+  #    @function(name: "${env}-neptune-resolvers")
+}

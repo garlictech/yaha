@@ -7,6 +7,7 @@ module.exports = {
     '<rootDir>/libs/neptune-gql',
     '<rootDir>/libs/gql-api',
     '<rootDir>/libs/shared/graphql/api-client',
+    '<rootDir>/apps/js-api',
   ],
   modulePaths: ['<rootDir>'],
 };
