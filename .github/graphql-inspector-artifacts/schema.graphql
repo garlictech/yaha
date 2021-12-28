@@ -126,6 +126,13 @@ input GetNodeInput {
   label: ValidDataLabels!
 }
 
+type Query {
+  getNode(input: GetNodeInput!): Node @aws_iam @aws_cognito_user_pools @aws_api_key
+  getHike(id: ID!): Hike
+  listHikes(filter: ModelHikeFilterInput, limit: Int, nextToken: String): ModelHikeConnection
+  syncHikes(filter: ModelHikeFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelHikeConnection
+}
+
 input ModelStringInput {
   ne: String
   eq: String
@@ -297,12 +304,6 @@ input ModelHikeFilterInput {
   and: [ModelHikeFilterInput]
   or: [ModelHikeFilterInput]
   not: ModelHikeFilterInput
-}
-
-type Query {
-  getHike(id: ID!): Hike
-  listHikes(filter: ModelHikeFilterInput, limit: Int, nextToken: String): ModelHikeConnection
-  syncHikes(filter: ModelHikeFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelHikeConnection
 }
 
 input ModelHikeConditionInput {

@@ -33,6 +33,10 @@ FLUTTERCONFIG="{\
 \"SourceDir\":\"./lib\"\
 }"
 
+JSCONFIG="{\
+\"SourceDir\":\"../../libs/gql-api/src/lib/generated\"\
+}"
+
 AUTHCONFIG="{\
 \"userPoolId\":\"$USERPOOLID\",\
 \"identityPoolId\":\"$IDENTITYPOOLID\",\
@@ -53,9 +57,15 @@ AMPLIFY="{\
 \"defaultEditor\":\"${EDITORNAME}\"\
 }"
 
-FRONTEND="{\
+FLUTTERFRONTEND="{\
 \"frontend\":\"flutter\",\
 \"config\":$FLUTTERCONFIG\
+}"
+
+JSFRONTEND="{\
+\"frontend\":\"javascript\",\
+\"framework\":\"none\",\
+\"config\":$JSCONFIG\
 }"
 
 PROVIDERS="{\
@@ -66,19 +76,36 @@ CATEGORIES="{\
 \"auth\":$AUTHCONFIG\
 }"
 
+pushd apps/mobile_app
 amplify pull \
 --amplify $AMPLIFY \
---frontend $FRONTEND \
+--frontend $FLUTTERFRONTEND \
 --providers $PROVIDERS \
 --categories $CATEGORIES \
 --yes
 
 amplify env checkout $ENVNAME
+popd
+
+pushd apps/js-api
+amplify pull \
+--amplify $AMPLIFY \
+--frontend $JSFRONTEND \
+--providers $PROVIDERS \
+--categories $CATEGORIES \
+--yes
+
+amplify env checkout $ENVNAME
+popd
+
+rm -rf  libs/gql-api/src/lib/generated/aws-exports.ts libs/gql-api/src/lib/generated/models
+mv -f apps/js-api/src/aws-exports.js libs/gql-api/src/lib/generated/aws-exports.ts
+mv -f apps/js-api/src/models libs/gql-api/src/lib/generated/
 
 # ----------------------------------------------------------
 # Generate crud config
 # ----------------------------------------------------------
-AMPLIFY_CONFIG_FILE=../../libs/gql-api/src/lib/generated/amplify-api-config.ts
+AMPLIFY_CONFIG_FILE=libs/gql-api/src/lib/generated/amplify-api-config.ts
 
 printf "Generating ${AMPLIFY_CONFIG_FILE}...\n"
 
