@@ -32,60 +32,12 @@
         "GraphQLAPIEndpointOutput": "https://w74q2txbubh63jngmpvyoxcx34.appsync-api.us-east-1.amazonaws.com/graphql",
         "GraphQLAPIKeyOutput": "da2-pa5q5y3zqfazxjgd2ilelrauza"
       },
-      "lastPushTimeStamp": "2022-01-02T23:34:52.835Z",
+      "lastPushTimeStamp": "2022-01-02T23:51:07.401Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-yaha-dev-124845-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apiyaha"
       }
     }
   },
-  "auth": {
-    "yaha84925904": {
-      "service": "Cognito",
-      "serviceType": "imported",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [],
-      "customAuth": false,
-      "output": {
-        "UserPoolId": "us-east-1_aiKVENWO3",
-        "UserPoolName": "dev-yaha-consumer-user-pool",
-        "AppClientID": "3r7ji76goc93sl78eepovrlqoh",
-        "AppClientSecret": "1nmkqbn97a3iumb52u33tplph1lkfd93mmc8joqkefbie2sr3gq3",
-        "AppClientIDWeb": "2bcedbbrqs7ppinn1j40jhre7c",
-        "HostedUIDomain": "dev-yaha-consumer",
-        "IdentityPoolId": "us-east-1:e4a5096b-e916-4e8d-9342-10826373028e",
-        "IdentityPoolName": "IdentityPool_N6x0B9DI69Jr",
-        "CreatedSNSRole": "arn:aws:iam::697486207432:role/dev-yaha-cognito-ConsumerUserPoolsmsRoleC92BB0E3-1RK9II25FAX20",
-        "OAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"aws.cognito.signin.user.admin\",\"email\",\"openid\",\"phone\",\"profile\"],\"CallbackURLs\":[\"yaha://signin/\"],\"LogoutURLs\":[\"yaha://signout/\"]}"
-      },
-      "frontendAuthConfig": {
-        "socialProviders": [
-          "FACEBOOK",
-          "GOOGLE",
-          "APPLE"
-        ],
-        "usernameAttributes": [],
-        "signupAttributes": [
-          "EMAIL"
-        ],
-        "passwordProtectionSettings": {
-          "passwordPolicyMinLength": 12,
-          "passwordPolicyCharacters": [
-            "REQUIRES_LOWERCASE",
-            "REQUIRES_UPPERCASE",
-            "REQUIRES_NUMBERS"
-          ]
-        },
-        "mfaConfiguration": "OPTIONAL",
-        "mfaTypes": [
-          "SMS",
-          "TOTP"
-        ],
-        "verificationMechanisms": [
-          "EMAIL"
-        ]
-      },
-      "lastPushTimeStamp": "2021-12-27T19:54:54.073Z"
-    }
-  }
+  "auth": {}
 }

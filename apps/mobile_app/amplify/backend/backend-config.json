@@ -18,13 +18,5 @@
       }
     }
   },
-  "auth": {
-    "yaha84925904": {
-      "service": "Cognito",
-      "serviceType": "imported",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [],
-      "customAuth": false
-    }
-  }
+  "auth": {}
 }
