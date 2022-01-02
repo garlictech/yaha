@@ -1,0 +1,7 @@
+{
+    "AppSyncApiName": "yaha",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": false,
+    "S3DeploymentBucket": "amplify-yaha-dev-124845-deployment",
+    "S3DeploymentRootKey": "amplify-appsync-files/475f9d739a4774c55416feee41b2d48df0955d2b"
+}

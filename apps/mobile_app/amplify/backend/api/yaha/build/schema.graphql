@@ -1,0 +1,371 @@
+
+type Point {
+  lat: Float!
+  lon: Float!
+  ele: Float
+}
+
+enum PublicationState {
+  draft
+  published
+  archived
+}
+
+enum TextualDescriptionType {
+  markdown
+  html
+}
+
+type TextualDescription {
+  languageKey: String!
+  title: String
+  summary: String
+  fullDescription: String
+  type: TextualDescriptionType!
+}
+
+type BoundingBox {
+  NorthEast: Point!
+  SouthWest: Point!
+}
+
+type RouteData {
+  distance: Int!
+  uphill: Int!
+  downhill: Int!
+  track: [[Float!]!]!
+  bigBuffer: [[[Float!]!]!]!
+  smallBuffer: [[[Float!]!]!]!
+  averageTime: Int!
+  score: Int!
+  difficulty: Int!
+  bounds: BoundingBox!
+  isRoundTrip: Boolean!
+  poiSearchBox: BoundingBox!
+}
+
+type HikeStop {
+  poiId: ID!
+  description: [TextualDescription!]
+}
+
+enum PoiSource {
+  google
+  wikipedia
+  osmAmenity
+  osmNatural
+  osmRoute
+  osmPublicTransport
+  osmEmergency
+  osmHistoric
+  osmLeisure
+  osmManMade
+  osmMilitary
+  osmShop
+  osmTourism
+  mapillary
+  flickr
+}
+
+type PoiSourceObject {
+  objectType: PoiSource!
+  languageKey: String
+  objectId: String!
+  url: String
+}
+
+type Poi {
+  id: ID!
+  location: Point!
+  types: [String!]
+  description: [TextualDescription!]!
+  tags: [String!]
+  sourceObject: [PoiSourceObject!]!
+  address: String
+  phoneFloat: String
+  openingHours: String
+}
+
+type Hike {
+  id: ID!
+  description: [TextualDescription!]!
+  location: String!
+  publicationState: PublicationState!
+  featured: Boolean
+  rate: String
+  offlineMap: String
+  featuredStops: [HikeStop]
+  checkpoints: [Poi]
+  tags: [String!]
+  route: RouteData!
+  startPoint: Point!
+  endPoint: Point!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  _version: Int!
+  _deleted: Boolean
+  _lastChangedAt: AWSTimestamp!
+}
+
+interface Node {
+  id: ID!
+  label: ValidDataLabels
+}
+
+interface HierarchicalNode {
+  parent: ID
+  children: [ID]
+}
+
+enum ValidDataLabels {
+  Hike
+}
+
+input GetNodeInput {
+  id: ID!
+  label: ValidDataLabels!
+}
+
+type Query {
+  getNode(input: GetNodeInput!): Node @aws_iam @aws_cognito_user_pools @aws_api_key
+  getHike(id: ID!): Hike
+  listHikes(filter: ModelHikeFilterInput, limit: Int, nextToken: String): ModelHikeConnection
+  syncHikes(filter: ModelHikeFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelHikeConnection
+}
+
+input ModelStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelBooleanInput {
+  ne: Boolean
+  eq: Boolean
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+enum ModelAttributeTypes {
+  binary
+  binarySet
+  bool
+  list
+  map
+  number
+  numberSet
+  string
+  stringSet
+  _null
+}
+
+input ModelSizeInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+input TextualDescriptionInput {
+  languageKey: String!
+  title: String
+  summary: String
+  fullDescription: String
+  type: TextualDescriptionType!
+}
+
+input HikeStopInput {
+  poiId: ID!
+  description: [TextualDescriptionInput!]
+}
+
+input PoiInput {
+  id: ID
+  location: PointInput!
+  types: [String!]
+  description: [TextualDescriptionInput!]!
+  tags: [String!]
+  sourceObject: [PoiSourceObjectInput!]!
+  address: String
+  phoneFloat: String
+  openingHours: String
+}
+
+input PointInput {
+  lat: Float!
+  lon: Float!
+  ele: Float
+}
+
+input PoiSourceObjectInput {
+  objectType: PoiSource!
+  languageKey: String
+  objectId: String!
+  url: String
+}
+
+input RouteDataInput {
+  distance: Int!
+  uphill: Int!
+  downhill: Int!
+  track: [[Float!]!]!
+  bigBuffer: [[[Float!]!]!]!
+  smallBuffer: [[[Float!]!]!]!
+  averageTime: Int!
+  score: Int!
+  difficulty: Int!
+  bounds: BoundingBoxInput!
+  isRoundTrip: Boolean!
+  poiSearchBox: BoundingBoxInput!
+}
+
+input BoundingBoxInput {
+  NorthEast: PointInput!
+  SouthWest: PointInput!
+}
+
+type ModelHikeConnection {
+  items: [Hike!]!
+  nextToken: String
+  startedAt: AWSTimestamp
+}
+
+input ModelPublicationStateInput {
+  eq: PublicationState
+  ne: PublicationState
+}
+
+input ModelHikeFilterInput {
+  id: ModelIDInput
+  location: ModelStringInput
+  publicationState: ModelPublicationStateInput
+  featured: ModelBooleanInput
+  rate: ModelStringInput
+  offlineMap: ModelStringInput
+  tags: ModelStringInput
+  and: [ModelHikeFilterInput]
+  or: [ModelHikeFilterInput]
+  not: ModelHikeFilterInput
+}
+
+input ModelHikeConditionInput {
+  location: ModelStringInput
+  publicationState: ModelPublicationStateInput
+  featured: ModelBooleanInput
+  rate: ModelStringInput
+  offlineMap: ModelStringInput
+  tags: ModelStringInput
+  and: [ModelHikeConditionInput]
+  or: [ModelHikeConditionInput]
+  not: ModelHikeConditionInput
+}
+
+input CreateHikeInput {
+  id: ID
+  description: [TextualDescriptionInput!]!
+  location: String!
+  publicationState: PublicationState!
+  featured: Boolean
+  rate: String
+  offlineMap: String
+  featuredStops: [HikeStopInput]
+  checkpoints: [PoiInput]
+  tags: [String!]
+  route: RouteDataInput!
+  startPoint: PointInput!
+  endPoint: PointInput!
+  _version: Int
+}
+
+input UpdateHikeInput {
+  id: ID!
+  description: [TextualDescriptionInput!]
+  location: String
+  publicationState: PublicationState
+  featured: Boolean
+  rate: String
+  offlineMap: String
+  featuredStops: [HikeStopInput]
+  checkpoints: [PoiInput]
+  tags: [String!]
+  route: RouteDataInput
+  startPoint: PointInput
+  endPoint: PointInput
+  _version: Int
+}
+
+input DeleteHikeInput {
+  id: ID!
+  _version: Int
+}
+
+type Mutation {
+  createHike(input: CreateHikeInput!, condition: ModelHikeConditionInput): Hike
+  updateHike(input: UpdateHikeInput!, condition: ModelHikeConditionInput): Hike
+  deleteHike(input: DeleteHikeInput!, condition: ModelHikeConditionInput): Hike
+}
+
+type Subscription {
+  onCreateHike: Hike @aws_subscribe(mutations: ["createHike"])
+  onUpdateHike: Hike @aws_subscribe(mutations: ["updateHike"])
+  onDeleteHike: Hike @aws_subscribe(mutations: ["deleteHike"])
+}
+

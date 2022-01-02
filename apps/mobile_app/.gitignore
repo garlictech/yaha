@@ -44,6 +44,9 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+android/app/build
+
+ios/build
 
 # Generated files
 lib/awsconfiguration.dart
@@ -55,7 +58,6 @@ amplify/logs
 amplify/mock-data
 amplify/backend/amplify-meta.json
 amplify/backend/.temp
-build/
 dist/
 node_modules/
 aws-exports.js
