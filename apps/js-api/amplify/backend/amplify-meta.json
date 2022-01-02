@@ -32,7 +32,7 @@
         "GraphQLAPIEndpointOutput": "https://w74q2txbubh63jngmpvyoxcx34.appsync-api.us-east-1.amazonaws.com/graphql",
         "GraphQLAPIKeyOutput": "da2-pa5q5y3zqfazxjgd2ilelrauza"
       },
-      "lastPushTimeStamp": "2022-01-02T14:51:28.479Z",
+      "lastPushTimeStamp": "2022-01-02T19:59:12.519Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-yaha-dev-124845-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apiyaha"
