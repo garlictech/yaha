@@ -106,7 +106,7 @@
     "fast-xml-parser": "3.21.1",
     "husky": "7.0.4",
     "hygen": "6.1.0",
-    "jest": "27.4.5",
+    "jest": "27.4.7",
     "patch-package": "6.4.7",
     "prettier": "2.5.1",
     "request-promise": "4.2.6",
