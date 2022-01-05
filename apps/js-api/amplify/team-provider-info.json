@@ -25,6 +25,19 @@
           "authRoleName": "dev-yaha-cognito-CognitoDefaultAuthenticatedRole2A-V45LUSD8NVWK",
           "unauthRoleArn": "arn:aws:iam::697486207432:role/dev-yaha-cognito-CognitoDefaultUnauthenticatedRole-17WIF25CVCIKE",
           "unauthRoleName": "dev-yaha-cognito-CognitoDefaultUnauthenticatedRole-17WIF25CVCIKE"
+        },
+        "yaha9a7360aa": {
+          "userPoolId": "us-east-1_aiKVENWO3",
+          "userPoolName": "dev-yaha-consumer-user-pool",
+          "webClientId": "2bcedbbrqs7ppinn1j40jhre7c",
+          "nativeClientId": "3r7ji76goc93sl78eepovrlqoh",
+          "identityPoolId": "us-east-1:e4a5096b-e916-4e8d-9342-10826373028e",
+          "identityPoolName": "IdentityPool_N6x0B9DI69Jr",
+          "allowUnauthenticatedIdentities": true,
+          "authRoleArn": "arn:aws:iam::697486207432:role/dev-yaha-cognito-CognitoDefaultAuthenticatedRole2A-V45LUSD8NVWK",
+          "authRoleName": "dev-yaha-cognito-CognitoDefaultAuthenticatedRole2A-V45LUSD8NVWK",
+          "unauthRoleArn": "arn:aws:iam::697486207432:role/dev-yaha-cognito-CognitoDefaultUnauthenticatedRole-17WIF25CVCIKE",
+          "unauthRoleName": "dev-yaha-cognito-CognitoDefaultUnauthenticatedRole-17WIF25CVCIKE"
         }
       }
     }

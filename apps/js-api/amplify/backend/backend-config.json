@@ -19,7 +19,7 @@
     }
   },
   "auth": {
-    "yaha84925904": {
+    "yaha9a7360aa": {
       "service": "Cognito",
       "serviceType": "imported",
       "providerPlugin": "awscloudformation",

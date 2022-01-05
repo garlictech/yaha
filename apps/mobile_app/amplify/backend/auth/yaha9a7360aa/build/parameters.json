@@ -1,0 +1,32 @@
+{
+  "authSelections": "identityPoolAndUserPool",
+  "resourceName": "yaha9a7360aa",
+  "serviceType": "imported",
+  "region": "us-east-1",
+  "aliasAttributes": [
+    "email",
+    "phone_number"
+  ],
+  "authProvidersUserPool": [
+    "Facebook",
+    "Google",
+    "SignInWithApple"
+  ],
+  "requiredAttributes": [
+    "email"
+  ],
+  "passwordPolicyMinLength": 12,
+  "passwordPolicyCharacters": [
+    "Requires Lowercase",
+    "Requires Uppercase",
+    "Requires Numbers"
+  ],
+  "mfaConfiguration": "OPTIONAL",
+  "autoVerifiedAttributes": [
+    "email"
+  ],
+  "mfaTypes": [
+    "SMS Text Message",
+    "TOTP"
+  ]
+}

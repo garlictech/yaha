@@ -99,6 +99,7 @@ amplify env checkout $ENVNAME
 popd
 
 rm -rf  libs/gql-api/src/lib/generated/aws-exports.ts libs/gql-api/src/lib/generated/models
+mkdir -p libs/gql-api/src/lib/generated
 mv -f apps/js-api/src/aws-exports.js libs/gql-api/src/lib/generated/aws-exports.ts
 mv -f apps/js-api/src/models libs/gql-api/src/lib/generated/
 

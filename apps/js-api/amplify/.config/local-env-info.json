@@ -1,6 +1,5 @@
 {
   "projectPath": "/Users/molnarzs/ActualProjects/garlictech/yaha/apps/js-api",
   "envName": "dev",
-  "defaultEditor": "vim",
-  "noUpdateBackend": true
+  "defaultEditor": "vim"
 }

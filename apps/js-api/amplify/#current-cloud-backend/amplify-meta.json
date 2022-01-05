@@ -32,16 +32,15 @@
         "GraphQLAPIEndpointOutput": "https://w74q2txbubh63jngmpvyoxcx34.appsync-api.us-east-1.amazonaws.com/graphql",
         "GraphQLAPIKeyOutput": "da2-pa5q5y3zqfazxjgd2ilelrauza"
       },
-      "lastPushTimeStamp": "2022-01-02T21:12:36.236Z",
+      "lastPushTimeStamp": "2022-01-05T22:40:08.203Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-yaha-dev-124845-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apiyaha"
-      },
-      "lastPushDirHash": "rkEWtJYKYUdRYYDRoxxLF93Gj8o="
+      }
     }
   },
   "auth": {
-    "yaha84925904": {
+    "yaha9a7360aa": {
       "service": "Cognito",
       "serviceType": "imported",
       "providerPlugin": "awscloudformation",
@@ -86,7 +85,7 @@
           "EMAIL"
         ]
       },
-      "lastPushTimeStamp": "2021-12-27T19:54:54.073Z"
+      "lastPushTimeStamp": "2022-01-05T22:40:15.604Z"
     }
   }
 }

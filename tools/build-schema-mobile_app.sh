@@ -15,16 +15,3 @@ echo 'Compile schema with amplify'
 echo '=============================='
 amplify api gql-compile --allow-destructive-graphql-schema-updates
 
-echo
-echo "Preparing schema for graphql schema checker..."
-echo '=============================='
-cp amplify/backend/api/${APPNAME}/build/schema.graphql \
-   ../../.github/graphql-inspector-artifacts/schema.graphql
-
-echo
-echo 'Generate typescript api'
-echo '=============================='
-cd ../..
-yarn graphql-codegen --config tools/graphql-codegen.yml
-echo 'Done.'
-

@@ -12,10 +12,7 @@
           "options": {
             "cwd": "apps/backend",
             "parallel": false,
-            "commands": [
-              "yarn sls package --stage='{args.env}'",
-              "yarn sst cdk synth"
-            ]
+            "commands": ["yarn sls package --stage='{args.env}'"]
           },
           "outputs": [
             "apps/backend/cdk.out",
