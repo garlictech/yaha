@@ -5325,10 +5325,10 @@
     ws "^7.4.0"
     yargs "^15.4.1"
 
-"@serverless-stack/core@^0.56.0":
-  version "0.56.0"
-  resolved "https://registry.yarnpkg.com/@serverless-stack/core/-/core-0.56.0.tgz#36b0471f400c36b150f8c1de479e7d676966667a"
-  integrity sha512-udrbC0m3Y30ee9jN59JpqlWE2+4wPXFMrCJaammUUyv85AGhUqhHYzHjgOpkH3oTN3jqC53phvuVCcLLttZAJg==
+"@serverless-stack/core@^0.56.1":
+  version "0.56.1"
+  resolved "https://registry.yarnpkg.com/@serverless-stack/core/-/core-0.56.1.tgz#79e9b0ad8b76c62e6e26cdb44e85ce3166f95036"
+  integrity sha512-SWKfaovw/yANlV3sirZECaT7+z68vCNQkYMviYcu5IIPpJd+g5Jay5bf4QwrKj/c/zuHmr9jWi3CPt67/7VC5g==
   dependencies:
     "@aws-sdk/client-s3" "^3.45.0"
     "@trpc/client" "^9.16.0"
@@ -5357,10 +5357,10 @@
     xstate "^4.26.1"
     zod "^3.11.6"
 
-"@serverless-stack/core@^0.56.1":
-  version "0.56.1"
-  resolved "https://registry.yarnpkg.com/@serverless-stack/core/-/core-0.56.1.tgz#79e9b0ad8b76c62e6e26cdb44e85ce3166f95036"
-  integrity sha512-SWKfaovw/yANlV3sirZECaT7+z68vCNQkYMviYcu5IIPpJd+g5Jay5bf4QwrKj/c/zuHmr9jWi3CPt67/7VC5g==
+"@serverless-stack/core@^0.56.2":
+  version "0.56.2"
+  resolved "https://registry.yarnpkg.com/@serverless-stack/core/-/core-0.56.2.tgz#a552aa12345055eec84ddaff1da595aa8b601108"
+  integrity sha512-67n9vGOn9KIHCXDED3E5eUKfFgOyejisaA3Iy0+7ybI9sdDFN49rrj/F/SQWm0YlnfDD7wak0l4CaMa1iBD/fw==
   dependencies:
     "@aws-sdk/client-s3" "^3.45.0"
     "@trpc/client" "^9.16.0"
@@ -5422,10 +5422,10 @@
     path-to-regexp "^6.1.0"
     send "^0.17.1"
 
-"@serverless-stack/resources@0.56.0":
-  version "0.56.0"
-  resolved "https://registry.yarnpkg.com/@serverless-stack/resources/-/resources-0.56.0.tgz#912b821ac5d43a4b93ea84e7bf190bc70292b10f"
-  integrity sha512-kTxySBfuUK5qc/pjyosi/FRAEj4T6SbWs0nKv37wkztYQgkxJ4p1a3M5huNzbFyfhefgNQ0rUdMBsigf6Qd+2w==
+"@serverless-stack/resources@0.56.2":
+  version "0.56.2"
+  resolved "https://registry.yarnpkg.com/@serverless-stack/resources/-/resources-0.56.2.tgz#1d6f761f88bb25fab9a02589273369d67c5c3d7d"
+  integrity sha512-1nvv0yhyHsGw4mGzUHBxXLajgFa6TTYqMNFAQ3X0CiFm/f3ApjsM+LR/404CIO4xHKR6GqZSYEXnqk7/gz/4/A==
   dependencies:
     "@aws-cdk/aws-apigateway" "1.132.0"
     "@aws-cdk/aws-apigatewayv2" "1.132.0"
@@ -5465,7 +5465,7 @@
     "@aws-cdk/lambda-layer-awscli" "1.132.0"
     "@graphql-tools/load-files" "^6.3.2"
     "@graphql-tools/merge" "^6.2.14"
-    "@serverless-stack/core" "^0.56.0"
+    "@serverless-stack/core" "^0.56.2"
     "@serverless-stack/nextjs-lambda" "^0.1.9"
     "@types/jest" "^26.0.7"
     archiver "^5.3.0"
