@@ -14,11 +14,16 @@
             "parallel": false,
             "commands": ["yarn sls package --stage='{args.env}'"]
           },
-          "outputs": [
-            "apps/backend/cdk.out",
-            "apps/backend/.build",
-            "apps/backend/.serverless"
-          ]
+          "outputs": ["apps/backend/.serverless"]
+        },
+        "synth": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "cwd": "apps/backend",
+            "parallel": false,
+            "commands": ["yarn sst cdk synth --stage='{args.env}'"]
+          },
+          "outputs": ["apps/backend/cdk.out", "apps/backend/.build"]
         },
         "deploy": {
           "executor": "@nrwl/workspace:run-commands",

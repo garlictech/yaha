@@ -9,6 +9,11 @@ plugins:
 
 package:
   individually: true
+  patterns:
+    - '!.build/**'
+    - '!.git/**'
+    - '!.serverless/**'
+    - '!cdk.out/**'
 
 custom:
   # Our stage is based on what is passed in when running serverless
@@ -21,11 +26,7 @@ custom:
     linting: false
     sourcemaps: true
     caching: true
-    concurrency: 4
     esbuild: true
-    copyFiles:
-      - from: ../../libs/gql-api/src/schema/hiking-api.graphql
-        to: lib/lambda/graphql-neo4j/hiking-api.graphql
 
   offline:
     useChildProcesses: true
@@ -44,15 +45,3 @@ functions:
 
   neptune-resolvers:
     handler: lib/lambda/neptune-resolvers/index.handler
-
-  graphql-neo4j:
-    handler: lib/lambda/graphql-neo4j/index.handler
-    events:
-      - http:
-          path: graphql
-          method: post
-          cors: true
-      - http:
-          path: graphql
-          method: get
-          cors: true
