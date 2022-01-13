@@ -30,6 +30,7 @@
     "allowJs": true,
     "baseUrl": ".",
     "paths": {
+      "@yaha/backend/shared/utils": ["libs/backend/shared/utils/src/index.ts"],
       "@yaha/gql-api": ["libs/gql-api/src/index.ts"],
       "@yaha/neptune-gql": ["libs/neptune-gql/src/index.ts"],
       "@yaha/shared/config": ["libs/shared/config/src/index.ts"],

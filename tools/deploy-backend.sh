@@ -27,7 +27,7 @@ if [ -f $STACKCONFIG_FILE ]; then
 fi
 # Process stack-config: remove stage label
 echo "Creating stack config for testing ($STACKCONFIG_FILE)"
-sed -i "s/^  \"${ENVNAME}\-backend/\"backend/g" $STACKCONFIG_FILE
+sed -i '' "s/^  \"${ENVNAME}\-backend/\"backend/g" $STACKCONFIG_FILE
 
 if [ -f $STACKCONFIG_FILE ]; then
   ln -sf $PWD/$STACKCONFIG_FILE $PWD/libs/shared/config/src/lib/generated/stack-config.json

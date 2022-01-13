@@ -4,7 +4,7 @@ import * as sst from '@serverless-stack/resources';
 import { App } from '@serverless-stack/resources';
 
 const secretsManagerArns: Record<string, string> = {
-  dev: 'arn:aws:secretsmanager:us-east-1:697486207432:secret:/yaha/dev/secrets',
+  dev: 'arn:aws:secretsmanager:us-east-1:697486207432:secret:yaha-dev-secrets-VBIyIl',
   qa: 'arn:aws:secretsmanager:us-east-1:697486207432:secret:/yaha/qa/secrets',
   staging:
     'arn:aws:secretsmanager:us-east-1:697486207432:secret:/yaha/qa/secrets',

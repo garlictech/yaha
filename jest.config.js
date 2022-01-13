@@ -8,6 +8,8 @@ module.exports = {
     '<rootDir>/libs/gql-api',
     '<rootDir>/libs/shared/graphql/api-client',
     '<rootDir>/apps/js-api',
+    '<rootDir>/apps/common-backend',
+    '<rootDir>/libs/backend/shared/utils',
   ],
   modulePaths: ['<rootDir>'],
 };
