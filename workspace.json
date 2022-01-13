@@ -127,7 +127,7 @@
             "cwd": "apps/cicd",
             "commands": [
               {
-                "command": "yarn sst remove"
+                "command": "yarn sst remove --stage='{args.env}'"
               }
             ]
           }

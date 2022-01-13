@@ -38,5 +38,45 @@ export class NeptuneApiStack extends sst.Stack {
     new cdk.CfnOutput(this, 'writerAddress', {
       value: this.writerAddress,
     });
+
+    // Bastion host to access neptune, only in DEV
+    // See: https://faun.pub/create-a-bastion-with-aws-cdk-d5ebfb91aef9
+    // Also, accessing is done with the tools/access-neptune-bastion.sh script
+    // You have to install the session menager plugin!
+    //
+    // https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html
+    if (!['prod', 'staging', 'qa'].includes(scope.stage)) {
+      const securityGroupName = 'NeptuneBastionSecurityGroup';
+
+      const sg = new ec2.SecurityGroup(this, 'NeptuneBastionSecurityGroup', {
+        securityGroupName,
+        description:
+          'Security group for the bastion, no inbound open because we should access to the bastion via AWS SSM',
+        vpc: props.vpc,
+        allowAllOutbound: true,
+      });
+
+      const host = new ec2.BastionHostLinux(this, 'NeptuneBastionHost', {
+        instanceName: 'NeptuneBastionHost',
+        vpc: props.vpc,
+        instanceType: new ec2.InstanceType('t2.nano'),
+        subnetSelection: {
+          subnetType: ec2.SubnetType.PUBLIC,
+        },
+        securityGroup: sg,
+      });
+
+      new cdk.CfnOutput(this, 'NeptuneBastionHostID', {
+        value: host.instanceId,
+      });
+
+      new cdk.CfnOutput(this, 'NeptuneBastionHostIP', {
+        value: host.instancePublicIp,
+      });
+
+      new cdk.CfnOutput(this, 'NeptuneBastionHostDNS', {
+        value: host.instancePublicDnsName,
+      });
+    }
   }
 }

@@ -92,6 +92,8 @@ export const createBuildProject = (
           NODE_OPTIONS:
             '--unhandled-rejections=strict --max_old_space_size=8196',
           GIT_DISCOVERY_ACROSS_FILESYSTEM: 1,
+          AWS_ACCOUNT: stack.account,
+          CI: 'ci',
         },
       },
     }),
