@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:yaha/hike-page.dart';
-import 'package:yaha/home/home-page-guest.dart';
+import 'package:yaha/explore.dart';
+import 'package:yaha/home/views/screens/guest-home-screen.dart';
 import 'package:yaha/profile/profile-page.dart';
 
 import 'package:yaha/utility/yaha-colors.dart';
 
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-
-import 'explore.dart';
+import 'package:yaha/views/track/screens/tracking.dart';
 
 // PersistentTabController _controller;
 
@@ -54,7 +53,7 @@ class BottomNavBar extends StatelessWidget {
 }
 
 List<Widget> _buildScreens() {
-  return [HomePageGuest(), ExplorePage(), HikePage(), ProfilePage()];
+  return [HomePageGuest(), ExplorePage(), TrackingScreen(), ProfilePage()];
 }
 
 List<PersistentBottomNavBarItem> _navBarsItems() {
@@ -62,28 +61,28 @@ List<PersistentBottomNavBarItem> _navBarsItems() {
     PersistentBottomNavBarItem(
       icon: Icon(Icons.home_rounded),
       title: ("Home"),
-      activeColorPrimary: YahaColors.tertiaryAccentColorDark,
+      activeColorPrimary: YahaColors.accentColorDark,
       activeColorSecondary: YahaColors.primary,
       inactiveColorPrimary: YahaColors.textColor,
     ),
     PersistentBottomNavBarItem(
       icon: Icon(Icons.travel_explore),
       title: ("Explore"),
-      activeColorPrimary: YahaColors.tertiaryAccentColorDark,
+      activeColorPrimary: YahaColors.accentColorDark,
       activeColorSecondary: YahaColors.primary,
       inactiveColorPrimary: YahaColors.textColor,
     ),
     PersistentBottomNavBarItem(
       icon: Icon(Icons.play_circle_fill),
       title: ("Track"),
-      activeColorPrimary: YahaColors.tertiaryAccentColorDark,
+      activeColorPrimary: YahaColors.accentColorDark,
       activeColorSecondary: YahaColors.primary,
       inactiveColorPrimary: YahaColors.textColor,
     ),
     PersistentBottomNavBarItem(
       icon: Icon(Icons.face_rounded),
       title: ("Profile"),
-      activeColorPrimary: YahaColors.tertiaryAccentColorDark,
+      activeColorPrimary: YahaColors.accentColorDark,
       activeColorSecondary: YahaColors.primary,
       inactiveColorPrimary: YahaColors.textColor,
     ),

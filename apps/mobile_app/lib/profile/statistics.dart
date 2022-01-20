@@ -25,7 +25,7 @@ class Statistics extends StatelessWidget {
         height: YahaBoxSizes.heightXXSmall,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
-          color: YahaColors.tertiaryAccentColor,
+          color: YahaColors.accentColor,
           borderRadius: BorderRadius.circular(YahaBorderRadius.general),
         ),
         child: Container(

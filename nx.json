@@ -17,31 +17,13 @@
         "cacheableOperations": ["build", "lint", "test", "e2e"],
         "accessToken": "YzIzOWI0OWUtMGRjMS00ZGZhLTliOTctZThlZmUxNGMyNGI2fHJlYWQtd3JpdGU=",
         "canTrackAnalytics": false,
-        "showUsageWarnings": true
+        "showUsageWarnings": true,
+        "parallel": 1
       }
     }
   },
-  "projects": {
-    "backend": {
-      "tags": ["type:backend", "platform:nodejs"]
-    },
-    "cicd": {
-      "tags": ["type:backend", "platform:nodejs"]
-    },
-    "mobile_app": {
-      "tags": ["type:application", "platform:flutter"]
-    },
-    "neo4j-gql-api": {
-      "tags": []
-    },
-    "neo4j-gql-backend": {
-      "tags": []
-    },
-    "shared-config": {
-      "tags": []
-    },
-    "shared-utils": {
-      "tags": ["type:utils", "platform:universal"]
-    }
-  }
+  "cli": {
+    "defaultCollection": "@nrwl/node"
+  },
+  "defaultProject": "cicd"
 }
