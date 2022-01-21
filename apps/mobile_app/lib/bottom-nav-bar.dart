@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:yaha/explore.dart';
 import 'package:yaha/home/views/screens/guest-home-screen.dart';
 import 'package:yaha/profile/profile-page.dart';
 
 import 'package:yaha/utility/yaha-colors.dart';
 
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import 'package:yaha/views/track/screens/timecapsule-new-comments-screen.dart';
 import 'package:yaha/views/track/screens/tracking.dart';
 
 // PersistentTabController _controller;
@@ -53,7 +53,12 @@ class BottomNavBar extends StatelessWidget {
 }
 
 List<Widget> _buildScreens() {
-  return [HomePageGuest(), ExplorePage(), TrackingScreen(), ProfilePage()];
+  return [
+    HomePageGuest(),
+    TimeCapsuleNewCommentsScreen(),
+    TrackingScreen(),
+    ProfilePage()
+  ];
 }
 
 List<PersistentBottomNavBarItem> _navBarsItems() {
