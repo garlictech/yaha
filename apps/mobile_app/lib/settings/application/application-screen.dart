@@ -8,7 +8,6 @@ import 'package:yaha/utility/yaha-icon-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:flutter/widgets.dart';
 
 import 'app-settings-state.dart';
 
