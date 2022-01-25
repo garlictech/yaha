@@ -3,7 +3,6 @@
 
 import 'package:network_image_mock/network_image_mock.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yaha/bottom-nav-bar.dart';
@@ -46,6 +45,7 @@ import 'package:yaha/views/track/screens/leave-a-timecapsule-screen.dart';
 import 'package:yaha/views/track/screens/summary-screen.dart';
 import 'package:yaha/views/track/screens/timecapsule-comments-screen.dart';
 import 'package:yaha/views/track/screens/timecapsule-in-track-mode-screen.dart';
+import 'package:yaha/views/track/screens/timecapsule-new-comments-screen.dart';
 import 'package:yaha/views/track/screens/tracking-data-screen.dart';
 import 'package:yaha/views/track/screens/tracking-map-screen.dart';
 import 'package:yaha/views/track/screens/tracking-timecapsule-screen.dart';
@@ -415,6 +415,13 @@ void main() {
       downhill: 10,
       points: 12,
     )));
+
+    await tester.pumpAndSettle();
+  });
+  testWidgets('TimeCapsule New Comments Screen smoke test',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(
+        createWidgetForTesting(child: new TimeCapsuleNewCommentsScreen()));
 
     await tester.pumpAndSettle();
   });

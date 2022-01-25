@@ -8,7 +8,6 @@ import 'package:yaha/utility/yaha-icon-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:flutter/widgets.dart';
 
 import 'app-settings-state.dart';
 
@@ -167,7 +166,7 @@ class ApplicationScreen extends ConsumerWidget {
                                           appSettingsStateNotifier
                                               .updateDistanceFormat(
                                                   newDistanceFormatState,
-                                                  index);
+                                                  index ?? 0);
                                         },
                                       ),
                                     ),
@@ -210,7 +209,7 @@ class ApplicationScreen extends ConsumerWidget {
                                           appSettingsStateNotifier
                                               .updateTemperatureFormat(
                                                   newTemperatureFormatState,
-                                                  index);
+                                                  index ?? 0);
                                         },
                                       ),
                                     ),
@@ -253,7 +252,8 @@ class ApplicationScreen extends ConsumerWidget {
                                               index == 0 ? true : false;
                                           appSettingsStateNotifier
                                               .updateTimeFormat(
-                                                  newTimeFormatState, index);
+                                                  newTimeFormatState,
+                                                  index ?? 0);
                                         },
                                       ),
                                     ),

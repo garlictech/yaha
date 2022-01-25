@@ -6,12 +6,6 @@
 
 #import "GeneratedPluginRegistrant.h"
 
-#if __has_include(<amplify_auth_cognito/AuthCognito.h>)
-#import <amplify_auth_cognito/AuthCognito.h>
-#else
-@import amplify_auth_cognito;
-#endif
-
 #if __has_include(<amplify_core/AmplifyCorePlugin.h>)
 #import <amplify_core/AmplifyCorePlugin.h>
 #else
@@ -34,6 +28,12 @@
 #import <flutter_web_auth/FlutterWebAuthPlugin.h>
 #else
 @import flutter_web_auth;
+#endif
+
+#if __has_include(<image_picker/FLTImagePickerPlugin.h>)
+#import <image_picker/FLTImagePickerPlugin.h>
+#else
+@import image_picker;
 #endif
 
 #if __has_include(<path_provider_ios/FLTPathProviderPlugin.h>)
@@ -69,11 +69,11 @@
 @implementation GeneratedPluginRegistrant
 
 + (void)registerWithRegistry:(NSObject<FlutterPluginRegistry>*)registry {
-  [AuthCognito registerWithRegistrar:[registry registrarForPlugin:@"AuthCognito"]];
   [AmplifyCorePlugin registerWithRegistrar:[registry registrarForPlugin:@"AmplifyCorePlugin"]];
   [AmplifyDataStorePlugin registerWithRegistrar:[registry registrarForPlugin:@"AmplifyDataStorePlugin"]];
   [Amplify registerWithRegistrar:[registry registrarForPlugin:@"Amplify"]];
   [FlutterWebAuthPlugin registerWithRegistrar:[registry registrarForPlugin:@"FlutterWebAuthPlugin"]];
+  [FLTImagePickerPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTImagePickerPlugin"]];
   [FLTPathProviderPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTPathProviderPlugin"]];
   [FLTSharedPreferencesPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTSharedPreferencesPlugin"]];
   [SqflitePlugin registerWithRegistrar:[registry registrarForPlugin:@"SqflitePlugin"]];
