@@ -27,17 +27,17 @@
           "unauthRoleName": "dev-yaha-cognito-CognitoDefaultUnauthenticatedRole-17WIF25CVCIKE"
         },
         "yaha9a7360aa": {
-          "userPoolId": "us-east-1_aiKVENWO3",
+          "userPoolId": "us-east-1_r0VBHq6to",
           "userPoolName": "dev-yaha-consumer-user-pool",
-          "webClientId": "2bcedbbrqs7ppinn1j40jhre7c",
-          "nativeClientId": "3r7ji76goc93sl78eepovrlqoh",
-          "identityPoolId": "us-east-1:e4a5096b-e916-4e8d-9342-10826373028e",
-          "identityPoolName": "IdentityPool_N6x0B9DI69Jr",
+          "webClientId": "5m1n884d7kooteqvree1p2ed8b",
+          "nativeClientId": "1d79g7kuqo1mj4lr8pmj1ec3pm",
+          "identityPoolId": "us-east-1:b6943e16-0ef1-4727-ae68-56ba8916ac36",
+          "identityPoolName": "IdentityPool_mpVvsLWupM3n",
           "allowUnauthenticatedIdentities": true,
-          "authRoleArn": "arn:aws:iam::697486207432:role/dev-yaha-cognito-CognitoDefaultAuthenticatedRole2A-V45LUSD8NVWK",
-          "authRoleName": "dev-yaha-cognito-CognitoDefaultAuthenticatedRole2A-V45LUSD8NVWK",
-          "unauthRoleArn": "arn:aws:iam::697486207432:role/dev-yaha-cognito-CognitoDefaultUnauthenticatedRole-17WIF25CVCIKE",
-          "unauthRoleName": "dev-yaha-cognito-CognitoDefaultUnauthenticatedRole-17WIF25CVCIKE"
+          "authRoleArn": "arn:aws:iam::697486207432:role/dev-yaha-cognito-CognitoDefaultAuthenticatedRole2A-1XGMDT5YBO8RD",
+          "authRoleName": "dev-yaha-cognito-CognitoDefaultAuthenticatedRole2A-1XGMDT5YBO8RD",
+          "unauthRoleArn": "arn:aws:iam::697486207432:role/dev-yaha-cognito-CognitoDefaultUnauthenticatedRole-17VCCO2A7KMOL",
+          "unauthRoleName": "dev-yaha-cognito-CognitoDefaultUnauthenticatedRole-17VCCO2A7KMOL"
         }
       }
     }

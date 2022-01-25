@@ -32,7 +32,7 @@
         "GraphQLAPIEndpointOutput": "https://w74q2txbubh63jngmpvyoxcx34.appsync-api.us-east-1.amazonaws.com/graphql",
         "GraphQLAPIKeyOutput": "da2-pa5q5y3zqfazxjgd2ilelrauza"
       },
-      "lastPushTimeStamp": "2022-01-10T19:34:28.764Z",
+      "lastPushTimeStamp": "2022-01-26T17:58:06.484Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-yaha-dev-124845-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apiyaha"
@@ -47,15 +47,15 @@
       "dependsOn": [],
       "customAuth": false,
       "output": {
-        "UserPoolId": "us-east-1_aiKVENWO3",
+        "UserPoolId": "us-east-1_r0VBHq6to",
         "UserPoolName": "dev-yaha-consumer-user-pool",
-        "AppClientID": "3r7ji76goc93sl78eepovrlqoh",
-        "AppClientSecret": "1nmkqbn97a3iumb52u33tplph1lkfd93mmc8joqkefbie2sr3gq3",
-        "AppClientIDWeb": "2bcedbbrqs7ppinn1j40jhre7c",
+        "AppClientID": "1d79g7kuqo1mj4lr8pmj1ec3pm",
+        "AppClientSecret": "7fftot4cgfpjrrbvnihshkm4v3bedmskf2oggk3jiab30fpn9j2",
+        "AppClientIDWeb": "5m1n884d7kooteqvree1p2ed8b",
         "HostedUIDomain": "dev-yaha-consumer",
-        "IdentityPoolId": "us-east-1:e4a5096b-e916-4e8d-9342-10826373028e",
-        "IdentityPoolName": "IdentityPool_N6x0B9DI69Jr",
-        "CreatedSNSRole": "arn:aws:iam::697486207432:role/dev-yaha-cognito-ConsumerUserPoolsmsRoleC92BB0E3-1RK9II25FAX20",
+        "IdentityPoolId": "us-east-1:b6943e16-0ef1-4727-ae68-56ba8916ac36",
+        "IdentityPoolName": "IdentityPool_mpVvsLWupM3n",
+        "CreatedSNSRole": "arn:aws:iam::697486207432:role/dev-yaha-cognito-ConsumerUserPoolsmsRoleC92BB0E3-1AFRHARUOEDNJ",
         "OAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"aws.cognito.signin.user.admin\",\"email\",\"openid\",\"phone\",\"profile\"],\"CallbackURLs\":[\"yaha://signin/\"],\"LogoutURLs\":[\"yaha://signout/\"]}"
       },
       "frontendAuthConfig": {

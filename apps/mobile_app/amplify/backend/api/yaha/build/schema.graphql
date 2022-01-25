@@ -84,22 +84,27 @@ type Poi {
   address: String
   phoneFloat: String
   openingHours: String
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  _version: Int!
+  _deleted: Boolean
+  _lastChangedAt: AWSTimestamp!
 }
 
 type Hike {
   id: ID!
-  description: [TextualDescription!]!
-  location: String!
-  publicationState: PublicationState!
+  description: [TextualDescription]
+  location: String
   featured: Boolean
   rate: String
   offlineMap: String
   featuredStops: [HikeStop]
   checkpoints: [Poi]
   tags: [String!]
-  route: RouteData!
-  startPoint: Point!
-  endPoint: Point!
+  route: RouteData
+  startPoint: Point
+  endPoint: Point
+  imageUrls: [String]
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
   _version: Int!
@@ -128,6 +133,9 @@ input GetNodeInput {
 
 type Query {
   getNode(input: GetNodeInput!): Node @aws_iam @aws_cognito_user_pools @aws_api_key
+  getPoi(id: ID!): Poi
+  listPois(filter: ModelPoiFilterInput, limit: Int, nextToken: String): ModelPoiConnection
+  syncPois(filter: ModelPoiFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelPoiConnection
   getHike(id: ID!): Hike
   listHikes(filter: ModelHikeFilterInput, limit: Int, nextToken: String): ModelHikeConnection
   syncHikes(filter: ModelHikeFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelHikeConnection
@@ -224,6 +232,12 @@ enum ModelSortDirection {
   DESC
 }
 
+input PointInput {
+  lat: Float!
+  lon: Float!
+  ele: Float
+}
+
 input TextualDescriptionInput {
   languageKey: String!
   title: String
@@ -232,12 +246,43 @@ input TextualDescriptionInput {
   type: TextualDescriptionType!
 }
 
-input HikeStopInput {
-  poiId: ID!
-  description: [TextualDescriptionInput!]
+input PoiSourceObjectInput {
+  objectType: PoiSource!
+  languageKey: String
+  objectId: String!
+  url: String
 }
 
-input PoiInput {
+type ModelPoiConnection {
+  items: [Poi]!
+  nextToken: String
+  startedAt: AWSTimestamp
+}
+
+input ModelPoiFilterInput {
+  id: ModelIDInput
+  types: ModelStringInput
+  tags: ModelStringInput
+  address: ModelStringInput
+  phoneFloat: ModelStringInput
+  openingHours: ModelStringInput
+  and: [ModelPoiFilterInput]
+  or: [ModelPoiFilterInput]
+  not: ModelPoiFilterInput
+}
+
+input ModelPoiConditionInput {
+  types: ModelStringInput
+  tags: ModelStringInput
+  address: ModelStringInput
+  phoneFloat: ModelStringInput
+  openingHours: ModelStringInput
+  and: [ModelPoiConditionInput]
+  or: [ModelPoiConditionInput]
+  not: ModelPoiConditionInput
+}
+
+input CreatePoiInput {
   id: ID
   location: PointInput!
   types: [String!]
@@ -247,19 +292,48 @@ input PoiInput {
   address: String
   phoneFloat: String
   openingHours: String
+  _version: Int
 }
 
-input PointInput {
-  lat: Float!
-  lon: Float!
-  ele: Float
+input UpdatePoiInput {
+  id: ID!
+  location: PointInput
+  types: [String!]
+  description: [TextualDescriptionInput!]
+  tags: [String!]
+  sourceObject: [PoiSourceObjectInput!]
+  address: String
+  phoneFloat: String
+  openingHours: String
+  _version: Int
 }
 
-input PoiSourceObjectInput {
-  objectType: PoiSource!
-  languageKey: String
-  objectId: String!
-  url: String
+input DeletePoiInput {
+  id: ID!
+  _version: Int
+}
+
+type Mutation {
+  createPoi(input: CreatePoiInput!, condition: ModelPoiConditionInput): Poi
+  updatePoi(input: UpdatePoiInput!, condition: ModelPoiConditionInput): Poi
+  deletePoi(input: DeletePoiInput!, condition: ModelPoiConditionInput): Poi
+  createHike(input: CreateHikeInput!, condition: ModelHikeConditionInput): Hike
+  updateHike(input: UpdateHikeInput!, condition: ModelHikeConditionInput): Hike
+  deleteHike(input: DeleteHikeInput!, condition: ModelHikeConditionInput): Hike
+}
+
+type Subscription {
+  onCreatePoi: Poi @aws_subscribe(mutations: ["createPoi"])
+  onUpdatePoi: Poi @aws_subscribe(mutations: ["updatePoi"])
+  onDeletePoi: Poi @aws_subscribe(mutations: ["deletePoi"])
+  onCreateHike: Hike @aws_subscribe(mutations: ["createHike"])
+  onUpdateHike: Hike @aws_subscribe(mutations: ["updateHike"])
+  onDeleteHike: Hike @aws_subscribe(mutations: ["deleteHike"])
+}
+
+input HikeStopInput {
+  poiId: ID!
+  description: [TextualDescriptionInput!]
 }
 
 input RouteDataInput {
@@ -283,24 +357,19 @@ input BoundingBoxInput {
 }
 
 type ModelHikeConnection {
-  items: [Hike!]!
+  items: [Hike]!
   nextToken: String
   startedAt: AWSTimestamp
-}
-
-input ModelPublicationStateInput {
-  eq: PublicationState
-  ne: PublicationState
 }
 
 input ModelHikeFilterInput {
   id: ModelIDInput
   location: ModelStringInput
-  publicationState: ModelPublicationStateInput
   featured: ModelBooleanInput
   rate: ModelStringInput
   offlineMap: ModelStringInput
   tags: ModelStringInput
+  imageUrls: ModelStringInput
   and: [ModelHikeFilterInput]
   or: [ModelHikeFilterInput]
   not: ModelHikeFilterInput
@@ -308,11 +377,11 @@ input ModelHikeFilterInput {
 
 input ModelHikeConditionInput {
   location: ModelStringInput
-  publicationState: ModelPublicationStateInput
   featured: ModelBooleanInput
   rate: ModelStringInput
   offlineMap: ModelStringInput
   tags: ModelStringInput
+  imageUrls: ModelStringInput
   and: [ModelHikeConditionInput]
   or: [ModelHikeConditionInput]
   not: ModelHikeConditionInput
@@ -320,52 +389,38 @@ input ModelHikeConditionInput {
 
 input CreateHikeInput {
   id: ID
-  description: [TextualDescriptionInput!]!
-  location: String!
-  publicationState: PublicationState!
+  description: [TextualDescriptionInput]
+  location: String
   featured: Boolean
   rate: String
   offlineMap: String
   featuredStops: [HikeStopInput]
-  checkpoints: [PoiInput]
   tags: [String!]
-  route: RouteDataInput!
-  startPoint: PointInput!
-  endPoint: PointInput!
+  route: RouteDataInput
+  startPoint: PointInput
+  endPoint: PointInput
+  imageUrls: [String]
   _version: Int
 }
 
 input UpdateHikeInput {
   id: ID!
-  description: [TextualDescriptionInput!]
+  description: [TextualDescriptionInput]
   location: String
-  publicationState: PublicationState
   featured: Boolean
   rate: String
   offlineMap: String
   featuredStops: [HikeStopInput]
-  checkpoints: [PoiInput]
   tags: [String!]
   route: RouteDataInput
   startPoint: PointInput
   endPoint: PointInput
+  imageUrls: [String]
   _version: Int
 }
 
 input DeleteHikeInput {
   id: ID!
   _version: Int
-}
-
-type Mutation {
-  createHike(input: CreateHikeInput!, condition: ModelHikeConditionInput): Hike
-  updateHike(input: UpdateHikeInput!, condition: ModelHikeConditionInput): Hike
-  deleteHike(input: DeleteHikeInput!, condition: ModelHikeConditionInput): Hike
-}
-
-type Subscription {
-  onCreateHike: Hike @aws_subscribe(mutations: ["createHike"])
-  onUpdateHike: Hike @aws_subscribe(mutations: ["updateHike"])
-  onDeleteHike: Hike @aws_subscribe(mutations: ["deleteHike"])
 }
 

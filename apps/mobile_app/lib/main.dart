@@ -7,10 +7,6 @@ import 'package:yaha/views/auth/screens/signup-screen.dart';
 import 'package:yaha/views/track/screens/tracking.dart';
 import 'profile/events/views/screens/event-detail-screen.dart';
 import 'settings/views/settings-screen.dart';
-//import 'package:amplify_flutter/amplify_flutter.dart';
-//import 'package:amplify_datastore/amplify_datastore.dart';
-//import 'amplifyconfiguration.dart';
-
 import 'bottom-nav-bar.dart';
 import 'explore.dart';
 import 'hike/hike-screen/hike-screen.dart';
@@ -24,7 +20,7 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     return MaterialApp(
-      title: 'Jaha',
+      title: 'Yaha',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           primaryColor: YahaColors.primary,

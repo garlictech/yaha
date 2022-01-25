@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yaha/explore.dart';
-import 'package:yaha/hike/hike-card/hike-card.dart';
-import 'package:yaha/home/views/widgets/explore-hike-box.dart';
-import 'package:yaha/home/views/screens/best-hikes-near-you-screen.dart';
-import 'package:yaha/home/views/screens/best-hikes-of-the-world-screen.dart';
+import 'package:yaha/presenters/home/guest-home-screen-presenter.dart';
 import 'package:yaha/profile/challenges/views/screens/challenge-detail-screen.dart';
 import 'package:yaha/profile/challenges/views/screens/challenges.dart';
 import 'package:yaha/profile/events/views/screens/events.dart';
@@ -21,6 +18,8 @@ import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
+import 'package:yaha/views/hikes/widgets/horizontal-hike-cards.dart';
+import 'package:yaha/views/home/views/widgets/explore-hike-box.dart';
 
 class HomePageGuest extends ConsumerWidget {
   @override
@@ -28,6 +27,7 @@ class HomePageGuest extends ConsumerWidget {
     AsyncValue userState = watch(userStateProvider);
     final authState = watch(authStateProvider);
     final authStateNotifier = watch(authStateProvider.notifier);
+    final viewModel = watch(guestHomeScreenMVPProvider);
 
     return Scaffold(
       body: CustomScrollView(
@@ -298,108 +298,15 @@ class HomePageGuest extends ConsumerWidget {
                           ),
                         ),
                         Container(
-                          padding: EdgeInsets.only(top: YahaSpaceSizes.small),
-                          child: Column(
-                            children: [
-                              Container(
-                                padding: EdgeInsets.only(
-                                    bottom: YahaSpaceSizes.medium),
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  'Best hikes near you',
-                                  style: TextStyle(
-                                      fontSize: YahaFontSizes.medium,
-                                      fontWeight: FontWeight.w600,
-                                      color: YahaColors.textColor),
-                                ),
-                              ),
-                              Container(
-                                height: YahaBoxSizes.heightMedium,
-                                child: ListView(
-                                  scrollDirection: Axis.horizontal,
-                                  children: [
-                                    Container(
-                                      padding: EdgeInsets.only(
-                                          right: YahaSpaceSizes.general),
-                                      width: YahaBoxSizes.widthMedium,
-                                      child: HikeCard(
-                                        title: 'Tura',
-                                        subTitle:
-                                            'Túrázás, vár, erdő, és barlang',
-                                        //distanceFromCurrentLocation: 10,
-                                        backgroundImage:
-                                            'assets/images/tura.png',
-                                      ),
-                                    ),
-                                    Container(
-                                      width: YahaBoxSizes.widthMedium,
-                                      child: HikeCard(
-                                        title: 'Mátra',
-                                        subTitle:
-                                            'Mátra, erdős hegyek túrázáshoz',
-                                        //distanceFromCurrentLocation: 10,
-                                        backgroundImage:
-                                            'assets/images/matra.png',
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              ShowMoreButton(nextScreen: BestHikesNearYou())
-                            ],
-                          ),
-                        ),
+                            padding: EdgeInsets.only(top: YahaSpaceSizes.small),
+                            child: HorizontalHikeCards(
+                                title: 'Best hikes near you',
+                                hikes: viewModel.bestHikesNearby)),
                         Container(
-                          padding: EdgeInsets.only(top: YahaSpaceSizes.small),
-                          child: Column(
-                            children: [
-                              Container(
-                                padding: EdgeInsets.only(
-                                    bottom: YahaSpaceSizes.medium),
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  'Best hikes of the world',
-                                  style: TextStyle(
-                                      fontSize: YahaFontSizes.medium,
-                                      fontWeight: FontWeight.w600,
-                                      color: YahaColors.textColor),
-                                ),
-                              ),
-                              Container(
-                                height: YahaBoxSizes.heightMedium,
-                                child: ListView(
-                                  scrollDirection: Axis.horizontal,
-                                  children: [
-                                    Container(
-                                      padding: EdgeInsets.only(
-                                          right: YahaSpaceSizes.general),
-                                      width: YahaBoxSizes.widthMedium,
-                                      child: HikeCard(
-                                        title: 'Budapest',
-                                        subTitle: 'Várhegy, Duna, Lánchíd',
-                                        //distanceFromCurrentLocation: 10,
-                                        backgroundImage:
-                                            'assets/images/budapest.png',
-                                      ),
-                                    ),
-                                    Container(
-                                      width: YahaBoxSizes.widthMedium,
-                                      child: HikeCard(
-                                        title: 'Balaton',
-                                        subTitle:
-                                            'Nagy édesvizű tó üdülővárosokkal',
-                                        //distanceFromCurrentLocation: 10,
-                                        backgroundImage:
-                                            'assets/images/balaton.png',
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              ShowMoreButton(nextScreen: BestHikesOfTheWorld())
-                            ],
-                          ),
-                        ),
+                            padding: EdgeInsets.only(top: YahaSpaceSizes.small),
+                            child: HorizontalHikeCards(
+                                title: 'Best hikes of the world',
+                                hikes: viewModel.bestHikesOfTheWorld))
                       ],
                     ),
                   ),
