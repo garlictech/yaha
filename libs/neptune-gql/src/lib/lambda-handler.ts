@@ -1,7 +1,7 @@
 import { Context, Handler } from 'aws-lambda';
 import { Observable } from 'rxjs';
-import { getNodeResolver } from './resolver/get-node';
-import { createNeptuneDeps } from './resolver/utils';
+//import { getNodeResolver } from './resolver/get-node';
+//import { createNeptuneDeps } from './resolver/utils';
 
 export interface YahaRequest {
   typeName: string;
@@ -12,11 +12,11 @@ export interface YahaRequest {
   arguments: unknown;
 }
 
-const neptuneResolverDeps = process.env.NEPTUNE_WRITER
+/*const neptuneResolverDeps = process.env.NEPTUNE_WRITER
   ? createNeptuneDeps(process.env.NEPTUNE_WRITER || '')
   : // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (undefined as any); // Simply prevents from connecting to neptune in lambda build time
-
+*/
 export const neptuneResolverHandler: Handler<YahaRequest, unknown> = (
   event: YahaRequest,
   _context: Context,
@@ -26,12 +26,12 @@ export const neptuneResolverHandler: Handler<YahaRequest, unknown> = (
   // We don't use typing here, we explicitly check the fields in runtime.
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const resolverMap: any = {
-    Mutation: {
+    /*Mutation: {
       upsertHike: getNodeResolver(neptuneResolverDeps),
     },
     Query: {
       getNode: getNodeResolver(neptuneResolverDeps),
-    },
+    },*/
   };
 
   const op = resolverMap[event.typeName]?.[event.fieldName]?.(event.arguments);

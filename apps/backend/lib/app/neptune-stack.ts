@@ -1,7 +1,6 @@
-import * as neptune from '@aws-cdk/aws-neptune';
+import { aws_ec2 as ec2, CfnOutput, RemovalPolicy } from 'aws-cdk-lib';
+import * as neptune from '@aws-cdk/aws-neptune-alpha';
 import * as sst from '@serverless-stack/resources';
-import * as ec2 from '@aws-cdk/aws-ec2';
-import * as cdk from '@aws-cdk/core';
 
 export interface NeptuneStackProps extends sst.StackProps {
   vpc: ec2.IVpc;
@@ -17,8 +16,7 @@ export class NeptuneApiStack extends sst.Stack {
     const clusterParams: neptune.DatabaseClusterProps = {
       vpc: props.vpc,
       instanceType: neptune.InstanceType.T3_MEDIUM,
-      removalPolicy:
-        scope.stage === 'prod' ? undefined : cdk.RemovalPolicy.DESTROY,
+      removalPolicy: scope.stage === 'prod' ? undefined : RemovalPolicy.DESTROY,
     };
 
     const cluster = new neptune.DatabaseCluster(
@@ -32,10 +30,10 @@ export class NeptuneApiStack extends sst.Stack {
     this.readerAddress = cluster.clusterReadEndpoint.socketAddress;
 
     // The next two lines are not required, they just log out the endpoints to your terminal for reference
-    new cdk.CfnOutput(this, 'readerAddress', {
+    new CfnOutput(this, 'readerAddress', {
       value: this.readerAddress,
     });
-    new cdk.CfnOutput(this, 'writerAddress', {
+    new CfnOutput(this, 'writerAddress', {
       value: this.writerAddress,
     });
 
@@ -66,15 +64,15 @@ export class NeptuneApiStack extends sst.Stack {
         securityGroup: sg,
       });
 
-      new cdk.CfnOutput(this, 'NeptuneBastionHostID', {
+      new CfnOutput(this, 'NeptuneBastionHostID', {
         value: host.instanceId,
       });
 
-      new cdk.CfnOutput(this, 'NeptuneBastionHostIP', {
+      new CfnOutput(this, 'NeptuneBastionHostIP', {
         value: host.instancePublicIp,
       });
 
-      new cdk.CfnOutput(this, 'NeptuneBastionHostDNS', {
+      new CfnOutput(this, 'NeptuneBastionHostDNS', {
         value: host.instancePublicDnsName,
       });
     }

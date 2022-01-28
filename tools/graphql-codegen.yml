@@ -1,9 +1,9 @@
 overwrite: true
 schema:
-  - apps/mobile_app/amplify/backend/api/yaha/build/schema.graphql
   - libs/gql-api/src/schema/aws.graphql
-documents:
-  - libs/gql-api/src/lib/generated/graphql/*.ts
+  - apps/mobile_app/amplify/backend/api/yaha/build/schema.graphql
+    #documents:
+    #- libs/gql-api/src/graphql/documents/*.graphql
 generates:
   libs/gql-api/src/lib/generated/yaha-api.ts:
     hooks:

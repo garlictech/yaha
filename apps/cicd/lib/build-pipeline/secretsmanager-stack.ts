@@ -1,5 +1,5 @@
+import { aws_secretsmanager as sm } from 'aws-cdk-lib';
 import * as sst from '@serverless-stack/resources';
-import * as sm from '@aws-cdk/aws-secretsmanager';
 
 export interface SecretsManagerStackProps extends sst.StackProps {
   projectSecretsManagerArn: string;

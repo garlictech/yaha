@@ -3,17 +3,26 @@
   "serviceConfiguration": {
     "apiName": "yaha",
     "serviceName": "AppSync",
-    "gqlSchemaPath": "/Users/molnarzs/ActualProjects/garlictech/yaha/apps/amplify-backend/amplify/backend/api/yaha/schema.graphql",
+    "gqlSchemaPath": "/Users/molnarzs/ActualProjects/garlictech/yaha/apps/mobile_app/amplify/backend/api/yaha/schema.graphql",
     "defaultAuthType": {
       "mode": "API_KEY",
       "expirationTime": 365,
-      "apiKeyExpirationDate": "2022-12-27T12:25:16.189Z",
+      "apiKeyExpirationDate": "2023-01-29T15:45:42.418Z",
       "keyDescription": "default"
     },
     "conflictResolution": {
       "defaultResolutionStrategy": {
         "type": "AUTOMERGE"
       }
-    }
+    },
+    "additionalAuthTypes": [
+      {
+        "mode": "AMAZON_COGNITO_USER_POOLS",
+        "cognitoUserPoolId": "authyaha381acd8e"
+      },
+      {
+        "mode": "AWS_IAM"
+      }
+    ]
   }
 }

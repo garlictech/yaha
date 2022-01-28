@@ -6,7 +6,7 @@ ENVNAME=$2
 excludes="--exclude=shared-config --exclude=mobile_app"
 
 ./tools/build-workspace.sh ${ENVNAME}
-#yarn nx format:check 
+yarn nx format:check 
 yarn nx affected:lint --base=${ENVNAME} ${generatedLibExcludes}
 yarn nx affected:test --base=${ENVNAME} ${generatedLibExcludes} --codeCoverage --coverageReporters=clover
 yarn nx lint-ci mobile_app

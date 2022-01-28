@@ -1,3 +1,7 @@
+input AMPLIFY {
+  globalAuthRule: AuthRule = { allow: public }
+}
+
 ## ------ Generic types -----------------------------------------------------
 type Point {
   lat: Float!
@@ -76,7 +80,7 @@ type PoiSourceObject {
   url: String
 }
 
-type Poi {
+type Poi @model {
   id: ID!
   location: Point!
   types: [String!]
@@ -90,18 +94,18 @@ type Poi {
 
 type Hike @model {
   id: ID!
-  description: [TextualDescription!]!
-  location: String!
-  publicationState: PublicationState!
+  description: [TextualDescription]
+  location: String
   featured: Boolean
   rate: String
   offlineMap: String
   featuredStops: [HikeStop]
   checkpoints: [Poi]
   tags: [String!]
-  route: RouteData!
-  startPoint: Point!
-  endPoint: Point!
+  route: RouteData
+  startPoint: Point
+  endPoint: Point
+  imageUrls: [String]
 }
 
 ### THE GRAPH BASED API

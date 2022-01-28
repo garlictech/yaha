@@ -1,6 +1,6 @@
+import { aws_codebuild as codebuild } from 'aws-cdk-lib';
 import * as utils from './utils';
 import * as sst from '@serverless-stack/resources';
-import * as codebuild from '@aws-cdk/aws-codebuild';
 import { PipelineStackProps } from './utils';
 
 export class DevPullRequestBuildStack extends sst.Stack {

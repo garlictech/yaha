@@ -2,11 +2,9 @@ import { App, Stack } from '@serverless-stack/resources';
 import { CognitoStack } from './app/cognito-stack';
 import { ParamsStack } from './app/params-stack';
 import { SecretsManagerStack } from './app/secretsmanager-stack';
-import { SeederStack } from './app/seeder-stack';
-import * as ec2 from '@aws-cdk/aws-ec2';
 import { NeptuneApiStack } from './app/neptune-stack';
 import { LambdaStack } from './app/lambda-stack';
-import { commonStackConfig } from '@yaha/shared/config';
+import { aws_ec2 as ec2 } from 'aws-cdk-lib';
 
 export class yahaStack extends Stack {
   constructor(scope: App, id: string) {
@@ -39,10 +37,6 @@ export class yahaStack extends Stack {
       appleKeyId: paramsStack.appleKeyId,
       appleServiceId: paramsStack.appleServiceId,
     });
-
-    if (scope.stage === 'dev' || scope.stage === 'qa') {
-      new SeederStack(scope, 'seeder', {});
-    }
   }
 }
 

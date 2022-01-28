@@ -7,47 +7,6 @@
     "unused-imports",
     "@nrwl/nx"
   ],
-  "nx-enforce-module-boundaries": [
-    "error",
-    {
-      "enforceBuildableLibDependency": true,
-      "allow": [],
-      "depConstraints": [
-        {
-          "sourceTag": "platform:nodejs",
-          "onlyDependOnLibsWithTags": [
-            "platform:nodejs"
-          ]
-        },
-        {
-          "sourceTag": "type:backend",
-          "onlyDependOnLibsWithTags": [
-            "type:utils",
-            "type:backend"
-          ]
-        },
-        {
-          "sourceTag": "type:utils",
-          "onlyDependOnLibsWithTags": [
-            "type:utils"
-          ]
-        },
-        {
-          "sourceTag": "layer:repository",
-          "onlyDependOnLibsWithTags": [
-            "layer:entity",
-            "layer:repository"
-          ]
-        },
-        {
-          "sourceTag": "type:integration-tests",
-          "onlyDependOnLibsWithTags": [
-            "*"
-          ]
-        }
-      ]
-    }
-  ],
   "overrides": [
     {
       "files": [
@@ -57,7 +16,48 @@
         "*.jsx"
       ],
       "rules": {
-        "unused-imports/no-unused-imports-ts": 2
+        "unused-imports/no-unused-imports-ts": 2,
+        "@nrwl/nx/nx-enforce-module-boundaries": [
+          "error",
+          {
+            "enforceBuildableLibDependency": true,
+            "allow": [],
+            "depConstraints": [
+              {
+                "sourceTag": "platform:nodejs",
+                "onlyDependOnLibsWithTags": [
+                  "platform:nodejs"
+                ]
+              },
+              {
+                "sourceTag": "type:backend",
+                "onlyDependOnLibsWithTags": [
+                  "type:utils",
+                  "type:backend"
+                ]
+              },
+              {
+                "sourceTag": "type:utils",
+                "onlyDependOnLibsWithTags": [
+                  "type:utils"
+                ]
+              },
+              {
+                "sourceTag": "layer:repository",
+                "onlyDependOnLibsWithTags": [
+                  "layer:entity",
+                  "layer:repository"
+                ]
+              },
+              {
+                "sourceTag": "type:integration-tests",
+                "onlyDependOnLibsWithTags": [
+                  "*"
+                ]
+              }
+            ]
+          }
+        ]
       }
     },
     {

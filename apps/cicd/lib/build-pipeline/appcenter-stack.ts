@@ -1,5 +1,5 @@
 import * as sst from '@serverless-stack/resources';
-import * as iam from '@aws-cdk/aws-iam';
+import { aws_iam as iam } from 'aws-cdk-lib';
 
 export type AppcenterStackProps = sst.StackProps;
 
