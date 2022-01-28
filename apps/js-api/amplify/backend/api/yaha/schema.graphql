@@ -94,18 +94,18 @@ type Poi @model {
 
 type Hike @model {
   id: ID!
-  description: [TextualDescription!]!
-  location: String!
-  publicationState: PublicationState!
+  description: [TextualDescription]
+  location: String
   featured: Boolean
   rate: String
   offlineMap: String
   featuredStops: [HikeStop]
   checkpoints: [Poi]
   tags: [String!]
-  route: RouteData!
-  startPoint: Point!
-  endPoint: Point!
+  route: RouteData
+  startPoint: Point
+  endPoint: Point
+  imageUrls: [String]
 }
 
 ### THE GRAPH BASED API

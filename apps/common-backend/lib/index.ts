@@ -1,7 +1,5 @@
-import * as cdk from '@aws-cdk/core';
+import { aws_ec2 as ec2, aws_ssm as ssm, CfnOutput } from 'aws-cdk-lib';
 import { App, Stack } from '@serverless-stack/resources';
-import * as ec2 from '@aws-cdk/aws-ec2';
-import * as ssm from '@aws-cdk/aws-ssm';
 import {
   yahaVpcName,
   yahaVpcSecurityGroupParamName,
@@ -28,15 +26,15 @@ export class YahaCommonStack extends Stack {
       stringValue: vpc.vpcDefaultSecurityGroup,
     });
 
-    new cdk.CfnOutput(this, 'YahaVpcSecurityGroupOutput', {
+    new CfnOutput(this, 'YahaVpcSecurityGroupOutput', {
       value: vpc.vpcDefaultSecurityGroup,
     });
 
-    new cdk.CfnOutput(this, 'YahaVpcSubnetOutput', {
+    new CfnOutput(this, 'YahaVpcSubnetOutput', {
       value: vpc.privateSubnets[0].subnetId,
     });
 
-    new cdk.CfnOutput(this, 'YahaVpcIdOutput', {
+    new CfnOutput(this, 'YahaVpcIdOutput', {
       value: vpc.vpcId,
     });
   }

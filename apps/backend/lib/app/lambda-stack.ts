@@ -1,11 +1,13 @@
-import * as iam from '@aws-cdk/aws-iam';
-import * as lambda from '@aws-cdk/aws-lambda';
-import * as sm from '@aws-cdk/aws-secretsmanager';
-import * as cdk from '@aws-cdk/core';
+import {
+  aws_lambda as lambda,
+  aws_iam as iam,
+  aws_secretsmanager as sm,
+  aws_ec2 as ec2,
+  Duration,
+} from 'aws-cdk-lib';
 import * as sst from '@serverless-stack/resources';
 import path from 'path';
 import { commonLambdaProps } from './lambda-common';
-import * as ec2 from '@aws-cdk/aws-ec2';
 
 export interface LambdaStackProps extends sst.StackProps {
   neptuneReaderAddress: string;
@@ -22,7 +24,7 @@ export class LambdaStack extends sst.Stack {
       // It must be relative to the serverless.yml file
       functionName: `${scope.stage}-yaha-neptune-resolvers`,
       handler: 'lib/lambda/neptune-resolvers/index.handler',
-      timeout: cdk.Duration.seconds(30),
+      timeout: Duration.seconds(30),
       memorySize: 1024,
       code: lambda.Code.fromAsset(
         path.join(__dirname, '../../.serverless/neptune-resolvers.zip'),

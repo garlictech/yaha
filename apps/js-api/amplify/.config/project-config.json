@@ -8,10 +8,10 @@
   "javascript": {
     "framework": "none",
     "config": {
-      "SourceDir": "src",
-      "DistributionDir": "dist",
-      "BuildCommand": "npm run-script build",
-      "StartCommand": "npm run-script start"
+      "SourceDir": "../../libs/gql-api/src/lib/generated",
+      "DistributionDir": "../../dist/apps/js-api",
+      "BuildCommand": "yarn nx build js-api",
+      "StartCommand": "yarn nx serve js-api"
     }
   }
 }

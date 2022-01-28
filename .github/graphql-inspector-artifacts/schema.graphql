@@ -93,18 +93,18 @@ type Poi {
 
 type Hike {
   id: ID!
-  description: [TextualDescription!]!
-  location: String!
-  publicationState: PublicationState!
+  description: [TextualDescription]
+  location: String
   featured: Boolean
   rate: String
   offlineMap: String
   featuredStops: [HikeStop]
   checkpoints: [Poi]
   tags: [String!]
-  route: RouteData!
-  startPoint: Point!
-  endPoint: Point!
+  route: RouteData
+  startPoint: Point
+  endPoint: Point
+  imageUrls: [String]
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
   _version: Int!
@@ -254,7 +254,7 @@ input PoiSourceObjectInput {
 }
 
 type ModelPoiConnection {
-  items: [Poi!]!
+  items: [Poi]!
   nextToken: String
   startedAt: AWSTimestamp
 }
@@ -357,24 +357,19 @@ input BoundingBoxInput {
 }
 
 type ModelHikeConnection {
-  items: [Hike!]!
+  items: [Hike]!
   nextToken: String
   startedAt: AWSTimestamp
-}
-
-input ModelPublicationStateInput {
-  eq: PublicationState
-  ne: PublicationState
 }
 
 input ModelHikeFilterInput {
   id: ModelIDInput
   location: ModelStringInput
-  publicationState: ModelPublicationStateInput
   featured: ModelBooleanInput
   rate: ModelStringInput
   offlineMap: ModelStringInput
   tags: ModelStringInput
+  imageUrls: ModelStringInput
   and: [ModelHikeFilterInput]
   or: [ModelHikeFilterInput]
   not: ModelHikeFilterInput
@@ -382,11 +377,11 @@ input ModelHikeFilterInput {
 
 input ModelHikeConditionInput {
   location: ModelStringInput
-  publicationState: ModelPublicationStateInput
   featured: ModelBooleanInput
   rate: ModelStringInput
   offlineMap: ModelStringInput
   tags: ModelStringInput
+  imageUrls: ModelStringInput
   and: [ModelHikeConditionInput]
   or: [ModelHikeConditionInput]
   not: ModelHikeConditionInput
@@ -394,25 +389,8 @@ input ModelHikeConditionInput {
 
 input CreateHikeInput {
   id: ID
-  description: [TextualDescriptionInput!]!
-  location: String!
-  publicationState: PublicationState!
-  featured: Boolean
-  rate: String
-  offlineMap: String
-  featuredStops: [HikeStopInput]
-  tags: [String!]
-  route: RouteDataInput!
-  startPoint: PointInput!
-  endPoint: PointInput!
-  _version: Int
-}
-
-input UpdateHikeInput {
-  id: ID!
-  description: [TextualDescriptionInput!]
+  description: [TextualDescriptionInput]
   location: String
-  publicationState: PublicationState
   featured: Boolean
   rate: String
   offlineMap: String
@@ -421,6 +399,23 @@ input UpdateHikeInput {
   route: RouteDataInput
   startPoint: PointInput
   endPoint: PointInput
+  imageUrls: [String]
+  _version: Int
+}
+
+input UpdateHikeInput {
+  id: ID!
+  description: [TextualDescriptionInput]
+  location: String
+  featured: Boolean
+  rate: String
+  offlineMap: String
+  featuredStops: [HikeStopInput]
+  tags: [String!]
+  route: RouteDataInput
+  startPoint: PointInput
+  endPoint: PointInput
+  imageUrls: [String]
   _version: Int
 }
 

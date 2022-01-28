@@ -16,9 +16,9 @@ APINAME=$(aws amplify get-app --app-id $APPID | jq -r ".app.name")
 METAFILE=amplify/backend/amplify-meta.json
 API_ID=$(jq -r ".api.$APINAME.output.GraphQLAPIIdOutput" $METAFILE)
 
-AMPLIFY_CONFIG_FILE=../../libs/gql-api/src/lib/generated/amplify-api-config.ts
-
 printf "Generating ${AMPLIFY_CONFIG_FILE}...\n"
+AMPLIFY_CONFIG_FILE=../../libs/gql-api/src/lib/generated/amplify-api-config.ts
+mkdir -p $(dirname ${AMPLIFY_CONFIG_FILE})
 
 echo "
 export const AmplifyApiConfig = {

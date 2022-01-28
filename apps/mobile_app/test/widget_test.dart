@@ -9,8 +9,6 @@ import 'package:yaha/bottom-nav-bar.dart';
 import 'package:yaha/hike/hike-screen/most-interesting-place-on-route/places-on-route-screen.dart';
 import 'package:yaha/hike/views/screens/more-poi-screen.dart';
 import 'package:yaha/hike/views/screens/weather-screen.dart';
-import 'package:yaha/home/views/screens/best-hikes-near-you-screen.dart';
-import 'package:yaha/home/views/screens/best-hikes-of-the-world-screen.dart';
 import 'package:yaha/profile/bookmarked-hikes.dart';
 import 'package:yaha/profile/challenges/views/screens/all-challenges.dart';
 import 'package:yaha/profile/challenges/views/screens/challenge-detail-screen.dart';
@@ -23,8 +21,6 @@ import 'package:yaha/filter/filter-page.dart';
 import 'package:yaha/gallery.dart';
 import 'package:yaha/hike/hike-screen/hike-screen.dart';
 import 'package:yaha/hike/hike-outline/hike-outline-screen.dart';
-import 'package:yaha/home/views/screens/guest-home-screen.dart';
-
 import 'package:yaha/main.dart';
 import 'package:yaha/hike/views/screens/poi-screen.dart';
 import 'package:yaha/previous-activities-page.dart';
@@ -134,11 +130,6 @@ void main() {
   });
   testWidgets('Bottom nav bar smoke test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: new BottomNavBar()));
-
-    await tester.pumpAndSettle();
-  });
-  testWidgets('Guest Home Screen smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new HomePageGuest()));
 
     await tester.pumpAndSettle();
   });
@@ -280,20 +271,6 @@ void main() {
       (WidgetTester tester) async {
     await tester
         .pumpWidget(createWidgetForTesting(child: new ChallengeDetailScreen()));
-
-    await tester.pumpAndSettle();
-  });
-  testWidgets('Best Hike Near You Screen smoke test',
-      (WidgetTester tester) async {
-    await tester
-        .pumpWidget(createWidgetForTesting(child: new BestHikesNearYou()));
-
-    await tester.pumpAndSettle();
-  });
-  testWidgets('Best Hike of The World Screen smoke test',
-      (WidgetTester tester) async {
-    await tester
-        .pumpWidget(createWidgetForTesting(child: new BestHikesOfTheWorld()));
 
     await tester.pumpAndSettle();
   });

@@ -41,9 +41,18 @@
             ],
             "Description": "Enable server side encryption powered by KMS."
         },
+        "AuthCognitoUserPoolId": {
+            "Type": "String"
+        },
         "AppSyncApiName": {
             "Type": "String",
             "Default": "AppSyncSimpleTransform"
+        },
+        "authRoleName": {
+            "Type": "String"
+        },
+        "unauthRoleName": {
+            "Type": "String"
         },
         "S3DeploymentBucket": {
             "Type": "String",
@@ -72,7 +81,23 @@
                             }
                         ]
                     ]
-                }
+                },
+                "AdditionalAuthenticationProviders": [
+                    {
+                        "AuthenticationType": "AMAZON_COGNITO_USER_POOLS",
+                        "UserPoolConfig": {
+                            "AwsRegion": {
+                                "Ref": "AWS::Region"
+                            },
+                            "UserPoolId": {
+                                "Ref": "AuthCognitoUserPoolId"
+                            }
+                        }
+                    },
+                    {
+                        "AuthenticationType": "AWS_IAM"
+                    }
+                ]
             }
         },
         "GraphQLAPITransformerSchema3CB2AE18": {
@@ -112,7 +137,7 @@
                     ]
                 },
                 "Description": "default",
-                "Expires": 1674846678
+                "Expires": 1675024356
             }
         },
         "GraphQLAPINONEDS95A13CF0": {
@@ -361,6 +386,12 @@
                     },
                     "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref": {
                         "Ref": "S3DeploymentRootKey"
+                    },
+                    "referencetotransformerrootstackauthRoleNameFB872D50Ref": {
+                        "Ref": "authRoleName"
+                    },
+                    "referencetotransformerrootstackunauthRoleName49F3C1FERef": {
+                        "Ref": "unauthRoleName"
                     }
                 }
             },
@@ -431,6 +462,12 @@
                     },
                     "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref": {
                         "Ref": "S3DeploymentRootKey"
+                    },
+                    "referencetotransformerrootstackauthRoleNameFB872D50Ref": {
+                        "Ref": "authRoleName"
+                    },
+                    "referencetotransformerrootstackunauthRoleName49F3C1FERef": {
+                        "Ref": "unauthRoleName"
                     }
                 }
             },

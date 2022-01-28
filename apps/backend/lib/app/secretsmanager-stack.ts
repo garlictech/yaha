@@ -1,7 +1,5 @@
-import * as sm from '@aws-cdk/aws-secretsmanager';
-import { CfnOutput } from '@aws-cdk/core';
+import { aws_secretsmanager as sm, CfnOutput } from 'aws-cdk-lib';
 import * as sst from '@serverless-stack/resources';
-import { App } from '@serverless-stack/resources';
 
 const secretsManagerArns: Record<string, string> = {
   dev: 'arn:aws:secretsmanager:us-east-1:697486207432:secret:yaha-dev-secrets-VBIyIl',
@@ -25,7 +23,7 @@ export class SecretsManagerStack extends sst.Stack {
 
   constructor(scope: sst.App, id: string, props?: sst.StackProps) {
     super(scope, id, props);
-    const app = this.node.root as App;
+    const app = this.node.root as sst.App;
 
     const secretsManagerArn =
       secretsManagerArns[scope.stage] || secretsManagerArns.dev;

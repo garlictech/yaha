@@ -1,8 +1,12 @@
-import * as lambda from '@aws-cdk/aws-lambda';
-import * as cognito from '@aws-cdk/aws-cognito';
-import * as iam from '@aws-cdk/aws-iam';
-import * as ssm from '@aws-cdk/aws-ssm';
-import { CfnOutput, Duration, RemovalPolicy } from '@aws-cdk/core';
+import {
+  aws_lambda as lambda,
+  aws_cognito as cognito,
+  aws_iam as iam,
+  aws_ssm as ssm,
+  CfnOutput,
+  Duration,
+  RemovalPolicy,
+} from 'aws-cdk-lib';
 import { App, Stack, StackProps } from '@serverless-stack/resources';
 import path from 'path';
 import { commonLambdaProps } from './lambda-common';

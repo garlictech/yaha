@@ -16,3 +16,4 @@ echo '=============================='
 amplify api gql-compile --allow-destructive-graphql-schema-updates
 amplify codegen models
 
+

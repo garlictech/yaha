@@ -50,6 +50,7 @@ ios/build
 
 # Generated files
 lib/awsconfiguration.dart
+lib/models
 
 #amplify-do-not-edit-begin
 amplify/\#current-cloud-backend
@@ -58,6 +59,7 @@ amplify/logs
 amplify/mock-data
 amplify/backend/amplify-meta.json
 amplify/backend/.temp
+build/
 dist/
 node_modules/
 aws-exports.js

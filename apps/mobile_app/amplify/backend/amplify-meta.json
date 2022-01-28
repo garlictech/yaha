@@ -1,15 +1,15 @@
 {
   "providers": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-yaha-dev-124845-authRole",
-      "UnauthRoleArn": "arn:aws:iam::697486207432:role/amplify-yaha-dev-124845-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::697486207432:role/amplify-yaha-dev-124845-authRole",
+      "AuthRoleName": "amplify-yaha-dev-150028-authRole",
+      "UnauthRoleArn": "arn:aws:iam::697486207432:role/amplify-yaha-dev-150028-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::697486207432:role/amplify-yaha-dev-150028-authRole",
       "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-yaha-dev-124845-deployment",
-      "UnauthRoleName": "amplify-yaha-dev-124845-unauthRole",
-      "StackName": "amplify-yaha-dev-124845",
-      "StackId": "arn:aws:cloudformation:us-east-1:697486207432:stack/amplify-yaha-dev-124845/f499b250-670a-11ec-8a9a-0e1372cb25ad",
-      "AmplifyAppId": "d3vprtdvusay3i"
+      "DeploymentBucketName": "amplify-yaha-dev-150028-deployment",
+      "UnauthRoleName": "amplify-yaha-dev-150028-unauthRole",
+      "StackName": "amplify-yaha-dev-150028",
+      "StackId": "arn:aws:cloudformation:us-east-1:697486207432:stack/amplify-yaha-dev-150028/a7f2d930-8042-11ec-96b6-0a35adaa438f",
+      "AmplifyAppId": "dbes8md0k8pgd"
     }
   },
   "api": {
@@ -22,25 +22,35 @@
             "authenticationType": "API_KEY",
             "apiKeyConfig": {
               "apiKeyExpirationDays": 365,
-              "apiKeyExpirationDate": "2022-12-27T12:25:16.189Z",
+              "apiKeyExpirationDate": "2023-01-29T15:45:42.418Z",
               "description": "default"
             }
           },
-          "additionalAuthenticationProviders": []
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+              "userPoolConfig": {
+                "userPoolId": "authyaha381acd8e"
+              }
+            },
+            {
+              "authenticationType": "AWS_IAM"
+            }
+          ]
         },
-        "GraphQLAPIIdOutput": "nmvq6n5fzrcwncmdhc6s4fj2qi",
-        "GraphQLAPIEndpointOutput": "https://w74q2txbubh63jngmpvyoxcx34.appsync-api.us-east-1.amazonaws.com/graphql",
-        "GraphQLAPIKeyOutput": "da2-pa5q5y3zqfazxjgd2ilelrauza"
+        "GraphQLAPIIdOutput": "gmpu264ek5gmtff2ugcwokhjyy",
+        "GraphQLAPIEndpointOutput": "https://ifo3ikr4ibh5rovyxgetxu7pz4.appsync-api.us-east-1.amazonaws.com/graphql",
+        "GraphQLAPIKeyOutput": "da2-cqadjdag7nf45eb5areymobzty"
       },
-      "lastPushTimeStamp": "2022-01-26T17:58:06.484Z",
+      "lastPushTimeStamp": "2022-01-29T20:32:32.627Z",
       "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-yaha-dev-124845-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-yaha-dev-150028-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apiyaha"
       }
     }
   },
   "auth": {
-    "yaha9a7360aa": {
+    "yaha381acd8e": {
       "service": "Cognito",
       "serviceType": "imported",
       "providerPlugin": "awscloudformation",
@@ -85,7 +95,7 @@
           "EMAIL"
         ]
       },
-      "lastPushTimeStamp": "2022-01-05T22:40:15.604Z"
+      "lastPushTimeStamp": "2022-01-29T15:50:27.288Z"
     }
   }
 }
