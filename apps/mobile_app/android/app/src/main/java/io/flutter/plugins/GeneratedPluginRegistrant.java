@@ -16,6 +16,11 @@ public final class GeneratedPluginRegistrant {
   private static final String TAG = "GeneratedPluginRegistrant";
   public static void registerWith(@NonNull FlutterEngine flutterEngine) {
     try {
+      flutterEngine.getPlugins().add(new com.amazonaws.amplify.amplify_api.AmplifyApiPlugin());
+    } catch(Exception e) {
+      Log.e(TAG, "Error registering plugin amplify_api, com.amazonaws.amplify.amplify_api.AmplifyApiPlugin", e);
+    }
+    try {
       flutterEngine.getPlugins().add(new com.amazonaws.amplify.amplify_core.AmplifyCorePlugin());
     } catch(Exception e) {
       Log.e(TAG, "Error registering plugin amplify_core, com.amazonaws.amplify.amplify_core.AmplifyCorePlugin", e);

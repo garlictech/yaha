@@ -22,6 +22,8 @@ import 'package:yaha/views/hikes/widgets/horizontal-hike-cards.dart';
 import 'package:yaha/views/home/views/widgets/explore-hike-box.dart';
 
 class HomePageGuest extends ConsumerWidget {
+  const HomePageGuest({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     AsyncValue userState = watch(userStateProvider);
@@ -31,14 +33,14 @@ class HomePageGuest extends ConsumerWidget {
 
     return Scaffold(
       body: CustomScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         slivers: <Widget>[
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
                 return SafeArea(
                   child: Container(
-                    padding: EdgeInsets.only(
+                    padding: const EdgeInsets.only(
                       left: YahaSpaceSizes.general,
                       right: YahaSpaceSizes.general,
                       top: YahaSpaceSizes.small,
@@ -52,7 +54,7 @@ class HomePageGuest extends ConsumerWidget {
                               alignment: Alignment.centerLeft,
                               child: Row(
                                 children: [
-                                  Container(
+                                  SizedBox(
                                       height: 64,
                                       width: 64,
                                       child: ClipRRect(
@@ -67,22 +69,22 @@ class HomePageGuest extends ConsumerWidget {
                                                 loading: () =>
                                                     const CircularProgressIndicator(),
                                                 error: (err, stack) =>
-                                                    Text('😱'),
+                                                    const Text('😱'),
                                                 data: (state) => Image.asset(
                                                       state.avatarImage,
                                                       fit: BoxFit.cover,
                                                     ))),
                                       )),
                                   Container(
-                                      padding: EdgeInsets.only(
+                                      padding: const EdgeInsets.only(
                                           left: YahaSpaceSizes.medium),
                                       child: userState.when(
                                         loading: () =>
                                             const CircularProgressIndicator(),
-                                        error: (err, stack) => Text('😱'),
+                                        error: (err, stack) => const Text('😱'),
                                         data: (state) => Text(
                                           'Hi ${state.nick}!',
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontSize: YahaFontSizes.medium,
                                               fontWeight: FontWeight.w600,
                                               color: YahaColors.textColor),
@@ -91,7 +93,7 @@ class HomePageGuest extends ConsumerWidget {
                                   ...(authState.loggedIn
                                       ? [
                                           TextButton(
-                                            child: Text("Logout"),
+                                            child: const Text("Logout"),
                                             onPressed: () =>
                                                 authStateNotifier.logout(),
                                           )
@@ -105,19 +107,20 @@ class HomePageGuest extends ConsumerWidget {
                               child: IconButton(
                                 iconSize: YahaFontSizes.xxLarge,
                                 color: YahaColors.textColor,
-                                icon: Icon(Icons.notifications_outlined),
+                                icon: const Icon(Icons.notifications_outlined),
                                 onPressed: () {},
                               ),
                             ),
                           ],
                         ),
                         Container(
-                          padding: EdgeInsets.only(top: YahaSpaceSizes.general),
+                          padding: const EdgeInsets.only(
+                              top: YahaSpaceSizes.general),
                           child: Column(
                             children: [
                               Container(
                                 alignment: Alignment.centerLeft,
-                                child: Text(
+                                child: const Text(
                                   'Statistics',
                                   style: TextStyle(
                                       fontSize: YahaFontSizes.medium,
@@ -126,11 +129,11 @@ class HomePageGuest extends ConsumerWidget {
                                 ),
                               ),
                               Container(
-                                padding:
-                                    EdgeInsets.only(top: YahaSpaceSizes.medium),
+                                padding: const EdgeInsets.only(
+                                    top: YahaSpaceSizes.medium),
                                 height: YahaBoxSizes.heigthXSmall,
                                 width: MediaQuery.of(context).size.width,
-                                child: Statistics(
+                                child: const Statistics(
                                   hikes: 0,
                                   km: 0,
                                   hours: 0,
@@ -143,14 +146,15 @@ class HomePageGuest extends ConsumerWidget {
                           ),
                         ),
                         Container(
-                          padding: EdgeInsets.only(top: YahaSpaceSizes.small),
+                          padding:
+                              const EdgeInsets.only(top: YahaSpaceSizes.small),
                           child: Column(
                             children: [
                               Container(
-                                padding: EdgeInsets.only(
+                                padding: const EdgeInsets.only(
                                     bottom: YahaSpaceSizes.medium),
                                 alignment: Alignment.centerLeft,
-                                child: Text(
+                                child: const Text(
                                   'Previous activities',
                                   style: TextStyle(
                                       fontSize: YahaFontSizes.medium,
@@ -168,14 +172,15 @@ class HomePageGuest extends ConsumerWidget {
                           ),
                         ),
                         Container(
-                          padding: EdgeInsets.only(top: YahaSpaceSizes.large),
+                          padding:
+                              const EdgeInsets.only(top: YahaSpaceSizes.large),
                           child: Column(
                             children: [
                               Container(
-                                padding: EdgeInsets.only(
+                                padding: const EdgeInsets.only(
                                     bottom: YahaSpaceSizes.medium),
                                 alignment: Alignment.centerLeft,
-                                child: Text(
+                                child: const Text(
                                   'Continue hiking',
                                   style: TextStyle(
                                       fontSize: YahaFontSizes.medium,
@@ -193,14 +198,15 @@ class HomePageGuest extends ConsumerWidget {
                           ),
                         ),
                         Container(
-                          padding: EdgeInsets.only(top: YahaSpaceSizes.large),
+                          padding:
+                              const EdgeInsets.only(top: YahaSpaceSizes.large),
                           child: Column(
                             children: [
                               Container(
-                                padding: EdgeInsets.only(
+                                padding: const EdgeInsets.only(
                                     bottom: YahaSpaceSizes.medium),
                                 alignment: Alignment.centerLeft,
-                                child: Text(
+                                child: const Text(
                                   'Current challenges',
                                   style: TextStyle(
                                       fontSize: YahaFontSizes.medium,
@@ -208,13 +214,13 @@ class HomePageGuest extends ConsumerWidget {
                                       color: YahaColors.textColor),
                                 ),
                               ),
-                              Container(
+                              SizedBox(
                                 height: YahaBoxSizes.heightGeneral,
                                 child: ListView(
                                   scrollDirection: Axis.horizontal,
                                   children: [
                                     Container(
-                                      padding: EdgeInsets.only(
+                                      padding: const EdgeInsets.only(
                                           right: YahaSpaceSizes.general),
                                       child: ChallengeBox(
                                         title: 'Complete a hike at night',
@@ -223,7 +229,7 @@ class HomePageGuest extends ConsumerWidget {
                                       ),
                                     ),
                                     Container(
-                                      padding: EdgeInsets.only(
+                                      padding: const EdgeInsets.only(
                                           right: YahaSpaceSizes.general),
                                       child: ChallengeBox(
                                         title: 'Take 10 pictures during a hike',
@@ -239,19 +245,20 @@ class HomePageGuest extends ConsumerWidget {
                                   ],
                                 ),
                               ),
-                              ShowMoreButton(nextScreen: Challenges()),
+                              const ShowMoreButton(nextScreen: Challenges()),
                             ],
                           ),
                         ),
                         Container(
-                          padding: EdgeInsets.only(top: YahaSpaceSizes.small),
+                          padding:
+                              const EdgeInsets.only(top: YahaSpaceSizes.small),
                           child: Column(
                             children: [
                               Container(
-                                padding: EdgeInsets.only(
+                                padding: const EdgeInsets.only(
                                     bottom: YahaSpaceSizes.medium),
                                 alignment: Alignment.centerLeft,
-                                child: Text(
+                                child: const Text(
                                   'Events starting next month',
                                   style: TextStyle(
                                       fontSize: YahaFontSizes.medium,
@@ -259,13 +266,13 @@ class HomePageGuest extends ConsumerWidget {
                                       color: YahaColors.textColor),
                                 ),
                               ),
-                              Container(
+                              SizedBox(
                                 height: YahaBoxSizes.heightGeneral,
                                 child: ListView(
                                   scrollDirection: Axis.horizontal,
                                   children: [
                                     Container(
-                                      padding: EdgeInsets.only(
+                                      padding: const EdgeInsets.only(
                                           right: YahaSpaceSizes.general),
                                       child: EventBox(
                                           background:
@@ -275,7 +282,7 @@ class HomePageGuest extends ConsumerWidget {
                                           nextScreen: EventDetailScreen()),
                                     ),
                                     Container(
-                                      padding: EdgeInsets.only(
+                                      padding: const EdgeInsets.only(
                                           right: YahaSpaceSizes.general),
                                       child: EventBox(
                                           background:
@@ -293,17 +300,19 @@ class HomePageGuest extends ConsumerWidget {
                                   ],
                                 ),
                               ),
-                              ShowMoreButton(nextScreen: Events()),
+                              const ShowMoreButton(nextScreen: Events()),
                             ],
                           ),
                         ),
                         Container(
-                            padding: EdgeInsets.only(top: YahaSpaceSizes.small),
+                            padding: const EdgeInsets.only(
+                                top: YahaSpaceSizes.small),
                             child: HorizontalHikeCards(
                                 title: 'Best hikes near you',
                                 hikes: viewModel.bestHikesNearby)),
                         Container(
-                            padding: EdgeInsets.only(top: YahaSpaceSizes.small),
+                            padding: const EdgeInsets.only(
+                                top: YahaSpaceSizes.small),
                             child: HorizontalHikeCards(
                                 title: 'Best hikes of the world',
                                 hikes: viewModel.bestHikesOfTheWorld))
@@ -322,7 +331,7 @@ class HomePageGuest extends ConsumerWidget {
 
   showAlertDialog(BuildContext context, authStateNotifier) {
     Widget continueButton = TextButton(
-      child: Text("OK, I'm logged in"),
+      child: const Text("OK, I'm logged in"),
       onPressed: () {
         Navigator.of(context).pop();
         authStateNotifier.loggedIn();
@@ -330,9 +339,9 @@ class HomePageGuest extends ConsumerWidget {
     );
 
     AlertDialog alert = AlertDialog(
-      title: Text("Login effect simulator"),
-      content:
-          Text("Ok, the login window was up, you logged in successfully.."),
+      title: const Text("Login effect simulator"),
+      content: const Text(
+          "Ok, the login window was up, you logged in successfully.."),
       actions: [
         continueButton,
       ],
