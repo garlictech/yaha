@@ -8,12 +8,7 @@
             "Outputs.UserPoolId"
         ]
     },
-    "authRoleName": {
-        "Ref": "AuthRoleName"
-    },
-    "unauthRoleName": {
-        "Ref": "UnauthRoleName"
-    },
+    "AuthModeLastUpdated": "2022-01-29T15:45:51.588Z",
     "S3DeploymentBucket": "amplify-yaha-dev-150028-deployment",
     "S3DeploymentRootKey": "amplify-appsync-files/1383249668eb4a5ebcb1d19c69109972cc7f0471"
 }
