@@ -1,0 +1,17 @@
+{
+  "providers": [
+    "awscloudformation"
+  ],
+  "projectName": "yaha",
+  "version": "3.1",
+  "frontend": "javascript",
+  "javascript": {
+    "framework": "none",
+    "config": {
+      "SourceDir": "../../libs/gql-api/src/lib/generated",
+      "DistributionDir": "../../dist/apps/js-api",
+      "BuildCommand": "yarn nx build js-api",
+      "StartCommand": "yarn nx serve js-api"
+    }
+  }
+}
