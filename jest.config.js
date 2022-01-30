@@ -10,6 +10,8 @@ module.exports = {
     '<rootDir>/apps/js-api',
     '<rootDir>/apps/common-backend',
     '<rootDir>/libs/backend/shared/utils',
+    '<rootDir>/libs/backend/hike-search/services',
+    '<rootDir>/libs/integration-tests/backend',
   ],
   modulePaths: ['<rootDir>'],
 };
