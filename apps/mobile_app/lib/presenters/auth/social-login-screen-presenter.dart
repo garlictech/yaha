@@ -26,7 +26,7 @@ class SocialLoginScreenPresenter
         final oAuth2State = ref.read(oAuth2StateProvider);
 
         if (oAuth2State.loggedIn) {
-          print("LOGGED IN");
+          debugPrint("LOGGED IN");
           Navigator.pop(context);
         }
 

@@ -11,15 +11,17 @@ class HorizontalHikeCards extends StatelessWidget {
   final String title;
   final List<Hike> hikes;
 
-  HorizontalHikeCards({required this.title, required this.hikes});
+  const HorizontalHikeCards(
+      {required this.title, required this.hikes, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(children: [
       Container(
-        padding: EdgeInsets.only(bottom: YahaSpaceSizes.medium),
+        padding: const EdgeInsets.only(bottom: YahaSpaceSizes.medium),
         alignment: Alignment.centerLeft,
-        child: Text(
+        child: const Text(
           'Best hikes of the world',
           style: TextStyle(
               fontSize: YahaFontSizes.medium,
@@ -33,7 +35,8 @@ class HorizontalHikeCards extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               children: hikes
                   .map((hike) => Container(
-                        padding: EdgeInsets.only(right: YahaSpaceSizes.general),
+                        padding: const EdgeInsets.only(
+                            right: YahaSpaceSizes.general),
                         width: YahaBoxSizes.widthMedium,
                         child: HikeCard(
                           title: hike.description?.first.title ?? '',

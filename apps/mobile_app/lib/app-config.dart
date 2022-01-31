@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'awsconfiguration.dart';
+import 'amplifyconfiguration.dart';
 
 class AppConfig {
   static String get region => _config['Region'];

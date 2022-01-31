@@ -67,6 +67,31 @@
       },
       "tags": ["layer:app", "platform:nodejs"]
     },
+    "backend-hike-search-repositories": {
+      "root": "libs/backend/hike-search/repositories",
+      "sourceRoot": "libs/backend/hike-search/repositories/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": [
+              "libs/backend/hike-search/repositories/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/backend/hike-search/repositories"],
+          "options": {
+            "jestConfig": "libs/backend/hike-search/repositories/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["platform:nodejs", "layer:repository"]
+    },
     "backend-hike-search-services": {
       "root": "libs/backend/hike-search/services",
       "sourceRoot": "libs/backend/hike-search/services/src",
@@ -88,7 +113,30 @@
           }
         }
       },
-      "tags": []
+      "tags": ["platform:nodejs", "layer:service"]
+    },
+    "backend-hike-search-utils": {
+      "root": "libs/backend/hike-search/utils",
+      "sourceRoot": "libs/backend/hike-search/utils/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/backend/hike-search/utils/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/backend/hike-search/utils"],
+          "options": {
+            "jestConfig": "libs/backend/hike-search/utils/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["platform:nodejs", "layer:utils"]
     },
     "backend-shared-utils": {
       "root": "libs/backend/shared/utils",

@@ -2,6 +2,7 @@
 // EXECUTE: yarn ts-node --project ./tools/tsconfig.tools.json -r tsconfig-paths/register ./tools/fetch-turistautak.ts
 //
 /* eslint no-console: "off" */
+import axios from 'axios';
 import * as NEA from 'fp-ts/lib/NonEmptyArray';
 import { sequenceS } from 'fp-ts/lib/Apply';
 import * as O from 'fp-ts/lib/Option';
@@ -11,30 +12,34 @@ import '@aws-amplify/datastore';
 import { DataStore, Amplify } from 'aws-amplify';
 import {
   awsConfig,
+  Hike,
   Poi,
   PoiSource,
+  PublicationState,
+  TextualDescription,
   TextualDescriptionType,
 } from '../libs/gql-api/src';
+import { defer, forkJoin, from, of, throwError } from 'rxjs';
+import {
+  catchError,
+  concatMap,
+  delay,
+  filter,
+  map,
+  switchMap,
+  tap,
+  toArray,
+} from 'rxjs/operators';
+import { DOMParser } from 'xmldom';
+import { XMLParser } from 'fast-xml-parser';
+const togeojson = require('@mapbox/togeojson');
+import lineChunk from '@turf/line-chunk';
+import * as fp from 'lodash/fp';
+import { pipe } from 'fp-ts/lib/function';
 
 Amplify.configure(awsConfig);
-
-(async function execute() {
-  await DataStore.save(
-    new Poi({
-      location: { lat: 0, lon: 0 },
-      description: [
-        {
-          languageKey: 'en_US',
-          type: TextualDescriptionType.MARKDOWN,
-          title: 'POI title',
-        },
-      ],
-      sourceObject: [
-        { objectType: PoiSource.OSM_AMENITY, objectId: 'OBJECTID' },
-      ],
-    }),
-  );
-})();
+const xmlParser = new XMLParser();
+const domParser = new DOMParser();
 
 /*import {
   GraphqlClientService,
@@ -42,9 +47,7 @@ Amplify.configure(awsConfig);
 } from '../../lib/nestjs/shared/graphql';
 import { NestFactory } from '@nestjs/core';
 */
-/*import * as togeojson from '@mapbox/togeojson';
-import lineChunk from '@turf/line-chunk';
-import * as fp from 'lodash/fp';
+/*
 import * as rp from 'request-promise';
 import { forkJoin, from, of, throwError, Observable } from 'rxjs';
 import {
@@ -58,8 +61,6 @@ import {
   shareReplay,
   delay,
 } from 'rxjs/operators';
-import * as xmlParse from 'fast-xml-parser';
-import * as DOMParser from 'xmldom';
 import {
   CreateHike,
   HikeData,
@@ -81,13 +82,12 @@ import { Position, Feature, Polygon } from '@turf/helpers';
 import { GtrackDefaults } from '@bit/garlictech.universal.gtrack.defaults/defaults';
 import { foldObservableEither } from '@bit/garlictech.universal.shared.fp';
 import { getCityFromGoogle } from '@bit/garlictech.nodejs.shared.reverse-geocoding';
-
+*/
 const hikeIds = [
-  //113261124,
+  113261124,
   //118158194,
-
-  20239810,
-  22601701,
+  //20239810,
+  //22601701,
   //22605620,
   //22668771,
   //22680751,
@@ -324,7 +324,7 @@ const hikeIds = [
 ];
 
 const segmentDistance = 2; // km
-
+/*
 const getGraphqlClient = from(
   NestFactory.createApplicationContext(GraphqlModule)
 )
@@ -385,23 +385,23 @@ const getEnvironment = (segments: Position[][]): Observable<Environment> =>
       routeData,
     }))
   );
-
+*/
 const fetchRoute = (routeId: number) => {
   console.log(`Processing route id ${routeId}`);
-  return from(
-    rp.get(
-      encodeURI(
-        `https://regio.outdooractive.com/download.tour.gpx?i=${routeId}&project=oar-hungary&lang=hu`
-      )
-    )
+  return defer(() =>
+    from(
+      axios.get(
+        encodeURI(
+          `https://regio.outdooractive.com/download.tour.gpx?i=${routeId}&project=oar-hungary&lang=hu`,
+        ),
+      ),
+    ),
   ).pipe(
+    map(response => response.data),
     map((gpxFile: string) => {
       try {
-        const _doc = new DOMParser.DOMParser().parseFromString(
-          gpxFile,
-          'application/xml'
-        );
-        const descriptionContent = xmlParse.parse(gpxFile);
+        const _doc = domParser.parseFromString(gpxFile, 'application/xml');
+        const descriptionContent = xmlParser.parse(gpxFile);
         const geojson = togeojson.gpx(_doc);
         const chunks = lineChunk(geojson, segmentDistance, {
           units: 'kilometers',
@@ -441,24 +441,24 @@ const fetchRoute = (routeId: number) => {
             type: 'html',
           } as TextualDescription,
         ],
-        publicationState: PublicationState.published,
+        publicationState: PublicationState.PUBLISHED,
       },
       segments,
     })),
-    tap(() => console.log('Processing segments...')),
+    /*tap(() => console.log('Processing segments...')),
     switchMap(
       ({
         hikeData,
         segments,
       }: {
-        hikeData: Partial<HikeData>;
+        hikeData: Partial<Hike>;
         segments: Position[][];
       }) =>
         processSegments(segments).pipe(
           tap(() => console.log('A segment is processed')),
           toArray(),
           tap((results: any[]) =>
-            console.log(`Processed ${results.length} segments`)
+            console.log(`Processed ${results.length} segments`),
           ),
           delay(10000),
           switchMap(() => getEnvironment(segments)),
@@ -493,34 +493,33 @@ const fetchRoute = (routeId: number) => {
                       location,
                       segments: waypoints,
                       route: routeData,
-                    })
-                  )
+                    }),
+                  ),
                 ),
                 switchMap(newHike =>
                   graphqlClient.backendClient.mutate(CreateHike, {
                     input: newHike,
-                  })
+                  }),
                 ),
-                tap(hike => console.log(`Hike created, id: ${hike.id}`))
-              )
+                tap(hike => console.log(`Hike created, id: ${hike.id}`)),
+              ),
           ),
           catchError(() => {
             console.log('ERROR AT ROUTE ID ', routeId);
             return of({});
-          })
-        )
+          }),
+        ),
     ),
-    tap(() => console.log(`Hike upload result for route ${routeId} is OK`))
+    */
+    tap(() => console.log(`Hike upload result for route ${routeId} is OK`)),
   );
 };
-
 console.log('STARTING...');
 
 from(hikeIds)
-  .pipe(mergeMap(routeId => fetchRoute(routeId), 1))
+  .pipe(concatMap(routeId => fetchRoute(routeId)))
   .subscribe(
     x => console.log(`FINISHED WITH RESULT ${JSON.stringify(x, null, 2)}`),
     //() => console.log(`ROUTE HANDLING FINISHED`),
-    err => console.log(`Errored with result ${JSON.stringify(err, null, 2)}`)
+    err => console.log(`Errored with result ${JSON.stringify(err, null, 2)}`),
   );
-  */

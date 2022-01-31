@@ -3,9 +3,10 @@ FROM cirrusci/flutter:stable
 RUN flutter doctor
 
 COPY apps/mobile_app mobile_app
+COPY apps/cicd/docker/keys/* /root/.ssh/
 
-RUN cd mobile_app \
+RUN ssh-keyscan github.com >> /root/.ssh/known_hosts \
+  && cd mobile_app \
   && flutter pub get \
-  && flutter build apk \ 
   && cd .. \
   && rm -rf mobile_app
