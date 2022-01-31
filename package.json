@@ -65,7 +65,7 @@
     "codelyzer": "6.0.2",
     "constructs": "10.0.46",
     "cowsay": "1.5.0",
-    "cypress": "9.2.0",
+    "cypress": "9.4.1",
     "pretty-quick": "3.1.3",
     "serverless": "2.70.0",
     "serverless-bundle": "4.4.0",
