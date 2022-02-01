@@ -1,6 +1,8 @@
 // This is a basic Flutter widget test.  To perform an interaction with a widget in your test, use the WidgetTester utility that Flutter provides. For example, you can send tap and scroll gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
+// ignore_for_file: unnecessary_const
+
 import 'package:network_image_mock/network_image_mock.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -53,11 +55,12 @@ import 'package:yaha/views/track/widgets/tracking-rating-widget.dart';
 import 'package:yaha/views/track/widgets/tracking-timeline-customize-widget.dart';
 
 void main() {
+  /*
   testWidgets('Yaha main smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(ProviderScope(child: MyApp()));
+    await tester.pumpWidget(const ProviderScope(child: MyApp()));
     expect(true, true);
   });
-
+*/
   Widget createWidgetForTesting({Widget? child}) {
     return ProviderScope(
         child: MaterialApp(
@@ -66,34 +69,32 @@ void main() {
   }
 
   testWidgets('Hike Screen smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new HikeScreen()));
+    await tester.pumpWidget(createWidgetForTesting(child: HikeScreen()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Poi Screen smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new PoiScreen()));
+    await tester.pumpWidget(createWidgetForTesting(child: PoiScreen()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Profile Screen smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new ProfilePage()));
+    await tester.pumpWidget(createWidgetForTesting(child: ProfilePage()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Settings Page smoke test', (WidgetTester tester) async {
-    await tester
-        .pumpWidget(createWidgetForTesting(child: new SettingsScreen()));
+    await tester.pumpWidget(createWidgetForTesting(child: SettingsScreen()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Application Screen smoke test', (WidgetTester tester) async {
-    await tester
-        .pumpWidget(createWidgetForTesting(child: new ApplicationScreen()));
+    await tester.pumpWidget(createWidgetForTesting(child: ApplicationScreen()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Sign Up Page smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new SignupScreen()));
+    await tester.pumpWidget(createWidgetForTesting(child: SignupScreen()));
     await tester.pumpAndSettle();
   });
   /*testWidgets('Sign Up With Email Screen smoke test',
@@ -107,57 +108,56 @@ void main() {
 */
 
   testWidgets('Log In Page smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(ProviderScope(child: MyApp()));
-    await tester.pumpWidget(createWidgetForTesting(child: new LogInScreen()));
+    await tester.pumpWidget(const ProviderScope(child: const MyApp()));
+    await tester.pumpWidget(createWidgetForTesting(child: LogInScreen()));
     await tester.pumpAndSettle();
   });
   testWidgets('Event Detail Screen smoke test', (WidgetTester tester) async {
-    await tester
-        .pumpWidget(createWidgetForTesting(child: new EventDetailScreen()));
+    await tester.pumpWidget(createWidgetForTesting(child: EventDetailScreen()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Track Screen smoke test', (WidgetTester tester) async {
     await tester
-        .pumpWidget(createWidgetForTesting(child: new TrackingScreen()));
+        .pumpWidget(createWidgetForTesting(child: const TrackingScreen()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Gallery widget smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new Gallery()));
+    await tester.pumpWidget(createWidgetForTesting(child: const Gallery()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Bottom nav bar smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new BottomNavBar()));
+    await tester
+        .pumpWidget(createWidgetForTesting(child: const BottomNavBar()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Filter Screen smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new FilterPage()));
+    await tester.pumpWidget(createWidgetForTesting(child: const FilterPage()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Explore Screen smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new ExplorePage()));
+    await tester.pumpWidget(createWidgetForTesting(child: ExplorePage()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Previous Activities Screen smoke test',
       (WidgetTester tester) async {
-    await tester.pumpWidget(
-        createWidgetForTesting(child: new PreviousActivitiesPage()));
+    await tester
+        .pumpWidget(createWidgetForTesting(child: PreviousActivitiesPage()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Hike Outline Screen smoke test', (WidgetTester tester) async {
-    await tester
-        .pumpWidget(createWidgetForTesting(child: new HikeOutlineScreen()));
+    await tester.pumpWidget(createWidgetForTesting(child: HikeOutlineScreen()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Login Screen smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new LogInScreen()));
+    await tester.pumpWidget(createWidgetForTesting(child: LogInScreen()));
 
     await tester.pumpAndSettle();
   });
@@ -170,8 +170,8 @@ void main() {
     await tester.pumpAndSettle();
   });*/
   testWidgets('Sign Up Screen smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(ProviderScope(child: MyApp()));
-    await tester.pumpWidget(createWidgetForTesting(child: new SignupScreen()));
+    await tester.pumpWidget(const ProviderScope(child: MyApp()));
+    await tester.pumpWidget(createWidgetForTesting(child: SignupScreen()));
 
     await tester.pumpAndSettle();
   });
@@ -186,147 +186,142 @@ void main() {
   });
   */
   testWidgets('Challenges Screen smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new Challenges()));
+    await tester.pumpWidget(createWidgetForTesting(child: const Challenges()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('All Challenges Screen smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new AllChallenges()));
+    await tester.pumpWidget(createWidgetForTesting(child: AllChallenges()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('My Challenges Screen smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new MyChallenges()));
+    await tester.pumpWidget(createWidgetForTesting(child: MyChallenges()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Events Screen smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new Events()));
+    await tester.pumpWidget(createWidgetForTesting(child: const Events()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('All Events Screen smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new AllEvents()));
+    await tester.pumpWidget(createWidgetForTesting(child: AllEvents()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Ongoing Events Screen smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new OngoingEvents()));
+    await tester.pumpWidget(createWidgetForTesting(child: OngoingEvents()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Statistics Screen smoke test', (WidgetTester tester) async {
-    await tester
-        .pumpWidget(createWidgetForTesting(child: new StatisticsScreen()));
+    await tester.pumpWidget(createWidgetForTesting(child: StatisticsScreen()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('TimeCapsules Screen smoke test', (WidgetTester tester) async {
     await tester
-        .pumpWidget(createWidgetForTesting(child: new TimeCapsulesScreen()));
+        .pumpWidget(createWidgetForTesting(child: const TimeCapsulesScreen()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Found TimeCapsules Screen smoke test',
       (WidgetTester tester) async {
-    await tester.pumpWidget(
-        createWidgetForTesting(child: new FoundTimeCapsulesScreen()));
+    await tester
+        .pumpWidget(createWidgetForTesting(child: FoundTimeCapsulesScreen()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('My TimeCapsules Screen smoke test', (WidgetTester tester) async {
     await tester
-        .pumpWidget(createWidgetForTesting(child: new MyTimeCapsulesScreen()));
+        .pumpWidget(createWidgetForTesting(child: MyTimeCapsulesScreen()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('TimeCapsule Info Screen smoke test',
       (WidgetTester tester) async {
     await tester
-        .pumpWidget(createWidgetForTesting(child: new TimeCapsuleInfoScreen()));
+        .pumpWidget(createWidgetForTesting(child: TimeCapsuleInfoScreen()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Bookmarked Hikes Screen smoke test',
       (WidgetTester tester) async {
-    await tester
-        .pumpWidget(createWidgetForTesting(child: new BookmarkedHikes()));
+    await tester.pumpWidget(createWidgetForTesting(child: BookmarkedHikes()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Most Interesting Places on Route Screen smoke test',
       (WidgetTester tester) async {
     await tester
-        .pumpWidget(createWidgetForTesting(child: new PlacesOnRouteScreen()));
+        .pumpWidget(createWidgetForTesting(child: PlacesOnRouteScreen()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Event Prize Screen smoke test', (WidgetTester tester) async {
-    await tester
-        .pumpWidget(createWidgetForTesting(child: new EventPrizeScreen()));
+    await tester.pumpWidget(createWidgetForTesting(child: EventPrizeScreen()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Challenge Detail Screen smoke test',
       (WidgetTester tester) async {
     await tester
-        .pumpWidget(createWidgetForTesting(child: new ChallengeDetailScreen()));
+        .pumpWidget(createWidgetForTesting(child: ChallengeDetailScreen()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Weather Screen smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new WeatherScreen()));
+    await tester.pumpWidget(createWidgetForTesting(child: WeatherScreen()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('More Poi Screen smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new MorePoiScreen()));
+    await tester.pumpWidget(createWidgetForTesting(child: MorePoiScreen()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Search Results Screen smoke test', (WidgetTester tester) async {
     await tester
-        .pumpWidget(createWidgetForTesting(child: new SearchResultsScreen()));
+        .pumpWidget(createWidgetForTesting(child: SearchResultsScreen()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Comments Screen smoke test', (WidgetTester tester) async {
     mockNetworkImagesFor(() async {
-      await tester
-          .pumpWidget(createWidgetForTesting(child: new CommmentsScreen()));
+      await tester.pumpWidget(createWidgetForTesting(child: CommmentsScreen()));
 
       await tester.pumpAndSettle();
     });
   });
   testWidgets('Leave a TimeCapsule Screen smoke test',
       (WidgetTester tester) async {
-    await tester.pumpWidget(
-        createWidgetForTesting(child: new LeaveATimeCapsuleScreen()));
+    await tester
+        .pumpWidget(createWidgetForTesting(child: LeaveATimeCapsuleScreen()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Tracking Screen smoke test', (WidgetTester tester) async {
     await tester
-        .pumpWidget(createWidgetForTesting(child: new TrackingScreen()));
+        .pumpWidget(createWidgetForTesting(child: const TrackingScreen()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Tracking Map Screen smoke test', (WidgetTester tester) async {
-    await tester
-        .pumpWidget(createWidgetForTesting(child: new TrackingMapScreen()));
+    await tester.pumpWidget(createWidgetForTesting(child: TrackingMapScreen()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Tracking Timeline Screen smoke test',
       (WidgetTester tester) async {
-    await tester.pumpWidget(
-        createWidgetForTesting(child: new TrackingTimelineScreen()));
+    await tester
+        .pumpWidget(createWidgetForTesting(child: TrackingTimelineScreen()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Tracking Data Screen smoke test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(
-        child: new TrackingDataScreen(
+        child: const TrackingDataScreen(
       durationHours: 2,
       durationMins: 1,
       calories: 59,
@@ -346,20 +341,20 @@ void main() {
   testWidgets('Tracking TimeCapsule Screen smoke test',
       (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(
-        child: new TrackingTimeCapsuleScreen(collectedTimeCapsules: 4)));
+        child: const TrackingTimeCapsuleScreen(collectedTimeCapsules: 4)));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Tracking Customize Timeline Widget smoke test',
       (WidgetTester tester) async {
     await tester.pumpWidget(
-        createWidgetForTesting(child: new TrackingTimelineCustomizeWidget()));
+        createWidgetForTesting(child: TrackingTimelineCustomizeWidget()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Tracking Rating Widget smoke test', (WidgetTester tester) async {
     await tester
-        .pumpWidget(createWidgetForTesting(child: new TrackingRatingWidget()));
+        .pumpWidget(createWidgetForTesting(child: TrackingRatingWidget()));
 
     await tester.pumpAndSettle();
   });
@@ -367,7 +362,7 @@ void main() {
       (WidgetTester tester) async {
     mockNetworkImagesFor(() async {
       await tester.pumpWidget(
-          createWidgetForTesting(child: new TimeCapsuleCommentsScreen()));
+          createWidgetForTesting(child: TimeCapsuleCommentsScreen()));
 
       await tester.pumpAndSettle();
     });
@@ -375,13 +370,13 @@ void main() {
   testWidgets('TimeCapsule in Track Mode smoke test',
       (WidgetTester tester) async {
     await tester.pumpWidget(
-        createWidgetForTesting(child: new TimeCapsuleInTrackModeScreen()));
+        createWidgetForTesting(child: TimeCapsuleInTrackModeScreen()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Summary Screen smoke test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(
-        child: new SummaryScreen(
+        child: const SummaryScreen(
       length: 12,
       averageSpeed: 5,
       uphill: 2,
@@ -398,7 +393,7 @@ void main() {
   testWidgets('TimeCapsule New Comments Screen smoke test',
       (WidgetTester tester) async {
     await tester.pumpWidget(
-        createWidgetForTesting(child: new TimeCapsuleNewCommentsScreen()));
+        createWidgetForTesting(child: const TimeCapsuleNewCommentsScreen()));
 
     await tester.pumpAndSettle();
   });
