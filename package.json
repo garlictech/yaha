@@ -63,7 +63,7 @@
     "builtin-modules": "3.2.0",
     "cli-progress": "3.10.0",
     "codelyzer": "6.0.2",
-    "constructs": "10.0.46",
+    "constructs": "10.0.52",
     "cowsay": "1.5.0",
     "cypress": "9.4.1",
     "pretty-quick": "3.1.3",
