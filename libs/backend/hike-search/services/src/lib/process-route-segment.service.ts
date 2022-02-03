@@ -1,13 +1,11 @@
-import { Position } from '@turf/helpers';
+/*import { Position } from '@turf/helpers';
 import * as E from 'fp-ts/lib/Either';
 import * as O from 'fp-ts/lib/Option';
 import * as A from 'fp-ts/lib/Array';
 
-import { Logger } from '@bit/garlictech.nodejs.shared.bunyan-logger';
 import * as fp from 'lodash/fp';
 import { forkJoin, Observable, of, throwError } from 'rxjs';
 import { tap, switchMap, take, map } from 'rxjs/operators';
-import { Injectable } from '@nestjs/common';
 import { ImageApiService } from '@bit/garlictech.nestjs.gtrack.image';
 import { GraphqlClientService } from '@bit/garlictech.nestjs.shared.graphql';
 import { pipe, flow } from 'fp-ts/lib/function';
@@ -46,17 +44,12 @@ import { DESCRIPTION_LANGUAGES_SHORT } from '@bit/garlictech.universal.gtrack.la
 
 const averageSpeed = 4; // KM/H
 
-@Injectable()
-export class ProcessRouteSegmentService {
-  constructor(
-    private readonly poiApiService: PoiApiService,
-    private readonly imageApiService: ImageApiService,
-    private readonly graphqlClient: GraphqlClientService,
-    private readonly externalPoiService: ExternalPoiService,
-  ) {}
+export interface ProcessRouteSegment {
 
-  process(segmentCoords: Position[]): Observable<any> {
-    Logger.info('Entering processing...');
+}
+
+export const processRouteSegment = (segmentCoords: Position[]): Observable<any> {
+    console.log('Entering processing...');
 
     const createPlaceResolvers = (bigBuffer: Feature<Polygon>) => [
       resolveDataInPolygon<Poi>({
@@ -253,4 +246,4 @@ export class ProcessRouteSegmentService {
     // Execute the database operations
     return forkJoin([saveNewPois, saveNewImages, updateNewPois]);
   }
-}
+  */

@@ -29,19 +29,24 @@ type BoundingBox {
   SouthWest: Point!
 }
 
+type GeoJson {
+  type: String!
+  coordinates: [[[Float]]]!
+}
+
 type RouteData {
-  distance: Int!
-  uphill: Int!
-  downhill: Int!
-  track: [[Float!]!]!
-  bigBuffer: [[[Float!]!]!]!
-  smallBuffer: [[[Float!]!]!]!
-  averageTime: Int!
-  score: Int!
-  difficulty: Int!
-  bounds: BoundingBox!
-  isRoundTrip: Boolean!
-  poiSearchBox: BoundingBox!
+  distance: Int
+  uphill: Int
+  downhill: Int
+  track: GeoJson!
+  elevations: [Float]
+  bigBuffer: [[[Float!]!]!]
+  smallBuffer: [[[Float!]!]!]
+  averageTime: Int
+  score: Int
+  difficulty: Int
+  bounds: BoundingBox
+  poiSearchBox: BoundingBox
 }
 
 type HikeStop {
@@ -101,7 +106,7 @@ type Hike {
   featuredStops: [HikeStop]
   checkpoints: [Poi]
   tags: [String!]
-  route: RouteData
+  route: GeoJson
   startPoint: Point
   endPoint: Point
   imageUrls: [String]
@@ -133,6 +138,7 @@ input GetNodeInput {
 
 type Query {
   getNode(input: GetNodeInput!): Node @aws_iam @aws_cognito_user_pools @aws_api_key
+  searchHikes(filter: SearchableHikeFilterInput, sort: [SearchableHikeSortInput], limit: Int, nextToken: String, from: Int, aggregates: [SearchableHikeAggregationInput]): SearchableHikeConnection
   getPoi(id: ID!): Poi
   listPois(filter: ModelPoiFilterInput, limit: Int, nextToken: String): ModelPoiConnection
   syncPois(filter: ModelPoiFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelPoiConnection
@@ -140,6 +146,33 @@ type Query {
   listHikes(filter: ModelHikeFilterInput, limit: Int, nextToken: String): ModelHikeConnection
   syncHikes(filter: ModelHikeFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelHikeConnection
 }
+
+type SearchableHikeConnection {
+  items: [Hike]!
+  nextToken: String
+  total: Int
+  aggregateItems: [SearchableAggregateResult]!
+}
+
+type SearchableAggregateResult {
+  name: String!
+  result: SearchableAggregateGenericResult
+}
+
+type SearchableAggregateScalarResult {
+  value: Float!
+}
+
+type SearchableAggregateBucketResult {
+  buckets: [SearchableAggregateBucketResultItem]
+}
+
+type SearchableAggregateBucketResultItem {
+  key: String!
+  doc_count: Int!
+}
+
+union SearchableAggregateGenericResult = SearchableAggregateScalarResult | SearchableAggregateBucketResult
 
 input ModelStringInput {
   ne: String
@@ -336,24 +369,9 @@ input HikeStopInput {
   description: [TextualDescriptionInput!]
 }
 
-input RouteDataInput {
-  distance: Int!
-  uphill: Int!
-  downhill: Int!
-  track: [[Float!]!]!
-  bigBuffer: [[[Float!]!]!]!
-  smallBuffer: [[[Float!]!]!]!
-  averageTime: Int!
-  score: Int!
-  difficulty: Int!
-  bounds: BoundingBoxInput!
-  isRoundTrip: Boolean!
-  poiSearchBox: BoundingBoxInput!
-}
-
-input BoundingBoxInput {
-  NorthEast: PointInput!
-  SouthWest: PointInput!
+input GeoJsonInput {
+  type: String!
+  coordinates: [[[Float]]]!
 }
 
 type ModelHikeConnection {
@@ -396,7 +414,7 @@ input CreateHikeInput {
   offlineMap: String
   featuredStops: [HikeStopInput]
   tags: [String!]
-  route: RouteDataInput
+  route: GeoJsonInput
   startPoint: PointInput
   endPoint: PointInput
   imageUrls: [String]
@@ -412,7 +430,7 @@ input UpdateHikeInput {
   offlineMap: String
   featuredStops: [HikeStopInput]
   tags: [String!]
-  route: RouteDataInput
+  route: GeoJsonInput
   startPoint: PointInput
   endPoint: PointInput
   imageUrls: [String]
@@ -422,5 +440,136 @@ input UpdateHikeInput {
 input DeleteHikeInput {
   id: ID!
   _version: Int
+}
+
+input SearchableStringFilterInput {
+  ne: String
+  gt: String
+  lt: String
+  gte: String
+  lte: String
+  eq: String
+  match: String
+  matchPhrase: String
+  matchPhrasePrefix: String
+  multiMatch: String
+  exists: Boolean
+  wildcard: String
+  regexp: String
+  range: [String]
+}
+
+input SearchableIntFilterInput {
+  ne: Int
+  gt: Int
+  lt: Int
+  gte: Int
+  lte: Int
+  eq: Int
+  range: [Int]
+}
+
+input SearchableFloatFilterInput {
+  ne: Float
+  gt: Float
+  lt: Float
+  gte: Float
+  lte: Float
+  eq: Float
+  range: [Float]
+}
+
+input SearchableBooleanFilterInput {
+  eq: Boolean
+  ne: Boolean
+}
+
+input SearchableIDFilterInput {
+  ne: ID
+  gt: ID
+  lt: ID
+  gte: ID
+  lte: ID
+  eq: ID
+  match: ID
+  matchPhrase: ID
+  matchPhrasePrefix: ID
+  multiMatch: ID
+  exists: Boolean
+  wildcard: ID
+  regexp: ID
+  range: [ID]
+}
+
+input SearchableHikeFilterInput {
+  id: SearchableIDFilterInput
+  location: SearchableStringFilterInput
+  featured: SearchableBooleanFilterInput
+  rate: SearchableStringFilterInput
+  offlineMap: SearchableStringFilterInput
+  tags: SearchableStringFilterInput
+  imageUrls: SearchableStringFilterInput
+  createdAt: SearchableStringFilterInput
+  updatedAt: SearchableStringFilterInput
+  _version: SearchableIntFilterInput
+  _deleted: SearchableBooleanFilterInput
+  _lastChangedAt: SearchableIntFilterInput
+  and: [SearchableHikeFilterInput]
+  or: [SearchableHikeFilterInput]
+  not: SearchableHikeFilterInput
+}
+
+enum SearchableSortDirection {
+  asc
+  desc
+}
+
+enum SearchableHikeSortableFields {
+  id
+  location
+  featured
+  rate
+  offlineMap
+  tags
+  imageUrls
+  createdAt
+  updatedAt
+  _version
+  _deleted
+  _lastChangedAt
+}
+
+input SearchableHikeSortInput {
+  field: SearchableHikeSortableFields
+  direction: SearchableSortDirection
+}
+
+enum SearchableAggregateType {
+  terms
+  avg
+  min
+  max
+  sum
+}
+
+enum SearchableHikeAggregateField {
+  id
+  location
+  featured
+  rate
+  offlineMap
+  tags
+  imageUrls
+  createdAt
+  updatedAt
+  _version
+  _deleted
+  _lastChangedAt
+}
+
+input SearchableHikeAggregationInput {
+  name: String!
+  type: SearchableAggregateType!
+  field: SearchableHikeAggregateField!
 }
 

@@ -164,7 +164,7 @@
           "authRoleName": "dev-yaha-cognito-CognitoDefaultAuthenticatedRole2A-1XGMDT5YBO8RD",
           "unauthRoleName": "dev-yaha-cognito-CognitoDefaultUnauthenticatedRole-17VCCO2A7KMOL",
           "S3DeploymentBucket": "amplify-yaha-dev-150028-deployment",
-          "S3DeploymentRootKey": "amplify-appsync-files/1383249668eb4a5ebcb1d19c69109972cc7f0471",
+          "S3DeploymentRootKey": "amplify-appsync-files/91896590d70fea38aeba3576240e66d866779506",
           "env": "dev"
         }
       }

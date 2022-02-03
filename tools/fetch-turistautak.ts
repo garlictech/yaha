@@ -3,12 +3,7 @@
 //
 /* eslint no-console: "off" */
 import axios from 'axios';
-import * as NEA from 'fp-ts/lib/NonEmptyArray';
-import { sequenceS } from 'fp-ts/lib/Apply';
-import * as O from 'fp-ts/lib/Option';
-import * as E from 'fp-ts/lib/Either';
-import '@aws-amplify/datastore';
-
+import { Position, Feature, Polygon } from '@turf/helpers';
 import { DataStore, Amplify } from 'aws-amplify';
 import {
   awsConfig,
@@ -78,7 +73,6 @@ import { CheckpointAdminFp } from '../../lib/universal/gtrack/checkpoints-admin'
 import { Route, RouteFp } from '../../lib/universal/gtrack/route';
 import { ProcessRouteSegmentModule } from '../../backend/src/lambda/process-route-segment/process-route-segment.module';
 import { ProcessRouteSegmentService } from '../../backend/src/lambda/process-route-segment/process-route-segment.service';
-import { Position, Feature, Polygon } from '@turf/helpers';
 import { GtrackDefaults } from '@bit/garlictech.universal.gtrack.defaults/defaults';
 import { foldObservableEither } from '@bit/garlictech.universal.shared.fp';
 import { getCityFromGoogle } from '@bit/garlictech.nodejs.shared.reverse-geocoding';
@@ -325,41 +319,17 @@ const hikeIds = [
 
 const segmentDistance = 2; // km
 /*
-const getGraphqlClient = from(
-  NestFactory.createApplicationContext(GraphqlModule)
-)
-  .pipe(map(app => app.get(GraphqlClientService)))
-  .pipe(shareReplay(1));
-
-const getPoiApi = from(NestFactory.createApplicationContext(PoiModule))
-  .pipe(map(app => app.get(PoiApiService)))
-  .pipe(shareReplay(1));
-
-const getRouteProcessor = from(
-  NestFactory.createApplicationContext(ProcessRouteSegmentModule)
-)
-  .pipe(map(app => app.get(ProcessRouteSegmentService)))
-  .pipe(shareReplay(1));
-
 const processSegments = (segments: number[][][]) =>
-  getRouteProcessor.pipe(
-    switchMap(routeProcessor =>
       from(segments).pipe(
-        mergeMap(segment => routeProcessor.process(segment), 1)
-      )
-    )
-  );
+        mergeMap(segment => routeProcessor.process(segment), 1),
+      ),
 
 type Environment = {
-  graphqlClient: GraphqlClientService;
-  poiApiService: PoiApiService;
   segments: Position[][];
   route: Route;
   searchPolygon: Feature<Polygon>;
-  waypoints: NEA.NonEmptyArray<number>;
   routeData: RouteData;
 };
-
 const getEnvironment = (segments: Position[][]): Observable<Environment> =>
   pipe(
     segments,
@@ -372,7 +342,7 @@ const getEnvironment = (segments: Position[][]): Observable<Environment> =>
     sequenceS(O.option),
     O.fold(
       () => throwError('Cannot process segment coordinates'),
-      x => of(x)
+      x => of(x),
     ),
     x => forkJoin([getGraphqlClient, getPoiApi, x]),
     map(([graphqlClient, poiApiService, { routeData, route, waypoints }]) => ({
@@ -383,8 +353,9 @@ const getEnvironment = (segments: Position[][]): Observable<Environment> =>
       waypoints,
       searchPolygon: route.bigBuffer,
       routeData,
-    }))
+    })),
   );
+
 */
 const fetchRoute = (routeId: number) => {
   console.log(`Processing route id ${routeId}`);
@@ -399,54 +370,23 @@ const fetchRoute = (routeId: number) => {
   ).pipe(
     map(response => response.data),
     map((gpxFile: string) => {
-      try {
-        const _doc = domParser.parseFromString(gpxFile, 'application/xml');
-        const descriptionContent = xmlParser.parse(gpxFile);
-        const geojson = togeojson.gpx(_doc);
-        const chunks = lineChunk(geojson, segmentDistance, {
-          units: 'kilometers',
-        });
-        return {
-          segments: fp.map((x: any) => x.geometry.coordinates, chunks.features),
-          title: descriptionContent.gpx.metadata.name,
-          description: descriptionContent.gpx.metadata.desc,
-        };
-      } catch (err) {
-        return throwError(err);
-      }
-    }),
-    filter(({ segments }: any) => fp.isArray(segments)),
-    map(({ segments, title, description }: any) => ({
-      segments: fp.map((segment: any, index: number) => {
-        if (index !== 0) {
-          segment[0][2] = segment[1][2];
-        }
-
-        if (index !== segments.length - 1) {
-          segment[segment.length - 1][2] = segment[segment.length - 2][2];
-        }
-
-        return segment;
-      }, segments),
-      title,
-      description,
-    })),
-    map(({ segments, title, description }: any) => ({
-      hikeData: {
+      const _doc = domParser.parseFromString(gpxFile, 'application/xml');
+      const geojson = togeojson.gpx(_doc);
+      return {
+        route: geojson?.features?.[0]?.geometry,
         description: [
           {
             languageKey: 'hu_HU',
-            title: (title || 'a downloaded hike ' + fp.now()).toString(),
-            fullDescription: description,
-            type: 'html',
-          } as TextualDescription,
+            title: geojson?.features?.[0]?.properties?.name,
+            summary: geojson?.features?.[0]?.properties?.desc,
+            type: TextualDescriptionType.MARKDOWN,
+          },
         ],
-        publicationState: PublicationState.PUBLISHED,
-      },
-      segments,
-    })),
-    /*tap(() => console.log('Processing segments...')),
-    switchMap(
+        imageUrls: ['https://loremflickr.com/g/320/240/landscape'],
+      };
+    }),
+    switchMap(hike => from(DataStore.save(new Hike(hike)))),
+    /*    switchMap(
       ({
         hikeData,
         segments,
@@ -509,8 +449,7 @@ const fetchRoute = (routeId: number) => {
             return of({});
           }),
         ),
-    ),
-    */
+    ),*/
     tap(() => console.log(`Hike upload result for route ${routeId} is OK`)),
   );
 };

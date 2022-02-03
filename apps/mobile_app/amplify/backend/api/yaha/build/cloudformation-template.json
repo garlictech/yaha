@@ -137,7 +137,7 @@
                     ]
                 },
                 "Description": "default",
-                "Expires": 1675453614
+                "Expires": 1675468098
             }
         },
         "GraphQLAPINONEDS95A13CF0": {
@@ -475,6 +475,73 @@
                 "GraphQLAPITransformerSchema3CB2AE18"
             ]
         },
+        "SearchableStack": {
+            "Type": "AWS::CloudFormation::Stack",
+            "Properties": {
+                "TemplateURL": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "https://s3.",
+                            {
+                                "Ref": "AWS::Region"
+                            },
+                            ".",
+                            {
+                                "Ref": "AWS::URLSuffix"
+                            },
+                            "/",
+                            {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "/",
+                            {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "/stacks/SearchableStack.json"
+                        ]
+                    ]
+                },
+                "Parameters": {
+                    "referencetotransformerrootstackenv10C5A902Ref": {
+                        "Ref": "env"
+                    },
+                    "referencetotransformerrootstackGraphQLAPI20497F53ApiId": {
+                        "Fn::GetAtt": [
+                            "GraphQLAPI",
+                            "ApiId"
+                        ]
+                    },
+                    "referencetotransformerrootstackHikeNestedStackHikeNestedStackResourceD197E9CBOutputstransformerrootstackHikeHikeTableF619A62CStreamArn": {
+                        "Fn::GetAtt": [
+                            "Hike",
+                            "Outputs.transformerrootstackHikeHikeTableF619A62CStreamArn"
+                        ]
+                    },
+                    "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref": {
+                        "Ref": "S3DeploymentRootKey"
+                    },
+                    "referencetotransformerrootstackS3DeploymentBucket7592718ARef": {
+                        "Ref": "S3DeploymentBucket"
+                    },
+                    "referencetotransformerrootstackGraphQLAPINONEDS2BA9D1C8Name": {
+                        "Fn::GetAtt": [
+                            "GraphQLAPINONEDS95A13CF0",
+                            "Name"
+                        ]
+                    },
+                    "referencetotransformerrootstackauthRoleNameFB872D50Ref": {
+                        "Ref": "authRoleName"
+                    },
+                    "referencetotransformerrootstackunauthRoleName49F3C1FERef": {
+                        "Ref": "unauthRoleName"
+                    }
+                }
+            },
+            "DependsOn": [
+                "GraphQLAPITransformerSchema3CB2AE18"
+            ]
+        },
         "CustomResourcesjson": {
             "Type": "AWS::CloudFormation::Stack",
             "Properties": {
@@ -519,7 +586,8 @@
                 "GraphQLAPI",
                 "GraphQLAPITransformerSchema3CB2AE18",
                 "Poi",
-                "Hike"
+                "Hike",
+                "SearchableStack"
             ]
         }
     },

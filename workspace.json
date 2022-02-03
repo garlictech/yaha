@@ -502,6 +502,13 @@
             "cwd": "apps/mobile_app"
           }
         },
+        "buildAppbundle-ci": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "docker run --platform linux/amd64 --rm -v ${PWD}:/build -v /tmp/x:/root/.pub-cache --workdir /build 697486207432.dkr.ecr.us-east-1.amazonaws.com/yaha-flutter flutter build appbundle",
+            "cwd": "apps/mobile_app"
+          }
+        },
         "buildBundle": {
           "executor": "@nrwl/workspace:run-commands",
           "options": {

@@ -1824,6 +1824,14 @@
           ]
         }
       }
+    },
+    "transformerrootstackHikeHikeTableF619A62CStreamArn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "HikeTable",
+          "StreamArn"
+        ]
+      }
     }
   }
 }
