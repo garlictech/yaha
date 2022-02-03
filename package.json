@@ -94,7 +94,7 @@
     "@nrwl/tao": "13.7.2",
     "@nrwl/workspace": "13.7.2",
     "@nxrocks/nx-flutter": "3.0.0",
-    "@serverless-stack/cli": "0.60.6",
+    "@serverless-stack/cli": "0.61.0",
     "@serverless-stack/resources": "0.60.6",
     "@types/cypress-cucumber-preprocessor": "4.0.1",
     "@types/googlemaps": "3.43.3",
