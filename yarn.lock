@@ -89,7 +89,7 @@
   dependencies:
     tslib "~2.0.1"
 
-"@aws-amplify/auth@^4.3.19":
+"@aws-amplify/auth@4.4.0":
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/@aws-amplify/auth/-/auth-4.4.0.tgz#bc7bd1421e7228fe5cacb92ea11715026cd046e2"
   integrity sha512-QQgYJ+bKKjhx1xptSC7S7ge0NYoABzfeDlH96HUzD+oFjsl1FvAYj1YRBMb5REJ7xi6EkkBbLTcsTjutxbrYqA==
@@ -140,7 +140,7 @@
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-appsync-alpha/-/aws-appsync-alpha-2.7.0-alpha.0.tgz#513f54798e39fad5ba23c69741f4a2e8d78cfadd"
   integrity sha512-4XyRBZG+hlAmyYv+xTJ1picE3eR9ImdbLpm/znde56/lOqOVBryP/h8xXL3EOAbOknqp7cnXAnjgV7BUOxLOdQ==
 
-"@aws-cdk/aws-neptune-alpha@^2.9.0-alpha.0":
+"@aws-cdk/aws-neptune-alpha@2.9.0-alpha.0":
   version "2.9.0-alpha.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-neptune-alpha/-/aws-neptune-alpha-2.9.0-alpha.0.tgz#720c7ccf1f7be516691e013537e0bf4d2def44c2"
   integrity sha512-VuOf4SeJnXL2u0PgJfLvkqL3o/iJuUsrB8xk3EKBbpDn3tshzvb5+h/vjFAzaBV/1+lGrLu2z+Tq21pjwhSH6A==
@@ -5746,7 +5746,7 @@
   dependencies:
     "@types/node" "*"
 
-"@types/gremlin@^3.5.1":
+"@types/gremlin@3.5.1":
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/@types/gremlin/-/gremlin-3.5.1.tgz#071b9ecf10d16c36fb568997ba064289ce37185f"
   integrity sha512-PcZBz4MaOryz/MTWSYsD7QiLZo4thda3aX1UiI06Ci879/NQR6jMR5+1AkenGQIvYCgDxKM7iUaeSp59Lx+miw==
@@ -7558,7 +7558,7 @@ aws-appsync-subscription-link@^2.2.6:
     debug "2.6.9"
     url "^0.11.0"
 
-aws-appsync@^4.1.4:
+aws-appsync@4.1.4:
   version "4.1.4"
   resolved "https://registry.yarnpkg.com/aws-appsync/-/aws-appsync-4.1.4.tgz#5c5fcf225a8a59f544850fffd6f1cc34480df761"
   integrity sha512-bSbFo58iNVGbRmXuvRwTnvU39XiDTaYYvTzyB428gkeF9iOd6xDB/q8jOSIWO44EwzdC1BzNBGSxmi+ev25ySQ==
@@ -12968,7 +12968,7 @@ graphql@^14.6.0:
   dependencies:
     iterall "^1.2.2"
 
-gremlin@^3.5.2:
+gremlin@3.5.2:
   version "3.5.2"
   resolved "https://registry.yarnpkg.com/gremlin/-/gremlin-3.5.2.tgz#fa1da392d9f37ee06e4c86b100fcd56150792202"
   integrity sha512-GPFevKxQZwOSweuMDDyy1+bwQ7bDc1+41DRYeoYJOgkbiR5fbQslFCjOuWvsVF+FEQr/De4pG8ZqVP6wJMrYMQ==
@@ -19049,6 +19049,11 @@ quick-lru@^5.1.1:
   resolved "https://registry.yarnpkg.com/quick-lru/-/quick-lru-5.1.1.tgz#366493e6b3e42a3a6885e2e99d18f80fb7a8c932"
   integrity sha512-WuyALRjWPDGtt/wzJiadO5AXY+8hZ80hVpe6MyivgraREW751X3SbhRvG3eLKOYN+8VEvqLcf3wdnt44Z4S4SA==
 
+ramda@0.28.0:
+  version "0.28.0"
+  resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.28.0.tgz#acd785690100337e8b063cab3470019be427cc97"
+  integrity sha512-9QnLuG/kPVgWvMQ4aODhsBUFKOUmnbUnsSXACv+NCQZcHbeb+v8Lodp8OVxtRULN1/xOyYLLaL6npE6dMq5QTA==
+
 ramda@^0.26.1:
   version "0.26.1"
   resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.26.1.tgz#8d41351eb8111c55353617fc3bbffad8e4d35d06"
@@ -19058,11 +19063,6 @@ ramda@^0.27.1:
   version "0.27.2"
   resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.27.2.tgz#84463226f7f36dc33592f6f4ed6374c48306c3f1"
   integrity sha512-SbiLPU40JuJniHexQSAgad32hfwd+DRUdwF2PlVuI5RZD0/vahUco7R8vD86J/tcEKKF9vZrUVwgtmGCqlCKyA==
-
-ramda@^0.28.0:
-  version "0.28.0"
-  resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.28.0.tgz#acd785690100337e8b063cab3470019be427cc97"
-  integrity sha512-9QnLuG/kPVgWvMQ4aODhsBUFKOUmnbUnsSXACv+NCQZcHbeb+v8Lodp8OVxtRULN1/xOyYLLaL6npE6dMq5QTA==
 
 randombytes@^2.0.0, randombytes@^2.0.1, randombytes@^2.0.5, randombytes@^2.1.0:
   version "2.1.0"
