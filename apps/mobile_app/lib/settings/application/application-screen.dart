@@ -166,7 +166,7 @@ class ApplicationScreen extends ConsumerWidget {
                                           appSettingsStateNotifier
                                               .updateDistanceFormat(
                                                   newDistanceFormatState,
-                                                  index);
+                                                  index ?? 0);
                                         },
                                       ),
                                     ),
@@ -209,7 +209,7 @@ class ApplicationScreen extends ConsumerWidget {
                                           appSettingsStateNotifier
                                               .updateTemperatureFormat(
                                                   newTemperatureFormatState,
-                                                  index);
+                                                  index ?? 0);
                                         },
                                       ),
                                     ),
@@ -252,7 +252,8 @@ class ApplicationScreen extends ConsumerWidget {
                                               index == 0 ? true : false;
                                           appSettingsStateNotifier
                                               .updateTimeFormat(
-                                                  newTimeFormatState, index);
+                                                  newTimeFormatState,
+                                                  index ?? 0);
                                         },
                                       ),
                                     ),

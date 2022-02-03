@@ -12,16 +12,18 @@
           "options": {
             "cwd": "apps/backend",
             "parallel": false,
-            "commands": [
-              "yarn sls package --stage='{args.stage}'",
-              "yarn sst cdk synth"
-            ]
+            "commands": ["yarn sls package --stage='{args.env}'"]
           },
-          "outputs": [
-            "apps/backend/cdk.out",
-            "apps/backend/.build",
-            "apps/backend/.serverless"
-          ]
+          "outputs": ["apps/backend/.serverless"]
+        },
+        "synth": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "cwd": "apps/backend",
+            "parallel": false,
+            "commands": ["yarn sst cdk synth --stage='{args.env}'"]
+          },
+          "outputs": ["apps/backend/cdk.out", "apps/backend/.build"]
         },
         "deploy": {
           "executor": "@nrwl/workspace:run-commands",
@@ -30,10 +32,7 @@
             "parallel": false,
             "commands": [
               {
-                "command": "yarn sst deploy --stage='{args.stage}'"
-              },
-              {
-                "command": "cd ../.. && yarn ts-node ./tools/fetch-configuration.ts '{args.app}' '{args.stage}'"
+                "command": "../../tools/deploy-backend.sh '{args.env}'"
               }
             ]
           }
@@ -45,7 +44,7 @@
             "parallel": false,
             "commands": [
               {
-                "command": "yarn sst remove --stage='{args.stage}'"
+                "command": "yarn sst remove --stage='{args.env}'"
               }
             ]
           }
@@ -66,7 +65,30 @@
           }
         }
       },
-      "tags": ["type:backend", "platform:nodejs"]
+      "tags": ["layer:app", "platform:nodejs"]
+    },
+    "backend-shared-utils": {
+      "root": "libs/backend/shared/utils",
+      "sourceRoot": "libs/backend/shared/utils/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/backend/shared/utils/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/backend/shared/utils"],
+          "options": {
+            "jestConfig": "libs/backend/shared/utils/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["layer:utils", "platform:nodejs"]
     },
     "cicd": {
       "root": "apps/cicd",
@@ -94,7 +116,7 @@
             "cwd": "apps/cicd",
             "commands": [
               {
-                "command": "yarn sst deploy"
+                "command": "yarn sst deploy --stage='{args.env}'"
               }
             ]
           }
@@ -105,7 +127,7 @@
             "cwd": "apps/cicd",
             "commands": [
               {
-                "command": "yarn sst remove"
+                "command": "yarn sst remove --stage='{args.env}'"
               }
             ]
           }
@@ -125,7 +147,142 @@
           }
         }
       },
-      "tags": ["type:backend", "platform:nodejs"]
+      "tags": ["layer:app", "platform:nodejs"]
+    },
+    "common-backend": {
+      "root": "apps/common-backend",
+      "sourceRoot": "apps/common-backend/src",
+      "projectType": "application",
+      "targets": {
+        "synth": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "cwd": "apps/common-backend",
+            "parallel": false,
+            "commands": ["yarn sst cdk synth --stage='{args.env}'"]
+          },
+          "outputs": [
+            "apps/common-backend/cdk.out",
+            "apps/common-backend/.build"
+          ]
+        },
+        "deploy": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "cwd": "apps/common-backend",
+            "parallel": false,
+            "commands": [
+              {
+                "command": "../../tools/deploy-common-backend.sh '{args.env}'"
+              }
+            ]
+          }
+        },
+        "remove": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "cwd": "apps/common-backend",
+            "parallel": false,
+            "commands": [
+              {
+                "command": "yarn sst remove --stage='{args.env}'"
+              }
+            ]
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/common-backend/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/common-backend"],
+          "options": {
+            "jestConfig": "apps/common-backend/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["platform:nodejs"]
+    },
+    "gql-api": {
+      "root": "libs/gql-api",
+      "sourceRoot": "libs/gql-api/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/gql-api/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/gql-api"],
+          "options": {
+            "jestConfig": "libs/gql-api/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["layer:repository", "platform:nodejs"]
+    },
+    "js-api": {
+      "root": "apps/js-api",
+      "sourceRoot": "apps/js-api/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/js-api",
+            "main": "apps/js-api/src/main.ts",
+            "tsConfig": "apps/js-api/tsconfig.app.json",
+            "assets": ["apps/js-api/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/js-api/src/environments/environment.ts",
+                  "with": "apps/js-api/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "build-schema": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "cwd": "apps/js-api",
+            "commands": ["../../tools/build-schema-js-api.sh"]
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/js-api/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/js-api"],
+          "options": {
+            "jestConfig": "apps/js-api/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
     },
     "mobile_app": {
       "root": "apps/mobile_app",
@@ -280,7 +437,7 @@
           }
         },
         "graphql-codegen": {
-          "builder": "@nrwl/workspace:run-commands",
+          "executor": "@nrwl/workspace:run-commands",
           "options": {
             "parallel": false,
             "command": "flutter pub run build_runner build --delete-conflicting-outputs",
@@ -288,70 +445,57 @@
           }
         },
         "graphql-codegen-ci": {
-          "builder": "@nrwl/workspace:run-commands",
-          "options": {
-            "parallel": false,
-            "command": "docker run --platform linux/amd64 --rm -v ${PWD}:/build -v /tmp/x:/root/.pub-cache --workdir /build  ${AWS_ACCOUNT}.dkr.ecr.eu-west-1.amazonaws.com/anyupp-flutter flutter pub run build_runner build --delete-conflicting-outputs",
-            "cwd": "apps/mobile_app"
-          }
-        }
-      },
-      "tags": ["type:application", "platform:flutter"]
-    },
-    "neo4j-gql-api": {
-      "root": "libs/neo4j-gql/api",
-      "sourceRoot": "libs/neo4j-gql/api/src",
-      "projectType": "library",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/neo4j-gql/api/**/*.ts"]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/neo4j-gql/api"],
-          "options": {
-            "jestConfig": "libs/neo4j-gql/api/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "build": {
           "executor": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": [
-              {
-                "command": "./tools/build-schema-api.sh '{args.stage}'"
-              }
-            ]
+            "parallel": false,
+            "command": "docker run --platform linux/amd64 --rm -v ${PWD}:/build -v /tmp/x:/root/.pub-cache --workdir /build  ${AWS_ACCOUNT}.dkr.ecr.eu-west-1.amazonaws.com/yaha-flutter flutter pub run build_runner build --delete-conflicting-outputs",
+            "cwd": "apps/mobile_app"
+          }
+        },
+        "build-schema": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "cwd": "apps/mobile_app",
+            "commands": ["../../tools/build-schema-mobile_app.sh"]
           },
-          "outputs": ["libs/neo4j-gql/api/src/lib/generated"]
+          "outputs": [
+            "apps/mobile_app/lib/awsconfiguration.dart",
+            "apps/mobile_app/lib/models"
+          ]
+        },
+        "deploy-amplify": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "cwd": "apps/mobile_app",
+            "parallel": false,
+            "commands": ["../../tools/deploy-amplify-backend.sh '{args.env}'"]
+          }
         }
       },
-      "tags": []
+      "tags": ["layer:app", "platform:flutter"]
     },
-    "neo4j-gql-backend": {
-      "root": "libs/neo4j-gql/backend",
-      "sourceRoot": "libs/neo4j-gql/backend/src",
+    "neptune-gql": {
+      "root": "libs/neptune-gql",
+      "sourceRoot": "libs/neptune-gql/src",
       "projectType": "library",
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
           "options": {
-            "lintFilePatterns": ["libs/neo4j-gql/backend/**/*.ts"]
+            "lintFilePatterns": ["libs/neptune-gql/**/*.ts"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/neo4j-gql/backend"],
+          "outputs": ["coverage/libs/neptune-gql"],
           "options": {
-            "jestConfig": "libs/neo4j-gql/backend/jest.config.js",
+            "jestConfig": "libs/neptune-gql/jest.config.js",
             "passWithNoTests": true
           }
         }
       },
-      "tags": []
+      "tags": ["layer:service", "platform:nodejs"]
     },
     "shared-config": {
       "root": "libs/shared/config",
@@ -362,8 +506,8 @@
           "executor": "@nrwl/workspace:run-commands",
           "options": {
             "commands": [
-              "yarn ts-node ./tools/fetch-configuration.ts '{args.app}' '{args.stage}'",
-              "yarn ts-node ./tools/get-secrets.ts 'yaha' '{args.stage}'"
+              "yarn ts-node ./tools/fetch-configuration.ts '{args.env}'",
+              "yarn ts-node ./tools/get-secrets.ts '{args.env}'"
             ]
           }
         },
@@ -382,7 +526,30 @@
           }
         }
       },
-      "tags": []
+      "tags": ["platform:nodejs", "layer:utils"]
+    },
+    "shared-graphql-api-client": {
+      "root": "libs/shared/graphql/api-client",
+      "sourceRoot": "libs/shared/graphql/api-client/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/shared/graphql/api-client/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/graphql/api-client"],
+          "options": {
+            "jestConfig": "libs/shared/graphql/api-client/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["platform:nodejs", "layer:repository"]
     },
     "shared-utils": {
       "root": "libs/shared/utils",
@@ -404,7 +571,7 @@
           }
         }
       },
-      "tags": ["type:utils", "platform:universal"]
+      "tags": ["layer:utils", "platform:nodejs"]
     }
   }
 }

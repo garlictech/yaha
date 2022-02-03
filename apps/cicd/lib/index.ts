@@ -39,6 +39,7 @@ export default function main(app: App): void {
   );
 */
   const appcenterStack = new AppcenterStack(app, 'AppcenterStack');
+
   const ciStack = new CiStack(app, 'CiStack', {
     secretsManager: devSecretsManagerStack,
   });

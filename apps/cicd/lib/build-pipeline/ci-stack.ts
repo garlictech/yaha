@@ -1,7 +1,9 @@
-import * as chatbot from '@aws-cdk/aws-chatbot';
-import * as codebuild from '@aws-cdk/aws-codebuild';
+import {
+  aws_sns as sns,
+  aws_codebuild as codebuild,
+  aws_chatbot as chatbot,
+} from 'aws-cdk-lib';
 import * as sst from '@serverless-stack/resources';
-import * as sns from '@aws-cdk/aws-sns';
 import { SecretsManagerStack } from './secretsmanager-stack';
 
 export interface CiStackProps extends sst.StackProps {

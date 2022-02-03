@@ -1,0 +1,32 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-yaha-dev-150028-authRole",
+      "UnauthRoleArn": "arn:aws:iam::697486207432:role/amplify-yaha-dev-150028-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::697486207432:role/amplify-yaha-dev-150028-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-yaha-dev-150028-deployment",
+      "UnauthRoleName": "amplify-yaha-dev-150028-unauthRole",
+      "StackName": "amplify-yaha-dev-150028",
+      "StackId": "arn:aws:cloudformation:us-east-1:697486207432:stack/amplify-yaha-dev-150028/a7f2d930-8042-11ec-96b6-0a35adaa438f",
+      "AmplifyAppId": "dbes8md0k8pgd"
+    },
+    "categories": {
+      "auth": {
+        "yaha381acd8e": {
+          "userPoolId": "us-east-1_r0VBHq6to",
+          "userPoolName": "dev-yaha-consumer-user-pool",
+          "webClientId": "5m1n884d7kooteqvree1p2ed8b",
+          "nativeClientId": "1d79g7kuqo1mj4lr8pmj1ec3pm",
+          "identityPoolId": "us-east-1:b6943e16-0ef1-4727-ae68-56ba8916ac36",
+          "identityPoolName": "IdentityPool_mpVvsLWupM3n",
+          "allowUnauthenticatedIdentities": true,
+          "authRoleArn": "arn:aws:iam::697486207432:role/dev-yaha-cognito-CognitoDefaultAuthenticatedRole2A-1XGMDT5YBO8RD",
+          "authRoleName": "dev-yaha-cognito-CognitoDefaultAuthenticatedRole2A-1XGMDT5YBO8RD",
+          "unauthRoleArn": "arn:aws:iam::697486207432:role/dev-yaha-cognito-CognitoDefaultUnauthenticatedRole-17VCCO2A7KMOL",
+          "unauthRoleName": "dev-yaha-cognito-CognitoDefaultUnauthenticatedRole-17VCCO2A7KMOL"
+        }
+      }
+    }
+  }
+}

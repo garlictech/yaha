@@ -174,7 +174,7 @@ class FilterPage extends ConsumerWidget {
               }
 
               filterSettingsStateNotifier.updateDifficulty(
-                  newDifficultyState, index);
+                  newDifficultyState, index ?? 0);
             },
           ),
         ),

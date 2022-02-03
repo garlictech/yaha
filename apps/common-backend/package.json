@@ -1,0 +1,10 @@
+{
+  "name": "@garlictech/common-backend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "sst build",
+    "deploy": "sst deploy",
+    "remove": "sst remove"
+  }
+}

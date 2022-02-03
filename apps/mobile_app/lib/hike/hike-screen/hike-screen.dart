@@ -1,4 +1,3 @@
-//import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:yaha/gallery.dart';
@@ -15,7 +14,6 @@ import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-icon-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
-
 import '../hike-outline/hike-outline-screen.dart';
 
 class HikeScreen extends StatefulWidget {

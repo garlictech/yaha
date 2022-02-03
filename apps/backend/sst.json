@@ -1,0 +1,7 @@
+{
+  "name": "yaha",
+  "type": "@serverless-stack/resources",
+  "region": "us-east-1",
+  "stage": "dev",
+  "lint": false
+}

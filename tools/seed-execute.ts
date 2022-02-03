@@ -2,21 +2,86 @@
 // execute with:
 // yarn ts-node --project ./tools/tsconfig.tools.json -r tsconfig-paths/register ./tools/seed-execute.ts
 
-import { handler } from '../apps/backend/lib/lambda/stack-seeder';
-import { awsConfig } from '../libs/crud-gql/api/src';
+import '@aws-amplify/datastore';
 
-handler({
-  RequestType: 'Create',
-  ResponseURL: 'http://index.hu',
-  StackId: '',
-  RequestId: '',
-  ServiceToken: 'foobar',
-  LogicalResourceId: '',
-  ResourceType: '',
+import { DataStore, Amplify } from 'aws-amplify';
+import {
+  awsConfig,
+  Poi,
+  Hike,
+  PoiSource,
+  TextualDescriptionType,
+} from '../libs/gql-api/src';
 
-  ResourceProperties: {
-    AdminUserPoolId: awsConfig.aws_user_pools_id,
-    physicalResourceId: 'atyala',
-    ServiceToken: 'foobar',
-  },
-});
+Amplify.configure(awsConfig);
+
+(async function execute() {
+  await DataStore.save(
+    new Poi({
+      location: { lat: 0, lon: 0 },
+      description: [
+        {
+          languageKey: 'en_US',
+          type: TextualDescriptionType.MARKDOWN,
+          title: 'POI title',
+        },
+      ],
+      sourceObject: [
+        { objectType: PoiSource.OSM_AMENITY, objectId: 'OBJECTID' },
+      ],
+    }),
+  );
+
+  console.log('POI saved.');
+
+  await DataStore.save(
+    new Hike({
+      location: 'Budapest',
+      description: [
+        {
+          languageKey: 'hu_HU',
+          type: TextualDescriptionType.MARKDOWN,
+          title: 'Túra',
+          summary: 'Túrázás, vár, erdő, és barlang',
+        },
+      ],
+      imageUrls: ['https://loremflickr.com/g/320/240/landscape'],
+    }),
+  );
+
+  console.log('Hike saved.');
+
+  await DataStore.save(
+    new Hike({
+      location: 'Mátrafüred',
+      description: [
+        {
+          languageKey: 'hu_HU',
+          type: TextualDescriptionType.MARKDOWN,
+          title: 'Mátra',
+          summary: 'Mátra, erdős hegyek túrázáshoz',
+        },
+      ],
+      imageUrls: ['https://loremflickr.com/g/320/240/landscape'],
+    }),
+  );
+
+  console.log('Hike saved.');
+
+  await DataStore.save(
+    new Hike({
+      location: 'Balaton',
+      description: [
+        {
+          languageKey: 'hu_HU',
+          type: TextualDescriptionType.MARKDOWN,
+          title: 'Balaton',
+          summary: 'Nagy édesvizű tó üdülővárosokkal',
+        },
+      ],
+      imageUrls: ['https://loremflickr.com/g/320/240/landscape'],
+    }),
+  );
+
+  console.log('Hike saved.');
+})();

@@ -1,2 +1,4 @@
 import * as config from './lib/generated/config.json';
-export { config };
+import * as commonStackConfig from './lib/common-stack-config.json';
+
+export { config, commonStackConfig };

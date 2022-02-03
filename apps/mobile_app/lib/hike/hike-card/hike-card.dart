@@ -39,7 +39,7 @@ class HikeCard extends StatelessWidget {
                   child: Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage(backgroundImage),
+                        image: NetworkImage(backgroundImage),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -49,7 +49,7 @@ class HikeCard extends StatelessWidget {
               Align(
                 alignment: Alignment.bottomLeft,
                 child: Container(
-                  padding: EdgeInsets.only(
+                  padding: const EdgeInsets.only(
                     left: YahaSpaceSizes.small,
                     bottom: YahaSpaceSizes.small,
                   ),
@@ -59,7 +59,7 @@ class HikeCard extends StatelessWidget {
                     children: [
                       Text(
                         title,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: YahaFontSizes.medium,
                           fontWeight: FontWeight.w700,
                           color: YahaColors.background,
@@ -67,7 +67,7 @@ class HikeCard extends StatelessWidget {
                       ),
                       Text(
                         subTitle + ' ($distanceFromCurrentLocation km away)',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: YahaFontSizes.small,
                           fontWeight: FontWeight.w600,
                           color: YahaColors.background,

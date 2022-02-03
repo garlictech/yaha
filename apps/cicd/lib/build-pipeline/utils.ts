@@ -1,15 +1,18 @@
-import * as s3 from '@aws-cdk/aws-s3';
-import * as cdk from '@aws-cdk/core';
+import {
+  aws_iam as iam,
+  aws_ssm as ssm,
+  aws_codebuild as codebuild,
+  aws_chatbot as chatbot,
+  aws_codepipeline as codepipeline,
+  aws_codepipeline_actions as codepipeline_actions,
+  aws_codestarnotifications as codestarnotifications,
+  aws_s3 as s3,
+  RemovalPolicy,
+  Duration,
+} from 'aws-cdk-lib';
 import * as utils from './utils';
-import * as codepipeline from '@aws-cdk/aws-codepipeline';
-import * as codepipeline_actions from '@aws-cdk/aws-codepipeline-actions';
-import * as codestarnotifications from '@aws-cdk/aws-codestarnotifications';
-import * as codebuild from '@aws-cdk/aws-codebuild';
-import * as iam from '@aws-cdk/aws-iam';
-import * as ssm from '@aws-cdk/aws-ssm';
 import { SecretsManagerStack } from './secretsmanager-stack';
 import * as sst from '@serverless-stack/resources';
-import * as chatbot from '@aws-cdk/aws-chatbot';
 
 export interface PipelineStackProps extends sst.StackProps {
   readonly chatbot: chatbot.SlackChannelConfiguration;
@@ -39,14 +42,11 @@ export const configurePermissions = (
     'ConsumerNativeUserPoolClientId',
     'ConsumerUserPoolDomain',
     'IdentityPoolId',
-    /*    'YahaGraphqlApiKey',
-    'YahaGraphqlApiUrl',
-    'AdminSiteUrl',
     'AdminWebUserPoolClientId',
     'AdminNativeUserPoolClientId',
     'AdminUserPoolId',
     'AdminUserPoolDomain',
-    'CrudApiAppId',*/
+    'AmplifyApiAppId',
   ].map(paramName => `/${prefix}/generated/${paramName}`);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -95,6 +95,8 @@ export const createBuildProject = (
           NODE_OPTIONS:
             '--unhandled-rejections=strict --max_old_space_size=8196',
           GIT_DISCOVERY_ACROSS_FILESYSTEM: 1,
+          AWS_ACCOUNT: stack.account,
+          CI: 'ci',
         },
       },
     }),
@@ -105,19 +107,6 @@ export const createBuildProject = (
       privileged: true,
     },
   });
-};
-
-export const configurePipeline = (
-  stack: sst.Stack,
-  stage: string,
-): { adminSiteUrl: string } => {
-  const adminSiteUrl = ssm.StringParameter.fromStringParameterName(
-    stack,
-    'AdminSiteUrlParamDev',
-    `/${stage}-${appConfig.name}/generated/AdminSiteUrl`,
-  ).stringValue;
-
-  return { adminSiteUrl };
 };
 
 export const configurePipelineNotifications = (
@@ -217,10 +206,10 @@ export const createPipeline = (
 
   const buildArtifactBucket = new s3.Bucket(scope, 'ArtifactBucket', {
     bucketName: getAppcenterArtifactBucketName(stage),
-    removalPolicy: cdk.RemovalPolicy.DESTROY, // NOT recommended for production code
+    removalPolicy: RemovalPolicy.DESTROY, // NOT recommended for production code
     lifecycleRules: [
       {
-        expiration: cdk.Duration.days(1),
+        expiration: Duration.days(1),
       },
     ],
   });
@@ -299,28 +288,13 @@ export const createCommonDevPipeline = (
         commands: ['apps/cicd/scripts/stage-install.sh'],
       },
       build: {
-        commands: [
-          `./tools/build-workspace.sh ${appConfig.name} ${stage}`,
-          `yarn nx deploy backend --stage=${stage} --app=${appConfig.name}`,
-          `yarn nx buildApk-ci mobile_app`,
-        ],
+        commands: [`apps/cicd/scripts/dev-build.sh ${stage} $CI`],
       },
       post_build: {
         commands: [
-          'tar -cvf ${CODEBUILD_RESOLVED_SOURCE_VERSION}.tgz apps/mobile_app/lib/awsconfiguration.dart',
-          `aws s3 cp \${CODEBUILD_RESOLVED_SOURCE_VERSION}.tgz s3://${getAppcenterArtifactBucketName(
+          `apps/cicd/scripts/dev-post_build.sh ${stage} ${utils.getAppcenterArtifactBucketName(
             stage,
-          )}/`,
-          `echo 'Pushing Android APK to appcenter'`,
-          `./tools/publish-to-appcenter.sh ${stage} android`,
-          `echo 'Triggering ios app build in appcenter...'`,
-          `./tools/trigger-appcenter-builds.sh ${stage} ios`,
-          // `yarn nx test integration-tests-universal --codeCoverage --coverageReporters=clover`,
-          // `yarn nx test integration-tests-angular --codeCoverage --coverageReporters=clover`,
-          //`yarn nx e2e-remote admin-e2e --headless --baseUrl=${adminSiteUrl}`,
-          //'yarn ts-node --project ./tools/tsconfig.tools.json -r tsconfig-paths/register ./tools/seed-execute.ts',
-          //'yarn cucumber:report',
-          //'yarn cypress:generate:html:report',
+          )}`,
         ],
       },
     },

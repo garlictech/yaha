@@ -1,6 +1,5 @@
 {
   "name": "yaha-cicd",
   "type": "@serverless-stack/resources",
-  "stage": "prod",
   "region": "us-east-1"
 }
