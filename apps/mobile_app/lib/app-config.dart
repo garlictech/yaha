@@ -10,7 +10,7 @@ class AppConfig {
   static String get userPoolDomain => _config['ConsumerUserPoolDomain'];
   static String signinCallback = 'yaha://signin/';
   static String signoutCallback = 'yaha://signout/';
-  static Map<String, dynamic> _config = jsonDecode(AWSCONFIG);
+  static Map<String, dynamic> _config = jsonDecode(amplifyconfig);
   static Map<String, dynamic> get config => _config;
 
   AppConfig._();
