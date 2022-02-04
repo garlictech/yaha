@@ -3,37 +3,15 @@
 //
 /* eslint no-console: "off" */
 import axios from 'axios';
-import { Position, Feature, Polygon } from '@turf/helpers';
+import '@aws-amplify/datastore';
 import { DataStore, Amplify } from 'aws-amplify';
-import {
-  awsConfig,
-  Hike,
-  Poi,
-  PoiSource,
-  PublicationState,
-  TextualDescription,
-  TextualDescriptionType,
-} from '../libs/gql-api/src';
-import { defer, forkJoin, from, of, throwError } from 'rxjs';
-import {
-  catchError,
-  concatMap,
-  delay,
-  filter,
-  map,
-  switchMap,
-  tap,
-  toArray,
-} from 'rxjs/operators';
+import { awsConfig, Hike, TextualDescriptionType } from '../libs/gql-api/src';
+import { defer, from, of } from 'rxjs';
+import { concatMap, map, delay, switchMap, tap } from 'rxjs/operators';
 import { DOMParser } from 'xmldom';
-import { XMLParser } from 'fast-xml-parser';
 const togeojson = require('@mapbox/togeojson');
-import lineChunk from '@turf/line-chunk';
-import * as fp from 'lodash/fp';
-import { pipe } from 'fp-ts/lib/function';
 
 Amplify.configure(awsConfig);
-const xmlParser = new XMLParser();
 const domParser = new DOMParser();
 
 /*import {
@@ -317,7 +295,6 @@ const hikeIds = [
   //  44305978,
 ];
 
-const segmentDistance = 2; // km
 /*
 const processSegments = (segments: number[][][]) =>
       from(segments).pipe(
@@ -455,8 +432,13 @@ const fetchRoute = (routeId: number) => {
 };
 console.log('STARTING...');
 
-from(hikeIds)
-  .pipe(concatMap(routeId => fetchRoute(routeId)))
+of(1)
+  .pipe(
+    delay(3000),
+    switchMap(() => from(DataStore.start())),
+    switchMap(() => from(hikeIds)),
+    concatMap(routeId => fetchRoute(routeId)),
+  )
   .subscribe(
     x => console.log(`FINISHED WITH RESULT ${JSON.stringify(x, null, 2)}`),
     //() => console.log(`ROUTE HANDLING FINISHED`),
