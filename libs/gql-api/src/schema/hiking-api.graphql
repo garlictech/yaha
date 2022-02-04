@@ -85,7 +85,10 @@ type PoiSourceObject {
   url: String
 }
 
-type Poi @model {
+type Poi
+  @model
+  @searchable
+  @auth(rules: [{ allow: public }, { allow: public, provider: iam }]) {
   id: ID!
   location: Point!
   types: [String!]
@@ -97,7 +100,10 @@ type Poi @model {
   openingHours: String
 }
 
-type Hike @model @searchable {
+type Hike
+  @model
+  @searchable
+  @auth(rules: [{ allow: public }, { allow: public, provider: iam }]) {
   id: ID!
   description: [TextualDescription]
   location: String

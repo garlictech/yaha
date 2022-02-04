@@ -4,15 +4,24 @@
 /* eslint no-console: "off" */
 import axios from 'axios';
 import '@aws-amplify/datastore';
-import { DataStore, Amplify } from 'aws-amplify';
-import { awsConfig, Hike, TextualDescriptionType } from '../libs/gql-api/src';
 import { defer, from, of } from 'rxjs';
 import { concatMap, map, delay, switchMap, tap } from 'rxjs/operators';
 import { DOMParser } from 'xmldom';
 const togeojson = require('@mapbox/togeojson');
+import {
+  YahaApi,
+  getGraphqlSdkForIAM,
+  getGraphqlSdkPublic,
+} from '../libs/gql-api/src';
 
-Amplify.configure(awsConfig);
 const domParser = new DOMParser();
+
+/*const sdk = getGraphqlSdkForIAM(
+  process.env.AWS_ACCESS_KEY_ID || 'AWS_ACCESS_KEY_ID NOT DEFINED',
+  process.env.AWS_SECRET_ACCESS_KEY || 'AWS_SECRET_ACCESS_KEY NOT DEFINED',
+);*/
+
+const sdk = getGraphqlSdkPublic();
 
 /*import {
   GraphqlClientService,
@@ -34,16 +43,6 @@ import {
   shareReplay,
   delay,
 } from 'rxjs/operators';
-import {
-  CreateHike,
-  HikeData,
-  TextualDescription,
-  Poi,
-  PlaceType,
-  PublicationState,
-  RouteData,
-  //CreateHikeGroup,
-} from '../../lib/universal/gtrack/graphql-api';
 import { pipe } from 'fp-ts/lib/function';
 import { resolveDataInPolygon } from '@bit/garlictech.universal.shared.graphql-data';
 import { PoiApiService, PoiModule } from '../../lib/nestjs/gtrack/poi';
@@ -356,13 +355,15 @@ const fetchRoute = (routeId: number) => {
             languageKey: 'hu_HU',
             title: geojson?.features?.[0]?.properties?.name,
             summary: geojson?.features?.[0]?.properties?.desc,
-            type: TextualDescriptionType.MARKDOWN,
+            type: YahaApi.TextualDescriptionType.markdown,
           },
         ],
         imageUrls: ['https://loremflickr.com/g/320/240/landscape'],
       };
     }),
-    switchMap(hike => from(DataStore.save(new Hike(hike)))),
+    switchMap((hike: YahaApi.CreateHikeInput) =>
+      sdk.CreateHike({ input: hike }),
+    ),
     /*    switchMap(
       ({
         hikeData,
@@ -435,7 +436,6 @@ console.log('STARTING...');
 of(1)
   .pipe(
     delay(3000),
-    switchMap(() => from(DataStore.start())),
     switchMap(() => from(hikeIds)),
     concatMap(routeId => fetchRoute(routeId)),
   )
