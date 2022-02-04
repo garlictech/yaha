@@ -61,7 +61,7 @@
   "devDependencies": {
     "@commitlint/cli": "16.1.0",
     "@commitlint/config-conventional": "16.0.0",
-    "@types/ramda": "0.27.52",
+    "@types/ramda": "0.27.64",
     "@types/aws-lambda": "8.10.92",
     "@types/jest": "27.4.0",
     "@types/supertest": "2.0.11",
