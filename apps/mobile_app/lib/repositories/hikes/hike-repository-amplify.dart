@@ -12,6 +12,7 @@ class HikeRepositoryAmplify implements HikeRepository {
       // Todo: wait for proper amplify initialization
       await Future.delayed(const Duration(seconds: 2));
       final h = await Amplify.DataStore.query(Hike.classType);
+      debugPrint(h.toString());
       return h;
     } on DataStoreException catch (e) {
       debugPrint('Hike query failed: $e');
