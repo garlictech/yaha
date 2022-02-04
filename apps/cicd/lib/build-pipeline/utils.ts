@@ -273,16 +273,6 @@ export const createCommonDevPipeline = (
 
   return createPipeline(scope, stage, {
     ...props,
-    finalizationStage: {
-      stageName: 'Finalization',
-      actions: [
-        new codepipeline_actions.CloudFormationDeleteStackAction({
-          actionName: `DeleteSeeder`,
-          stackName: `${utils.projectPrefix(stage)}-seeder`,
-          adminPermissions: true,
-        }),
-      ],
-    },
     buildProjectPhases: {
       install: {
         commands: ['apps/cicd/scripts/stage-install.sh'],
@@ -298,13 +288,5 @@ export const createCommonDevPipeline = (
         ],
       },
     },
-    //reports: {
-    //  cypressReports: {
-    //    files: ['cyreport/cucumber-json/**/*'],
-    //    'file-format': 'CUCUMBERJSON',
-    //  },
-    //  coverage: {
-    //    files: ['coverage/**/*'],
-    //    'file-format': 'CLOVERXML',
   });
 };
