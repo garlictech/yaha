@@ -37,7 +37,7 @@
     "@aws-amplify/auth": "4.4.0",
     "@aws-cdk/aws-neptune-alpha": "2.9.0-alpha.0",
     "@mapbox/togeojson": "0.16.0",
-    "@neo4j/graphql": "2.5.6",
+    "@neo4j/graphql": "2.5.7",
     "@neo4j/graphql-ogm": "1.2.4",
     "@turf/line-chunk": "6.5.0",
     "apollo-client": "^2.6.10",
