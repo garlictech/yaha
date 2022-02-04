@@ -67,6 +67,77 @@
       },
       "tags": ["layer:app", "platform:nodejs"]
     },
+    "backend-hike-search-repositories": {
+      "root": "libs/backend/hike-search/repositories",
+      "sourceRoot": "libs/backend/hike-search/repositories/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": [
+              "libs/backend/hike-search/repositories/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/backend/hike-search/repositories"],
+          "options": {
+            "jestConfig": "libs/backend/hike-search/repositories/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["platform:nodejs", "layer:repository"]
+    },
+    "backend-hike-search-services": {
+      "root": "libs/backend/hike-search/services",
+      "sourceRoot": "libs/backend/hike-search/services/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/backend/hike-search/services/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/backend/hike-search/services"],
+          "options": {
+            "jestConfig": "libs/backend/hike-search/services/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["platform:nodejs", "layer:service"]
+    },
+    "backend-hike-search-utils": {
+      "root": "libs/backend/hike-search/utils",
+      "sourceRoot": "libs/backend/hike-search/utils/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/backend/hike-search/utils/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/backend/hike-search/utils"],
+          "options": {
+            "jestConfig": "libs/backend/hike-search/utils/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["platform:nodejs", "layer:utils"]
+    },
     "backend-shared-utils": {
       "root": "libs/backend/shared/utils",
       "sourceRoot": "libs/backend/shared/utils/src",
@@ -230,6 +301,29 @@
         }
       },
       "tags": ["layer:repository", "platform:nodejs"]
+    },
+    "integration-tests-backend": {
+      "root": "libs/integration-tests/backend",
+      "sourceRoot": "libs/integration-tests/backend/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/integration-tests/backend/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/integration-tests/backend"],
+          "options": {
+            "jestConfig": "libs/integration-tests/backend/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
     },
     "js-api": {
       "root": "apps/js-api",

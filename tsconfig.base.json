@@ -2,7 +2,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "rootDir": ".",
-    "outDir": "./dist/out",
+    "outDir": "./dist",
     "strict": true,
     "sourceMap": true,
     "declaration": false,
@@ -30,8 +30,20 @@
     "allowJs": true,
     "baseUrl": ".",
     "paths": {
+      "@yaha/backend/hike-search/repositories": [
+        "libs/backend/hike-search/repositories/src/index.ts"
+      ],
+      "@yaha/backend/hike-search/services": [
+        "libs/backend/hike-search/services/src/index.ts"
+      ],
+      "@yaha/backend/hike-search/utils": [
+        "libs/backend/hike-search/utils/src/index.ts"
+      ],
       "@yaha/backend/shared/utils": ["libs/backend/shared/utils/src/index.ts"],
       "@yaha/gql-api": ["libs/gql-api/src/index.ts"],
+      "@yaha/integration-tests/backend": [
+        "libs/integration-tests/backend/src/index.ts"
+      ],
       "@yaha/neptune-gql": ["libs/neptune-gql/src/index.ts"],
       "@yaha/shared/config": ["libs/shared/config/src/index.ts"],
       "@yaha/shared/graphql/api-client": [

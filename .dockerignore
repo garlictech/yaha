@@ -1,0 +1,8 @@
+node_modules
+dist
+ios
+android
+.git
+.build
+cdk.out
+build

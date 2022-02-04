@@ -35,19 +35,24 @@ type BoundingBox {
   SouthWest: Point!
 }
 
+type GeoJson {
+  type: String!
+  coordinates: [[[Float]]]!
+}
+
 type RouteData {
-  distance: Int!
-  uphill: Int!
-  downhill: Int!
-  track: [[Float!]!]!
-  bigBuffer: [[[Float!]!]!]!
-  smallBuffer: [[[Float!]!]!]!
-  averageTime: Int!
-  score: Int!
-  difficulty: Int!
-  bounds: BoundingBox!
-  isRoundTrip: Boolean!
-  poiSearchBox: BoundingBox!
+  distance: Int
+  uphill: Int
+  downhill: Int
+  track: GeoJson!
+  elevations: [Float]
+  bigBuffer: [[[Float!]!]!]
+  smallBuffer: [[[Float!]!]!]
+  averageTime: Int
+  score: Int
+  difficulty: Int
+  bounds: BoundingBox
+  poiSearchBox: BoundingBox
 }
 
 type HikeStop {
@@ -80,7 +85,10 @@ type PoiSourceObject {
   url: String
 }
 
-type Poi @model {
+type Poi
+  @model
+  @searchable
+  @auth(rules: [{ allow: public }, { allow: public, provider: iam }]) {
   id: ID!
   location: Point!
   types: [String!]
@@ -92,7 +100,10 @@ type Poi @model {
   openingHours: String
 }
 
-type Hike @model {
+type Hike
+  @model
+  @searchable
+  @auth(rules: [{ allow: public }, { allow: public, provider: iam }]) {
   id: ID!
   description: [TextualDescription]
   location: String
@@ -102,7 +113,7 @@ type Hike @model {
   featuredStops: [HikeStop]
   checkpoints: [Poi]
   tags: [String!]
-  route: RouteData
+  route: GeoJson
   startPoint: Point
   endPoint: Point
   imageUrls: [String]
