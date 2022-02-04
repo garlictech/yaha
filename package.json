@@ -46,7 +46,7 @@
     "aws-lambda": "1.0.7",
     "aws-sdk": "2.1067.0",
     "fp-ts": "2.11.8",
-    "gpx-builder": "3.8.0",
+    "gpx-builder": "4.0.3",
     "graphql": "15.8.0",
     "graphql-subscriptions": "2.0.0",
     "graphql-tag": "2.12.6",
