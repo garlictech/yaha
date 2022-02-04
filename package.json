@@ -44,7 +44,7 @@
     "apollo-server-lambda": "2.25.3",
     "aws-appsync": "4.1.4",
     "aws-lambda": "1.0.7",
-    "aws-sdk": "2.1067.0",
+    "aws-sdk": "2.1069.0",
     "fp-ts": "2.11.8",
     "gpx-builder": "3.8.0",
     "graphql": "15.8.0",
