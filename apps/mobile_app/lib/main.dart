@@ -15,6 +15,7 @@ import 'hike/hike-screen/hike-screen.dart';
 import 'models/ModelProvider.dart';
 import 'amplifyconfiguration.dart';
 import 'package:amplify_api/amplify_api.dart';
+import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -64,8 +65,10 @@ class _MyAppState extends State<MyApp> {
     AmplifyDataStore datastorePlugin =
         AmplifyDataStore(modelProvider: ModelProvider.instance);
     try {
-      await Amplify.addPlugins([datastorePlugin, AmplifyAPI()]);
+      await Amplify.addPlugins(
+          [datastorePlugin, AmplifyAPI(), AmplifyAuthCognito()]);
       await Amplify.configure(amplifyconfig);
+      await Amplify.DataStore.clear();
       await Amplify.DataStore.start();
       debugPrint("Amplify config done");
     } on AmplifyAlreadyConfiguredException {

@@ -61,6 +61,7 @@ dependencies:
   amplify_flutter: ^0.3.2
   amplify_datastore: ^0.3.2
   amplify_api: ^0.3.2
+  amplify_auth_cognito: ^0.3.2
 
 flutter_icons:
   android: true

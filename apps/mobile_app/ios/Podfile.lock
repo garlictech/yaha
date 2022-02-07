@@ -9,6 +9,12 @@ PODS:
     - Flutter
     - SwiftFormat/CLI
     - SwiftLint
+  - amplify_auth_cognito (0.0.1):
+    - Amplify (= 1.19.0)
+    - amplify_core
+    - AmplifyPlugins/AWSCognitoAuthPlugin (= 1.19.0)
+    - Flutter
+    - ObjectMapper
   - amplify_core (0.0.1):
     - Flutter
     - SwiftFormat/CLI
@@ -67,6 +73,7 @@ PODS:
   - FMDB/standard (2.7.5)
   - image_picker (0.0.1):
     - Flutter
+  - ObjectMapper (4.2.0)
   - path_provider_ios (0.0.1):
     - Flutter
   - shared_preferences_ios (0.0.1):
@@ -87,6 +94,7 @@ PODS:
 
 DEPENDENCIES:
   - amplify_api (from `.symlinks/plugins/amplify_api/ios`)
+  - amplify_auth_cognito (from `.symlinks/plugins/amplify_auth_cognito/ios`)
   - amplify_core (from `.symlinks/plugins/amplify_core/ios`)
   - amplify_datastore (from `.symlinks/plugins/amplify_datastore/ios`)
   - amplify_flutter (from `.symlinks/plugins/amplify_flutter/ios`)
@@ -111,6 +119,7 @@ SPEC REPOS:
     - AWSMobileClient
     - AWSPluginsCore
     - FMDB
+    - ObjectMapper
     - SQLite.swift
     - Starscream
     - SwiftFormat
@@ -119,6 +128,8 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   amplify_api:
     :path: ".symlinks/plugins/amplify_api/ios"
+  amplify_auth_cognito:
+    :path: ".symlinks/plugins/amplify_auth_cognito/ios"
   amplify_core:
     :path: ".symlinks/plugins/amplify_core/ios"
   amplify_datastore:
@@ -145,6 +156,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Amplify: 7906ce8bc77c2c9a97545581024eb90ec6f2e03a
   amplify_api: 746a987380d7b6666155a13205e4b7e6379e78f0
+  amplify_auth_cognito: 7069f7c928b8e68dbc4d3feea002cb01e30086d3
   amplify_core: e67fe0c53845db08aced670bfc7370b1329d2798
   amplify_datastore: a08d00ffda5eabaad23b28d2d85b1a58e951d014
   amplify_flutter: 565399b1213f406463a5d99443ea5973a78f494c
@@ -160,6 +172,7 @@ SPEC CHECKSUMS:
   flutter_web_auth: fd071763f61703882adbb2524f5cd5251883118c
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   image_picker: 9aa50e1d8cdacdbed739e925b7eea16d014367e6
+  ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
   path_provider_ios: 7d7ce634493af4477d156294792024ec3485acd5
   shared_preferences_ios: aef470a42dc4675a1cdd50e3158b42e3d1232b32
   sqflite: 6d358c025f5b867b29ed92fc697fd34924e11904
@@ -170,6 +183,6 @@ SPEC CHECKSUMS:
   url_launcher_ios: 02f1989d4e14e998335b02b67a7590fa34f971af
   webview_flutter_wkwebview: 005fbd90c888a42c5690919a1527ecc6649e1162
 
-PODFILE CHECKSUM: 0f7873280b712a1fecf6d976b84743308d1a5095
+PODFILE CHECKSUM: 2d88a1f5affa20555026125dbb9a768532a96464
 
 COCOAPODS: 1.11.2
