@@ -1,16 +1,4 @@
 
-type Point @aws_iam @aws_api_key {
-  lat: Float!
-  lon: Float!
-  ele: Float
-}
-
-enum PublicationState {
-  draft
-  published
-  archived
-}
-
 enum TextualDescriptionType {
   markdown
   html
@@ -24,71 +12,13 @@ type TextualDescription @aws_iam @aws_api_key {
   type: TextualDescriptionType!
 }
 
-type BoundingBox {
-  NorthEast: Point!
-  SouthWest: Point!
-}
-
 type GeoJson @aws_iam @aws_api_key {
   type: String!
   coordinates: [[[Float]]]!
 }
 
-type RouteData {
-  distance: Int
-  uphill: Int
-  downhill: Int
-  track: GeoJson!
-  elevations: [Float]
-  bigBuffer: [[[Float!]!]!]
-  smallBuffer: [[[Float!]!]!]
-  averageTime: Int
-  score: Int
-  difficulty: Int
-  bounds: BoundingBox
-  poiSearchBox: BoundingBox
-}
-
-type HikeStop @aws_iam @aws_api_key {
-  poiId: ID!
-  description: [TextualDescription!]
-}
-
-enum PoiSource {
-  google
-  wikipedia
-  osmAmenity
-  osmNatural
-  osmRoute
-  osmPublicTransport
-  osmEmergency
-  osmHistoric
-  osmLeisure
-  osmManMade
-  osmMilitary
-  osmShop
-  osmTourism
-  mapillary
-  flickr
-}
-
-type PoiSourceObject @aws_iam @aws_api_key {
-  objectType: PoiSource!
-  languageKey: String
-  objectId: String!
-  url: String
-}
-
 type Poi @aws_iam @aws_api_key {
   id: ID!
-  location: Point!
-  types: [String!]
-  description: [TextualDescription!]!
-  tags: [String!]
-  sourceObject: [PoiSourceObject!]!
-  address: String
-  phoneFloat: String
-  openingHours: String
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
   _version: Int!
@@ -99,53 +29,13 @@ type Poi @aws_iam @aws_api_key {
 type Hike @aws_iam @aws_api_key {
   id: ID!
   description: [TextualDescription]
-  location: String
-  featured: Boolean
-  rate: String
-  offlineMap: String
-  featuredStops: [HikeStop]
-  checkpoints: [Poi]
-  tags: [String!]
   route: GeoJson
-  startPoint: Point
-  endPoint: Point
   imageUrls: [String]
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
   _version: Int!
   _deleted: Boolean
   _lastChangedAt: AWSTimestamp!
-}
-
-interface Node {
-  id: ID!
-  label: ValidDataLabels
-}
-
-interface HierarchicalNode {
-  parent: ID
-  children: [ID]
-}
-
-enum ValidDataLabels {
-  Hike
-}
-
-input GetNodeInput {
-  id: ID!
-  label: ValidDataLabels!
-}
-
-type Query {
-  getNode(input: GetNodeInput!): Node @aws_iam @aws_cognito_user_pools @aws_api_key
-  getPoi(id: ID!): Poi @aws_api_key @aws_iam
-  listPois(filter: ModelPoiFilterInput, limit: Int, nextToken: String): ModelPoiConnection @aws_api_key @aws_iam
-  syncPois(filter: ModelPoiFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelPoiConnection @aws_api_key @aws_iam
-  searchPois(filter: SearchablePoiFilterInput, sort: [SearchablePoiSortInput], limit: Int, nextToken: String, from: Int, aggregates: [SearchablePoiAggregationInput]): SearchablePoiConnection @aws_api_key @aws_iam
-  getHike(id: ID!): Hike @aws_api_key @aws_iam
-  listHikes(filter: ModelHikeFilterInput, limit: Int, nextToken: String): ModelHikeConnection @aws_api_key @aws_iam
-  syncHikes(filter: ModelHikeFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelHikeConnection @aws_api_key @aws_iam
-  searchHikes(filter: SearchableHikeFilterInput, sort: [SearchableHikeSortInput], limit: Int, nextToken: String, from: Int, aggregates: [SearchableHikeAggregationInput]): SearchableHikeConnection @aws_api_key @aws_iam
 }
 
 type SearchablePoiConnection @aws_api_key @aws_iam {
@@ -174,6 +64,17 @@ type SearchableAggregateBucketResultItem @aws_iam @aws_api_key {
 }
 
 union SearchableAggregateGenericResult = SearchableAggregateScalarResult | SearchableAggregateBucketResult
+
+type Query {
+  getPoi(id: ID!): Poi @aws_api_key @aws_iam
+  listPois(filter: ModelPoiFilterInput, limit: Int, nextToken: String): ModelPoiConnection @aws_api_key @aws_iam
+  syncPois(filter: ModelPoiFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelPoiConnection @aws_api_key @aws_iam
+  searchPois(filter: SearchablePoiFilterInput, sort: [SearchablePoiSortInput], limit: Int, nextToken: String, from: Int, aggregates: [SearchablePoiAggregationInput]): SearchablePoiConnection @aws_api_key @aws_iam
+  getHike(id: ID!): Hike @aws_api_key @aws_iam
+  listHikes(filter: ModelHikeFilterInput, limit: Int, nextToken: String): ModelHikeConnection @aws_api_key @aws_iam
+  syncHikes(filter: ModelHikeFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelHikeConnection @aws_api_key @aws_iam
+  searchHikes(filter: SearchableHikeFilterInput, sort: [SearchableHikeSortInput], limit: Int, nextToken: String, from: Int, aggregates: [SearchableHikeAggregationInput]): SearchableHikeConnection @aws_api_key @aws_iam
+}
 
 type SearchableHikeConnection @aws_api_key @aws_iam {
   items: [Hike]!
@@ -273,27 +174,6 @@ enum ModelSortDirection {
   DESC
 }
 
-input PointInput {
-  lat: Float!
-  lon: Float!
-  ele: Float
-}
-
-input TextualDescriptionInput {
-  languageKey: String!
-  title: String
-  summary: String
-  fullDescription: String
-  type: TextualDescriptionType!
-}
-
-input PoiSourceObjectInput {
-  objectType: PoiSource!
-  languageKey: String
-  objectId: String!
-  url: String
-}
-
 type ModelPoiConnection @aws_api_key @aws_iam {
   items: [Poi]!
   nextToken: String
@@ -302,22 +182,12 @@ type ModelPoiConnection @aws_api_key @aws_iam {
 
 input ModelPoiFilterInput {
   id: ModelIDInput
-  types: ModelStringInput
-  tags: ModelStringInput
-  address: ModelStringInput
-  phoneFloat: ModelStringInput
-  openingHours: ModelStringInput
   and: [ModelPoiFilterInput]
   or: [ModelPoiFilterInput]
   not: ModelPoiFilterInput
 }
 
 input ModelPoiConditionInput {
-  types: ModelStringInput
-  tags: ModelStringInput
-  address: ModelStringInput
-  phoneFloat: ModelStringInput
-  openingHours: ModelStringInput
   and: [ModelPoiConditionInput]
   or: [ModelPoiConditionInput]
   not: ModelPoiConditionInput
@@ -325,27 +195,11 @@ input ModelPoiConditionInput {
 
 input CreatePoiInput {
   id: ID
-  location: PointInput!
-  types: [String!]
-  description: [TextualDescriptionInput!]!
-  tags: [String!]
-  sourceObject: [PoiSourceObjectInput!]!
-  address: String
-  phoneFloat: String
-  openingHours: String
   _version: Int
 }
 
 input UpdatePoiInput {
   id: ID!
-  location: PointInput
-  types: [String!]
-  description: [TextualDescriptionInput!]
-  tags: [String!]
-  sourceObject: [PoiSourceObjectInput!]
-  address: String
-  phoneFloat: String
-  openingHours: String
   _version: Int
 }
 
@@ -372,9 +226,12 @@ type Subscription {
   onDeleteHike: Hike @aws_subscribe(mutations: ["deleteHike"]) @aws_api_key @aws_iam
 }
 
-input HikeStopInput {
-  poiId: ID!
-  description: [TextualDescriptionInput!]
+input TextualDescriptionInput {
+  languageKey: String!
+  title: String
+  summary: String
+  fullDescription: String
+  type: TextualDescriptionType!
 }
 
 input GeoJsonInput {
@@ -390,11 +247,6 @@ type ModelHikeConnection @aws_api_key @aws_iam {
 
 input ModelHikeFilterInput {
   id: ModelIDInput
-  location: ModelStringInput
-  featured: ModelBooleanInput
-  rate: ModelStringInput
-  offlineMap: ModelStringInput
-  tags: ModelStringInput
   imageUrls: ModelStringInput
   and: [ModelHikeFilterInput]
   or: [ModelHikeFilterInput]
@@ -402,11 +254,6 @@ input ModelHikeFilterInput {
 }
 
 input ModelHikeConditionInput {
-  location: ModelStringInput
-  featured: ModelBooleanInput
-  rate: ModelStringInput
-  offlineMap: ModelStringInput
-  tags: ModelStringInput
   imageUrls: ModelStringInput
   and: [ModelHikeConditionInput]
   or: [ModelHikeConditionInput]
@@ -416,15 +263,7 @@ input ModelHikeConditionInput {
 input CreateHikeInput {
   id: ID
   description: [TextualDescriptionInput]
-  location: String
-  featured: Boolean
-  rate: String
-  offlineMap: String
-  featuredStops: [HikeStopInput]
-  tags: [String!]
   route: GeoJsonInput
-  startPoint: PointInput
-  endPoint: PointInput
   imageUrls: [String]
   _version: Int
 }
@@ -432,15 +271,7 @@ input CreateHikeInput {
 input UpdateHikeInput {
   id: ID!
   description: [TextualDescriptionInput]
-  location: String
-  featured: Boolean
-  rate: String
-  offlineMap: String
-  featuredStops: [HikeStopInput]
-  tags: [String!]
   route: GeoJsonInput
-  startPoint: PointInput
-  endPoint: PointInput
   imageUrls: [String]
   _version: Int
 }
@@ -511,11 +342,6 @@ input SearchableIDFilterInput {
 
 input SearchablePoiFilterInput {
   id: SearchableIDFilterInput
-  types: SearchableStringFilterInput
-  tags: SearchableStringFilterInput
-  address: SearchableStringFilterInput
-  phoneFloat: SearchableStringFilterInput
-  openingHours: SearchableStringFilterInput
   createdAt: SearchableStringFilterInput
   updatedAt: SearchableStringFilterInput
   _version: SearchableIntFilterInput
@@ -533,11 +359,6 @@ enum SearchableSortDirection {
 
 enum SearchablePoiSortableFields {
   id
-  types
-  tags
-  address
-  phoneFloat
-  openingHours
   createdAt
   updatedAt
   _version
@@ -560,11 +381,6 @@ enum SearchableAggregateType {
 
 enum SearchablePoiAggregateField {
   id
-  types
-  tags
-  address
-  phoneFloat
-  openingHours
   createdAt
   updatedAt
   _version
@@ -580,11 +396,6 @@ input SearchablePoiAggregationInput {
 
 input SearchableHikeFilterInput {
   id: SearchableIDFilterInput
-  location: SearchableStringFilterInput
-  featured: SearchableBooleanFilterInput
-  rate: SearchableStringFilterInput
-  offlineMap: SearchableStringFilterInput
-  tags: SearchableStringFilterInput
   imageUrls: SearchableStringFilterInput
   createdAt: SearchableStringFilterInput
   updatedAt: SearchableStringFilterInput
@@ -598,11 +409,6 @@ input SearchableHikeFilterInput {
 
 enum SearchableHikeSortableFields {
   id
-  location
-  featured
-  rate
-  offlineMap
-  tags
   imageUrls
   createdAt
   updatedAt
@@ -618,11 +424,6 @@ input SearchableHikeSortInput {
 
 enum SearchableHikeAggregateField {
   id
-  location
-  featured
-  rate
-  offlineMap
-  tags
   imageUrls
   createdAt
   updatedAt

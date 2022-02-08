@@ -2,19 +2,6 @@ input AMPLIFY {
   globalAuthRule: AuthRule = { allow: public }
 }
 
-## ------ Generic types -----------------------------------------------------
-type Point {
-  lat: Float!
-  lon: Float!
-  ele: Float
-}
-
-enum PublicationState {
-  draft
-  published
-  archived
-}
-
 # ------ TEXTUAL DESCRIPTION -----------------------------------------------------
 enum TextualDescriptionType {
   markdown
@@ -29,60 +16,9 @@ type TextualDescription {
   type: TextualDescriptionType!
 }
 
-# ------ HIKE -----------------------------------------------------
-type BoundingBox {
-  NorthEast: Point!
-  SouthWest: Point!
-}
-
 type GeoJson {
   type: String!
   coordinates: [[[Float]]]!
-}
-
-type RouteData {
-  distance: Int
-  uphill: Int
-  downhill: Int
-  track: GeoJson!
-  elevations: [Float]
-  bigBuffer: [[[Float!]!]!]
-  smallBuffer: [[[Float!]!]!]
-  averageTime: Int
-  score: Int
-  difficulty: Int
-  bounds: BoundingBox
-  poiSearchBox: BoundingBox
-}
-
-type HikeStop {
-  poiId: ID!
-  description: [TextualDescription!]
-}
-
-enum PoiSource {
-  google
-  wikipedia
-  osmAmenity
-  osmNatural
-  osmRoute
-  osmPublicTransport
-  osmEmergency
-  osmHistoric
-  osmLeisure
-  osmManMade
-  osmMilitary
-  osmShop
-  osmTourism
-  mapillary
-  flickr
-}
-
-type PoiSourceObject {
-  objectType: PoiSource!
-  languageKey: String
-  objectId: String!
-  url: String
 }
 
 type Poi
@@ -90,14 +26,6 @@ type Poi
   @searchable
   @auth(rules: [{ allow: public }, { allow: public, provider: iam }]) {
   id: ID!
-  location: Point!
-  types: [String!]
-  description: [TextualDescription!]!
-  tags: [String!]
-  sourceObject: [PoiSourceObject!]!
-  address: String
-  phoneFloat: String
-  openingHours: String
 }
 
 type Hike
@@ -106,43 +34,6 @@ type Hike
   @auth(rules: [{ allow: public }, { allow: public, provider: iam }]) {
   id: ID!
   description: [TextualDescription]
-  location: String
-  featured: Boolean
-  rate: String
-  offlineMap: String
-  featuredStops: [HikeStop]
-  checkpoints: [Poi]
-  tags: [String!]
   route: GeoJson
-  startPoint: Point
-  endPoint: Point
   imageUrls: [String]
-}
-
-### THE GRAPH BASED API
-interface Node {
-  id: ID!
-  label: ValidDataLabels
-}
-
-interface HierarchicalNode {
-  parent: ID
-  children: [ID]
-}
-
-enum ValidDataLabels {
-  Hike
-}
-
-input GetNodeInput {
-  id: ID!
-  label: ValidDataLabels!
-}
-
-type Query {
-  getNode(input: GetNodeInput!): Node
-    @aws_iam
-    @aws_cognito_user_pools
-    @aws_api_key
-  #    @function(name: "${env}-neptune-resolvers")
 }
