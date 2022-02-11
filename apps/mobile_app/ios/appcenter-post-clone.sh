@@ -23,9 +23,6 @@ echo "***** The build: ${APPCENTER_BRANCH}/${ARTIFACT_NAME}"
 cd ../..
 aws s3 cp s3://yaha-build-artifacts-${APPCENTER_BRANCH}/${ARTIFACT_NAME} .
 tar -zxf ${ARTIFACT_NAME}
-mkdir -p ~/.ssh
-mv apps/cicd/docker/keys/id_rsa ~/.ssh/
-chmod 600 ~/.ssh/
 
 cd apps/mobile_app
 flutter build ios --release --no-codesign

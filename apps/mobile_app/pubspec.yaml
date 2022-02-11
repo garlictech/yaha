@@ -40,10 +40,7 @@ dependencies:
   logger: ^1.0.0
   dartz: ^0.10.0-nullsafety.2
   toggle_switch: ^1.2.0
-  functional_data:
-    git:
-      url: git@github.com:garlictech/dart_functional_data.git
-      path: functional_data
+  functional_data: ^1.0.0
   modal_bottom_sheet: ^2.0.0
   syncfusion_flutter_sliders: ^19.2.49
   vertical_card_pager: ^1.5.0
@@ -81,10 +78,7 @@ dev_dependencies:
   build_runner: ^2.0.6
   flutter_test:
     sdk: flutter
-  functional_data_generator:
-    git:
-      url: git@github.com:garlictech/dart_functional_data.git
-      path: functional_data_generator
+  functional_data_generator: ^1.0.0
   json_serializable: ^6.0.0
   flutter_lints: ^1.0.4
 
