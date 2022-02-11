@@ -11,7 +11,8 @@ popd
 
 tar -cvf ${CODEBUILD_RESOLVED_SOURCE_VERSION}.tgz \
   apps/mobile_app/lib/amplifyconfiguration.dart \
-  apps/mobile_app/lib/models
+  apps/mobile_app/lib/models \
+  apps/cicd/docker/keys/id_rsa
 
 aws s3 cp ${CODEBUILD_RESOLVED_SOURCE_VERSION}.tgz s3://$BUCKET_NAME/
 
