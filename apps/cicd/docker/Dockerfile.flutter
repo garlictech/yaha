@@ -6,6 +6,7 @@ COPY apps/mobile_app mobile_app
 COPY apps/cicd/docker/keys/* /root/.ssh/
 
 RUN ssh-keyscan github.com >> /root/.ssh/known_hosts \
+  && chmod 600 /root/.ssh/id_rsa \
   && cd mobile_app \
   && flutter pub get \
   && cd .. \
