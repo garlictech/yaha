@@ -82,9 +82,6 @@ export const createBuildProject = (
     buildSpec: codebuild.BuildSpec.fromObject({
       version: '0.2',
       phases: buildProjectPhases,
-      artifacts: {
-        files: ['apps/backend/cdk.out/**/*'],
-      },
       env: {
         'secrets-manager': {
           AWS_ACCESS_KEY_ID: 'cicd:codebuild-aws_access_key_id',
