@@ -62,14 +62,10 @@ class _MyAppState extends State<MyApp> {
 
   void _configureAmplify() async {
     // Add the following lines to your app initialization to add the DataStore plugin
-    AmplifyDataStore datastorePlugin =
-        AmplifyDataStore(modelProvider: ModelProvider.instance);
     try {
-      await Amplify.addPlugins(
-          [datastorePlugin, AmplifyAPI(), AmplifyAuthCognito()]);
+      await Amplify.addPlugins([AmplifyAPI(), AmplifyAuthCognito()]);
       await Amplify.configure(amplifyconfig);
-      await Amplify.DataStore.clear();
-      await Amplify.DataStore.start();
+      //await Amplify.DataStore.clear();
       debugPrint("Amplify config done");
     } on AmplifyAlreadyConfiguredException {
       debugPrint(
