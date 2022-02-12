@@ -33,7 +33,7 @@ type Hike
   @searchable
   @auth(rules: [{ allow: public }, { allow: public, provider: iam }]) {
   id: ID!
-  description: [TextualDescription]
-  route: GeoJson
+  description: [TextualDescription]!
+  route: GeoJson!
   imageUrls: [String]
 }

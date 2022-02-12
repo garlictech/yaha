@@ -309,13 +309,15 @@ class HomePageGuest extends ConsumerWidget {
                                 top: YahaSpaceSizes.small),
                             child: HorizontalHikeCards(
                                 title: 'Best hikes near you',
-                                hikes: viewModel.bestHikesNearby)),
+                                hikeListProvider:
+                                    viewModel.bestHikesNearbyProvider)),
                         Container(
                             padding: const EdgeInsets.only(
                                 top: YahaSpaceSizes.small),
                             child: HorizontalHikeCards(
                                 title: 'Best hikes of the world',
-                                hikes: viewModel.bestHikesOfTheWorld))
+                                hikeListProvider:
+                                    viewModel.bestHikesOfTheWorldProvider)),
                       ],
                     ),
                   ),

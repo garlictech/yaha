@@ -269,23 +269,25 @@ class ApplicationSettingsState$ {
 // **************************************************************************
 
 ApplicationSettingsState _$ApplicationSettingsStateFromJson(
-    Map<String, dynamic> json) {
-  return ApplicationSettingsState(
-    isEnglish: json['isEnglish'] as bool,
-    isKm: json['isKm'] as bool,
-    isCelsius: json['isCelsius'] as bool,
-    isTimeFormat24: json['isTimeFormat24'] as bool,
-    distanceInitialIndex: json['distanceInitialIndex'] as int,
-    temperatureInitialIndex: json['temperatureInitialIndex'] as int,
-    averageHikingSpeed: json['averageHikingSpeed'] as String,
-    timeFormatInitialIndex: json['timeFormatInitialIndex'] as int,
-    startTime: json['startTime'],
-    finishTime: json['finishTime'],
-    startTimePickerVisibility: json['startTimePickerVisibility'] as bool,
-    finishTimePickerVisibility: json['finishTimePickerVisibility'] as bool,
-    currentLanguageTitle: json['currentLanguageTitle'] as String,
-  );
-}
+        Map<String, dynamic> json) =>
+    ApplicationSettingsState(
+      isEnglish: json['isEnglish'] as bool? ?? true,
+      isKm: json['isKm'] as bool? ?? true,
+      isCelsius: json['isCelsius'] as bool? ?? true,
+      isTimeFormat24: json['isTimeFormat24'] as bool? ?? true,
+      distanceInitialIndex: json['distanceInitialIndex'] as int? ?? 0,
+      temperatureInitialIndex: json['temperatureInitialIndex'] as int? ?? 0,
+      averageHikingSpeed: json['averageHikingSpeed'] as String? ?? '4',
+      timeFormatInitialIndex: json['timeFormatInitialIndex'] as int? ?? 1,
+      startTime: json['startTime'],
+      finishTime: json['finishTime'],
+      startTimePickerVisibility:
+          json['startTimePickerVisibility'] as bool? ?? false,
+      finishTimePickerVisibility:
+          json['finishTimePickerVisibility'] as bool? ?? false,
+      currentLanguageTitle:
+          json['currentLanguageTitle'] as String? ?? 'English',
+    );
 
 Map<String, dynamic> _$ApplicationSettingsStateToJson(
         ApplicationSettingsState instance) =>

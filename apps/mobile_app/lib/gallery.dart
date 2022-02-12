@@ -3,7 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 
 class Gallery extends StatelessWidget {
-  const Gallery({Key? key}) : super(key: key);
+  final List<String>? imageUrls;
+  const Gallery(
+      {Key? key,
+      this.imageUrls = const [
+        'https://cdn2.iconfinder.com/data/icons/mountain-landscape-2/138/hiking_boots_hiking_logo_hiking_chair_hiking_drawing_hiking_day_hiking_flyer_hiking_in_winter-1024.png'
+      ]})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,13 +20,19 @@ class Gallery extends StatelessWidget {
         enableInfiniteScroll: true,
         initialPage: 3,
       ),
-      items: <Widget>[
-        ClipRRect(
-          borderRadius: BorderRadius.circular(YahaBorderRadius.general),
-          child: Image.asset('assets/images/Parlament.jpg',
-              fit: BoxFit.cover, width: MediaQuery.of(context).size.width),
-        ),
-      ],
+      items: imageUrls
+          ?.map<Widget>((url) => ClipRRect(
+                borderRadius: BorderRadius.circular(YahaBorderRadius.general),
+                child: Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: NetworkImage(url),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              ))
+          .toList(),
     );
   }
 }

@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:yaha/hike/hike-screen/hike-screen.dart';
+import 'package:yaha/entities/hike/hike.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
+import '../screens/hike-screen.dart';
+
 class HikeCard extends StatelessWidget {
-  final String title;
-  final String subTitle;
   final int? distanceFromCurrentLocation;
-  final String backgroundImage;
+  final Hike hike;
 
   const HikeCard({
     Key? key,
-    required this.title,
-    required this.subTitle,
+    required this.hike,
     this.distanceFromCurrentLocation,
-    required this.backgroundImage,
   }) : super(key: key);
 
   @override
@@ -27,7 +25,9 @@ class HikeCard extends StatelessWidget {
         child: InkWell(
           onTap: () {
             Navigator.push(
-                context, MaterialPageRoute(builder: (context) => HikeScreen()));
+                context,
+                MaterialPageRoute(
+                    builder: (context) => HikeScreen(hike: hike)));
           },
           child: Stack(
             children: [
@@ -39,7 +39,8 @@ class HikeCard extends StatelessWidget {
                   child: Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: NetworkImage(backgroundImage),
+                        image: NetworkImage(hike.imageUrls?.first ??
+                            'https://cdn2.iconfinder.com/data/icons/mountain-landscape-2/138/hiking_boots_hiking_logo_hiking_chair_hiking_drawing_hiking_day_hiking_flyer_hiking_in_winter-1024.png'),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -58,7 +59,7 @@ class HikeCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        title,
+                        hike.description?[0].title ?? 'A nice hike',
                         style: const TextStyle(
                           fontSize: YahaFontSizes.medium,
                           fontWeight: FontWeight.w700,
@@ -66,7 +67,7 @@ class HikeCard extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        subTitle + ' ($distanceFromCurrentLocation km away)',
+                        '($distanceFromCurrentLocation km away)',
                         style: const TextStyle(
                           fontSize: YahaFontSizes.small,
                           fontWeight: FontWeight.w600,

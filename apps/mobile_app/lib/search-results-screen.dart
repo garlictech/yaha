@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:yaha/hike/hike-card/hike-card.dart';
 import 'package:yaha/utility/buttons/back-button.dart';
 import 'package:yaha/utility/buttons/filter-button.dart';
 import 'package:yaha/utility/yaha-colors.dart';
@@ -7,6 +6,8 @@ import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
 class SearchResultsScreen extends StatefulWidget {
+  const SearchResultsScreen({Key? key}) : super(key: key);
+
   @override
   _SearchResultState createState() => _SearchResultState();
 }
@@ -18,7 +19,7 @@ class _SearchResultState extends State<SearchResultsScreen> {
       appBar: AppBar(
         backgroundColor: YahaColors.background,
         elevation: 0,
-        title: Text(
+        title: const Text(
           'Search results',
           textAlign: TextAlign.center,
           style: TextStyle(
@@ -36,7 +37,7 @@ class _SearchResultState extends State<SearchResultsScreen> {
         ],
       ),
       body: CustomScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         slivers: <Widget>[
           SliverList(
             delegate: SliverChildBuilderDelegate(
@@ -60,8 +61,8 @@ class _SearchResultState extends State<SearchResultsScreen> {
                           primary: false,
                           crossAxisSpacing: YahaSpaceSizes.general,
                           mainAxisSpacing: YahaSpaceSizes.general,
-                          children: [
-                            HikeCard(
+                          children: const [
+                            /*HikeCard(
                               title: 'Budapest',
                               subTitle: 'Várhegy, Duna, Lánchid',
                               backgroundImage: 'assets/images/budapest.png',
@@ -90,7 +91,7 @@ class _SearchResultState extends State<SearchResultsScreen> {
                               title: 'Balaton',
                               subTitle: 'Nagy édesvizű tó üdülővárosokkal',
                               backgroundImage: 'assets/images/balaton.png',
-                            ),
+                            ),*/
                           ],
                         ),
                       ),

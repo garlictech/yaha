@@ -126,15 +126,13 @@ class Comment$ {
 // JsonSerializableGenerator
 // **************************************************************************
 
-Comment _$CommentFromJson(Map<String, dynamic> json) {
-  return Comment(
-    body: json['body'] as String,
-    ownerId: json['ownerId'] as String,
-    ownerName: json['ownerName'] as String,
-    profilePicture: json['profilePicture'] as String,
-    date: json['date'] as String,
-  );
-}
+Comment _$CommentFromJson(Map<String, dynamic> json) => Comment(
+      body: json['body'] as String,
+      ownerId: json['ownerId'] as String,
+      ownerName: json['ownerName'] as String,
+      profilePicture: json['profilePicture'] as String,
+      date: json['date'] as String,
+    );
 
 Map<String, dynamic> _$CommentToJson(Comment instance) => <String, dynamic>{
       'body': instance.body,

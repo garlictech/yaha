@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:yaha/hike/hike-card/hike-card.dart';
 import 'package:yaha/utility/buttons/back-button.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
 class BookmarkedHikes extends ConsumerWidget {
+  const BookmarkedHikes({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: YahaColors.background,
         elevation: 0,
-        title: Text(
+        title: const Text(
           'Bookmarked hikes',
           textAlign: TextAlign.center,
           style: TextStyle(
@@ -25,7 +26,7 @@ class BookmarkedHikes extends ConsumerWidget {
         leading: YahaBackButton(),
       ),
       body: CustomScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         slivers: <Widget>[
           SliverList(
             delegate: SliverChildBuilderDelegate(
@@ -44,8 +45,8 @@ class BookmarkedHikes extends ConsumerWidget {
                           primary: false,
                           crossAxisSpacing: YahaSpaceSizes.general,
                           mainAxisSpacing: YahaSpaceSizes.general,
-                          children: [
-                            HikeCard(
+                          children: const [
+                            /*HikeCard(
                               title: 'Budapest',
                               subTitle: 'Várhegy, Duna, Lánchid',
                               backgroundImage: 'assets/images/budapest.png',
@@ -74,7 +75,7 @@ class BookmarkedHikes extends ConsumerWidget {
                               title: 'Balaton',
                               subTitle: 'Nagy édesvizű tó üdülővárosokkal',
                               backgroundImage: 'assets/images/balaton.png',
-                            ),
+                            ),*/
                           ],
                         ),
                       ),

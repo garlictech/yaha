@@ -21,21 +21,15 @@ type Poi @aws_iam @aws_api_key {
   id: ID!
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
-  _version: Int!
-  _deleted: Boolean
-  _lastChangedAt: AWSTimestamp!
 }
 
 type Hike @aws_iam @aws_api_key {
   id: ID!
-  description: [TextualDescription]
-  route: GeoJson
+  description: [TextualDescription]!
+  route: GeoJson!
   imageUrls: [String]
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
-  _version: Int!
-  _deleted: Boolean
-  _lastChangedAt: AWSTimestamp!
 }
 
 type SearchablePoiConnection @aws_api_key @aws_iam {
@@ -68,11 +62,9 @@ union SearchableAggregateGenericResult = SearchableAggregateScalarResult | Searc
 type Query {
   getPoi(id: ID!): Poi @aws_api_key @aws_iam
   listPois(filter: ModelPoiFilterInput, limit: Int, nextToken: String): ModelPoiConnection @aws_api_key @aws_iam
-  syncPois(filter: ModelPoiFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelPoiConnection @aws_api_key @aws_iam
   searchPois(filter: SearchablePoiFilterInput, sort: [SearchablePoiSortInput], limit: Int, nextToken: String, from: Int, aggregates: [SearchablePoiAggregationInput]): SearchablePoiConnection @aws_api_key @aws_iam
   getHike(id: ID!): Hike @aws_api_key @aws_iam
   listHikes(filter: ModelHikeFilterInput, limit: Int, nextToken: String): ModelHikeConnection @aws_api_key @aws_iam
-  syncHikes(filter: ModelHikeFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelHikeConnection @aws_api_key @aws_iam
   searchHikes(filter: SearchableHikeFilterInput, sort: [SearchableHikeSortInput], limit: Int, nextToken: String, from: Int, aggregates: [SearchableHikeAggregationInput]): SearchableHikeConnection @aws_api_key @aws_iam
 }
 
@@ -177,7 +169,6 @@ enum ModelSortDirection {
 type ModelPoiConnection @aws_api_key @aws_iam {
   items: [Poi]!
   nextToken: String
-  startedAt: AWSTimestamp
 }
 
 input ModelPoiFilterInput {
@@ -195,17 +186,14 @@ input ModelPoiConditionInput {
 
 input CreatePoiInput {
   id: ID
-  _version: Int
 }
 
 input UpdatePoiInput {
   id: ID!
-  _version: Int
 }
 
 input DeletePoiInput {
   id: ID!
-  _version: Int
 }
 
 type Mutation {
@@ -242,7 +230,6 @@ input GeoJsonInput {
 type ModelHikeConnection @aws_api_key @aws_iam {
   items: [Hike]!
   nextToken: String
-  startedAt: AWSTimestamp
 }
 
 input ModelHikeFilterInput {
@@ -262,10 +249,9 @@ input ModelHikeConditionInput {
 
 input CreateHikeInput {
   id: ID
-  description: [TextualDescriptionInput]
-  route: GeoJsonInput
+  description: [TextualDescriptionInput]!
+  route: GeoJsonInput!
   imageUrls: [String]
-  _version: Int
 }
 
 input UpdateHikeInput {
@@ -273,12 +259,10 @@ input UpdateHikeInput {
   description: [TextualDescriptionInput]
   route: GeoJsonInput
   imageUrls: [String]
-  _version: Int
 }
 
 input DeleteHikeInput {
   id: ID!
-  _version: Int
 }
 
 input SearchableStringFilterInput {
@@ -344,9 +328,6 @@ input SearchablePoiFilterInput {
   id: SearchableIDFilterInput
   createdAt: SearchableStringFilterInput
   updatedAt: SearchableStringFilterInput
-  _version: SearchableIntFilterInput
-  _deleted: SearchableBooleanFilterInput
-  _lastChangedAt: SearchableIntFilterInput
   and: [SearchablePoiFilterInput]
   or: [SearchablePoiFilterInput]
   not: SearchablePoiFilterInput
@@ -361,9 +342,6 @@ enum SearchablePoiSortableFields {
   id
   createdAt
   updatedAt
-  _version
-  _deleted
-  _lastChangedAt
 }
 
 input SearchablePoiSortInput {
@@ -383,9 +361,6 @@ enum SearchablePoiAggregateField {
   id
   createdAt
   updatedAt
-  _version
-  _deleted
-  _lastChangedAt
 }
 
 input SearchablePoiAggregationInput {
@@ -399,9 +374,6 @@ input SearchableHikeFilterInput {
   imageUrls: SearchableStringFilterInput
   createdAt: SearchableStringFilterInput
   updatedAt: SearchableStringFilterInput
-  _version: SearchableIntFilterInput
-  _deleted: SearchableBooleanFilterInput
-  _lastChangedAt: SearchableIntFilterInput
   and: [SearchableHikeFilterInput]
   or: [SearchableHikeFilterInput]
   not: SearchableHikeFilterInput
@@ -412,9 +384,6 @@ enum SearchableHikeSortableFields {
   imageUrls
   createdAt
   updatedAt
-  _version
-  _deleted
-  _lastChangedAt
 }
 
 input SearchableHikeSortInput {
@@ -427,9 +396,6 @@ enum SearchableHikeAggregateField {
   imageUrls
   createdAt
   updatedAt
-  _version
-  _deleted
-  _lastChangedAt
 }
 
 input SearchableHikeAggregationInput {

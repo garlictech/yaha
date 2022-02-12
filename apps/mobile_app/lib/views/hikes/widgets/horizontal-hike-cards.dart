@@ -1,22 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:yaha/hike/hike-card/hike-card.dart';
-import 'package:yaha/models/ModelProvider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:yaha/entities/hike/hike.dart';
 //import 'package:yaha/utility/buttons/show-more-button.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
-class HorizontalHikeCards extends StatelessWidget {
+import 'hike-card.dart';
+
+class HorizontalHikeCards extends ConsumerWidget {
   final String title;
-  final List<Hike> hikes;
+  final FutureProvider<List<Hike>> hikeListProvider;
 
   const HorizontalHikeCards(
-      {required this.title, required this.hikes, Key? key})
+      {required this.title, required this.hikeListProvider, Key? key})
       : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ScopedReader watch) {
+    final hikes = watch(hikeListProvider);
+
     return Column(children: [
       Container(
         padding: const EdgeInsets.only(bottom: YahaSpaceSizes.medium),
@@ -29,23 +33,21 @@ class HorizontalHikeCards extends StatelessWidget {
               color: YahaColors.textColor),
         ),
       ),
-      Container(
+      SizedBox(
           height: YahaBoxSizes.heightMedium,
-          child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: hikes
-                  .map((hike) => Container(
-                        padding: const EdgeInsets.only(
-                            right: YahaSpaceSizes.general),
-                        width: YahaBoxSizes.widthMedium,
-                        child: HikeCard(
-                          title: hike.description?.first.title ?? '',
-                          subTitle: hike.description?.first.summary ?? '',
-                          backgroundImage: hike.imageUrls?.first ?? '',
-                        ),
-                      ))
-                  .toList())),
-//      ShowMoreButton(nextScreen: BestHikesOfTheWorld())
+          child: hikes.when(
+              data: (data) => ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: data
+                      .map((hike) => Container(
+                          padding: const EdgeInsets.only(
+                              right: YahaSpaceSizes.general),
+                          width: YahaBoxSizes.widthMedium,
+                          child: HikeCard(hike: hike)))
+                      .toList()),
+              loading: () => const CircularProgressIndicator(),
+              error: (err, stack) => Text('Error: $err')))
     ]);
+//      ShowMoreButton(nextScreen: BestHikesOfTheWorld())
   }
 }

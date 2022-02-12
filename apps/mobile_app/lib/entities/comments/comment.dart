@@ -6,10 +6,15 @@ part 'comment.g.dart';
 @FunctionalData()
 @JsonSerializable()
 class Comment extends $Comment {
+  @override
   final String body;
+  @override
   final String ownerId;
+  @override
   final String ownerName;
+  @override
   final String profilePicture;
+  @override
   final String date;
 
   Comment(

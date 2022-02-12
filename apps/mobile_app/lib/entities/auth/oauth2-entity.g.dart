@@ -98,13 +98,11 @@ class OAuth2Entity$ {
 // JsonSerializableGenerator
 // **************************************************************************
 
-OAuth2Entity _$OAuth2EntityFromJson(Map<String, dynamic> json) {
-  return OAuth2Entity(
-    refreshToken: json['refreshToken'] as String,
-    accessToken: json['accessToken'] as String,
-    idToken: json['idToken'] as String,
-  );
-}
+OAuth2Entity _$OAuth2EntityFromJson(Map<String, dynamic> json) => OAuth2Entity(
+      refreshToken: json['refreshToken'] as String,
+      accessToken: json['accessToken'] as String,
+      idToken: json['idToken'] as String,
+    );
 
 Map<String, dynamic> _$OAuth2EntityToJson(OAuth2Entity instance) =>
     <String, dynamic>{

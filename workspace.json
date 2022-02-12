@@ -541,7 +541,7 @@
           "executor": "@nrwl/workspace:run-commands",
           "options": {
             "parallel": false,
-            "command": "flutter pub run build_runner build --delete-conflicting-outputs",
+            "command": "flutter pub run build_runner build --verbose --delete-conflicting-outputs",
             "cwd": "apps/mobile_app"
           }
         },

@@ -8,6 +8,7 @@ import { defer, from, of } from 'rxjs';
 import { concatMap, map, delay, switchMap, tap } from 'rxjs/operators';
 import { DOMParser } from 'xmldom';
 const togeojson = require('@mapbox/togeojson');
+import * as r from 'ramda';
 import {
   YahaApi,
   getGraphqlSdkForIAM,
@@ -55,13 +56,7 @@ import { foldObservableEither } from '@bit/garlictech.universal.shared.fp';
 import { getCityFromGoogle } from '@bit/garlictech.nodejs.shared.reverse-geocoding';
 */
 const hikeIds = [
-  113261124,
-  //118158194,
-  //20239810,
-  //22601701,
-  //22605620,
-  //22668771,
-  //22680751,
+  113261124, 118158194, 20239810, 22601701, 22605620, 22668771, 22680751,
   //22684373,
   //22690585,
   //22690716,
@@ -358,7 +353,11 @@ const fetchRoute = (routeId: number) => {
             type: YahaApi.TextualDescriptionType.markdown,
           },
         ],
-        imageUrls: ['https://loremflickr.com/g/320/240/landscape'],
+        imageUrls: r
+          .range(1, 10)
+          .map(
+            () => `https://loremflickr.com/320/240/landscape?${Math.random()}`,
+          ),
       };
     }),
     switchMap((hike: YahaApi.CreateHikeInput) =>
