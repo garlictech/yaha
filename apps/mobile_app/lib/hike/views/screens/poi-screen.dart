@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yaha/gallery.dart';
-import 'package:yaha/hike/hike-outline/poi.dart';
+import 'package:yaha/hike/hike-outline/poi-summary.dart';
 import 'package:yaha/utility/buttons/back-button.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
@@ -12,6 +12,8 @@ import 'package:yaha/utility/yaha-space-sizes.dart';
 import 'package:yaha/views/comments/screens/commments-screen.dart';
 
 class PoiScreen extends ConsumerWidget {
+  const PoiScreen({Key? key}) : super(key: key);
+
   /*final int openingHoursChevronQuarterTurns;
 
   const PoiScreen({
@@ -25,7 +27,7 @@ class PoiScreen extends ConsumerWidget {
       appBar: AppBar(
         backgroundColor: YahaColors.background,
         elevation: 0,
-        title: Text(
+        title: const Text(
           'Hungarian\nNational Museum',
           textAlign: TextAlign.center,
           style: TextStyle(
@@ -39,7 +41,7 @@ class PoiScreen extends ConsumerWidget {
           Padding(
             padding: const EdgeInsets.only(right: YahaSpaceSizes.medium),
             child: IconButton(
-              icon: Icon(Icons.comment_outlined,
+              icon: const Icon(Icons.comment_outlined,
                   size: YahaIconSizes.medium, color: YahaColors.textColor),
               onPressed: () {
                 Navigator.push(context,
@@ -50,7 +52,7 @@ class PoiScreen extends ConsumerWidget {
         ],
       ),
       body: CustomScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         slivers: <Widget>[
           SliverList(
             delegate: SliverChildBuilderDelegate(
@@ -66,7 +68,7 @@ class PoiScreen extends ConsumerWidget {
                             padding: const EdgeInsets.only(
                                 top: YahaSpaceSizes.general,
                                 bottom: YahaSpaceSizes.general),
-                            child: Poi(
+                            child: const PoiSummary(
                               backgroundColor: YahaColors.generic,
                               icon: Icons.museum_rounded,
                               iconSize: 48,
@@ -76,7 +78,7 @@ class PoiScreen extends ConsumerWidget {
                         Container(
                           padding: const EdgeInsets.only(
                               bottom: YahaSpaceSizes.general),
-                          child: Text(
+                          child: const Text(
                               'The Hungarian National Museum (Hungarian: Magyar Nemzeti Múzeum) was founded in 1802 and is the national museum for the history, art, and archaeology of Hungary.',
                               style: TextStyle(
                                   fontSize: YahaFontSizes.small,
@@ -105,13 +107,13 @@ class PoiScreen extends ConsumerWidget {
                               Container(
                                   padding: const EdgeInsets.only(
                                       right: YahaSpaceSizes.small),
-                                  child: Icon(Icons.schedule_outlined)),
-                              Text('Open',
+                                  child: const Icon(Icons.schedule_outlined)),
+                              const Text('Open',
                                   style: TextStyle(
                                       fontSize: YahaFontSizes.small,
                                       fontWeight: FontWeight.w400,
                                       color: YahaColors.primary)),
-                              Text(' - closing: 18:00',
+                              const Text(' - closing: 18:00',
                                   style: TextStyle(
                                       fontSize: YahaFontSizes.small,
                                       fontWeight: FontWeight.w400,
@@ -120,7 +122,7 @@ class PoiScreen extends ConsumerWidget {
                                 quarterTurns: 0,
                                 child: GestureDetector(
                                     onTap: () {},
-                                    child: Icon(Icons.expand_more)),
+                                    child: const Icon(Icons.expand_more)),
                               ),
                             ],
                           ),
@@ -133,8 +135,9 @@ class PoiScreen extends ConsumerWidget {
                               Container(
                                   padding: const EdgeInsets.only(
                                       right: YahaSpaceSizes.small),
-                                  child: Icon(Icons.location_on_outlined)),
-                              Text('Opening hours',
+                                  child:
+                                      const Icon(Icons.location_on_outlined)),
+                              const Text('Opening hours',
                                   style: TextStyle(
                                       fontSize: YahaFontSizes.small,
                                       fontWeight: FontWeight.w400,
@@ -150,8 +153,8 @@ class PoiScreen extends ConsumerWidget {
                               Container(
                                   padding: const EdgeInsets.only(
                                       right: YahaSpaceSizes.small),
-                                  child: Icon(Icons.call)),
-                              Text('(06 1) 338 2122',
+                                  child: const Icon(Icons.call)),
+                              const Text('(06 1) 338 2122',
                                   style: TextStyle(
                                       fontSize: YahaFontSizes.small,
                                       fontWeight: FontWeight.w400,
@@ -159,10 +162,10 @@ class PoiScreen extends ConsumerWidget {
                             ],
                           ),
                         ),
-                        Container(
+                        SizedBox(
                             height: 220.0,
                             width: MediaQuery.of(context).size.width,
-                            child: Gallery()),
+                            child: const Gallery()),
                         Padding(
                           padding: const EdgeInsets.only(
                               top: YahaSpaceSizes.xLarge,
@@ -171,13 +174,13 @@ class PoiScreen extends ConsumerWidget {
                             height: YahaBoxSizes.buttonHeight,
                             width: YahaBoxSizes.buttonWidthBig,
                             child: ElevatedButton.icon(
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.add,
                                 color: YahaColors.accentColor,
                                 size: YahaFontSizes.large,
                               ),
                               onPressed: () {},
-                              label: Text('Add to hike',
+                              label: const Text('Add to hike',
                                   style: TextStyle(
                                     fontSize: YahaFontSizes.small,
                                     fontWeight: FontWeight.w600,

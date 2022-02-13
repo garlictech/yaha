@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaha/hike/hike-outline/poi.dart';
+import 'package:yaha/hike/hike-outline/poi-summary.dart';
 import 'package:yaha/hike/views/screens/poi-screen.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
@@ -24,8 +24,8 @@ class PoiListTileWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => PoiScreen()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const PoiScreen()));
       },
       child: Padding(
         padding: const EdgeInsets.only(
@@ -36,7 +36,7 @@ class PoiListTileWidget extends StatelessWidget {
           children: [
             Row(
               children: [
-                Poi(
+                PoiSummary(
                   backgroundColor: poiColor,
                   icon: poiIcon,
                   iconSize: YahaIconSizes.small,
@@ -53,7 +53,7 @@ class PoiListTileWidget extends StatelessWidget {
                             bottom: YahaSpaceSizes.xSmall),
                         child: Text(
                           title,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: YahaFontSizes.small,
                             color: YahaColors.textColor,
                             fontWeight: FontWeight.w600,
@@ -62,7 +62,7 @@ class PoiListTileWidget extends StatelessWidget {
                       ),
                       Text(
                         'Distance from start: ${distanceFromStart}m',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: YahaFontSizes.small,
                           color: YahaColors.textColor,
                           fontWeight: FontWeight.w400,
@@ -73,7 +73,7 @@ class PoiListTileWidget extends StatelessWidget {
                 ),
               ],
             ),
-            Icon(
+            const Icon(
               Icons.arrow_forward_ios_rounded,
               size: YahaIconSizes.medium,
               color: YahaColors.textColor,
