@@ -1,45 +1,46 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'geojson.dart';
+part of 'linestring.dart';
 
 // **************************************************************************
 // FunctionalDataGenerator
 // **************************************************************************
 
-abstract class $GeoJsonData {
-  const $GeoJsonData();
+abstract class $LineStringData {
+  const $LineStringData();
 
   String get type;
-  List<List<List<double>>> get coordinates;
+  List<List<double>> get coordinates;
 
-  GeoJsonData copyWith({
+  LineStringData copyWith({
     String? type,
-    List<List<List<double>>>? coordinates,
+    List<List<double>>? coordinates,
   }) =>
-      GeoJsonData(
+      LineStringData(
         type: type ?? this.type,
         coordinates: coordinates ?? this.coordinates,
       );
 
-  GeoJsonData copyUsing(void Function(GeoJsonData$Change change) mutator) {
-    final change = GeoJsonData$Change._(
+  LineStringData copyUsing(
+      void Function(LineStringData$Change change) mutator) {
+    final change = LineStringData$Change._(
       this.type,
       this.coordinates,
     );
     mutator(change);
-    return GeoJsonData(
+    return LineStringData(
       type: change.type,
       coordinates: change.coordinates,
     );
   }
 
   @override
-  String toString() => "GeoJsonData(type: $type, coordinates: $coordinates)";
+  String toString() => "LineStringData(type: $type, coordinates: $coordinates)";
 
   @override
   // ignore: avoid_equals_and_hash_code_on_mutable_classes
   bool operator ==(Object other) =>
-      other is GeoJsonData &&
+      other is LineStringData &&
       other.runtimeType == runtimeType &&
       type == other.type &&
       coordinates == other.coordinates;
@@ -54,24 +55,24 @@ abstract class $GeoJsonData {
   }
 }
 
-class GeoJsonData$Change {
-  GeoJsonData$Change._(
+class LineStringData$Change {
+  LineStringData$Change._(
     this.type,
     this.coordinates,
   );
 
   String type;
-  List<List<List<double>>> coordinates;
+  List<List<double>> coordinates;
 }
 
 // ignore: avoid_classes_with_only_static_members
-class GeoJsonData$ {
-  static final type = Lens<GeoJsonData, String>(
+class LineStringData$ {
+  static final type = Lens<LineStringData, String>(
     (typeContainer) => typeContainer.type,
     (typeContainer, type) => typeContainer.copyWith(type: type),
   );
 
-  static final coordinates = Lens<GeoJsonData, List<List<List<double>>>>(
+  static final coordinates = Lens<LineStringData, List<List<double>>>(
     (coordinatesContainer) => coordinatesContainer.coordinates,
     (coordinatesContainer, coordinates) =>
         coordinatesContainer.copyWith(coordinates: coordinates),
@@ -82,18 +83,16 @@ class GeoJsonData$ {
 // JsonSerializableGenerator
 // **************************************************************************
 
-GeoJsonData _$GeoJsonDataFromJson(Map<String, dynamic> json) => GeoJsonData(
+LineStringData _$LineStringDataFromJson(Map<String, dynamic> json) =>
+    LineStringData(
       type: json['type'] as String,
       coordinates: (json['coordinates'] as List<dynamic>)
-          .map((e) => (e as List<dynamic>)
-              .map((e) => (e as List<dynamic>)
-                  .map((e) => (e as num).toDouble())
-                  .toList())
-              .toList())
+          .map((e) =>
+              (e as List<dynamic>).map((e) => (e as num).toDouble()).toList())
           .toList(),
     );
 
-Map<String, dynamic> _$GeoJsonDataToJson(GeoJsonData instance) =>
+Map<String, dynamic> _$LineStringDataToJson(LineStringData instance) =>
     <String, dynamic>{
       'type': instance.type,
       'coordinates': instance.coordinates,

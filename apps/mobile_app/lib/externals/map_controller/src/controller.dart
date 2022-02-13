@@ -178,7 +178,7 @@ class StatefulMapController {
       {required String name,
       required List<LatLng> points,
       double width = 3.0,
-      Color color = Colors.green,
+      Color color = Colors.red,
       bool isDotted = false}) async {
     await _linesState.addLine(
         name: name,
@@ -263,6 +263,11 @@ class StatefulMapController {
           break;
         case GeoJsonFeatureType.line:
           final line = feature.geometry as GeoJsonLine;
+
+          debugPrint("*******");
+          debugPrint(line.toString());
+          debugPrint(line.geoSerie.toString());
+
           unawaited(addLine(
               name: line.name ?? '',
               points: line.geoSerie?.toLatLng() ?? const []));

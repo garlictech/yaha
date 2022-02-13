@@ -343,6 +343,7 @@ const fetchRoute = (routeId: number) => {
     map((gpxFile: string) => {
       const _doc = domParser.parseFromString(gpxFile, 'application/xml');
       const geojson = togeojson.gpx(_doc);
+      console.warn(geojson);
       return {
         route: geojson?.features?.[0]?.geometry,
         description: [

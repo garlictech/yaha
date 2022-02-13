@@ -16,9 +16,9 @@ type TextualDescription {
   type: TextualDescriptionType!
 }
 
-type GeoJson {
+type LineString {
   type: String!
-  coordinates: [[[Float]]]!
+  coordinates: [[Float]]!
 }
 
 type Poi
@@ -34,6 +34,6 @@ type Hike
   @auth(rules: [{ allow: public }, { allow: public, provider: iam }]) {
   id: ID!
   description: [TextualDescription]!
-  route: GeoJson!
+  route: LineString!
   imageUrls: [String]
 }

@@ -2,11 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:yaha/entities/hike/hike.dart';
-import 'package:yaha/entities/shared/geojson.dart';
+import 'package:yaha/entities/entities.dart';
 import 'package:yaha/gallery.dart';
 import 'package:yaha/hike/hike-outline/hike-outline-screen.dart';
-import 'package:yaha/hike/hike-outline/poi.dart';
+import 'package:yaha/hike/hike-outline/poi-summary.dart';
 import 'package:yaha/hike/hike-outline/settings/poi-filters.dart';
 import 'package:yaha/hike/hike-screen/most-interesting-place-on-route/places-on-route-screen.dart';
 import 'package:yaha/hike/views/screens/more-poi-screen.dart';
@@ -121,7 +120,7 @@ class HikeScreen extends ConsumerWidget {
     final presenter = watch(leafletMapMVPProvider.notifier);
 
     if (hike.route != null) {
-      presenter.addHikeTrack(hike.route as GeoJsonData);
+      presenter.addHikeTrack(hike.route as LineStringData);
     }
 
     return Scaffold(
@@ -493,7 +492,7 @@ class HikeScreen extends ConsumerWidget {
                           children: [
                             Row(
                               children: [
-                                const Poi(
+                                const PoiSummary(
                                   backgroundColor: YahaColors.generic,
                                   icon: Icons.location_city_rounded,
                                   iconSize: YahaIconSizes.small,
@@ -516,7 +515,7 @@ class HikeScreen extends ConsumerWidget {
                                   top: YahaSpaceSizes.medium),
                               child: Row(
                                 children: [
-                                  const Poi(
+                                  const PoiSummary(
                                     backgroundColor: YahaColors.generic,
                                     icon: Icons.museum,
                                     iconSize: YahaIconSizes.small,
@@ -540,7 +539,7 @@ class HikeScreen extends ConsumerWidget {
                                   top: YahaSpaceSizes.medium),
                               child: Row(
                                 children: [
-                                  const Poi(
+                                  const PoiSummary(
                                     backgroundColor: YahaColors.amenity,
                                     icon: Icons.pool_rounded,
                                     iconSize: YahaIconSizes.small,

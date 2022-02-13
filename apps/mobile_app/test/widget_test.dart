@@ -3,16 +3,12 @@
 
 // ignore_for_file: unnecessary_const
 
-import 'package:network_image_mock/network_image_mock.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yaha/bottom-nav-bar.dart';
-import 'package:yaha/entities/hike/hike.dart';
-import 'package:yaha/entities/shared/geojson.dart';
-import 'package:yaha/entities/shared/textual-description.dart';
+import 'package:yaha/entities/entities.dart';
 import 'package:yaha/hike/hike-screen/most-interesting-place-on-route/places-on-route-screen.dart';
-import 'package:yaha/hike/views/screens/more-poi-screen.dart';
 import 'package:yaha/hike/views/screens/weather-screen.dart';
 import 'package:yaha/profile/bookmarked-hikes.dart';
 import 'package:yaha/profile/challenges/views/screens/all-challenges.dart';
@@ -23,28 +19,20 @@ import 'package:yaha/profile/events/views/screens/all-events.dart';
 import 'package:yaha/profile/events/views/screens/event-detail-screen.dart';
 import 'package:yaha/explore.dart';
 import 'package:yaha/filter/filter-page.dart';
-import 'package:yaha/gallery.dart';
 import 'package:yaha/hike/hike-outline/hike-outline-screen.dart';
 import 'package:yaha/main.dart';
-import 'package:yaha/hike/views/screens/poi-screen.dart';
-import 'package:yaha/previous-activities-page.dart';
 import 'package:yaha/profile/events/views/screens/event-prize-screen.dart';
 import 'package:yaha/profile/events/views/screens/events.dart';
 import 'package:yaha/profile/events/views/screens/ongoing-events.dart';
 import 'package:yaha/profile/profile-page.dart';
 import 'package:yaha/profile/statistics/statistics-screen.dart';
-import 'package:yaha/profile/time-capsules/views/screens/found-timecapsules-screen.dart';
-import 'package:yaha/profile/time-capsules/views/screens/my-timecapsules-screen.dart';
-import 'package:yaha/profile/time-capsules/views/screens/timecapsules-screen.dart';
 import 'package:yaha/search-results-screen.dart';
 import 'package:yaha/settings/application/application-screen.dart';
 import 'package:yaha/settings/views/settings-screen.dart';
 import 'package:yaha/views/auth/screens/login-screen.dart';
 import 'package:yaha/views/auth/screens/signup-screen.dart';
-import 'package:yaha/views/hikes/screens/hike-screen.dart';
 import 'package:yaha/views/track/screens/leave-a-timecapsule-screen.dart';
 import 'package:yaha/views/track/screens/summary-screen.dart';
-import 'package:yaha/views/track/screens/timecapsule-comments-screen.dart';
 import 'package:yaha/views/track/screens/timecapsule-in-track-mode-screen.dart';
 import 'package:yaha/views/track/screens/timecapsule-new-comments-screen.dart';
 import 'package:yaha/views/track/screens/tracking-data-screen.dart';
@@ -52,8 +40,6 @@ import 'package:yaha/views/track/screens/tracking-map-screen.dart';
 import 'package:yaha/views/track/screens/tracking-timecapsule-screen.dart';
 import 'package:yaha/views/track/screens/tracking-timeline-screen.dart';
 import 'package:yaha/views/track/screens/tracking.dart';
-import 'package:yaha/views/comments/screens/commments-screen.dart';
-import 'package:yaha/views/hike-outline/screens/time-capsule-info-screen.dart';
 import 'package:yaha/views/track/widgets/tracking-rating-widget.dart';
 import 'package:yaha/views/track/widgets/tracking-timeline-customize-widget.dart';
 
@@ -66,10 +52,8 @@ final hikeFixture = Hike(
           summary: 'Summary',
           type: 'markdown')
     ],
-    route: GeoJsonData(type: "Line", coordinates: const [
-      [
-        [0.0, 0.0]
-      ]
+    route: LineStringData(type: "LineString", coordinates: const [
+      [0.0, 0.0]
     ]));
 
 void main() {
