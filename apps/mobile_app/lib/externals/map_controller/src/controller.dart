@@ -263,11 +263,6 @@ class StatefulMapController {
           break;
         case GeoJsonFeatureType.line:
           final line = feature.geometry as GeoJsonLine;
-
-          debugPrint("*******");
-          debugPrint(line.toString());
-          debugPrint(line.geoSerie.toString());
-
           unawaited(addLine(
               name: line.name ?? '',
               points: line.geoSerie?.toLatLng() ?? const []));

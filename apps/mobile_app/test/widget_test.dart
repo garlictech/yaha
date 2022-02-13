@@ -31,6 +31,7 @@ import 'package:yaha/settings/application/application-screen.dart';
 import 'package:yaha/settings/views/settings-screen.dart';
 import 'package:yaha/views/auth/screens/login-screen.dart';
 import 'package:yaha/views/auth/screens/signup-screen.dart';
+import 'package:yaha/views/hikes/screens/hike-screen.dart';
 import 'package:yaha/views/track/screens/leave-a-timecapsule-screen.dart';
 import 'package:yaha/views/track/screens/summary-screen.dart';
 import 'package:yaha/views/track/screens/timecapsule-in-track-mode-screen.dart';
