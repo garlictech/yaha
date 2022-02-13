@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geojson/geojson.dart';
 import 'package:geopoint/geopoint.dart';
-import 'package:latlong/latlong.dart';
+import 'package:latlong2/latlong.dart';
 
 import '../models.dart';
 
 /// State of the lines on the map
 class LinesState {
   /// Default contructor
-  LinesState({@required this.notify}) : assert(notify != null);
+  LinesState({required this.notify});
 
   /// The notify function
   final Function notify;
@@ -25,8 +25,8 @@ class LinesState {
 
   /// Add a line on the map
   Future<void> addLine(
-      {@required String name,
-      @required List<LatLng> points,
+      {required String name,
+      required List<LatLng> points,
       double width = 1.0,
       Color color = Colors.green,
       bool isDotted = false}) async {
@@ -47,7 +47,7 @@ class LinesState {
 
   /// Export all lines to a [GeoJsonFeature] with geometry
   /// type [GeoJsonMultiLine]
-  GeoJsonFeature<GeoJsonMultiLine> toGeoJsonFeatures() {
+  GeoJsonFeature<GeoJsonMultiLine>? toGeoJsonFeatures() {
     if (namedLines.isEmpty) {
       return null;
     }
@@ -55,11 +55,13 @@ class LinesState {
     for (final k in namedLines.keys) {
       final polyline = namedLines[k];
       final line = GeoJsonLine()..name = k;
-      final geoSerie = GeoSerie(name: line.name, type: GeoSerieType.line);
-      for (final point in polyline.points) {
+      final geoSerie = GeoSerie(name: line.name ?? '', type: GeoSerieType.line);
+
+      for (final point in polyline?.points ?? const []) {
         geoSerie.geoPoints.add(
             GeoPoint(latitude: point.latitude, longitude: point.longitude));
       }
+
       line.geoSerie = geoSerie;
       multiLine.lines.add(line);
     }

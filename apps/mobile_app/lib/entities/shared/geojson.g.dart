@@ -6,40 +6,40 @@ part of 'geojson.dart';
 // FunctionalDataGenerator
 // **************************************************************************
 
-abstract class $GeoJson {
-  const $GeoJson();
+abstract class $GeoJsonData {
+  const $GeoJsonData();
 
   String get type;
   List<List<List<double>>> get coordinates;
 
-  GeoJson copyWith({
+  GeoJsonData copyWith({
     String? type,
     List<List<List<double>>>? coordinates,
   }) =>
-      GeoJson(
+      GeoJsonData(
         type: type ?? this.type,
         coordinates: coordinates ?? this.coordinates,
       );
 
-  GeoJson copyUsing(void Function(GeoJson$Change change) mutator) {
-    final change = GeoJson$Change._(
+  GeoJsonData copyUsing(void Function(GeoJsonData$Change change) mutator) {
+    final change = GeoJsonData$Change._(
       this.type,
       this.coordinates,
     );
     mutator(change);
-    return GeoJson(
+    return GeoJsonData(
       type: change.type,
       coordinates: change.coordinates,
     );
   }
 
   @override
-  String toString() => "GeoJson(type: $type, coordinates: $coordinates)";
+  String toString() => "GeoJsonData(type: $type, coordinates: $coordinates)";
 
   @override
   // ignore: avoid_equals_and_hash_code_on_mutable_classes
   bool operator ==(Object other) =>
-      other is GeoJson &&
+      other is GeoJsonData &&
       other.runtimeType == runtimeType &&
       type == other.type &&
       coordinates == other.coordinates;
@@ -54,8 +54,8 @@ abstract class $GeoJson {
   }
 }
 
-class GeoJson$Change {
-  GeoJson$Change._(
+class GeoJsonData$Change {
+  GeoJsonData$Change._(
     this.type,
     this.coordinates,
   );
@@ -65,13 +65,13 @@ class GeoJson$Change {
 }
 
 // ignore: avoid_classes_with_only_static_members
-class GeoJson$ {
-  static final type = Lens<GeoJson, String>(
+class GeoJsonData$ {
+  static final type = Lens<GeoJsonData, String>(
     (typeContainer) => typeContainer.type,
     (typeContainer, type) => typeContainer.copyWith(type: type),
   );
 
-  static final coordinates = Lens<GeoJson, List<List<List<double>>>>(
+  static final coordinates = Lens<GeoJsonData, List<List<List<double>>>>(
     (coordinatesContainer) => coordinatesContainer.coordinates,
     (coordinatesContainer, coordinates) =>
         coordinatesContainer.copyWith(coordinates: coordinates),
@@ -82,7 +82,7 @@ class GeoJson$ {
 // JsonSerializableGenerator
 // **************************************************************************
 
-GeoJson _$GeoJsonFromJson(Map<String, dynamic> json) => GeoJson(
+GeoJsonData _$GeoJsonDataFromJson(Map<String, dynamic> json) => GeoJsonData(
       type: json['type'] as String,
       coordinates: (json['coordinates'] as List<dynamic>)
           .map((e) => (e as List<dynamic>)
@@ -93,7 +93,8 @@ GeoJson _$GeoJsonFromJson(Map<String, dynamic> json) => GeoJson(
           .toList(),
     );
 
-Map<String, dynamic> _$GeoJsonToJson(GeoJson instance) => <String, dynamic>{
+Map<String, dynamic> _$GeoJsonDataToJson(GeoJsonData instance) =>
+    <String, dynamic>{
       'type': instance.type,
       'coordinates': instance.coordinates,
     };

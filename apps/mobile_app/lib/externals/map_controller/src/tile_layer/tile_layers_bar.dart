@@ -1,20 +1,15 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:map_controller/map_controller.dart';
-
-import '../controller.dart';
-import '../types.dart';
+import '../../map_controller.dart';
 
 class _TileLayersBarState extends State<TileLayersBar> {
-  _TileLayersBarState({@required this.controller})
-      : assert(controller != null),
-        _tileLayerType = controller.tileLayerType;
+  _TileLayersBarState({required this.controller})
+      : _tileLayerType = controller.tileLayerType;
 
   final StatefulMapController controller;
 
   TileLayerType _tileLayerType;
-  StreamSubscription<StatefulMapControllerStateChange> _sub;
+  late StreamSubscription<StatefulMapControllerStateChange> _sub;
 
   @override
   void initState() {
@@ -80,7 +75,7 @@ class _TileLayersBarState extends State<TileLayersBar> {
 /// The tile layers bar
 class TileLayersBar extends StatefulWidget {
   /// Provide a controller
-  const TileLayersBar({@required this.controller});
+  const TileLayersBar({Key? key, required this.controller}) : super(key: key);
 
   /// The map controller
   final StatefulMapController controller;

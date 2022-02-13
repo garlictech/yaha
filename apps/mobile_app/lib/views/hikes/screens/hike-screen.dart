@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yaha/entities/hike/hike.dart';
+import 'package:yaha/entities/shared/geojson.dart';
 import 'package:yaha/gallery.dart';
 import 'package:yaha/hike/hike-outline/hike-outline-screen.dart';
 import 'package:yaha/hike/hike-outline/poi.dart';
@@ -10,6 +11,7 @@ import 'package:yaha/hike/hike-outline/settings/poi-filters.dart';
 import 'package:yaha/hike/hike-screen/most-interesting-place-on-route/places-on-route-screen.dart';
 import 'package:yaha/hike/views/screens/more-poi-screen.dart';
 import 'package:yaha/hike/views/screens/weather-screen.dart';
+import 'package:yaha/presenters/map/leaflet-map-presenter.dart';
 import 'package:yaha/utility/buttons/show-more-button.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-border-width.dart';
@@ -18,6 +20,7 @@ import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-icon-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
+import 'package:yaha/views/map/widgets/leaflet-map.dart';
 
 SpeedDial buildSpeedDial() {
   return SpeedDial(
@@ -115,6 +118,12 @@ class HikeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {
+    final presenter = watch(leafletMapMVPProvider.notifier);
+
+    if (hike.route != null) {
+      presenter.addHikeTrack(hike.route as GeoJsonData);
+    }
+
     return Scaffold(
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
@@ -144,7 +153,7 @@ class HikeScreen extends ConsumerWidget {
                         style: const TextStyle(
                             color: YahaColors.background,
                             fontWeight: FontWeight.w700,
-                            fontSize: YahaFontSizes.large),
+                            fontSize: YahaFontSizes.small),
                       ),
                     ],
                   ),
@@ -564,19 +573,15 @@ class HikeScreen extends ConsumerWidget {
                             nextScreen: PlacesOnRouteScreen(),
                           )),
                       Container(
-                        height: 340,
-                        margin:
-                            const EdgeInsets.only(top: YahaSpaceSizes.large),
-                        width: MediaQuery.of(context).size.width,
-                        child: ClipRRect(
-                          borderRadius:
-                              BorderRadius.circular(YahaBorderRadius.general),
-                          child: Image.asset(
-                            'assets/images/elevation.png',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
+                          height: 340,
+                          margin:
+                              const EdgeInsets.only(top: YahaSpaceSizes.large),
+                          width: MediaQuery.of(context).size.width,
+                          child: ClipRRect(
+                            borderRadius:
+                                BorderRadius.circular(YahaBorderRadius.general),
+                            child: const LeafletMap(),
+                          )),
                       Container(
                         padding:
                             const EdgeInsets.only(top: YahaSpaceSizes.large),
