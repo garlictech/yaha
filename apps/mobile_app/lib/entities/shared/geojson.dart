@@ -5,19 +5,19 @@ part 'geojson.g.dart';
 
 @FunctionalData()
 @JsonSerializable()
-class GeoJson extends $GeoJson {
+class GeoJsonData extends $GeoJsonData {
   @override
   final String type;
   @override
   final List<List<List<double>>> coordinates;
 
-  GeoJson({
+  GeoJsonData({
     required this.type,
     required this.coordinates,
   });
 
-  factory GeoJson.fromJson(Map<String, dynamic> json) =>
-      _$GeoJsonFromJson(json);
+  factory GeoJsonData.fromJson(Map<String, dynamic> json) =>
+      _$GeoJsonDataFromJson(json);
 
-  Map<String, dynamic> toJson() => _$GeoJsonToJson(this);
+  Map<String, dynamic> toJson() => _$GeoJsonDataToJson(this);
 }

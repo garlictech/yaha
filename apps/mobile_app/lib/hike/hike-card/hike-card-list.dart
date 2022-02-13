@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:yaha/hike/hike-card/hike-card.dart';
+import 'package:yaha/entities/hike/hike.dart';
+import 'package:yaha/entities/shared/geojson.dart';
+import 'package:yaha/entities/shared/textual-description.dart';
+import 'package:yaha/views/hikes/widgets/hike-card.dart';
 
 class HikeCardList extends StatefulWidget {
   @override
@@ -31,12 +34,20 @@ final data = [
 
 final images = data
     .map((e) => HikeCard(
-          //color: e[0] as Color,
-          title: e[0] as String,
-          subTitle: e[1] as String,
-          distanceFromCurrentLocation: e[2] as int,
-          backgroundImage: e[3] as String,
-        ))
+        hike: Hike(
+            id: 'id',
+            description: [
+              TextualDescription(
+                  languageKey: 'hu_hu',
+                  title: e[0] as String,
+                  summary: e[1] as String,
+                  type: 'markdown')
+            ],
+            route: GeoJsonData(type: "Line", coordinates: const [
+              [
+                [0.0, 0.0]
+              ]
+            ]))))
     .toList();
 
 class _HikeCardListState extends State<HikeCardList> {
@@ -48,7 +59,7 @@ class _HikeCardListState extends State<HikeCardList> {
           children: <Widget>[
             Expanded(
               child: Container(
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   child: ListWheelScrollView(
                     itemExtent: 300,
                     children: images,

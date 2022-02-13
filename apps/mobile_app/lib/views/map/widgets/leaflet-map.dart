@@ -1,36 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:yaha/presenters/map/leaflet-map-presenter.dart';
 
-class LeafletMap extends StatelessWidget {
+@immutable
+class LeafletMap extends ConsumerWidget {
   const LeafletMap({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return FlutterMap(
-      options: MapOptions(
-        center: LatLng(51.5, -0.09),
-        zoom: 13.0,
-      ),
-      layers: [
-        TileLayerOptions(
-          urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-          subdomains: ['a', 'b', 'c'],
-          attributionBuilder: (_) {
-            return const Text("© OpenStreetMap contributors");
-          },
+  Widget build(BuildContext context, ScopedReader watch) {
+    watch(leafletMapMVPProvider);
+    final presenter = watch(leafletMapMVPProvider.notifier);
+
+    return Scaffold(
+      body: SafeArea(
+          child: FlutterMap(
+        mapController: presenter.mapController,
+        options: MapOptions(
+          center: LatLng(39.75621, -104.99404),
+          zoom: 2.0,
         ),
-        MarkerLayerOptions(
-          markers: [
-            Marker(
-              width: 80.0,
-              height: 80.0,
-              point: LatLng(51.5, -0.09),
-              builder: (ctx) => const FlutterLogo(),
-            ),
-          ],
-        ),
-      ],
+        layers: [
+          presenter.statefulMapController.tileLayer,
+          MarkerLayerOptions(
+            markers: presenter.statefulMapController.markers,
+          ),
+        ],
+      )),
     );
   }
 }

@@ -5,6 +5,8 @@ import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
 class PreviousActivitiesPage extends StatefulWidget {
+  const PreviousActivitiesPage({Key? key}) : super(key: key);
+
   @override
   _PreviousActivitiesState createState() => _PreviousActivitiesState();
 }
@@ -14,7 +16,7 @@ class _PreviousActivitiesState extends State<PreviousActivitiesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         slivers: <Widget>[
           SliverList(
             delegate: SliverChildBuilderDelegate(
@@ -32,13 +34,13 @@ class _PreviousActivitiesState extends State<PreviousActivitiesPage> {
                           children: [
                             IconButton(
                               iconSize: YahaFontSizes.xxLarge,
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.arrow_back_ios_rounded,
                                 color: YahaColors.textColor,
                               ),
                               onPressed: () {},
                             ),
-                            Text(
+                            const Text(
                               'Previous activities',
                               style: TextStyle(
                                   fontSize: YahaFontSizes.large,
@@ -55,7 +57,7 @@ class _PreviousActivitiesState extends State<PreviousActivitiesPage> {
                           ],
                         ),
                       ),
-                      Container(
+                      const SizedBox(
                         //height: MediaQuery.of(context).size.height,
                         height: 800,
                         child: HikeCardList(),
