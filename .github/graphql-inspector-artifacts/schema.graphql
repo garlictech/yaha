@@ -12,9 +12,9 @@ type TextualDescription @aws_iam @aws_api_key {
   type: TextualDescriptionType!
 }
 
-type GeoJson @aws_iam @aws_api_key {
+type LineString @aws_iam @aws_api_key {
   type: String!
-  coordinates: [[[Float]]]!
+  coordinates: [[Float]]!
 }
 
 type Poi @aws_iam @aws_api_key {
@@ -26,7 +26,7 @@ type Poi @aws_iam @aws_api_key {
 type Hike @aws_iam @aws_api_key {
   id: ID!
   description: [TextualDescription]!
-  route: GeoJson!
+  route: LineString!
   imageUrls: [String]
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
@@ -222,9 +222,9 @@ input TextualDescriptionInput {
   type: TextualDescriptionType!
 }
 
-input GeoJsonInput {
+input LineStringInput {
   type: String!
-  coordinates: [[[Float]]]!
+  coordinates: [[Float]]!
 }
 
 type ModelHikeConnection @aws_api_key @aws_iam {
@@ -250,14 +250,14 @@ input ModelHikeConditionInput {
 input CreateHikeInput {
   id: ID
   description: [TextualDescriptionInput]!
-  route: GeoJsonInput!
+  route: LineStringInput!
   imageUrls: [String]
 }
 
 input UpdateHikeInput {
   id: ID!
   description: [TextualDescriptionInput]
-  route: GeoJsonInput
+  route: LineStringInput
   imageUrls: [String]
 }
 

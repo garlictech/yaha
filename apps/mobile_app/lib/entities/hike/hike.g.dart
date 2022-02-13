@@ -11,13 +11,13 @@ abstract class $Hike {
 
   String get id;
   List<TextualDescription>? get description;
-  GeoJsonData? get route;
+  LineStringData? get route;
   List<String>? get imageUrls;
 
   Hike copyWith({
     String? id,
     List<TextualDescription>? description,
-    GeoJsonData? route,
+    LineStringData? route,
     List<String>? imageUrls,
   }) =>
       Hike(
@@ -79,7 +79,7 @@ class Hike$Change {
 
   String id;
   List<TextualDescription>? description;
-  GeoJsonData? route;
+  LineStringData? route;
   List<String>? imageUrls;
 }
 
@@ -96,7 +96,7 @@ class Hike$ {
         descriptionContainer.copyWith(description: description),
   );
 
-  static final route = Lens<Hike, GeoJsonData?>(
+  static final route = Lens<Hike, LineStringData?>(
     (routeContainer) => routeContainer.route,
     (routeContainer, route) => routeContainer.copyWith(route: route),
   );
@@ -119,7 +119,7 @@ Hike _$HikeFromJson(Map<String, dynamic> json) => Hike(
           .toList(),
       route: json['route'] == null
           ? null
-          : GeoJsonData.fromJson(json['route'] as Map<String, dynamic>),
+          : LineStringData.fromJson(json['route'] as Map<String, dynamic>),
       imageUrls: (json['imageUrls'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),

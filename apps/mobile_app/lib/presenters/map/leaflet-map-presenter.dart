@@ -1,7 +1,8 @@
 import 'package:flutter/foundation.dart';
-import 'package:geojson/geojson.dart';
+import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:yaha/entities/shared/geojson.dart';
+import 'package:latlong2/latlong.dart';
+import 'package:yaha/entities/entities.dart';
 import 'package:yaha/externals/map_controller/src/controller.dart';
 import 'package:flutter_map/flutter_map.dart';
 
@@ -14,7 +15,19 @@ class LeafletMapPresenter extends ChangeNotifier {
         StatefulMapController(mapController: mapController, verbose: true);
   }
 
-  addHikeTrack(GeoJsonData track) async {
+  addHikeTrack(LineStringData track) async {
+    const name = 'name';
+
+    return statefulMapController.onReady
+        .then((_) => statefulMapController
+            .fromGeoJson(track.toGeojsonFeatureString(name), verbose: true))
+        .then((_) => addPoi(track.coordinates[0][0], track.coordinates[0][1]))
+        .then((_) => statefulMapController.centerOnPoint(
+            LatLng(track.coordinates[0][1], track.coordinates[0][0])))
+        .then((_) => notifyListeners());
+  }
+
+  addPoi(double longitude, double latitude) async {
     var geojsonFeature = '''{
 "features": [
     {
@@ -26,18 +39,13 @@ class LeafletMapPresenter extends ChangeNotifier {
     },
     "geometry": {
         "type": "Point",
-        "coordinates": [-104.99404, 39.75621]
+        "coordinates": [$longitude, $latitude]
     }
         }]
     }''';
-
-    final geojson = GeoJson();
-    await geojson.parse(geojsonFeature, verbose: true);
-
-    statefulMapController.onReady.then((_) {
-      return statefulMapController.fromGeoJson(geojsonFeature);
-    }).then((_) => notifyListeners());
-    statefulMapController.changeFeed.listen((change) {});
+    return statefulMapController.onReady
+        .then((_) => statefulMapController.fromGeoJson(geojsonFeature))
+        .then((_) => notifyListeners());
   }
 }
 

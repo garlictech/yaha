@@ -1,7 +1,7 @@
 import 'package:functional_data/functional_data.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import '../shared/geojson.dart';
+import '../shared/linestring.dart';
 import '../shared/textual-description.dart';
 
 part 'hike.g.dart';
@@ -14,7 +14,7 @@ class Hike extends $Hike {
   @override
   final List<TextualDescription>? description;
   @override
-  final GeoJsonData? route;
+  final LineStringData? route;
   @override
   final List<String>? imageUrls;
 

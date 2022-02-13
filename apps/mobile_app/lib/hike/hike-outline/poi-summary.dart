@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 
-class Poi extends StatelessWidget {
+class PoiSummary extends StatelessWidget {
   final Color backgroundColor;
   final IconData icon;
   final double iconSize;
   final double padding;
   final double radius;
 
-  const Poi(
+  const PoiSummary(
       {Key? key,
       required this.backgroundColor,
       required this.icon,

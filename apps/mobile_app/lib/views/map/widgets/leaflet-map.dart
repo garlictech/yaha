@@ -18,14 +18,15 @@ class LeafletMap extends ConsumerWidget {
           child: FlutterMap(
         mapController: presenter.mapController,
         options: MapOptions(
-          center: LatLng(39.75621, -104.99404),
-          zoom: 2.0,
+          center: LatLng(47.251956, 17.728452),
+          zoom: 11.0,
         ),
         layers: [
           presenter.statefulMapController.tileLayer,
           MarkerLayerOptions(
             markers: presenter.statefulMapController.markers,
           ),
+          PolylineLayerOptions(polylines: presenter.statefulMapController.lines)
         ],
       )),
     );
