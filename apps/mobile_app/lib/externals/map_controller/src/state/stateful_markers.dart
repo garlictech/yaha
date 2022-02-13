@@ -1,12 +1,10 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter_map/flutter_map.dart';
 
 import '../models.dart';
 
 class StatefulMarkersState {
   /// Provide a [MapController]
-  StatefulMarkersState({@required this.mapController, @required this.notify})
-      : assert(mapController != null);
+  StatefulMarkersState({required this.mapController, required this.notify});
 
   /// The Flutter Map controller
   final MapController mapController;
@@ -37,7 +35,9 @@ class StatefulMarkersState {
   }
 
   void mutate(String name, String property, dynamic value) {
-    _statefulMarkers[name].mutate(property, value);
-    addStatefulMarker(name, _statefulMarkers[name]);
+    _statefulMarkers[name]?.mutate(property, value);
+    if (_statefulMarkers[name] != null) {
+      addStatefulMarker(name, _statefulMarkers[name]!);
+    }
   }
 }

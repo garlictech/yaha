@@ -10,7 +10,7 @@ yarn nx format:check --base={ENVNAME}
 yarn nx affected:lint ${excludes} --base=${ENVNAME} 
 yarn nx affected:test ${excludes} --base=${ENVNAME} 
 #yarn nx lint-ci mobile_app
-#yarn nx test-ci mobile_app
+yarn nx test-ci mobile_app
 yarn nx buildApk-ci mobile_app
 yarn nx synth backend --env=${ENVNAME}
 yarn nx synth common-backend --env=dev

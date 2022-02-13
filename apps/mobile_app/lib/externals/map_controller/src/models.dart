@@ -1,16 +1,15 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:latlong/latlong.dart';
+import 'package:latlong2/latlong.dart';
 
 typedef StatefulMarkerBuidler = Widget Function(
     BuildContext, Map<String, dynamic>);
 
 class StatefulMarker {
   StatefulMarker(
-      {@required this.point,
-      @required this.state,
-      @required this.builder,
+      {required this.point,
+      required this.state,
+      required this.builder,
       this.width = 30.0,
       this.height = 30.0,
       this.anchorAlign = AnchorAlign.center});
@@ -64,12 +63,10 @@ enum MapControllerChangeType {
 class StatefulMapControllerStateChange {
   /// Name and value of the change
   StatefulMapControllerStateChange(
-      {@required this.type,
-      @required this.name,
-      @required this.value,
-      this.from})
-      : assert(name != null),
-        assert(type != null);
+      {required this.type,
+      required this.name,
+      required this.value,
+      required this.from});
 
   /// Name of the change
   final String name;
@@ -86,6 +83,6 @@ class StatefulMapControllerStateChange {
   /// String representation
   @override
   String toString() {
-    return "${this.name} ${this.value} from ${this.from}";
+    return "$name $value from $from";
   }
 }

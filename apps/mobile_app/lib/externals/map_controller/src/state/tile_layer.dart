@@ -9,7 +9,7 @@ import '../types.dart';
 class TileLayerState {
   /// Default contructor
   TileLayerState(
-      {@required this.type, @required this.notify, this.customTileLayer}) {
+      {required this.type, required this.notify, this.customTileLayer}) {
     _tileLayer = _tileLayerForType(type);
   }
 
@@ -17,12 +17,12 @@ class TileLayerState {
   TileLayerType type;
 
   /// A custom tile layer options
-  TileLayerOptions customTileLayer;
+  TileLayerOptions? customTileLayer;
 
   /// Function to notify the changefeed
   final Function notify;
 
-  TileLayerOptions _tileLayer;
+  late TileLayerOptions _tileLayer;
 
   TileLayerOptions get tileLayer => _tileLayer;
 
@@ -62,9 +62,14 @@ class TileLayerState {
         break;
       case TileLayerType.custom:
         if (customTileLayer != null) {
-          tlo = customTileLayer;
+          tlo = customTileLayer!;
         } else {
-          tlo = customTileLayer;
+          tlo = TileLayerOptions(
+              urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+              subdomains: ['a', 'b', 'c'],
+              tileProvider: kIsWeb
+                  ? _NonCachingNetworkTileProvider()
+                  : NetworkTileProvider());
         }
         break;
       default:

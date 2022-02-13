@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:latlong/latlong.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:geojson/geojson.dart';
 import 'package:geopoint/geopoint.dart';
 import '../models.dart';
@@ -9,7 +8,7 @@ import '../models.dart';
 /// State of the polygons on the map
 class PolygonsState {
   /// Default contructor
-  PolygonsState({@required this.notify}) : assert(notify != null);
+  PolygonsState({required this.notify});
 
   /// The notify function
   final Function notify;
@@ -24,11 +23,11 @@ class PolygonsState {
 
   /// Add a polygon on the map
   Future<void> addPolygon(
-      {@required String name,
-      @required List<LatLng> points,
-      Color color,
-      double borderWidth,
-      Color borderColor}) async {
+      {required String name,
+      required List<LatLng> points,
+      required Color color,
+      required double borderWidth,
+      required Color borderColor}) async {
     _namedPolygons[name] = Polygon(
         points: points,
         color: color,
@@ -49,7 +48,7 @@ class PolygonsState {
 
   /// Export all polygons to a [GeoJsonFeature] with geometry
   /// type [GeoJsonMultiPolygon]
-  GeoJsonFeature<GeoJsonMultiPolygon> toGeoJsonFeatures() {
+  GeoJsonFeature<GeoJsonMultiPolygon>? toGeoJsonFeatures() {
     if (namedPolygons.isEmpty) {
       return null;
     }
@@ -57,8 +56,9 @@ class PolygonsState {
     for (final k in namedPolygons.keys) {
       final mapPolygon = namedPolygons[k];
       final polygon = GeoJsonPolygon()..name = k;
-      final geoSerie = GeoSerie(name: polygon.name, type: GeoSerieType.polygon);
-      for (final point in mapPolygon.points) {
+      final geoSerie =
+          GeoSerie(name: polygon.name ?? '', type: GeoSerieType.polygon);
+      for (final point in mapPolygon?.points ?? const []) {
         geoSerie.geoPoints.add(
             GeoPoint(latitude: point.latitude, longitude: point.longitude));
       }

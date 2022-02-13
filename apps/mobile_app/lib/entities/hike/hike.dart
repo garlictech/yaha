@@ -14,7 +14,7 @@ class Hike extends $Hike {
   @override
   final List<TextualDescription>? description;
   @override
-  final GeoJson? route;
+  final GeoJsonData? route;
   @override
   final List<String>? imageUrls;
 

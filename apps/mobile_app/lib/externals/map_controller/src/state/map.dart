@@ -1,15 +1,12 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:latlong/latlong.dart';
+import 'package:latlong2/latlong.dart';
 
 import '../models.dart';
 
 /// State of the map
 class MapState {
   /// Default constructor
-  MapState({@required this.mapController, @required this.notify})
-      : assert(mapController != null);
+  MapState({required this.mapController, required this.notify});
 
   /// The [MapController]
   final MapController mapController;
@@ -58,13 +55,13 @@ class MapState {
   /// This is used to handle the gestures
   void onPositionChanged(MapPosition posChange, bool gesture) {
     //print("Position changed: zoom ${posChange.zoom} / ${posChange.center}");
-    if (posChange.zoom != _zoom) {
-      _zoom = posChange.zoom;
+    if (posChange.zoom != _zoom && posChange.zoom != null) {
+      _zoom = posChange.zoom!;
       notify("zoom", posChange.zoom, onPositionChanged,
           MapControllerChangeType.zoom);
     }
-    if (posChange.center != _center) {
-      _center = posChange.center;
+    if (posChange.center != _center && posChange.center != null) {
+      _center = posChange.center!;
       notify("center", posChange.center, onPositionChanged,
           MapControllerChangeType.center);
     }
