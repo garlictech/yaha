@@ -20,6 +20,8 @@ export class SecretsManagerStack extends sst.Stack {
   public neo4jUsername: string;
   public neo4jPassword: string;
   public secretsManager: sm.ISecret;
+  public apiAccessKeyId: string;
+  public apiSecretAccessKey: string;
 
   constructor(scope: sst.App, id: string, props?: sst.StackProps) {
     super(scope, id, props);
@@ -64,5 +66,13 @@ export class SecretsManagerStack extends sst.Stack {
       value: this.secretsManager.secretArn,
       exportName: app.logicalPrefixedName('SecretsManager'),
     });
+
+    this.apiAccessKeyId = this.secretsManager
+      .secretValueFromJson('apiAccessKeyId')
+      .toString();
+
+    this.apiSecretAccessKey = this.secretsManager
+      .secretValueFromJson('apiSecretAccessKey')
+      .toString();
   }
 }

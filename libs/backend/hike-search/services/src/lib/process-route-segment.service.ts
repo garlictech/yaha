@@ -1,4 +1,4 @@
-/*import { Position } from '@turf/helpers';
+import { Position } from '@turf/helpers';
 import * as E from 'fp-ts/lib/Either';
 import * as O from 'fp-ts/lib/Option';
 import * as A from 'fp-ts/lib/Array';
@@ -6,30 +6,8 @@ import * as A from 'fp-ts/lib/Array';
 import * as fp from 'lodash/fp';
 import { forkJoin, Observable, of, throwError } from 'rxjs';
 import { tap, switchMap, take, map } from 'rxjs/operators';
-import { ImageApiService } from '@bit/garlictech.nestjs.gtrack.image';
-import { GraphqlClientService } from '@bit/garlictech.nestjs.shared.graphql';
 import { pipe, flow } from 'fp-ts/lib/function';
-import {
-  Poi,
-  Image,
-  CreateImageInput,
-  isCreateImageInput,
-  isCreatePoiInput,
-  CreatePoiInput,
-  validateCoordinatesWithElevation,
-  PlaceType,
-  BoundingBox,
-} from '@bit/garlictech.universal.gtrack.graphql-api';
-import { PoiApiService } from '@bit/garlictech.nestjs.gtrack.poi';
-import { ExternalPoiFp } from './lib/external-poi.fp';
-import { ExternalPoiService } from './external-poi.service';
-import { PoiSearchOutputType, ExternalPoi } from './lib/types';
 import { Feature, Polygon } from '@turf/helpers';
-import {
-  removePointsOutsideOfPolygon,
-  filterPointsCloseToReferencePoints,
-} from '@bit/garlictech.universal.gtrack.geometry';
-import { groupPoisOnSameLocation } from './lib/group-pois-on-same-location';
 import { GtrackDefaults } from '@bit/garlictech.universal.gtrack.defaults/defaults';
 import { PoiFp } from '@bit/garlictech.universal.gtrack.poi';
 import { getElevationOfPointsFromGoogle } from '@bit/garlictech.nodejs.shared.elevation';
@@ -39,22 +17,23 @@ import {
   RouteSegment,
   EBuffer,
 } from '@bit/garlictech.universal.gtrack.route-segment';
-import { resolveDataInPolygon } from '@bit/garlictech.universal.shared.graphql-data';
-import { DESCRIPTION_LANGUAGES_SHORT } from '@bit/garlictech.universal.gtrack.language/language.fp';
+import { resolveDataInPolygon } from './graphql-data';
+import {DESCRIPTION_LANGUAGES_SHORT} from '@bit/garlictech.universal.gtrack.language/language.fp';
+import {YahaApi} from '@yaha/gql-api';
 
 const averageSpeed = 4; // KM/H
 
-export interface ProcessRouteSegment {
+export interface ProcessRouteSegmentDeps {
 
 }
 
-export const processRouteSegment = (segmentCoords: Position[]): Observable<any> {
+export const processRouteSegment =(deps: ProcessRouteSegmentDeps) => (segmentCoords: Position[]): Observable<any> => {
     console.log('Entering processing...');
 
     const createPlaceResolvers = (bigBuffer: Feature<Polygon>) => [
-      resolveDataInPolygon<Poi>({
+      resolveDataInPolygon<YahaApi.Poi>({
         searchPolygon: bigBuffer,
-        placeType: PlaceType.poi,
+        placeType: YahaApi.PlaceType.poi,
       })({
         graphqlClient: this.graphqlClient.backendClient,
         queryExecutor: params => this.poiApiService.api.getWithQuery(params),
@@ -94,12 +73,6 @@ export const processRouteSegment = (segmentCoords: Position[]): Observable<any> 
           );
 
     return validateCoordinatesWithElevation(segmentCoords).pipe(
-      tap(x => {
-        Logger.info(
-          `Route segment coordinates are valid, executing process`,
-          x,
-        );
-      }),
       switchMap(
         flow(
           RouteSegmentFp.fromCoordinatesWithElevation(averageSpeed),
@@ -126,9 +99,6 @@ export const processRouteSegment = (segmentCoords: Position[]): Observable<any> 
           ),
         ),
       ),
-      tap(() => {
-        Logger.info(`Finished segment processing`);
-      }),
     );
   }
 
@@ -203,7 +173,6 @@ export const processRouteSegment = (segmentCoords: Position[]): Observable<any> 
         (image: CreateImageInput) =>
           !fp.includes(ImageFp.generateId(image), gtrackItemIds),
       ),
-      fp.tap(x => Logger.info(`New images to save: ${x.length}`)),
       (reallyNewImages: CreateImageInput[]) =>
         fp.isEmpty(reallyNewImages)
           ? of(true)
@@ -225,12 +194,10 @@ export const processRouteSegment = (segmentCoords: Position[]): Observable<any> 
     const updatedPoisForDatabase = fp.flow(
       pois => fp.differenceWith(poisAreTheSame, pois, gtrackPoisInBigBuffer),
       fp.map(PoiFp.createPoiUpdateData),
-      fp.tap(x => Logger.info(`Pois to update: ${x.length}`)),
     )(poisToUpdate);
 
     const saveNewPois = pipe(
       newPois,
-      fp.tap(x => Logger.info(`New pois to save: ${x.length}`)),
       fp.map(poi => ExternalPoiFp.convertToPoiInput(poi, 0)),
       getElevationOfPointsFromGoogle,
       switchMap(E.fold(err => throwError(err), of)),
@@ -246,4 +213,4 @@ export const processRouteSegment = (segmentCoords: Position[]): Observable<any> 
     // Execute the database operations
     return forkJoin([saveNewPois, saveNewImages, updateNewPois]);
   }
-  */
+  

@@ -5,6 +5,7 @@ import { SecretsManagerStack } from './app/secretsmanager-stack';
 import { NeptuneApiStack } from './app/neptune-stack';
 import { LambdaStack } from './app/lambda-stack';
 import { aws_ec2 as ec2 } from 'aws-cdk-lib';
+import { ConfiguratorStack } from './app/configurator-stack';
 
 export class yahaStack extends Stack {
   constructor(scope: App, id: string) {
@@ -24,6 +25,8 @@ export class yahaStack extends Stack {
       neptuneReaderAddress: neptuneStack.readerAddress,
       neptuneWriterAddress: neptuneStack.writerAddress,
       vpc,
+      apiAccessKeyId: secretsManagerStack.apiAccessKeyId,
+      apiSecretAccessKey: secretsManagerStack.apiSecretAccessKey,
     });
 
     new CognitoStack(scope, 'cognito', {
@@ -37,6 +40,8 @@ export class yahaStack extends Stack {
       appleKeyId: paramsStack.appleKeyId,
       appleServiceId: paramsStack.appleServiceId,
     });
+
+    new ConfiguratorStack(scope, 'configurator');
   }
 }
 

@@ -3,7 +3,6 @@ import {
   GraphqlApiFp,
 } from '@yaha/shared/graphql/api-client';
 import { GraphqlSdk, getSdkAmplify } from './sdk';
-
 import awsmobile from './generated/aws-exports';
 import { pipe } from 'fp-ts/function';
 

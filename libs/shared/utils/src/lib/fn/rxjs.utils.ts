@@ -1,3 +1,4 @@
+import * as OE from 'fp-ts-rxjs/lib/ObservableEither';
 import {
   Observable,
   of,
@@ -84,3 +85,6 @@ export function throwIfEmptyValue<T>(
     ) as OperatorFunction<T | null | undefined, T>,
   );
 }
+
+export const oeTryCatch = <TYPE>(x: Observable<TYPE>) =>
+  OE.tryCatch(x) as OE.ObservableEither<string, TYPE>;

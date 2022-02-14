@@ -46,7 +46,8 @@
                 "sourceTag": "layer:service",
                 "onlyDependOnLibsWithTags": [
                   "layer:entity",
-                  "layer:usecase"
+                  "layer:service",
+                  "layer:repository"
                 ]
               },
               {

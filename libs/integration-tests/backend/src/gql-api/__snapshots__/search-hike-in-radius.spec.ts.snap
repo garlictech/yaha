@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Search for a hike in radius: SHOULD FIND HIKE 1`] = `
+Object {
+  "items": Array [
+    "12-search-hike-in-radius-c86e6484-a2c7-11ec-b909-0242ac120002",
+  ],
+  "total": 1,
+}
+`;
+
+exports[`Search for a hike in radius: SHOULD NOT FIND HIKE 1`] = `
+Object {
+  "items": Array [],
+  "total": 0,
+}
+`;
