@@ -1,4 +1,4 @@
-/*import { Position } from '@turf/helpers';
+import { Position } from '@turf/helpers';
 import * as E from 'fp-ts/lib/Either';
 import * as O from 'fp-ts/lib/Option';
 import * as A from 'fp-ts/lib/Array';
@@ -44,11 +44,11 @@ import { DESCRIPTION_LANGUAGES_SHORT } from '@bit/garlictech.universal.gtrack.la
 
 const averageSpeed = 4; // KM/H
 
-export interface ProcessRouteSegment {
+export interface ProcessRouteSegmentDeps {
 
 }
 
-export const processRouteSegment = (segmentCoords: Position[]): Observable<any> {
+export const processRouteSegment = (segmentCoords: Position[]): Observable<any> => {
     console.log('Entering processing...');
 
     const createPlaceResolvers = (bigBuffer: Feature<Polygon>) => [
@@ -246,4 +246,4 @@ export const processRouteSegment = (segmentCoords: Position[]): Observable<any> 
     // Execute the database operations
     return forkJoin([saveNewPois, saveNewImages, updateNewPois]);
   }
-  */
+  
