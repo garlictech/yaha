@@ -45,3 +45,9 @@ functions:
 
   neptune-resolvers:
     handler: lib/lambda/neptune-resolvers/index.handler
+
+  amplify-resolvers:
+    handler: lib/lambda/amplify-resolvers/index.handler
+
+  yaha-api-updater:
+    handler: lib/lambda/yaha-api-updater/index.handler

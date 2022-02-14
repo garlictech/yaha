@@ -20,7 +20,7 @@
     "downlevelIteration": true,
     "target": "es2015",
     "module": "esnext",
-    "typeRoots": ["types", "node_modules/@types"],
+    "typeRoots": ["./types", "./node_modules/@types"],
     "types": ["node", "jest"],
     "lib": ["es2015", "es2016", "es2017", "dom"],
     "skipLibCheck": true,
@@ -30,6 +30,9 @@
     "allowJs": true,
     "baseUrl": ".",
     "paths": {
+      "@yaha/backend/amplify-resolvers": [
+        "libs/backend/amplify-resolvers/src/index.ts"
+      ],
       "@yaha/backend/hike-search/repositories": [
         "libs/backend/hike-search/repositories/src/index.ts"
       ],

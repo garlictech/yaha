@@ -2,6 +2,18 @@ input AMPLIFY {
   globalAuthRule: AuthRule = { allow: public }
 }
 
+## ------ Generic types -----------------------------------------------------
+enum PublicationState {
+  draft
+  published
+  archived
+}
+
+enum LengthUnit {
+  imperial
+  metric
+}
+
 # ------ TEXTUAL DESCRIPTION -----------------------------------------------------
 enum TextualDescriptionType {
   markdown
@@ -16,9 +28,56 @@ type TextualDescription {
   type: TextualDescriptionType!
 }
 
-type LineString {
-  type: String!
-  coordinates: [[Float]]!
+# ------ IMAGES -----------------------------------------------------
+type ImageInfo {
+  url: String!
+  width: Int
+  height: Int
+}
+
+type ImageLabel {
+  label: String!
+  confidence: Float!
+}
+
+type Image
+  @model
+  @searchable
+  @auth(rules: [{ allow: public }, { allow: public, provider: iam }]) {
+  id: ID!
+  location: Location!
+  original: ImageInfo!
+  card: ImageInfo!
+  thumbnail: ImageInfo!
+  sourceObject: PoiSourceObject!
+  attributions: String
+  labels: [ImageLabel]
+}
+
+# ------ POIS -----------------------------------------------------
+enum PoiSource {
+  google
+  wikipedia
+  osmAmenity
+  osmNatural
+  osmRoute
+  osmPublicTransport
+  osmEmergency
+  osmHistoric
+  osmLeisure
+  osmManMade
+  osmMilitary
+  osmShop
+  osmTourism
+  mapillary
+  flickr
+}
+
+type PoiSourceObject {
+  objectType: PoiSource!
+  languageKey: String
+  objectId: String!
+  url: String
 }
 
 type Poi
@@ -26,6 +85,89 @@ type Poi
   @searchable
   @auth(rules: [{ allow: public }, { allow: public, provider: iam }]) {
   id: ID!
+  elevation: Float
+  location: Location!
+  types: [String!]
+  description: [TextualDescription!]
+  tags: [String!]
+  sourceObject: [PoiSourceObject!]
+  address: String
+  phoneNumber: String
+  openingHours: String
+}
+
+# ------ ROUTES -----------------------------------------------------
+type Point {
+  lat: Float!
+  lon: Float!
+  elevation: Float
+}
+
+type Location {
+  lat: Float!
+  lon: Float!
+}
+
+type BoundingBox {
+  NorthEast: Point!
+  SouthWest: Point!
+}
+
+# ------ GEO SEARCH -----------------------------------------------------
+enum PlaceType {
+  poi
+  hike
+  message
+  image
+}
+
+type Place {
+  id: ID!
+  type: PlaceType!
+  objectId: String!
+  lat: Float!
+  lon: Float!
+  title: String
+  banned: Boolean
+  processed: Boolean
+}
+
+# ------ HIKES -----------------------------------------------------
+type HikeStopData {
+  poiId: ID!
+  description: [TextualDescription!]
+}
+
+type Checkpoint {
+  poiId: String
+  point: Point
+}
+
+type RouteData {
+  distance: Int!
+  uphill: Int!
+  downhill: Int!
+  averageTime: Int!
+  score: Int!
+  difficulty: Int!
+  bounds: BoundingBox!
+  isRoundTrip: Boolean!
+  poiSearchBox: BoundingBox!
+}
+
+type LineString {
+  type: String!
+  coordinates: [[Float]]!
+}
+
+type GeoShape {
+  type: String!
+  coordinates: [[[Float]]]!
+}
+
+input GeoShapeInput {
+  type: String!
+  coordinates: [[[Float]]]!
 }
 
 type Hike
@@ -33,7 +175,105 @@ type Hike
   @searchable
   @auth(rules: [{ allow: public }, { allow: public, provider: iam }]) {
   id: ID!
-  description: [TextualDescription]!
-  route: LineString!
+  description: [TextualDescription]
+  route: LineString
   imageUrls: [String]
+  publicationState: PublicationState
+  featured: Boolean
+  rate: String
+  offlineMap: String
+  featuredStops: [HikeStopData]
+  checkpoints: [Checkpoint]
+  tags: [String]
+  location: Location
+}
+
+# ------ PROFILES -----------------------------------------------------
+type Profile {
+  username: String!
+  birthDate: String
+  firstName: String
+  lastName: String
+  languages: [String!]
+  picture: String
+  phone: String
+}
+
+type Settings {
+  averageSpeed: Int
+  lengthUnit: LengthUnit
+}
+
+type Customer {
+  profile: Profile
+  settings: Settings
+  bookmarkedHikes: [ID]
+}
+
+input LocationInput {
+  lon: Float!
+  lat: Float!
+}
+
+enum GeoSearchableObjectType {
+  poi
+  hike
+  image
+}
+
+input SearchByRadiusInput {
+  location: LocationInput!
+  radiusInMeters: Float!
+  objectType: GeoSearchableObjectType!
+  limit: Int
+  nextToken: String
+}
+
+input SearchInShapeInput {
+  shape: GeoShapeInput!
+  objectType: GeoSearchableObjectType!
+  limit: Int
+  nextToken: String
+}
+
+input SearchInMultipolygonInput {
+  coordinates: [[[[Float!]]]]!
+  objectType: GeoSearchableObjectType!
+  limit: Int
+  nextToken: String
+}
+
+input SearchInEnvelopeInput {
+  envelope: [[Float]]!
+  objectType: GeoSearchableObjectType!
+  limit: Int
+  nextToken: String
+}
+
+type GeoSearchConnection {
+  items: [String]
+    @auth(rules: [{ allow: public }, { allow: public, provider: iam }])
+
+  nextToken: String
+    @auth(rules: [{ allow: public }, { allow: public, provider: iam }])
+
+  total: Int @auth(rules: [{ allow: public }, { allow: public, provider: iam }])
+}
+
+type Query {
+  searchByRadius(input: SearchByRadiusInput!): GeoSearchConnection
+    @auth(rules: [{ allow: public }, { allow: public, provider: iam }])
+    @function(name: "dev-yaha-amplify-resolvers")
+
+  searchInEnvelope(input: SearchInEnvelopeInput!): GeoSearchConnection
+    @auth(rules: [{ allow: public }, { allow: public, provider: iam }])
+    @function(name: "dev-yaha-amplify-resolvers")
+
+  searchInShape(input: SearchInShapeInput!): GeoSearchConnection
+    @auth(rules: [{ allow: public }, { allow: public, provider: iam }])
+    @function(name: "dev-yaha-amplify-resolvers")
+
+  searchInMultipolygon(input: SearchInMultipolygonInput!): GeoSearchConnection
+    @auth(rules: [{ allow: public }, { allow: public, provider: iam }])
+    @function(name: "dev-yaha-amplify-resolvers")
 }

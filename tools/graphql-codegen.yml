@@ -4,6 +4,7 @@ schema:
   - apps/mobile_app/amplify/backend/api/yaha/build/schema.graphql
 documents:
   - libs/gql-api/src/lib/generated/graphql/*.ts
+  - libs/gql-api/src/gql-documents/*.graphql
 generates:
   libs/gql-api/src/lib/generated/yaha-api.ts:
     hooks:

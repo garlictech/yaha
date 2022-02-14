@@ -14,6 +14,7 @@ module.exports = {
     '<rootDir>/libs/integration-tests/backend',
     '<rootDir>/libs/backend/hike-search/repositories',
     '<rootDir>/libs/backend/hike-search/utils',
+    '<rootDir>/libs/backend/amplify-resolvers',
   ],
   modulePaths: ['<rootDir>'],
 };

@@ -1,4 +1,15 @@
 
+enum PublicationState {
+  draft
+  published
+  archived
+}
+
+enum LengthUnit {
+  imperial
+  metric
+}
+
 enum TextualDescriptionType {
   markdown
   html
@@ -12,28 +23,243 @@ type TextualDescription @aws_iam @aws_api_key {
   type: TextualDescriptionType!
 }
 
+type ImageInfo @aws_iam @aws_api_key {
+  url: String!
+  width: Int
+  height: Int
+}
+
+type ImageLabel @aws_iam @aws_api_key {
+  label: String!
+  confidence: Float!
+}
+
+type Image @aws_iam @aws_api_key {
+  id: ID!
+  location: Location!
+  original: ImageInfo!
+  card: ImageInfo!
+  thumbnail: ImageInfo!
+  sourceObject: PoiSourceObject!
+  attributions: String
+  labels: [ImageLabel]
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+enum PoiSource {
+  google
+  wikipedia
+  osmAmenity
+  osmNatural
+  osmRoute
+  osmPublicTransport
+  osmEmergency
+  osmHistoric
+  osmLeisure
+  osmManMade
+  osmMilitary
+  osmShop
+  osmTourism
+  mapillary
+  flickr
+}
+
+type PoiSourceObject @aws_iam @aws_api_key {
+  objectType: PoiSource!
+  languageKey: String
+  objectId: String!
+  url: String
+}
+
+type Poi @aws_iam @aws_api_key {
+  id: ID!
+  elevation: Float
+  location: Location!
+  types: [String!]
+  description: [TextualDescription!]
+  tags: [String!]
+  sourceObject: [PoiSourceObject!]
+  address: String
+  phoneNumber: String
+  openingHours: String
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type Point @aws_iam @aws_api_key {
+  lat: Float!
+  lon: Float!
+  elevation: Float
+}
+
+type Location @aws_iam @aws_api_key {
+  lat: Float!
+  lon: Float!
+}
+
+type BoundingBox {
+  NorthEast: Point!
+  SouthWest: Point!
+}
+
+enum PlaceType {
+  poi
+  hike
+  message
+  image
+}
+
+type Place {
+  id: ID!
+  type: PlaceType!
+  objectId: String!
+  lat: Float!
+  lon: Float!
+  title: String
+  banned: Boolean
+  processed: Boolean
+}
+
+type HikeStopData @aws_iam @aws_api_key {
+  poiId: ID!
+  description: [TextualDescription!]
+}
+
+type Checkpoint @aws_iam @aws_api_key {
+  poiId: String
+  point: Point
+}
+
+type RouteData {
+  distance: Int!
+  uphill: Int!
+  downhill: Int!
+  averageTime: Int!
+  score: Int!
+  difficulty: Int!
+  bounds: BoundingBox!
+  isRoundTrip: Boolean!
+  poiSearchBox: BoundingBox!
+}
+
 type LineString @aws_iam @aws_api_key {
   type: String!
   coordinates: [[Float]]!
 }
 
-type Poi @aws_iam @aws_api_key {
-  id: ID!
-  createdAt: AWSDateTime!
-  updatedAt: AWSDateTime!
+type GeoShape {
+  type: String!
+  coordinates: [[[Float]]]!
+}
+
+input GeoShapeInput {
+  type: String!
+  coordinates: [[[Float]]]!
 }
 
 type Hike @aws_iam @aws_api_key {
   id: ID!
-  description: [TextualDescription]!
-  route: LineString!
+  description: [TextualDescription]
+  route: LineString
   imageUrls: [String]
+  publicationState: PublicationState
+  featured: Boolean
+  rate: String
+  offlineMap: String
+  featuredStops: [HikeStopData]
+  checkpoints: [Checkpoint]
+  tags: [String]
+  location: Location
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
 }
 
-type SearchablePoiConnection @aws_api_key @aws_iam {
-  items: [Poi]!
+type Profile {
+  username: String!
+  birthDate: String
+  firstName: String
+  lastName: String
+  languages: [String!]
+  picture: String
+  phone: String
+}
+
+type Settings {
+  averageSpeed: Int
+  lengthUnit: LengthUnit
+}
+
+type Customer {
+  profile: Profile
+  settings: Settings
+  bookmarkedHikes: [ID]
+}
+
+input LocationInput {
+  lon: Float!
+  lat: Float!
+}
+
+enum GeoSearchableObjectType {
+  poi
+  hike
+  image
+}
+
+input SearchByRadiusInput {
+  location: LocationInput!
+  radiusInMeters: Float!
+  objectType: GeoSearchableObjectType!
+  limit: Int
+  nextToken: String
+}
+
+input SearchInShapeInput {
+  shape: GeoShapeInput!
+  objectType: GeoSearchableObjectType!
+  limit: Int
+  nextToken: String
+}
+
+input SearchInMultipolygonInput {
+  coordinates: [[[[Float!]]]]!
+  objectType: GeoSearchableObjectType!
+  limit: Int
+  nextToken: String
+}
+
+input SearchInEnvelopeInput {
+  envelope: [[Float]]!
+  objectType: GeoSearchableObjectType!
+  limit: Int
+  nextToken: String
+}
+
+type GeoSearchConnection {
+  items: [String] @aws_iam @aws_api_key
+  nextToken: String @aws_iam @aws_api_key
+  total: Int @aws_iam @aws_api_key
+}
+
+type Query {
+  getImage(id: ID!): Image @aws_api_key @aws_iam
+  listImages(filter: ModelImageFilterInput, limit: Int, nextToken: String): ModelImageConnection @aws_api_key @aws_iam
+  searchImages(filter: SearchableImageFilterInput, sort: [SearchableImageSortInput], limit: Int, nextToken: String, from: Int, aggregates: [SearchableImageAggregationInput]): SearchableImageConnection @aws_api_key @aws_iam
+  getPoi(id: ID!): Poi @aws_api_key @aws_iam
+  listPois(filter: ModelPoiFilterInput, limit: Int, nextToken: String): ModelPoiConnection @aws_api_key @aws_iam
+  searchPois(filter: SearchablePoiFilterInput, sort: [SearchablePoiSortInput], limit: Int, nextToken: String, from: Int, aggregates: [SearchablePoiAggregationInput]): SearchablePoiConnection @aws_api_key @aws_iam
+  getHike(id: ID!): Hike @aws_api_key @aws_iam
+  listHikes(filter: ModelHikeFilterInput, limit: Int, nextToken: String): ModelHikeConnection @aws_api_key @aws_iam
+  searchHikes(filter: SearchableHikeFilterInput, sort: [SearchableHikeSortInput], limit: Int, nextToken: String, from: Int, aggregates: [SearchableHikeAggregationInput]): SearchableHikeConnection @aws_api_key @aws_iam
+  searchByRadius(input: SearchByRadiusInput!): GeoSearchConnection @aws_iam @aws_api_key
+  searchInEnvelope(input: SearchInEnvelopeInput!): GeoSearchConnection @aws_iam @aws_api_key
+  searchInShape(input: SearchInShapeInput!): GeoSearchConnection @aws_iam @aws_api_key
+  searchInMultipolygon(input: SearchInMultipolygonInput!): GeoSearchConnection @aws_iam @aws_api_key
+}
+
+type SearchableImageConnection @aws_api_key @aws_iam {
+  items: [Image]!
   nextToken: String
   total: Int
   aggregateItems: [SearchableAggregateResult]!
@@ -59,13 +285,11 @@ type SearchableAggregateBucketResultItem @aws_iam @aws_api_key {
 
 union SearchableAggregateGenericResult = SearchableAggregateScalarResult | SearchableAggregateBucketResult
 
-type Query {
-  getPoi(id: ID!): Poi @aws_api_key @aws_iam
-  listPois(filter: ModelPoiFilterInput, limit: Int, nextToken: String): ModelPoiConnection @aws_api_key @aws_iam
-  searchPois(filter: SearchablePoiFilterInput, sort: [SearchablePoiSortInput], limit: Int, nextToken: String, from: Int, aggregates: [SearchablePoiAggregationInput]): SearchablePoiConnection @aws_api_key @aws_iam
-  getHike(id: ID!): Hike @aws_api_key @aws_iam
-  listHikes(filter: ModelHikeFilterInput, limit: Int, nextToken: String): ModelHikeConnection @aws_api_key @aws_iam
-  searchHikes(filter: SearchableHikeFilterInput, sort: [SearchableHikeSortInput], limit: Int, nextToken: String, from: Int, aggregates: [SearchableHikeAggregationInput]): SearchableHikeConnection @aws_api_key @aws_iam
+type SearchablePoiConnection @aws_api_key @aws_iam {
+  items: [Poi]!
+  nextToken: String
+  total: Int
+  aggregateItems: [SearchableAggregateResult]!
 }
 
 type SearchableHikeConnection @aws_api_key @aws_iam {
@@ -166,37 +390,74 @@ enum ModelSortDirection {
   DESC
 }
 
-type ModelPoiConnection @aws_api_key @aws_iam {
-  items: [Poi]!
+input ImageInfoInput {
+  url: String!
+  width: Int
+  height: Int
+}
+
+input PoiSourceObjectInput {
+  objectType: PoiSource!
+  languageKey: String
+  objectId: String!
+  url: String
+}
+
+input ImageLabelInput {
+  label: String!
+  confidence: Float!
+}
+
+type ModelImageConnection @aws_api_key @aws_iam {
+  items: [Image]!
   nextToken: String
 }
 
-input ModelPoiFilterInput {
+input ModelImageFilterInput {
   id: ModelIDInput
-  and: [ModelPoiFilterInput]
-  or: [ModelPoiFilterInput]
-  not: ModelPoiFilterInput
+  attributions: ModelStringInput
+  and: [ModelImageFilterInput]
+  or: [ModelImageFilterInput]
+  not: ModelImageFilterInput
 }
 
-input ModelPoiConditionInput {
-  and: [ModelPoiConditionInput]
-  or: [ModelPoiConditionInput]
-  not: ModelPoiConditionInput
+input ModelImageConditionInput {
+  attributions: ModelStringInput
+  and: [ModelImageConditionInput]
+  or: [ModelImageConditionInput]
+  not: ModelImageConditionInput
 }
 
-input CreatePoiInput {
+input CreateImageInput {
   id: ID
+  location: LocationInput!
+  original: ImageInfoInput!
+  card: ImageInfoInput!
+  thumbnail: ImageInfoInput!
+  sourceObject: PoiSourceObjectInput!
+  attributions: String
+  labels: [ImageLabelInput]
 }
 
-input UpdatePoiInput {
+input UpdateImageInput {
   id: ID!
+  location: LocationInput
+  original: ImageInfoInput
+  card: ImageInfoInput
+  thumbnail: ImageInfoInput
+  sourceObject: PoiSourceObjectInput
+  attributions: String
+  labels: [ImageLabelInput]
 }
 
-input DeletePoiInput {
+input DeleteImageInput {
   id: ID!
 }
 
 type Mutation {
+  createImage(input: CreateImageInput!, condition: ModelImageConditionInput): Image @aws_api_key @aws_iam
+  updateImage(input: UpdateImageInput!, condition: ModelImageConditionInput): Image @aws_api_key @aws_iam
+  deleteImage(input: DeleteImageInput!, condition: ModelImageConditionInput): Image @aws_api_key @aws_iam
   createPoi(input: CreatePoiInput!, condition: ModelPoiConditionInput): Poi @aws_api_key @aws_iam
   updatePoi(input: UpdatePoiInput!, condition: ModelPoiConditionInput): Poi @aws_api_key @aws_iam
   deletePoi(input: DeletePoiInput!, condition: ModelPoiConditionInput): Poi @aws_api_key @aws_iam
@@ -206,6 +467,9 @@ type Mutation {
 }
 
 type Subscription {
+  onCreateImage: Image @aws_subscribe(mutations: ["createImage"]) @aws_api_key @aws_iam
+  onUpdateImage: Image @aws_subscribe(mutations: ["updateImage"]) @aws_api_key @aws_iam
+  onDeleteImage: Image @aws_subscribe(mutations: ["deleteImage"]) @aws_api_key @aws_iam
   onCreatePoi: Poi @aws_subscribe(mutations: ["createPoi"]) @aws_api_key @aws_iam
   onUpdatePoi: Poi @aws_subscribe(mutations: ["updatePoi"]) @aws_api_key @aws_iam
   onDeletePoi: Poi @aws_subscribe(mutations: ["deletePoi"]) @aws_api_key @aws_iam
@@ -222,9 +486,85 @@ input TextualDescriptionInput {
   type: TextualDescriptionType!
 }
 
+type ModelPoiConnection @aws_api_key @aws_iam {
+  items: [Poi]!
+  nextToken: String
+}
+
+input ModelPoiFilterInput {
+  id: ModelIDInput
+  elevation: ModelFloatInput
+  types: ModelStringInput
+  tags: ModelStringInput
+  address: ModelStringInput
+  phoneNumber: ModelStringInput
+  openingHours: ModelStringInput
+  and: [ModelPoiFilterInput]
+  or: [ModelPoiFilterInput]
+  not: ModelPoiFilterInput
+}
+
+input ModelPoiConditionInput {
+  elevation: ModelFloatInput
+  types: ModelStringInput
+  tags: ModelStringInput
+  address: ModelStringInput
+  phoneNumber: ModelStringInput
+  openingHours: ModelStringInput
+  and: [ModelPoiConditionInput]
+  or: [ModelPoiConditionInput]
+  not: ModelPoiConditionInput
+}
+
+input CreatePoiInput {
+  id: ID
+  elevation: Float
+  location: LocationInput!
+  types: [String!]
+  description: [TextualDescriptionInput!]
+  tags: [String!]
+  sourceObject: [PoiSourceObjectInput!]
+  address: String
+  phoneNumber: String
+  openingHours: String
+}
+
+input UpdatePoiInput {
+  id: ID!
+  elevation: Float
+  location: LocationInput
+  types: [String!]
+  description: [TextualDescriptionInput!]
+  tags: [String!]
+  sourceObject: [PoiSourceObjectInput!]
+  address: String
+  phoneNumber: String
+  openingHours: String
+}
+
+input DeletePoiInput {
+  id: ID!
+}
+
 input LineStringInput {
   type: String!
   coordinates: [[Float]]!
+}
+
+input HikeStopDataInput {
+  poiId: ID!
+  description: [TextualDescriptionInput!]
+}
+
+input CheckpointInput {
+  poiId: String
+  point: PointInput
+}
+
+input PointInput {
+  lat: Float!
+  lon: Float!
+  elevation: Float
 }
 
 type ModelHikeConnection @aws_api_key @aws_iam {
@@ -232,9 +572,19 @@ type ModelHikeConnection @aws_api_key @aws_iam {
   nextToken: String
 }
 
+input ModelPublicationStateInput {
+  eq: PublicationState
+  ne: PublicationState
+}
+
 input ModelHikeFilterInput {
   id: ModelIDInput
   imageUrls: ModelStringInput
+  publicationState: ModelPublicationStateInput
+  featured: ModelBooleanInput
+  rate: ModelStringInput
+  offlineMap: ModelStringInput
+  tags: ModelStringInput
   and: [ModelHikeFilterInput]
   or: [ModelHikeFilterInput]
   not: ModelHikeFilterInput
@@ -242,6 +592,11 @@ input ModelHikeFilterInput {
 
 input ModelHikeConditionInput {
   imageUrls: ModelStringInput
+  publicationState: ModelPublicationStateInput
+  featured: ModelBooleanInput
+  rate: ModelStringInput
+  offlineMap: ModelStringInput
+  tags: ModelStringInput
   and: [ModelHikeConditionInput]
   or: [ModelHikeConditionInput]
   not: ModelHikeConditionInput
@@ -249,9 +604,17 @@ input ModelHikeConditionInput {
 
 input CreateHikeInput {
   id: ID
-  description: [TextualDescriptionInput]!
-  route: LineStringInput!
+  description: [TextualDescriptionInput]
+  route: LineStringInput
   imageUrls: [String]
+  publicationState: PublicationState
+  featured: Boolean
+  rate: String
+  offlineMap: String
+  featuredStops: [HikeStopDataInput]
+  checkpoints: [CheckpointInput]
+  tags: [String]
+  location: LocationInput
 }
 
 input UpdateHikeInput {
@@ -259,6 +622,14 @@ input UpdateHikeInput {
   description: [TextualDescriptionInput]
   route: LineStringInput
   imageUrls: [String]
+  publicationState: PublicationState
+  featured: Boolean
+  rate: String
+  offlineMap: String
+  featuredStops: [HikeStopDataInput]
+  checkpoints: [CheckpointInput]
+  tags: [String]
+  location: LocationInput
 }
 
 input DeleteHikeInput {
@@ -324,13 +695,14 @@ input SearchableIDFilterInput {
   range: [ID]
 }
 
-input SearchablePoiFilterInput {
+input SearchableImageFilterInput {
   id: SearchableIDFilterInput
+  attributions: SearchableStringFilterInput
   createdAt: SearchableStringFilterInput
   updatedAt: SearchableStringFilterInput
-  and: [SearchablePoiFilterInput]
-  or: [SearchablePoiFilterInput]
-  not: SearchablePoiFilterInput
+  and: [SearchableImageFilterInput]
+  or: [SearchableImageFilterInput]
+  not: SearchableImageFilterInput
 }
 
 enum SearchableSortDirection {
@@ -338,14 +710,15 @@ enum SearchableSortDirection {
   desc
 }
 
-enum SearchablePoiSortableFields {
+enum SearchableImageSortableFields {
   id
+  attributions
   createdAt
   updatedAt
 }
 
-input SearchablePoiSortInput {
-  field: SearchablePoiSortableFields
+input SearchableImageSortInput {
+  field: SearchableImageSortableFields
   direction: SearchableSortDirection
 }
 
@@ -357,8 +730,59 @@ enum SearchableAggregateType {
   sum
 }
 
+enum SearchableImageAggregateField {
+  id
+  attributions
+  createdAt
+  updatedAt
+}
+
+input SearchableImageAggregationInput {
+  name: String!
+  type: SearchableAggregateType!
+  field: SearchableImageAggregateField!
+}
+
+input SearchablePoiFilterInput {
+  id: SearchableIDFilterInput
+  elevation: SearchableFloatFilterInput
+  types: SearchableStringFilterInput
+  tags: SearchableStringFilterInput
+  address: SearchableStringFilterInput
+  phoneNumber: SearchableStringFilterInput
+  openingHours: SearchableStringFilterInput
+  createdAt: SearchableStringFilterInput
+  updatedAt: SearchableStringFilterInput
+  and: [SearchablePoiFilterInput]
+  or: [SearchablePoiFilterInput]
+  not: SearchablePoiFilterInput
+}
+
+enum SearchablePoiSortableFields {
+  id
+  elevation
+  types
+  tags
+  address
+  phoneNumber
+  openingHours
+  createdAt
+  updatedAt
+}
+
+input SearchablePoiSortInput {
+  field: SearchablePoiSortableFields
+  direction: SearchableSortDirection
+}
+
 enum SearchablePoiAggregateField {
   id
+  elevation
+  types
+  tags
+  address
+  phoneNumber
+  openingHours
   createdAt
   updatedAt
 }
@@ -372,8 +796,13 @@ input SearchablePoiAggregationInput {
 input SearchableHikeFilterInput {
   id: SearchableIDFilterInput
   imageUrls: SearchableStringFilterInput
+  featured: SearchableBooleanFilterInput
+  rate: SearchableStringFilterInput
+  offlineMap: SearchableStringFilterInput
+  tags: SearchableStringFilterInput
   createdAt: SearchableStringFilterInput
   updatedAt: SearchableStringFilterInput
+  publicationState: SearchableStringFilterInput
   and: [SearchableHikeFilterInput]
   or: [SearchableHikeFilterInput]
   not: SearchableHikeFilterInput
@@ -382,6 +811,10 @@ input SearchableHikeFilterInput {
 enum SearchableHikeSortableFields {
   id
   imageUrls
+  featured
+  rate
+  offlineMap
+  tags
   createdAt
   updatedAt
 }
@@ -394,6 +827,11 @@ input SearchableHikeSortInput {
 enum SearchableHikeAggregateField {
   id
   imageUrls
+  publicationState
+  featured
+  rate
+  offlineMap
+  tags
   createdAt
   updatedAt
 }

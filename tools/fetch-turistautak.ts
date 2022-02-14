@@ -14,6 +14,9 @@ import {
   getGraphqlSdkForIAM,
   getGraphqlSdkPublic,
 } from '../libs/gql-api/src';
+import { pipe } from 'fp-ts/lib/function';
+import lineChunk from '@turf/line-chunk';
+import * as fp from 'lodash/fp';
 
 const domParser = new DOMParser();
 
@@ -328,6 +331,9 @@ const getEnvironment = (segments: Position[][]): Observable<Environment> =>
   );
 
 */
+
+const state: any = {};
+
 const fetchRoute = (routeId: number) => {
   console.log(`Processing route id ${routeId}`);
   return defer(() =>
@@ -343,7 +349,8 @@ const fetchRoute = (routeId: number) => {
     map((gpxFile: string) => {
       const _doc = domParser.parseFromString(gpxFile, 'application/xml');
       const geojson = togeojson.gpx(_doc);
-      console.warn(geojson);
+      state.geojson = geojson;
+
       return {
         route: geojson?.features?.[0]?.geometry,
         description: [
@@ -364,6 +371,17 @@ const fetchRoute = (routeId: number) => {
     switchMap((hike: YahaApi.CreateHikeInput) =>
       sdk.CreateHike({ input: hike }),
     ),
+    map(() =>
+      pipe(
+        lineChunk(state.geojson, 2, {
+          units: 'kilometers',
+        }),
+        x => x.features,
+        fp.map((x: any) => x.geometry.coordinates),
+        fp.filter(fp.isArray),
+      ),
+    ),
+    //    switchMap(processSegments)
     /*    switchMap(
       ({
         hikeData,
