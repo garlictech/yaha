@@ -65,61 +65,63 @@ type DependencyReader = Reader<
   Observable<E.Either<any, string[]>>
 >;
 
-const executeSearch = (
-  searchArgs: Record<string, unknown>,
-  maxItemNo: number | undefined,
-  from: number,
-  resultFilter: ((place: Partial<Place>[]) => Partial<Place>[]) | undefined,
-  searchOperation: DocumentNode,
-  responseDataPath: string
-): DependencyReader => deps => {
-  const isPositive = (x: number | undefined) =>
-    fp.isNumber(x) && fp.isFinite(x) && x > 0;
+const executeSearch =
+  (
+    searchArgs: Record<string, unknown>,
+    maxItemNo: number | undefined,
+    from: number,
+    resultFilter: ((place: Partial<Place>[]) => Partial<Place>[]) | undefined,
+    searchOperation: DocumentNode,
+    responseDataPath: string,
+  ): DependencyReader =>
+  deps => {
+    const isPositive = (x: number | undefined) =>
+      fp.isNumber(x) && fp.isFinite(x) && x > 0;
 
-  const pageSize = isPositive(maxItemNo)
-    ? Math.min((maxItemNo as unknown) as number, getMaxPageItemNumber)
-    : getMaxPageItemNumber;
+    const pageSize = isPositive(maxItemNo)
+      ? Math.min(maxItemNo as unknown as number, getMaxPageItemNumber)
+      : getMaxPageItemNumber;
 
-  const args = { ...searchArgs, pageSize };
+    const args = { ...searchArgs, pageSize };
 
-  const limitIndicator = isPositive(maxItemNo)
-    ? createPagedArrayLimitIndicator((maxItemNo as unknown) as number)
-    : undefined;
+    const limitIndicator = isPositive(maxItemNo)
+      ? createPagedArrayLimitIndicator(maxItemNo as unknown as number)
+      : undefined;
 
-  const getPage = (currentFrom = from) =>
-    deps.graphqlClient
-      .query(searchOperation, { ...args, from: currentFrom })
-      .pipe(
-        map(response => fp.get(responseDataPath, response) || []),
-        tap(items => limitIndicator && limitIndicator.addArray(items)),
-        map((items: Place[]) => ({
-          items,
-          nextFrom: currentFrom + items.length,
-          isNext:
-            items.length >= pageSize &&
-            (limitIndicator ? !limitIndicator.limitReached() : true),
-        }))
-      );
+    const getPage = (currentFrom = from) =>
+      deps.graphqlClient
+        .query(searchOperation, { ...args, from: currentFrom })
+        .pipe(
+          map(response => fp.get(responseDataPath, response) || []),
+          tap(items => limitIndicator && limitIndicator.addArray(items)),
+          map((items: Place[]) => ({
+            items,
+            nextFrom: currentFrom + items.length,
+            isNext:
+              items.length >= pageSize &&
+              (limitIndicator ? !limitIndicator.limitReached() : true),
+          })),
+        );
 
-  const addResults = (objectIds: string[], places: Place[]): string[] =>
-    fp.flow(
-      fp.uniqBy('objectId'),
-      (items: Place[]) =>
-        resultFilter ? resultFilter(items) : fp.identity(items),
-      fp.map('objectId'),
-      fp.concat(objectIds),
-      fp.uniq
-    )(places);
+    const addResults = (objectIds: string[], places: Place[]): string[] =>
+      fp.flow(
+        fp.uniqBy('objectId'),
+        (items: Place[]) =>
+          resultFilter ? resultFilter(items) : fp.identity(items),
+        fp.map('objectId'),
+        fp.concat(objectIds),
+        fp.uniq,
+      )(places);
 
-  return getPage().pipe(
-    expand(({ nextFrom, isNext }) =>
-      isNext ? getPage(nextFrom).pipe(delay(500)) : EMPTY
-    ),
-    reduce((acc, { items }) => addResults(acc, items), []),
-    takeLast(1),
-    map(E.right)
-  );
-};
+    return getPage().pipe(
+      expand(({ nextFrom, isNext }) =>
+        isNext ? getPage(nextFrom).pipe(delay(500)) : EMPTY,
+      ),
+      reduce((acc, { items }) => addResults(acc, items), []),
+      takeLast(1),
+      map(E.right),
+    );
+  };
 
 export const searchDataInCircle = ({
   circle,
@@ -140,7 +142,7 @@ export const searchDataInCircle = ({
     from,
     resultFilter,
     SearchPlaceInCircle,
-    'data.searchPlaceInCircle'
+    'data.searchPlaceInCircle',
   );
 
 export const searchByTitle = ({
@@ -160,7 +162,7 @@ export const searchByTitle = ({
     from,
     resultFilter,
     SearchPlaceByTitle,
-    'data.searchPlaceByTitle'
+    'data.searchPlaceByTitle',
   );
 
 export const searchSafeImagesInCircle = ({
@@ -180,45 +182,48 @@ export const searchSafeImagesInCircle = ({
     from,
     resultFilter,
     SearchSafeImageInCircle,
-    'data.searchSafeImageInCircle'
+    'data.searchSafeImageInCircle',
   );
 
-export const searchByObjectId = (objectId: string) => (
-  apiService: GraphqlApiClient
-): Observable<E.Either<any, string[]>> =>
-  apiService
-    .query(SearchPlaceByObjectId, { objectId })
-    .pipe(map(fp.get('data.searchPlaceByObjectId')));
+export const searchByObjectId =
+  (objectId: string) =>
+  (apiService: GraphqlApiClient): Observable<E.Either<any, string[]>> =>
+    apiService
+      .query(SearchPlaceByObjectId, { objectId })
+      .pipe(map(fp.get('data.searchPlaceByObjectId')));
 
-const searchDataInPolygonTask = ({
-  searchPolygon,
-  maxItemNo,
-  placeType,
-}: {
-  searchPolygon: Feature<Polygon>;
-  maxItemNo?: number;
-  placeType: PlaceType;
-}) => (task: typeof searchDataInCircle): DependencyReader => deps =>
-  pipe(
+const searchDataInPolygonTask =
+  ({
     searchPolygon,
-    getPaddedBoundingBoxOfFeature,
-    getCenterRadiusOfBox,
-    O.map(circle => ({
-      circle,
-      resultFilter: removePointsOutsideOfPolygon(searchPolygon),
-      maxItemNo,
-      placeType,
-    })),
-    O.map(searchParameters => pipe(deps, task(searchParameters), take(1))),
-    data =>
-      O.isSome(data)
-        ? data.value
-        : of(
-            E.left(
-              new Error('Cannot determine circle around the search polygon')
-            )
-          )
-  );
+    maxItemNo,
+    placeType,
+  }: {
+    searchPolygon: Feature<Polygon>;
+    maxItemNo?: number;
+    placeType: PlaceType;
+  }) =>
+  (task: typeof searchDataInCircle): DependencyReader =>
+  deps =>
+    pipe(
+      searchPolygon,
+      getPaddedBoundingBoxOfFeature,
+      getCenterRadiusOfBox,
+      O.map(circle => ({
+        circle,
+        resultFilter: removePointsOutsideOfPolygon(searchPolygon),
+        maxItemNo,
+        placeType,
+      })),
+      O.map(searchParameters => pipe(deps, task(searchParameters), take(1))),
+      data =>
+        O.isSome(data)
+          ? data.value
+          : of(
+              E.left(
+                new Error('Cannot determine circle around the search polygon'),
+              ),
+            ),
+    );
 
 export const searchDataInPolygon = ({
   searchPolygon,
@@ -230,7 +235,7 @@ export const searchDataInPolygon = ({
   placeType: PlaceType;
 }): DependencyReader =>
   searchDataInPolygonTask({ searchPolygon, maxItemNo, placeType })(
-    searchDataInCircle
+    searchDataInCircle,
   );
 
 export const searchSafeImagesInPolygon = ({
@@ -256,22 +261,24 @@ type ResolveDependencyReader<FOUND_ITEMS> = Reader<
   Observable<E.Either<any, FOUND_ITEMS[]>>
 >;
 
-export const resolveDataInPolygon = <ENTITY>({
-  searchPolygon,
-  maxItemNo,
-  placeType,
-}: {
-  searchPolygon: Feature<Polygon>;
-  maxItemNo?: number;
-  placeType: PlaceType;
-}): ResolveDependencyReader<ENTITY> => deps =>
-  searchDataInPolygon({
+export const resolveDataInPolygon =
+  <ENTITY>({
     searchPolygon,
     maxItemNo,
     placeType,
-  })({
-    graphqlClient: deps.graphqlClient,
-  }).pipe(
-    switchMap(E.fold(throwError, x => of(x))),
-    switchMap(ids => resolveByMultipleKeys<ENTITY>(ids)(deps.queryExecutor))
-  );
+  }: {
+    searchPolygon: Feature<Polygon>;
+    maxItemNo?: number;
+    placeType: PlaceType;
+  }): ResolveDependencyReader<ENTITY> =>
+  deps =>
+    searchDataInPolygon({
+      searchPolygon,
+      maxItemNo,
+      placeType,
+    })({
+      graphqlClient: deps.graphqlClient,
+    }).pipe(
+      switchMap(E.fold(throwError, x => of(x))),
+      switchMap(ids => resolveByMultipleKeys<ENTITY>(ids)(deps.queryExecutor)),
+    );

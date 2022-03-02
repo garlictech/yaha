@@ -8,7 +8,7 @@ export interface QueryData {
 
 export interface GraphqlCRUDApi<
   CREATE_TYPE,
-  ENTITY_TYPE extends { id: string }
+  ENTITY_TYPE extends { id: string },
 > {
   add(entity: CREATE_TYPE): Observable<Either<any, ENTITY_TYPE>>;
   delete(id: string): Observable<Either<any, boolean>>;
@@ -16,13 +16,13 @@ export interface GraphqlCRUDApi<
   getWithQuery(query: QueryData): Observable<Either<any, ENTITY_TYPE[]>>;
   update(
     id: string,
-    update: Partial<ENTITY_TYPE>
+    update: Partial<ENTITY_TYPE>,
   ): Observable<Either<any, ENTITY_TYPE>>;
   createMultipleItems(
-    input: CREATE_TYPE[]
+    input: CREATE_TYPE[],
   ): Observable<Either<any, ENTITY_TYPE[]>>;
   updateMultipleItems(
-    input: Partial<ENTITY_TYPE>[]
+    input: Partial<ENTITY_TYPE>[],
   ): Observable<Either<any, ENTITY_TYPE[]>>;
   getMultipleItemsById(ids: string[]): Observable<Either<any, ENTITY_TYPE[]>>;
 }
