@@ -9,55 +9,23 @@ import { concatMap, map, delay, switchMap, tap } from 'rxjs/operators';
 import { DOMParser } from 'xmldom';
 const togeojson = require('@mapbox/togeojson');
 import * as r from 'ramda';
-import {
-  YahaApi,
-  getGraphqlSdkForIAM,
-  getGraphqlSdkPublic,
-} from '../libs/gql-api/src';
+import { YahaApi, getGraphqlSdkForIAM } from '../libs/gql-api/src';
 import { pipe } from 'fp-ts/lib/function';
 import lineChunk from '@turf/line-chunk';
 import * as fp from 'lodash/fp';
+import { HttpClientImpl } from '../libs/backend/hike-search/services/src/lib/http';
+import {
+  processRouteSegment,
+  ProcessRouteSegmentDeps,
+} from '../libs/backend/hike-search/services/src';
 
 const domParser = new DOMParser();
 
-/*const sdk = getGraphqlSdkForIAM(
+const sdk = getGraphqlSdkForIAM(
   process.env.AWS_ACCESS_KEY_ID || 'AWS_ACCESS_KEY_ID NOT DEFINED',
   process.env.AWS_SECRET_ACCESS_KEY || 'AWS_SECRET_ACCESS_KEY NOT DEFINED',
-);*/
+);
 
-const sdk = getGraphqlSdkPublic();
-
-/*import {
-  GraphqlClientService,
-  GraphqlModule,
-} from '../../lib/nestjs/shared/graphql';
-import { NestFactory } from '@nestjs/core';
-*/
-/*
-import * as rp from 'request-promise';
-import { forkJoin, from, of, throwError, Observable } from 'rxjs';
-import {
-  catchError,
-  filter,
-  map,
-  mergeMap,
-  switchMap,
-  tap,
-  toArray,
-  shareReplay,
-  delay,
-} from 'rxjs/operators';
-import { pipe } from 'fp-ts/lib/function';
-import { resolveDataInPolygon } from '@bit/garlictech.universal.shared.graphql-data';
-import { PoiApiService, PoiModule } from '../../lib/nestjs/gtrack/poi';
-import { CheckpointAdminFp } from '../../lib/universal/gtrack/checkpoints-admin';
-import { Route, RouteFp } from '../../lib/universal/gtrack/route';
-import { ProcessRouteSegmentModule } from '../../backend/src/lambda/process-route-segment/process-route-segment.module';
-import { ProcessRouteSegmentService } from '../../backend/src/lambda/process-route-segment/process-route-segment.service';
-import { GtrackDefaults } from '@bit/garlictech.universal.gtrack.defaults/defaults';
-import { foldObservableEither } from '@bit/garlictech.universal.shared.fp';
-import { getCityFromGoogle } from '@bit/garlictech.nodejs.shared.reverse-geocoding';
-*/
 const hikeIds = [
   113261124, 118158194, 20239810, 22601701, 22605620, 22668771, 22680751,
   //22684373,
@@ -292,12 +260,16 @@ const hikeIds = [
   //  44305978,
 ];
 
-/*
-const processSegments = (segments: number[][][]) =>
-      from(segments).pipe(
-        mergeMap(segment => routeProcessor.process(segment), 1),
-      ),
+const deps: ProcessRouteSegmentDeps = {
+  googleApiKey: process.env.GOOGLE_API_KEY || '',
+  flickrApiKey: process.env.FLICKR_API_KEY || '',
+  http: new HttpClientImpl(),
+  sdk,
+};
 
+const processSegments = (segments: number[][][]) =>
+  from(segments).pipe(concatMap(segment => processRouteSegment(deps)(segment)));
+/*
 type Environment = {
   segments: Position[][];
   route: Route;
@@ -381,7 +353,7 @@ const fetchRoute = (routeId: number) => {
         fp.filter(fp.isArray),
       ),
     ),
-    //    switchMap(processSegments)
+    switchMap(processSegments),
     /*    switchMap(
       ({
         hikeData,

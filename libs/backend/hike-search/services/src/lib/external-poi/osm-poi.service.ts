@@ -1,20 +1,15 @@
-import { buildRetryLogic } from '@bit/garlictech.universal.gtrack.fp';
-import { validateSchema } from '@bit/garlictech.universal.gtrack.joi-validator';
-import { Logger } from '@bit/garlictech.nodejs.shared.bunyan-logger';
 import * as _ from 'lodash';
 import * as fp from 'lodash/fp';
-import { Injectable } from '@nestjs/common';
 import * as Joi from 'joi';
 import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap, take } from 'rxjs/operators';
-import { HttpClient } from '@bit/garlictech.nestjs.shared.http';
-import { LanguageFp } from '@bit/garlictech.universal.gtrack.language';
-import {
-  PoiSource,
-  BoundingBox,
-  TextualDescriptionType,
-} from '@bit/garlictech.universal.gtrack.graphql-api';
 import { OsmPoiTypes, ExternalPoi } from './lib/types';
+import { validateSchema } from '../joi-validator';
+import { Logger } from '../bunyan-logger';
+import { YahaApi } from '@yaha/gql-api';
+import { HttpClient } from '../http';
+import { LanguageFp } from '../language';
+import { buildRetryLogic } from '@yaha/shared/utils';
 
 interface OsmPoiResponse {
   tags: {
@@ -54,31 +49,29 @@ const { validate: validateResponse } =
   validateSchema<OsmPoiResponse[]>(responseSchema);
 
 const osmTypeMap = {
-  natural: PoiSource.osmnatural,
-  amenity: PoiSource.osmamenity,
-  public_transport: PoiSource.osmpublictransport,
-  emergency: PoiSource.osmemergency,
-  historic: PoiSource.osmhistoric,
-  leisure: PoiSource.osmleisure,
-  man_made: PoiSource.osmmanmade,
-  military: PoiSource.osmmilitary,
-  shop: PoiSource.osmshop,
-  tourism: PoiSource.osmtourism,
+  natural: YahaApi.PoiSource.osmnatural,
+  amenity: YahaApi.PoiSource.osmamenity,
+  public_transport: YahaApi.PoiSource.osmpublictransport,
+  emergency: YahaApi.PoiSource.osmemergency,
+  historic: YahaApi.PoiSource.osmhistoric,
+  leisure: YahaApi.PoiSource.osmleisure,
+  man_made: YahaApi.PoiSource.osmmanmade,
+  military: YahaApi.PoiSource.osmmilitary,
+  shop: YahaApi.PoiSource.osmshop,
+  tourism: YahaApi.PoiSource.osmtourism,
 };
 
-@Injectable()
-export class OsmPoiService {
-  constructor(private readonly _http: HttpClient) {}
+export interface OsmPoiDeps {
+  http: HttpClient;
+}
 
-  get(
-    bounds: BoundingBox,
+export const getOsmPois =
+  (deps: OsmPoiDeps) =>
+  (
+    bounds: YahaApi.BoundingBox,
     typeParam: OsmPoiTypes,
     lng = 'en',
-  ): Observable<ExternalPoi[]> {
-    Logger.info(
-      // eslint-disable-next-line prefer-rest-params
-      `OSM poi fetch started with params ${JSON.stringify(arguments, null, 2)}`,
-    );
+  ): Observable<ExternalPoi[]> => {
     const languageKey = LanguageFp.shortToLocale(lng);
 
     const request = `
@@ -102,10 +95,10 @@ export class OsmPoiService {
         <print e="" from="_" geometry="skeleton" limit="" mode="skeleton" n="" order="quadtile" s="" w=""/>
       </osm-script>`;
 
-    return this._http
+    return deps.http
       .post('https://overpass-api.de/api/interpreter', request)
       .pipe(
-        buildRetryLogic<unknown>({ logger: Logger }),
+        buildRetryLogic<unknown>({}),
         map((response: unknown) => _.get(response, 'elements', [])),
         map(response =>
           fp.filter(
@@ -131,14 +124,16 @@ export class OsmPoiService {
               ];
 
               return {
-                lat: _point.lat,
-                lon: _point.lon,
+                location: {
+                  lat: _point.lat,
+                  lon: _point.lon,
+                },
                 types: [`${typeParam}:${type}`],
                 description: [
                   {
                     languageKey,
                     title: _point.tags.name,
-                    type: TextualDescriptionType.markdown,
+                    type: YahaApi.TextualDescriptionType.markdown,
                   },
                 ],
                 sourceObject,
@@ -153,5 +148,4 @@ export class OsmPoiService {
           return of([]);
         }),
       );
-  }
-}
+  };

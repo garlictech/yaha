@@ -52,6 +52,7 @@ type Image
   sourceObject: PoiSourceObject!
   attributions: String
   labels: [ImageLabel]
+  banned: Boolean
 }
 
 # ------ POIS -----------------------------------------------------
@@ -251,7 +252,7 @@ input SearchInEnvelopeInput {
 }
 
 type GeoSearchConnection {
-  items: [String]
+  items: [String!]
     @auth(rules: [{ allow: public }, { allow: public, provider: iam }])
 
   nextToken: String
@@ -261,19 +262,19 @@ type GeoSearchConnection {
 }
 
 type Query {
-  searchByRadius(input: SearchByRadiusInput!): GeoSearchConnection
+  searchByRadius(query: SearchByRadiusInput!): GeoSearchConnection
     @auth(rules: [{ allow: public }, { allow: public, provider: iam }])
     @function(name: "${env}-yaha-amplify-resolvers")
 
-  searchInEnvelope(input: SearchInEnvelopeInput!): GeoSearchConnection
+  searchInEnvelope(query: SearchInEnvelopeInput!): GeoSearchConnection
     @auth(rules: [{ allow: public }, { allow: public, provider: iam }])
     @function(name: "${env}-yaha-amplify-resolvers")
 
-  searchInShape(input: SearchInShapeInput!): GeoSearchConnection
+  searchInShape(query: SearchInShapeInput!): GeoSearchConnection
     @auth(rules: [{ allow: public }, { allow: public, provider: iam }])
     @function(name: "${env}-yaha-amplify-resolvers")
 
-  searchInMultipolygon(input: SearchInMultipolygonInput!): GeoSearchConnection
+  searchInMultipolygon(query: SearchInMultipolygonInput!): GeoSearchConnection
     @auth(rules: [{ allow: public }, { allow: public, provider: iam }])
     @function(name: "${env}-yaha-amplify-resolvers")
 }

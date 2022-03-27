@@ -2,8 +2,8 @@ import * as fp from 'lodash/fp';
 import { approximateDistance } from './geospatial-calculations';
 
 export function filterPointsCloseToReferencePoints<
-  POINT1 extends { lat: number; lon: number },
-  POINT2 extends { lat: number; lon: number },
+  POINT1 extends { location: { lat: number; lon: number } },
+  POINT2 extends { location: { lat: number; lon: number } },
 >(
   minimalDistance: number,
   referencePoints: POINT1[],
@@ -16,7 +16,8 @@ export function filterPointsCloseToReferencePoints<
     filteredPoints = fp.flow(
       fp.filter(
         (point: POINT2) =>
-          approximateDistance(referencePoint, point) < minimalDistance,
+          approximateDistance(referencePoint.location, point.location) <
+          minimalDistance,
       ),
       fp.concat(filteredPoints),
     )(pointsNotYetFiltered);

@@ -23,19 +23,19 @@ export const fromApolloSubscription = <T>(
 };
 
 export const getAllPaginatedData = <
-  INPUT extends Record<string, unknown> & { limit?: number | null },
+  INPUT extends { limit?: number | null },
   OUTPUT,
 >(
   op: (
-    query: INPUT,
+    variables: { query: INPUT },
     options?: Record<string, unknown>,
   ) => Observable<
     | { nextToken?: string | null; items?: Array<OUTPUT> | null }
     | null
     | undefined
   >,
-  params?: {
-    query?: INPUT;
+  params: {
+    variables: { query: INPUT };
     options?: Record<string, unknown>;
   },
 ): Observable<{ items: OUTPUT[] }> => {
@@ -44,14 +44,14 @@ export const getAllPaginatedData = <
       [R.isNil, R.always({ limit: 100 } as INPUT)],
       [
         flow(R.prop('item'), R.isNil),
-        R.always({ ...params?.query, limit: 100 }),
+        R.always({ ...params?.variables, limit: 100 }),
       ],
-      [R.T, R.always(params?.query)],
+      [R.T, R.always(params?.variables)],
     ]);
 
     return op(
       {
-        ...fullOp(params?.query),
+        ...fullOp(params?.variables),
         nextToken,
       },
       params?.options,

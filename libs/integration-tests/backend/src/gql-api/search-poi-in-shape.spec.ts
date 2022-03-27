@@ -30,7 +30,7 @@ test('Search for a poi in radius', done => {
       delay(3000),
       switchMap(() =>
         sdk.SearchInEnvelope({
-          input: {
+          query: {
             envelope: [
               [0, 2],
               [2, 0],
@@ -47,7 +47,7 @@ test('Search for a poi in radius', done => {
       ),
       switchMap(() =>
         sdk.SearchInShape({
-          input: {
+          query: {
             shape: {
               type: 'polygon',
               coordinates: [
@@ -72,7 +72,7 @@ test('Search for a poi in radius', done => {
       ),
       switchMap(() =>
         sdk.SearchInMultipolygon({
-          input: {
+          query: {
             coordinates: [
               [
                 [
@@ -103,7 +103,7 @@ test('Search for a poi in radius', done => {
       ),
       switchMap(() =>
         sdk.SearchInEnvelope({
-          input: {
+          query: {
             envelope: [
               [3, 4],
               [4, 3],

@@ -2,6 +2,7 @@ import { YahaApi } from '@yaha/gql-api';
 import { pick } from 'lodash';
 import { filter, flow, isEmpty, map, negate, uniq } from 'lodash/fp';
 import * as fp from 'lodash/fp';
+import * as R from 'ramda';
 import { ExternalPoi } from './types';
 
 export class ExternalPoiFp {
@@ -50,13 +51,14 @@ export class ExternalPoiFp {
 
   static collectObjId<
     T extends {
-      sourceObject: YahaApi.PoiSourceObject[] | YahaApi.PoiSourceObject;
+      sourceObject?: YahaApi.PoiSourceObject[] | YahaApi.PoiSourceObject | null;
     },
   >(pois: T[]): string[] {
     return fp.flow(
       _pois => (fp.isArray(_pois) ? _pois : [_pois]),
       fp.map((x: T) => x.sourceObject),
       fp.flatten,
+      R.reject(R.isNil),
       fp.map((sourceObject: YahaApi.PoiSourceObject) =>
         ExternalPoiFp.idFromSourceObject(
           sourceObject.objectType,

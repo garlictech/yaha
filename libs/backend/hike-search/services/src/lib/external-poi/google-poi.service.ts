@@ -1,24 +1,6 @@
-import { HttpClient } from '@bit/garlictech.nestjs.shared.http';
-import { buildRetryLogic } from '@bit/garlictech.universal.gtrack.fp';
-
 import * as Joi from 'joi';
 import { pipe as fptsPipe } from 'fp-ts/lib/function';
 import { map as fptsMap, isSome, Option } from 'fp-ts/lib/Option';
-import { Logger } from '@bit/garlictech.nodejs.shared.bunyan-logger';
-import {
-  Circle,
-  getCenterRadiusOfBox,
-} from '@bit/garlictech.universal.gtrack.geometry';
-import { GtrackDefaults } from '@bit/garlictech.universal.gtrack.defaults/defaults';
-import {
-  poiSourceSchema,
-  CreateImageInput,
-  BoundingBox,
-  PoiSource,
-  TextualDescriptionType,
-  longitudeSchema,
-  latitudeSchema,
-} from '@bit/garlictech.universal.gtrack.graphql-api';
 import * as fp from 'lodash/fp';
 import * as _ from 'lodash';
 import { EMPTY, forkJoin, Observable, of } from 'rxjs';
@@ -33,16 +15,26 @@ import {
   toArray,
 } from 'rxjs/operators';
 import { ExternalPoiFp } from './lib/external-poi.fp';
-import { PoiSearchOutputType, ExternalPoi, GoogleApiConfig } from './lib/types';
-import { Injectable } from '@nestjs/common';
-import { validateSchema } from '@bit/garlictech.universal.gtrack.joi-validator';
+import { PoiSearchOutputType, ExternalPoi } from './lib/types';
+import { YahaApi } from '@yaha/gql-api';
+import { HttpClient } from '../http';
+import { validateSchema } from '../joi-validator';
+import { GtrackDefaults } from '../defaults/defaults';
+import { Logger } from '../bunyan-logger';
+import { Circle, getCenterRadiusOfBox } from '../geometry';
+import { buildRetryLogic } from '@yaha/shared/utils';
+import {
+  latitudeSchema,
+  longitudeSchema,
+  poiSourceSchema,
+} from '../joi-schemas';
 
 export const PLACE_API_URL = 'https://maps.googleapis.com/maps/api/place';
 
 //const hiddenTypes = ['premise', 'political'];
 
 interface GoogleData {
-  objectType?: PoiSource;
+  objectType?: YahaApi.PoiSource;
   languageKey?: string;
   place_id: string;
   website?: string;
@@ -56,6 +48,11 @@ interface GoogleData {
   };
   name?: string;
   types?: string[];
+}
+
+export interface GooglePoiDeps {
+  http: HttpClient;
+  apiKey: string;
 }
 
 const googleDataSchema = {
@@ -80,7 +77,8 @@ export const { validate: validateGoogleData, isType: isGoogleData } =
 
 const createImagesFromPhotoData =
   (poi: ExternalPoi | undefined, apiKey: string) =>
-  (photos: any[]): CreateImageInput[] => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (photos: any[]): YahaApi.CreateImageInput[] => {
     if (!poi) {
       return [];
     }
@@ -89,10 +87,10 @@ const createImagesFromPhotoData =
     const cardWidth = GtrackDefaults.cardImageWidthInPixel();
 
     return fp.map(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (photo: any) =>
         ({
-          lat: poi.lat,
-          lon: poi.lon,
+          location: poi.location,
           original: {
             url: `${PLACE_API_URL}/photo?maxwidth=${photo.width}&photoreference=${photo.photo_reference}&key=${apiKey}`,
             width: photo.width,
@@ -113,28 +111,22 @@ const createImagesFromPhotoData =
             height: Math.round((thumbnailWidth * photo.height) / photo.width),
           },
           sourceObject: {
-            objectType: PoiSource.google,
+            objectType: YahaApi.PoiSource.google,
             objectId: `${poi.sourceObject[0].objectId}-${photos.indexOf(
               photo,
             )}`,
           },
           attributions: JSON.stringify(photo.attributions),
-        } as CreateImageInput),
+        } as YahaApi.CreateImageInput),
     )(photos);
   };
 
-@Injectable()
-export class GooglePoiService {
-  private readonly googleApiConfig: GoogleApiConfig;
-
-  constructor(private readonly _http: HttpClient) {
-    this.googleApiConfig = { apiKey: process.env.GOOGLE_API_KEY || '' };
-  }
-
-  get(
-    bounds: BoundingBox,
+export const getGooglePois =
+  (deps: GooglePoiDeps) =>
+  (
+    bounds: YahaApi.BoundingBox,
     alreadyProcessedSourceObjectIds: string[] = [],
-  ): Observable<PoiSearchOutputType> {
+  ): Observable<PoiSearchOutputType> => {
     // eslint-disable-next-line prefer-rest-params
     Logger.info(
       `Google poi fetch started with params ${JSON.stringify(
@@ -155,7 +147,7 @@ export class GooglePoiService {
               params: {
                 location: `${circle.center.lat},${circle.center.lon}`,
                 radius: circle.radius.toString(),
-                key: this.googleApiConfig.apiKey,
+                key: deps.apiKey,
                 cahcheBreaker: _.uniqueId(Math.random().toString()),
               },
             }),
@@ -165,8 +157,9 @@ export class GooglePoiService {
                 : httpQueryParams.params,
             }),
             httpQueryParams =>
-              this._http.get(url, httpQueryParams).pipe(
+              deps.http.get(url, httpQueryParams).pipe(
                 delay(2000),
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 map((data: any) => ({
                   items: fp.map('place_id')(data.results),
                   pageToken: data.next_page_token,
@@ -175,24 +168,26 @@ export class GooglePoiService {
           )();
 
         return getPage().pipe(
-          buildRetryLogic({ logger: Logger }),
+          buildRetryLogic({}),
           expand(({ pageToken }) => (pageToken ? getPage(pageToken) : EMPTY)),
           concatMap(({ items }) => items),
           toArray(),
           switchMap(placeIds =>
-            this._getPoiDetails(placeIds, alreadyProcessedSourceObjectIds),
+            _getPoiDetails(deps)(placeIds, alreadyProcessedSourceObjectIds),
           ),
         );
       }),
     );
 
     return isSome(resultOption) ? resultOption.value : of([]);
-  }
+  };
 
-  private _getPoiDetails(
+const _getPoiDetails =
+  (deps: GooglePoiDeps) =>
+  (
     objectIds: string[],
     alreadyProcessedSourceObjectIds: string[],
-  ): Observable<PoiSearchOutputType> {
+  ): Observable<PoiSearchOutputType> => {
     const pickUsedFields = (data: unknown, schema: unknown): GoogleData =>
       fp.flow(
         () => fp.keys(schema),
@@ -210,7 +205,7 @@ export class GooglePoiService {
         ? {
             sourceObject: [
               {
-                objectType: PoiSource.google,
+                objectType: YahaApi.PoiSource.google,
                 languageKey: 'en_US',
                 objectId: data.place_id,
                 url: data.website,
@@ -219,13 +214,15 @@ export class GooglePoiService {
             address: data.formatted_address,
             phoneNumber: data.international_phone_number,
             openingHours: _.get(data, 'opening_hours.periods'),
-            lat: data.geometry.location.lat,
-            lon: data.geometry.location.lng,
+            location: {
+              lat: data.geometry.location.lat,
+              lon: data.geometry.location.lng,
+            },
             description: [
               {
                 languageKey: 'en_US',
                 title: data.name,
-                type: TextualDescriptionType.markdown,
+                type: YahaApi.TextualDescriptionType.markdown,
               },
             ],
             types: data.types,
@@ -238,7 +235,10 @@ export class GooglePoiService {
       fp.filter(
         (objectId: string) =>
           !fp.includes(
-            ExternalPoiFp.idFromSourceObject(PoiSource.google, objectId),
+            ExternalPoiFp.idFromSourceObject(
+              YahaApi.PoiSource.google,
+              objectId,
+            ),
             alreadyProcessedSourceObjectIds,
           ),
       ),
@@ -250,27 +250,28 @@ export class GooglePoiService {
       ? of([])
       : forkJoin(
           fp.map((objectId: string) =>
-            this._http
+            deps.http
               .get(`${PLACE_API_URL}/details/json`, {
                 params: {
                   placeid: objectId,
-                  key: this.googleApiConfig.apiKey,
+                  key: deps.apiKey,
                   language: 'en',
                 },
               })
               .pipe(
                 take(1),
-                map(response => {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                map((response: any) => {
                   const returnedPoiData = pickUsedFields(
                     response.result,
                     googleDataSchema,
                   );
                   const externalPoi = createPoi(returnedPoiData);
 
-                  const imageInputs: CreateImageInput[] =
+                  const imageInputs: YahaApi.CreateImageInput[] =
                     createImagesFromPhotoData(
                       externalPoi,
-                      this.googleApiConfig.apiKey,
+                      deps.apiKey,
                     )(response.result && response.result.photos);
 
                   return externalPoi ? [externalPoi, ...imageInputs] : [];
@@ -282,5 +283,4 @@ export class GooglePoiService {
               ),
           )(newObjectIds),
         ).pipe(map(fp.flatten));
-  }
-}
+  };

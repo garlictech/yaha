@@ -1,23 +1,21 @@
 import * as fp from 'lodash/fp';
-import { Logger } from '@bit/garlictech.nodejs.shared.bunyan-logger';
-import { buildRetryLogic } from '@bit/garlictech.universal.gtrack.fp';
 import { EMPTY, Observable } from 'rxjs';
 import { concatMap, delay, expand, map, toArray } from 'rxjs/operators';
-import { Injectable } from '@nestjs/common';
-import { HttpClient } from '@bit/garlictech.nestjs.shared.http';
-import {
-  BoundingBox,
-  PoiSource,
-  CreateImageInput,
-} from '@bit/garlictech.universal.gtrack.graphql-api';
-import { GtrackDefaults } from '@bit/garlictech.universal.gtrack.defaults/defaults';
 import { PoiSearchOutputType } from './lib/types';
+import { YahaApi } from '@yaha/gql-api';
+import { GtrackDefaults } from '../defaults/defaults';
+import { HttpClient } from '../http';
+import { Logger } from '../bunyan-logger';
+import { buildRetryLogic } from '@yaha/shared/utils';
 
-const createImageObject = (data: any): CreateImageInput => ({
-  lat: data.latitude,
-  lon: data.longitude,
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const createImageObject = (data: any): YahaApi.CreateImageInput => ({
+  location: {
+    lat: data.latitude,
+    lon: data.longitude,
+  },
   sourceObject: {
-    objectType: PoiSource.flickr,
+    objectType: YahaApi.PoiSource.flickr,
     objectId: data.id,
   },
   original: {
@@ -35,13 +33,14 @@ const createImageObject = (data: any): CreateImageInput => ({
   },
 });
 
-@Injectable()
-export class FlickrService {
-  apiKey = process.env.FLICKR_API_KEY || '';
+export interface FlickrPoiDeps {
+  http: HttpClient;
+  flickrApiKey: string;
+}
 
-  constructor(private readonly _http: HttpClient) {}
-
-  get(bounds: BoundingBox): Observable<PoiSearchOutputType> {
+export const getFlickrImages =
+  (deps: FlickrPoiDeps) =>
+  (bounds: YahaApi.BoundingBox): Observable<PoiSearchOutputType> => {
     // eslint-disable-next-line prefer-rest-params
     Logger.info(
       `Flickr poi fetch started with params ${JSON.stringify(bounds, null, 2)}`,
@@ -54,7 +53,7 @@ export class FlickrService {
         () => ({
           params: {
             method: 'flickr.photos.search',
-            api_key: this.apiKey,
+            api_key: deps.flickrApiKey,
             bbox: `${bounds.SouthWest.lon},${bounds.SouthWest.lat},${bounds.NorthEast.lon},${bounds.NorthEast.lat}`,
             privacy_filter: '1',
             content_type: '1',
@@ -70,8 +69,9 @@ export class FlickrService {
             : httpQueryParams.params,
         }),
         httpQueryParams =>
-          this._http.get(url, httpQueryParams).pipe(
+          deps.http.get(url, httpQueryParams).pipe(
             delay(2000),
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             map((data: any) => ({
               items: fp.flow(
                 fp.get('photos.photo'),
@@ -85,9 +85,8 @@ export class FlickrService {
 
     return getPage(1).pipe(
       expand(({ pageToken }) => (pageToken ? getPage(pageToken) : EMPTY)),
-      concatMap(({ items }) => items as CreateImageInput[]),
+      concatMap(({ items }) => items as YahaApi.CreateImageInput[]),
       toArray(),
-      buildRetryLogic<PoiSearchOutputType>({ logger: Logger }),
+      buildRetryLogic<PoiSearchOutputType>({}),
     );
-  }
-}
+  };

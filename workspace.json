@@ -323,7 +323,7 @@
           }
         }
       },
-      "tags": ["layer:repository", "layer:utils", "platform:nodejs"]
+      "tags": ["layer:utils", "platform:nodejs"]
     },
     "integration-tests-backend": {
       "root": "libs/integration-tests/backend",

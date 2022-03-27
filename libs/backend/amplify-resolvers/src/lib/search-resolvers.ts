@@ -22,8 +22,8 @@ export const searchByRadiusResolver =
             },
             filter: {
               geo_distance: {
-                distance: `${args.input.radiusInMeters / 1000}km`,
-                location: args.input.location,
+                distance: `${args.query.radiusInMeters / 1000}km`,
+                location: args.query.location,
               },
             },
           },
@@ -31,7 +31,7 @@ export const searchByRadiusResolver =
         sort: [
           {
             _geo_distance: {
-              location: args.input.location,
+              location: args.query.location,
               order: 'asc',
               unit: 'km',
               distance_type: 'plane',
@@ -39,18 +39,18 @@ export const searchByRadiusResolver =
             createdAt: 'desc',
           },
         ],
-        size: args.input.limit ?? 10,
-        track_total_hits: !args.input.nextToken,
+        size: args.query.limit ?? 10,
+        track_total_hits: !args.query.nextToken,
       },
       body =>
-        args.input.nextToken
+        args.query.nextToken
           ? {
               ...body,
-              search_after: JSON.parse(args.input.nextToken),
+              search_after: JSON.parse(args.query.nextToken),
             }
           : body,
       body => ({
-        index: args.input.objectType,
+        index: args.query.objectType,
         body,
       }),
       x => defer(() => from(deps.osClient.search(x))),
@@ -89,26 +89,26 @@ export const searchInShapeResolver =
               geo_shape: {
                 location: {
                   shape: {
-                    ...args.input.shape,
-                    coordinates: args.input.shape.coordinates,
+                    ...args.query.shape,
+                    coordinates: args.query.shape.coordinates,
                   },
                 },
               },
             },
           },
         },
-        size: args.input.limit ?? 10,
-        track_total_hits: !args.input.nextToken,
+        size: args.query.limit ?? 10,
+        track_total_hits: !args.query.nextToken,
       },
       body =>
-        args.input.nextToken
+        args.query.nextToken
           ? {
               ...body,
-              search_after: JSON.parse(args.input.nextToken),
+              search_after: JSON.parse(args.query.nextToken),
             }
           : body,
       body => ({
-        index: args.input.objectType,
+        index: args.query.objectType,
         body,
       }),
       x => defer(() => from(deps.osClient.search(x))),
@@ -148,25 +148,25 @@ export const searchInEnvelopeResolver =
                 location: {
                   shape: {
                     type: 'envelope',
-                    coordinates: args.input.envelope,
+                    coordinates: args.query.envelope,
                   },
                 },
               },
             },
           },
         },
-        size: args.input.limit ?? 10,
-        track_total_hits: !args.input.nextToken,
+        size: args.query.limit ?? 10,
+        track_total_hits: !args.query.nextToken,
       },
       body =>
-        args.input.nextToken
+        args.query.nextToken
           ? {
               ...body,
-              search_after: JSON.parse(args.input.nextToken),
+              search_after: JSON.parse(args.query.nextToken),
             }
           : body,
       body => ({
-        index: args.input.objectType,
+        index: args.query.objectType,
         body,
       }),
       x => defer(() => from(deps.osClient.search(x))),
@@ -206,25 +206,25 @@ export const searchInMultipolygonResolver =
                 location: {
                   shape: {
                     type: 'multipolygon',
-                    coordinates: args.input.coordinates,
+                    coordinates: args.query.coordinates,
                   },
                 },
               },
             },
           },
         },
-        size: args.input.limit ?? 10,
-        track_total_hits: !args.input.nextToken,
+        size: args.query.limit ?? 10,
+        track_total_hits: !args.query.nextToken,
       },
       body =>
-        args.input.nextToken
+        args.query.nextToken
           ? {
               ...body,
-              search_after: JSON.parse(args.input.nextToken),
+              search_after: JSON.parse(args.query.nextToken),
             }
           : body,
       body => ({
-        index: args.input.objectType,
+        index: args.query.objectType,
         body,
       }),
       x => defer(() => from(deps.osClient.search(x))),

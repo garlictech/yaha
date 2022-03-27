@@ -1,3 +1,5 @@
+import * as E from 'fp-ts/lib/Either';
+import * as O from 'fp-ts/lib/Option';
 import * as OE from 'fp-ts-rxjs/lib/ObservableEither';
 import {
   Observable,
@@ -88,3 +90,17 @@ export function throwIfEmptyValue<T>(
 
 export const oeTryCatch = <TYPE>(x: Observable<TYPE>) =>
   OE.tryCatch(x) as OE.ObservableEither<string, TYPE>;
+
+export const foldObservableOption = <T>(par: O.Option<T>): Observable<T> =>
+  O.fold(
+    () => throwError('Invalid data'),
+    (x: T) => of(x),
+  )(par);
+
+export const foldObservableEither = <T>(
+  par: E.Either<unknown, T>,
+): Observable<T> =>
+  E.fold(
+    res => throwError(res),
+    (res: T) => of(res),
+  )(par);

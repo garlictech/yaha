@@ -1,22 +1,6 @@
 import { YahaApi } from '@yaha/gql-api';
-export type PoiSearchOutputType = (ExternalPoi | YahaApi.CreateImageInput)[];
 
-interface ExternalPoiType {
-  location: {
-    lat: number;
-    lon: number;
-  };
-  elevation: -1;
-  id: '';
-  types?: string[];
-  sourceObject: YahaApi.PoiSourceObject[];
-  description: YahaApi.TextualDescription[];
-  address?: string;
-  phoneNumber?: string;
-  openingHours?: string;
-}
-
-export type ExternalPoi = Readonly<ExternalPoiType>;
+export type ExternalPoi = YahaApi.CreatePoiInput;
 
 export enum OsmPoiTypes {
   natural = 'natural',

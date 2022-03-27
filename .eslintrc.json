@@ -47,7 +47,8 @@
                 "onlyDependOnLibsWithTags": [
                   "layer:entity",
                   "layer:service",
-                  "layer:repository"
+                  "layer:repository",
+                  "layer:utils"
                 ]
               },
               {

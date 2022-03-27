@@ -1,76 +1,86 @@
+import * as R from 'ramda';
 import { Position } from '@turf/helpers';
 import * as E from 'fp-ts/lib/Either';
 import * as O from 'fp-ts/lib/Option';
-import * as A from 'fp-ts/lib/Array';
-
 import * as fp from 'lodash/fp';
 import { forkJoin, Observable, of, throwError } from 'rxjs';
-import { tap, switchMap, take, map } from 'rxjs/operators';
+import { switchMap, map } from 'rxjs/operators';
 import { pipe, flow } from 'fp-ts/lib/function';
 import { Feature, Polygon } from '@turf/helpers';
-import { GtrackDefaults } from '@bit/garlictech.universal.gtrack.defaults/defaults';
-import { PoiFp } from '@bit/garlictech.universal.gtrack.poi';
-import { getElevationOfPointsFromGoogle } from '@bit/garlictech.nodejs.shared.elevation';
-import { ImageFp } from '@bit/garlictech.universal.gtrack.image';
+import { GtrackDefaults } from './defaults/defaults';
+import { PoiFp } from './poi';
+import { getElevationOfPointsFromGoogle } from './elevation';
+import { ImageFp } from './image.fp';
+import { RouteSegmentFp, RouteSegment, EBuffer } from './route-segment';
+import { DESCRIPTION_LANGUAGES_SHORT } from './language/language.fp';
+import { YahaApi, GraphqlSdk } from '@yaha/gql-api';
+import { getAllPaginatedData } from '@yaha/shared/graphql/api-client';
 import {
-  RouteSegmentFp,
-  RouteSegment,
-  EBuffer,
-} from '@bit/garlictech.universal.gtrack.route-segment';
-import { resolveDataInPolygon } from './graphql-data';
-import {DESCRIPTION_LANGUAGES_SHORT} from '@bit/garlictech.universal.gtrack.language/language.fp';
-import {YahaApi} from '@yaha/gql-api';
+  ExternalPoi,
+  ExternalPoiFp,
+  ExternalPoiServiceDeps,
+  getExternalImages,
+  getExternalPois,
+  groupPoisOnSameLocation,
+} from './external-poi';
+import { validateCoordinatesWithElevation } from './joi-schemas';
+import { HttpClient } from './http';
+import {
+  filterPointsCloseToReferencePoints,
+  removePointsOutsideOfPolygon,
+} from './geometry';
+import { multipleGet, multipleWrite } from './data-service-utils';
 
 const averageSpeed = 4; // KM/H
 
 export interface ProcessRouteSegmentDeps {
-
+  sdk: GraphqlSdk;
+  googleApiKey: string;
+  flickrApiKey: string;
+  http: HttpClient;
 }
 
-export const processRouteSegment =(deps: ProcessRouteSegmentDeps) => (segmentCoords: Position[]): Observable<any> => {
+export const processRouteSegment =
+  (deps: ProcessRouteSegmentDeps) =>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (segmentCoords: Position[]): Observable<any> => {
     console.log('Entering processing...');
 
-    const createPlaceResolvers = (bigBuffer: Feature<Polygon>) => [
-      resolveDataInPolygon<YahaApi.Poi>({
-        searchPolygon: bigBuffer,
-        placeType: YahaApi.PlaceType.poi,
-      })({
-        graphqlClient: this.graphqlClient.backendClient,
-        queryExecutor: params => this.poiApiService.api.getWithQuery(params),
-      }),
-      resolveDataInPolygon<Image>({
-        searchPolygon: bigBuffer,
-        placeType: PlaceType.image,
-      })({
-        graphqlClient: this.graphqlClient.backendClient,
-        queryExecutor: params => this.imageApiService.api.getWithQuery(params),
-      }),
-    ];
+    const findPlaces =
+      (bigBuffer: Feature<Polygon>) =>
+      (objectType: YahaApi.GeoSearchableObjectType) =>
+        getAllPaginatedData<YahaApi.SearchInShapeInput, string>(
+          deps.sdk.SearchInShape,
+          {
+            variables: {
+              query: {
+                objectType,
+                shape: {
+                  type: 'polygon',
+                  coordinates: bigBuffer.geometry.coordinates,
+                },
+              },
+            },
+          },
+        );
 
-    const updatePois =
-      (
-        boundingBox: BoundingBox,
-        bigBuffer: Feature<Polygon>,
-        smallBuffer: Feature<Polygon>,
-      ) =>
-      (gtrackPois: Array<Poi | Image>) =>
-        this.externalPoiService
-          .get(
-            boundingBox,
-            DESCRIPTION_LANGUAGES_SHORT,
-            ExternalPoiFp.collectObjId(gtrackPois),
-          )
-          .pipe(
-            switchMap(externalItems =>
-              this.updateGtrackPois(
-                externalItems,
-                gtrackPois,
-                bigBuffer,
-                smallBuffer,
-              ),
-            ),
-            take(1),
-          );
+    const findYahaPois = (bigBuffer: Feature<Polygon>) =>
+      findPlaces(bigBuffer)(YahaApi.GeoSearchableObjectType.poi).pipe(
+        switchMap(ids => multipleGet(deps.sdk.GetPoi)(ids.items)),
+        map(pois => R.reject(R.isNil)(pois)),
+      );
+
+    const findYahaImages = (bigBuffer: Feature<Polygon>) =>
+      findPlaces(bigBuffer)(YahaApi.GeoSearchableObjectType.image).pipe(
+        switchMap(ids => multipleGet(deps.sdk.GetImage)(ids.items)),
+        map(pois => R.reject(R.isNil)(pois)),
+      );
+
+    const externalPoisDeps: ExternalPoiServiceDeps = {
+      googleApiKey: deps.googleApiKey,
+      flickrApiKey: deps.flickrApiKey,
+      http: deps.http,
+    };
 
     return validateCoordinatesWithElevation(segmentCoords).pipe(
       switchMap(
@@ -88,111 +98,143 @@ export const processRouteSegment =(deps: ProcessRouteSegmentDeps) => (segmentCoo
               segment.geojsonFeature,
             ),
           })),
-          switchMap(({ bigBuffer, boundingBox, smallBuffer }) =>
+          switchMap(state =>
             pipe(
-              createPlaceResolvers(bigBuffer),
-              forkJoin,
-              map(flow(A.array.sequence(E.either), E.map(A.flatten))),
-              switchMap(E.fold(err => throwError(err), of)),
-              switchMap(updatePois(boundingBox, bigBuffer, smallBuffer)),
+              forkJoin([
+                findYahaPois(state.bigBuffer),
+                findYahaImages(state.bigBuffer),
+              ]),
+              map(([pois, images]) => ({
+                ...state,
+                pois: pois ?? [],
+                images: images ?? [],
+              })),
+            ),
+          ),
+          switchMap(state =>
+            pipe(
+              forkJoin([
+                getExternalPois(externalPoisDeps)(
+                  state.boundingBox,
+                  DESCRIPTION_LANGUAGES_SHORT,
+                  ExternalPoiFp.collectObjId(state.pois),
+                ),
+                getExternalImages(externalPoisDeps)(
+                  state.boundingBox,
+                  DESCRIPTION_LANGUAGES_SHORT,
+                  ExternalPoiFp.collectObjId(state.images),
+                ),
+              ]),
+              map(([pois, images]) => ({
+                ...state,
+                externalPois: pois ?? [],
+                externalImages: images ?? [],
+              })),
+            ),
+          ),
+          switchMap(state =>
+            updateYahaPois(deps)(
+              state.externalPois,
+              state.externalImages,
+              state.pois,
+              state.images,
+              state.bigBuffer,
+              state.smallBuffer,
             ),
           ),
         ),
       ),
     );
-  }
+  };
 
-  private updateGtrackPois(
-    externalItems: PoiSearchOutputType,
-    itemsInDb: (Poi | Image)[],
+const updateYahaPois =
+  (deps: ProcessRouteSegmentDeps) =>
+  (
+    externalPois: ExternalPoi[],
+    externalImages: YahaApi.CreateImageInput[],
+    poisInDb: YahaApi.Poi[],
+    imagesInDb: YahaApi.Image[],
     searchPolygon: Feature<Polygon>,
     smallBuffer: Feature<Polygon>,
-  ): Observable<any> {
-    const externalImages: CreateImageInput[] = fp.filter(
-      isCreateImageInput,
-      externalItems,
-    ) as unknown as CreateImageInput[];
-
-    const externalPois = fp.flow(
-      fp.map((item: any) => ({ ...item, elevation: 0 })),
-      fp.filter<Poi>(isCreatePoiInput),
-    )(externalItems);
-
-    const isGtrackPoi = (item: { id?: string; description?: unknown }) =>
-      !!item.id && !!item.description;
-
-    const gtrackItemIds = fp.map(item => item.id, itemsInDb);
-
-    const filterExternalPoisInBuffer =
-      (pois: Poi[]) =>
-      (buffer: Feature<Polygon>): Poi[] =>
-        pipe(
-          pois,
-          fp.remove<Poi>(isCreateImageInput),
-          removePointsOutsideOfPolygon(buffer),
-        );
-
-    const filterGtrackPoisInBuffer = (buffer: Feature<Polygon>) =>
-      fp.flow(fp.filter(isGtrackPoi), removePointsOutsideOfPolygon(buffer));
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ): Observable<any> => {
+    const yahaItemIds = fp.map(item => item.id, poisInDb);
 
     // Get the processed pois
     const externalPoisInBigBuffer =
-      filterExternalPoisInBuffer(externalPois)(searchPolygon);
-    const gtrackPoisInBigBuffer =
-      filterGtrackPoisInBuffer(searchPolygon)(itemsInDb);
+      removePointsOutsideOfPolygon<ExternalPoi>(searchPolygon)(externalPois);
+
     const allPoisInBigBuffer = fp.concat(
-      gtrackPoisInBigBuffer,
-      externalPoisInBigBuffer,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      poisInDb as any[],
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      externalPoisInBigBuffer as any[],
     );
 
-    const groupedPois: (ExternalPoi | Poi)[] = groupPoisOnSameLocation(
+    const groupedPois: (ExternalPoi | YahaApi.Poi)[] = groupPoisOnSameLocation(
       GtrackDefaults.distanceOfSamePoisInMeters(),
     )(allPoisInBigBuffer);
 
     // Get the new images
     const imagesInBigBuffer =
-      removePointsOutsideOfPolygon(searchPolygon)(externalImages);
+      removePointsOutsideOfPolygon<YahaApi.CreateImageInput>(searchPolygon)(
+        externalImages,
+      );
 
-    const imagesCloseToPois = filterPointsCloseToReferencePoints(
+    const imagesCloseToPois = filterPointsCloseToReferencePoints<
+      { location: { lat: number; lon: number } },
+      YahaApi.CreateImageInput
+    >(
       GtrackDefaults.distanceOfSamePoisInMeters(),
       groupedPois,
       imagesInBigBuffer,
     );
 
     const imagesInSmallBuffer =
-      removePointsOutsideOfPolygon(smallBuffer)(externalImages);
+      removePointsOutsideOfPolygon<YahaApi.CreateImageInput>(smallBuffer)(
+        externalImages,
+      );
+
+    const imagesAreTheSame = (
+      image1: { sourceObject: YahaApi.PoiSourceObject },
+      image2: { sourceObject: YahaApi.PoiSourceObject },
+    ): boolean => fp.isEqual(image1.sourceObject, image2.sourceObject);
 
     const newImages = fp.flow(
       fp.concat(imagesInSmallBuffer),
+      newImages => fp.differenceWith(imagesAreTheSame, newImages, imagesInDb),
       fp.uniq,
     )(imagesCloseToPois);
 
     const saveNewImages = pipe(
       newImages,
       fp.filter(
-        (image: CreateImageInput) =>
-          !fp.includes(ImageFp.generateId(image), gtrackItemIds),
+        (image: YahaApi.CreateImageInput) =>
+          !fp.includes(ImageFp.generateId(image), yahaItemIds),
       ),
-      (reallyNewImages: CreateImageInput[]) =>
+      (reallyNewImages: YahaApi.CreateImageInput[]) =>
         fp.isEmpty(reallyNewImages)
           ? of(true)
-          : this.imageApiService.api.createMultipleItems(reallyNewImages),
+          : multipleWrite<YahaApi.CreateImageInput, YahaApi.Image>(
+              deps.sdk.CreateImage,
+            )(reallyNewImages),
     );
 
     // Prepare pois for upsert
     const [poisToUpdate, newPois] = fp.partition(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (item: any) => !!item.id,
       groupedPois,
     );
 
-    const poisAreTheSame = (poi1: Poi, poi2: Poi): boolean =>
+    const poisAreTheSame = (poi1: YahaApi.Poi, poi2: YahaApi.Poi): boolean =>
       fp.isEqual(
         PoiFp.createPoiUpdateData(poi1),
         PoiFp.createPoiUpdateData(poi2),
       );
 
     const updatedPoisForDatabase = fp.flow(
-      pois => fp.differenceWith(poisAreTheSame, pois, gtrackPoisInBigBuffer),
+      pois => fp.differenceWith(poisAreTheSame, pois, poisInDb),
       fp.map(PoiFp.createPoiUpdateData),
     )(poisToUpdate);
 
@@ -201,16 +243,17 @@ export const processRouteSegment =(deps: ProcessRouteSegmentDeps) => (segmentCoo
       fp.map(poi => ExternalPoiFp.convertToPoiInput(poi, 0)),
       getElevationOfPointsFromGoogle,
       switchMap(E.fold(err => throwError(err), of)),
-      switchMap((pois: CreatePoiInput[]) =>
-        this.poiApiService.api.createMultipleItems(pois),
+      switchMap((pois: YahaApi.CreatePoiInput[]) =>
+        multipleWrite<YahaApi.CreatePoiInput, YahaApi.Poi>(deps.sdk.CreatePoi)(
+          pois,
+        ),
       ),
     );
 
-    const updateNewPois = this.poiApiService.api.updateMultipleItems(
-      updatedPoisForDatabase,
-    );
+    const updateNewPois = multipleWrite<YahaApi.UpdatePoiInput, YahaApi.Poi>(
+      deps.sdk.UpdatePoi,
+    )(updatedPoisForDatabase);
 
     // Execute the database operations
     return forkJoin([saveNewPois, saveNewImages, updateNewPois]);
-  }
-  
+  };

@@ -1,12 +1,11 @@
 import * as fp from 'lodash/fp';
 import { forkJoin, from, Observable, of } from 'rxjs';
 import { catchError, delay, map, toArray, mergeMap } from 'rxjs/operators';
-import { PoiSearchOutputType, ExternalPoi, OsmPoiTypes } from './lib/types';
-import { FlickrService } from './flickr.service';
-import { GooglePoiService } from './google-poi.service';
-import { OsmPoiService } from './osm-poi.service';
-import { WikipediaPoiService } from './wikipedia-poi.service';
+import { ExternalPoi, OsmPoiTypes } from './lib/types';
 import { YahaApi } from '@yaha/gql-api';
+import { HttpClient } from '../http';
+import { getOsmPois } from './osm-poi.service';
+import { getFlickrImages } from './flickr.service';
 
 const filterTypes = fp.flow(
   fp.pullAll(['point_of_interest', 'establishment']),
@@ -26,24 +25,22 @@ const filterTypesFv = fp.map((item: ExternalPoi) =>
 );
 
 export interface ExternalPoiServiceDeps {
-  wikipediaPoiService: WikipediaPoiService;
-  osmPoiService: OsmPoiService;
-  googlePoiService: GooglePoiService;
-  flickrService: FlickrService;
+  googleApiKey: string;
+  flickrApiKey: string;
+  http: HttpClient;
 }
 
-export const getExternapPois =
+export const getExternalPois =
   (deps: ExternalPoiServiceDeps) =>
   (
     bounds: YahaApi.BoundingBox,
-    allLanguages: string[],
-    alreadyProcessedSourceObjectIds: string[],
-  ): Observable<PoiSearchOutputType> =>
+    _allLanguages: string[],
+    _alreadyProcessedSourceObjectIds: string[],
+  ): Observable<ExternalPoi[]> =>
     forkJoin([
-      deps.wikipediaPoiService.getAll(bounds, allLanguages),
-      osmPois(deps.osmPoiService)(bounds),
-      deps.googlePoiService.get(bounds, alreadyProcessedSourceObjectIds),
-      deps.flickrService.get(bounds),
+      //     deps.wikipediaPoiService.getAll(bounds, allLanguages),
+      osmPois(getOsmPois(deps))(bounds),
+      //     deps.googlePoiService.get(bounds, alreadyProcessedSourceObjectIds),
     ]).pipe(
       map(fp.flow(fp.flattenDeep, filterTypesFv)),
       catchError(err => {
@@ -52,9 +49,29 @@ export const getExternapPois =
       }),
     );
 
+export const getExternalImages =
+  (deps: ExternalPoiServiceDeps) =>
+  (
+    bounds: YahaApi.BoundingBox,
+    _allLanguages: string[],
+    _alreadyProcessedSourceObjectIds: string[],
+  ): Observable<YahaApi.CreateImageInput[]> =>
+    getFlickrImages(deps)(bounds).pipe(
+      map(fp.flow(fp.flattenDeep, filterTypesFv)),
+      catchError(err => {
+        console.error(`Error in external POI fetch: ${err}`);
+        return of([] as YahaApi.CreateImageInput[]);
+      }),
+    );
+
 const osmPois =
-  (osmPoiService: OsmPoiService) =>
-  (bounds: YahaApi.BoundingBox): Observable<PoiSearchOutputType> =>
+  (
+    osmPoiService: (
+      bounds: YahaApi.BoundingBox,
+      typeParam: OsmPoiTypes,
+    ) => Observable<ExternalPoi[]>,
+  ) =>
+  (bounds: YahaApi.BoundingBox): Observable<ExternalPoi[]> =>
     from([
       OsmPoiTypes.publicTransport,
       OsmPoiTypes.amenity,
@@ -69,7 +86,7 @@ const osmPois =
     ]).pipe(
       mergeMap(
         (osmPoiType: OsmPoiTypes) =>
-          osmPoiService.get(bounds, osmPoiType).pipe(delay(2000)),
+          osmPoiService(bounds, osmPoiType).pipe(delay(2000)),
         1,
       ),
       toArray(),
