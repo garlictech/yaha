@@ -18,6 +18,7 @@ import {
   processRouteSegment,
   ProcessRouteSegmentDeps,
 } from '../libs/backend/hike-search/services/src';
+import { Client as GoogleMapsClient } from '@googlemaps/google-maps-services-js';
 
 const domParser = new DOMParser();
 
@@ -25,6 +26,8 @@ const sdk = getGraphqlSdkForIAM(
   process.env.AWS_ACCESS_KEY_ID || 'AWS_ACCESS_KEY_ID NOT DEFINED',
   process.env.AWS_SECRET_ACCESS_KEY || 'AWS_SECRET_ACCESS_KEY NOT DEFINED',
 );
+
+const googleMapsClient = new GoogleMapsClient({});
 
 const hikeIds = [
   113261124, 118158194, 20239810, 22601701, 22605620, 22668771, 22680751,
