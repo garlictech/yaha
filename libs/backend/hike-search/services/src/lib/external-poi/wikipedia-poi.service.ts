@@ -95,7 +95,7 @@ const _getPoiDetails =
     for (const lng of languageCodesShort) {
       const langPois = _.filter(
         pois,
-        p => p.description[0].languageKey === LanguageFp.shortToLocale(lng),
+        p => p.description?.[0]?.languageKey === LanguageFp.shortToLocale(lng),
       );
 
       promises.push(_getPageExtracts(deps)(langPois, lng));
@@ -108,7 +108,9 @@ const _getPoiDetails =
 const _getPageExtracts =
   (deps: WikipediaDeps) =>
   async (_pois: ExternalPoi[], lng: string): Promise<ExternalPoi[]> => {
-    const _poiIds = _pois.map((p: ExternalPoi) => p.sourceObject[0].objectId);
+    const _poiIds = _pois.map(
+      (p: ExternalPoi) => p.sourceObject?.[0]?.objectId,
+    );
     const _chunks = _.chunk(_poiIds, 20);
 
     return interval(100)
@@ -135,12 +137,12 @@ const _getPageExtracts =
                     if (_exData.extract) {
                       const _targetPoi = _pois.find(p =>
                         fp.isEqual(
-                          p.sourceObject[0].objectId,
+                          p.sourceObject?.[0].objectId,
                           _exData.pageid.toString(),
                         ),
                       );
 
-                      if (_targetPoi) {
+                      if (_targetPoi?.description?.[0]) {
                         _targetPoi.description[0].summary = _exData.extract;
                       }
                     }

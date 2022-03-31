@@ -1,7 +1,6 @@
 import * as fp from 'lodash/fp';
 import { EMPTY, Observable } from 'rxjs';
 import { concatMap, delay, expand, map, toArray } from 'rxjs/operators';
-import { PoiSearchOutputType } from './lib/types';
 import { YahaApi } from '@yaha/gql-api';
 import { GtrackDefaults } from '../defaults/defaults';
 import { HttpClient } from '../http';
@@ -40,7 +39,7 @@ export interface FlickrPoiDeps {
 
 export const getFlickrImages =
   (deps: FlickrPoiDeps) =>
-  (bounds: YahaApi.BoundingBox): Observable<PoiSearchOutputType> => {
+  (bounds: YahaApi.BoundingBox): Observable<YahaApi.CreateImageInput[]> => {
     // eslint-disable-next-line prefer-rest-params
     Logger.info(
       `Flickr poi fetch started with params ${JSON.stringify(bounds, null, 2)}`,
@@ -87,6 +86,6 @@ export const getFlickrImages =
       expand(({ pageToken }) => (pageToken ? getPage(pageToken) : EMPTY)),
       concatMap(({ items }) => items as YahaApi.CreateImageInput[]),
       toArray(),
-      buildRetryLogic<PoiSearchOutputType>({}),
+      buildRetryLogic({}),
     );
   };

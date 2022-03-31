@@ -18,6 +18,7 @@ import {
   processRouteSegment,
   ProcessRouteSegmentDeps,
 } from '../libs/backend/hike-search/services/src';
+import { Client as GoogleMapsClient } from '@googlemaps/google-maps-services-js';
 
 const domParser = new DOMParser();
 
@@ -265,6 +266,7 @@ const deps: ProcessRouteSegmentDeps = {
   flickrApiKey: process.env.FLICKR_API_KEY || '',
   http: new HttpClientImpl(),
   sdk,
+  googleMapsClient: new GoogleMapsClient({}),
 };
 
 const processSegments = (segments: number[][][]) =>

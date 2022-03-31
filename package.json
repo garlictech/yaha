@@ -53,11 +53,9 @@
     "aws-lambda": "1.0.7",
     "aws-sdk": "2.1069.0",
     "bunyan": "^1.8.15",
-    "d3-geo": "^3.0.1",
     "enum-values": "^1.2.1",
     "fp-ts": "2.11.8",
     "fp-ts-rxjs": "^0.6.15",
-    "geojson-rewind": "^0.3.1",
     "gpx-builder": "4.0.3",
     "graphql": "15.8.0",
     "graphql-subscriptions": "2.0.0",
@@ -68,6 +66,7 @@
     "neo4j-driver": "4.4.2",
     "ramda": "0.28.0",
     "rxjs": "7.5.2",
+    "joi": "17.6.0",
     "tslib": "2.3.1"
   },
   "devDependencies": {
@@ -95,7 +94,6 @@
     "@types/aws-lambda": "8.10.92",
     "@types/bunyan": "^1.8.8",
     "@types/cypress-cucumber-preprocessor": "4.0.1",
-    "@types/d3-geo": "^3.0.2",
     "@types/googlemaps": "3.43.3",
     "@types/gremlin": "3.5.1",
     "@types/jest": "27.4.0",

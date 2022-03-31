@@ -1,14 +1,3 @@
-import { GtrackDefaults } from '@bit/garlictech.universal.gtrack.defaults/defaults';
-import { DifficultyFp } from '@bit/garlictech.universal.gtrack.difficulty/difficulty.fp';
-import { ElevationFp } from '@bit/garlictech.universal.gtrack.elevation/lib/elevation.fp';
-import {
-  convertGeojsonPositionToPoint,
-  lineLengthInMeters,
-  PathType,
-  score,
-  getBoundingBoxOfTrack,
-} from '@bit/garlictech.universal.gtrack.geometry';
-import { BoundingBox } from '@bit/garlictech.universal.gtrack.graphql-api';
 import { lineString as turfLineString, Position } from '@turf/helpers';
 import turfBuffer from '@turf/buffer';
 import {
@@ -25,6 +14,17 @@ import { EBuffer } from '../interfaces';
 import { RouteSegment } from './types';
 import { pipe } from 'fp-ts/lib/function';
 import { sequenceS } from 'fp-ts/lib/Apply';
+import {
+  convertGeojsonPositionToPoint,
+  getBoundingBoxOfTrack,
+  lineLengthInMeters,
+  PathType,
+  score,
+} from '../../geometry';
+import { ElevationFp } from '../../elevation';
+import { DifficultyFp } from '../../difficulty';
+import { GtrackDefaults } from '../../defaults/defaults';
+import { YahaApi } from '@yaha/gql-api';
 
 const calculateTime = (
   distance: number,
@@ -103,7 +103,9 @@ export class RouteSegmentFp {
         },
       );
 
-  static calculatePoiSearchBox(path: PathType | PathType[]): BoundingBox {
+  static calculatePoiSearchBox(
+    path: PathType | PathType[],
+  ): YahaApi.BoundingBox {
     const featureCollection = turfFeatureCollection(
       fp.isArray(path) ? path : [path],
     );

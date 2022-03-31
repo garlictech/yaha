@@ -2,7 +2,7 @@ import * as _ from 'lodash';
 import * as fp from 'lodash/fp';
 import * as Joi from 'joi';
 import { Observable, of } from 'rxjs';
-import { catchError, map, switchMap, take } from 'rxjs/operators';
+import { catchError, map, take } from 'rxjs/operators';
 import { OsmPoiTypes, ExternalPoi } from './lib/types';
 import { validateSchema } from '../joi-validator';
 import { Logger } from '../bunyan-logger';
@@ -109,7 +109,7 @@ export const getOsmPois =
               _.isObject(_point.tags),
           )(response),
         ),
-        switchMap(response => validateResponse(response)),
+        //  switchMap(response => validateResponse(response)),
         map((response: OsmPoiResponse[]) =>
           fp.flow(
             fp.map((_point: OsmPoiResponse) => {

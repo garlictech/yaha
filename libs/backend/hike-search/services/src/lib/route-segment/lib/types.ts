@@ -1,6 +1,6 @@
-import { PathType } from '@bit/garlictech.universal.gtrack.geometry';
-import { Point } from '@bit/garlictech.universal.gtrack.graphql-api';
+import { YahaApi } from '@yaha/gql-api';
 import { Position } from '@turf/helpers';
+import { PathType } from '../../geometry';
 
 export enum EBuffer {
   SMALL = 'small',
@@ -21,7 +21,7 @@ export type RouteTotals = typeof emptyRouteTotals;
 export interface RouteSegment extends RouteTotals {
   coordinates: Position[];
   difficulty: number;
-  endPoint: Point;
-  startPoint: Point;
+  endPoint: YahaApi.Point;
+  startPoint: YahaApi.Point;
   geojsonFeature: PathType;
 }

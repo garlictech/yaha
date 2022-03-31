@@ -1,9 +1,6 @@
-import { validateSchema } from '@bit/garlictech.universal.gtrack.joi-validator';
-import { EnumValues } from 'enum-values';
-import * as geoJSONValidation from 'geojson-validation';
 import * as Joi from 'joi';
-import { PoiSource, PublicationState } from '../api/graphql';
 import { Observable } from 'rxjs';
+import { validateSchema } from '../joi-validator';
 
 export const textualDescriptionSchema = Joi.array().items(
   Joi.object()
@@ -36,44 +33,15 @@ export const checkpointSchema = Joi.alternatives().try(
   Joi.object().keys({ point: pointSchema.required() }),
 );
 
-export const poiSourceSchema = Joi.string().allow(
-  EnumValues.getValues(PoiSource),
-);
-
 export const poiSourceObjectSchema = {
   languageKey: Joi.string(),
-  objectType: poiSourceSchema.required(),
+  objectType: Joi.string().required(),
   objectId: Joi.string().required(),
   url: Joi.string().uri(),
 };
 
-export const publicationStateSchema = Joi.string()
-  .allow(EnumValues.getValues(PublicationState))
-  .required();
-
-export const publicationStateSchemaFragment = {
-  publicationState: publicationStateSchema,
-};
-
 export const descriptionSchemaFragment = {
   description: textualDescriptionSchema.required(),
-};
-
-const geojsonValidator = geoJSONValidation.allTypes.GeoJSON;
-
-export const genericHikingObjectSchemaFragment = {
-  ...descriptionSchemaFragment,
-  tags: Joi.array().items(Joi.string().required()).allow(null),
-};
-
-export const isValidGEOJsonString = (value: string): boolean => {
-  try {
-    JSON.parse(value);
-  } catch (err) {
-    return false;
-  }
-
-  return geojsonValidator(value);
 };
 
 export function multipleObjectValidator<TYPE>(

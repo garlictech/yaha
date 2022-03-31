@@ -5,6 +5,7 @@ import {
   circle,
   distance,
   envelope,
+  bbox,
   featureCollection as turfFeatureCollection,
   lineString as turfLineString,
   FeatureCollection,
@@ -15,8 +16,6 @@ import {
   AllGeoJSON,
   featureCollection,
 } from '@turf/turf';
-import { geoBounds as d3GeoBounds } from 'd3-geo';
-import * as rewind from 'geojson-rewind';
 import * as fp from 'lodash/fp';
 import { Circle } from '../interfaces';
 import {
@@ -30,16 +29,16 @@ export const getPaddedBoundingBoxOfFeature = (
   features: AllGeoJSON,
   padding = 0,
 ): YahaApi.BoundingBox => {
-  const d3Bounds = d3GeoBounds(rewind(features, true));
+  const env = bbox(features);
 
   return {
     SouthWest: {
-      lat: d3Bounds[0][1] + padding,
-      lon: d3Bounds[0][0] + padding,
+      lat: env[1] + padding,
+      lon: env[0] + padding,
     },
     NorthEast: {
-      lat: d3Bounds[1][1] - padding,
-      lon: d3Bounds[1][0] - padding,
+      lat: env[3] - padding,
+      lon: env[2] - padding,
     },
   };
 };

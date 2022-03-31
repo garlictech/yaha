@@ -15,19 +15,14 @@ import {
   toArray,
 } from 'rxjs/operators';
 import { ExternalPoiFp } from './lib/external-poi.fp';
-import { PoiSearchOutputType, ExternalPoi } from './lib/types';
+import { ExternalPoi } from './lib/types';
 import { YahaApi } from '@yaha/gql-api';
 import { HttpClient } from '../http';
 import { validateSchema } from '../joi-validator';
-import { GtrackDefaults } from '../defaults/defaults';
 import { Logger } from '../bunyan-logger';
 import { Circle, getCenterRadiusOfBox } from '../geometry';
 import { buildRetryLogic } from '@yaha/shared/utils';
-import {
-  latitudeSchema,
-  longitudeSchema,
-  poiSourceSchema,
-} from '../joi-schemas';
+import { latitudeSchema, longitudeSchema } from '../joi-schemas';
 
 export const PLACE_API_URL = 'https://maps.googleapis.com/maps/api/place';
 
@@ -55,8 +50,8 @@ export interface GooglePoiDeps {
   apiKey: string;
 }
 
-const googleDataSchema = {
-  objectType: poiSourceSchema,
+const googleDataSchema = Joi.object().keys({
+  objectType: Joi.string().required(),
   languageKey: Joi.string(),
   place_id: Joi.string().required(),
   website: Joi.string(),
@@ -70,63 +65,17 @@ const googleDataSchema = {
   },
   name: Joi.string(),
   types: Joi.array().items(Joi.string()),
-};
+});
 
 export const { validate: validateGoogleData, isType: isGoogleData } =
   validateSchema<GoogleData>(googleDataSchema);
-
-const createImagesFromPhotoData =
-  (poi: ExternalPoi | undefined, apiKey: string) =>
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (photos: any[]): YahaApi.CreateImageInput[] => {
-    if (!poi) {
-      return [];
-    }
-
-    const thumbnailWidth = GtrackDefaults.thumbnailWidthInPixel();
-    const cardWidth = GtrackDefaults.cardImageWidthInPixel();
-
-    return fp.map(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (photo: any) =>
-        ({
-          location: poi.location,
-          original: {
-            url: `${PLACE_API_URL}/photo?maxwidth=${photo.width}&photoreference=${photo.photo_reference}&key=${apiKey}`,
-            width: photo.width,
-            height: photo.height,
-          },
-          card: {
-            url: `${PLACE_API_URL}/photo?maxwidth=${ExternalPoiFp.cardImageWidth()}&photoreference=${
-              photo.photo_reference
-            }&key=${apiKey}`,
-            width: cardWidth,
-            height: Math.round((cardWidth * photo.height) / photo.width),
-          },
-          thumbnail: {
-            url: `${PLACE_API_URL}/photo?maxwidth=${ExternalPoiFp.thumbnailImageWidth()}&photoreference=${
-              photo.photo_reference
-            }&key=${apiKey}`,
-            width: thumbnailWidth,
-            height: Math.round((thumbnailWidth * photo.height) / photo.width),
-          },
-          sourceObject: {
-            objectType: YahaApi.PoiSource.google,
-            objectId: `${poi.sourceObject[0].objectId}-${photos.indexOf(
-              photo,
-            )}`,
-          },
-          attributions: JSON.stringify(photo.attributions),
-        } as YahaApi.CreateImageInput),
-    )(photos);
-  };
 
 export const getGooglePois =
   (deps: GooglePoiDeps) =>
   (
     bounds: YahaApi.BoundingBox,
     alreadyProcessedSourceObjectIds: string[] = [],
-  ): Observable<PoiSearchOutputType> => {
+  ): Observable<YahaApi.CreatePoiInput[]> => {
     // eslint-disable-next-line prefer-rest-params
     Logger.info(
       `Google poi fetch started with params ${JSON.stringify(
@@ -136,7 +85,7 @@ export const getGooglePois =
       )}`,
     );
 
-    const resultOption: Option<Observable<PoiSearchOutputType>> = fptsPipe(
+    const resultOption: Option<Observable<YahaApi.CreatePoiInput[]>> = fptsPipe(
       getCenterRadiusOfBox(bounds),
       fptsMap((circle: Circle) => {
         const url = `${PLACE_API_URL}/nearbysearch/json`;
@@ -179,7 +128,9 @@ export const getGooglePois =
       }),
     );
 
-    return isSome(resultOption) ? resultOption.value : of([]);
+    return isSome(resultOption)
+      ? resultOption.value
+      : of([] as YahaApi.CreatePoiInput[]);
   };
 
 const _getPoiDetails =
@@ -187,7 +138,7 @@ const _getPoiDetails =
   (
     objectIds: string[],
     alreadyProcessedSourceObjectIds: string[],
-  ): Observable<PoiSearchOutputType> => {
+  ): Observable<YahaApi.CreatePoiInput[]> => {
     const pickUsedFields = (data: unknown, schema: unknown): GoogleData =>
       fp.flow(
         () => fp.keys(schema),
@@ -268,13 +219,7 @@ const _getPoiDetails =
                   );
                   const externalPoi = createPoi(returnedPoiData);
 
-                  const imageInputs: YahaApi.CreateImageInput[] =
-                    createImagesFromPhotoData(
-                      externalPoi,
-                      deps.apiKey,
-                    )(response.result && response.result.photos);
-
-                  return externalPoi ? [externalPoi, ...imageInputs] : [];
+                  return externalPoi || [];
                 }),
                 catchError(err => {
                   Logger.error(`Error in google poi fetch ${objectId}: ${err}`);

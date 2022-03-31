@@ -5,7 +5,7 @@ import * as O from 'fp-ts/lib/Option';
 import * as fp from 'lodash/fp';
 import { forkJoin, Observable, of, throwError } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
-import { pipe, flow } from 'fp-ts/lib/function';
+import { pipe } from 'fp-ts/lib/function';
 import { Feature, Polygon } from '@turf/helpers';
 import { GtrackDefaults } from './defaults/defaults';
 import { PoiFp } from './poi';
@@ -23,13 +23,13 @@ import {
   getExternalPois,
   groupPoisOnSameLocation,
 } from './external-poi';
-import { validateCoordinatesWithElevation } from './joi-schemas';
 import { HttpClient } from './http';
 import {
   filterPointsCloseToReferencePoints,
   removePointsOutsideOfPolygon,
 } from './geometry';
 import { multipleGet, multipleWrite } from './data-service-utils';
+import { Client as GoogleMapsClient } from '@googlemaps/google-maps-services-js';
 
 const averageSpeed = 4; // KM/H
 
@@ -38,6 +38,7 @@ export interface ProcessRouteSegmentDeps {
   googleApiKey: string;
   flickrApiKey: string;
   http: HttpClient;
+  googleMapsClient: GoogleMapsClient;
 }
 
 export const processRouteSegment =
@@ -82,66 +83,63 @@ export const processRouteSegment =
       http: deps.http,
     };
 
-    return validateCoordinatesWithElevation(segmentCoords).pipe(
-      switchMap(
-        flow(
-          RouteSegmentFp.fromCoordinatesWithElevation(averageSpeed),
-          O.fold(() => throwError('Cannot calculate route segment'), of),
-          map((segment: RouteSegment) => ({
-            boundingBox: RouteSegmentFp.calculatePoiSearchBox(
-              segment.geojsonFeature,
-            ),
-            bigBuffer: RouteSegmentFp.calculateBufferOfLine(EBuffer.BIG)(
-              segment.geojsonFeature,
-            ),
-            smallBuffer: RouteSegmentFp.calculateBufferOfLine(EBuffer.SMALL)(
-              segment.geojsonFeature,
-            ),
+    return pipe(
+      segmentCoords,
+      RouteSegmentFp.fromCoordinatesWithElevation(averageSpeed),
+      O.fold(() => throwError('Cannot calculate route segment'), of),
+      map((segment: RouteSegment) => ({
+        boundingBox: RouteSegmentFp.calculatePoiSearchBox(
+          segment.geojsonFeature,
+        ),
+        bigBuffer: RouteSegmentFp.calculateBufferOfLine(EBuffer.BIG)(
+          segment.geojsonFeature,
+        ),
+        smallBuffer: RouteSegmentFp.calculateBufferOfLine(EBuffer.SMALL)(
+          segment.geojsonFeature,
+        ),
+      })),
+      switchMap(state =>
+        pipe(
+          forkJoin([
+            findYahaPois(state.bigBuffer),
+            findYahaImages(state.bigBuffer),
+          ]),
+          map(([pois, images]) => ({
+            ...state,
+            pois: pois ?? [],
+            images: images ?? [],
           })),
-          switchMap(state =>
-            pipe(
-              forkJoin([
-                findYahaPois(state.bigBuffer),
-                findYahaImages(state.bigBuffer),
-              ]),
-              map(([pois, images]) => ({
-                ...state,
-                pois: pois ?? [],
-                images: images ?? [],
-              })),
+        ),
+      ),
+      switchMap(state =>
+        pipe(
+          forkJoin([
+            getExternalPois(externalPoisDeps)(
+              state.boundingBox,
+              DESCRIPTION_LANGUAGES_SHORT,
+              ExternalPoiFp.collectObjId(state.pois),
             ),
-          ),
-          switchMap(state =>
-            pipe(
-              forkJoin([
-                getExternalPois(externalPoisDeps)(
-                  state.boundingBox,
-                  DESCRIPTION_LANGUAGES_SHORT,
-                  ExternalPoiFp.collectObjId(state.pois),
-                ),
-                getExternalImages(externalPoisDeps)(
-                  state.boundingBox,
-                  DESCRIPTION_LANGUAGES_SHORT,
-                  ExternalPoiFp.collectObjId(state.images),
-                ),
-              ]),
-              map(([pois, images]) => ({
-                ...state,
-                externalPois: pois ?? [],
-                externalImages: images ?? [],
-              })),
+            getExternalImages(externalPoisDeps)(
+              state.boundingBox,
+              DESCRIPTION_LANGUAGES_SHORT,
+              ExternalPoiFp.collectObjId(state.images),
             ),
-          ),
-          switchMap(state =>
-            updateYahaPois(deps)(
-              state.externalPois,
-              state.externalImages,
-              state.pois,
-              state.images,
-              state.bigBuffer,
-              state.smallBuffer,
-            ),
-          ),
+          ]),
+          map(([pois, images]) => ({
+            ...state,
+            externalPois: pois ?? [],
+            externalImages: images ?? [],
+          })),
+        ),
+      ),
+      switchMap(state =>
+        updateYahaPois(deps)(
+          state.externalPois,
+          state.externalImages,
+          state.pois,
+          state.images,
+          state.bigBuffer,
+          state.smallBuffer,
         ),
       ),
     );
@@ -241,7 +239,10 @@ const updateYahaPois =
     const saveNewPois = pipe(
       newPois,
       fp.map(poi => ExternalPoiFp.convertToPoiInput(poi, 0)),
-      getElevationOfPointsFromGoogle,
+      getElevationOfPointsFromGoogle({
+        apiKey: deps.googleApiKey,
+        client: deps.googleMapsClient,
+      }),
       switchMap(E.fold(err => throwError(err), of)),
       switchMap((pois: YahaApi.CreatePoiInput[]) =>
         multipleWrite<YahaApi.CreatePoiInput, YahaApi.Poi>(deps.sdk.CreatePoi)(
