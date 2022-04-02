@@ -30,7 +30,7 @@ test('Search for a poi in radius', done => {
       delay(3000),
       switchMap(() =>
         sdk.SearchByRadius({
-          input: {
+          query: {
             location: { lat: 1, lon: 1 },
             radiusInMeters: 100,
             objectType: YahaApi.GeoSearchableObjectType.poi,
@@ -44,7 +44,7 @@ test('Search for a poi in radius', done => {
       ),
       switchMap(() =>
         sdk.SearchByRadius({
-          input: {
+          query: {
             location: { lat: 2, lon: 2 },
             radiusInMeters: 100,
             objectType: YahaApi.GeoSearchableObjectType.poi,

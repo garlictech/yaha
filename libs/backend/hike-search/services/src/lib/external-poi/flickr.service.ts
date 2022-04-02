@@ -5,7 +5,6 @@ import { YahaApi } from '@yaha/gql-api';
 import { GtrackDefaults } from '../defaults/defaults';
 import { HttpClient } from '../http';
 import { Logger } from '../bunyan-logger';
-import { buildRetryLogic } from '@yaha/shared/utils';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const createImageObject = (data: any): YahaApi.CreateImageInput => ({
@@ -86,6 +85,6 @@ export const getFlickrImages =
       expand(({ pageToken }) => (pageToken ? getPage(pageToken) : EMPTY)),
       concatMap(({ items }) => items as YahaApi.CreateImageInput[]),
       toArray(),
-      buildRetryLogic({}),
+      //buildRetryLogic({}),
     );
   };

@@ -201,7 +201,7 @@ const updateYahaPois =
     const newImages = fp.flow(
       fp.concat(imagesInSmallBuffer),
       newImages => fp.differenceWith(imagesAreTheSame, newImages, imagesInDb),
-      fp.uniq,
+      fp.uniqWith(imagesAreTheSame),
     )(imagesCloseToPois);
 
     const saveNewImages = pipe(
@@ -254,6 +254,17 @@ const updateYahaPois =
     const updateNewPois = multipleWrite<YahaApi.UpdatePoiInput, YahaApi.Poi>(
       deps.sdk.UpdatePoi,
     )(updatedPoisForDatabase);
+
+    console.warn('Number of pois already found in YAHA:', poisInDb.length);
+    console.warn('Number of images already found in YAHA:', imagesInDb.length);
+    console.warn('Number of external pois to process:', externalPois.length);
+    console.warn(
+      'Number of external images to process:',
+      externalImages.length,
+    );
+    console.warn('Number of new pois to save:', newPois.length);
+    console.warn('Number of pois to update:', updatedPoisForDatabase.length);
+    console.warn('Number of new images:', newImages.length);
 
     // Execute the database operations
     return forkJoin([saveNewPois, saveNewImages, updateNewPois]);

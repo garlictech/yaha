@@ -13,19 +13,29 @@ export type HttpClient = {
   post: <T>(url: string, data: unknown) => Observable<T>;
 };
 
+/*axios.interceptors.request.use(
+  function (config) {
+    // Do something before request is sent
+    console.log(config);
+    return config;
+  },
+  function (error) {
+    // Do something with request error
+    return Promise.reject(error);
+  },
+);
+*/
 export class HttpClientImpl implements HttpClient {
-  private static axiosInstance = axios.create();
-
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   get<T = any>(url: string, config?: HttpGetConfig): Observable<T> {
-    return defer(() =>
-      from(HttpClientImpl.axiosInstance.get(url, config)),
-    ).pipe(map(response => response.data));
+    return defer(() => from(axios.get(url, config))).pipe(
+      map(response => response.data),
+    );
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   post<T = any>(url: string, data: unknown): Observable<T> {
-    return defer(() => from(HttpClientImpl.axiosInstance.post(url, data))).pipe(
+    return defer(() => from(axios.post(url, data))).pipe(
       map(response => response.data),
     );
   }

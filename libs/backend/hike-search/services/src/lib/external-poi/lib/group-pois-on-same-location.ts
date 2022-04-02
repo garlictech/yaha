@@ -18,6 +18,7 @@ import {
 } from 'lodash';
 import * as fp from 'lodash/fp';
 import { approximateDistance } from '../../geometry';
+import * as R from 'ramda';
 
 function indexPoiPairsByDistance<
   POINT extends { location: { lat: number; lon: number } },
@@ -100,7 +101,7 @@ export function groupPoisOnSameLocation(minimalDistanceInMeters: number) {
         pickedPois = pipe(
           pairsInRelationWithAPicked.map(pair => [pair.point1, pair.point2]),
           fp.flatten,
-          pickedPois.concat,
+          R.concat(pickedPois),
           fp.uniq,
         );
 

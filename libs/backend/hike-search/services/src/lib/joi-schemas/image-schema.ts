@@ -1,6 +1,7 @@
-import { validateSchema } from '@bit/garlictech.universal.gtrack.joi-validator';
+import { YahaApi } from '@yaha/gql-api';
 import * as Joi from 'joi';
-import { CreateImageInput, Image } from '../api/graphql';
+
+import { validateSchema } from '../joi-validator';
 import {
   coordinatesSchemaFragment,
   poiSourceObjectSchema,
@@ -18,26 +19,17 @@ const imageLabelSchema = {
 };
 
 export const createImageInputSchema = {
-  ...coordinatesSchemaFragment,
+  location: Joi.object().keys(coordinatesSchemaFragment),
   original: Joi.object().keys(imageInfoSchema).required(),
   card: Joi.object().keys(imageInfoSchema).required(),
   thumbnail: Joi.object().keys(imageInfoSchema).required(),
   sourceObject: Joi.object().keys(poiSourceObjectSchema).required(),
   attributions: Joi.string(),
   banned: Joi.boolean(),
-  labels: Joi.array().items(imageLabelSchema),
+  labels: Joi.array().items(Joi.object(imageLabelSchema)),
 };
 
 export const {
   validate: validateCreateImageInput,
   isType: isCreateImageInput,
-} = validateSchema<CreateImageInput>(createImageInputSchema);
-
-// Image
-export const imageSchema = {
-  id: Joi.string().required(),
-  ...createImageInputSchema,
-};
-
-export const { validate: validateImage, isType: isImage } =
-  validateSchema<Image>(imageSchema);
+} = validateSchema<YahaApi.CreateImageInput>(createImageInputSchema);

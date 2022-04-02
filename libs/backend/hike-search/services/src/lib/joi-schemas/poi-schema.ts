@@ -1,34 +1,23 @@
-import { validateSchema } from '@bit/garlictech.universal.gtrack.joi-validator';
+import { validateSchema } from '../joi-validator';
+import { YahaApi } from '@yaha/gql-api';
 import * as Joi from 'joi';
-import { CreatePoiInput, Poi } from '../api/graphql';
 import {
   coordinatesSchemaFragment,
-  genericHikingObjectSchemaFragment,
   poiSourceObjectSchema,
+  textualDescriptionSchema,
 } from './schema-utils';
 
 // CreatePoiInput
 export const createPoiInputSchema = {
-  elevation: Joi.number().required(),
+  elevation: Joi.number(),
   types: Joi.array().items(Joi.string()),
-  sourceObject: Joi.array()
-    .items(Joi.object().keys(poiSourceObjectSchema))
-    .required(),
-  ...coordinatesSchemaFragment,
-  ...genericHikingObjectSchemaFragment,
+  sourceObject: Joi.array().items(Joi.object(poiSourceObjectSchema)),
+  location: Joi.object(coordinatesSchemaFragment).required(),
   address: Joi.string(),
   phoneNumber: Joi.string(),
   openingHours: Joi.string(),
+  description: textualDescriptionSchema,
 };
 
 export const { validate: validateCreatePoiInput, isType: isCreatePoiInput } =
-  validateSchema<CreatePoiInput>(createPoiInputSchema);
-
-// Poi
-export const poiSchema = {
-  id: Joi.string().required(),
-  ...createPoiInputSchema,
-};
-
-export const { validate: validatePoi, isType: isPoi } =
-  validateSchema<Poi>(poiSchema);
+  validateSchema<YahaApi.CreatePoiInput>(createPoiInputSchema);

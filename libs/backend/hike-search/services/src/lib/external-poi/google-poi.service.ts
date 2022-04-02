@@ -50,22 +50,22 @@ export interface GooglePoiDeps {
   apiKey: string;
 }
 
-const googleDataSchema = Joi.object().keys({
+const googleDataSchema = {
   objectType: Joi.string().required(),
   languageKey: Joi.string(),
   place_id: Joi.string().required(),
   website: Joi.string(),
   formatted_address: Joi.string(),
   international_phone_number: Joi.string(),
-  geometry: {
-    location: {
+  geometry: Joi.object({
+    location: Joi.object({
       lat: latitudeSchema,
       lng: longitudeSchema,
-    },
-  },
+    }),
+  }),
   name: Joi.string(),
   types: Joi.array().items(Joi.string()),
-});
+};
 
 export const { validate: validateGoogleData, isType: isGoogleData } =
   validateSchema<GoogleData>(googleDataSchema);

@@ -1,3 +1,4 @@
+import { isCreateImageInput } from '../joi-schemas/image-schema';
 import * as fp from 'lodash/fp';
 import { forkJoin, from, Observable, of } from 'rxjs';
 import { catchError, delay, map, toArray, mergeMap } from 'rxjs/operators';
@@ -6,6 +7,7 @@ import { YahaApi } from '@yaha/gql-api';
 import { HttpClient } from '../http';
 import { getOsmPois } from './osm-poi.service';
 import { getFlickrImages } from './flickr.service';
+import { isCreatePoiInput } from '../joi-schemas/poi-schema';
 
 const filterTypes = fp.flow(
   fp.pullAll(['point_of_interest', 'establishment']),
@@ -42,7 +44,19 @@ export const getExternalPois =
       osmPois(getOsmPois(deps))(bounds),
       //     deps.googlePoiService.get(bounds, alreadyProcessedSourceObjectIds),
     ]).pipe(
-      map(fp.flow(fp.flattenDeep, filterTypesFv)),
+      map(
+        fp.flow(
+          fp.flattenDeep,
+          filterTypesFv,
+          fp.tap(res =>
+            console.warn('Number of external poi candidates:', res.length),
+          ),
+          fp.filter(x => isCreatePoiInput(x)),
+          fp.tap(res =>
+            console.warn('Number of correct external pois:', res.length),
+          ),
+        ),
+      ),
       catchError(err => {
         console.error(`Error in external POI fetch: ${err}`);
         return of([]);
@@ -57,9 +71,21 @@ export const getExternalImages =
     _alreadyProcessedSourceObjectIds: string[],
   ): Observable<YahaApi.CreateImageInput[]> =>
     getFlickrImages(deps)(bounds).pipe(
-      map(fp.flow(fp.flattenDeep, filterTypesFv)),
+      map(
+        fp.flow(
+          fp.flattenDeep,
+          filterTypesFv,
+          fp.tap(res =>
+            console.warn('Number of external image candidates:', res.length),
+          ),
+          fp.filter(isCreateImageInput),
+          fp.tap(res =>
+            console.warn('Number of correct external images:', res.length),
+          ),
+        ),
+      ),
       catchError(err => {
-        console.error(`Error in external POI fetch: ${err}`);
+        console.error(`Error in external IMAGE fetch: ${err}`);
         return of([] as YahaApi.CreateImageInput[]);
       }),
     );
@@ -73,16 +99,16 @@ const osmPois =
   ) =>
   (bounds: YahaApi.BoundingBox): Observable<ExternalPoi[]> =>
     from([
-      OsmPoiTypes.publicTransport,
-      OsmPoiTypes.amenity,
+      //OsmPoiTypes.publicTransport,
+      //OsmPoiTypes.amenity,
       OsmPoiTypes.natural,
-      OsmPoiTypes.emergency,
+      /*OsmPoiTypes.emergency,
       OsmPoiTypes.historic,
       OsmPoiTypes.leisure,
       OsmPoiTypes.manMade,
       OsmPoiTypes.military,
       OsmPoiTypes.shop,
-      OsmPoiTypes.tourism,
+      OsmPoiTypes.tourism,*/
     ]).pipe(
       mergeMap(
         (osmPoiType: OsmPoiTypes) =>

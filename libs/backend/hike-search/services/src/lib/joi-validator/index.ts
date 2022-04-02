@@ -11,7 +11,7 @@ export interface SchemaValidation<T> {
   isType: (_arg: unknown) => boolean;
 }
 export const validateSchema = <REQUIRED_TYPE>(
-  schema: Joi.Schema,
+  schema: Record<string, Joi.Schema>,
   stripUnknown = false,
 ): SchemaValidation<REQUIRED_TYPE> => {
   return {

@@ -1,10 +1,8 @@
 import * as _ from 'lodash';
 import * as fp from 'lodash/fp';
-import * as Joi from 'joi';
 import { Observable, of } from 'rxjs';
 import { catchError, map, take } from 'rxjs/operators';
 import { OsmPoiTypes, ExternalPoi } from './lib/types';
-import { validateSchema } from '../joi-validator';
 import { Logger } from '../bunyan-logger';
 import { YahaApi } from '@yaha/gql-api';
 import { HttpClient } from '../http';
@@ -24,29 +22,6 @@ interface OsmPoiResponse {
   lon: number;
   type: string;
 }
-
-const responseSchema = Joi.array().items(
-  Joi.object()
-    .keys({
-      id: Joi.number().required(),
-      lat: Joi.number().required(),
-      lon: Joi.number().required(),
-      type: Joi.string().required(),
-      tags: Joi.object()
-        .keys({
-          name: Joi.string(),
-          amenity: Joi.string(),
-          url: Joi.string().uri(),
-          description: Joi.string(),
-          alt_name: Joi.string(),
-        })
-        .unknown(),
-    })
-    .unknown(),
-);
-
-const { validate: validateResponse } =
-  validateSchema<OsmPoiResponse[]>(responseSchema);
 
 const osmTypeMap = {
   natural: YahaApi.PoiSource.osmnatural,

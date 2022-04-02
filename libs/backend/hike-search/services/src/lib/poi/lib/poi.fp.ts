@@ -92,7 +92,7 @@ export class PoiFp {
 
     return fp.flow(
       fp.omitBy(fp.isNull),
-      fp.omit(['location', 'elevation']),
+      fp.omit(['createdAt', 'updatedAt']),
       (updatedPoi: Partial<YahaApi.Poi>) =>
         ({
           ...updatedPoi,

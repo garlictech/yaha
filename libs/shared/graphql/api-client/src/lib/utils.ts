@@ -1,7 +1,6 @@
 import * as R from 'ramda';
 import { EMPTY, Observable, Observer } from 'rxjs';
 import { expand, map, reduce, takeLast } from 'rxjs/operators';
-import { flow } from 'fp-ts/lib/function';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 type SubsType<T> = {
@@ -40,19 +39,13 @@ export const getAllPaginatedData = <
   },
 ): Observable<{ items: OUTPUT[] }> => {
   const getPage = (nextToken?: string | null) => {
-    const fullOp = R.cond([
-      [R.isNil, R.always({ limit: 100 } as INPUT)],
-      [
-        flow(R.prop('item'), R.isNil),
-        R.always({ ...params?.variables, limit: 100 }),
-      ],
-      [R.T, R.always(params?.variables)],
-    ]);
-
+    console.warn('GEtting a page', nextToken);
     return op(
       {
-        ...fullOp(params?.variables),
-        nextToken,
+        query: {
+          ...params?.variables.query,
+          nextToken,
+        },
       },
       params?.options,
     );

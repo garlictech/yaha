@@ -97,10 +97,14 @@ export const searchInShapeResolver =
             },
           },
         },
+        sort: [
+          {
+            createdAt: 'desc',
+          },
+        ],
         size: args.query.limit ?? 10,
         track_total_hits: !args.query.nextToken,
       },
-      R.tap(() => console.warn('*****', JSON.stringify(args, null, 2))),
       body =>
         args.query.nextToken
           ? {
@@ -156,6 +160,11 @@ export const searchInEnvelopeResolver =
             },
           },
         },
+        sort: [
+          {
+            createdAt: 'desc',
+          },
+        ],
         size: args.query.limit ?? 10,
         track_total_hits: !args.query.nextToken,
       },
@@ -214,6 +223,11 @@ export const searchInMultipolygonResolver =
             },
           },
         },
+        sort: [
+          {
+            createdAt: 'desc',
+          },
+        ],
         size: args.query.limit ?? 10,
         track_total_hits: !args.query.nextToken,
       },

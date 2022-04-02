@@ -161,6 +161,29 @@
       },
       "tags": ["platform:nodejs", "layer:utils"]
     },
+    "backend-image-tagger": {
+      "root": "libs/backend/image-tagger",
+      "sourceRoot": "libs/backend/image-tagger/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/backend/image-tagger/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/backend/image-tagger"],
+          "options": {
+            "jestConfig": "libs/backend/image-tagger/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
     "backend-shared-utils": {
       "root": "libs/backend/shared/utils",
       "sourceRoot": "libs/backend/shared/utils/src",

@@ -5,7 +5,7 @@
 import axios from 'axios';
 import '@aws-amplify/datastore';
 import { defer, from, of } from 'rxjs';
-import { concatMap, map, delay, switchMap, tap } from 'rxjs/operators';
+import { concatMap, map, delay, switchMap, tap, toArray } from 'rxjs/operators';
 import { DOMParser } from 'xmldom';
 const togeojson = require('@mapbox/togeojson');
 import * as r from 'ramda';
@@ -28,7 +28,8 @@ const sdk = getGraphqlSdkForIAM(
 );
 
 const hikeIds = [
-  113261124, 118158194, 20239810, 22601701, 22605620, 22668771, 22680751,
+  113261124,
+  //118158194, 20239810, 22601701, 22605620, 22668771, 22680751,
   //22684373,
   //22690585,
   //22690716,
@@ -270,7 +271,11 @@ const deps: ProcessRouteSegmentDeps = {
 };
 
 const processSegments = (segments: number[][][]) =>
-  from(segments).pipe(concatMap(segment => processRouteSegment(deps)(segment)));
+  from(segments).pipe(
+    concatMap(segment => processRouteSegment(deps)(segment)),
+    tap(() => console.warn('One segment processed')),
+    toArray(),
+  );
 /*
 type Environment = {
   segments: Position[][];
@@ -430,9 +435,6 @@ of(1)
     delay(3000),
     switchMap(() => from(hikeIds)),
     concatMap(routeId => fetchRoute(routeId)),
+    toArray(),
   )
-  .subscribe(
-    x => console.log(`FINISHED WITH RESULT ${JSON.stringify(x, null, 2)}`),
-    //() => console.log(`ROUTE HANDLING FINISHED`),
-    err => console.log(`Errored with result ${JSON.stringify(err, null, 2)}`),
-  );
+  .subscribe(x => console.log(`PROCESSED ${x?.length ?? 0} HIKES.`));

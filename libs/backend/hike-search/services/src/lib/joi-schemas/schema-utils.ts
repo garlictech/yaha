@@ -1,17 +1,13 @@
 import * as Joi from 'joi';
-import { Observable } from 'rxjs';
-import { validateSchema } from '../joi-validator';
 
 export const textualDescriptionSchema = Joi.array().items(
-  Joi.object()
-    .keys({
-      languageKey: Joi.string().required(),
-      title: Joi.string().allow(null),
-      summary: Joi.string().allow(null),
-      fullDescription: Joi.string().allow(null),
-      type: Joi.string().required(),
-    })
-    .required(),
+  Joi.object({
+    languageKey: Joi.string().required(),
+    title: Joi.string(),
+    summary: Joi.string(),
+    fullDescription: Joi.string(),
+    type: Joi.string().required(),
+  }),
 );
 
 export const latitudeSchema = Joi.number().min(-90).max(90).precision(8);
@@ -23,14 +19,14 @@ export const coordinatesSchemaFragment = {
   lat: latitudeSchema.required(),
 };
 
-export const pointSchema = Joi.object().keys({
+export const pointSchema = Joi.object({
   ...coordinatesSchemaFragment,
   elevation: Joi.number(),
 });
 
 export const checkpointSchema = Joi.alternatives().try(
-  Joi.object().keys({ poiId: Joi.string().required() }),
-  Joi.object().keys({ point: pointSchema.required() }),
+  Joi.object({ poiId: Joi.string().required() }),
+  Joi.object({ point: pointSchema.required() }),
 );
 
 export const poiSourceObjectSchema = {
@@ -43,15 +39,6 @@ export const poiSourceObjectSchema = {
 export const descriptionSchemaFragment = {
   description: textualDescriptionSchema.required(),
 };
-
-export function multipleObjectValidator<TYPE>(
-  itemSchema: Joi.SchemaLike,
-): (arg: unknown) => Observable<TYPE> {
-  const arrayschema = Joi.array().items(itemSchema).required();
-
-  const { validate } = validateSchema<TYPE>(arrayschema);
-  return validate;
-}
 
 // BoundingBox
 export const boundingBoxSchema = {
