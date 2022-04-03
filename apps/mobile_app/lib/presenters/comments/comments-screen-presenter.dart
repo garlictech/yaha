@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yaha/entities/comments/comment.dart';
+import 'package:yaha/domain/domain.dart';
+import 'package:yaha/domain/use-cases/use-cases.dart';
 import 'package:yaha/states/comments/comments-state.dart';
-import 'package:yaha/use-cases/comments/comments-use-cases-provider.dart';
 import 'package:yaha/viewmodels/comments/comments-screen-viewmodel.dart';
 
 class CommentsScreenPresenter extends StateNotifier<CommentsScreenViewModel> {
@@ -11,9 +11,9 @@ class CommentsScreenPresenter extends StateNotifier<CommentsScreenViewModel> {
       : super(CommentsScreenViewModel(comments: comments));
 
   toggleCommentInput() => state =
-      new CommentsScreenViewModel(commentInputShown: !state.commentInputShown);
+      CommentsScreenViewModel(commentInputShown: !state.commentInputShown);
 
-  sendComment({body: String}) {
+  sendComment({body = String}) {
     final commentsUseCases = ref.read(commentsUseCasesProvider);
     commentsUseCases.addNewComment(body: body);
     toggleCommentInput();

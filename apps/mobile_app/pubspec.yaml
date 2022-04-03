@@ -63,6 +63,7 @@ dependencies:
   latlong2: ^0.8.1
   geojson: ^1.0.0
   geopoint: ^1.0.0
+  geolocator: ^8.2.0
 
 flutter_icons:
   android: true

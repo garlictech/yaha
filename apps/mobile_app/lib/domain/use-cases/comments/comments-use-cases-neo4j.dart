@@ -1,6 +1,6 @@
-import 'package:yaha/entities/comments/comment.dart';
 import 'package:yaha/states/comments/comments-state.dart';
 
+import '../../entities/entities.dart';
 import 'comments-use-cases.dart';
 
 class CommentsUseCasesNeo4j extends CommentsUseCases {
@@ -8,8 +8,9 @@ class CommentsUseCasesNeo4j extends CommentsUseCases {
 
   CommentsUseCasesNeo4j({required this.commentsStateNotifier});
 
-  addNewComment({body: String}) {
-    commentsStateNotifier.addComment(new Comment(
+  @override
+  addNewComment({body = String}) {
+    commentsStateNotifier.addComment(Comment(
         body: body,
         ownerId: "ownerId",
         ownerName: "John Doe",

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:yaha/entities/poi/poi.dart';
 import 'package:yaha/hike/hike-outline/poi-summary.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';

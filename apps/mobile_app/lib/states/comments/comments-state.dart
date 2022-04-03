@@ -1,12 +1,13 @@
 import 'package:functional_data/functional_data.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yaha/entities/comments/comment.dart';
+import 'package:yaha/domain/entities/entities.dart';
 
 part 'comments-state.g.dart';
 
 @FunctionalData()
 class CommentsState extends $CommentsState {
+  @override
   final List<Comment> comments;
 
   CommentsState({this.comments = const []});
