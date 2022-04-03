@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaha/entities/comments/comment.dart';
+import 'package:yaha/domain/domain.dart';
 
 class CommentsScreenViewModel {
   final bool commentInputShown;

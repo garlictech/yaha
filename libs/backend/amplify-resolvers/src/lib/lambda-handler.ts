@@ -1,6 +1,6 @@
-//import { getGraphqlSdkForIAM } from '@yaha/gql-api';
 import { Context, Handler } from 'aws-lambda';
 import {
+  searchAroundHikeResolver,
   searchByRadiusResolver,
   searchInEnvelopeResolver,
   searchInMultipolygonResolver,
@@ -8,7 +8,7 @@ import {
 } from './search-resolvers';
 const { createConnector } = require('aws-elasticsearch-js');
 import { Client } from '@elastic/elasticsearch';
-import { AmplifyApiConfig } from '@yaha/gql-api';
+import { getGraphqlSdkForIAM, AmplifyApiConfig } from '@yaha/gql-api';
 
 export interface AmplifyRequest {
   typeName: string;
@@ -23,11 +23,17 @@ export interface AmplifyRequest {
 //const awsSecretAccessKey = process.env.API_SECRET_ACCESS_KEY || '';
 //const sdk = getGraphqlSdkForIAM(awsAccesskeyId, awsSecretAccessKey);
 
+const sdk = getGraphqlSdkForIAM(
+  process.env.AWS_ACCESS_KEY_ID || '',
+  process.env.AWS_SECRET_ACCESS_KEY || '',
+);
+
 const searchDeps = {
   osClient: new Client({
     nodes: [AmplifyApiConfig.openSearchEndpoint],
     Connection: createConnector({ region: process.env.AWS_REGION || '' }),
   }),
+  sdk,
 };
 
 export const handler: Handler<AmplifyRequest, unknown> = (
@@ -45,6 +51,7 @@ export const handler: Handler<AmplifyRequest, unknown> = (
       searchInShape: searchInShapeResolver(searchDeps),
       searchInEnvelope: searchInEnvelopeResolver(searchDeps),
       searchInMultipolygon: searchInMultipolygonResolver(searchDeps),
+      searchAroundHike: searchAroundHikeResolver(searchDeps),
     },
   };
 

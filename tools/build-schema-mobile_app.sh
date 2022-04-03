@@ -10,7 +10,11 @@ echo '=============================='
 cp ../../libs/gql-api/src/schema/hiking-api.graphql \
   amplify/backend/api/$APPNAME/schema.graphql
 
-sed -i "s/\${env}/${ENVNAME}/g" amplify/backend/api/$APPNAME/schema.graphql
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  sed -i '' "s/\${env}/${ENVNAME}/g" amplify/backend/api/$APPNAME/schema.graphql
+else
+  sed -i "s/\${env}/${ENVNAME}/g" amplify/backend/api/$APPNAME/schema.graphql
+fi
 
 echo
 echo 'Compile schema with amplify'
