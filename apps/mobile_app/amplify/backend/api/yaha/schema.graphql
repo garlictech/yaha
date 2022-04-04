@@ -245,10 +245,8 @@ input SearchInMultipolygonInput {
 }
 
 input SearchInEnvelopeInput {
-  query {
-    envelope: [[Float]]!
+  envelope: [[Float]]!
   objectType: GeoSearchableObjectType!
-  }
   limit: Int
   nextToken: String
 }

@@ -36,5 +36,6 @@
       "dependsOn": [],
       "customAuth": false
     }
-  }
+  },
+  "geo": {}
 }
