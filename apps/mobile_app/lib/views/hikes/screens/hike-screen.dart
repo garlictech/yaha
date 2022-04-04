@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:yaha/entities/entities.dart';
+import 'package:yaha/domain/domain.dart';
 import 'package:yaha/gallery.dart';
 import 'package:yaha/hike/hike-outline/hike-outline-screen.dart';
 import 'package:yaha/hike/hike-outline/poi-summary.dart';

@@ -122,17 +122,6 @@ enum PlaceType {
   image
 }
 
-type Place {
-  id: ID!
-  type: PlaceType!
-  objectId: String!
-  lat: Float!
-  lon: Float!
-  title: String
-  banned: Boolean
-  processed: Boolean
-}
-
 # ------ HIKES -----------------------------------------------------
 type HikeStopData {
   poiId: ID!
@@ -178,7 +167,6 @@ type Hike
   id: ID!
   description: [TextualDescription]
   route: LineString
-  imageUrls: [String]
   publicationState: PublicationState
   featured: Boolean
   rate: String
@@ -251,6 +239,14 @@ input SearchInEnvelopeInput {
   nextToken: String
 }
 
+input SearchAroundHikeInput {
+  hikeId: String!
+  distanceInMeters: Float!
+  objectType: GeoSearchableObjectType!
+  limit: Int
+  nextToken: String
+}
+
 type GeoSearchConnection {
   items: [String!]
     @auth(rules: [{ allow: public }, { allow: public, provider: iam }])
@@ -275,6 +271,10 @@ type Query {
     @function(name: "dev-yaha-amplify-resolvers")
 
   searchInMultipolygon(query: SearchInMultipolygonInput!): GeoSearchConnection
+    @auth(rules: [{ allow: public }, { allow: public, provider: iam }])
+    @function(name: "dev-yaha-amplify-resolvers")
+
+  searchAroundHike(query: SearchAroundHikeInput!): GeoSearchConnection
     @auth(rules: [{ allow: public }, { allow: public, provider: iam }])
     @function(name: "dev-yaha-amplify-resolvers")
 }

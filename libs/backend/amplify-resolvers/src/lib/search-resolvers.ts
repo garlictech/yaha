@@ -1,11 +1,16 @@
-import { YahaApi } from '@yaha/gql-api';
-import { defer, from, map, Observable } from 'rxjs';
+import { LineString } from '@turf/helpers';
+import { oeTryCatch } from '@yaha/shared/utils';
+import * as OE from 'fp-ts-rxjs/lib/ObservableEither';
+import turfBuffer from '@turf/buffer';
+import { GraphqlSdk, YahaApi } from '@yaha/gql-api';
+import { defer, from, map, Observable, of, throwError } from 'rxjs';
 import { Client } from '@elastic/elasticsearch';
 import * as R from 'ramda';
-import { pipe } from 'fp-ts/lib/function';
+import { flow, pipe } from 'fp-ts/lib/function';
 
 export interface SearchResolverDeps {
   osClient: Client;
+  sdk: GraphqlSdk;
 }
 
 export const searchByRadiusResolver =
@@ -260,4 +265,43 @@ export const searchInMultipolygonResolver =
           }),
         ),
       ),
+    );
+
+export const searchAroundHikeResolver =
+  (deps: SearchResolverDeps) =>
+  (
+    args: YahaApi.QuerySearchAroundHikeArgs,
+  ): Observable<YahaApi.GeoSearchConnection> =>
+    pipe(
+      deps.sdk.GetHike({ id: args.query.hikeId }),
+      oeTryCatch,
+      OE.chain(
+        OE.fromPredicate(
+          x => !R.isNil(x),
+          () => `Hike ${args.query.hikeId} cannot be found`,
+        ),
+      ),
+      OE.map(x => x as YahaApi.Hike),
+      OE.map((hike: YahaApi.Hike) =>
+        turfBuffer(hike.route as LineString, args.query.distanceInMeters, {
+          units: 'meters',
+        }),
+      ),
+      x => x,
+      OE.chain(
+        flow(
+          shape =>
+            searchInShapeResolver(deps)({
+              query: {
+                ...args.query,
+                shape: {
+                  type: 'Polygon',
+                  coordinates: shape.geometry.coordinates,
+                },
+              },
+            }),
+          oeTryCatch,
+        ),
+      ),
+      OE.fold(throwError, of),
     );

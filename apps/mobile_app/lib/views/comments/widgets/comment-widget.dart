@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:yaha/entities/comments/comment.dart';
+import 'package:yaha/domain/domain.dart' as domain;
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
 import 'package:yaha/utility/yaha-colors.dart';
@@ -8,7 +8,7 @@ import 'package:yaha/utility/yaha-font-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
 class CommentWidget extends ConsumerWidget {
-  final Comment commentEntity;
+  final domain.Comment commentEntity;
 
   const CommentWidget({
     Key? key,
@@ -38,7 +38,7 @@ class CommentWidget extends ConsumerWidget {
                   children: [
                     Text(
                       commentEntity.ownerName,
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: YahaFontSizes.small,
                           color: YahaColors.textColor,
                           fontWeight: FontWeight.w600),
@@ -48,7 +48,7 @@ class CommentWidget extends ConsumerWidget {
                           const EdgeInsets.only(top: YahaSpaceSizes.xxSmall),
                       child: Text(
                         commentEntity.date,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: YahaFontSizes.xSmall,
                             color: YahaColors.textColor,
                             fontWeight: FontWeight.w400),
@@ -72,7 +72,7 @@ class CommentWidget extends ConsumerWidget {
                 color: YahaColors.accentColor,
                 width: MediaQuery.of(context).size.width,
                 constraints:
-                    BoxConstraints(maxHeight: YahaBoxSizes.heightGeneral),
+                    const BoxConstraints(maxHeight: YahaBoxSizes.heightGeneral),
                 child: Text(commentEntity.body),
               ),
             ),

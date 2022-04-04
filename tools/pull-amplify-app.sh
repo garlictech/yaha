@@ -148,9 +148,14 @@ AMPLIFY_CONFIG_FILE=${AMPLIFY_CONFIG_DIR}/amplify-api-config.ts
 
 printf "Generating ${AMPLIFY_CONFIG_FILE}...\n"
 
+OS_ENDPOINT=$(aws cloudformation list-exports | \
+  jq ".Exports[] | select(.Name == \"$API_ID:GetAtt:OpenSearch:DomainEndpoint\")" | \
+  jq ".Value")
+
 echo "
 export const AmplifyApiConfig = {
   appId: '${APPID}',
-  appsyncApiId: '${API_ID}'
+  appsyncApiId: '${API_ID}',
+  openSearchEndpoint: ${OS_ENDPOINT}
 }
 " > ${AMPLIFY_CONFIG_FILE}

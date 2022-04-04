@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaha/entities/hike/hike.dart';
+import 'package:yaha/domain/domain.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';

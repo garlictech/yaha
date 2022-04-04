@@ -111,17 +111,6 @@ enum PlaceType {
   image
 }
 
-type Place {
-  id: ID!
-  type: PlaceType!
-  objectId: String!
-  lat: Float!
-  lon: Float!
-  title: String
-  banned: Boolean
-  processed: Boolean
-}
-
 type HikeStopData @aws_iam @aws_api_key {
   poiId: ID!
   description: [TextualDescription!]
@@ -163,7 +152,6 @@ type Hike @aws_iam @aws_api_key {
   id: ID!
   description: [TextualDescription]
   route: LineString
-  imageUrls: [String]
   publicationState: PublicationState
   featured: Boolean
   rate: String
@@ -237,6 +225,14 @@ input SearchInEnvelopeInput {
   nextToken: String
 }
 
+input SearchAroundHikeInput {
+  hikeId: String!
+  distanceInMeters: Float!
+  objectType: GeoSearchableObjectType!
+  limit: Int
+  nextToken: String
+}
+
 type GeoSearchConnection {
   items: [String!] @aws_iam @aws_api_key
   nextToken: String @aws_iam @aws_api_key
@@ -257,6 +253,7 @@ type Query {
   searchInEnvelope(query: SearchInEnvelopeInput!): GeoSearchConnection @aws_iam @aws_api_key
   searchInShape(query: SearchInShapeInput!): GeoSearchConnection @aws_iam @aws_api_key
   searchInMultipolygon(query: SearchInMultipolygonInput!): GeoSearchConnection @aws_iam @aws_api_key
+  searchAroundHike(query: SearchAroundHikeInput!): GeoSearchConnection @aws_iam @aws_api_key
 }
 
 type SearchableImageConnection @aws_api_key @aws_iam {
@@ -584,7 +581,6 @@ input ModelPublicationStateInput {
 
 input ModelHikeFilterInput {
   id: ModelIDInput
-  imageUrls: ModelStringInput
   publicationState: ModelPublicationStateInput
   featured: ModelBooleanInput
   rate: ModelStringInput
@@ -596,7 +592,6 @@ input ModelHikeFilterInput {
 }
 
 input ModelHikeConditionInput {
-  imageUrls: ModelStringInput
   publicationState: ModelPublicationStateInput
   featured: ModelBooleanInput
   rate: ModelStringInput
@@ -611,7 +606,6 @@ input CreateHikeInput {
   id: ID
   description: [TextualDescriptionInput]
   route: LineStringInput
-  imageUrls: [String]
   publicationState: PublicationState
   featured: Boolean
   rate: String
@@ -626,7 +620,6 @@ input UpdateHikeInput {
   id: ID!
   description: [TextualDescriptionInput]
   route: LineStringInput
-  imageUrls: [String]
   publicationState: PublicationState
   featured: Boolean
   rate: String
@@ -803,7 +796,6 @@ input SearchablePoiAggregationInput {
 
 input SearchableHikeFilterInput {
   id: SearchableIDFilterInput
-  imageUrls: SearchableStringFilterInput
   featured: SearchableBooleanFilterInput
   rate: SearchableStringFilterInput
   offlineMap: SearchableStringFilterInput
@@ -818,7 +810,6 @@ input SearchableHikeFilterInput {
 
 enum SearchableHikeSortableFields {
   id
-  imageUrls
   featured
   rate
   offlineMap
@@ -834,7 +825,6 @@ input SearchableHikeSortInput {
 
 enum SearchableHikeAggregateField {
   id
-  imageUrls
   publicationState
   featured
   rate

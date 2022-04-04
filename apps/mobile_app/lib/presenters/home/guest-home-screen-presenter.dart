@@ -1,6 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:yaha/providers/hike-providers.dart';
 import 'package:yaha/viewmodels/hikes/guest-home-screen-viewmodel.dart';
-import 'package:yaha/repositories/hikes/hikes.dart';
 
 class GuestHomeScreenPresenter extends StateNotifier<GuestHomeScreenViewModel> {
   GuestHomeScreenPresenter()
