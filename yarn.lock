@@ -10,7 +10,7 @@
     d "1"
     es5-ext "^0.10.47"
 
-"@acuris/aws-es-connection@^2.3.0":
+"@acuris/aws-es-connection@2.3.0":
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/@acuris/aws-es-connection/-/aws-es-connection-2.3.0.tgz#bfa736163bdfe2e7fc12f8529eead949fb4e73fe"
   integrity sha512-k8jSkdNwpSPty7oautGaJXoAzzPjP7WKbmaAE9i+vJrKWg9n2UtjesHeDhOAPzV9MG8EzXofGozYjaLdeTP+Ug==
@@ -4235,20 +4235,20 @@
     debug "^3.1.0"
     lodash.once "^4.1.1"
 
-"@elastic/elasticsearch@^7.12.0":
-  version "7.17.0"
-  resolved "https://registry.yarnpkg.com/@elastic/elasticsearch/-/elasticsearch-7.17.0.tgz#589fb219234cf1b0da23744e82b1d25e2fe9a797"
-  integrity sha512-5QLPCjd0uLmLj1lSuKSThjNpq39f6NmlTy9ROLFwG5gjyTgpwSqufDeYG/Fm43Xs05uF7WcscoO7eguI3HuuYA==
+"@elastic/elasticsearch@7.13.0":
+  version "7.13.0"
+  resolved "https://registry.yarnpkg.com/@elastic/elasticsearch/-/elasticsearch-7.13.0.tgz#6dcf511dfa91187e22c81e54f41f4bd0fd96b4d6"
+  integrity sha512-WgwLWo2p9P2tdqzBGX9fHeG8p5IOTXprXNTECQG2mJ7z9n93N5AFBJpEw4d35tWWeCWi9jI13A2wzQZH7XZ/xw==
   dependencies:
     debug "^4.3.1"
     hpagent "^0.1.1"
     ms "^2.1.3"
     secure-json-parse "^2.4.0"
 
-"@elastic/elasticsearch@~7.13.0":
-  version "7.13.0"
-  resolved "https://registry.yarnpkg.com/@elastic/elasticsearch/-/elasticsearch-7.13.0.tgz#6dcf511dfa91187e22c81e54f41f4bd0fd96b4d6"
-  integrity sha512-WgwLWo2p9P2tdqzBGX9fHeG8p5IOTXprXNTECQG2mJ7z9n93N5AFBJpEw4d35tWWeCWi9jI13A2wzQZH7XZ/xw==
+"@elastic/elasticsearch@^7.12.0":
+  version "7.17.0"
+  resolved "https://registry.yarnpkg.com/@elastic/elasticsearch/-/elasticsearch-7.17.0.tgz#589fb219234cf1b0da23744e82b1d25e2fe9a797"
+  integrity sha512-5QLPCjd0uLmLj1lSuKSThjNpq39f6NmlTy9ROLFwG5gjyTgpwSqufDeYG/Fm43Xs05uF7WcscoO7eguI3HuuYA==
   dependencies:
     debug "^4.3.1"
     hpagent "^0.1.1"
@@ -4285,7 +4285,7 @@
   resolved "https://registry.yarnpkg.com/@gar/promisify/-/promisify-1.1.2.tgz#30aa825f11d438671d585bd44e7fd564535fc210"
   integrity sha512-82cpyJyKRoQoRi+14ibCeGPu0CwypgtBAdBhq1WfvagpCZNKqwXbKwXllYSMG91DhmG4jt9gN8eP6lGOtozuaw==
 
-"@googlemaps/google-maps-services-js@^3.3.12":
+"@googlemaps/google-maps-services-js@3.3.12":
   version "3.3.12"
   resolved "https://registry.yarnpkg.com/@googlemaps/google-maps-services-js/-/google-maps-services-js-3.3.12.tgz#67eea62b1ad641bf430538df9f8a39dae409a49f"
   integrity sha512-d/cWUnzgB0kBT0X6I7Pudj8yWMxTOuAlw7pJ9Dx9mgIb11/x8BNHSuem10a5ypU7K0hCyEOG6jKQ7K/P6De8qw==
@@ -8027,7 +8027,7 @@
     "@turf/helpers" "^6.5.0"
     "@turf/meta" "^6.5.0"
 
-"@turf/turf@^6.5.0":
+"@turf/turf@6.5.0":
   version "6.5.0"
   resolved "https://registry.yarnpkg.com/@turf/turf/-/turf-6.5.0.tgz#49cd07b942a757f3ebbdba6cb294bbb864825a83"
   integrity sha512-ipMCPnhu59bh92MNt8+pr1VZQhHVuTMHklciQURo54heoxRzt1neNYZOBR6jdL+hNsbDGAECMuIpAutX+a3Y+w==
@@ -8238,7 +8238,7 @@
     "@types/connect" "*"
     "@types/node" "*"
 
-"@types/bunyan@^1.8.8":
+"@types/bunyan@1.8.8":
   version "1.8.8"
   resolved "https://registry.yarnpkg.com/@types/bunyan/-/bunyan-1.8.8.tgz#8d6d33f090f37c07e2a80af30ae728450a101008"
   integrity sha512-Cblq+Yydg3u+sGiz2mjHjC5MPmdjY+No4qvHrF+BUhblsmSfMvsHLbOG62tPbonsqBj6sbWv1LHcsoe5Jw+/Ow==
@@ -10188,7 +10188,7 @@ available-typed-arrays@^1.0.5:
   resolved "https://registry.yarnpkg.com/available-typed-arrays/-/available-typed-arrays-1.0.5.tgz#92f95616501069d07d10edb2fc37d3e1c65123b7"
   integrity sha512-DMD0KiN46eipeziST1LPP/STfDU0sufISXmjSgvVsoU2tqxctQeASejWcfNtxYKqETM1UxQ8sp2OrSBWpHY6sw==
 
-aws-amplify@^4.3.14:
+aws-amplify@4.3.14:
   version "4.3.14"
   resolved "https://registry.yarnpkg.com/aws-amplify/-/aws-amplify-4.3.14.tgz#8b0bc01d82eec95ef3fe3d521c99408d4dddbe01"
   integrity sha512-pTIlYlo63cJ7TMqWOow6+1ADiRCf3HAGgqqT8t7gvYBIeWd7gscwF3VYxEhd0xEjp7rJgO+LgiZcKm4IiLmX1Q==
@@ -10231,7 +10231,7 @@ aws-appsync-subscription-link@^2.2.6:
     debug "2.6.9"
     url "^0.11.0"
 
-aws-appsync@^4.1.4:
+aws-appsync@4.1.4:
   version "4.1.4"
   resolved "https://registry.yarnpkg.com/aws-appsync/-/aws-appsync-4.1.4.tgz#5c5fcf225a8a59f544850fffd6f1cc34480df761"
   integrity sha512-bSbFo58iNVGbRmXuvRwTnvU39XiDTaYYvTzyB428gkeF9iOd6xDB/q8jOSIWO44EwzdC1BzNBGSxmi+ev25ySQ==
@@ -10303,7 +10303,7 @@ aws-cdk@2.7.0:
     yaml "1.10.2"
     yargs "^16.2.0"
 
-aws-elasticsearch-js@^1.0.3:
+aws-elasticsearch-js@1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/aws-elasticsearch-js/-/aws-elasticsearch-js-1.0.3.tgz#f831db44d6cbca45434abc1e844290a41fd30651"
   integrity sha512-a/85E/Kbd+amAHwD/2yHg/HOhQah4ota0zlBiCRwdGzzyU9LZAfCMjlh5F8ZHjbIgIR8cvY/y5ZcQMxUPjp1kQ==
@@ -11177,7 +11177,7 @@ builtins@^1.0.3:
   resolved "https://registry.yarnpkg.com/builtins/-/builtins-1.0.3.tgz#cb94faeb61c8696451db36534e1422f94f0aee88"
   integrity sha1-y5T662HIaWRR2zZTThQi+U8K7og=
 
-bunyan@^1.8.15:
+bunyan@1.8.15:
   version "1.8.15"
   resolved "https://registry.yarnpkg.com/bunyan/-/bunyan-1.8.15.tgz#8ce34ca908a17d0776576ca1b2f6cbd916e93b46"
   integrity sha512-0tECWShh6wUysgucJcBAoYegf3JJoZWibxdqhTm7OHPeT42qdjkZ29QCMcKwbgU1kiH+auSIasNRXMLWXafXig==
@@ -13717,7 +13717,7 @@ entities@2.2.0:
   resolved "https://registry.yarnpkg.com/entities/-/entities-2.2.0.tgz#098dc90ebb83d8dffa089d55256b351d34c4da55"
   integrity sha512-p92if5Nz619I0w+akJrLZH0MX0Pb5DX39XOwQTtXSdQQOaYH03S1uIQp4mhOZtAXrxq4ViO67YTiLBo2638o9A==
 
-enum-values@^1.2.1:
+enum-values@1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/enum-values/-/enum-values-1.2.1.tgz#c74c7f076fe63c15dee2e4af0f51fd6cd0ce2f62"
   integrity sha512-Qxe+bcN4g9tnmUitlkQnCpMXTUliW7WntCZ0giei/J4SbSeCiLJzhnFOUZKwnIOT4LiNo2iVfrrjDTZW+JAJhA==
@@ -15102,7 +15102,7 @@ forwarded@0.2.0:
   resolved "https://registry.yarnpkg.com/forwarded/-/forwarded-0.2.0.tgz#2269936428aad4c15c7ebe9779a84bf0b2a81811"
   integrity sha512-buRG0fpBtRHSTCOASe6hD258tEubFoRLb4ZNA6NxMVHNw2gOcwHo9wyablzMzOA5z9xA9L1KNjk/Nt6MT9aYow==
 
-fp-ts-rxjs@^0.6.15:
+fp-ts-rxjs@0.6.15:
   version "0.6.15"
   resolved "https://registry.yarnpkg.com/fp-ts-rxjs/-/fp-ts-rxjs-0.6.15.tgz#4c53ecaf5e18a82c94e4a43a4cf8148978ef9e6c"
   integrity sha512-5fD4a/439l0aUkSkPq7xnznXYsD7YwGyYANO3v6dkkZJTta36et3bNJ2tzq28UcVR6bS9nTDbP7kMjgQqFFxYQ==
