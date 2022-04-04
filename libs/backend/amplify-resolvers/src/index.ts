@@ -4,4 +4,5 @@ export {
   SearchResolverDeps,
   searchInShapeResolver,
   searchInEnvelopeResolver,
+  searchAroundHikeResolver,
 } from './lib/search-resolvers';

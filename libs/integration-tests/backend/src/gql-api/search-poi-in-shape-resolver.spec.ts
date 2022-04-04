@@ -1,16 +1,23 @@
-import { YahaApi } from '@yaha/gql-api';
+import { getGraphqlSdkForIAM, YahaApi } from '@yaha/gql-api';
 const { createConnector } = require('aws-elasticsearch-js');
 import { Client } from '@elastic/elasticsearch';
 import { AmplifyApiConfig } from '@yaha/gql-api';
 import { searchInShapeResolver } from '@yaha/backend/amplify-resolvers';
 import { switchMap, tap } from 'rxjs';
 
+const sdk = getGraphqlSdkForIAM(
+  process.env.AWS_ACCESS_KEY_ID || '',
+  process.env.AWS_SECRET_ACCESS_KEY || '',
+);
+
 const searchDeps = {
   osClient: new Client({
     nodes: [AmplifyApiConfig.openSearchEndpoint],
     Connection: createConnector({ region: process.env.AWS_REGION || '' }),
   }),
+  sdk,
 };
+
 test('Search for a poi in radius', done => {
   searchInShapeResolver(searchDeps)({
     query: {
