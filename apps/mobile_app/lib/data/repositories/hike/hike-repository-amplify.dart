@@ -8,7 +8,7 @@ import 'package:yaha/domain/domain.dart';
 class HikeRepositoryAmplify implements HikeRepository {
   @override
   getHikeList() async {
-    return _executeQuery(''' 
+    String gqlDocument = ''' 
       query ListHikes {
         listHikes {
           items {
@@ -28,35 +28,15 @@ class HikeRepositoryAmplify implements HikeRepository {
           nextToken
         }
       }
-    ''');
-  }
+    ''';
 
-  @override
-  searchImagesAroundHike(SearchAroundHikeInput input) async {
-    return _executeQuery(''' 
-      query SearchAroundLine(\$query: SearchAroundLineInput!) {
-        searchAroundLine(query: \$query) {
-          items 
-          nextToken
-          total
-        }
-      }
-    ''', input.toJson());
-  }
-
-  _executeQuery(String gqlDocument,
-      [Map<String, dynamic> variables = const {}]) async {
     try {
-      var request =
-          GraphQLRequest<String>(document: gqlDocument, variables: variables);
+      var request = GraphQLRequest<String>(document: gqlDocument);
       var operation = Amplify.API.query(request: request);
       var response = await operation.response;
-      final result = Right<Failure, List<Hike>>(
-          jsonDecode(response.data)['listHikes']['items']
-              .map<Hike>((hike) => Hike.fromJson(hike))
-              .toList());
-      debugPrint(result.toString());
-      return result;
+      return Right(jsonDecode(response.data)['listHikes']['items']
+          .map<Hike>((hike) => Hike.fromJson(hike))
+          .toList());
     } on ApiException catch (e) {
       debugPrint('Query failed: $e');
       return const Right([]);
