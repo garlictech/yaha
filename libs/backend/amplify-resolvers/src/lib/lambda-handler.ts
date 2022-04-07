@@ -19,13 +19,9 @@ export interface AmplifyRequest {
   arguments: unknown;
 }
 
-//const awsAccesskeyId = process.env.API_ACCESS_KEY_ID || '';
-//const awsSecretAccessKey = process.env.API_SECRET_ACCESS_KEY || '';
-//const sdk = getGraphqlSdkForIAM(awsAccesskeyId, awsSecretAccessKey);
-
 const sdk = getGraphqlSdkForIAM(
-  process.env.AWS_ACCESS_KEY_ID || '',
-  process.env.AWS_SECRET_ACCESS_KEY || '',
+  process.env.API_ACCESS_KEY_ID || '',
+  process.env.API_SECRET_ACCESS_KEY || '',
 );
 
 const searchDeps = {
