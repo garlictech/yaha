@@ -14,7 +14,7 @@ abstract class $Image {
   Imageinfo get original;
   Imageinfo get card;
   Imageinfo get thumbnail;
-  PoiSourceObject get sourceObject;
+  PoiSourceObject? get sourceObject;
   String? get attributions;
   List<Imagelabel>? get labels;
   bool? get banned;
@@ -122,7 +122,7 @@ class Image$Change {
   Imageinfo original;
   Imageinfo card;
   Imageinfo thumbnail;
-  PoiSourceObject sourceObject;
+  PoiSourceObject? sourceObject;
   String? attributions;
   List<Imagelabel>? labels;
   bool? banned;
@@ -158,7 +158,7 @@ class Image$ {
         thumbnailContainer.copyWith(thumbnail: thumbnail),
   );
 
-  static final sourceObject = Lens<Image, PoiSourceObject>(
+  static final sourceObject = Lens<Image, PoiSourceObject?>(
     (sourceObjectContainer) => sourceObjectContainer.sourceObject,
     (sourceObjectContainer, sourceObject) =>
         sourceObjectContainer.copyWith(sourceObject: sourceObject),
@@ -191,8 +191,10 @@ Image _$ImageFromJson(Map<String, dynamic> json) => Image(
       original: Imageinfo.fromJson(json['original'] as Map<String, dynamic>),
       card: Imageinfo.fromJson(json['card'] as Map<String, dynamic>),
       thumbnail: Imageinfo.fromJson(json['thumbnail'] as Map<String, dynamic>),
-      sourceObject: PoiSourceObject.fromJson(
-          json['sourceObject'] as Map<String, dynamic>),
+      sourceObject: json['sourceObject'] == null
+          ? null
+          : PoiSourceObject.fromJson(
+              json['sourceObject'] as Map<String, dynamic>),
       attributions: json['attributions'] as String?,
       labels: (json['labels'] as List<dynamic>?)
           ?.map((e) => Imagelabel.fromJson(e as Map<String, dynamic>))

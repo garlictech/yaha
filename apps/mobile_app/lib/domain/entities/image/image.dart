@@ -23,7 +23,7 @@ class Image extends $Image {
   @override
   final Imageinfo thumbnail;
   @override
-  final PoiSourceObject sourceObject;
+  final PoiSourceObject? sourceObject;
   @override
   final String? attributions;
   @override
@@ -37,7 +37,7 @@ class Image extends $Image {
       required this.original,
       required this.card,
       required this.thumbnail,
-      required this.sourceObject,
+      this.sourceObject,
       this.attributions,
       this.labels,
       this.banned});

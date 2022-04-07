@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geojson/geojson.dart';
@@ -31,8 +30,6 @@ class LinesState {
       Color color = Colors.red,
       bool isDotted = false}) async {
     //print("ADD LINE $name of ${points.length} points");
-    debugPrint("******2 $name");
-    debugPrint("******3 ${points.toString()}");
     _namedLines[name] = Polyline(
         points: points, strokeWidth: width, color: color, isDotted: isDotted);
     notify("updateLines", _namedLines[name], addLine,

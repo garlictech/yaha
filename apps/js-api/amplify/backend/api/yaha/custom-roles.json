@@ -2,6 +2,7 @@
   "adminRoleNames": [
     "admin",
     "yaha-cicd",
+    "yaha-lambda",
     "zsolt",
     "kezymate",
     "szimeonovn"

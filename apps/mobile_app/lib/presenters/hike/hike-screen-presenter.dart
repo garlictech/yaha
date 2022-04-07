@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/domain/domain.dart';
 import 'package:yaha/providers/providers.dart';
@@ -14,10 +15,13 @@ class HikeScreenPresenter extends StateNotifier<HikeScreenViewModel> {
     imageUsecases
         .getImagesAlongHike(hike.id)
         .then((images) => images.map((image) => image.card.url).toList())
-        .then((imageUrls) => imageUrls.isEmpty
-            ? imageUrls
-            : [HikeScreenViewModel.imagePlaceholder])
-        .then((imageUrls) => state = HikeScreenViewModel(imageUrls: imageUrls));
+        .then((imageUrls) {
+      debugPrint("***");
+      debugPrint(imageUrls.toString());
+      return imageUrls.isEmpty
+          ? [HikeScreenViewModel.imagePlaceholder]
+          : imageUrls;
+    }).then((imageUrls) => state = HikeScreenViewModel(imageUrls: imageUrls));
   }
 }
 
