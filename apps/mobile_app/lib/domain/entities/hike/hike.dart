@@ -15,14 +15,11 @@ class Hike extends $Hike {
   final List<TextualDescription>? description;
   @override
   final LineStringData? route;
-  @override
-  final List<String>? imageUrls;
 
   Hike({
     required this.id,
     this.description,
     this.route,
-    this.imageUrls,
   });
 
   factory Hike.fromJson(Map<String, dynamic> json) => _$HikeFromJson(json);

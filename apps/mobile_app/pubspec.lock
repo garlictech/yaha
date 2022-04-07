@@ -106,6 +106,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.3.0"
+  artemis:
+    dependency: "direct main"
+    description:
+      name: artemis
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "7.5.0-beta"
   async:
     dependency: transitive
     description:
@@ -583,6 +590,48 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.2.0"
+  gql:
+    dependency: transitive
+    description:
+      name: gql
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.13.1-alpha+1645425888336"
+  gql_code_builder:
+    dependency: transitive
+    description:
+      name: gql_code_builder
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.0-alpha+1635885531709"
+  gql_dedupe_link:
+    dependency: transitive
+    description:
+      name: gql_dedupe_link
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.2-alpha+1635885531760"
+  gql_exec:
+    dependency: transitive
+    description:
+      name: gql_exec
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.2-alpha+1635885531651"
+  gql_http_link:
+    dependency: transitive
+    description:
+      name: gql_http_link
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.4.2-alpha+1635885531688"
+  gql_link:
+    dependency: transitive
+    description:
+      name: gql_link
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.4.2-alpha+1635885531659"
   graphs:
     dependency: transitive
     description:
@@ -975,6 +1024,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.1+1"
+  recase:
+    dependency: transitive
+    description:
+      name: recase
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.0.0"
   riverpod:
     dependency: transitive
     description:

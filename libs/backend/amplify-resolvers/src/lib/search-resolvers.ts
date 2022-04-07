@@ -287,17 +287,13 @@ export const searchAroundHikeResolver =
           units: 'meters',
         }),
       ),
-      x => x,
       OE.chain(
         flow(
           shape =>
-            searchInShapeResolver(deps)({
+            searchInMultipolygonResolver(deps)({
               query: {
                 ...args.query,
-                shape: {
-                  type: 'Polygon',
-                  coordinates: shape.geometry.coordinates,
-                },
+                coordinates: [shape.geometry.coordinates],
               },
             }),
           oeTryCatch,

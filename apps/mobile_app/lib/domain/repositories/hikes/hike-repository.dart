@@ -5,6 +5,4 @@ import '../../utils/failure.dart';
 
 abstract class HikeRepository {
   Future<Either<Failure, List<Hike>>> getHikeList();
-  Future<Either<Failure, List<Image>>> searchImagesAroundHike(
-      SearchAroundHikeInput input);
 }
