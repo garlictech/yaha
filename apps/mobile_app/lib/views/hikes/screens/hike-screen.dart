@@ -10,6 +10,7 @@ import 'package:yaha/hike/hike-outline/settings/poi-filters.dart';
 import 'package:yaha/hike/hike-screen/most-interesting-place-on-route/places-on-route-screen.dart';
 import 'package:yaha/hike/views/screens/more-poi-screen.dart';
 import 'package:yaha/hike/views/screens/weather-screen.dart';
+import 'package:yaha/presenters/hike/hike-screen-presenter.dart';
 import 'package:yaha/presenters/map/leaflet-map-presenter.dart';
 import 'package:yaha/utility/buttons/show-more-button.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
@@ -118,6 +119,7 @@ class HikeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     final presenter = watch(leafletMapMVPProvider.notifier);
+    final viewModel = watch(hikeScreenPresenter(hike));
 
     if (hike.route != null) {
       presenter.addHikeTrack(hike.route as LineStringData);
@@ -164,8 +166,7 @@ class HikeScreen extends ConsumerWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: NetworkImage(hike.imageUrls?.first ??
-                          'https://cdn2.iconfinder.com/data/icons/mountain-landscape-2/138/hiking_boots_hiking_logo_hiking_chair_hiking_drawing_hiking_day_hiking_flyer_hiking_in_winter-1024.png'),
+                      image: NetworkImage(viewModel.imageUrls.first),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -222,7 +223,7 @@ class HikeScreen extends ConsumerWidget {
                               bottom: YahaSpaceSizes.large),
                           height: YahaBoxSizes.heightMedium,
                           width: MediaQuery.of(context).size.width,
-                          child: Gallery(imageUrls: hike.imageUrls)),
+                          child: Gallery(imageUrls: viewModel.imageUrls)),
                       GridView.count(
                         shrinkWrap: true,
                         primary: false,

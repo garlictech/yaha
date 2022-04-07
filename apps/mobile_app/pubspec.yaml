@@ -64,6 +64,7 @@ dependencies:
   geojson: ^1.0.0
   geopoint: ^1.0.0
   geolocator: ^8.2.0
+  artemis: ^7.5.0-beta
 
 flutter_icons:
   android: true

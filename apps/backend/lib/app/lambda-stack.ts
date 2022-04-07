@@ -68,6 +68,9 @@ export class LambdaStack extends sst.Stack {
       amplifyApiLambda.role.addManagedPolicy(
         iam.ManagedPolicy.fromAwsManagedPolicyName('AmazonDynamoDBFullAccess'),
       );
+      amplifyApiLambda.role.addManagedPolicy(
+        iam.ManagedPolicy.fromAwsManagedPolicyName('AdministratorAccess'),
+      );
       amplifyApiLambda.role.addToPrincipalPolicy(
         new iam.PolicyStatement({
           actions: ['es:ESHttpPost'],

@@ -1,0 +1,26 @@
+targets:
+  $default:
+    sources:
+      - graphql/**
+      - lib/**
+      - amplify/backend/api/yaha/build/schema.graphql
+      - $package$
+    builders:
+      # json_serializable:
+      #   options:
+      #     include_if_null: false
+      #     # explicit_to_json: true
+      #     # checked: false
+      artemis:
+        options:
+          schema_mapping:
+            # Schema mapping for CRUD
+            - schema: amplify/backend/api/yaha/build/schema.graphql
+              queries_glob: graphql/**.graphql
+              output: lib/data/utils/graphql/generated/yaha-api.dart
+              naming_scheme: simple
+          scalar_mapping:
+            - custom_parser_import: 'package:yaha/utils/graphql/graphql_coercers.dart'
+              graphql_type: AWSDateTime
+              dart_type: DateTime
+          generate_helpers: true

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:yaha/domain/domain.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:yaha/domain/domain.dart' as domain;
+import 'package:yaha/presenters/hike/hike-card-presenter.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-colors.dart';
 import 'package:yaha/utility/yaha-font-sizes.dart';
@@ -7,9 +9,9 @@ import 'package:yaha/utility/yaha-space-sizes.dart';
 
 import '../screens/hike-screen.dart';
 
-class HikeCard extends StatelessWidget {
+class HikeCard extends ConsumerWidget {
   final int? distanceFromCurrentLocation;
-  final Hike hike;
+  final domain.Hike hike;
 
   const HikeCard({
     Key? key,
@@ -18,7 +20,9 @@ class HikeCard extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ScopedReader watch) {
+    final viewModel = watch(hikeCardPresenter(hike));
+
     return Scaffold(
       body: ClipRRect(
         borderRadius: BorderRadius.circular(YahaBorderRadius.poiSmall),
@@ -39,8 +43,7 @@ class HikeCard extends StatelessWidget {
                   child: Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: NetworkImage(hike.imageUrls?.first ??
-                            'https://cdn2.iconfinder.com/data/icons/mountain-landscape-2/138/hiking_boots_hiking_logo_hiking_chair_hiking_drawing_hiking_day_hiking_flyer_hiking_in_winter-1024.png'),
+                        image: NetworkImage(viewModel.mainHikeImage),
                         fit: BoxFit.cover,
                       ),
                     ),

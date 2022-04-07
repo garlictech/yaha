@@ -19,3 +19,7 @@ class ConnectionFailure extends Failure {
 class DatabaseFailure extends Failure {
   const DatabaseFailure(String message) : super(message);
 }
+
+class GraphqlFailure extends Failure {
+  const GraphqlFailure(String message) : super(message);
+}

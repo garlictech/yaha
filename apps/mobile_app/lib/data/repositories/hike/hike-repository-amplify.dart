@@ -13,7 +13,6 @@ class HikeRepositoryAmplify implements HikeRepository {
         listHikes {
           items {
             id
-            imageUrls
             description {
               title
               languageKey

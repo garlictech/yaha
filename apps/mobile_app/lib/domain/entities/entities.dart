@@ -1,5 +1,7 @@
 export 'poi/poi.dart';
 export 'hike/hike.dart';
+export 'shared/search-around-hike-input.dart';
+export 'image/image.dart';
 export 'shared/linestring.dart';
 export 'shared/textual-description.dart';
 export 'shared/geolocation.dart';
