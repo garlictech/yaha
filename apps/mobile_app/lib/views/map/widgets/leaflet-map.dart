@@ -9,9 +9,9 @@ class LeafletMap extends ConsumerWidget {
   const LeafletMap({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    watch(leafletMapMVPProvider);
-    final presenter = watch(leafletMapMVPProvider.notifier);
+  Widget build(BuildContext context, WidgetRef ref) {
+    ref.watch(leafletMapMVPProvider);
+    final presenter = ref.watch(leafletMapMVPProvider.notifier);
 
     return Scaffold(
       body: SafeArea(

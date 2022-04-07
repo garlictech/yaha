@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:yaha/hike/hike-outline/route-section.dart';
 import 'package:yaha/hike/hike-outline/settings/hike-outline-filters.dart';
@@ -17,8 +17,8 @@ import 'hike-outline-state.dart';
 
 class HikeOutlineScreen extends ConsumerWidget {
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    var hikeOutlineState = watch(hikeOutlineStateProvider);
+  Widget build(BuildContext context,  WidgetRef ref) {
+    var hikeOutlineState = ref.watch(hikeOutlineStateProvider);
 
     return Scaffold(
         appBar: AppBar(

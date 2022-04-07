@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_verification_code/flutter_verification_code.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/utility/buttons/back-button.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
@@ -11,7 +11,7 @@ import 'package:yaha/utility/yaha-space-sizes.dart';
 
 class SignupConfirmationScreen extends ConsumerWidget {
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
+  Widget build(BuildContext context,  WidgetRef ref) {
     return Scaffold(
       body: CustomScrollView(
         physics: BouncingScrollPhysics(),

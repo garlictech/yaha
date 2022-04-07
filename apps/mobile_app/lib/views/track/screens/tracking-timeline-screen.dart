@@ -1,6 +1,6 @@
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:yaha/hike/hike-outline/checkpoint.dart';
 import 'package:yaha/hike/hike-outline/route-section.dart';
@@ -17,8 +17,8 @@ import 'package:yaha/views/track/widgets/tracking-timeline-customize-widget.dart
 
 class TrackingTimelineScreen extends ConsumerWidget {
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final trackingTimelineState = watch(trackingTimelineStateProvider);
+  Widget build(BuildContext context,  WidgetRef ref) {
+    final trackingTimelineState = ref.watch(trackingTimelineStateProvider);
 
     return Scaffold(
         body: trackingTimelineState.when(

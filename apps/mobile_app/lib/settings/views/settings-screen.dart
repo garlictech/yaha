@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/hike/views/widgets/list-section-title-box-widget.dart';
 import 'package:yaha/settings/application/application-screen.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
@@ -13,9 +13,9 @@ import '../presenters/settings-screen-presenter.dart';
 
 class SettingsScreen extends ConsumerWidget {
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final viewModel = watch(settingsScreenMVPProvider);
-    final presenter = watch(settingsScreenMVPProvider.notifier);
+  Widget build(BuildContext context,  WidgetRef ref) {
+    final viewModel = ref.watch(settingsScreenMVPProvider);
+    final presenter = ref.watch(settingsScreenMVPProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(

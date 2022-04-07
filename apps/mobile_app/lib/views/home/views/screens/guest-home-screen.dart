@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/explore.dart';
 import 'package:yaha/presenters/home/guest-home-screen-presenter.dart';
 import 'package:yaha/profile/challenges/views/screens/challenge-detail-screen.dart';
@@ -25,11 +25,11 @@ class HomePageGuest extends ConsumerWidget {
   const HomePageGuest({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    AsyncValue userState = watch(userStateProvider);
-    final authState = watch(authStateProvider);
-    final authStateNotifier = watch(authStateProvider.notifier);
-    final viewModel = watch(guestHomeScreenMVPProvider);
+  Widget build(BuildContext context,  WidgetRef ref) {
+    AsyncValue userState = ref.watch(userStateProvider);
+    final authState = ref.watch(authStateProvider);
+    final authStateNotifier = ref.watch(authStateProvider.notifier);
+    final viewModel = ref.watch(guestHomeScreenMVPProvider);
 
     return Scaffold(
       body: CustomScrollView(

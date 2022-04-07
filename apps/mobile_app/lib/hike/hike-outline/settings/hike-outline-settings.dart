@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/settings/application/app-settings-state.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-border-width.dart';
@@ -17,14 +17,16 @@ class HikeOutlineSettings extends ConsumerWidget {
   final finishTimeController = TextEditingController();
   final DateTime dateTime = DateTime.now();
 
+  HikeOutlineSettings({Key? key}) : super(key: key);
+
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    var appSettingsState = watch(applicationSettingsStateProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    var appSettingsState = ref.watch(applicationSettingsStateProvider);
     var appSettingsStateNotifier =
-        watch(applicationSettingsStateProvider.notifier);
+        ref.watch(applicationSettingsStateProvider.notifier);
 
     return Container(
-      padding: EdgeInsets.only(
+      padding: const EdgeInsets.only(
         top: YahaSpaceSizes.large,
         right: YahaSpaceSizes.general,
         bottom: YahaSpaceSizes.large,
@@ -37,7 +39,7 @@ class HikeOutlineSettings extends ConsumerWidget {
             children: [
               Expanded(
                 child: Container(
-                  constraints: BoxConstraints(
+                  constraints: const BoxConstraints(
                     maxWidth: 330.0,
                   ),
                   child: TextFormField(
@@ -49,26 +51,26 @@ class HikeOutlineSettings extends ConsumerWidget {
                     keyboardType: TextInputType.text,
                     enableSuggestions: false,
                     autocorrect: false,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontWeight: FontWeight.w500,
                         color: YahaColors.textColor,
                         fontSize: YahaFontSizes.small),
                     decoration: InputDecoration(
                       focusColor: YahaColors.military,
                       labelText: appSettingsState.startTime.toString(),
-                      labelStyle: TextStyle(color: YahaColors.textColor),
+                      labelStyle: const TextStyle(color: YahaColors.textColor),
                       contentPadding:
-                          EdgeInsets.only(left: YahaSpaceSizes.medium),
+                          const EdgeInsets.only(left: YahaSpaceSizes.medium),
                       enabledBorder: OutlineInputBorder(
                           borderRadius:
                               BorderRadius.circular(YahaBorderRadius.general),
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                               color: YahaColors.textColor,
                               width: YahaBorderWidth.xSmall)),
                       focusedBorder: OutlineInputBorder(
                           borderRadius:
                               BorderRadius.circular(YahaBorderRadius.general),
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                               color: YahaColors.primary,
                               width: YahaBorderWidth.xSmall)),
                     ),
@@ -76,10 +78,10 @@ class HikeOutlineSettings extends ConsumerWidget {
                 ),
               ),
               Container(
-                padding: EdgeInsets.only(left: YahaSpaceSizes.small),
+                padding: const EdgeInsets.only(left: YahaSpaceSizes.small),
                 child: IconButton(
                   onPressed: () {},
-                  icon: Icon(Icons.help_rounded),
+                  icon: const Icon(Icons.help_rounded),
                   color: YahaColors.primary,
                   iconSize: YahaIconSizes.small,
                 ),
@@ -87,7 +89,7 @@ class HikeOutlineSettings extends ConsumerWidget {
             ],
           ),
           Container(
-            padding: EdgeInsets.only(top: YahaSpaceSizes.small),
+            padding: const EdgeInsets.only(top: YahaSpaceSizes.small),
             child: Visibility(
               visible: appSettingsState.startTimePickerVisibility,
               child: SizedBox(
@@ -105,8 +107,8 @@ class HikeOutlineSettings extends ConsumerWidget {
             children: [
               Expanded(
                 child: Container(
-                  constraints: BoxConstraints(maxWidth: 330.0),
-                  padding: EdgeInsets.only(
+                  constraints: const BoxConstraints(maxWidth: 330.0),
+                  padding: const EdgeInsets.only(
                     top: YahaSpaceSizes.general,
                     bottom: YahaSpaceSizes.general,
                   ),
@@ -117,10 +119,10 @@ class HikeOutlineSettings extends ConsumerWidget {
                 ),
               ),
               Container(
-                padding: EdgeInsets.only(left: YahaSpaceSizes.small),
+                padding: const EdgeInsets.only(left: YahaSpaceSizes.small),
                 child: IconButton(
                   onPressed: () {},
-                  icon: Icon(Icons.help_rounded),
+                  icon: const Icon(Icons.help_rounded),
                   color: YahaColors.primary,
                   iconSize: YahaIconSizes.small,
                 ),
@@ -131,8 +133,8 @@ class HikeOutlineSettings extends ConsumerWidget {
             children: [
               Expanded(
                 child: Container(
-                  padding: EdgeInsets.only(top: YahaSpaceSizes.small),
-                  constraints: BoxConstraints(maxWidth: 330.0),
+                  padding: const EdgeInsets.only(top: YahaSpaceSizes.small),
+                  constraints: const BoxConstraints(maxWidth: 330.0),
                   child: TextFormField(
                     controller: finishTimeController,
                     onTap: () => appSettingsStateNotifier
@@ -142,26 +144,26 @@ class HikeOutlineSettings extends ConsumerWidget {
                     keyboardType: TextInputType.text,
                     enableSuggestions: false,
                     autocorrect: false,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontWeight: FontWeight.w500,
                         color: YahaColors.textColor,
                         fontSize: YahaFontSizes.small),
                     decoration: InputDecoration(
                       focusColor: YahaColors.military,
                       labelText: appSettingsState.finishTime.toString(),
-                      labelStyle: TextStyle(color: YahaColors.textColor),
+                      labelStyle: const TextStyle(color: YahaColors.textColor),
                       contentPadding:
-                          EdgeInsets.only(left: YahaSpaceSizes.medium),
+                          const EdgeInsets.only(left: YahaSpaceSizes.medium),
                       enabledBorder: OutlineInputBorder(
                           borderRadius:
                               BorderRadius.circular(YahaBorderRadius.general),
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                               color: YahaColors.textColor,
                               width: YahaBorderWidth.xSmall)),
                       focusedBorder: OutlineInputBorder(
                           borderRadius:
                               BorderRadius.circular(YahaBorderRadius.general),
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                               color: YahaColors.primary,
                               width: YahaBorderWidth.xSmall)),
                     ),
@@ -169,10 +171,10 @@ class HikeOutlineSettings extends ConsumerWidget {
                 ),
               ),
               Container(
-                padding: EdgeInsets.only(left: YahaSpaceSizes.small),
+                padding: const EdgeInsets.only(left: YahaSpaceSizes.small),
                 child: IconButton(
                   onPressed: () {},
-                  icon: Icon(Icons.help_rounded),
+                  icon: const Icon(Icons.help_rounded),
                   color: YahaColors.primary,
                   iconSize: YahaIconSizes.small,
                 ),
@@ -180,7 +182,7 @@ class HikeOutlineSettings extends ConsumerWidget {
             ],
           ),
           Container(
-            padding: EdgeInsets.only(top: YahaSpaceSizes.small),
+            padding: const EdgeInsets.only(top: YahaSpaceSizes.small),
             child: Visibility(
               visible: appSettingsState.finishTimePickerVisibility,
               child: SizedBox(
@@ -200,7 +202,7 @@ class HikeOutlineSettings extends ConsumerWidget {
               height: YahaBoxSizes.buttonHeight,
               width: YahaBoxSizes.buttonWidthBig,
               child: ElevatedButton.icon(
-                icon: Icon(
+                icon: const Icon(
                   Icons.save_rounded,
                   color: YahaColors.accentColor,
                   size: YahaFontSizes.large,
@@ -209,7 +211,7 @@ class HikeOutlineSettings extends ConsumerWidget {
                   appSettingsStateNotifier
                       .updateAverageHikingSpeed(averageSpeedController.text);
                 },
-                label: Text('Save',
+                label: const Text('Save',
                     style: TextStyle(
                       fontSize: YahaFontSizes.small,
                       fontWeight: FontWeight.w600,

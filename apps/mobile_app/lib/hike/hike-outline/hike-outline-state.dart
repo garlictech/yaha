@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/hike/hike-outline/views/widgets/timecapsule-on-hike-outline-widget.dart';
 import 'package:yaha/hike/hike-outline/weather-astronomical-data.dart';

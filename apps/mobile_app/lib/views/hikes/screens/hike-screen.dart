@@ -1,7 +1,7 @@
 // ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/domain/domain.dart';
 import 'package:yaha/gallery.dart';
 import 'package:yaha/hike/hike-outline/hike-outline-screen.dart';
@@ -111,15 +111,74 @@ SpeedDial buildSpeedDial() {
   );
 }
 
+class HikeScreenSliverAppBar extends StatelessWidget {
+  final String title;
+  final String imageUrl;
+
+  const HikeScreenSliverAppBar(
+      {required this.title, required this.imageUrl, Key? key})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverAppBar(
+      stretch: false,
+      pinned: true,
+      snap: true,
+      floating: true,
+      expandedHeight: 240.0,
+      flexibleSpace: FlexibleSpaceBar(
+        titlePadding: const EdgeInsets.only(
+            left: YahaSpaceSizes.general, bottom: YahaSpaceSizes.small),
+        centerTitle: false,
+        title: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  textAlign: TextAlign.left,
+                  style: const TextStyle(
+                      color: YahaColors.background,
+                      fontWeight: FontWeight.w700,
+                      fontSize: YahaFontSizes.small),
+                ),
+              ],
+            ),
+          ],
+        ),
+        background: ColorFiltered(
+          colorFilter: ColorFilter.mode(
+              Colors.black.withOpacity(0.20), BlendMode.darken),
+          child: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: NetworkImage(imageUrl),
+                //image: NetworkImage(viewModel.imageUrls.first),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class HikeScreen extends ConsumerWidget {
   final Hike hike;
 
   const HikeScreen({Key? key, required this.hike}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final presenter = watch(leafletMapMVPProvider.notifier);
-    final viewModel = watch(hikeScreenPresenter(hike));
+  Widget build(BuildContext context,  WidgetRef ref) {
+    final presenter = ref.watch(leafletMapMVPProvider.notifier);
+    final viewModel = ref.watch(hikeScreenPresenter(hike));
 
     if (hike.route != null) {
       presenter.addHikeTrack(hike.route as LineStringData);
@@ -129,51 +188,13 @@ class HikeScreen extends ConsumerWidget {
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: <Widget>[
-          SliverAppBar(
-            stretch: false,
-            pinned: true,
-            snap: true,
-            floating: true,
-            expandedHeight: 240.0,
-            flexibleSpace: FlexibleSpaceBar(
-              titlePadding: const EdgeInsets.only(
-                  left: YahaSpaceSizes.general, bottom: YahaSpaceSizes.small),
-              centerTitle: false,
-              title: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        hike.description?.first.title ?? '',
-                        textAlign: TextAlign.left,
-                        style: const TextStyle(
-                            color: YahaColors.background,
-                            fontWeight: FontWeight.w700,
-                            fontSize: YahaFontSizes.small),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              background: ColorFiltered(
-                colorFilter: ColorFilter.mode(
-                    Colors.black.withOpacity(0.20), BlendMode.darken),
-                child: Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: NetworkImage(viewModel.imageUrls.first),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
+          Consumer(builder: (c, ref, _child) {
+            final imageUrl = ref.watch(
+                hikeScreenPresenter(hike).select((vm) => vm.imageUrls.first));
+
+            return HikeScreenSliverAppBar(
+                title: hike.description?.first.title ?? '', imageUrl: imageUrl);
+          }),
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {

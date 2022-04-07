@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/presenters/track/timecapsule-comments-screen-presenter.dart';
 import 'package:yaha/utility/buttons/back-button.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
@@ -12,9 +12,9 @@ import 'package:yaha/views/track/widgets/timecapsule-comment-widget.dart';
 
 class TimeCapsuleCommentsScreen extends ConsumerWidget {
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final viewModel = watch(timeCapsuleCommentsScreenMVPProvider);
-    final presenter = watch(timeCapsuleCommentsScreenMVPProvider.notifier);
+  Widget build(BuildContext context,  WidgetRef ref) {
+    final viewModel = ref.watch(timeCapsuleCommentsScreenMVPProvider);
+    final presenter = ref.watch(timeCapsuleCommentsScreenMVPProvider.notifier);
 
     return Scaffold(
       backgroundColor: YahaColors.timeCapsuleBackground,

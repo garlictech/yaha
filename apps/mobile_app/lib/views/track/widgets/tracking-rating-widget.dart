@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
 import 'package:yaha/utility/yaha-border-width.dart';
 import 'package:yaha/utility/yaha-box-sizes.dart';
@@ -11,7 +11,7 @@ import 'package:yaha/views/track/widgets/rating-satisfaction-widget.dart';
 
 class TrackingRatingWidget extends ConsumerWidget {
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
+  Widget build(BuildContext context,  WidgetRef ref) {
     return Material(
       child: Padding(
         padding: const EdgeInsets.only(

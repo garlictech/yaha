@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:yaha/search-results-screen.dart';
@@ -15,10 +15,10 @@ class FilterPage extends ConsumerWidget {
   const FilterPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
+  Widget build(BuildContext context, WidgetRef ref) {
     var filterSettingsStateNotifier =
-        watch(filterSettingsStateProvider.notifier);
-    var filterSettingsState = watch(filterSettingsStateProvider);
+        ref.watch(filterSettingsStateProvider.notifier);
+    var filterSettingsState = ref.watch(filterSettingsStateProvider);
     SfRangeValues _lengthValues = SfRangeValues(
         filterSettingsState.lengthMin, filterSettingsState.lengthMax);
     SfRangeValues _durationValues = SfRangeValues(
@@ -29,12 +29,12 @@ class FilterPage extends ConsumerWidget {
     return Column(
       children: [
         Container(
-          padding: EdgeInsets.only(
+          padding: const EdgeInsets.only(
             top: YahaSpaceSizes.general,
             left: YahaSpaceSizes.large,
             //bottom: YahaSpaceSizes.general,
           ),
-          child: SizedBox(
+          child: const SizedBox(
               width: double.infinity,
               child: Text(
                 'Hike length (km)',
@@ -44,7 +44,7 @@ class FilterPage extends ConsumerWidget {
               )),
         ),
         Container(
-          padding: EdgeInsets.only(
+          padding: const EdgeInsets.only(
             left: YahaSpaceSizes.general,
             right: YahaSpaceSizes.general,
             bottom: YahaSpaceSizes.general,
@@ -64,11 +64,11 @@ class FilterPage extends ConsumerWidget {
           ),
         ),
         Container(
-          padding: EdgeInsets.only(
+          padding: const EdgeInsets.only(
             left: YahaSpaceSizes.large,
             //bottom: YahaSpaceSizes.general,
           ),
-          child: SizedBox(
+          child: const SizedBox(
               width: double.infinity,
               child: Text(
                 'Duration (hour)',
@@ -78,7 +78,7 @@ class FilterPage extends ConsumerWidget {
               )),
         ),
         Container(
-          padding: EdgeInsets.only(
+          padding: const EdgeInsets.only(
             left: YahaSpaceSizes.general,
             right: YahaSpaceSizes.general,
             bottom: YahaSpaceSizes.general,
@@ -99,11 +99,11 @@ class FilterPage extends ConsumerWidget {
           ),
         ),
         Container(
-          padding: EdgeInsets.only(
+          padding: const EdgeInsets.only(
             left: YahaSpaceSizes.large,
             //bottom: YahaSpaceSizes.general,
           ),
-          child: SizedBox(
+          child: const SizedBox(
               width: double.infinity,
               child: Text(
                 'Search radius (km)',
@@ -113,7 +113,7 @@ class FilterPage extends ConsumerWidget {
               )),
         ),
         Container(
-          padding: EdgeInsets.only(
+          padding: const EdgeInsets.only(
             left: YahaSpaceSizes.general,
             right: YahaSpaceSizes.general,
             bottom: YahaSpaceSizes.large,
@@ -133,11 +133,11 @@ class FilterPage extends ConsumerWidget {
           ),
         ),
         Container(
-          padding: EdgeInsets.only(
+          padding: const EdgeInsets.only(
             left: YahaSpaceSizes.large,
             bottom: YahaSpaceSizes.general,
           ),
-          child: SizedBox(
+          child: const SizedBox(
               width: double.infinity,
               child: Text(
                 'Difficulty',
@@ -153,14 +153,14 @@ class FilterPage extends ConsumerWidget {
               bottom: YahaSpaceSizes.xLarge),
           child: ToggleSwitch(
             minWidth: 100,
-            activeBgColor: [YahaColors.primary],
+            activeBgColor: const [YahaColors.primary],
             inactiveBgColor: YahaColors.accentColor,
             dividerColor: YahaColors.primary,
             initialLabelIndex: filterSettingsState.difficultyIndex,
             totalSwitches: 3,
-            labels: ['1', '2', '3'],
+            labels: const ['1', '2', '3'],
             onToggle: (index) {
-              var newDifficultyState;
+              int newDifficultyState = 0;
               switch (index) {
                 case 0:
                   newDifficultyState = 1;
@@ -188,9 +188,9 @@ class FilterPage extends ConsumerWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => SearchResultsScreen()));
+                        builder: (context) => const SearchResultsScreen()));
               },
-              child: Text('Show results',
+              child: const Text('Show results',
                   style: TextStyle(
                     fontSize: YahaFontSizes.small,
                     fontWeight: FontWeight.w600,

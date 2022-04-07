@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/profile/events/views/screens/event-detail-screen.dart';
 import 'package:yaha/profile/events/views/widgets/event-box.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
 class OngoingEvents extends ConsumerWidget {
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
+  Widget build(BuildContext context,  WidgetRef ref) {
     return Scaffold(
       body: CustomScrollView(
         physics: BouncingScrollPhysics(),

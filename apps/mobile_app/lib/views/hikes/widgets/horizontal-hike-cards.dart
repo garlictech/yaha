@@ -19,8 +19,8 @@ class HorizontalHikeCards extends ConsumerWidget {
       : super(key: key);
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final hikes = watch(hikeListProvider);
+  Widget build(BuildContext context,  WidgetRef ref) {
+    final hikes = ref.watch(hikeListProvider);
 
     return Column(children: [
       Container(

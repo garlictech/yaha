@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/hike/hike-screen/most-interesting-place-on-route/poi-list-tile-widget.dart';
 import 'package:yaha/hike/hike-screen/most-interesting-place-on-route/places-on-route-state.dart';
 import 'package:yaha/utility/buttons/back-button.dart';
@@ -10,8 +10,8 @@ import 'package:yaha/utility/yaha-space-sizes.dart';
 
 class PlacesOnRouteScreen extends ConsumerWidget {
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    var placesOnRouteState = watch(placesOnRouteStateProvider);
+  Widget build(BuildContext context,  WidgetRef ref) {
+    var placesOnRouteState = ref.watch(placesOnRouteStateProvider);
 
     return Scaffold(
         body: placesOnRouteState.when(

@@ -1,9 +1,9 @@
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/hike/views/screens/poi-screen.dart';
 import 'package:yaha/profile/profile-page.dart';
 import 'package:yaha/utility/yaha-colors.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yaha/views/auth/screens/signup-screen.dart';
 import 'package:yaha/views/track/screens/tracking.dart';
 import 'profile/events/views/screens/event-detail-screen.dart';

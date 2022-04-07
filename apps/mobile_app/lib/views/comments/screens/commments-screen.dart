@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/presenters/comments/comments-screen-presenter.dart';
 import 'package:yaha/utility/buttons/back-button.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
@@ -11,16 +11,18 @@ import 'package:yaha/utility/yaha-space-sizes.dart';
 import '../widgets/comment-widget.dart';
 
 class CommmentsScreen extends ConsumerWidget {
+  const CommmentsScreen({Key? key}) : super(key: key);
+
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final viewModel = watch(commentsScreenMVPProvider);
-    final presenter = watch(commentsScreenMVPProvider.notifier);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final viewModel = ref.watch(commentsScreenMVPProvider);
+    final presenter = ref.watch(commentsScreenMVPProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: YahaColors.background,
         elevation: 0,
-        title: Text(
+        title: const Text(
           'Comments',
           textAlign: TextAlign.center,
           style: TextStyle(
@@ -36,7 +38,7 @@ class CommmentsScreen extends ConsumerWidget {
             child: Padding(
               padding: const EdgeInsets.only(right: YahaSpaceSizes.medium),
               child: IconButton(
-                icon: Icon(Icons.add_rounded,
+                icon: const Icon(Icons.add_rounded,
                     size: YahaIconSizes.large, color: YahaColors.textColor),
                 onPressed: () {
                   presenter.toggleCommentInput();
@@ -47,7 +49,7 @@ class CommmentsScreen extends ConsumerWidget {
         ],
       ),
       body: CustomScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         slivers: <Widget>[
           SliverList(
             delegate: SliverChildBuilderDelegate(
@@ -71,14 +73,14 @@ class CommmentsScreen extends ConsumerWidget {
                                 children: [
                                   GestureDetector(
                                     onTap: () {},
-                                    child: Icon(
+                                    child: const Icon(
                                       Icons.close_rounded,
                                       size: YahaIconSizes.medium,
                                       color: YahaColors.textColor,
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
+                                  const Padding(
+                                    padding: EdgeInsets.only(
                                         left: YahaSpaceSizes.small),
                                     child: Text(
                                       'Leave a comment',
@@ -101,7 +103,7 @@ class CommmentsScreen extends ConsumerWidget {
                                     controller: viewModel.newCommentController,
                                     cursorColor: YahaColors.textColor,
                                     maxLines: 10,
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                         filled: true,
                                         fillColor: YahaColors.accentColor,
                                         border: InputBorder.none),
@@ -115,7 +117,7 @@ class CommmentsScreen extends ConsumerWidget {
                                   height: YahaBoxSizes.buttonHeight,
                                   width: YahaBoxSizes.buttonWidthBig,
                                   child: ElevatedButton.icon(
-                                    icon: Icon(
+                                    icon: const Icon(
                                       Icons.send_rounded,
                                       color: YahaColors.accentColor,
                                       size: YahaFontSizes.large,
@@ -125,7 +127,7 @@ class CommmentsScreen extends ConsumerWidget {
                                           body: viewModel
                                               .newCommentController.text);
                                     },
-                                    label: Text('Send',
+                                    label: const Text('Send',
                                         style: TextStyle(
                                           fontSize: YahaFontSizes.small,
                                           fontWeight: FontWeight.w600,

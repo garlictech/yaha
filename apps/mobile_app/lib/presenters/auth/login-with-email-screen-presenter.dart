@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/viewmodels/auth/login-with-email-screen-viewmodel.dart';
 import 'package:yaha/views/auth/screens/signup-screen.dart';
 import 'social-login-mixin.dart';

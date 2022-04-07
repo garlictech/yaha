@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/presenters/auth/login-with-email-screen-presenter.dart';
 import 'package:yaha/utility/buttons/back-button.dart';
 import 'package:yaha/utility/pop-ups/success-popup.dart';
@@ -16,9 +16,9 @@ class LogInWithEmailScreen extends ConsumerWidget {
   final _formKey = GlobalKey<FormState>();
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final viewModel = watch(loginWithEmailMVPProvider(context));
-    final presenter = watch(loginWithEmailMVPProvider(context).notifier);
+  Widget build(BuildContext context,  WidgetRef ref) {
+    final viewModel = ref.watch(loginWithEmailMVPProvider(context));
+    final presenter = ref.watch(loginWithEmailMVPProvider(context).notifier);
 
     return Scaffold(
       body: CustomScrollView(

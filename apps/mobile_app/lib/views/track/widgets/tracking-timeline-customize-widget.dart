@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/hike/hike-outline/settings/poi-filters-list.dart';
 import 'package:yaha/presenters/track/tracking-timeline-customize-widget-presenter.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
@@ -10,15 +10,17 @@ import 'package:yaha/utility/yaha-icon-sizes.dart';
 import 'package:yaha/utility/yaha-space-sizes.dart';
 
 class TrackingTimelineCustomizeWidget extends ConsumerWidget {
+  const TrackingTimelineCustomizeWidget({Key? key}) : super(key: key);
+
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final viewModel = watch(trackingTimelineCustomizeWidgetMVPProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final viewModel = ref.watch(trackingTimelineCustomizeWidgetMVPProvider);
     final presenter =
-        watch(trackingTimelineCustomizeWidgetMVPProvider.notifier);
+        ref.watch(trackingTimelineCustomizeWidgetMVPProvider.notifier);
 
     return Material(
       child: Padding(
-        padding: EdgeInsets.only(
+        padding: const EdgeInsets.only(
           top: YahaSpaceSizes.general,
           right: YahaSpaceSizes.general,
           bottom: YahaSpaceSizes.large,
@@ -29,7 +31,7 @@ class TrackingTimelineCustomizeWidget extends ConsumerWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
+                const Text(
                   'Show POIs between checkpoints',
                   style: TextStyle(
                     fontSize: YahaFontSizes.small,
@@ -45,7 +47,7 @@ class TrackingTimelineCustomizeWidget extends ConsumerWidget {
               ],
             ),
             Container(
-              padding: EdgeInsets.only(
+              padding: const EdgeInsets.only(
                 top: YahaSpaceSizes.xSmall,
                 bottom: YahaSpaceSizes.xSmall,
               ),
@@ -54,7 +56,7 @@ class TrackingTimelineCustomizeWidget extends ConsumerWidget {
                 children: [
                   Row(
                     children: [
-                      Text(
+                      const Text(
                         'Show natural phenomenons',
                         style: TextStyle(
                           fontSize: YahaFontSizes.small,
@@ -62,13 +64,11 @@ class TrackingTimelineCustomizeWidget extends ConsumerWidget {
                           fontWeight: FontWeight.w400,
                         ),
                       ),
-                      Container(
-                        child: IconButton(
-                          onPressed: () {},
-                          icon: Icon(Icons.help_rounded),
-                          color: YahaColors.primary,
-                          iconSize: YahaIconSizes.small,
-                        ),
+                      IconButton(
+                        onPressed: () {},
+                        icon: const Icon(Icons.help_rounded),
+                        color: YahaColors.primary,
+                        iconSize: YahaIconSizes.small,
                       ),
                     ],
                   ),
@@ -88,7 +88,7 @@ class TrackingTimelineCustomizeWidget extends ConsumerWidget {
                 children: [
                   Row(
                     children: [
-                      Text(
+                      const Text(
                         'Show TimeCapsules',
                         style: TextStyle(
                           fontSize: YahaFontSizes.small,
@@ -96,13 +96,11 @@ class TrackingTimelineCustomizeWidget extends ConsumerWidget {
                           fontWeight: FontWeight.w400,
                         ),
                       ),
-                      Container(
-                        child: IconButton(
-                          onPressed: () {},
-                          icon: Icon(Icons.help_rounded),
-                          color: YahaColors.primary,
-                          iconSize: YahaIconSizes.small,
-                        ),
+                      IconButton(
+                        onPressed: () {},
+                        icon: const Icon(Icons.help_rounded),
+                        color: YahaColors.primary,
+                        iconSize: YahaIconSizes.small,
                       ),
                     ],
                   ),
@@ -116,7 +114,7 @@ class TrackingTimelineCustomizeWidget extends ConsumerWidget {
             ),
             Row(
               children: [
-                Text(
+                const Text(
                   'POI categories',
                   style: TextStyle(
                     fontSize: YahaFontSizes.small,
@@ -124,32 +122,28 @@ class TrackingTimelineCustomizeWidget extends ConsumerWidget {
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                Container(
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.help_rounded),
-                    color: YahaColors.primary,
-                    iconSize: YahaIconSizes.small,
-                  ),
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.help_rounded),
+                  color: YahaColors.primary,
+                  iconSize: YahaIconSizes.small,
                 ),
               ],
             ),
-            Container(
-              child: PoiFiltersList(),
-            ),
+            PoiFiltersList(),
             Container(
               padding: const EdgeInsets.only(top: YahaSpaceSizes.xLarge),
               child: SizedBox(
                 height: YahaBoxSizes.buttonHeight,
                 width: YahaBoxSizes.buttonWidthBig,
                 child: ElevatedButton.icon(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.save_rounded,
                     color: YahaColors.accentColor,
                     size: YahaFontSizes.large,
                   ),
                   onPressed: () {},
-                  label: Text('Save',
+                  label: const Text('Save',
                       style: TextStyle(
                         fontSize: YahaFontSizes.small,
                         fontWeight: FontWeight.w600,

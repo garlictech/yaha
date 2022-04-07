@@ -20,8 +20,8 @@ class HikeCard extends ConsumerWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final viewModel = watch(hikeCardPresenter(hike));
+  Widget build(BuildContext context,  WidgetRef ref) {
+    final viewModel = ref.watch(hikeCardPresenter(hike));
 
     return Scaffold(
       body: ClipRRect(

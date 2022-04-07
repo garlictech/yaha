@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/gallery.dart';
 import 'package:yaha/hike/hike-outline/poi-summary.dart';
 import 'package:yaha/utility/buttons/back-button.dart';
@@ -22,7 +22,7 @@ class PoiScreen extends ConsumerWidget {
   }) : super(key: key);*/
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
+  Widget build(BuildContext context,  WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: YahaColors.background,

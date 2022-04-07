@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class LoginErrorWidget extends ConsumerWidget {
   final String error;
@@ -8,7 +8,7 @@ class LoginErrorWidget extends ConsumerWidget {
   const LoginErrorWidget({Key? key, required this.error}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
+  Widget build(BuildContext context,  WidgetRef ref) {
     return Container(
       child: Center(
         child: Column(

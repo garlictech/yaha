@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart' hide Lens;
 import 'package:json_annotation/json_annotation.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:functional_data/functional_data.dart';
 import 'package:yaha/core/local-storage-handler.dart';

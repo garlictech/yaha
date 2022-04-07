@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/hike/views/widgets/list-section-title-box-widget.dart';
 import 'package:yaha/profile/time-capsules/views/widgets/timecapsule-list-tile-widget.dart';
 import 'package:yaha/utility/yaha-border-width.dart';
@@ -8,7 +8,7 @@ import 'package:yaha/utility/yaha-space-sizes.dart';
 
 class MyTimeCapsulesScreen extends ConsumerWidget {
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
+  Widget build(BuildContext context,  WidgetRef ref) {
     return Scaffold(
       body: CustomScrollView(
         physics: BouncingScrollPhysics(),

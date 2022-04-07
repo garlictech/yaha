@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/presenters/auth/login-screen-presenter.dart';
 import 'package:yaha/utility/buttons/back-button.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
@@ -16,9 +16,9 @@ import '../widgets/google-button.dart';
 
 class LogInScreen extends ConsumerWidget {
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final viewModel = watch(loginScreenMVPProvider(context));
-    final presenter = watch(loginScreenMVPProvider(context).notifier);
+  Widget build(BuildContext context,  WidgetRef ref) {
+    final viewModel = ref.watch(loginScreenMVPProvider(context));
+    final presenter = ref.watch(loginScreenMVPProvider(context).notifier);
 
     return Scaffold(
       body: CustomScrollView(

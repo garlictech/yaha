@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/presenters/auth/signup-screen-presenter.dart';
 import 'package:yaha/utility/buttons/back-button.dart';
 import 'package:yaha/utility/yaha-border-radius.dart';
@@ -15,21 +15,23 @@ import '../widgets/facebook-button.dart';
 import '../widgets/google-button.dart';
 
 class SignupScreen extends ConsumerWidget {
+  const SignupScreen({Key? key}) : super(key: key);
+
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final viewModel = watch(signupScreenMVPProvider(context));
-    final presenter = watch(signupScreenMVPProvider(context).notifier);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final viewModel = ref.watch(signupScreenMVPProvider(context));
+    final presenter = ref.watch(signupScreenMVPProvider(context).notifier);
 
     return Scaffold(
       body: CustomScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         slivers: <Widget>[
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
                 return SafeArea(
                   child: Container(
-                    padding: EdgeInsets.only(
+                    padding: const EdgeInsets.only(
                       left: YahaSpaceSizes.general,
                       right: YahaSpaceSizes.general,
                     ),
@@ -42,7 +44,7 @@ class SignupScreen extends ConsumerWidget {
                               alignment: Alignment.centerLeft,
                               child: YahaBackButton(),
                             ),
-                            Align(
+                            const Align(
                               alignment: Alignment.center,
                               child: Text(
                                 'Sign up',
@@ -66,7 +68,7 @@ class SignupScreen extends ConsumerWidget {
                                 children: [
                                   Container(
                                     padding: const EdgeInsets.only(left: 3.0),
-                                    child: Align(
+                                    child: const Align(
                                       alignment: Alignment.centerLeft,
                                       child: Icon(
                                         Icons.mail_outline_rounded,
@@ -75,7 +77,7 @@ class SignupScreen extends ConsumerWidget {
                                       ),
                                     ),
                                   ),
-                                  Align(
+                                  const Align(
                                     alignment: Alignment.center,
                                     child: Text(
                                       'Sign up with email',
@@ -120,8 +122,8 @@ class SignupScreen extends ConsumerWidget {
                             )),
                         Container(
                           width: YahaBoxSizes.buttonWidthBig,
-                          padding:
-                              EdgeInsets.only(bottom: YahaSpaceSizes.small),
+                          padding: const EdgeInsets.only(
+                              bottom: YahaSpaceSizes.small),
                           child: Row(
                             children: [
                               Checkbox(
@@ -137,11 +139,11 @@ class SignupScreen extends ConsumerWidget {
                               Expanded(
                                 child: RichText(
                                   text: TextSpan(
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: YahaColors.textColor,
                                         fontSize: YahaFontSizes.small),
                                     children: [
-                                      TextSpan(
+                                      const TextSpan(
                                         text: 'I accept ',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w400,
@@ -149,12 +151,12 @@ class SignupScreen extends ConsumerWidget {
                                       ),
                                       TextSpan(
                                           text: 'Terms & Conditions ',
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontWeight: FontWeight.w600,
                                               color: YahaColors.primary),
                                           recognizer: TapGestureRecognizer()
                                             ..onTap = () {}),
-                                      TextSpan(
+                                      const TextSpan(
                                         text: 'and ',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w400,
@@ -162,7 +164,7 @@ class SignupScreen extends ConsumerWidget {
                                       ),
                                       TextSpan(
                                           text: 'Privacy Policy',
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontWeight: FontWeight.w600,
                                               color: YahaColors.primary),
                                           recognizer: TapGestureRecognizer()
@@ -175,14 +177,15 @@ class SignupScreen extends ConsumerWidget {
                           ),
                         ),
                         Container(
-                          padding: EdgeInsets.only(top: YahaSpaceSizes.general),
+                          padding: const EdgeInsets.only(
+                              top: YahaSpaceSizes.general),
                           child: RichText(
                             text: TextSpan(
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: YahaColors.textColor,
                                   fontSize: YahaFontSizes.small),
                               children: [
-                                TextSpan(
+                                const TextSpan(
                                   text: "Already have an account? ",
                                   style: TextStyle(
                                     fontWeight: FontWeight.w400,
@@ -190,7 +193,7 @@ class SignupScreen extends ConsumerWidget {
                                 ),
                                 TextSpan(
                                     text: 'Log in',
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontWeight: FontWeight.w600,
                                       color: YahaColors.primary,
                                     ),

@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/presenters/auth/signup-with-email-screen-presenter.dart';
 import 'package:yaha/utility/buttons/back-button.dart';
 import 'package:yaha/utility/pop-ups/success-popup.dart';
@@ -18,9 +18,9 @@ class SignupWithEmailScreen extends ConsumerWidget {
   SignupWithEmailScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final viewModel = watch(signupWithEmailMVPProvider(context));
-    final presenter = watch(signupWithEmailMVPProvider(context).notifier);
+  Widget build(BuildContext context,  WidgetRef ref) {
+    final viewModel = ref.watch(signupWithEmailMVPProvider(context));
+    final presenter = ref.watch(signupWithEmailMVPProvider(context).notifier);
 
     final bool passwordMismatch = !viewModel.passwordsMatch;
 

@@ -13,9 +13,9 @@ class SocialLoginScreen extends ConsumerWidget {
   SocialLoginScreen({required this.method}) : super();
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final presenter = watch(socialLoginScreenMVPProvider(context).notifier);
-    final viewModel = watch(socialLoginScreenMVPProvider(context));
+  Widget build(BuildContext context,  WidgetRef ref) {
+    final presenter = ref.watch(socialLoginScreenMVPProvider(context).notifier);
+    final viewModel = ref.watch(socialLoginScreenMVPProvider(context));
 
     return Scaffold(
         appBar: AppBar(
