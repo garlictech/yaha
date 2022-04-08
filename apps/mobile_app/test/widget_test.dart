@@ -128,31 +128,31 @@ void main() {
 
     await tester.pumpAndSettle();
   });
-  /*testWidgets('Gallery widget smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: const Gallery()));
+  /*testWidgets('GalleryWidget widget smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetForTesting(child: const GalleryWidget()));
 
     await tester.pumpAndSettle();
   });*/
   testWidgets('Bottom nav bar smoke test', (WidgetTester tester) async {
     await tester
-        .pumpWidget(createWidgetForTesting(child: const BottomNavBar()));
+        .pumpWidget(createWidgetForTesting(child: const BottomNavBarWidget()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Filter Screen smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: const FilterPage()));
+    await tester.pumpWidget(createWidgetForTesting(child: const HikeFilterPage()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Explore Screen smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: ExplorePage()));
+    await tester.pumpWidget(createWidgetForTesting(child: ExploreScreen()));
 
     await tester.pumpAndSettle();
   });
   /*testWidgets('Previous Activities Screen smoke test',
       (WidgetTester tester) async {
     await tester.pumpWidget(
-        createWidgetForTesting(child: const PreviousActivitiesPage()));
+        createWidgetForTesting(child: const PreviousActivitiesScreen()));
 
     await tester.pumpAndSettle();
   });*/

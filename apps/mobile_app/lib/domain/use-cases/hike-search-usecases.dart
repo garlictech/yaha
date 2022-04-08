@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/providers/providers.dart';
+import 'package:yaha/utils/failure.dart';
 
 import '../entities/entities.dart';
-import '../utils/failure.dart';
 
 class HikeSearchUsecases {
   final ProviderReference ref;

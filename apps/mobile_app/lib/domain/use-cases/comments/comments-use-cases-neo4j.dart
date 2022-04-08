@@ -1,6 +1,5 @@
-import 'package:yaha/states/comments/comments-state.dart';
-
 import '../../entities/entities.dart';
+import '../../states/comments/comments-state.dart';
 import 'comments-use-cases.dart';
 
 class CommentsUseCasesNeo4j extends CommentsUseCases {

@@ -1,15 +1,15 @@
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yaha/hike/views/screens/poi-screen.dart';
-import 'package:yaha/profile/profile-page.dart';
-import 'package:yaha/utility/yaha-colors.dart';
-import 'package:yaha/views/auth/screens/signup-screen.dart';
-import 'package:yaha/views/track/screens/tracking.dart';
-import 'profile/events/views/screens/event-detail-screen.dart';
-import 'settings/views/settings-screen.dart';
-import 'bottom-nav-bar.dart';
-import 'explore.dart';
+import 'package:yaha/app/views/auth/screens/signup-screen.dart';
+import 'package:yaha/app/views/events/screens/event-detail-screen.dart';
+import 'package:yaha/app/views/hikes/screens/explore-screen.dart';
+import 'package:yaha/app/views/hikes/screens/poi-screen.dart';
+import 'package:yaha/app/views/personal/screen/profile-page.dart';
+import 'package:yaha/app/views/personal/screen/settings-screen.dart';
+import 'package:yaha/app/views/shared/widgets/bottom-nav-bar-widget.dart';
+import 'package:yaha/app/views/shared/widgets/yaha-colors.dart';
+import 'package:yaha/app/views/track/screens/tracking.dart';
 import 'amplifyconfiguration.dart';
 import 'package:amplify_api/amplify_api.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
@@ -50,16 +50,16 @@ class _MyAppState extends State<MyApp> {
           focusColor: YahaColors.primary,
           scaffoldBackgroundColor: YahaColors.background,
           fontFamily: 'Inter'),
-      home: const BottomNavBar(),
+      home: const BottomNavBarWidget(),
       initialRoute: '/',
       routes: {
         '/profile': (context) => ProfilePage(),
         '/event': (context) => EventDetailScreen(),
-        '/poi': (context) => PoiScreen(),
+        '/poi': (context) => const PoiScreen(),
         '/settings': (context) => SettingsScreen(),
-        '/signup': (context) => SignupScreen(),
+        '/signup': (context) => const SignupScreen(),
         '/track': (context) => const TrackingScreen(),
-        '/explore': (context) => ExplorePage(),
+        '/explore': (context) => ExploreScreen(),
       },
     );
   }

@@ -1,8 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:yaha/domain/repositories/repositories.dart';
 import 'package:yaha/domain/domain.dart';
-
-import '../../domain/entities/entities.dart';
+import 'package:yaha/utils/failure.dart';
 
 class GeoLocationRepositoryImpl implements GeoLocationRepository {
   @override

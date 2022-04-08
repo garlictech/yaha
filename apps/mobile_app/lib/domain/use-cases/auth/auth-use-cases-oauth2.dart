@@ -1,4 +1,4 @@
-import 'package:yaha/states/auth/oauth2-state.dart';
+import 'package:yaha/domain/states/auth/oauth2-state.dart';
 
 import 'auth-use-cases.dart';
 

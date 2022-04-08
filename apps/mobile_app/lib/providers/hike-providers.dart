@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/data/data.dart';
 import 'package:yaha/domain/domain.dart';
+import 'package:yaha/utils/failure.dart';
 
 import 'use-case-providers.dart';
 
