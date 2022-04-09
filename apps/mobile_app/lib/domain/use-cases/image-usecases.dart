@@ -19,9 +19,8 @@ class ImageUsecasesImpl implements ImageUsecases {
     final imageRepo = ref.read(imageRepositoryProvider);
 
     return imageRepo
-        .searchImagesAroundHike(SearchAroundHikeInput(
+        .searchImagesAroundHike(SearchSafeImagesAroundHikeInput(
             hikeId: hikeId,
-            objectType: 'image',
             distanceInMeters: defaults.smallGeoBufferSizeInMeters))
         .then((res) {
       final futureGroup = FutureGroup<Image>();

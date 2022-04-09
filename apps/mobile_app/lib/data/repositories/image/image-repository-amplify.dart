@@ -42,10 +42,10 @@ class ImageRepositoryAmplify implements ImageRepository {
   }
 
   @override
-  searchImagesAroundHike(SearchAroundHikeInput input) async {
+  searchImagesAroundHike(SearchSafeImagesAroundHikeInput input) async {
     String gqlDocument = ''' 
-      query SearchImagesAroundHike(\$query: SearchAroundHikeInput!) {
-        searchAroundHike(query: \$query) {
+      query SearchImagesAroundHike(\$query: SearchSafeImagesAroundHikeInput!) {
+        searchSafeImagesAroundHike(query: \$query) {
           items
           nextToken
           total
@@ -56,6 +56,6 @@ class ImageRepositoryAmplify implements ImageRepository {
         document: gqlDocument, variables: Map.from({'query': input.toJson()}));
     var operation = Amplify.API.query(request: request);
     return operation.response.then((response) => List<String>.from(
-        jsonDecode(response.data)['searchAroundHike']['items']));
+        jsonDecode(response.data)['searchSafeImagesAroundHike']['items']));
   }
 }
