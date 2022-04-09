@@ -17,6 +17,30 @@ class GeoCalc {
       var p2 = coordinates[i + 1];
       _length += _calculateDistance(p1[1], p1[0], p2[1], p2[0]);
     }
-    return (_length / 100).round() / 10;
+
+    return _length;
+  }
+
+  static double calculateUphill(List<List<double>> coordinates) {
+    return _calculateHill(coordinates, (diff) => diff > 0, 1);
+  }
+
+  static double calculateDownhill(List<List<double>> coordinates) {
+    return _calculateHill(coordinates, (diff) => diff < 0, -1);
+  }
+
+  static double _calculateHill(List<List<double>> coordinates,
+      Function(double) bigEnough, double multiplier) {
+    double sum = 0;
+
+    for (var i = 1; i < coordinates.length; i++) {
+      final diff = coordinates[i][2] - coordinates[i - 1][2];
+
+      if (bigEnough(diff)) {
+        sum += diff * multiplier;
+      }
+    }
+
+    return sum.round().toDouble();
   }
 }
