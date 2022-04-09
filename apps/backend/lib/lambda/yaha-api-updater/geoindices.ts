@@ -3,6 +3,7 @@ import { defer, from, of } from 'rxjs';
 import { catchError, mergeMap } from 'rxjs/operators';
 import { AmplifyApiConfig } from '@yaha/gql-api';
 import { pipe } from 'fp-ts/lib/function';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { createConnector } = require('aws-elasticsearch-js');
 
 const client = new Client({

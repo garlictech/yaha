@@ -7,6 +7,7 @@ import {
   searchInShapeResolver,
   searchSafeImagesAroundHikeResolver,
 } from './search-resolvers';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { createConnector } = require('aws-elasticsearch-js');
 import { Client } from '@elastic/elasticsearch';
 import { getGraphqlSdkForIAM, AmplifyApiConfig } from '@yaha/gql-api';

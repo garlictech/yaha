@@ -1,4 +1,5 @@
 import { getGraphqlSdkForIAM, YahaApi } from '@yaha/gql-api';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { createConnector } = require('aws-elasticsearch-js');
 import { Client } from '@elastic/elasticsearch';
 import { AmplifyApiConfig } from '@yaha/gql-api';
