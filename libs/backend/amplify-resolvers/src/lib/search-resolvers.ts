@@ -248,25 +248,28 @@ export const searchSafeImagesAroundHikeResolver =
       getBufferAroundHike(deps)(args.query.hikeId, args.query.distanceInMeters),
       OE.map(shape => ({
         query: {
-          bool: {
-            must: [{ match: { banned: false } }],
-            filter: {
-              geo_shape: {
-                location: {
-                  shape: {
-                    type: 'multipolygon',
-                    coordinates: [shape.geometry.coordinates],
+          function_score: {
+            query: {
+              bool: {
+                must: [{ term: { banned: false } }],
+                filter: {
+                  geo_shape: {
+                    location: {
+                      shape: {
+                        type: 'multipolygon',
+                        coordinates: [shape.geometry.coordinates],
+                      },
+                    },
                   },
                 },
               },
             },
+            random_score: {},
+            score_mode: 'sum',
+            boost_mode: 'sum',
           },
         },
-        sort: [
-          {
-            createdAt: 'desc',
-          },
-        ],
+        sort: ['_score'],
         size: args.query.limit ?? 10,
         track_total_hits: !args.query.nextToken,
       })),

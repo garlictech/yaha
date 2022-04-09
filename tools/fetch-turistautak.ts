@@ -30,8 +30,8 @@ const sdk = getGraphqlSdkForIAM(
 const googleMapsClient = new GoogleMapsClient({});
 
 const hikeIds = [
-  113261124,
-  //118158194, 20239810, 22601701, 22605620, 22668771, 22680751,
+  //113261124,
+  118158194, 20239810, 22601701, 22605620, 22668771, 22680751,
   //22684373,
   //22690585,
   //22690716,
@@ -342,11 +342,6 @@ const fetchRoute = (routeId: number) => {
             type: YahaApi.TextualDescriptionType.markdown,
           },
         ],
-        imageUrls: r
-          .range(1, 10)
-          .map(
-            () => `https://loremflickr.com/320/240/landscape?${Math.random()}`,
-          ),
       };
     }),
     switchMap((hike: YahaApi.CreateHikeInput) =>
