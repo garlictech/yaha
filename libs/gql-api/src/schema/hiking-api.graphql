@@ -166,7 +166,6 @@ type Hike
   publicationState: PublicationState
   featured: Boolean
   rate: String
-  offlineMap: String
   featuredStops: [HikeStopData]
   checkpoints: [Checkpoint]
   tags: [String]

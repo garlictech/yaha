@@ -1,26 +1,28 @@
-import 'package:functional_data/functional_data.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:yaha/utils/geometry/geocalc.dart';
 
 import '../shared/linestring.dart';
 import '../shared/textual-description.dart';
 
 part 'hike.g.dart';
 
-@FunctionalData()
 @JsonSerializable()
-class Hike extends $Hike {
-  @override
+class Hike {
   final String id;
-  @override
-  final List<TextualDescription>? description;
-  @override
-  final LineStringData? route;
+  final List<TextualDescription> description;
+  final LineStringData route;
+
+  @JsonKey(ignore: true)
+  double? trailLength_;
 
   Hike({
     required this.id,
-    this.description,
-    this.route,
+    required this.description,
+    required this.route,
   });
+
+  double get trailLength =>
+      trailLength_ ??= GeoCalc.lineLength(route.coordinates);
 
   factory Hike.fromJson(Map<String, dynamic> json) => _$HikeFromJson(json);
 

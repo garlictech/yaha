@@ -2,47 +2,47 @@
 // tree, read text, and verify that the values of widget properties are correct.
 
 // ignore_for_file: unnecessary_const
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yaha/bottom-nav-bar.dart';
-import 'package:yaha/entities/entities.dart';
-import 'package:yaha/hike/hike-screen/most-interesting-place-on-route/places-on-route-screen.dart';
-import 'package:yaha/hike/views/screens/weather-screen.dart';
-import 'package:yaha/profile/bookmarked-hikes.dart';
-import 'package:yaha/profile/challenges/views/screens/all-challenges.dart';
-import 'package:yaha/profile/challenges/views/screens/challenge-detail-screen.dart';
-import 'package:yaha/profile/challenges/views/screens/challenges.dart';
-import 'package:yaha/profile/challenges/views/screens/my-challenges.dart';
-import 'package:yaha/profile/events/views/screens/all-events.dart';
-import 'package:yaha/profile/events/views/screens/event-detail-screen.dart';
-import 'package:yaha/explore.dart';
-import 'package:yaha/filter/filter-page.dart';
-import 'package:yaha/hike/hike-outline/hike-outline-screen.dart';
+import 'package:yaha/app/views/auth/screens/login-screen.dart';
+import 'package:yaha/app/views/auth/screens/signup-screen.dart';
+import 'package:yaha/app/views/events/screens/all-events.dart';
+import 'package:yaha/app/views/events/screens/event-detail-screen.dart';
+import 'package:yaha/app/views/events/screens/event-prize-screen.dart';
+import 'package:yaha/app/views/events/screens/events.dart';
+import 'package:yaha/app/views/events/screens/ongoing-events.dart';
+import 'package:yaha/app/views/hikes/screens/explore-screen.dart';
+import 'package:yaha/app/views/hikes/screens/hike-filter-screen.dart';
+import 'package:yaha/app/views/hikes/screens/hike-outline-screen.dart';
+import 'package:yaha/app/views/hikes/screens/places-on-route-screen.dart';
+import 'package:yaha/app/views/hikes/screens/search-results-screen.dart';
+import 'package:yaha/app/views/hikes/screens/weather-screen.dart';
+import 'package:yaha/app/views/personal/screen/all-challenges.dart';
+import 'package:yaha/app/views/personal/screen/application-screen.dart';
+import 'package:yaha/app/views/personal/screen/bookmarked-hikes.dart';
+import 'package:yaha/app/views/personal/screen/challenge-detail-screen.dart';
+import 'package:yaha/app/views/personal/screen/challenges.dart';
+import 'package:yaha/app/views/personal/screen/my-challenges.dart';
+import 'package:yaha/app/views/personal/screen/profile-page.dart';
+import 'package:yaha/app/views/personal/screen/settings-screen.dart';
+import 'package:yaha/app/views/personal/screen/statistics-screen.dart';
+import 'package:yaha/app/views/shared/widgets/bottom-nav-bar-widget.dart';
+import 'package:yaha/app/views/track/screens/leave-a-timecapsule-screen.dart';
+import 'package:yaha/app/views/track/screens/summary-screen.dart';
+import 'package:yaha/app/views/track/screens/timecapsule-in-track-mode-screen.dart';
+import 'package:yaha/app/views/track/screens/timecapsule-new-comments-screen.dart';
+import 'package:yaha/app/views/track/screens/tracking-data-screen.dart';
+import 'package:yaha/app/views/track/screens/tracking-map-screen.dart';
+import 'package:yaha/app/views/track/screens/tracking-timecapsule-screen.dart';
+import 'package:yaha/app/views/track/screens/tracking-timeline-screen.dart';
+import 'package:yaha/app/views/track/screens/tracking.dart';
+import 'package:yaha/app/views/track/widgets/tracking-rating-widget.dart';
+import 'package:yaha/app/views/track/widgets/tracking-timeline-customize-widget.dart';
+import 'package:yaha/domain/entities/hike/hike.dart';
+import 'package:yaha/domain/entities/shared/linestring.dart';
+import 'package:yaha/domain/entities/shared/textual-description.dart';
 import 'package:yaha/main.dart';
-import 'package:yaha/profile/events/views/screens/event-prize-screen.dart';
-import 'package:yaha/profile/events/views/screens/events.dart';
-import 'package:yaha/profile/events/views/screens/ongoing-events.dart';
-import 'package:yaha/profile/profile-page.dart';
-import 'package:yaha/profile/statistics/statistics-screen.dart';
-import 'package:yaha/search-results-screen.dart';
-import 'package:yaha/settings/application/application-screen.dart';
-import 'package:yaha/settings/views/settings-screen.dart';
-import 'package:yaha/views/auth/screens/login-screen.dart';
-import 'package:yaha/views/auth/screens/signup-screen.dart';
-import 'package:yaha/views/hikes/screens/hike-screen.dart';
-import 'package:yaha/views/track/screens/leave-a-timecapsule-screen.dart';
-import 'package:yaha/views/track/screens/summary-screen.dart';
-import 'package:yaha/views/track/screens/timecapsule-in-track-mode-screen.dart';
-import 'package:yaha/views/track/screens/timecapsule-new-comments-screen.dart';
-import 'package:yaha/views/track/screens/tracking-data-screen.dart';
-import 'package:yaha/views/track/screens/tracking-map-screen.dart';
-import 'package:yaha/views/track/screens/tracking-timecapsule-screen.dart';
-import 'package:yaha/views/track/screens/tracking-timeline-screen.dart';
-import 'package:yaha/views/track/screens/tracking.dart';
-import 'package:yaha/views/track/widgets/tracking-rating-widget.dart';
-import 'package:yaha/views/track/widgets/tracking-timeline-customize-widget.dart';
 
 final hikeFixture = Hike(
     id: 'id',
@@ -84,22 +84,25 @@ void main() {
   });
   */
   testWidgets('Profile Screen smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: ProfilePage()));
+    await tester.pumpWidget(createWidgetForTesting(child: const ProfilePage()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Settings Page smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: SettingsScreen()));
+    await tester
+        .pumpWidget(createWidgetForTesting(child: const SettingsScreen()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Application Screen smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: ApplicationScreen()));
+    await tester
+        .pumpWidget(createWidgetForTesting(child: const ApplicationScreen()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Sign Up Page smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: SignupScreen()));
+    await tester
+        .pumpWidget(createWidgetForTesting(child: const SignupScreen()));
     await tester.pumpAndSettle();
   });
   /*testWidgets('Sign Up With Email Screen smoke test',
@@ -114,11 +117,12 @@ void main() {
 
   testWidgets('Log In Page smoke test', (WidgetTester tester) async {
     await tester.pumpWidget(const ProviderScope(child: const MyApp()));
-    await tester.pumpWidget(createWidgetForTesting(child: LogInScreen()));
+    await tester.pumpWidget(createWidgetForTesting(child: const LogInScreen()));
     await tester.pumpAndSettle();
   });
   testWidgets('Event Detail Screen smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: EventDetailScreen()));
+    await tester
+        .pumpWidget(createWidgetForTesting(child: const EventDetailScreen()));
 
     await tester.pumpAndSettle();
   });
@@ -140,12 +144,14 @@ void main() {
     await tester.pumpAndSettle();
   });
   testWidgets('Filter Screen smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: const HikeFilterPage()));
+    await tester
+        .pumpWidget(createWidgetForTesting(child: const HikeFilterPage()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Explore Screen smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: ExploreScreen()));
+    await tester
+        .pumpWidget(createWidgetForTesting(child: const ExploreScreen()));
 
     await tester.pumpAndSettle();
   });
@@ -157,12 +163,13 @@ void main() {
     await tester.pumpAndSettle();
   });*/
   testWidgets('Hike Outline Screen smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: HikeOutlineScreen()));
+    await tester
+        .pumpWidget(createWidgetForTesting(child: const HikeOutlineScreen()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Login Screen smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: LogInScreen()));
+    await tester.pumpWidget(createWidgetForTesting(child: const LogInScreen()));
 
     await tester.pumpAndSettle();
   });
@@ -176,7 +183,8 @@ void main() {
   });*/
   testWidgets('Sign Up Screen smoke test', (WidgetTester tester) async {
     await tester.pumpWidget(const ProviderScope(child: MyApp()));
-    await tester.pumpWidget(createWidgetForTesting(child: SignupScreen()));
+    await tester
+        .pumpWidget(createWidgetForTesting(child: const SignupScreen()));
 
     await tester.pumpAndSettle();
   });
@@ -196,12 +204,14 @@ void main() {
     await tester.pumpAndSettle();
   });
   testWidgets('All Challenges Screen smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: AllChallenges()));
+    await tester
+        .pumpWidget(createWidgetForTesting(child: const AllChallenges()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('My Challenges Screen smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: MyChallenges()));
+    await tester
+        .pumpWidget(createWidgetForTesting(child: const MyChallenges()));
 
     await tester.pumpAndSettle();
   });
@@ -216,12 +226,14 @@ void main() {
     await tester.pumpAndSettle();
   });
   testWidgets('Ongoing Events Screen smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: OngoingEvents()));
+    await tester
+        .pumpWidget(createWidgetForTesting(child: const OngoingEvents()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Statistics Screen smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: StatisticsScreen()));
+    await tester
+        .pumpWidget(createWidgetForTesting(child: const StatisticsScreen()));
 
     await tester.pumpAndSettle();
   });
@@ -268,7 +280,7 @@ void main() {
   testWidgets('Most Interesting Places on Route Screen smoke test',
       (WidgetTester tester) async {
     await tester
-        .pumpWidget(createWidgetForTesting(child: PlacesOnRouteScreen()));
+        .pumpWidget(createWidgetForTesting(child: const PlacesOnRouteScreen()));
 
     await tester.pumpAndSettle();
   });
@@ -285,7 +297,8 @@ void main() {
     await tester.pumpAndSettle();
   });
   testWidgets('Weather Screen smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: WeatherScreen()));
+    await tester
+        .pumpWidget(createWidgetForTesting(child: const WeatherScreen()));
 
     await tester.pumpAndSettle();
   });
@@ -310,8 +323,8 @@ void main() {
   });*/
   testWidgets('Leave a TimeCapsule Screen smoke test',
       (WidgetTester tester) async {
-    await tester
-        .pumpWidget(createWidgetForTesting(child: LeaveATimeCapsuleScreen()));
+    await tester.pumpWidget(
+        createWidgetForTesting(child: const LeaveATimeCapsuleScreen()));
 
     await tester.pumpAndSettle();
   });
@@ -328,8 +341,8 @@ void main() {
   });
   testWidgets('Tracking Timeline Screen smoke test',
       (WidgetTester tester) async {
-    await tester
-        .pumpWidget(createWidgetForTesting(child: TrackingTimelineScreen()));
+    await tester.pumpWidget(
+        createWidgetForTesting(child: const TrackingTimelineScreen()));
 
     await tester.pumpAndSettle();
   });
@@ -362,13 +375,13 @@ void main() {
   testWidgets('Tracking Customize Timeline Widget smoke test',
       (WidgetTester tester) async {
     await tester.pumpWidget(
-        createWidgetForTesting(child: TrackingTimelineCustomizeWidget()));
+        createWidgetForTesting(child: const TrackingTimelineCustomizeWidget()));
 
     await tester.pumpAndSettle();
   });
   testWidgets('Tracking Rating Widget smoke test', (WidgetTester tester) async {
-    await tester
-        .pumpWidget(createWidgetForTesting(child: TrackingRatingWidget()));
+    await tester.pumpWidget(
+        createWidgetForTesting(child: const TrackingRatingWidget()));
 
     await tester.pumpAndSettle();
   });
@@ -384,7 +397,7 @@ void main() {
   testWidgets('TimeCapsule in Track Mode smoke test',
       (WidgetTester tester) async {
     await tester.pumpWidget(
-        createWidgetForTesting(child: TimeCapsuleInTrackModeScreen()));
+        createWidgetForTesting(child: const TimeCapsuleInTrackModeScreen()));
 
     await tester.pumpAndSettle();
   });

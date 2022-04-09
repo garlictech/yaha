@@ -254,6 +254,47 @@ class HikeScreenDescription extends StatelessWidget {
   }
 }
 
+class HikeProperties extends StatelessWidget {
+  final Hike hike;
+
+  const HikeProperties({required this.hike, Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.count(
+      shrinkWrap: true,
+      primary: false,
+      padding: const EdgeInsets.only(
+        bottom: YahaSpaceSizes.general,
+      ),
+      crossAxisSpacing: YahaSpaceSizes.medium,
+      mainAxisSpacing: YahaSpaceSizes.medium,
+      crossAxisCount: 3,
+      children: <Widget>[
+        HikeDataElement(
+            title: "Distance",
+            icon: Icons.hiking_rounded,
+            value: "${hike.trailLength} km"),
+        const HikeDataElement(
+            title: "Uphill", icon: Icons.trending_up_rounded, value: "576m"),
+        const HikeDataElement(
+            title: "Downhill",
+            icon: Icons.trending_down_rounded,
+            value: "1.2km"),
+        const HikeDataElement(
+            title: "Time", icon: Icons.watch_later_rounded, value: "6h"),
+        const HikeDataElement(
+            title: "Score", icon: Icons.emoji_events_rounded, value: "240"),
+        const HikeDataElement(
+            title: "Difficulty",
+            icon: Icons.stars_rounded,
+            value: "Medium",
+            color: YahaColors.secondary)
+      ],
+    );
+  }
+}
+
 class HikeScreen extends ConsumerWidget {
   final Hike hike;
 
@@ -262,10 +303,7 @@ class HikeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final presenter = ref.watch(leafletMapMVPProvider.notifier);
-
-    if (hike.route != null) {
-      presenter.addHikeTrack(hike.route as LineStringData);
-    }
+    presenter.addHikeTrack(hike.route);
 
     return Scaffold(
       body: CustomScrollView(
@@ -276,7 +314,7 @@ class HikeScreen extends ConsumerWidget {
                 hikeScreenPresenter(hike).select((vm) => vm.imageUrls.first));
 
             return HikeScreenSliverAppBar(
-                title: hike.description?.first.title ?? '', imageUrl: imageUrl);
+                title: hike.description.first.title ?? '', imageUrl: imageUrl);
           }),
           SliverList(
             delegate: SliverChildBuilderDelegate(
@@ -291,7 +329,7 @@ class HikeScreen extends ConsumerWidget {
                     children: [
                       const HikeScreenStartHikeButton(),
                       HikeScreenDescription(
-                          summary: hike.description?.first.summary ?? ''),
+                          summary: hike.description.first.summary ?? ''),
                       Container(
                           margin: const EdgeInsets.only(
                               bottom: YahaSpaceSizes.large),
@@ -304,43 +342,7 @@ class HikeScreen extends ConsumerWidget {
 
                             return GalleryWidget(imageUrls: imageUrls);
                           })),
-                      GridView.count(
-                        shrinkWrap: true,
-                        primary: false,
-                        padding: const EdgeInsets.only(
-                          bottom: YahaSpaceSizes.general,
-                        ),
-                        crossAxisSpacing: YahaSpaceSizes.medium,
-                        mainAxisSpacing: YahaSpaceSizes.medium,
-                        crossAxisCount: 3,
-                        children: const <Widget>[
-                          HikeDataElement(
-                              title: "Distance",
-                              icon: Icons.hiking_rounded,
-                              value: "24.3km"),
-                          HikeDataElement(
-                              title: "Uphill",
-                              icon: Icons.trending_up_rounded,
-                              value: "576m"),
-                          HikeDataElement(
-                              title: "Downhill",
-                              icon: Icons.trending_down_rounded,
-                              value: "1.2km"),
-                          HikeDataElement(
-                              title: "Time",
-                              icon: Icons.watch_later_rounded,
-                              value: "6h"),
-                          HikeDataElement(
-                              title: "Score",
-                              icon: Icons.emoji_events_rounded,
-                              value: "240"),
-                          HikeDataElement(
-                              title: "Difficulty",
-                              icon: Icons.stars_rounded,
-                              value: "Medium",
-                              color: YahaColors.secondary)
-                        ],
-                      ),
+                      HikeProperties(hike: hike),
                       Container(
                         padding: const EdgeInsets.only(
                             top: YahaSpaceSizes.small,
@@ -399,7 +401,8 @@ class HikeScreen extends ConsumerWidget {
                         padding: const EdgeInsets.only(
                           top: YahaSpaceSizes.small,
                         ),
-                        child: ShowMoreButton(nextScreen: MorePoiScreen()),
+                        child:
+                            const ShowMoreButton(nextScreen: MorePoiScreen()),
                       ),
                       Container(
                         padding: const EdgeInsets.only(
@@ -503,7 +506,7 @@ class HikeScreen extends ConsumerWidget {
                       Container(
                           padding:
                               const EdgeInsets.only(top: YahaSpaceSizes.small),
-                          child: ShowMoreButton(
+                          child: const ShowMoreButton(
                             nextScreen: PlacesOnRouteScreen(),
                           )),
                       Container(
@@ -647,7 +650,7 @@ class HikeScreen extends ConsumerWidget {
                           ),
                         ],
                       ),
-                      ShowMoreButton(nextScreen: WeatherScreen()),
+                      const ShowMoreButton(nextScreen: WeatherScreen()),
                       Padding(
                         padding: const EdgeInsets.only(
                             top: YahaSpaceSizes.large,
@@ -665,7 +668,7 @@ class HikeScreen extends ConsumerWidget {
                               Navigator.of(context).push(
                                   MaterialPageRoute<dynamic>(
                                       builder: (BuildContext context) {
-                                return HikeOutlineScreen();
+                                return const HikeOutlineScreen();
                               }));
                             },
                             label: const Text('Hike outline',

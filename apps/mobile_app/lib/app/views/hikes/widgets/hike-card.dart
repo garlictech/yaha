@@ -59,7 +59,7 @@ class HikeCard extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        hike.description?[0].title ?? 'A nice hike',
+                        hike.description[0].title ?? 'A nice hike',
                         style: const TextStyle(
                           fontSize: YahaFontSizes.medium,
                           fontWeight: FontWeight.w700,
