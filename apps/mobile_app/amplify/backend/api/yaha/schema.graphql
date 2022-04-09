@@ -35,11 +35,6 @@ type ImageInfo {
   height: Int
 }
 
-type ImageLabel {
-  label: String!
-  confidence: Float!
-}
-
 type Image
   @model
   @searchable
@@ -51,7 +46,8 @@ type Image
   thumbnail: ImageInfo!
   sourceObject: PoiSourceObject!
   attributions: String
-  labels: [ImageLabel]
+  labels: [String!]
+  tagged: Boolean
   banned: Boolean
 }
 
@@ -247,6 +243,13 @@ input SearchAroundHikeInput {
   nextToken: String
 }
 
+input SearchSafeImagesAroundHikeInput {
+  hikeId: String!
+  distanceInMeters: Float!
+  limit: Int
+  nextToken: String
+}
+
 type GeoSearchConnection {
   items: [String!]
     @auth(rules: [{ allow: public }, { allow: public, provider: iam }])
@@ -275,6 +278,12 @@ type Query {
     @function(name: "dev-yaha-amplify-resolvers")
 
   searchAroundHike(query: SearchAroundHikeInput!): GeoSearchConnection
+    @auth(rules: [{ allow: public }, { allow: public, provider: iam }])
+    @function(name: "dev-yaha-amplify-resolvers")
+
+  searchSafeImagesAroundHike(
+    query: SearchSafeImagesAroundHikeInput!
+  ): GeoSearchConnection
     @auth(rules: [{ allow: public }, { allow: public, provider: iam }])
     @function(name: "dev-yaha-amplify-resolvers")
 }

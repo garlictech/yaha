@@ -1,1 +1,1 @@
-export * from './lib/backend-image-tagger';
+export * from './lib/image-tagger';

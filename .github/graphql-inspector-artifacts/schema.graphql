@@ -29,11 +29,6 @@ type ImageInfo @aws_iam @aws_api_key {
   height: Int
 }
 
-type ImageLabel @aws_iam @aws_api_key {
-  label: String!
-  confidence: Float!
-}
-
 type Image @aws_iam @aws_api_key {
   id: ID!
   location: Location!
@@ -42,7 +37,8 @@ type Image @aws_iam @aws_api_key {
   thumbnail: ImageInfo!
   sourceObject: PoiSourceObject!
   attributions: String
-  labels: [ImageLabel]
+  labels: [String!]
+  tagged: Boolean
   banned: Boolean
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
@@ -233,6 +229,13 @@ input SearchAroundHikeInput {
   nextToken: String
 }
 
+input SearchSafeImagesAroundHikeInput {
+  hikeId: String!
+  distanceInMeters: Float!
+  limit: Int
+  nextToken: String
+}
+
 type GeoSearchConnection {
   items: [String!] @aws_iam @aws_api_key
   nextToken: String @aws_iam @aws_api_key
@@ -254,6 +257,7 @@ type Query {
   searchInShape(query: SearchInShapeInput!): GeoSearchConnection @aws_iam @aws_api_key
   searchInMultipolygon(query: SearchInMultipolygonInput!): GeoSearchConnection @aws_iam @aws_api_key
   searchAroundHike(query: SearchAroundHikeInput!): GeoSearchConnection @aws_iam @aws_api_key
+  searchSafeImagesAroundHike(query: SearchSafeImagesAroundHikeInput!): GeoSearchConnection @aws_iam @aws_api_key
 }
 
 type SearchableImageConnection @aws_api_key @aws_iam {
@@ -401,11 +405,6 @@ input PoiSourceObjectInput {
   url: String
 }
 
-input ImageLabelInput {
-  label: String!
-  confidence: Float!
-}
-
 type ModelImageConnection @aws_api_key @aws_iam {
   items: [Image]!
   nextToken: String
@@ -414,6 +413,8 @@ type ModelImageConnection @aws_api_key @aws_iam {
 input ModelImageFilterInput {
   id: ModelIDInput
   attributions: ModelStringInput
+  labels: ModelStringInput
+  tagged: ModelBooleanInput
   banned: ModelBooleanInput
   and: [ModelImageFilterInput]
   or: [ModelImageFilterInput]
@@ -422,6 +423,8 @@ input ModelImageFilterInput {
 
 input ModelImageConditionInput {
   attributions: ModelStringInput
+  labels: ModelStringInput
+  tagged: ModelBooleanInput
   banned: ModelBooleanInput
   and: [ModelImageConditionInput]
   or: [ModelImageConditionInput]
@@ -436,7 +439,8 @@ input CreateImageInput {
   thumbnail: ImageInfoInput!
   sourceObject: PoiSourceObjectInput!
   attributions: String
-  labels: [ImageLabelInput]
+  labels: [String!]
+  tagged: Boolean
   banned: Boolean
 }
 
@@ -448,7 +452,8 @@ input UpdateImageInput {
   thumbnail: ImageInfoInput
   sourceObject: PoiSourceObjectInput
   attributions: String
-  labels: [ImageLabelInput]
+  labels: [String!]
+  tagged: Boolean
   banned: Boolean
 }
 
@@ -696,6 +701,8 @@ input SearchableIDFilterInput {
 input SearchableImageFilterInput {
   id: SearchableIDFilterInput
   attributions: SearchableStringFilterInput
+  labels: SearchableStringFilterInput
+  tagged: SearchableBooleanFilterInput
   banned: SearchableBooleanFilterInput
   createdAt: SearchableStringFilterInput
   updatedAt: SearchableStringFilterInput
@@ -712,6 +719,8 @@ enum SearchableSortDirection {
 enum SearchableImageSortableFields {
   id
   attributions
+  labels
+  tagged
   banned
   createdAt
   updatedAt
@@ -733,6 +742,8 @@ enum SearchableAggregateType {
 enum SearchableImageAggregateField {
   id
   attributions
+  labels
+  tagged
   banned
   createdAt
   updatedAt

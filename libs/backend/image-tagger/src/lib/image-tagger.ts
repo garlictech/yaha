@@ -2,12 +2,11 @@ import * as AWS from 'aws-sdk';
 import { Rekognition } from 'aws-sdk';
 import axios from 'axios';
 import * as fp from 'lodash/fp';
-import { Observable, of } from 'rxjs';
 import * as OE from 'fp-ts-rxjs/lib/ObservableEither';
 import * as TE from 'fp-ts/lib/TaskEither';
 import * as E from 'fp-ts/lib/Either';
 import { pipe, flow, Lazy } from 'fp-ts/lib/function';
-import { tap } from 'rxjs/operators';
+import * as R from 'ramda';
 
 const promiseToObservableEither = <A>(task: Lazy<Promise<A>>) =>
   pipe(TE.tryCatch(task, E.toError), OE.fromTaskEither);
@@ -29,24 +28,18 @@ export const tagImage = (
   imageUrl: string,
   maxLabels = defaultMaxLabels,
   minConfidence = defaultMinConfidence,
-): Observable<boolean> =>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+): OE.ObservableEither<any, string[]> =>
   pipe(
     imageUrl,
     fp.tap(() => console.log(`Tagging image at ${imageUrl}`)),
     getBase64BufferFromURL,
     OE.chain(bytes =>
-      flow(
-        isRelevantImage(maxLabels, minConfidence),
-        OE.chain(() => isImageUnsafe(minConfidence)(bytes)),
+      pipe(
+        isImageUnsafe(minConfidence)(bytes),
         OE.chain(() => isFaceInImage(minConfidence)(bytes)),
-      )(bytes),
-    ),
-    OE.fold(
-      () => of(false),
-      () => of(true),
-    ),
-    tap((isGood: boolean) =>
-      console.log(`Image at ${imageUrl} is ${isGood ? 'GOOD' : 'BAD'}`),
+        OE.chain(() => isRelevantImage(maxLabels, minConfidence)(bytes)),
+      ),
     ),
   );
 
@@ -68,7 +61,7 @@ const isRelevantImage =
   (
     bytes: Buffer,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  ): OE.ObservableEither<any, true> =>
+  ): OE.ObservableEither<any, string[]> =>
     pipe(
       () =>
         rekognition
@@ -81,7 +74,7 @@ const isRelevantImage =
           })
           .promise(),
       promiseToObservableEither,
-      OE.chain(
+      OE.map(
         flow(
           (res: Rekognition.DetectLabelsResponse) => res.Labels,
           fp.tap(labels =>
@@ -93,17 +86,31 @@ const isRelevantImage =
               )}`,
             ),
           ),
+        ),
+      ),
+      OE.map(labels =>
+        R.isNil(labels)
+          ? E.left(new Error('failed'))
+          : E.right(labels as Rekognition.Labels),
+      ),
+      OE.chain(x => OE.fromEither(x)),
+      OE.chain(
+        flow(labels =>
           fp.some(
-            res =>
-              !!res.Name &&
-              !!res.Confidence &&
-              ['Nature', 'Outdoors', 'Vegetation'].includes(res.Name),
-          ),
-          fp.tap(isRelevant =>
-            console.info(`--- detected relevance: ${isRelevant}`),
-          ),
-          isRelevant =>
-            isRelevant ? OE.right(true) : OE.left(new Error('failed')),
+            (label: Rekognition.Label) =>
+              !!label.Name &&
+              !!label.Confidence &&
+              ['Nature', 'Outdoors', 'Vegetation'].includes(label.Name),
+          )(labels)
+            ? OE.right(
+                pipe(
+                  labels,
+                  R.map(label => label.Name),
+                  R.reject(x => R.isNil(x)),
+                  x => x as string[],
+                ),
+              )
+            : OE.left(new Error('failed')),
         ),
       ),
     );

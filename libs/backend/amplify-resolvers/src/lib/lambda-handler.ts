@@ -5,6 +5,7 @@ import {
   searchInEnvelopeResolver,
   searchInMultipolygonResolver,
   searchInShapeResolver,
+  searchSafeImagesAroundHikeResolver,
 } from './search-resolvers';
 const { createConnector } = require('aws-elasticsearch-js');
 import { Client } from '@elastic/elasticsearch';
@@ -48,6 +49,8 @@ export const handler: Handler<AmplifyRequest, unknown> = (
       searchInEnvelope: searchInEnvelopeResolver(searchDeps),
       searchInMultipolygon: searchInMultipolygonResolver(searchDeps),
       searchAroundHike: searchAroundHikeResolver(searchDeps),
+      searchSafeImagesAroundHike:
+        searchSafeImagesAroundHikeResolver(searchDeps),
     },
   };
 

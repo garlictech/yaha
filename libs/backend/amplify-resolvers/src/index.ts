@@ -5,4 +5,5 @@ export {
   searchInShapeResolver,
   searchInEnvelopeResolver,
   searchAroundHikeResolver,
+  searchSafeImagesAroundHikeResolver,
 } from './lib/search-resolvers';
