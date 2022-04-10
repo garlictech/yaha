@@ -1,7 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/domain/domain.dart';
-import 'package:yaha/providers/providers.dart';
 
 import '../../viewmodels/hikes/hike-screen-viewmodel.dart';
 
@@ -10,20 +8,7 @@ class HikeScreenPresenter extends StateNotifier<HikeScreenViewModel> {
   final Hike hike;
 
   HikeScreenPresenter({required this.ref, required this.hike})
-      : super(HikeScreenViewModel()) {
-    final imageUsecases = ref.read(imageUsecasesProvider);
-
-    imageUsecases
-        .getImagesAlongHike(hike.id)
-        .then((images) => images.map((image) => image.card.url).toList())
-        .then((imageUrls) {
-      debugPrint("***");
-      debugPrint(imageUrls.toString());
-      return imageUrls.isEmpty
-          ? [HikeScreenViewModel.imagePlaceholder]
-          : imageUrls;
-    }).then((imageUrls) => state = HikeScreenViewModel(imageUrls: imageUrls));
-  }
+      : super(HikeScreenViewModel());
 }
 
 final hikeScreenPresenter = StateNotifierProvider.family<HikeScreenPresenter,

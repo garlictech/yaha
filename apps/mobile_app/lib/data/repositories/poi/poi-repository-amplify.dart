@@ -5,39 +5,35 @@ import 'package:yaha/domain/domain.dart';
 
 import '../../utils/cache/cache.dart';
 
-class ImageRepositoryAmplify implements ImageRepository {
-  final _imageCache = DataCache();
+class PoiRepositoryAmplify implements PoiRepository {
+  final _poiCache = DataCache();
 
   @override
-  getImage(String id) async {
-    if (_imageCache.containsKey(id)) {
-      return _imageCache.getData(id);
+  getPoi(String id) async {
+    if (_poiCache.containsKey(id)) {
+      return _poiCache.getData(id);
     }
 
     String gqlDocument = ''' 
-      query GetImage(\$id: ID!) {
-        getImage(id: \$id) {
+      query GetPoi(\$id: ID!) {
+        getPoi(id: \$id) {
           id
+          elevation
           location {
             lat
             lon
           }
-          original {
-            url
-            width
-            height
+          types
+          description {
+            title
+            languageKey
+            summary
+            type
           }
-          card {
-            url
-            width
-            height
-          }
-          thumbnail {
-            url
-            width
-            height
-          }
-          attributions
+          tags
+          address 
+          phoneNumber
+          openingHours
         }
       }
     ''';
@@ -46,17 +42,17 @@ class ImageRepositoryAmplify implements ImageRepository {
         GraphQLRequest<String>(document: gqlDocument, variables: {"id": id});
     var operation = Amplify.API.query(request: request);
     return operation.response.then((response) {
-      final image = Image.fromJson(jsonDecode(response.data)['getImage']);
-      _imageCache.addData(id, image);
-      return image;
+      final poi = Poi.fromJson(jsonDecode(response.data)['getPoi']);
+      _poiCache.addData(id, poi);
+      return poi;
     });
   }
 
   @override
-  searchImagesAroundHike(SearchSafeImagesAroundHikeInput input) async {
+  searchPoisAroundHike(SearchAroundHikeInput input) async {
     String gqlDocument = ''' 
-      query SearchImagesAroundHike(\$query: SearchSafeImagesAroundHikeInput!) {
-        searchSafeImagesAroundHike(query: \$query) {
+      query SearchPoisAroundHike(\$query: SearchAroundHikeInput!) {
+        searchAroundHike(query: \$query) {
           items
           nextToken
           total
@@ -67,6 +63,6 @@ class ImageRepositoryAmplify implements ImageRepository {
         document: gqlDocument, variables: Map.from({'query': input.toJson()}));
     var operation = Amplify.API.query(request: request);
     return operation.response.then((response) => List<String>.from(
-        jsonDecode(response.data)['searchSafeImagesAroundHike']['items']));
+        jsonDecode(response.data)['searchAroundHike']['items']));
   }
 }

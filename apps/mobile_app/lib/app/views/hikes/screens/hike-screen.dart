@@ -2,11 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yaha/app/presenters/hike/hike-screen-presenter.dart';
 import 'package:yaha/app/presenters/map/leaflet-map-presenter.dart';
 import 'package:yaha/domain/domain.dart';
-import 'package:yaha/providers/defaults-providers.dart';
 
+import '../../../../providers/providers.dart';
 import '../../map/widgets/leaflet-map.dart';
 import '../../shared/shared.dart';
 import '../widgets/poi-filters.dart';
@@ -368,8 +367,8 @@ class HikeScreen extends ConsumerWidget {
         physics: const BouncingScrollPhysics(),
         slivers: <Widget>[
           Consumer(builder: (c, ref, _child) {
-            final imageUrl = ref.watch(
-                hikeScreenPresenter(hike).select((vm) => vm.imageUrls.first));
+            final imageUrl = ref.watch(imagesAlongHikeNotifierProvider(hike.id)
+                .select((vm) => vm.firstImageUrl));
 
             return HikeScreenSliverAppBar(
                 title: hike.description.first.title ?? '', imageUrl: imageUrl);
@@ -395,7 +394,7 @@ class HikeScreen extends ConsumerWidget {
                           width: MediaQuery.of(context).size.width,
                           child: Consumer(builder: (c, ref, _child) {
                             final imageUrls = ref.watch(
-                                hikeScreenPresenter(hike)
+                                imagesAlongHikeNotifierProvider(hike.id)
                                     .select((vm) => vm.imageUrls));
 
                             return GalleryWidget(imageUrls: imageUrls);

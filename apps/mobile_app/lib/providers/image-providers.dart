@@ -9,3 +9,9 @@ final imageRepositoryProvider = Provider<ImageRepository>(
 final imageUsecasesProvider = Provider<ImageUsecases>(
   (ref) => ImageUsecasesImpl(ref: ref),
 );
+
+final imagesAlongHikeNotifierProvider =
+    ChangeNotifierProvider.family<ImagesAlongHikeNotifier, String>(
+        (ref, hikeId) {
+  return ImagesAlongHikeNotifier(hikeId: hikeId, ref: ref);
+});
