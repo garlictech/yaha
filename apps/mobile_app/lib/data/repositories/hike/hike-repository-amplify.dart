@@ -23,6 +23,7 @@ class HikeRepositoryAmplify implements HikeRepository {
               type
               coordinates
             }
+            closestPlace
           }
           nextToken
         }

@@ -15,7 +15,6 @@ class ImagesAlongHikeNotifier extends ChangeNotifier {
   }
 
   void refreshImages() async {
-    debugPrint("*****");
     final imageUsecases = ref.read(imageUsecasesProvider);
     imageUrls = await imageUsecases
         .getImagesAlongHike(hikeId)

@@ -68,9 +68,9 @@ export const googleReverseGeocodingService = <
 >(
   deps: GoogleMapsDeps,
 ): {
-  getCity(point: POINT): Observable<E.Either<unknown, string>>;
+  getCity(point: POINT): Observable<string>;
 } => ({
-  getCity: (point: POINT): Observable<E.Either<unknown, string>> =>
+  getCity: (point: POINT): Observable<string> =>
     pipe(
       point,
       ({ lat, lon }) => ({ lat, lng: lon }),
@@ -80,8 +80,8 @@ export const googleReverseGeocodingService = <
       map(
         fp.flow(
           (response: ReverseGeocodeResponse) => response?.data?.results,
-          E.fromNullable('Wrong reverse geocoding result'),
-          E.map(results => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (results: any[]) => {
             const _parts: Record<string, string> = {};
 
             for (const res of results) {
@@ -105,16 +105,15 @@ export const googleReverseGeocodingService = <
               delete _parts.administrative_area_level_1;
             }
 
-            let _ret = _parts.locality || '';
+            const _ret = _parts.locality || '';
 
-            if (_parts.country) {
+            /*      if (_parts.country) {
               _ret += `, ${_parts.country}`;
             }
-
+*/
             return _ret;
-          }),
+          },
         ),
       ),
-      catchError(err => of(E.left(err))),
     ),
 });

@@ -12,6 +12,7 @@ class Hike {
   final String id;
   final List<TextualDescription> description;
   final LineStringData route;
+  final String? closestPlace;
 
   @JsonKey(ignore: true)
   double? trailLength_;
@@ -32,6 +33,7 @@ class Hike {
     required this.id,
     required this.description,
     required this.route,
+    this.closestPlace,
   });
 
   double get trailLength =>

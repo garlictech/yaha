@@ -131,7 +131,7 @@ type RouteData {
 
 type LineString @aws_iam @aws_api_key {
   type: String!
-  coordinates: [[Float]]!
+  coordinates: [[Float!]!]!
 }
 
 type GeoShape {
@@ -147,14 +147,14 @@ input GeoShapeInput {
 type Hike @aws_iam @aws_api_key {
   id: ID!
   description: [TextualDescription]
-  route: LineString
+  route: LineString!
   publicationState: PublicationState
   featured: Boolean
   rate: String
-  offlineMap: String
   featuredStops: [HikeStopData]
   checkpoints: [Checkpoint]
   tags: [String]
+  closestPlace: String
   location: Location
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
@@ -555,7 +555,7 @@ input DeletePoiInput {
 
 input LineStringInput {
   type: String!
-  coordinates: [[Float]]!
+  coordinates: [[Float!]!]!
 }
 
 input HikeStopDataInput {
@@ -589,8 +589,8 @@ input ModelHikeFilterInput {
   publicationState: ModelPublicationStateInput
   featured: ModelBooleanInput
   rate: ModelStringInput
-  offlineMap: ModelStringInput
   tags: ModelStringInput
+  closestPlace: ModelStringInput
   and: [ModelHikeFilterInput]
   or: [ModelHikeFilterInput]
   not: ModelHikeFilterInput
@@ -600,8 +600,8 @@ input ModelHikeConditionInput {
   publicationState: ModelPublicationStateInput
   featured: ModelBooleanInput
   rate: ModelStringInput
-  offlineMap: ModelStringInput
   tags: ModelStringInput
+  closestPlace: ModelStringInput
   and: [ModelHikeConditionInput]
   or: [ModelHikeConditionInput]
   not: ModelHikeConditionInput
@@ -610,14 +610,14 @@ input ModelHikeConditionInput {
 input CreateHikeInput {
   id: ID
   description: [TextualDescriptionInput]
-  route: LineStringInput
+  route: LineStringInput!
   publicationState: PublicationState
   featured: Boolean
   rate: String
-  offlineMap: String
   featuredStops: [HikeStopDataInput]
   checkpoints: [CheckpointInput]
   tags: [String]
+  closestPlace: String
   location: LocationInput
 }
 
@@ -628,10 +628,10 @@ input UpdateHikeInput {
   publicationState: PublicationState
   featured: Boolean
   rate: String
-  offlineMap: String
   featuredStops: [HikeStopDataInput]
   checkpoints: [CheckpointInput]
   tags: [String]
+  closestPlace: String
   location: LocationInput
 }
 
@@ -809,8 +809,8 @@ input SearchableHikeFilterInput {
   id: SearchableIDFilterInput
   featured: SearchableBooleanFilterInput
   rate: SearchableStringFilterInput
-  offlineMap: SearchableStringFilterInput
   tags: SearchableStringFilterInput
+  closestPlace: SearchableStringFilterInput
   createdAt: SearchableStringFilterInput
   updatedAt: SearchableStringFilterInput
   publicationState: SearchableStringFilterInput
@@ -823,8 +823,8 @@ enum SearchableHikeSortableFields {
   id
   featured
   rate
-  offlineMap
   tags
+  closestPlace
   createdAt
   updatedAt
 }
@@ -839,8 +839,8 @@ enum SearchableHikeAggregateField {
   publicationState
   featured
   rate
-  offlineMap
   tags
+  closestPlace
   createdAt
   updatedAt
 }

@@ -12,10 +12,12 @@ Hike _$HikeFromJson(Map<String, dynamic> json) => Hike(
           .map((e) => TextualDescription.fromJson(e as Map<String, dynamic>))
           .toList(),
       route: LineStringData.fromJson(json['route'] as Map<String, dynamic>),
+      closestPlace: json['closestPlace'] as String?,
     );
 
 Map<String, dynamic> _$HikeToJson(Hike instance) => <String, dynamic>{
       'id': instance.id,
       'description': instance.description,
       'route': instance.route,
+      'closestPlace': instance.closestPlace,
     };

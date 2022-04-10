@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yaha/app/presenters/hike/hike-card-presenter.dart';
 import 'package:yaha/domain/domain.dart' as domain;
+import 'package:yaha/providers/image-providers.dart';
 
 import '../../shared/shared.dart';
 import '../screens/hike-screen.dart';
@@ -18,8 +18,6 @@ class HikeCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final viewModel = ref.watch(hikeCardPresenter(hike));
-
     return Scaffold(
       body: ClipRRect(
         borderRadius: BorderRadius.circular(YahaBorderRadius.poiSmall),
@@ -37,14 +35,20 @@ class HikeCard extends ConsumerWidget {
                 child: ColorFiltered(
                   colorFilter: ColorFilter.mode(
                       Colors.black.withOpacity(0.35), BlendMode.darken),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: NetworkImage(viewModel.mainHikeImage),
-                        fit: BoxFit.cover,
+                  child: Consumer(builder: (c, ref, _child) {
+                    final imageUrl = ref.watch(
+                        imagesAlongHikeNotifierProvider(hike.id)
+                            .select((vm) => vm.firstImageUrl));
+
+                    return Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: NetworkImage(imageUrl),
+                          fit: BoxFit.cover,
+                        ),
                       ),
-                    ),
-                  ),
+                    );
+                  }),
                 ),
               ),
               Align(
@@ -67,7 +71,7 @@ class HikeCard extends ConsumerWidget {
                         ),
                       ),
                       Text(
-                        '($distanceFromCurrentLocation km away)',
+                        hike.closestPlace ?? '',
                         style: const TextStyle(
                           fontSize: YahaFontSizes.small,
                           fontWeight: FontWeight.w600,
