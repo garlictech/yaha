@@ -91,7 +91,7 @@
     "@nxrocks/nx-flutter": "3.0.0",
     "@serverless-stack/cli": "0.69.3",
     "@serverless-stack/resources": "0.61.0",
-    "@types/aws-lambda": "8.10.92",
+    "@types/aws-lambda": "8.10.93",
     "@types/bunyan": "1.8.8",
     "@types/cypress-cucumber-preprocessor": "4.0.1",
     "@types/googlemaps": "3.43.3",
