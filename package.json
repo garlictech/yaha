@@ -88,7 +88,7 @@
     "@nrwl/nx-cloud": "13.2.2",
     "@nrwl/tao": "13.9.6",
     "@nrwl/workspace": "13.9.6",
-    "@nxrocks/nx-flutter": "3.0.0",
+    "@nxrocks/nx-flutter": "3.0.2",
     "@serverless-stack/cli": "0.69.3",
     "@serverless-stack/resources": "0.61.0",
     "@types/aws-lambda": "8.10.92",
