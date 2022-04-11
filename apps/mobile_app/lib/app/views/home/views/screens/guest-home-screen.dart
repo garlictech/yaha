@@ -135,7 +135,7 @@ class HomePageGuest extends ConsumerWidget {
                                   hours: 0,
                                 ),
                               ),
-                              ShowMoreButton(
+                              const ShowMoreButton(
                                 nextScreen: StatisticsScreen(),
                               ),
                             ],

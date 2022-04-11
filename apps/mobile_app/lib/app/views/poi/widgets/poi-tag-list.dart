@@ -21,38 +21,28 @@ class PoiTagList extends ConsumerWidget {
         alignment: WrapAlignment.start,
         children: types
             .map((type) => PoiFilters(
-                  backgroundColor: YahaColors.generic,
-                  icon: Icons.park_rounded,
-                  title: type,
+                  backgroundColor: _getColor(type.category),
+                  poiType: type,
+                  title: type.kind.replaceAll('_', ' '),
                 ))
-            .toList()
-        /*const [
-        PoiFilters(
-          backgroundColor: YahaColors.generic,
-          icon: Icons.location_city_rounded,
-          title: "Generic",
-        ),
-        PoiFilters(
-          backgroundColor: YahaColors.amenity,
-          icon: Icons.fastfood_rounded,
-          title: "Amenity",
-        ),
-        PoiFilters(
-          backgroundColor: YahaColors.natural,
-          icon: Icons.park_rounded,
-          title: "Natural",
-        ),
-        PoiFilters(
-          backgroundColor: YahaColors.emergency,
-          icon: Icons.local_hospital_rounded,
-          title: "Emergency",
-        ),
-        PoiFilters(
-          backgroundColor: YahaColors.publicTransport,
-          icon: Icons.commute_rounded,
-          title: "Public Transport",
-        ),
-      ],*/
-        );
+            .toList());
   }
+
+  _getColor(String category) {
+    return PoiTagList._colorMap[category] ?? const Color(0xff00ff00);
+  }
+
+  static const _colorMap = {
+    "natural": Color(0xff108E4C),
+    "amenity": Color(0xff265DB2),
+    "public_ransport": Color(0xff9D7050),
+    "emergency": Color(0xffBF3638),
+    "historic": Color(0xff8D4EB8),
+    "leisure": Color(0xffFF8A21),
+    "man_made": Color(0xffC259B5),
+    "military": Color(0xffA8A8A8),
+    "shop": Color(0xff5DC8BD),
+    "tourism": Color(0xff66C547),
+    "generic": Color(0xffFF8C00)
+  };
 }

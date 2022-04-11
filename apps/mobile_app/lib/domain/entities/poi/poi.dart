@@ -1,3 +1,4 @@
+export 'poi-type.dart';
 import 'dart:core';
 
 import 'package:functional_data/functional_data.dart';
@@ -5,6 +6,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 import '../shared/location.dart';
 import '../shared/textual-description.dart';
+import 'poi-type.dart';
 
 part 'poi.g.dart';
 
@@ -30,6 +32,8 @@ class Poi extends $Poi {
   @override
   final String? openingHours;
 
+  Set<PoiType>? _poiTypes;
+
   Poi(
       {required this.id,
       required this.location,
@@ -40,6 +44,15 @@ class Poi extends $Poi {
       this.phoneNumber,
       this.address,
       this.tags});
+
+  get poiTypes {
+    return _poiTypes ??= types?.map((type) {
+      final splitted = type.split(':');
+      return splitted.length > 1
+          ? PoiType(category: splitted[0], kind: splitted[1])
+          : PoiType(category: 'unknown', kind: splitted[0]);
+    }).toSet();
+  }
 
   factory Poi.fromJson(Map<String, dynamic> json) => _$PoiFromJson(json);
 
