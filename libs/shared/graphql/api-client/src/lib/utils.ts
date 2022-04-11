@@ -40,7 +40,6 @@ export const getAllPaginatedData = <
   },
 ): Observable<{ items: OUTPUT[] }> => {
   const getPage = (nextToken?: string | null) => {
-    console.warn('GEtting a page', nextToken);
     return op(
       {
         query: {

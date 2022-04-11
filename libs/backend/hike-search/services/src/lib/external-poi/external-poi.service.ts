@@ -99,16 +99,16 @@ const osmPois =
   ) =>
   (bounds: YahaApi.BoundingBox): Observable<ExternalPoi[]> =>
     from([
-      //OsmPoiTypes.publicTransport,
-      //OsmPoiTypes.amenity,
-      OsmPoiTypes.natural,
-      /*OsmPoiTypes.emergency,
+      OsmPoiTypes.publicTransport,
+      OsmPoiTypes.amenity,
+      //OsmPoiTypes.natural,
+      OsmPoiTypes.emergency,
       OsmPoiTypes.historic,
       OsmPoiTypes.leisure,
       OsmPoiTypes.manMade,
       OsmPoiTypes.military,
       OsmPoiTypes.shop,
-      OsmPoiTypes.tourism,*/
+      OsmPoiTypes.tourism,
     ]).pipe(
       mergeMap(
         (osmPoiType: OsmPoiTypes) =>

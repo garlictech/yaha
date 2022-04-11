@@ -20,7 +20,7 @@ class Poi extends $Poi {
   @override
   final List<String>? types;
   @override
-  final TextualDescription? description;
+  final List<TextualDescription>? description;
   @override
   final List<String>? tags;
   @override

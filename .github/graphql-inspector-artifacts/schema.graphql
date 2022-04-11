@@ -74,7 +74,7 @@ type Poi @aws_iam @aws_api_key {
   elevation: Float
   location: Location!
   types: [String!]
-  description: [TextualDescription!]
+  description: [TextualDescription]
   tags: [String!]
   sourceObject: [PoiSourceObject!]
   address: String
@@ -528,7 +528,7 @@ input CreatePoiInput {
   elevation: Float
   location: LocationInput!
   types: [String!]
-  description: [TextualDescriptionInput!]
+  description: [TextualDescriptionInput]
   tags: [String!]
   sourceObject: [PoiSourceObjectInput!]
   address: String
@@ -541,7 +541,7 @@ input UpdatePoiInput {
   elevation: Float
   location: LocationInput
   types: [String!]
-  description: [TextualDescriptionInput!]
+  description: [TextualDescriptionInput]
   tags: [String!]
   sourceObject: [PoiSourceObjectInput!]
   address: String

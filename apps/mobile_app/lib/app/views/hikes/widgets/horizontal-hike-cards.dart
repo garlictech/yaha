@@ -46,8 +46,8 @@ class HorizontalHikeCards extends ConsumerWidget {
                           child: HikeCard(hike: hike)))
                       .toList()),
               loading: () => const CircularProgressIndicator(),
-              error: (err, stack) => Text('Error: $err')))
+              error: (err, stack) => Text('Error: $err'))),
+      //ShowMoreButton(nextScreen: BestHikesOfTheWorld())
     ]);
-//      ShowMoreButton(nextScreen: BestHikesOfTheWorld())
   }
 }

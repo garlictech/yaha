@@ -343,9 +343,9 @@ const fetchRoute = (routeId: number) => {
         ],
       };
     }),
-    switchMap((hike: YahaApi.CreateHikeInput) =>
+    /*switchMap((hike: YahaApi.CreateHikeInput) =>
       sdk.CreateHike({ input: hike }),
-    ),
+    ),*/
     map(() =>
       pipe(
         lineChunk(state.geojson, 2, {
