@@ -9361,10 +9361,10 @@
   dependencies:
     "@types/node" "*"
 
-"@types/gremlin@3.5.1":
-  version "3.5.1"
-  resolved "https://registry.yarnpkg.com/@types/gremlin/-/gremlin-3.5.1.tgz#071b9ecf10d16c36fb568997ba064289ce37185f"
-  integrity sha512-PcZBz4MaOryz/MTWSYsD7QiLZo4thda3aX1UiI06Ci879/NQR6jMR5+1AkenGQIvYCgDxKM7iUaeSp59Lx+miw==
+"@types/gremlin@3.5.2":
+  version "3.5.2"
+  resolved "https://registry.yarnpkg.com/@types/gremlin/-/gremlin-3.5.2.tgz#9d26f6a4a774605daedd40c59f8963d91852fe80"
+  integrity sha512-guOs0Y7ZiZAd12kf86KmyzxvwmmVYznXy+/jbiO9tPViLUCSUT9JtJ/lHMSast/yxJpkkd2a3VG7+kgwqax9WA==
 
 "@types/http-assert@*":
   version "1.5.3"
