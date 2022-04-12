@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/app/presenters/map/leaflet-map-presenter.dart';
+import 'package:yaha/app/views/poi/widgets/poi-title-list.dart';
 import 'package:yaha/domain/domain.dart';
 
 import '../../../../providers/providers.dart';
@@ -420,10 +421,7 @@ class HikeScreen extends ConsumerWidget {
                           ],
                         ),
                       ),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width,
-                        child: PoiTagList(hikeId: hike.id),
-                      ),
+                      PoiTagList(hikeId: hike.id),
                       Container(
                         padding: const EdgeInsets.only(
                           top: YahaSpaceSizes.small,
@@ -453,77 +451,17 @@ class HikeScreen extends ConsumerWidget {
                       Container(
                         padding: const EdgeInsets.all(YahaSpaceSizes.general),
                         width: MediaQuery.of(context).size.width,
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                const PoiSummary(
-                                  backgroundColor: YahaColors.generic,
-                                  icon: Icons.location_city_rounded,
-                                  iconSize: YahaIconSizes.small,
-                                  padding: YahaSpaceSizes.xSmall,
-                                  radius: 19,
-                                ),
-                                Container(
-                                  padding: const EdgeInsets.only(
-                                      left: YahaSpaceSizes.small),
-                                  child: const Text(
-                                      "Hungarian Parliament Building",
-                                      style: TextStyle(
-                                          fontSize: YahaFontSizes.small,
-                                          color: YahaColors.textColor)),
-                                ),
-                              ],
-                            ),
-                            Container(
-                              padding: const EdgeInsets.only(
-                                  top: YahaSpaceSizes.medium),
-                              child: Row(
-                                children: [
-                                  const PoiSummary(
-                                    backgroundColor: YahaColors.generic,
-                                    icon: Icons.museum,
-                                    iconSize: YahaIconSizes.small,
-                                    padding: YahaSpaceSizes.xSmall,
-                                    radius: 19,
-                                  ),
-                                  Container(
-                                    padding: const EdgeInsets.only(
-                                        left: YahaSpaceSizes.small),
-                                    child: const Text(
-                                        "Hungarian National Museum",
-                                        style: TextStyle(
-                                            fontSize: YahaFontSizes.small,
-                                            color: YahaColors.textColor)),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              padding: const EdgeInsets.only(
-                                  top: YahaSpaceSizes.medium),
-                              child: Row(
-                                children: [
-                                  const PoiSummary(
-                                    backgroundColor: YahaColors.amenity,
-                                    icon: Icons.pool_rounded,
-                                    iconSize: YahaIconSizes.small,
-                                    padding: YahaSpaceSizes.xSmall,
-                                    radius: 19,
-                                  ),
-                                  Container(
-                                    padding: const EdgeInsets.only(
-                                        left: YahaSpaceSizes.small),
-                                    child: const Text("Széchenyi Thermal Bath",
-                                        style: TextStyle(
-                                            fontSize: YahaFontSizes.small,
-                                            color: YahaColors.textColor)),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
+                        child: Consumer(builder: (c, ref, _child) {
+                          final poiUseCases = ref.watch(poiUsecasesProvider);
+                          final pois = ref.watch(
+                              poisAlongHikeNotifierProvider(hike.id)
+                                  .select((notifier) => notifier.pois));
+
+                          final touristicPois =
+                              poiUseCases.selectTouristicPois(pois);
+
+                          return PoiTitleList(pois: touristicPois);
+                        }),
                         decoration: BoxDecoration(
                           color: YahaColors.accentColor,
                           borderRadius:

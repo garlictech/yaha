@@ -65,6 +65,8 @@ dependencies:
   geolocator: ^8.2.0
   artemis: ^7.5.0-beta
   flutter_svg: ^1.0.3
+  flutter_html: ^3.0.0-alpha.2
+  flutter_markdown: ^0.6.9+1
 
 flutter_icons:
   android: true

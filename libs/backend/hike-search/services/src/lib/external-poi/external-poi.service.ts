@@ -5,9 +5,9 @@ import { catchError, delay, map, toArray, mergeMap } from 'rxjs/operators';
 import { ExternalPoi, OsmPoiTypes } from './lib/types';
 import { YahaApi } from '@yaha/gql-api';
 import { HttpClient } from '../http';
-import { getOsmPois } from './osm-poi.service';
 import { getFlickrImages } from './flickr.service';
 import { isCreatePoiInput } from '../joi-schemas/poi-schema';
+import { getAllWikipediaPois } from './wikipedia-poi.service';
 
 const filterTypes = fp.flow(
   fp.pullAll(['point_of_interest', 'establishment']),
@@ -40,8 +40,8 @@ export const getExternalPois =
     _alreadyProcessedSourceObjectIds: string[],
   ): Observable<ExternalPoi[]> =>
     forkJoin([
-      //     deps.wikipediaPoiService.getAll(bounds, allLanguages),
-      osmPois(getOsmPois(deps))(bounds),
+      getAllWikipediaPois(deps)(bounds, ['en', 'hu']),
+      //osmPois(getOsmPois(deps))(bounds),
       //     deps.googlePoiService.get(bounds, alreadyProcessedSourceObjectIds),
     ]).pipe(
       map(
@@ -49,7 +49,11 @@ export const getExternalPois =
           fp.flattenDeep,
           filterTypesFv,
           fp.tap(res =>
-            console.warn('Number of external poi candidates:', res.length),
+            console.warn(
+              'Number of external poi candidates:',
+              res.length,
+              JSON.stringify(res, null, 2),
+            ),
           ),
           fp.filter(x => isCreatePoiInput(x)),
           fp.tap(res =>
@@ -101,7 +105,7 @@ const osmPois =
     from([
       OsmPoiTypes.publicTransport,
       OsmPoiTypes.amenity,
-      //OsmPoiTypes.natural,
+      OsmPoiTypes.natural,
       OsmPoiTypes.emergency,
       OsmPoiTypes.historic,
       OsmPoiTypes.leisure,

@@ -1,11 +1,14 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/providers/providers.dart';
 import 'package:async/async.dart';
-import '../entities/entities.dart';
+
+import '../../entities/entities.dart';
 
 abstract class PoiUsecases {
   Future<List<Poi>> getPoisAlongHike(String hikeId);
   Future<List<Poi>> getPoisAroundHike(String hikeId);
+
+  List<Poi> selectTouristicPois(List<Poi> pois);
 }
 
 class PoiUsecasesImpl implements PoiUsecases {
@@ -40,5 +43,13 @@ class PoiUsecasesImpl implements PoiUsecases {
       futureGroup.close();
       return futureGroup.future;
     });
+  }
+
+  @override
+  selectTouristicPois(List<Poi> pois) {
+    return pois.where((poi) {
+      return poi.poiTypes.map((type) => type.category).toSet().intersection(
+          {'tourism', 'natural', 'leisure', 'historic', 'sight'}).isNotEmpty;
+    }).toList();
   }
 }

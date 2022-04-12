@@ -32,6 +32,7 @@ const get =
 
         // eslint:disable:max-line-length
         const request = `https://${lng}.wikipedia.org/w/api.php?action=query&list=geosearch&gsradius=${radius}&gscoord=${circle.center.lat}%7C${circle.center.lon}&format=json&gslimit=${gsLimit}&origin=*`;
+        console.warn('Request: ', request);
 
         // Get basic poi list
         return deps.http.get(request).pipe(
@@ -58,9 +59,11 @@ const get =
                 ];
 
                 return {
-                  lat: _point.lat,
-                  lon: _point.lon,
-                  types: ['generic:sight'],
+                  location: {
+                    lat: _point.lat,
+                    lon: _point.lon,
+                  },
+                  types: ['tourism:sight'],
                   description: [
                     {
                       languageKey,
