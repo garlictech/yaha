@@ -102,20 +102,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
-    - assets/poi-icons/amenity/
-    - assets/poi-icons/tourism/
-    - assets/poi-icons/barrier/
-    - assets/poi-icons/generic/
-    - assets/poi-icons/highway/
-    - assets/poi-icons/historic/
-    - assets/poi-icons/leisure/
-    - assets/poi-icons/man_made/
-    - assets/poi-icons/natural/
-    - assets/poi-icons/office/
-    - assets/poi-icons/place/
-    - assets/poi-icons/religion/
-    - assets/poi-icons/shields/
-    - assets/poi-icons/shop/
+    - assets/poi-icons/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

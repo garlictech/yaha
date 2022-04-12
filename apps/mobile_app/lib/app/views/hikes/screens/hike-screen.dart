@@ -9,7 +9,6 @@ import '../../../../providers/providers.dart';
 import '../../map/widgets/leaflet-map.dart';
 import '../../poi/poi.dart';
 import '../../shared/shared.dart';
-import '../widgets/poi-filters.dart';
 import 'hike-outline-screen.dart';
 import 'more-poi-screen.dart';
 import 'places-on-route-screen.dart';

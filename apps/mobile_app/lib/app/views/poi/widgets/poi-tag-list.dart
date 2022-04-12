@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/providers/poi-providers.dart';
 
-import '../../hikes/widgets/poi-filters.dart';
 import '../../shared/shared.dart';
+import 'poi-filters.dart';
 
 class PoiTagList extends ConsumerWidget {
   final String hikeId;

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/app/presenters/track/tracking-timeline-customize-widget-presenter.dart';
 
-import '../../hikes/widgets/poi-filters-list.dart';
+import '../../poi/widgets/poi-filters-list.dart';
 import '../../shared/shared.dart';
 
 class TrackingTimelineCustomizeWidget extends ConsumerWidget {
@@ -126,7 +126,7 @@ class TrackingTimelineCustomizeWidget extends ConsumerWidget {
                 ),
               ],
             ),
-            PoiFiltersList(),
+            const PoiFiltersList(),
             Container(
               padding: const EdgeInsets.only(top: YahaSpaceSizes.xLarge),
               child: SizedBox(

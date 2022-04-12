@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/app/presenters/track/tracking-timeline-customize-widget-presenter.dart';
 
+import '../../poi/widgets/poi-filters-list.dart';
 import '../../shared/shared.dart';
-import 'poi-filters-list.dart';
 
 class HikeOutlineFilters extends ConsumerWidget {
   const HikeOutlineFilters({Key? key}) : super(key: key);

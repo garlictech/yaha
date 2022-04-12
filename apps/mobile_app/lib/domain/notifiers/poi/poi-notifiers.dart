@@ -19,12 +19,16 @@ class PoisAlongHikeNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  Set<PoiType> get typeList {
-    return pois
+  List<PoiType> get typeList {
+    List<PoiType> poiList = pois
         .map((poi) => poi.poiTypes)
         .toList()
         .whereType<Set<PoiType>>()
         .expand((i) => i)
-        .toSet();
+        .toSet()
+        .toList();
+
+    poiList.sort();
+    return poiList;
   }
 }
