@@ -154,14 +154,12 @@ const _getPoiDetails =
     const createPoi = (data: GoogleData): ExternalPoi | undefined =>
       isGoogleData(data)
         ? {
-            sourceObject: [
-              {
-                objectType: YahaApi.PoiSource.google,
-                languageKey: 'en_US',
-                objectId: data.place_id,
-                url: data.website,
-              },
-            ],
+            sourceObject: {
+              objectType: YahaApi.PoiSource.google,
+              languageKey: 'en_US',
+              objectId: data.place_id,
+              url: data.website,
+            },
             address: data.formatted_address,
             phoneNumber: data.international_phone_number,
             openingHours: _.get(data, 'opening_hours.periods'),

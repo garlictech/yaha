@@ -76,7 +76,7 @@ type Poi @aws_iam @aws_api_key {
   types: [String!]
   description: [TextualDescription]
   tags: [String!]
-  sourceObject: [PoiSourceObject!]
+  sourceObject: PoiSourceObject
   address: String
   phoneNumber: String
   openingHours: String
@@ -530,7 +530,7 @@ input CreatePoiInput {
   types: [String!]
   description: [TextualDescriptionInput]
   tags: [String!]
-  sourceObject: [PoiSourceObjectInput!]
+  sourceObject: PoiSourceObjectInput
   address: String
   phoneNumber: String
   openingHours: String
@@ -543,7 +543,7 @@ input UpdatePoiInput {
   types: [String!]
   description: [TextualDescriptionInput]
   tags: [String!]
-  sourceObject: [PoiSourceObjectInput!]
+  sourceObject: PoiSourceObjectInput
   address: String
   phoneNumber: String
   openingHours: String

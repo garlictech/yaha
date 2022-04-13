@@ -87,7 +87,7 @@ type Poi
   types: [String!]
   description: [TextualDescription]
   tags: [String!]
-  sourceObject: [PoiSourceObject!]
+  sourceObject: PoiSourceObject
   address: String
   phoneNumber: String
   openingHours: String

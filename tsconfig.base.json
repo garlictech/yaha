@@ -33,9 +33,6 @@
       "@yaha/backend/amplify-resolvers": [
         "libs/backend/amplify-resolvers/src/index.ts"
       ],
-      "@yaha/backend/hike-search/repositories": [
-        "libs/backend/hike-search/repositories/src/index.ts"
-      ],
       "@yaha/backend/hike-search/services": [
         "libs/backend/hike-search/services/src/index.ts"
       ],

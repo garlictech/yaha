@@ -90,13 +90,11 @@ export const getOsmPois =
             fp.map((_point: OsmPoiResponse) => {
               const type = _.get(_point.tags, typeParam);
 
-              const sourceObject = [
-                {
-                  objectType: osmTypeMap[typeParam],
-                  languageKey,
-                  objectId: _point.id.toString(),
-                },
-              ];
+              const sourceObject = {
+                objectType: osmTypeMap[typeParam],
+                languageKey,
+                objectId: _point.id.toString(),
+              };
 
               return {
                 location: {

@@ -1,16 +1,16 @@
 import { YahaApi } from '@yaha/gql-api';
 import { pick } from 'lodash';
-import { filter, flow, isEmpty, map, negate, uniq } from 'lodash/fp';
+import { flow, map, uniq } from 'lodash/fp';
 import * as fp from 'lodash/fp';
 import * as R from 'ramda';
 import { ExternalPoi } from './types';
 
 export class ExternalPoiFp {
-  static collectUrls = (poi: ExternalPoi): string[] =>
-    flow(map('url'), filter(negate(isEmpty)))(poi.sourceObject);
+  static collectUrls = (poi: ExternalPoi): string | undefined | null =>
+    poi.sourceObject.url;
 
-  static collectSourceTypes = (poi: ExternalPoi): string[] =>
-    flow(map('objectType'), uniq)(poi.sourceObject);
+  static collectSourceTypes = (poi: ExternalPoi): string =>
+    poi.sourceObject.objectType;
 
   static collectLanguageKeys = (poi: ExternalPoi): string[] =>
     flow(map('languageKey'), uniq)(poi.description);

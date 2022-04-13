@@ -90,31 +90,6 @@
       },
       "tags": ["platform:nodejs", "layer:service"]
     },
-    "backend-hike-search-repositories": {
-      "root": "libs/backend/hike-search/repositories",
-      "sourceRoot": "libs/backend/hike-search/repositories/src",
-      "projectType": "library",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
-          "options": {
-            "lintFilePatterns": [
-              "libs/backend/hike-search/repositories/**/*.ts"
-            ]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/backend/hike-search/repositories"],
-          "options": {
-            "jestConfig": "libs/backend/hike-search/repositories/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      },
-      "tags": ["platform:nodejs", "layer:repository"]
-    },
     "backend-hike-search-services": {
       "root": "libs/backend/hike-search/services",
       "sourceRoot": "libs/backend/hike-search/services/src",

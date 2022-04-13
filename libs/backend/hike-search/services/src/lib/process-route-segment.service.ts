@@ -8,7 +8,6 @@ import { switchMap, map } from 'rxjs/operators';
 import { pipe } from 'fp-ts/lib/function';
 import { Feature, Polygon } from '@turf/helpers';
 import { GtrackDefaults } from './defaults/defaults';
-import { PoiFp } from './poi';
 import { getElevationOfPointsFromGoogle } from './elevation';
 import { ImageFp } from './image.fp';
 import { RouteSegmentFp, RouteSegment, EBuffer } from './route-segment';
@@ -19,9 +18,7 @@ import {
   ExternalPoi,
   ExternalPoiFp,
   ExternalPoiServiceDeps,
-  getExternalImages,
   getExternalPois,
-  groupPoisOnSameLocation,
 } from './external-poi';
 import { HttpClient } from './http';
 import {
@@ -119,11 +116,11 @@ export const processRouteSegment =
               DESCRIPTION_LANGUAGES_SHORT,
               ExternalPoiFp.collectObjId(state.pois),
             ),
-            getExternalImages(externalPoisDeps)(
+            /*getExternalImages(externalPoisDeps)(
               state.boundingBox,
               DESCRIPTION_LANGUAGES_SHORT,
               ExternalPoiFp.collectObjId(state.images),
-            ),
+            ),*/ of([]),
           ]),
           map(([pois, images]) => ({
             ...state,
@@ -162,16 +159,14 @@ const updateYahaPois =
     const externalPoisInBigBuffer =
       removePointsOutsideOfPolygon<ExternalPoi>(searchPolygon)(externalPois);
 
-    const allPoisInBigBuffer = fp.concat(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      poisInDb as any[],
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      externalPoisInBigBuffer as any[],
+    const newPois = fp.differenceWith(
+      (
+        x: { sourceObject: YahaApi.PoiSourceObject },
+        y: { sourceObject?: YahaApi.PoiSourceObject | null },
+      ) => fp.isEqual(x.sourceObject, y.sourceObject),
+      externalPoisInBigBuffer,
+      poisInDb,
     );
-
-    const groupedPois: (ExternalPoi | YahaApi.Poi)[] = groupPoisOnSameLocation(
-      GtrackDefaults.distanceOfSamePoisInMeters(),
-    )(allPoisInBigBuffer);
 
     // Get the new images
     const imagesInBigBuffer =
@@ -182,11 +177,7 @@ const updateYahaPois =
     const imagesCloseToPois = filterPointsCloseToReferencePoints<
       { location: { lat: number; lon: number } },
       YahaApi.CreateImageInput
-    >(
-      GtrackDefaults.distanceOfSamePoisInMeters(),
-      groupedPois,
-      imagesInBigBuffer,
-    );
+    >(GtrackDefaults.distanceOfSamePoisInMeters(), newPois, imagesInBigBuffer);
 
     const imagesInSmallBuffer =
       removePointsOutsideOfPolygon<YahaApi.CreateImageInput>(smallBuffer)(
@@ -218,24 +209,6 @@ const updateYahaPois =
             )(reallyNewImages),
     );
 
-    // Prepare pois for upsert
-    const [poisToUpdate, newPois] = fp.partition(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (item: any) => !!item.id,
-      groupedPois,
-    );
-
-    const poisAreTheSame = (poi1: YahaApi.Poi, poi2: YahaApi.Poi): boolean =>
-      fp.isEqual(
-        PoiFp.createPoiUpdateData(poi1),
-        PoiFp.createPoiUpdateData(poi2),
-      );
-
-    const updatedPoisForDatabase = fp.flow(
-      pois => fp.differenceWith(poisAreTheSame, pois, poisInDb),
-      fp.map(PoiFp.createPoiUpdateData),
-    )(poisToUpdate);
-
     const saveNewPois = pipe(
       newPois,
       fp.map(poi => ExternalPoiFp.convertToPoiInput(poi, 0)),
@@ -251,10 +224,6 @@ const updateYahaPois =
       ),
     );
 
-    const updateNewPois = multipleWrite<YahaApi.UpdatePoiInput, YahaApi.Poi>(
-      deps.sdk.UpdatePoi,
-    )(updatedPoisForDatabase);
-
     console.warn('Number of pois already found in YAHA:', poisInDb.length);
     console.warn('Number of images already found in YAHA:', imagesInDb.length);
     console.warn('Number of external pois to process:', externalPois.length);
@@ -263,9 +232,8 @@ const updateYahaPois =
       externalImages.length,
     );
     console.warn('Number of new pois to save:', newPois.length);
-    console.warn('Number of pois to update:', updatedPoisForDatabase.length);
     console.warn('Number of new images:', newImages.length);
 
     // Execute the database operations
-    return forkJoin([saveNewPois, saveNewImages, updateNewPois]);
+    return forkJoin([saveNewPois, saveNewImages]);
   };

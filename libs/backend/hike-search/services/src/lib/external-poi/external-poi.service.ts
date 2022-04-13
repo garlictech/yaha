@@ -8,6 +8,8 @@ import { HttpClient } from '../http';
 import { getFlickrImages } from './flickr.service';
 import { isCreatePoiInput } from '../joi-schemas/poi-schema';
 import { getAllWikipediaPois } from './wikipedia-poi.service';
+import { getOsmPois } from './osm-poi.service';
+import { getGooglePois } from './google-poi.service';
 
 const filterTypes = fp.flow(
   fp.pullAll(['point_of_interest', 'establishment']),
@@ -36,24 +38,23 @@ export const getExternalPois =
   (deps: ExternalPoiServiceDeps) =>
   (
     bounds: YahaApi.BoundingBox,
-    _allLanguages: string[],
-    _alreadyProcessedSourceObjectIds: string[],
+    allLanguages: string[],
+    alreadyProcessedSourceObjectIds: string[],
   ): Observable<ExternalPoi[]> =>
     forkJoin([
-      getAllWikipediaPois(deps)(bounds, ['en', 'hu']),
-      //osmPois(getOsmPois(deps))(bounds),
-      //     deps.googlePoiService.get(bounds, alreadyProcessedSourceObjectIds),
+      getAllWikipediaPois(deps)(bounds, allLanguages),
+      osmPois(getOsmPois(deps))(bounds),
+      getGooglePois({
+        apiKey: deps.googleApiKey,
+        http: deps.http,
+      })(bounds, alreadyProcessedSourceObjectIds),
     ]).pipe(
       map(
         fp.flow(
           fp.flattenDeep,
           filterTypesFv,
           fp.tap(res =>
-            console.warn(
-              'Number of external poi candidates:',
-              res.length,
-              JSON.stringify(res, null, 2),
-            ),
+            console.warn('Number of external poi candidates:', res.length),
           ),
           fp.filter(x => isCreatePoiInput(x)),
           fp.tap(res =>

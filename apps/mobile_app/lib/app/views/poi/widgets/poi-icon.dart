@@ -18,16 +18,17 @@ class PoiIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     SvgPicture svgPicture = SvgPicture.asset(
         'assets/poi-icons/${poiType.kind}.svg',
-        color: color,
+        color: Colors.white,
         height: 30);
 
     return Container(
-      padding: const EdgeInsets.all(YahaSpaceSizes.small),
-      child: svgPicture,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(YahaBorderRadius.general),
-          border: Border.all(width: 4.0, color: color)),
-    );
+        padding: const EdgeInsets.all(3),
+        child: svgPicture,
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(50),
+          border: Border.all(width: 4.0, color: color),
+        ));
     /*return Chip(
       label: Text(
         title,

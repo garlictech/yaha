@@ -35,7 +35,7 @@ function indexPoiPairsByDistance<
   return fp.sortBy(['distance'], fp.flatten(indexedPairsbyDistance));
 }
 
-const mergeSourceObjects = (
+/*const mergeSourceObjects = (
   pois: YahaApi.Poi[],
   targetPoi: YahaApi.Poi,
 ): YahaApi.PoiSourceObject[] =>
@@ -46,13 +46,14 @@ const mergeSourceObjects = (
     fp.reverse,
     fp.uniqWith(fp.isEqual),
   )(pois);
-
+*/
 export const mergePois = (
   pois: YahaApi.Poi[],
   targetPoi: YahaApi.Poi,
 ): YahaApi.Poi => ({
   ...targetPoi,
-  sourceObject: mergeSourceObjects(pois, targetPoi),
+  sourceObject: targetPoi.sourceObject,
+  //sourceObject: mergeSourceObjects(pois, targetPoi),
   description: uniqWith(
     uniqWith(
       flatten(_concat(targetPoi.description, fp.map('description')(pois))),

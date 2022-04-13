@@ -1,6 +1,8 @@
 import { YahaApi } from '@yaha/gql-api';
 
-export type ExternalPoi = YahaApi.CreatePoiInput;
+export interface ExternalPoi extends YahaApi.CreatePoiInput {
+  sourceObject: YahaApi.PoiSourceObject;
+}
 
 export enum OsmPoiTypes {
   natural = 'natural',

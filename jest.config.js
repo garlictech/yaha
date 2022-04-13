@@ -12,7 +12,6 @@ module.exports = {
     '<rootDir>/libs/backend/shared/utils',
     '<rootDir>/libs/backend/hike-search/services',
     '<rootDir>/libs/integration-tests/backend',
-    '<rootDir>/libs/backend/hike-search/repositories',
     '<rootDir>/libs/backend/hike-search/utils',
     '<rootDir>/libs/backend/amplify-resolvers',
     '<rootDir>/libs/backend/image-tagger',

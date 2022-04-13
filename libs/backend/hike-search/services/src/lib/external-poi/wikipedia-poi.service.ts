@@ -32,7 +32,6 @@ const get =
 
         // eslint:disable:max-line-length
         const request = `https://${lng}.wikipedia.org/w/api.php?action=query&list=geosearch&gsradius=${radius}&gscoord=${circle.center.lat}%7C${circle.center.lon}&format=json&gslimit=${gsLimit}&origin=*`;
-        console.warn('Request: ', request);
 
         // Get basic poi list
         return deps.http.get(request).pipe(
@@ -49,14 +48,12 @@ const get =
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 title: any;
               }) => {
-                const sourceObject = [
-                  {
-                    objectType: YahaApi.PoiSource.wikipedia,
-                    languageKey,
-                    objectId: _point.pageid.toString(),
-                    url: `https://${lng}.wikipedia.org/?curid=${_point.pageid}`,
-                  },
-                ];
+                const sourceObject = {
+                  objectType: YahaApi.PoiSource.wikipedia,
+                  languageKey,
+                  objectId: _point.pageid.toString(),
+                  url: `https://${lng}.wikipedia.org/?curid=${_point.pageid}`,
+                };
 
                 return {
                   location: {
@@ -111,9 +108,7 @@ const _getPoiDetails =
 const _getPageExtracts =
   (deps: WikipediaDeps) =>
   async (_pois: ExternalPoi[], lng: string): Promise<ExternalPoi[]> => {
-    const _poiIds = _pois.map(
-      (p: ExternalPoi) => p.sourceObject?.[0]?.objectId,
-    );
+    const _poiIds = _pois.map((p: ExternalPoi) => p.sourceObject?.objectId);
     const _chunks = _.chunk(_poiIds, 20);
 
     return interval(100)
@@ -140,7 +135,7 @@ const _getPageExtracts =
                     if (_exData.extract) {
                       const _targetPoi = _pois.find(p =>
                         fp.isEqual(
-                          p.sourceObject?.[0].objectId,
+                          p.sourceObject?.objectId,
                           _exData.pageid.toString(),
                         ),
                       );
