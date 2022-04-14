@@ -68,11 +68,11 @@ export const processRouteSegment =
         map(pois => R.reject(R.isNil)(pois)),
       );
 
-    const findYahaImages = (bigBuffer: Feature<Polygon>) =>
-      findPlaces(bigBuffer)(YahaApi.GeoSearchableObjectType.image).pipe(
+    const findYahaImages = (_bigBuffer: Feature<Polygon>) =>
+      /*findPlaces(bigBuffer)(YahaApi.GeoSearchableObjectType.image).pipe(
         switchMap(ids => multipleGet(deps.sdk.GetImage)(ids.items)),
         map(pois => R.reject(R.isNil)(pois)),
-      );
+      );*/ of([]);
 
     const externalPoisDeps: ExternalPoiServiceDeps = {
       googleApiKey: deps.googleApiKey,
@@ -99,7 +99,8 @@ export const processRouteSegment =
         pipe(
           forkJoin([
             findYahaPois(state.bigBuffer),
-            findYahaImages(state.bigBuffer),
+            //findYahaImages(state.bigBuffer),
+            of([]),
           ]),
           map(([pois, images]) => ({
             ...state,

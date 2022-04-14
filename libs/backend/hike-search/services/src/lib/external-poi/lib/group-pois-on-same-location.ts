@@ -61,10 +61,6 @@ export const mergePois = (
     ),
     (desc1, desc2) => desc1.languageKey === desc2.languageKey,
   ),
-  types: filter(
-    uniq(flatten(_concat(targetPoi.types, fp.map('types')(pois)))),
-    item => !!item,
-  ),
 });
 
 export function groupPoisOnSameLocation(minimalDistanceInMeters: number) {

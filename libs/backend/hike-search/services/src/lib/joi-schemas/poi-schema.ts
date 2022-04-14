@@ -10,7 +10,7 @@ import {
 // CreatePoiInput
 export const createPoiInputSchema = {
   elevation: Joi.number(),
-  types: Joi.array().items(Joi.string()),
+  type: Joi.string(),
   sourceObject: Joi.object(poiSourceObjectSchema),
   location: Joi.object(coordinatesSchemaFragment).required(),
   address: Joi.string(),

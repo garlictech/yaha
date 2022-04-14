@@ -12,7 +12,7 @@ class PoiTagList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final types = ref.watch(poisAlongHikeNotifierProvider(hikeId)
-        .select((notifier) => notifier.typeList));
+        .select((notifier) => notifier.uniqueTypes));
 
     return Wrap(
         direction: Axis.horizontal,

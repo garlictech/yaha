@@ -23,7 +23,7 @@ export class ExternalPoiFp {
     elevation: number,
   ): YahaApi.CreatePoiInput => ({
     ...pick(poi, [
-      'types',
+      'type',
       'description',
       'sourceObject',
       'address',

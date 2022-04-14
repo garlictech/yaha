@@ -1,7 +1,6 @@
 import { from, Observable } from 'rxjs';
 import { concatMap, mergeMap, toArray } from 'rxjs/operators';
 import { pipe } from 'fp-ts/lib/function';
-import { throwIfEmptyValue } from '@yaha/shared/utils';
 
 export const multipleGet =
   <ITEM>(getOp: ({ id }: { id: string }) => Observable<ITEM>) =>
@@ -9,7 +8,6 @@ export const multipleGet =
     pipe(
       from(ids),
       mergeMap(id => getOp({ id }), 5),
-      throwIfEmptyValue(),
       toArray(),
     );
 
@@ -25,6 +23,5 @@ export const multipleWrite =
     pipe(
       from(items),
       concatMap(item => createOp({ input: item })),
-      throwIfEmptyValue(),
       toArray(),
     );

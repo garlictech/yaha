@@ -84,7 +84,7 @@ type Poi
   id: ID!
   elevation: Float
   location: Location!
-  types: [String!]
+  type: String
   description: [TextualDescription]
   tags: [String!]
   sourceObject: PoiSourceObject

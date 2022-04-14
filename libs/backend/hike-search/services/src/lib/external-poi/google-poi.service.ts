@@ -77,14 +77,6 @@ export const getGooglePois =
     alreadyProcessedSourceObjectIds: string[] = [],
   ): Observable<YahaApi.CreatePoiInput[]> => {
     // eslint-disable-next-line prefer-rest-params
-    Logger.info(
-      `Google poi fetch started with params ${JSON.stringify(
-        [bounds, alreadyProcessedSourceObjectIds],
-        null,
-        2,
-      )}`,
-    );
-
     const resultOption: Option<Observable<YahaApi.CreatePoiInput[]>> = fptsPipe(
       getCenterRadiusOfBox(bounds),
       fptsMap((circle: Circle) => {
@@ -174,7 +166,7 @@ const _getPoiDetails =
                 type: YahaApi.TextualDescriptionType.markdown,
               },
             ],
-            types: data.types,
+            type: data?.types?.[0],
             elevation: -1,
             id: '',
           }

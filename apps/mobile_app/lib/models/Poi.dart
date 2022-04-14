@@ -32,7 +32,7 @@ class Poi extends Model {
   final String id;
   final double? _elevation;
   final Location? _location;
-  final List<String>? _types;
+  final String? _type;
   final List<TextualDescription>? _description;
   final List<String>? _tags;
   final PoiSourceObject? _sourceObject;
@@ -67,8 +67,8 @@ class Poi extends Model {
     }
   }
   
-  List<String>? get types {
-    return _types;
+  String? get type {
+    return _type;
   }
   
   List<TextualDescription>? get description {
@@ -103,14 +103,14 @@ class Poi extends Model {
     return _updatedAt;
   }
   
-  const Poi._internal({required this.id, elevation, required location, types, description, tags, sourceObject, address, phoneNumber, openingHours, createdAt, updatedAt}): _elevation = elevation, _location = location, _types = types, _description = description, _tags = tags, _sourceObject = sourceObject, _address = address, _phoneNumber = phoneNumber, _openingHours = openingHours, _createdAt = createdAt, _updatedAt = updatedAt;
+  const Poi._internal({required this.id, elevation, required location, type, description, tags, sourceObject, address, phoneNumber, openingHours, createdAt, updatedAt}): _elevation = elevation, _location = location, _type = type, _description = description, _tags = tags, _sourceObject = sourceObject, _address = address, _phoneNumber = phoneNumber, _openingHours = openingHours, _createdAt = createdAt, _updatedAt = updatedAt;
   
-  factory Poi({String? id, double? elevation, required Location location, List<String>? types, List<TextualDescription>? description, List<String>? tags, PoiSourceObject? sourceObject, String? address, String? phoneNumber, String? openingHours}) {
+  factory Poi({String? id, double? elevation, required Location location, String? type, List<TextualDescription>? description, List<String>? tags, PoiSourceObject? sourceObject, String? address, String? phoneNumber, String? openingHours}) {
     return Poi._internal(
       id: id == null ? UUID.getUUID() : id,
       elevation: elevation,
       location: location,
-      types: types != null ? List<String>.unmodifiable(types) : types,
+      type: type,
       description: description != null ? List<TextualDescription>.unmodifiable(description) : description,
       tags: tags != null ? List<String>.unmodifiable(tags) : tags,
       sourceObject: sourceObject,
@@ -130,7 +130,7 @@ class Poi extends Model {
       id == other.id &&
       _elevation == other._elevation &&
       _location == other._location &&
-      DeepCollectionEquality().equals(_types, other._types) &&
+      _type == other._type &&
       DeepCollectionEquality().equals(_description, other._description) &&
       DeepCollectionEquality().equals(_tags, other._tags) &&
       _sourceObject == other._sourceObject &&
@@ -150,7 +150,7 @@ class Poi extends Model {
     buffer.write("id=" + "$id" + ", ");
     buffer.write("elevation=" + (_elevation != null ? _elevation!.toString() : "null") + ", ");
     buffer.write("location=" + (_location != null ? _location!.toString() : "null") + ", ");
-    buffer.write("types=" + (_types != null ? _types!.toString() : "null") + ", ");
+    buffer.write("type=" + "$_type" + ", ");
     buffer.write("description=" + (_description != null ? _description!.toString() : "null") + ", ");
     buffer.write("tags=" + (_tags != null ? _tags!.toString() : "null") + ", ");
     buffer.write("sourceObject=" + (_sourceObject != null ? _sourceObject!.toString() : "null") + ", ");
@@ -164,12 +164,12 @@ class Poi extends Model {
     return buffer.toString();
   }
   
-  Poi copyWith({String? id, double? elevation, Location? location, List<String>? types, List<TextualDescription>? description, List<String>? tags, PoiSourceObject? sourceObject, String? address, String? phoneNumber, String? openingHours}) {
+  Poi copyWith({String? id, double? elevation, Location? location, String? type, List<TextualDescription>? description, List<String>? tags, PoiSourceObject? sourceObject, String? address, String? phoneNumber, String? openingHours}) {
     return Poi._internal(
       id: id ?? this.id,
       elevation: elevation ?? this.elevation,
       location: location ?? this.location,
-      types: types ?? this.types,
+      type: type ?? this.type,
       description: description ?? this.description,
       tags: tags ?? this.tags,
       sourceObject: sourceObject ?? this.sourceObject,
@@ -184,7 +184,7 @@ class Poi extends Model {
       _location = json['location']?['serializedData'] != null
         ? Location.fromJson(new Map<String, dynamic>.from(json['location']['serializedData']))
         : null,
-      _types = json['types']?.cast<String>(),
+      _type = json['type'],
       _description = json['description'] is List
         ? (json['description'] as List)
           .where((e) => e != null)
@@ -202,13 +202,13 @@ class Poi extends Model {
       _updatedAt = json['updatedAt'] != null ? TemporalDateTime.fromString(json['updatedAt']) : null;
   
   Map<String, dynamic> toJson() => {
-    'id': id, 'elevation': _elevation, 'location': _location?.toJson(), 'types': _types, 'description': _description?.map((TextualDescription? e) => e?.toJson()).toList(), 'tags': _tags, 'sourceObject': _sourceObject?.toJson(), 'address': _address, 'phoneNumber': _phoneNumber, 'openingHours': _openingHours, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
+    'id': id, 'elevation': _elevation, 'location': _location?.toJson(), 'type': _type, 'description': _description?.map((TextualDescription? e) => e?.toJson()).toList(), 'tags': _tags, 'sourceObject': _sourceObject?.toJson(), 'address': _address, 'phoneNumber': _phoneNumber, 'openingHours': _openingHours, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
   };
 
   static final QueryField ID = QueryField(fieldName: "poi.id");
   static final QueryField ELEVATION = QueryField(fieldName: "elevation");
   static final QueryField LOCATION = QueryField(fieldName: "location");
-  static final QueryField TYPES = QueryField(fieldName: "types");
+  static final QueryField TYPE = QueryField(fieldName: "type");
   static final QueryField DESCRIPTION = QueryField(fieldName: "description");
   static final QueryField TAGS = QueryField(fieldName: "tags");
   static final QueryField SOURCEOBJECT = QueryField(fieldName: "sourceObject");
@@ -254,10 +254,9 @@ class Poi extends Model {
     ));
     
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
-      key: Poi.TYPES,
+      key: Poi.TYPE,
       isRequired: false,
-      isArray: true,
-      ofType: ModelFieldType(ModelFieldTypeEnum.collection, ofModelName: describeEnum(ModelFieldTypeEnum.string))
+      ofType: ModelFieldType(ModelFieldTypeEnum.string)
     ));
     
     modelSchemaDefinition.addField(ModelFieldDefinition.embedded(

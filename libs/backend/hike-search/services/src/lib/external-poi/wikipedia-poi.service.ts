@@ -60,7 +60,7 @@ const get =
                     lat: _point.lat,
                     lon: _point.lon,
                   },
-                  types: ['tourism:sight'],
+                  type: 'tourism:sight',
                   description: [
                     {
                       languageKey,

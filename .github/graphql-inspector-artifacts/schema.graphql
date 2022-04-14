@@ -73,7 +73,7 @@ type Poi @aws_iam @aws_api_key {
   id: ID!
   elevation: Float
   location: Location!
-  types: [String!]
+  type: String
   description: [TextualDescription]
   tags: [String!]
   sourceObject: PoiSourceObject
@@ -501,7 +501,7 @@ type ModelPoiConnection @aws_api_key @aws_iam {
 input ModelPoiFilterInput {
   id: ModelIDInput
   elevation: ModelFloatInput
-  types: ModelStringInput
+  type: ModelStringInput
   tags: ModelStringInput
   address: ModelStringInput
   phoneNumber: ModelStringInput
@@ -513,7 +513,7 @@ input ModelPoiFilterInput {
 
 input ModelPoiConditionInput {
   elevation: ModelFloatInput
-  types: ModelStringInput
+  type: ModelStringInput
   tags: ModelStringInput
   address: ModelStringInput
   phoneNumber: ModelStringInput
@@ -527,7 +527,7 @@ input CreatePoiInput {
   id: ID
   elevation: Float
   location: LocationInput!
-  types: [String!]
+  type: String
   description: [TextualDescriptionInput]
   tags: [String!]
   sourceObject: PoiSourceObjectInput
@@ -540,7 +540,7 @@ input UpdatePoiInput {
   id: ID!
   elevation: Float
   location: LocationInput
-  types: [String!]
+  type: String
   description: [TextualDescriptionInput]
   tags: [String!]
   sourceObject: PoiSourceObjectInput
@@ -758,7 +758,7 @@ input SearchableImageAggregationInput {
 input SearchablePoiFilterInput {
   id: SearchableIDFilterInput
   elevation: SearchableFloatFilterInput
-  types: SearchableStringFilterInput
+  type: SearchableStringFilterInput
   tags: SearchableStringFilterInput
   address: SearchableStringFilterInput
   phoneNumber: SearchableStringFilterInput
@@ -773,7 +773,7 @@ input SearchablePoiFilterInput {
 enum SearchablePoiSortableFields {
   id
   elevation
-  types
+  type
   tags
   address
   phoneNumber
@@ -790,7 +790,7 @@ input SearchablePoiSortInput {
 enum SearchablePoiAggregateField {
   id
   elevation
-  types
+  type
   tags
   address
   phoneNumber

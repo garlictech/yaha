@@ -101,7 +101,7 @@ export const getOsmPois =
                   lat: _point.lat,
                   lon: _point.lon,
                 },
-                types: [`${typeParam}:${type}`],
+                type: `${typeParam}:${type}`,
                 description: [
                   {
                     languageKey,

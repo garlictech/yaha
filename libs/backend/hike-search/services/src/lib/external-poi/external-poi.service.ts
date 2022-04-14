@@ -12,18 +12,17 @@ import { getOsmPois } from './osm-poi.service';
 import { getGooglePois } from './google-poi.service';
 
 const filterTypes = fp.flow(
-  fp.pullAll(['point_of_interest', 'establishment']),
-  fp.map(type => (type === 'locality' ? 'city' : type)),
-  fp.map(type => (type === 'stop_position' ? 'bus_station' : type)),
-  fp.map(type => (type === 'platform' ? 'bus_station' : type)),
-  fp.map(type => (type === 'station' ? 'bus_station' : type)),
+  type => (type === 'locality' ? 'city' : type),
+  type => (type === 'stop_position' ? 'bus_station' : type),
+  type => (type === 'platform' ? 'bus_station' : type),
+  type => (type === 'station' ? 'bus_station' : type),
 );
 
 const filterTypesFv = fp.map((item: ExternalPoi) =>
-  item.types
+  item.type
     ? {
         ...item,
-        types: filterTypes(item.types),
+        type: filterTypes(item.type),
       }
     : item,
 );

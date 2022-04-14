@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:amplify_api/amplify_api.dart';
+import 'package:flutter/foundation.dart';
 import 'package:yaha/domain/domain.dart';
 
 import '../../utils/cache/cache.dart';
@@ -23,7 +24,7 @@ class PoiRepositoryAmplify implements PoiRepository {
             lat
             lon
           }
-          types
+          type
           description {
             title
             languageKey
@@ -48,8 +49,7 @@ class PoiRepositoryAmplify implements PoiRepository {
     });
   }
 
-  @override
-  searchPoisAroundHike(SearchAroundHikeInput input) async {
+  _searchPoisAroundHikeOnePage(SearchAroundHikeInput input) async {
     String gqlDocument = ''' 
       query SearchPoisAroundHike(\$query: SearchAroundHikeInput!) {
         searchAroundHike(query: \$query) {
@@ -62,7 +62,21 @@ class PoiRepositoryAmplify implements PoiRepository {
     var request = GraphQLRequest<String>(
         document: gqlDocument, variables: Map.from({'query': input.toJson()}));
     var operation = Amplify.API.query(request: request);
-    return operation.response.then((response) => List<String>.from(
-        jsonDecode(response.data)['searchAroundHike']['items']));
+    final response = await operation.response;
+    return jsonDecode(response.data)['searchAroundHike'];
+  }
+
+  @override
+  searchPoisAroundHike(SearchAroundHikeInput input) async {
+    List<String> pois = [];
+    var nextInput = input.copyWith(limit: 100);
+
+    do {
+      var res = await _searchPoisAroundHikeOnePage(nextInput);
+      nextInput = input.copyWith(nextToken: res['nextToken'], limit: 100);
+      pois += List<String>.from(res['items']);
+    } while (nextInput.nextToken != null);
+
+    return pois;
   }
 }

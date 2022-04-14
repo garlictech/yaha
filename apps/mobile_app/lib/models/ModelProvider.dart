@@ -66,7 +66,7 @@ export 'TextualDescriptionType.dart';
 
 class ModelProvider implements ModelProviderInterface {
   @override
-  String version = "5234eac4a5f56627b9af925b6893d202";
+  String version = "55c378dcd400053ffb32c86d56e87c74";
   @override
   List<ModelSchema> modelSchemas = [Hike.schema, Image.schema, Poi.schema];
   static final ModelProvider _instance = ModelProvider();

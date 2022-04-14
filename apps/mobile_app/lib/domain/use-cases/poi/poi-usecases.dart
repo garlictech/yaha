@@ -47,9 +47,9 @@ class PoiUsecasesImpl implements PoiUsecases {
 
   @override
   selectTouristicPois(List<Poi> pois) {
-    return pois.where((poi) {
-      return poi.poiTypes.map((type) => type.category).toSet().intersection(
-          {'tourism', 'natural', 'leisure', 'historic', 'sight'}).isNotEmpty;
-    }).toList();
+    return pois
+        .where((poi) => {'tourism', 'natural', 'leisure', 'historic', 'sight'}
+            .contains(poi.poiType.category))
+        .toList();
   }
 }

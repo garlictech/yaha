@@ -5,6 +5,8 @@ import '../../entities/entities.dart';
 
 class PoisAlongHikeNotifier extends ChangeNotifier {
   List<Poi> pois = [];
+  List<PoiType>? _typeList;
+  List<PoiType>? _uniquePois;
 
   final String hikeId;
   final ChangeNotifierProviderRef<PoisAlongHikeNotifier> ref;
@@ -16,19 +18,29 @@ class PoisAlongHikeNotifier extends ChangeNotifier {
   void refreshPois() async {
     final poiUsecases = ref.read(poiUsecasesProvider);
     pois = await poiUsecases.getPoisAlongHike(hikeId);
+    _typeList = null;
+    _uniquePois = null;
     notifyListeners();
   }
 
   List<PoiType> get typeList {
-    List<PoiType> poiList = pois
-        .map((poi) => poi.poiTypes)
-        .toList()
-        .whereType<Set<PoiType>>()
-        .expand((i) => i)
-        .toSet()
-        .toList();
+    getTypeList() {
+      var poiList = pois.map<PoiType>((poi) => poi.poiType).toList();
+      poiList.sort();
+      debugPrint("Lofasz - 1: ${poiList.length}");
+      return poiList;
+    }
 
-    poiList.sort();
-    return poiList;
+    return _typeList ??= getTypeList();
+  }
+
+  List<PoiType> get uniqueTypes {
+    debugPrint("Lofasz: ${pois.length}");
+    debugPrint("Lofasz: ${typeList.length}");
+    getTypeList() => typeList.toSet().toList();
+    debugPrint("Lofasz2: ${typeList.length}");
+    debugPrint("Lofasz3: ${typeList.toSet().length}");
+
+    return _uniquePois ??= getTypeList();
   }
 }
