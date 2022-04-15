@@ -13,7 +13,6 @@ import '../../shared/shared.dart';
 import 'hike-outline-screen.dart';
 import 'more-poi-screen.dart';
 import 'places-on-route-screen.dart';
-import 'poi-summary.dart';
 import 'weather-screen.dart';
 
 SpeedDial buildSpeedDial() {
@@ -421,7 +420,13 @@ class HikeScreen extends ConsumerWidget {
                           ],
                         ),
                       ),
-                      PoiTagList(hikeId: hike.id),
+                      Consumer(builder: (c, ref, _child) {
+                        final types = ref.watch(
+                            poisAlongHikeUsecasesProvider(hike.id)
+                                .select((notifier) => notifier.uniqueTypes));
+
+                        return PoiIconList(types: types);
+                      }),
                       Container(
                         padding: const EdgeInsets.only(
                           top: YahaSpaceSizes.small,
@@ -454,7 +459,7 @@ class HikeScreen extends ConsumerWidget {
                         child: Consumer(builder: (c, ref, _child) {
                           final poiUseCases = ref.watch(poiUsecasesProvider);
                           final pois = ref.watch(
-                              poisAlongHikeNotifierProvider(hike.id)
+                              poisAlongHikeUsecasesProvider(hike.id)
                                   .select((notifier) => notifier.pois));
 
                           final touristicPois =

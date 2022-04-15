@@ -5,10 +5,9 @@ import 'package:async/async.dart';
 import '../../entities/entities.dart';
 
 abstract class PoiUsecases {
-  Future<List<Poi>> getPoisAlongHike(String hikeId);
-  Future<List<Poi>> getPoisAroundHike(String hikeId);
-
-  List<Poi> selectTouristicPois(List<Poi> pois);
+  Stream<List<Poi>> getPoisAlongHike(String hikeId);
+  Stream<List<Poi>> getPoisAroundHike(String hikeId);
+  List<Poi>? selectTouristicPois(List<Poi>? pois);
 }
 
 class PoiUsecasesImpl implements PoiUsecases {
@@ -28,28 +27,27 @@ class PoiUsecasesImpl implements PoiUsecases {
     return _getPoisOfHike(hikeId, defaults.bigGeoBufferSizeInMeters);
   }
 
-  _getPoisOfHike(String hikeId, double distanceInMeters) {
-    final poiRepo = ref.read(poiRepositoryProvider);
-
-    return poiRepo
-        .searchPoisAroundHike(SearchAroundHikeInput(
-            objectType: 'poi',
-            hikeId: hikeId,
-            distanceInMeters: distanceInMeters))
-        .then((res) {
-      final futureGroup = FutureGroup<Poi>();
-      fv(r) => futureGroup.add(poiRepo.getPoi(r));
-      res.forEach(fv);
-      futureGroup.close();
-      return futureGroup.future;
-    });
-  }
-
   @override
-  selectTouristicPois(List<Poi> pois) {
+  selectTouristicPois(List<Poi>? pois) {
     return pois
-        .where((poi) => {'tourism', 'natural', 'leisure', 'historic', 'sight'}
+        ?.where((poi) => {'tourism', 'natural', 'leisure', 'historic', 'sight'}
             .contains(poi.poiType.category))
         .toList();
+  }
+
+  Stream<List<Poi>> _getPoisOfHike(
+      String hikeId, double distanceInMeters) async* {
+    final poiRepo = ref.read(poiRepositoryProvider);
+
+    var poiChunks = poiRepo.searchPoisAroundHike(SearchAroundHikeInput(
+        objectType: 'poi', hikeId: hikeId, distanceInMeters: distanceInMeters));
+
+    await for (final pois in poiChunks) {
+      final futureGroup = FutureGroup<Poi>();
+      fv(r) => futureGroup.add(poiRepo.getPoi(r));
+      pois.forEach(fv);
+      futureGroup.close();
+      yield await futureGroup.future;
+    }
   }
 }

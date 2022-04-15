@@ -1,7 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/providers/providers.dart';
 import 'package:async/async.dart';
-import '../entities/entities.dart';
+
+import '../../entities/entities.dart';
 
 abstract class ImageUsecases {
   Future<List<Image>> getImagesAlongHike(String hikeId);
