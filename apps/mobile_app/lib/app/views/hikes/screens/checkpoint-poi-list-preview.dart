@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../shared/widgets/yaha-box-sizes.dart';
-import '../../shared/widgets/yaha-colors.dart';
-import '../../shared/widgets/yaha-icon-sizes.dart';
-import '../../shared/widgets/yaha-space-sizes.dart';
-import 'poi-summary.dart';
-
 const List<Object> defaultPoiPreviewList = [
-  PoiSummary(
+/*  PoiSummary(
     backgroundColor: YahaColors.generic,
     icon: Icons.museum_rounded,
     iconSize: YahaIconSizes.small,
@@ -38,6 +32,7 @@ const List<Object> defaultPoiPreviewList = [
     padding: YahaSpaceSizes.xSmall,
     radius: YahaBoxSizes.circleAvatarRadiusSmall,
   ),
+  */
 ];
 
 class CheckpointPoiListPreview extends StatelessWidget {
@@ -47,9 +42,7 @@ class CheckpointPoiListPreview extends StatelessWidget {
   Widget build(BuildContext context) {
     //_createMainWidget() {
     var nodes = defaultPoiPreviewList.map<Widget>((node) {
-      if (node is PoiSummary) {
-        return node;
-      } else if (node is SizedBox) {
+      if (node is SizedBox) {
         return const SizedBox(width: 10.0);
       } else {
         throw "Wrong data";

@@ -20,7 +20,8 @@ class PoiTitleList extends ConsumerWidget {
           padding: const EdgeInsets.only(top: YahaSpaceSizes.medium),
           child: Row(
             children: [
-              PoiIcon(poiType: poi.poiType),
+              SizedBox(
+                  child: PoiIcon(poiType: poi.poiType), height: 40, width: 40),
               Container(
                 padding: const EdgeInsets.only(left: YahaSpaceSizes.small),
                 child: Text(poi.title,

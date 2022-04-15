@@ -10,9 +10,8 @@ import '../../../../providers/providers.dart';
 import '../../map/widgets/leaflet-map.dart';
 import '../../poi/poi.dart';
 import '../../shared/shared.dart';
+import '../widgets/hike_properties.dart';
 import 'hike-outline-screen.dart';
-import 'more-poi-screen.dart';
-import 'places-on-route-screen.dart';
 import 'weather-screen.dart';
 
 SpeedDial buildSpeedDial() {
@@ -194,47 +193,6 @@ class HikeScreenStartHikeButton extends StatelessWidget {
   }
 }
 
-class HikeDataElement extends StatelessWidget {
-  final String title;
-  final IconData icon;
-  final String value;
-  final Color color;
-
-  const HikeDataElement(
-      {required this.title,
-      required this.icon,
-      required this.value,
-      this.color = YahaColors.secondaryAccentColor,
-      Key? key})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(YahaSpaceSizes.small),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Icon(icon, size: YahaIconSizes.large, color: color),
-          Text(value,
-              style: TextStyle(
-                  fontSize: YahaFontSizes.small,
-                  fontWeight: FontWeight.w600,
-                  color: color)),
-          Text(title,
-              style: TextStyle(
-                  fontSize: YahaFontSizes.small,
-                  fontWeight: FontWeight.w500,
-                  color: color)),
-        ],
-      ),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(YahaBorderRadius.general),
-          border: Border.all(width: 4.0, color: color)),
-    );
-  }
-}
-
 class HikeScreenDescription extends StatelessWidget {
   final String summary;
 
@@ -251,103 +209,6 @@ class HikeScreenDescription extends StatelessWidget {
               fontWeight: FontWeight.w400,
               color: YahaColors.textColor)),
     );
-  }
-}
-
-class HikeProperties extends StatelessWidget {
-  final Hike hike;
-  final double averageSpeedKmh;
-
-  const HikeProperties(
-      {required this.hike, required this.averageSpeedKmh, Key? key})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GridView.count(
-      shrinkWrap: true,
-      primary: false,
-      padding: const EdgeInsets.only(
-        bottom: YahaSpaceSizes.general,
-      ),
-      crossAxisSpacing: YahaSpaceSizes.medium,
-      mainAxisSpacing: YahaSpaceSizes.medium,
-      crossAxisCount: 3,
-      children: <Widget>[
-        HikeDataElement(
-            title: "Distance",
-            icon: Icons.hiking_rounded,
-            value: _distanceValue(hike.trailLength)),
-        HikeDataElement(
-            title: "Uphill",
-            icon: Icons.trending_up_rounded,
-            value: _distanceValue(hike.uphill)),
-        HikeDataElement(
-            title: "Downhill",
-            icon: Icons.trending_down_rounded,
-            value: _distanceValue(hike.downhill)),
-        HikeDataElement(
-            title: "Time",
-            icon: Icons.watch_later_rounded,
-            value: _timeValue(GameRules.estimatedTime(
-                hike.trailLength, hike.uphill, averageSpeedKmh))),
-        HikeDataElement(
-            title: "Score",
-            icon: Icons.emoji_events_rounded,
-            value: hike.score.toString()),
-        HikeDataElement(
-            title: "Difficulty",
-            icon: Icons.stars_rounded,
-            value: _difficulty[1],
-            color: _difficulty[0])
-      ],
-    );
-  }
-
-  _distanceValue(double distanceInMeters) {
-    final value = distanceInMeters < 2000
-        ? distanceInMeters.round()
-        : (distanceInMeters / 100).round() / 10;
-
-    final unit = distanceInMeters < 2000 ? 'm' : 'km';
-    return '$value $unit';
-  }
-
-  _timeValue(double timeInMinutes) {
-    final hours = timeInMinutes ~/ 60;
-    final minutes = timeInMinutes.remainder(60).floor();
-
-    String hoursTxt = hours == 0 ? '' : '${hours}h';
-    hoursTxt += minutes == 0 ? '' : ' ';
-
-    final minutesTxt = minutes == 0 ? '' : '${minutes}m';
-    return '$hoursTxt$minutesTxt';
-  }
-
-  get _difficulty {
-    const diffData = {
-      0: [Colors.green, "Easy"],
-      1: [Colors.orange, "Difficult"],
-      2: [Colors.red, "Extreme"],
-    };
-
-    return diffData[hike.difficulty];
-  }
-}
-
-class DistanceWidget extends StatelessWidget {
-  final double distanceInMeters;
-  final TextStyle? style;
-
-  const DistanceWidget({Key? key, required this.distanceInMeters, this.style})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final value = distanceInMeters < 2000
-        ? distanceInMeters.round()
-        : (distanceInMeters * 10).round() / 10;
-    return Text(value.toString(), style: style);
   }
 }
 
@@ -429,13 +290,6 @@ class HikeScreen extends ConsumerWidget {
                       }),
                       Container(
                         padding: const EdgeInsets.only(
-                          top: YahaSpaceSizes.small,
-                        ),
-                        child:
-                            const ShowMoreButton(nextScreen: MorePoiScreen()),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.only(
                           top: YahaSpaceSizes.general,
                           bottom: YahaSpaceSizes.medium,
                         ),
@@ -458,10 +312,11 @@ class HikeScreen extends ConsumerWidget {
                         width: MediaQuery.of(context).size.width,
                         child: Consumer(builder: (c, ref, _child) {
                           final pois = ref.watch(
-                              poisAlongHikeUsecasesProvider(hike.id).select(
-                                  (notifier) => notifier.touristicPois));
+                              poisAlongHikeUsecasesProvider(hike.id)
+                                  .select((notifier) => notifier.touristicPois))
+                            ?..shuffle();
 
-                          return PoiTitleList(pois: pois);
+                          return PoiTitleList(pois: pois?.take(10).toList());
                         }),
                         decoration: BoxDecoration(
                           color: YahaColors.accentColor,
@@ -472,8 +327,8 @@ class HikeScreen extends ConsumerWidget {
                       Container(
                           padding:
                               const EdgeInsets.only(top: YahaSpaceSizes.small),
-                          child: const ShowMoreButton(
-                            nextScreen: PlacesOnRouteScreen(),
+                          child: ShowMoreButton(
+                            nextScreen: PlacesOnRouteScreen(hike: hike),
                           )),
                       Container(
                           height: 340,

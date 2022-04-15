@@ -18,3 +18,4 @@ export 'widgets/yaha-colors.dart';
 export 'widgets/yaha-icon-sizes.dart';
 export 'widgets/yaha-space-sizes.dart';
 export 'widgets/yaha-text-input-password.dart';
+export 'widgets/distance_widget.dart';

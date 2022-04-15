@@ -10,17 +10,9 @@ import '../../shared/widgets/yaha-colors.dart';
 import '../../shared/widgets/yaha-font-sizes.dart';
 import '../../shared/widgets/yaha-icon-sizes.dart';
 import '../../shared/widgets/yaha-space-sizes.dart';
-import 'poi-summary.dart';
 
-class PoiScreen extends ConsumerWidget {
-  const PoiScreen({Key? key}) : super(key: key);
-
-  /*final int openingHoursChevronQuarterTurns;
-
-  const PoiScreen({
-    Key? key,
-    required this.openingHoursChevronQuarterTurns,
-  }) : super(key: key);*/
+class PoiInfoScreen extends ConsumerWidget {
+  const PoiInfoScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -37,7 +29,7 @@ class PoiScreen extends ConsumerWidget {
             fontWeight: FontWeight.w600,
           ),
         ),
-        leading: YahaBackButton(),
+        leading: const YahaBackButton(),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: YahaSpaceSizes.medium),
@@ -67,7 +59,7 @@ class PoiScreen extends ConsumerWidget {
                         right: YahaSpaceSizes.general),
                     child: Column(
                       children: [
-                        Container(
+                        /*Container(
                             padding: const EdgeInsets.only(
                                 top: YahaSpaceSizes.general,
                                 bottom: YahaSpaceSizes.general),
@@ -78,6 +70,7 @@ class PoiScreen extends ConsumerWidget {
                               padding: YahaSpaceSizes.small,
                               radius: 40,
                             )),
+                        */
                         Container(
                           padding: const EdgeInsets.only(
                               bottom: YahaSpaceSizes.general),

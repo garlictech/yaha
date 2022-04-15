@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 
+import '../../poi/widgets/poi-icon.dart';
 import '../../shared/shared.dart';
-import 'poi-screen.dart';
-import 'poi-summary.dart';
+import '../screens/poi_info_screen.dart';
 
 class PoiListTileWidget extends StatelessWidget {
-  final Color poiColor;
-  final IconData poiIcon;
+  final PoiIcon poiIcon;
   final String title;
   final int? distanceFromStart;
 
   const PoiListTileWidget({
     Key? key,
-    required this.poiColor,
     required this.poiIcon,
     required this.title,
     required this.distanceFromStart,
@@ -23,7 +21,7 @@ class PoiListTileWidget extends StatelessWidget {
     return InkWell(
       onTap: () {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const PoiScreen()));
+            MaterialPageRoute(builder: (context) => const PoiInfoScreen()));
       },
       child: Padding(
         padding: const EdgeInsets.only(
@@ -34,13 +32,7 @@ class PoiListTileWidget extends StatelessWidget {
           children: [
             Row(
               children: [
-                PoiSummary(
-                  backgroundColor: poiColor,
-                  icon: poiIcon,
-                  iconSize: YahaIconSizes.small,
-                  padding: YahaSpaceSizes.xSmall,
-                  radius: 18,
-                ),
+                SizedBox(child: poiIcon, height: 40, width: 40),
                 Padding(
                   padding: const EdgeInsets.only(left: YahaSpaceSizes.small),
                   child: Column(

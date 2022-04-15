@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../shared/shared.dart';
-import 'poi-summary.dart';
-
 const List<Object> defaultPoiPreviewList = [
-  PoiSummary(
+/*  PoiSummary(
     backgroundColor: YahaColors.amenity,
     icon: Icons.bakery_dining_rounded,
     iconSize: YahaIconSizes.small,
@@ -26,7 +23,7 @@ const List<Object> defaultPoiPreviewList = [
     iconSize: YahaIconSizes.small,
     padding: YahaSpaceSizes.xSmall,
     radius: YahaBoxSizes.circleAvatarRadiusSmall,
-  ),
+  ),*/
 ];
 
 class RouteSectionPoiListPreview extends StatelessWidget {
@@ -36,9 +33,7 @@ class RouteSectionPoiListPreview extends StatelessWidget {
   Widget build(BuildContext context) {
     //_createMainWidget() {
     var nodes = defaultPoiPreviewList.map((node) {
-      if (node is PoiSummary) {
-        return node;
-      } else if (node is SizedBox) {
+      if (node is SizedBox) {
         return const SizedBox(width: 10.0);
       } else {
         throw "Wrong data";
