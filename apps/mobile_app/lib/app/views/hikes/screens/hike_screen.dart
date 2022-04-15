@@ -457,15 +457,11 @@ class HikeScreen extends ConsumerWidget {
                         padding: const EdgeInsets.all(YahaSpaceSizes.general),
                         width: MediaQuery.of(context).size.width,
                         child: Consumer(builder: (c, ref, _child) {
-                          final poiUseCases = ref.watch(poiUsecasesProvider);
                           final pois = ref.watch(
-                              poisAlongHikeUsecasesProvider(hike.id)
-                                  .select((notifier) => notifier.pois));
+                              poisAlongHikeUsecasesProvider(hike.id).select(
+                                  (notifier) => notifier.touristicPois));
 
-                          final touristicPois =
-                              poiUseCases.selectTouristicPois(pois);
-
-                          return PoiTitleList(pois: touristicPois);
+                          return PoiTitleList(pois: pois);
                         }),
                         decoration: BoxDecoration(
                           color: YahaColors.accentColor,

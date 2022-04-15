@@ -53,7 +53,8 @@ class Poi extends $Poi {
       this.tags});
 
   get poiType {
-    final splitted = type.split(':');
+    final convertedType = temporaryTypeConversions(type);
+    final splitted = convertedType.split(':');
     var category = splitted.length > 1 ? splitted[0] : 'unknown';
     var kind = splitted.length > 1 ? splitted[1] : splitted[0];
     category =
@@ -63,11 +64,16 @@ class Poi extends $Poi {
 
     final newType = '$category:$kind';
 
-    if (newType != type) {
+    if (newType != convertedType) {
       debugPrint('Found unsupported POI: $type');
     }
 
     return PoiType(category: category, kind: kind);
+  }
+
+  get title {
+    return description?.first.title ??
+        "Unknown " + poiType.kind.replaceAll('_', ' ');
   }
 
   factory Poi.fromJson(Map<String, dynamic> json) => _$PoiFromJson(json);

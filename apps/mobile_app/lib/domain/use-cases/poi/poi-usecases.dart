@@ -7,7 +7,6 @@ import '../../entities/entities.dart';
 abstract class PoiUsecases {
   Stream<List<Poi>> getPoisAlongHike(String hikeId);
   Stream<List<Poi>> getPoisAroundHike(String hikeId);
-  List<Poi>? selectTouristicPois(List<Poi>? pois);
 }
 
 class PoiUsecasesImpl implements PoiUsecases {
@@ -25,14 +24,6 @@ class PoiUsecasesImpl implements PoiUsecases {
   getPoisAroundHike(String hikeId) {
     final defaults = ref.read(defaultsProvider);
     return _getPoisOfHike(hikeId, defaults.bigGeoBufferSizeInMeters);
-  }
-
-  @override
-  selectTouristicPois(List<Poi>? pois) {
-    return pois
-        ?.where((poi) => {'tourism', 'natural', 'leisure', 'historic', 'sight'}
-            .contains(poi.poiType.category))
-        .toList();
   }
 
   Stream<List<Poi>> _getPoisOfHike(

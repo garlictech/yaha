@@ -23,7 +23,7 @@ class PoiTitleList extends ConsumerWidget {
               PoiIcon(poiType: poi.poiType),
               Container(
                 padding: const EdgeInsets.only(left: YahaSpaceSizes.small),
-                child: Text(poi.description?.first.title ?? poi.poiType.kind,
+                child: Text(poi.title,
                     style: const TextStyle(
                         fontSize: YahaFontSizes.small,
                         color: YahaColors.textColor)),

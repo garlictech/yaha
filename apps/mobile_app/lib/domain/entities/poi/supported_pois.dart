@@ -39,6 +39,7 @@ const Map<String, Set<String>> supportedTags = {
     'stone',
     'sinkhole',
     'cave_entrance',
+    'shrub'
   },
   "amenity": {
     'bar',
@@ -209,6 +210,7 @@ const Map<String, Set<String>> supportedTags = {
     'wayside_cross',
     'wayside_shrine',
     'wreck',
+    'unknown'
   },
   "leisure": {
     'adult_gaming_centre',
@@ -250,7 +252,9 @@ const Map<String, Set<String>> supportedTags = {
     'breakwater',
     'bridge',
     'bunker_silo',
+    'cairn',
     'carpet_hanger',
+    'cellar_entrance',
     'chimney',
     'communications_tower',
     'crane',
@@ -498,3 +502,30 @@ const Map<String, Set<String>> supportedTags = {
     'zoo',
   },
 };
+
+const touristicCategories = {
+  'tourism',
+  'natural',
+  'leisure',
+  'historic',
+  'sight'
+};
+
+const nonTouristicKinds = {
+  "information",
+  "firepit",
+  "picnic_table",
+  "picnic_site",
+  "wayside_cross",
+  "tree",
+  "playground"
+};
+
+// Must be handled in the POI search code!
+String temporaryTypeConversions(String type) {
+  if (type == "historic:yes") {
+    return "historic:unknown";
+  }
+
+  return type;
+}

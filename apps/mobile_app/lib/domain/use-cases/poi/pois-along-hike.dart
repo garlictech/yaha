@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:yaha/domain/use-cases/poi/utils.dart';
 import '../../../providers/poi-providers.dart';
 import '../../entities/entities.dart';
 
@@ -7,6 +8,7 @@ class PoisAlongHikeUsecases extends ChangeNotifier {
   List<Poi>? pois;
   List<PoiType>? _typeList;
   List<PoiType>? _uniquePois;
+  List<Poi>? _touristicPois;
 
   final String hikeId;
   final ChangeNotifierProviderRef<PoisAlongHikeUsecases> ref;
@@ -16,14 +18,13 @@ class PoisAlongHikeUsecases extends ChangeNotifier {
   }
 
   void refreshPois() async {
-    _typeList = null;
-    _uniquePois = null;
+    pois = null;
+    _resetProps();
     notifyListeners();
     final poiUsecases = ref.read(poiUsecasesProvider);
     await for (final newPois in poiUsecases.getPoisAlongHike(hikeId)) {
       pois = newPois;
-      _typeList = null;
-      _uniquePois = null;
+      _resetProps();
       notifyListeners();
     }
   }
@@ -41,5 +42,15 @@ class PoisAlongHikeUsecases extends ChangeNotifier {
   List<PoiType>? get uniqueTypes {
     getTypeList() => typeList?.toSet().toList();
     return _uniquePois ??= getTypeList();
+  }
+
+  List<Poi>? get touristicPois {
+    return _touristicPois ??= selectTouristicPois(pois);
+  }
+
+  _resetProps() {
+    _typeList = null;
+    _uniquePois = null;
+    _touristicPois = null;
   }
 }
