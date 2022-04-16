@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/domain/domain.dart';
-import 'package:yaha/providers/poi-providers.dart';
+import 'package:yaha/providers/providers.dart';
 
 import '../../poi/poi.dart';
 import '../../shared/shared.dart';
@@ -9,8 +9,11 @@ import '../widgets/poi_list_tile_widget.dart';
 
 class PlacesOnRouteItem extends StatelessWidget {
   final Poi poi;
+  final double distanceFromStart;
 
-  const PlacesOnRouteItem({Key? key, required this.poi}) : super(key: key);
+  const PlacesOnRouteItem(
+      {Key? key, required this.poi, required this.distanceFromStart})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +21,7 @@ class PlacesOnRouteItem extends StatelessWidget {
       PoiListTileWidget(
         poiIcon: PoiIcon(poiType: poi.poiType),
         title: poi.title,
-        distanceFromStart: 500,
+        distanceFromStart: distanceFromStart,
       ),
       const Padding(
         padding: EdgeInsets.only(
@@ -40,8 +43,16 @@ class PlacesOnRouteScreen extends ConsumerWidget {
     final pois = ref.watch(poisAlongHikeUsecasesProvider(hike.id)
         .select((notifier) => notifier.touristicPois));
 
-    final listItems =
-        (pois ?? []).map((poi) => PlacesOnRouteItem(poi: poi)).toList();
+    final geocalc = ref.watch(geoCalcProvider);
+
+    final listItems = (pois ?? [])
+        .map((poi) => FutureBuilder<double>(
+            future:
+                geocalc.distanceOnLine(poi.location, hike.endPoint, hike.route),
+            builder: (BuildContext context, AsyncSnapshot<double> snapshot) =>
+                PlacesOnRouteItem(
+                    poi: poi, distanceFromStart: snapshot.data ?? 0)))
+        .toList();
 
     return Scaffold(
       appBar: AppBar(

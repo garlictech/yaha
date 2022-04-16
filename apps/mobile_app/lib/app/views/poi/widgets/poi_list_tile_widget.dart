@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yaha/utils/units/units.dart';
 
 import '../../poi/widgets/poi-icon.dart';
 import '../../shared/shared.dart';
@@ -7,7 +8,7 @@ import '../screens/poi_info_screen.dart';
 class PoiListTileWidget extends StatelessWidget {
   final PoiIcon poiIcon;
   final String title;
-  final int? distanceFromStart;
+  final double distanceFromStart;
 
   const PoiListTileWidget({
     Key? key,
@@ -51,7 +52,7 @@ class PoiListTileWidget extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'Distance from start: ${distanceFromStart}m',
+                        'Distance from start: ${getDistanceString(distanceFromStart)}',
                         style: const TextStyle(
                           fontSize: YahaFontSizes.small,
                           color: YahaColors.textColor,

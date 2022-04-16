@@ -23,13 +23,20 @@ class LineStringData extends $LineStringData {
 
   Map<String, dynamic> toJson() => _$LineStringDataToJson(this);
 
-  String toGeojsonFeatureString(String? name) => '''
+  String toGeojsonFeatureString([String? name]) => '''
     {
       "features": [
         {
         "type": "Feature",
         "geometry": ${jsonEncode(toJson())}
       }]
+    }
+    ''';
+
+  String toLinestringFeatureString() => '''
+    {
+        "type": "Feature",
+        "geometry": ${jsonEncode(toJson())}
     }
     ''';
 }
