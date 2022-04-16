@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:rxdart/streams.dart';
 import 'package:yaha/domain/domain.dart';
 import 'package:yaha/providers/providers.dart';
 
@@ -40,19 +41,21 @@ class PlacesOnRouteScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final pois = ref.watch(poisAlongHikeUsecasesProvider(hike.id)
-        .select((notifier) => notifier.touristicPois));
+    final pois = ref
+        .watch(poisAlongHikeUsecasesProvider(hike.id)
+            .select((notifier) => notifier.touristicPoisSortedByDistance))
+        .first;
 
-    final geocalc = ref.watch(geoCalcProvider);
-
-    final listItems = (pois ?? [])
-        .map((poi) => FutureBuilder<double>(
-            future:
-                geocalc.distanceOnLine(poi.location, hike.endPoint, hike.route),
-            builder: (BuildContext context, AsyncSnapshot<double> snapshot) =>
-                PlacesOnRouteItem(
-                    poi: poi, distanceFromStart: snapshot.data ?? 0)))
-        .toList();
+    var listItems = FutureBuilder<List<PoiOfHike>>(
+        future: pois,
+        builder:
+            (BuildContext context, AsyncSnapshot<List<PoiOfHike>> snapshot) =>
+                Column(
+                    children: (snapshot.data ?? [])
+                        .map<Widget>((poi) => PlacesOnRouteItem(
+                            poi: poi,
+                            distanceFromStart: poi.distanceFromStartSync ?? 0))
+                        .toList()));
 
     return Scaffold(
       appBar: AppBar(
@@ -79,9 +82,7 @@ class PlacesOnRouteScreen extends ConsumerWidget {
                 return SafeArea(
                   child: Padding(
                     padding: const EdgeInsets.only(top: YahaSpaceSizes.general),
-                    child: Column(
-                      children: listItems,
-                    ),
+                    child: listItems,
                   ),
                 );
               },
