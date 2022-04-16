@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:rxdart/streams.dart';
 import 'package:yaha/domain/domain.dart';
 import 'package:yaha/providers/providers.dart';
 
+import '../../map/widgets/pois-of-hike-map.dart';
 import '../../poi/poi.dart';
 import '../../shared/shared.dart';
 import '../widgets/poi_list_tile_widget.dart';
@@ -48,49 +48,53 @@ class PlacesOnRouteScreen extends ConsumerWidget {
 
     var listItems = FutureBuilder<List<PoiOfHike>>(
         future: pois,
-        builder:
-            (BuildContext context, AsyncSnapshot<List<PoiOfHike>> snapshot) =>
-                Column(
-                    children: (snapshot.data ?? [])
-                        .map<Widget>((poi) => PlacesOnRouteItem(
-                            poi: poi,
-                            distanceFromStart: poi.distanceFromStartSync ?? 0))
-                        .toList()));
+        builder: (BuildContext context,
+                AsyncSnapshot<List<PoiOfHike>> snapshot) =>
+            Column(children: [
+              Container(
+                  height: 240,
+                  margin: const EdgeInsets.only(bottom: YahaSpaceSizes.large),
+                  width: MediaQuery.of(context).size.width,
+                  child: ClipRRect(
+                    borderRadius:
+                        BorderRadius.circular(YahaBorderRadius.general),
+                    child: PoisOfHikeMap(pois: snapshot.data ?? [], hike: hike),
+                  )),
+              Expanded(
+                  child: ListView.builder(
+                      padding: const EdgeInsets.all(8),
+                      itemCount: snapshot.data?.length ?? 0,
+                      itemBuilder: (BuildContext context, int index) {
+                        return SizedBox(
+                            height: 100,
+                            child: PlacesOnRouteItem(
+                                poi: snapshot.data![index],
+                                distanceFromStart: snapshot
+                                        .data![index].distanceFromStartSync ??
+                                    0));
+                      }))
+            ]));
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: YahaColors.background,
-        elevation: 0,
-        title: const Text(
-          'Most interesting places on route',
-          softWrap: true,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: YahaFontSizes.medium,
-            color: YahaColors.textColor,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        leading: const YahaBackButton(),
-      ),
-      body: CustomScrollView(
-        physics: const BouncingScrollPhysics(),
-        slivers: <Widget>[
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
-                return SafeArea(
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: YahaSpaceSizes.general),
-                    child: listItems,
-                  ),
-                );
-              },
-              childCount: 1,
+        appBar: AppBar(
+          backgroundColor: YahaColors.background,
+          elevation: 0,
+          title: const Text(
+            'Most interesting places on route',
+            softWrap: true,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: YahaFontSizes.medium,
+              color: YahaColors.textColor,
+              fontWeight: FontWeight.w600,
             ),
           ),
-        ],
-      ),
-    );
+          leading: const YahaBackButton(),
+        ),
+        body: SafeArea(
+          child: Padding(
+              padding: const EdgeInsets.only(top: YahaSpaceSizes.general),
+              child: listItems),
+        ));
   }
 }
