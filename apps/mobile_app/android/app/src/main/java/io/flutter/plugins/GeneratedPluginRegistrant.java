@@ -41,6 +41,11 @@ public final class GeneratedPluginRegistrant {
       Log.e(TAG, "Error registering plugin amplify_flutter, com.amazonaws.amplify.Amplify", e);
     }
     try {
+      flutterEngine.getPlugins().add(new com.hemanthraj.fluttercompass.FlutterCompassPlugin());
+    } catch(Exception e) {
+      Log.e(TAG, "Error registering plugin flutter_compass, com.hemanthraj.fluttercompass.FlutterCompassPlugin", e);
+    }
+    try {
       flutterEngine.getPlugins().add(new io.abner.flutter_js.FlutterJsPlugin());
     } catch(Exception e) {
       Log.e(TAG, "Error registering plugin flutter_js, io.abner.flutter_js.FlutterJsPlugin", e);

@@ -398,6 +398,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.4.4"
+  flutter_compass:
+    dependency: transitive
+    description:
+      name: flutter_compass
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.7.0"
   flutter_html:
     dependency: "direct main"
     description:
@@ -447,6 +454,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.14.0"
+  flutter_map_location_marker:
+    dependency: "direct main"
+    description:
+      name: flutter_map_location_marker
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.1.0"
   flutter_markdown:
     dependency: "direct main"
     description:
@@ -1280,7 +1294,14 @@ packages:
       name: syncfusion_flutter_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "19.4.47"
+    version: "19.4.56"
+  syncfusion_flutter_maps:
+    dependency: "direct main"
+    description:
+      name: syncfusion_flutter_maps
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "19.4.56-beta"
   syncfusion_flutter_sliders:
     dependency: "direct main"
     description:
