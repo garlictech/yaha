@@ -558,11 +558,11 @@
             "cwd": "apps/mobile_app"
           }
         },
-        "graphql-codegen": {
+        "codegen": {
           "executor": "@nrwl/workspace:run-commands",
           "options": {
             "parallel": false,
-            "command": "flutter pub run build_runner build --verbose --delete-conflicting-outputs",
+            "command": "flutter packages pub run build_runner build lib --delete-conflicting-outputs",
             "cwd": "apps/mobile_app"
           }
         },
@@ -570,7 +570,7 @@
           "executor": "@nrwl/workspace:run-commands",
           "options": {
             "parallel": false,
-            "command": "docker run --platform linux/amd64 --rm -v ${PWD}:/build -v /tmp/x:/root/.pub-cache --workdir /build  ${AWS_ACCOUNT}.dkr.ecr.eu-west-1.amazonaws.com/yaha-flutter flutter pub run build_runner build --delete-conflicting-outputs",
+            "command": "docker run --platform linux/amd64 --rm -v ${PWD}:/build -v /tmp/x:/root/.pub-cache --workdir /build  ${AWS_ACCOUNT}.dkr.ecr.eu-west-1.amazonaws.com/yaha-flutter flutter packages pub run build_runner build lib --delete-conflicting-outputs",
             "cwd": "apps/mobile_app"
           }
         },

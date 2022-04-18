@@ -286,4 +286,10 @@ type Query {
   ): GeoSearchConnection
     @auth(rules: [{ allow: public }, { allow: public, provider: iam }])
     @function(name: "${env}-yaha-amplify-resolvers")
+
+  searchSafeImagesAroundLocation(
+    query: SearchByRadiusInput!
+  ): GeoSearchConnection
+    @auth(rules: [{ allow: public }, { allow: public, provider: iam }])
+    @function(name: "${env}-yaha-amplify-resolvers")
 }

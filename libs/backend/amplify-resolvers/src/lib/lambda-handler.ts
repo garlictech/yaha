@@ -6,6 +6,7 @@ import {
   searchInMultipolygonResolver,
   searchInShapeResolver,
   searchSafeImagesAroundHikeResolver,
+  searchSafeImagesAroundLocationResolver,
 } from './search-resolvers';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { createConnector } = require('aws-elasticsearch-js');
@@ -52,6 +53,8 @@ export const handler: Handler<AmplifyRequest, unknown> = (
       searchAroundHike: searchAroundHikeResolver(searchDeps),
       searchSafeImagesAroundHike:
         searchSafeImagesAroundHikeResolver(searchDeps),
+      searchSafeImagesAroundLocation:
+        searchSafeImagesAroundLocationResolver(searchDeps),
     },
   };
 
