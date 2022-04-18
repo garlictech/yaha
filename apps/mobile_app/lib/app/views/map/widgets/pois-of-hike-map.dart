@@ -7,6 +7,7 @@ import 'package:syncfusion_flutter_maps/maps.dart';
 import 'package:yaha/domain/domain.dart' as domain;
 import 'package:yaha/providers/providers.dart';
 
+import '../../poi/screens/poi_info_screen.dart';
 import '../../poi/widgets/poi-icon.dart';
 
 /// Renders the map widget with OSM map.
@@ -181,7 +182,7 @@ class _PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
                         height: _cardHeight,
                         padding: const EdgeInsets.only(bottom: 10),
 
-                        /// PageView which shows the world wonder details at the bottom.
+                        /// PageView which shows the poi details at the bottom.
                         child: PageView.builder(
                           itemCount: pois.length,
                           onPageChanged: (index) =>
@@ -340,6 +341,13 @@ class _PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
                                                 milliseconds: 500),
                                             curve: Curves.easeInOut,
                                           );
+                                        } else {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      PoiInfoScreen(
+                                                          poi: item)));
                                         }
                                       },
                                     ),

@@ -20,7 +20,7 @@ class PlacesOnRouteItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(children: [
       PoiListTileWidget(
-        poiIcon: PoiIcon(poiType: poi.poiType),
+        poi: poi,
         title: poi.title,
         distanceFromStart: distanceFromStart,
       ),

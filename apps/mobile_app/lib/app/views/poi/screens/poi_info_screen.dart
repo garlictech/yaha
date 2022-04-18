@@ -1,54 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:yaha/domain/domain.dart' as domain;
+import 'package:yaha/providers/providers.dart';
 
-import '../../comments/screens/commments-screen.dart';
-import '../../shared/widgets/buttons/back-button.dart';
-import '../../shared/widgets/gallery-widget.dart';
-import '../../shared/widgets/yaha-border-radius.dart';
-import '../../shared/widgets/yaha-box-sizes.dart';
-import '../../shared/widgets/yaha-colors.dart';
-import '../../shared/widgets/yaha-font-sizes.dart';
-import '../../shared/widgets/yaha-icon-sizes.dart';
-import '../../shared/widgets/yaha-space-sizes.dart';
+import '../../shared/shared.dart';
+import '../widgets/poi-icon.dart';
 
 class PoiInfoScreen extends ConsumerWidget {
-  const PoiInfoScreen({Key? key}) : super(key: key);
+  final domain.Poi poi;
+  const PoiInfoScreen({Key? key, required this.poi}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: YahaColors.background,
-        elevation: 0,
-        title: const Text(
-          'Hungarian\nNational Museum',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: YahaFontSizes.medium,
-            color: YahaColors.textColor,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        leading: const YahaBackButton(),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: YahaSpaceSizes.medium),
-            child: IconButton(
-              icon: const Icon(Icons.comment_outlined,
-                  size: YahaIconSizes.medium, color: YahaColors.textColor),
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const CommmentsScreen()));
-              },
-            ),
-          ),
-        ],
-      ),
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: <Widget>[
+          Consumer(builder: (c, ref, _child) {
+            final imagesOfPoi = ref.watch(imagesOfPoiProvider(poi.id));
+            poiIcon() =>
+                SizedBox(height: 240, child: PoiIcon(poiType: poi.poiType));
+
+            imageContent(imageUrl) => Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: NetworkImage(imageUrl),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                );
+
+            return imagesOfPoi.when(
+                error: (_e, _s) =>
+                    YahaSliverAppBar(title: poi.title, content: poiIcon()),
+                loading: () =>
+                    YahaSliverAppBar(title: poi.title, content: poiIcon()),
+                data: (imageUrls) => YahaSliverAppBar(
+                    title: poi.title,
+                    content: imageUrls.isEmpty
+                        ? poiIcon()
+                        : imageContent(imageUrls.first)));
+          }),
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
@@ -158,10 +150,22 @@ class PoiInfoScreen extends ConsumerWidget {
                             ],
                           ),
                         ),
-                        SizedBox(
-                            height: 220.0,
-                            width: MediaQuery.of(context).size.width,
-                            child: const GalleryWidget()),
+                        Consumer(builder: (c, ref, _child) {
+                          final imagesOfPoi =
+                              ref.watch(imagesOfPoiProvider(poi.id));
+                          return imagesOfPoi.when(
+                              error: (_e, _s) => Container(),
+                              loading: () => const CircularProgressIndicator(),
+                              data: (imageUrls) => imageUrls.isEmpty
+                                  ? Container()
+                                  : Container(
+                                      margin: const EdgeInsets.only(
+                                          bottom: YahaSpaceSizes.large),
+                                      height: YahaBoxSizes.heightMedium,
+                                      width: MediaQuery.of(context).size.width,
+                                      child:
+                                          GalleryWidget(imageUrls: imageUrls)));
+                        }),
                         Padding(
                           padding: const EdgeInsets.only(
                               top: YahaSpaceSizes.xLarge,

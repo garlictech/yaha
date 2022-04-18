@@ -103,65 +103,6 @@ SpeedDial buildSpeedDial() {
   );
 }
 
-class HikeScreenSliverAppBar extends StatelessWidget {
-  final String title;
-  final String imageUrl;
-
-  const HikeScreenSliverAppBar(
-      {required this.title, required this.imageUrl, Key? key})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SliverAppBar(
-      stretch: false,
-      pinned: true,
-      snap: true,
-      floating: true,
-      expandedHeight: 240.0,
-      flexibleSpace: FlexibleSpaceBar(
-        titlePadding: const EdgeInsets.only(
-            left: YahaSpaceSizes.general, bottom: YahaSpaceSizes.small),
-        centerTitle: false,
-        title: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  textAlign: TextAlign.left,
-                  style: const TextStyle(
-                      color: YahaColors.background,
-                      fontWeight: FontWeight.w700,
-                      fontSize: YahaFontSizes.small),
-                ),
-              ],
-            ),
-          ],
-        ),
-        background: ColorFiltered(
-          colorFilter: ColorFilter.mode(
-              Colors.black.withOpacity(0.20), BlendMode.darken),
-          child: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: NetworkImage(imageUrl),
-                //image: NetworkImage(viewModel.imageUrls.first),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 class HikeScreenStartHikeButton extends StatelessWidget {
   const HikeScreenStartHikeButton({Key? key}) : super(key: key);
 
@@ -230,9 +171,16 @@ class HikeScreen extends ConsumerWidget {
           Consumer(builder: (c, ref, _child) {
             final imageUrl = ref.watch(imagesAlongHikeNotifierProvider(hike.id)
                 .select((vm) => vm.firstImageUrl));
-
-            return HikeScreenSliverAppBar(
-                title: hike.description.first.title ?? '', imageUrl: imageUrl);
+            final content = Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: NetworkImage(imageUrl),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            );
+            return YahaSliverAppBar(
+                title: hike.description.first.title ?? '', content: content);
           }),
           SliverList(
             delegate: SliverChildBuilderDelegate(
