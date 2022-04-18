@@ -73,6 +73,7 @@ dependencies:
   rxdart: ^0.27.3
   flutter_map_location_marker: ^3.1.0
   syncfusion_flutter_maps: ^19.4.56-beta
+  flutter_hooks: ^0.18.3
 
 flutter_icons:
   android: true

@@ -1,26 +1,21 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yaha/domain/entities/poi/poi_entity.dart';
-import '../../../providers/image-providers.dart';
+import 'package:yaha/providers/providers.dart';
 
-class ImagesOfPoiUsecases extends ChangeNotifier {
-  final Poi poi;
-  final ChangeNotifierProviderRef<ImagesOfPoiUsecases> ref;
+class ImagesOfPoiUsecases {
+  final String poiId;
+  final FutureProviderRef ref;
 
-  List<String>? imageUrls;
+  Future<List<String>>? _imageUrls;
 
-  ImagesOfPoiUsecases({required this.poi, required this.ref}) {
-    refreshImages();
-  }
+  ImagesOfPoiUsecases({required this.poiId, required this.ref});
 
-  void refreshImages() async {
+  Future<List<String>> get imageUrls {
     final imageUsecases = ref.read(imageUsecasesProvider);
-    imageUrls = await imageUsecases.getImagesAroundPoi(poi).then(
-        (images) => images.map<String>((image) => image.card.url).toList());
-    notifyListeners();
-  }
-
-  get firstImageUrl {
-    return imageUrls?.first;
+    final poiRepo = ref.read(poiRepositoryProvider);
+    return _imageUrls ??= poiRepo
+        .getPoi(poiId)
+        .then((poi) => imageUsecases.getImagesAroundPoi(poi))
+        .then(
+            (images) => images.map<String>((image) => image.card.url).toList());
   }
 }

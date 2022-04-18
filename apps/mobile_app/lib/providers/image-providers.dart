@@ -15,3 +15,8 @@ final imagesAlongHikeNotifierProvider =
         (ref, hikeId) {
   return ImagesAlongHikeUsecases(hikeId: hikeId, ref: ref);
 });
+
+final imagesOfPoiProvider =
+    FutureProvider.family<List<String>, String>((ref, poiId) {
+  return ImagesOfPoiUsecases(poiId: poiId, ref: ref).imageUrls;
+});

@@ -67,6 +67,9 @@ class PlacesOnRouteScreen extends ConsumerWidget {
                 future: pois,
                 builder: (BuildContext context,
                         AsyncSnapshot<List<PoiOfHike>> snapshot) =>
-                    PoisOfHikeMap(pois: snapshot.data ?? [], hike: hike))));
+                    snapshot.data == null
+                        ? Container()
+                        : PoisOfHikeMap(
+                            pois: snapshot.data ?? [], hike: hike))));
   }
 }

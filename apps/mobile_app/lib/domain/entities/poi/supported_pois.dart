@@ -148,6 +148,7 @@ const Map<String, Set<String>> supportedTags = {
     'waste_transfer_station',
     'watering_place',
     'water_point',
+    'pub'
   },
   "public_transport": {'stop_position', 'platform', 'station', 'stop_area'},
   "emergency": {
@@ -178,6 +179,8 @@ const Map<String, Set<String>> supportedTags = {
     'archaeological_site',
     'battlefield',
     'bomb_crater',
+    'boundary_stone',
+    'bunker',
     'building',
     'cannon',
     'castle',
@@ -328,6 +331,7 @@ const Map<String, Set<String>> supportedTags = {
     'convenience',
     'deli',
     'dairy',
+    'estate_agent',
     'farm',
     'frozen_food',
     'greengrocer',
