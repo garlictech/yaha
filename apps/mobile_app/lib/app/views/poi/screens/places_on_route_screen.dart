@@ -41,11 +41,6 @@ class PlacesOnRouteScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final pois = ref
-        .watch(poisAlongHikeUsecasesProvider(hike.id)
-            .select((notifier) => notifier.touristicPoisSortedByDistance))
-        .first;
-
     return Scaffold(
         appBar: AppBar(
           backgroundColor: YahaColors.background,
@@ -62,14 +57,6 @@ class PlacesOnRouteScreen extends ConsumerWidget {
           ),
           leading: const YahaBackButton(),
         ),
-        body: SafeArea(
-            child: FutureBuilder<List<PoiOfHike>>(
-                future: pois,
-                builder: (BuildContext context,
-                        AsyncSnapshot<List<PoiOfHike>> snapshot) =>
-                    snapshot.data == null
-                        ? Container()
-                        : PoisOfHikeMap(
-                            pois: snapshot.data ?? [], hike: hike))));
+        body: SafeArea(child: PoisOfHikeMap(hike: hike)));
   }
 }
