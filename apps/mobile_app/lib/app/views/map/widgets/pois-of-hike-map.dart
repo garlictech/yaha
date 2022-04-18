@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 ///Map import
@@ -213,6 +215,19 @@ class _PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
                                       final imagesOfPoi = ref
                                           .watch(imagesOfPoiProvider(item.id));
 
+                                      final summary =
+                                          item.description?[0].summary == null
+                                              ? const Text("No description yet")
+                                              : (item.description?[0].type ==
+                                                      'html'
+                                                  ? Html(
+                                                      data: item.description?[0]
+                                                          .summary)
+                                                  : Markdown(
+                                                      data: item.description?[0]
+                                                              .summary ??
+                                                          ''));
+
                                       return Row(children: <Widget>[
                                         // Adding title and description for card.
                                         Expanded(
@@ -289,18 +304,7 @@ class _PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
                                                                               .start)
                                                                 ])),
                                               const SizedBox(height: 5),
-                                              Expanded(
-                                                  child: Text(
-                                                item.description?[0].summary ??
-                                                    '',
-                                                style: const TextStyle(
-                                                    fontSize: 11),
-                                                overflow: TextOverflow.ellipsis,
-                                                maxLines:
-                                                    (index == 2 || index == 6)
-                                                        ? 2
-                                                        : 4,
-                                              ))
+                                              Expanded(child: summary)
                                             ],
                                           ),
                                         )),

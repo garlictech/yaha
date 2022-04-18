@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/domain/domain.dart' as domain;
 import 'package:yaha/providers/providers.dart';
@@ -12,6 +14,13 @@ class PoiInfoScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    debugPrint("************* ${poi.description?[0]}");
+    final summary = poi.description?[0].summary == null
+        ? const Text("No description yet")
+        : (poi.description?[0].type == 'html'
+            ? Html(data: poi.description?[0].summary)
+            : Markdown(data: poi.description?[0].summary ?? ''));
+
     return Scaffold(
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
@@ -51,28 +60,25 @@ class PoiInfoScreen extends ConsumerWidget {
                         right: YahaSpaceSizes.general),
                     child: Column(
                       children: [
-                        /*Container(
-                            padding: const EdgeInsets.only(
-                                top: YahaSpaceSizes.general,
-                                bottom: YahaSpaceSizes.general),
-                            child: const PoiSummary(
-                              backgroundColor: YahaColors.generic,
-                              icon: Icons.museum_rounded,
-                              iconSize: 48,
-                              padding: YahaSpaceSizes.small,
-                              radius: 40,
-                            )),
-                        */
+                        Row(children: [
+                          SizedBox(
+                              child: PoiIcon(poiType: poi.poiType),
+                              height: 40,
+                              width: 40),
+                          Column(children: [
+                            Text(
+                                'LAT: ${(poi.location.lon * 100000).round() / 100000}'),
+                            Text(
+                                'LON: ${(poi.location.lat * 100000).round() / 100000}'),
+                            poi.elevation != null
+                                ? Text('ELEVATION: ${poi.elevation!.round()}m')
+                                : Container(),
+                          ])
+                        ]),
                         Container(
-                          padding: const EdgeInsets.only(
-                              bottom: YahaSpaceSizes.general),
-                          child: const Text(
-                              'The Hungarian National Museum (Hungarian: Magyar Nemzeti Múzeum) was founded in 1802 and is the national museum for the history, art, and archaeology of Hungary.',
-                              style: TextStyle(
-                                  fontSize: YahaFontSizes.small,
-                                  fontWeight: FontWeight.w400,
-                                  color: YahaColors.textColor)),
-                        ),
+                            padding: const EdgeInsets.only(
+                                bottom: YahaSpaceSizes.general),
+                            child: summary),
                         Container(
                           height: 340,
                           width: MediaQuery.of(context).size.width,
