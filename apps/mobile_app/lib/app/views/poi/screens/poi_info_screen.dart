@@ -1,62 +1,55 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:yaha/domain/domain.dart' as domain;
+import 'package:yaha/providers/providers.dart';
 
-import '../../comments/screens/commments-screen.dart';
-import '../../shared/widgets/buttons/back-button.dart';
-import '../../shared/widgets/gallery-widget.dart';
-import '../../shared/widgets/yaha-border-radius.dart';
-import '../../shared/widgets/yaha-box-sizes.dart';
-import '../../shared/widgets/yaha-colors.dart';
-import '../../shared/widgets/yaha-font-sizes.dart';
-import '../../shared/widgets/yaha-icon-sizes.dart';
-import '../../shared/widgets/yaha-space-sizes.dart';
-import 'poi-summary.dart';
+import '../../shared/shared.dart';
+import '../widgets/poi-icon.dart';
 
-class PoiScreen extends ConsumerWidget {
-  const PoiScreen({Key? key}) : super(key: key);
-
-  /*final int openingHoursChevronQuarterTurns;
-
-  const PoiScreen({
-    Key? key,
-    required this.openingHoursChevronQuarterTurns,
-  }) : super(key: key);*/
+class PoiInfoScreen extends ConsumerWidget {
+  final domain.Poi poi;
+  const PoiInfoScreen({Key? key, required this.poi}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    debugPrint("************* ${poi.description?[0]}");
+    final summary = poi.description?[0].summary == null
+        ? const Text("No description yet")
+        : (poi.description?[0].type == 'html'
+            ? Html(data: poi.description?[0].summary)
+            : Markdown(data: poi.description?[0].summary ?? ''));
+
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: YahaColors.background,
-        elevation: 0,
-        title: const Text(
-          'Hungarian\nNational Museum',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: YahaFontSizes.medium,
-            color: YahaColors.textColor,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        leading: YahaBackButton(),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: YahaSpaceSizes.medium),
-            child: IconButton(
-              icon: const Icon(Icons.comment_outlined,
-                  size: YahaIconSizes.medium, color: YahaColors.textColor),
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const CommmentsScreen()));
-              },
-            ),
-          ),
-        ],
-      ),
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: <Widget>[
+          Consumer(builder: (c, ref, _child) {
+            final imagesOfPoi = ref.watch(imagesOfPoiProvider(poi.id));
+            poiIcon() =>
+                SizedBox(height: 240, child: PoiIcon(poiType: poi.poiType));
+
+            imageContent(imageUrl) => Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: NetworkImage(imageUrl),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                );
+
+            return imagesOfPoi.when(
+                error: (_e, _s) =>
+                    YahaSliverAppBar(title: poi.title, content: poiIcon()),
+                loading: () =>
+                    YahaSliverAppBar(title: poi.title, content: poiIcon()),
+                data: (imageUrls) => YahaSliverAppBar(
+                    title: poi.title,
+                    content: imageUrls.isEmpty
+                        ? poiIcon()
+                        : imageContent(imageUrls.first)));
+          }),
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
@@ -67,27 +60,25 @@ class PoiScreen extends ConsumerWidget {
                         right: YahaSpaceSizes.general),
                     child: Column(
                       children: [
+                        Row(children: [
+                          SizedBox(
+                              child: PoiIcon(poiType: poi.poiType),
+                              height: 40,
+                              width: 40),
+                          Column(children: [
+                            Text(
+                                'LAT: ${(poi.location.lon * 100000).round() / 100000}'),
+                            Text(
+                                'LON: ${(poi.location.lat * 100000).round() / 100000}'),
+                            poi.elevation != null
+                                ? Text('ELEVATION: ${poi.elevation!.round()}m')
+                                : Container(),
+                          ])
+                        ]),
                         Container(
                             padding: const EdgeInsets.only(
-                                top: YahaSpaceSizes.general,
                                 bottom: YahaSpaceSizes.general),
-                            child: const PoiSummary(
-                              backgroundColor: YahaColors.generic,
-                              icon: Icons.museum_rounded,
-                              iconSize: 48,
-                              padding: YahaSpaceSizes.small,
-                              radius: 40,
-                            )),
-                        Container(
-                          padding: const EdgeInsets.only(
-                              bottom: YahaSpaceSizes.general),
-                          child: const Text(
-                              'The Hungarian National Museum (Hungarian: Magyar Nemzeti Múzeum) was founded in 1802 and is the national museum for the history, art, and archaeology of Hungary.',
-                              style: TextStyle(
-                                  fontSize: YahaFontSizes.small,
-                                  fontWeight: FontWeight.w400,
-                                  color: YahaColors.textColor)),
-                        ),
+                            child: summary),
                         Container(
                           height: 340,
                           width: MediaQuery.of(context).size.width,
@@ -165,10 +156,22 @@ class PoiScreen extends ConsumerWidget {
                             ],
                           ),
                         ),
-                        SizedBox(
-                            height: 220.0,
-                            width: MediaQuery.of(context).size.width,
-                            child: const GalleryWidget()),
+                        Consumer(builder: (c, ref, _child) {
+                          final imagesOfPoi =
+                              ref.watch(imagesOfPoiProvider(poi.id));
+                          return imagesOfPoi.when(
+                              error: (_e, _s) => Container(),
+                              loading: () => const CircularProgressIndicator(),
+                              data: (imageUrls) => imageUrls.isEmpty
+                                  ? Container()
+                                  : Container(
+                                      margin: const EdgeInsets.only(
+                                          bottom: YahaSpaceSizes.large),
+                                      height: YahaBoxSizes.heightMedium,
+                                      width: MediaQuery.of(context).size.width,
+                                      child:
+                                          GalleryWidget(imageUrls: imageUrls)));
+                        }),
                         Padding(
                           padding: const EdgeInsets.only(
                               top: YahaSpaceSizes.xLarge,

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/app/presenters/home/guest-home-screen-presenter.dart';
 import 'package:yaha/domain/states/auth/auth-state.dart';
 import 'package:yaha/domain/states/user/user-state.dart';
+import 'package:yaha/providers/providers.dart';
 
 import '../../../events/screens/event-detail-screen.dart';
 import '../../../events/screens/events.dart';

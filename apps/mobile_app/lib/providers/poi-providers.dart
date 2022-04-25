@@ -10,7 +10,7 @@ final poiUsecasesProvider = Provider<PoiUsecases>(
   (ref) => PoiUsecasesImpl(ref: ref),
 );
 
-final poisAlongHikeNotifierProvider =
-    ChangeNotifierProvider.family<PoisAlongHikeNotifier, String>((ref, hikeId) {
-  return PoisAlongHikeNotifier(hikeId: hikeId, ref: ref);
+final poisAlongHikeUsecasesProvider =
+    ChangeNotifierProvider.family<PoisAlongHikeUsecases, String>((ref, hikeId) {
+  return PoisAlongHikeUsecases(hikeId: hikeId, ref: ref);
 });

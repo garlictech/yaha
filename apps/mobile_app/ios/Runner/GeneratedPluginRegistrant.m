@@ -36,6 +36,18 @@
 @import amplify_flutter;
 #endif
 
+#if __has_include(<flutter_compass/FlutterCompassPlugin.h>)
+#import <flutter_compass/FlutterCompassPlugin.h>
+#else
+@import flutter_compass;
+#endif
+
+#if __has_include(<flutter_js/FlutterJsPlugin.h>)
+#import <flutter_js/FlutterJsPlugin.h>
+#else
+@import flutter_js;
+#endif
+
 #if __has_include(<flutter_web_auth/FlutterWebAuthPlugin.h>)
 #import <flutter_web_auth/FlutterWebAuthPlugin.h>
 #else
@@ -98,6 +110,8 @@
   [AmplifyCorePlugin registerWithRegistrar:[registry registrarForPlugin:@"AmplifyCorePlugin"]];
   [AmplifyDataStorePlugin registerWithRegistrar:[registry registrarForPlugin:@"AmplifyDataStorePlugin"]];
   [Amplify registerWithRegistrar:[registry registrarForPlugin:@"Amplify"]];
+  [FlutterCompassPlugin registerWithRegistrar:[registry registrarForPlugin:@"FlutterCompassPlugin"]];
+  [FlutterJsPlugin registerWithRegistrar:[registry registrarForPlugin:@"FlutterJsPlugin"]];
   [FlutterWebAuthPlugin registerWithRegistrar:[registry registrarForPlugin:@"FlutterWebAuthPlugin"]];
   [GeolocatorPlugin registerWithRegistrar:[registry registrarForPlugin:@"GeolocatorPlugin"]];
   [FLTImagePickerPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTImagePickerPlugin"]];

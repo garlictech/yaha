@@ -11,7 +11,12 @@ final imageUsecasesProvider = Provider<ImageUsecases>(
 );
 
 final imagesAlongHikeNotifierProvider =
-    ChangeNotifierProvider.family<ImagesAlongHikeNotifier, String>(
+    ChangeNotifierProvider.family<ImagesAlongHikeUsecases, String>(
         (ref, hikeId) {
-  return ImagesAlongHikeNotifier(hikeId: hikeId, ref: ref);
+  return ImagesAlongHikeUsecases(hikeId: hikeId, ref: ref);
+});
+
+final imagesOfPoiProvider =
+    FutureProvider.family<List<String>, String>((ref, poiId) {
+  return ImagesOfPoiUsecases(poiId: poiId, ref: ref).imageUrls;
 });

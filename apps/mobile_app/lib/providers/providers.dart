@@ -4,3 +4,4 @@ export 'use-case-providers.dart';
 export 'geolocation-providers.dart';
 export 'image-providers.dart';
 export 'defaults-providers.dart';
+export 'calculation-providers.dart';

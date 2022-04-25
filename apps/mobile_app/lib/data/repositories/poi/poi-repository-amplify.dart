@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:amplify_api/amplify_api.dart';
-import 'package:flutter/foundation.dart';
 import 'package:yaha/domain/domain.dart';
 
 import '../../utils/cache/cache.dart';
@@ -67,16 +66,15 @@ class PoiRepositoryAmplify implements PoiRepository {
   }
 
   @override
-  searchPoisAroundHike(SearchAroundHikeInput input) async {
+  searchPoisAroundHike(SearchAroundHikeInput input) async* {
     List<String> pois = [];
-    var nextInput = input.copyWith(limit: 100);
+    var nextInput = input.copyWith(limit: 50);
 
     do {
       var res = await _searchPoisAroundHikeOnePage(nextInput);
-      nextInput = input.copyWith(nextToken: res['nextToken'], limit: 100);
+      nextInput = input.copyWith(nextToken: res['nextToken'], limit: 50);
       pois += List<String>.from(res['items']);
+      yield pois;
     } while (nextInput.nextToken != null);
-
-    return pois;
   }
 }

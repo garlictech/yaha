@@ -4,7 +4,7 @@ import 'package:yaha/domain/domain.dart' as domain;
 import 'package:yaha/providers/image-providers.dart';
 
 import '../../shared/shared.dart';
-import '../screens/hike-screen.dart';
+import '../screens/hike_screen.dart';
 
 class HikeCard extends ConsumerWidget {
   final int? distanceFromCurrentLocation;

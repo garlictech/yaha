@@ -1,11 +1,9 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/domain/domain.dart';
-import 'package:yaha/utils/failure.dart';
 
 class GuestHomeScreenViewModel {
-  final FutureProvider<Either<Failure, List<Hike>>> bestHikesNearbyProvider;
-  final FutureProvider<Either<Failure, List<Hike>>> bestHikesOfTheWorldProvider;
+  final FutureProvider<List<Hike>> bestHikesNearbyProvider;
+  final FutureProvider<List<Hike>> bestHikesOfTheWorldProvider;
 
   GuestHomeScreenViewModel(
       {required this.bestHikesNearbyProvider,

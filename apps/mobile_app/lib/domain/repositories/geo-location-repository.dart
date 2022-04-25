@@ -1,8 +1,5 @@
-import 'package:dartz/dartz.dart';
-import 'package:yaha/utils/failure.dart';
-
-import '../entities/shared/geolocation.dart';
+import 'package:geolocator/geolocator.dart';
 
 abstract class GeoLocationRepository {
-  Future<Either<Failure, GeoLocation>> getCurrentLocation();
+  Future<Position> getCurrentLocation();
 }

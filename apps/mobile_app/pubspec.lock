@@ -288,6 +288,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.2.1"
+  dartx:
+    dependency: "direct main"
+    description:
+      name: dartx
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.0"
   dartz:
     dependency: "direct main"
     description:
@@ -391,6 +398,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.4.4"
+  flutter_compass:
+    dependency: transitive
+    description:
+      name: flutter_compass
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.7.0"
+  flutter_hooks:
+    dependency: "direct main"
+    description:
+      name: flutter_hooks
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.18.3"
   flutter_html:
     dependency: "direct main"
     description:
@@ -398,6 +419,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.0-alpha.2"
+  flutter_js:
+    dependency: "direct main"
+    description:
+      name: flutter_js
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.5.0+6"
   flutter_launcher_icons:
     dependency: "direct main"
     description:
@@ -433,6 +461,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.14.0"
+  flutter_map_location_marker:
+    dependency: "direct main"
+    description:
+      name: flutter_map_location_marker
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.1.0"
   flutter_markdown:
     dependency: "direct main"
     description:
@@ -1067,7 +1102,7 @@ packages:
     source: hosted
     version: "1.0.3"
   rxdart:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: rxdart
       url: "https://pub.dartlang.org"
@@ -1253,13 +1288,27 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.0"
+  sync_http:
+    dependency: transitive
+    description:
+      name: sync_http
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.0"
   syncfusion_flutter_core:
     dependency: transitive
     description:
       name: syncfusion_flutter_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "19.4.47"
+    version: "19.4.56"
+  syncfusion_flutter_maps:
+    dependency: "direct main"
+    description:
+      name: syncfusion_flutter_maps
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "19.4.56-beta"
   syncfusion_flutter_sliders:
     dependency: "direct main"
     description:
@@ -1302,6 +1351,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.9"
+  time:
+    dependency: transitive
+    description:
+      name: time
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.0"
   timing:
     dependency: transitive
     description:
@@ -1330,6 +1386,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.0"
+  turf:
+    dependency: "direct main"
+    description:
+      name: turf
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.5"
   typed_data:
     dependency: transitive
     description:

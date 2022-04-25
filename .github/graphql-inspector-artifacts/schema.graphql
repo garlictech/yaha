@@ -258,6 +258,7 @@ type Query {
   searchInMultipolygon(query: SearchInMultipolygonInput!): GeoSearchConnection @aws_iam @aws_api_key
   searchAroundHike(query: SearchAroundHikeInput!): GeoSearchConnection @aws_iam @aws_api_key
   searchSafeImagesAroundHike(query: SearchSafeImagesAroundHikeInput!): GeoSearchConnection @aws_iam @aws_api_key
+  searchSafeImagesAroundLocation(query: SearchByRadiusInput!): GeoSearchConnection @aws_iam @aws_api_key
 }
 
 type SearchableImageConnection @aws_api_key @aws_iam {

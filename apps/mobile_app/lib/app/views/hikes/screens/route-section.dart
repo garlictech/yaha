@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../shared/shared.dart';
-import 'more-poi-screen.dart';
 import 'route-section-poi-list-preview.dart';
 
 // We have to move these classes somewhere else
@@ -28,10 +27,10 @@ class RouteSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
+/*      onTap: () {
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => const MorePoiScreen()));
-      },
+      },*/
       child: ClipRRect(
         borderRadius: BorderRadius.circular(YahaBorderRadius.general),
         child: Container(

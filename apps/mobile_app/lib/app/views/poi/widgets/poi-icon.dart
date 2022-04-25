@@ -5,45 +5,29 @@ import 'package:yaha/domain/entities/entities.dart';
 import '../../shared/shared.dart';
 
 class PoiIcon extends StatelessWidget {
-  late Color color;
   final PoiType poiType;
 
-  PoiIcon(
-      {Key? key, required this.poiType, this.color = const Color(0xff00ff00)})
-      : super(key: key) {
-    color = PoiIcon._colorMap[poiType.category] ?? const Color(0xff00ff00);
-  }
+  PoiIcon({
+    Key? key,
+    required this.poiType,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final color =
+        PoiIcon._colorMap[poiType.category] ?? const Color(0xff00ff00);
+
     SvgPicture svgPicture = SvgPicture.asset(
         'assets/poi-icons/${poiType.kind}.svg',
-        color: Colors.white,
-        height: 30);
+        color: Colors.white);
 
     return Container(
-        padding: const EdgeInsets.all(3),
+        //padding: const EdgeInsets.all(3),
         child: svgPicture,
         decoration: BoxDecoration(
-          color: color,
-          borderRadius: BorderRadius.circular(50),
-          border: Border.all(width: 4.0, color: color),
-        ));
-    /*return Chip(
-      label: Text(
-        title,
-        style: const TextStyle(
-          color: YahaColors.background,
-          fontSize: YahaFontSizes.xSmall,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-      backgroundColor: backgroundColor,
-      avatar: svgPicture,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(YahaBorderRadius.xSmall),
-      ),
-    );*/
+            color: color,
+            shape: BoxShape.circle,
+            border: Border.all(width: YahaBorderRadius.xSmall, color: color)));
   }
 
   static const _colorMap = {

@@ -283,3 +283,47 @@ export const searchSafeImagesAroundHikeResolver =
       ),
       OE.fold(throwError, R.identity),
     );
+
+export const searchSafeImagesAroundLocationResolver =
+  (deps: SearchResolverDeps) =>
+  (
+    args: YahaApi.QuerySearchByRadiusArgs,
+  ): Observable<YahaApi.GeoSearchConnection> =>
+    pipe(
+      {
+        query: {
+          function_score: {
+            query: {
+              bool: {
+                must: [{ term: { banned: false } }],
+                filter: {
+                  geo_distance: {
+                    distance: `${args.query.radiusInMeters / 1000}km`,
+                    location: args.query.location,
+                  },
+                },
+              },
+            },
+            random_score: {},
+            score_mode: 'sum',
+            boost_mode: 'sum',
+          },
+        },
+        sort: [
+          {
+            _geo_distance: {
+              location: args.query.location,
+              order: 'asc',
+              unit: 'km',
+              distance_type: 'plane',
+            },
+            createdAt: 'desc',
+          },
+          '_score',
+        ],
+        size: args.query.limit ?? 10,
+        track_total_hits: !args.query.nextToken,
+      },
+      body =>
+        executeQuery(deps)(body, args.query.nextToken, args.query.objectType),
+    );

@@ -3,6 +3,7 @@ import 'package:yaha/utils/geometry/geocalc.dart';
 
 import '../../game-rules.dart';
 import '../shared/linestring.dart';
+import '../shared/location.dart';
 import '../shared/textual-description.dart';
 
 part 'hike.g.dart';
@@ -48,6 +49,12 @@ class Hike {
       difficulty_ ??= GameRules.calculateDifficulty(trailLength, uphill);
 
   int get score => score_ ??= GameRules.calculateScore(trailLength, uphill);
+
+  Location get startPoint => Location(
+      lon: route.coordinates.first[0], lat: route.coordinates.first[1]);
+
+  Location get endPoint =>
+      Location(lon: route.coordinates.last[0], lat: route.coordinates.last[1]);
 
   factory Hike.fromJson(Map<String, dynamic> json) => _$HikeFromJson(json);
 

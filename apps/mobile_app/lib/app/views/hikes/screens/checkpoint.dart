@@ -7,8 +7,6 @@ import '../../shared/widgets/yaha-font-sizes.dart';
 import '../../shared/widgets/yaha-icon-sizes.dart';
 import '../../shared/widgets/yaha-space-sizes.dart';
 import 'checkpoint-poi-list-preview.dart';
-import 'more-poi-screen.dart';
-import 'poi-summary.dart';
 
 // We have to move these classes somewhere else
 class CheckpointModel {
@@ -41,10 +39,10 @@ class Checkpoint extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => MorePoiScreen()));
-      },
+      /*onTap: () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const MorePoiScreen()));
+      },*/
       child: ClipRRect(
         borderRadius: BorderRadius.circular(YahaBorderRadius.general),
         child: Container(
@@ -60,13 +58,14 @@ class Checkpoint extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  PoiSummary(
+                  /*PoiSummary(
                     backgroundColor: checkpointModel.backgroundColor,
                     icon: checkpointModel.icon,
                     iconSize: checkpointModel.iconSize,
                     padding: checkpointModel.padding,
                     radius: checkpointModel.radius,
                   ),
+                  */
                   Container(
                     padding: const EdgeInsets.only(
                       left: YahaSpaceSizes.general,

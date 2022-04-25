@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/app/views/auth/screens/signup-screen.dart';
 import 'package:yaha/app/views/events/screens/event-detail-screen.dart';
 import 'package:yaha/app/views/hikes/screens/explore-screen.dart';
-import 'package:yaha/app/views/hikes/screens/poi-screen.dart';
 import 'package:yaha/app/views/personal/screen/profile-page.dart';
 import 'package:yaha/app/views/personal/screen/settings-screen.dart';
 import 'package:yaha/app/views/shared/widgets/bottom-nav-bar-widget.dart';
@@ -53,13 +52,12 @@ class _MyAppState extends State<MyApp> {
       home: const BottomNavBarWidget(),
       initialRoute: '/',
       routes: {
-        '/profile': (context) => ProfilePage(),
-        '/event': (context) => EventDetailScreen(),
-        '/poi': (context) => const PoiScreen(),
-        '/settings': (context) => SettingsScreen(),
+        '/profile': (context) => const ProfilePage(),
+        '/event': (context) => const EventDetailScreen(),
+        '/settings': (context) => const SettingsScreen(),
         '/signup': (context) => const SignupScreen(),
         '/track': (context) => const TrackingScreen(),
-        '/explore': (context) => ExploreScreen(),
+        '/explore': (context) => const ExploreScreen(),
       },
     );
   }
