@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:yaha/app/views/hikes/widgets/hike-card-image.dart';
 import 'package:yaha/domain/domain.dart' as domain;
 import 'package:yaha/providers/image-providers.dart';
 
@@ -43,7 +44,8 @@ class HikeCard extends ConsumerWidget {
                     return Container(
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: NetworkImage(imageUrl),
+                          image: HikeCardImage(imageUrl: imageUrl)
+                              as ImageProvider,
                           fit: BoxFit.cover,
                         ),
                       ),
