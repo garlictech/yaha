@@ -141,7 +141,7 @@ SearchByRadiusInput _$SearchByRadiusInputFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$SearchByRadiusInputToJson(
         SearchByRadiusInput instance) =>
     <String, dynamic>{
-      'location': instance.location.toJson(),
+      'location': instance.location,
       'radiusInMeters': instance.radiusInMeters,
       'objectType': instance.objectType,
       'limit': instance.limit,

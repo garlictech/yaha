@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:latlong2/latlong.dart';
 
 ///Map import
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:syncfusion_flutter_maps/maps.dart';
+import 'package:yaha/app/views/poi/widgets/poi-icon.dart';
 import 'package:yaha/domain/domain.dart' as domain;
+import 'package:yaha/domain/entities/poi/poi_entity.dart';
 import 'package:yaha/providers/providers.dart';
 
+import '../../../presenters/map/map.dart';
 import '../../poi/screens/poi_info_screen.dart';
-import '../../poi/widgets/poi-icon.dart';
+import '../../poi/widgets/poi_list_item.dart';
+import 'leaflet-map.dart';
 
 /// Renders the map widget with OSM map.
 class PoisOfHikeMap extends ConsumerStatefulWidget {
@@ -32,15 +36,18 @@ class _PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
   late int _currentSelectedIndex;
   late int _previousSelectedIndex;
   late int _tappedMarkerIndex;
+  late int _cardNum;
 
   late double _cardHeight;
   late Animation<double> _animation;
   AnimationController? _animationController;
   late bool _canUpdateFocalLatLng;
+  late LeafletMapPresenter presenter;
 
   @override
   void initState() {
     _currentSelectedIndex = 0;
+    _cardNum = 0;
     _canUpdateFocalLatLng = true;
     _mapController = MapTileLayerController();
 
@@ -77,6 +84,10 @@ class _PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
             .select((notifier) => notifier.touristicPoisSortedByDistance))
         .first;
 
+    final mapPresenter = ref.watch(leafletMapMVPProvider(widget.key).notifier);
+    //mapPresenter.addHike(widget.hike);
+    //mapPresenter.mapCenter = widget.hike.startPoint;
+
     _cardHeight = (MediaQuery.of(context).orientation == Orientation.landscape)
         ? 90
         : 110;
@@ -87,6 +98,17 @@ class _PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
             AsyncSnapshot<List<domain.PoiOfHike>> snapshot) {
           final pois = snapshot.data;
 
+          if (pois != null && pois.length != _cardNum) {
+            _currentSelectedIndex = 0;
+            _cardNum = pois.length;
+          }
+
+          if (pois != null && pois.isNotEmpty) {
+            _zoomPanBehavior.focalLatLng = MapLatLng(
+                pois[_currentSelectedIndex].location.lat,
+                pois[_currentSelectedIndex].location.lon);
+          }
+
           _pageViewController = PageController(
               initialPage: _currentSelectedIndex,
               viewportFraction:
@@ -94,10 +116,40 @@ class _PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
                       ? 0.7
                       : 0.8);
 
-          if (pois != null && pois.isNotEmpty) {
-            _zoomPanBehavior.focalLatLng = MapLatLng(
-                pois[_currentSelectedIndex].location.lat,
-                pois[_currentSelectedIndex].location.lon);
+          markerBuilder(BuildContext context, Poi poi, int index) {
+            final double _markerSize = _currentSelectedIndex == index ? 40 : 25;
+            return Marker(
+                point: LatLng(poi.location.lat, poi.location.lon),
+                builder: (BuildContext _c) {
+                  return GestureDetector(
+                    onTap: () {
+                      if (_currentSelectedIndex != index) {
+                        _canUpdateFocalLatLng = false;
+                        _tappedMarkerIndex = index;
+                        _pageViewController.animateToPage(
+                          index,
+                          duration: const Duration(milliseconds: 500),
+                          curve: Curves.easeInOut,
+                        );
+                      }
+                    },
+                    child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 250),
+                        height: _markerSize,
+                        width: _markerSize,
+                        child: FittedBox(
+                            child: PhysicalModel(
+                                color: Colors.black,
+                                shadowColor: Colors.black,
+                                elevation: 8.0,
+                                shape: BoxShape.circle,
+                                child: PoiIcon(poiType: poi.poiType)))),
+                  );
+                });
+          }
+
+          if (pois != null) {
+            mapPresenter.addPois(pois);
           }
 
           return pois == null
@@ -110,7 +162,8 @@ class _PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
                         repeat: ImageRepeat.repeat,
                       ),
                     ),
-                    SfMaps(
+                    LeafletMap(key: widget.key, poiMarkerBuilder: markerBuilder)
+                    /*SfMaps(
                       layers: <MapLayer>[
                         MapTileLayer(
                           /// URL to request the tiles from the providers.
@@ -170,14 +223,21 @@ class _PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
                                     height: _markerSize,
                                     width: _markerSize,
                                     child: FittedBox(
-                                        child: PoiIcon(
-                                            poiType: pois[index].poiType))),
+                                        child: PhysicalModel(
+                                            color: Colors.black,
+                                            shadowColor: Colors.black,
+                                            elevation: 8.0,
+                                            shape: BoxShape.circle,
+                                            child: PoiIcon(
+                                                poiType:
+                                                    pois[index].poiType)))),
                               ),
                             );
                           },
                         ),
                       ],
-                    ),
+                    ) */
+                    ,
                     Align(
                       alignment: Alignment.bottomCenter,
                       child: Container(
@@ -197,140 +257,25 @@ class _PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
                               child: Stack(
                                 children: <Widget>[
                                   Container(
-                                    padding: const EdgeInsets.all(10.0),
-                                    decoration: BoxDecoration(
-                                      color: Theme.of(context).brightness ==
-                                              Brightness.light
-                                          ? const Color.fromRGBO(
-                                              255, 255, 255, 1)
-                                          : const Color.fromRGBO(66, 66, 66, 1),
-                                      border: Border.all(
-                                        color: const Color.fromRGBO(
-                                            153, 153, 153, 1),
-                                        width: 0.5,
+                                      padding: const EdgeInsets.all(10.0),
+                                      decoration: BoxDecoration(
+                                        color: Theme.of(context).brightness ==
+                                                Brightness.light
+                                            ? const Color.fromRGBO(
+                                                255, 255, 255, 1)
+                                            : const Color.fromRGBO(
+                                                66, 66, 66, 1),
+                                        border: Border.all(
+                                          color: const Color.fromRGBO(
+                                              153, 153, 153, 1),
+                                          width: 0.5,
+                                        ),
+                                        borderRadius: BorderRadius.circular(10),
                                       ),
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: Consumer(builder: (c, ref, _child) {
-                                      final imagesOfPoi = ref
-                                          .watch(imagesOfPoiProvider(item.id));
-
-                                      final summary =
-                                          item.description?[0].summary == null
-                                              ? const Text("No description yet")
-                                              : (item.description?[0].type ==
-                                                      'html'
-                                                  ? Html(
-                                                      data: item.description?[0]
-                                                          .summary)
-                                                  : Markdown(
-                                                      data: item.description?[0]
-                                                              .summary ??
-                                                          ''));
-
-                                      return Row(children: <Widget>[
-                                        // Adding title and description for card.
-                                        Expanded(
-                                            child: Padding(
-                                          padding: const EdgeInsets.only(
-                                              top: 5.0, right: 5.0),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Row(
-                                                  children: imagesOfPoi.when(
-                                                      error: (_e, _s) => [
-                                                            Text(item.title,
-                                                                style: const TextStyle(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold,
-                                                                    fontSize:
-                                                                        16),
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .start)
-                                                          ],
-                                                      loading: () => [
-                                                            Text(item.title,
-                                                                style: const TextStyle(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold,
-                                                                    fontSize:
-                                                                        16),
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .start)
-                                                          ],
-                                                      data: (imageUrls) =>
-                                                          imageUrls.isEmpty
-                                                              ? [
-                                                                  Text(
-                                                                      item
-                                                                          .title,
-                                                                      style: const TextStyle(
-                                                                          fontWeight: FontWeight
-                                                                              .bold,
-                                                                          fontSize:
-                                                                              16),
-                                                                      textAlign:
-                                                                          TextAlign
-                                                                              .start)
-                                                                ]
-                                                              : [
-                                                                  Container(
-                                                                      height:
-                                                                          30,
-                                                                      width: 30,
-                                                                      padding: const EdgeInsets
-                                                                              .only(
-                                                                          right:
-                                                                              4),
-                                                                      child: PoiIcon(
-                                                                          poiType:
-                                                                              item.poiType)),
-                                                                  Text(
-                                                                      item
-                                                                          .title,
-                                                                      style: const TextStyle(
-                                                                          fontWeight: FontWeight
-                                                                              .bold,
-                                                                          fontSize:
-                                                                              16),
-                                                                      textAlign:
-                                                                          TextAlign
-                                                                              .start)
-                                                                ])),
-                                              const SizedBox(height: 5),
-                                              Expanded(child: summary)
-                                            ],
-                                          ),
-                                        )),
-                                        // Adding Image for card.
-                                        ClipRRect(
-                                            borderRadius: const BorderRadius.all(
-                                                Radius.circular(4)),
-                                            child: SizedBox(
-                                                height: _cardHeight - 10,
-                                                width: _cardHeight - 10,
-                                                child: imagesOfPoi.when(
-                                                    loading: () => PoiIcon(
-                                                        poiType: item.poiType),
-                                                    error: (_err, _val) => PoiIcon(
-                                                        poiType: item.poiType),
-                                                    data: (imageUrls) => imageUrls.isEmpty
-                                                        ? PoiIcon(
-                                                            poiType:
-                                                                item.poiType)
-                                                        : Container(
-                                                            decoration:
-                                                                BoxDecoration(
-                                                                    image: DecorationImage(image: NetworkImage(imageUrls.first), fit: BoxFit.cover))))))
-                                      ]);
-                                    }),
-                                  ),
+                                      child: PoiListItem(
+                                        poi: item,
+                                        cardHeight: _cardHeight,
+                                      )),
                                   // Adding splash to card while tapping.
                                   Material(
                                     color: Colors.transparent,
