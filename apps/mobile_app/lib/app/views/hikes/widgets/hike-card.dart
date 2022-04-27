@@ -44,8 +44,7 @@ class HikeCard extends ConsumerWidget {
                     return Container(
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: HikeCardImage(imageUrl: imageUrl)
-                              as ImageProvider,
+                          image: loadImage(imageUrl).image,
                           fit: BoxFit.cover,
                         ),
                       ),
