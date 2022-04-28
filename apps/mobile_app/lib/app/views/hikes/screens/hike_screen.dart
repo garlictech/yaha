@@ -172,6 +172,9 @@ class HikeScreen extends ConsumerWidget {
             final imageUrl = ref.watch(imagesAlongHikeNotifierProvider(hike.id)
                 .select((vm) => vm.firstImageUrl));
             final content = Container(
+              foregroundDecoration: BoxDecoration(
+                color: Colors.black.withOpacity(0.35),
+              ),
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: NetworkImage(imageUrl),
