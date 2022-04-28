@@ -14,7 +14,6 @@ class PoiInfoScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    debugPrint("************* ${poi.description?[0]}");
     final summary = poi.description?[0].summary == null
         ? const Text("No description yet")
         : (poi.description?[0].type == 'html'
