@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 import 'yaha-border-radius.dart';
+import 'yaha-image.dart';
 
 class GalleryWidget extends StatelessWidget {
   final List<String>? imageUrls;
@@ -23,16 +24,10 @@ class GalleryWidget extends StatelessWidget {
       ),
       items: imageUrls
           ?.map<Widget>((url) => ClipRRect(
-                borderRadius: BorderRadius.circular(YahaBorderRadius.general),
-                child: Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: NetworkImage(url),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-              ))
+              borderRadius: BorderRadius.circular(YahaBorderRadius.general),
+              child: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 1500),
+                  child: YahaImage(key: UniqueKey(), imageUrl: url))))
           .toList(),
     );
   }
