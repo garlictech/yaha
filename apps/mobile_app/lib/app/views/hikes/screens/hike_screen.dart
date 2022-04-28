@@ -10,6 +10,7 @@ import '../../../../providers/providers.dart';
 import '../../map/widgets/leaflet-map.dart';
 import '../../poi/poi.dart';
 import '../../shared/shared.dart';
+import '../../shared/widgets/yaha-image.dart';
 import '../widgets/hike_properties.dart';
 import 'hike-outline-screen.dart';
 import 'weather-screen.dart';
@@ -175,11 +176,9 @@ class HikeScreen extends ConsumerWidget {
               foregroundDecoration: BoxDecoration(
                 color: Colors.black.withOpacity(0.35),
               ),
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(imageUrl),
-                  fit: BoxFit.cover,
-                ),
+              child: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 1000),
+                child: YahaImage(key: UniqueKey(), imageUrl: imageUrl),
               ),
             );
             return YahaSliverAppBar(
@@ -209,7 +208,8 @@ class HikeScreen extends ConsumerWidget {
                                 imagesAlongHikeNotifierProvider(hike.id)
                                     .select((vm) => vm.imageUrls));
 
-                            return GalleryWidget(imageUrls: imageUrls);
+                            return GalleryWidget(
+                                key: UniqueKey(), imageUrls: imageUrls);
                           })),
                       HikeProperties(
                           hike: hike,
