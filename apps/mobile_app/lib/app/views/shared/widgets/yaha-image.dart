@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'yaha-colors.dart';
+
 class YahaImage extends StatelessWidget {
   final String? imageUrl;
   const YahaImage({Key? key, required this.imageUrl}) : super(key: key);
@@ -9,7 +11,8 @@ class YahaImage extends StatelessWidget {
     return AnimatedSwitcher(
         duration: const Duration(milliseconds: 1500),
         child: Stack(children: [
-          const Center(child: CircularProgressIndicator()),
+          const Center(
+              child: CircularProgressIndicator(color: YahaColors.lightGreen)),
           Container(
               decoration: BoxDecoration(
                   image: DecorationImage(
