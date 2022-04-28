@@ -4,6 +4,7 @@ import 'package:yaha/domain/domain.dart' as domain;
 import 'package:yaha/providers/image-providers.dart';
 
 import '../../shared/shared.dart';
+import '../../shared/widgets/yaha-image.dart';
 import '../screens/hike_screen.dart';
 
 class HikeCard extends ConsumerWidget {
@@ -40,14 +41,9 @@ class HikeCard extends ConsumerWidget {
                         imagesAlongHikeNotifierProvider(hike.id)
                             .select((vm) => vm.firstImageUrl));
 
-                    return Container(
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: NetworkImage(imageUrl),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    );
+                    return AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 1500),
+                        child: YahaImage(key: UniqueKey(), imageUrl: imageUrl));
                   }),
                 ),
               ),
