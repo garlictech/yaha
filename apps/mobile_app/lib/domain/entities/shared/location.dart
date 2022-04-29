@@ -11,7 +11,7 @@ class Location extends $Location {
   @override
   final double lon;
 
-  Location({
+  const Location({
     required this.lat,
     required this.lon,
   });
