@@ -68,13 +68,11 @@ export const processRouteSegment =
         map(pois => R.reject(R.isNil)(pois)),
       );
 
-    const findYahaImages = (_bigBuffer: Feature<Polygon>) =>
-      /*findPlaces(bigBuffer)(YahaApi.GeoSearchableObjectType.image).pipe(
+    /*const findYahaImages = (_bigBuffer: Feature<Polygon>) =>
+      findPlaces(bigBuffer)(YahaApi.GeoSearchableObjectType.image).pipe(
         switchMap(ids => multipleGet(deps.sdk.GetImage)(ids.items)),
         map(pois => R.reject(R.isNil)(pois)),
-      );*/ of([]);
-
-    const externalPoisDeps: ExternalPoiServiceDeps = {
+      );of([]) */ const externalPoisDeps: ExternalPoiServiceDeps = {
       googleApiKey: deps.googleApiKey,
       flickrApiKey: deps.flickrApiKey,
       http: deps.http,
