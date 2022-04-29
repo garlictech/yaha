@@ -148,10 +148,6 @@ class _PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
                 });
           }
 
-          if (pois != null) {
-            mapPresenter.addPois(pois);
-          }
-
           return pois == null
               ? const CircularProgressIndicator()
               : Stack(
@@ -162,82 +158,10 @@ class _PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
                         repeat: ImageRepeat.repeat,
                       ),
                     ),
-                    LeafletMap(key: widget.key, poiMarkerBuilder: markerBuilder)
-                    /*SfMaps(
-                      layers: <MapLayer>[
-                        MapTileLayer(
-                          /// URL to request the tiles from the providers.
-                          ///
-                          /// The [urlTemplate] accepts the URL in WMTS format i.e. {z} —
-                          /// zoom level, {x} and {y} — tile coordinates.
-                          ///
-                          /// We will replace the {z}, {x}, {y} internally based on the
-                          /// current center point and the zoom level.
-                          urlTemplate:
-                              'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                          zoomPanBehavior: _zoomPanBehavior,
-                          controller: _mapController,
-                          initialMarkersCount: pois.length,
-                          tooltipSettings: const MapTooltipSettings(
-                            color: Colors.transparent,
-                          ),
-                          markerTooltipBuilder:
-                              (BuildContext context, int index) {
-                            return const SizedBox();
-                          },
-                          sublayers: <MapSublayer>[
-                            MapPolylineLayer(polylines: <MapPolyline>{
-                              MapPolyline(
-                                points: widget.hike.route.coordinates
-                                    .map((coord) =>
-                                        MapLatLng(coord[1], coord[0]))
-                                    .toList(),
-                                color: const Color(0xaaff0000),
-                                width: 6.0,
-                              )
-                            } //, animation: _animation
-                                )
-                          ],
-                          markerBuilder: (BuildContext context, int index) {
-                            final double _markerSize =
-                                _currentSelectedIndex == index ? 40 : 25;
-                            return MapMarker(
-                              latitude: pois[index].location.lat,
-                              longitude: pois[index].location.lon,
-                              alignment: Alignment.bottomCenter,
-                              child: GestureDetector(
-                                onTap: () {
-                                  if (_currentSelectedIndex != index) {
-                                    _canUpdateFocalLatLng = false;
-                                    _tappedMarkerIndex = index;
-                                    _pageViewController.animateToPage(
-                                      index,
-                                      duration:
-                                          const Duration(milliseconds: 500),
-                                      curve: Curves.easeInOut,
-                                    );
-                                  }
-                                },
-                                child: AnimatedContainer(
-                                    duration: const Duration(milliseconds: 250),
-                                    height: _markerSize,
-                                    width: _markerSize,
-                                    child: FittedBox(
-                                        child: PhysicalModel(
-                                            color: Colors.black,
-                                            shadowColor: Colors.black,
-                                            elevation: 8.0,
-                                            shape: BoxShape.circle,
-                                            child: PoiIcon(
-                                                poiType:
-                                                    pois[index].poiType)))),
-                              ),
-                            );
-                          },
-                        ),
-                      ],
-                    ) */
-                    ,
+                    LeafletMap(
+                        key: widget.key,
+                        poiMarkerBuilder: markerBuilder,
+                        pois: pois),
                     Align(
                       alignment: Alignment.bottomCenter,
                       child: Container(

@@ -12,7 +12,9 @@ typedef PoiMarkerBuilder = Marker Function(
 
 class LeafletMap extends ConsumerStatefulWidget {
   final PoiMarkerBuilder? poiMarkerBuilder;
-  const LeafletMap({Key? key, this.poiMarkerBuilder}) : super(key: key);
+  final List<Poi>? pois;
+  const LeafletMap({Key? key, this.poiMarkerBuilder, this.pois})
+      : super(key: key);
 
   @override
   _LeafletMapState createState() => _LeafletMapState();
@@ -68,19 +70,14 @@ class _LeafletMapState extends ConsumerState<LeafletMap> {
     });
   }
 
-  Consumer _getMarkerLayerWidget() {
-    return Consumer(builder: (c, ref, _child) {
-      final pois =
-          ref.watch(leafletMapMVPProvider(widget.key).select((md) => md.pois));
+  _getMarkerLayerWidget() {
+    final markers = widget.poiMarkerBuilder == null || widget.pois == null
+        ? const <Marker>[]
+        : widget.pois!
+            .mapIndexed<Marker>(
+                (index, poi) => widget.poiMarkerBuilder!(context, poi, index))
+            .toList();
 
-      final markers = widget.poiMarkerBuilder == null
-          ? const <Marker>[]
-          : pois
-              .mapIndexed<Marker>(
-                  (index, poi) => widget.poiMarkerBuilder!(context, poi, index))
-              .toList();
-
-      return MarkerLayerWidget(options: MarkerLayerOptions(markers: markers));
-    });
+    return MarkerLayerWidget(options: MarkerLayerOptions(markers: markers));
   }
 }
