@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yaha/app/presenters/map/leaflet-map-presenter.dart';
+import 'package:yaha/app/presenters/map/map.dart';
 import 'package:yaha/app/views/poi/widgets/poi-title-list.dart';
 import 'package:yaha/domain/domain.dart';
 
@@ -161,9 +161,10 @@ class HikeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final presenter = ref.watch(leafletMapMVPProvider.notifier);
+    final mapPresenter = ref.watch(leafletMapMVPProvider(key).notifier);
     final defaults = ref.watch(defaultsProvider);
-    presenter.addHikeTrack(hike.route);
+    mapPresenter.addHike(hike);
+    mapPresenter.mapCenter = hike.startPoint;
 
     return Scaffold(
       body: CustomScrollView(

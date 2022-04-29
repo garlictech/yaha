@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:yaha/domain/domain.dart' as domain;
 import 'package:yaha/providers/providers.dart';
 
+import '../../map/widgets/leaflet-map.dart';
 import '../../shared/shared.dart';
 import '../widgets/poi-icon.dart';
 
 class PoiInfoScreen extends ConsumerWidget {
   final domain.Poi poi;
-  const PoiInfoScreen({Key? key, required this.poi}) : super(key: key);
+  final domain.Hike? hike;
+  const PoiInfoScreen({Key? key, required this.poi, this.hike})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -84,13 +89,11 @@ class PoiInfoScreen extends ConsumerWidget {
                           padding: const EdgeInsets.only(
                               bottom: YahaSpaceSizes.general),
                           child: ClipRRect(
-                            borderRadius:
-                                BorderRadius.circular(YahaBorderRadius.general),
-                            child: Image.asset(
-                              'assets/images/poi_page.png',
-                              fit: BoxFit.cover,
-                            ),
-                          ),
+                              borderRadius: BorderRadius.circular(
+                                  YahaBorderRadius.general),
+                              child: LeafletMap(
+                                  poiMarkerBuilder: _markerBuilder,
+                                  pois: [poi])),
                         ),
                         Container(
                           padding: const EdgeInsets.only(
@@ -211,5 +214,24 @@ class PoiInfoScreen extends ConsumerWidget {
         ],
       ),
     );
+  }
+
+  get _markerBuilder {
+    return (BuildContext context, domain.Poi poi, int index) {
+      const double _markerSize = 40;
+      return Marker(
+          point: LatLng(poi.location.lat, poi.location.lon),
+          builder: (BuildContext _c) {
+            return SizedBox(
+                height: _markerSize,
+                width: _markerSize,
+                child: PhysicalModel(
+                    color: Colors.black,
+                    shadowColor: Colors.black,
+                    elevation: 8.0,
+                    shape: BoxShape.circle,
+                    child: PoiIcon(poiType: poi.poiType)));
+          });
+    };
   }
 }
