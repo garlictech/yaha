@@ -15,33 +15,26 @@ class YahaSliverAppBar extends StatelessWidget {
     return SliverAppBar(
       stretch: false,
       pinned: true,
-      snap: true,
-      floating: true,
+      snap: false,
+      floating: false,
       expandedHeight: 240.0,
+      backgroundColor: YahaColors.primary,
       flexibleSpace: FlexibleSpaceBar(
         titlePadding: const EdgeInsets.only(
-            left: YahaSpaceSizes.general, bottom: YahaSpaceSizes.small),
+            left: YahaSpaceSizes.general,
+            bottom: YahaSpaceSizes.small,
+            right: YahaSpaceSizes.general),
         centerTitle: false,
-        title: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  textAlign: TextAlign.left,
-                  style: const TextStyle(
-                      color: YahaColors.background,
-                      fontWeight: FontWeight.w700,
-                      fontSize: YahaFontSizes.small),
-                ),
-              ],
-            ),
-          ],
+        title: ConstrainedBox(
+          constraints:
+              BoxConstraints(maxWidth: MediaQuery.of(context).size.width / 1.5),
+          child: Text(
+            title,
+            style: const TextStyle(
+                color: YahaColors.background,
+                fontWeight: FontWeight.w700,
+                fontSize: YahaFontSizes.small),
+          ),
         ),
         background: content,
       ),

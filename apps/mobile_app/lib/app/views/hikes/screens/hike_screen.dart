@@ -173,10 +173,15 @@ class HikeScreen extends ConsumerWidget {
           Consumer(builder: (c, ref, _child) {
             final imageUrl = ref.watch(imagesAlongHikeNotifierProvider(hike.id)
                 .select((vm) => vm.firstImageUrl));
-            final content = AnimatedSwitcher(
+            final content = Container(
+              foregroundDecoration: BoxDecoration(
+                color: Colors.black.withOpacity(0.35),
+              ),
+              child: AnimatedSwitcher(
                 duration: const Duration(milliseconds: 1000),
-                child: YahaImage(key: UniqueKey(), imageUrl: imageUrl));
-
+                child: YahaImage(key: UniqueKey(), imageUrl: imageUrl),
+              ),
+            );
             return YahaSliverAppBar(
                 title: hike.description.first.title ?? '', content: content);
           }),
