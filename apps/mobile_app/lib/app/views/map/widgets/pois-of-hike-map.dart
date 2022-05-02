@@ -3,9 +3,6 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 
-///Map import
-// ignore: import_of_legacy_library_into_null_safe
-import 'package:syncfusion_flutter_maps/maps.dart';
 import 'package:yaha/app/views/poi/widgets/poi-icon.dart';
 import 'package:yaha/domain/domain.dart' as domain;
 import 'package:yaha/domain/entities/poi/poi_entity.dart';
@@ -30,17 +27,13 @@ class PoisOfHikeMap extends ConsumerStatefulWidget {
 class _PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
     with SingleTickerProviderStateMixin {
   late PageController _pageViewController;
-  late MapTileLayerController _mapController;
 
-  late MapZoomPanBehavior _zoomPanBehavior;
   late int _currentSelectedIndex;
   late int _previousSelectedIndex;
   late int _tappedMarkerIndex;
   late int _cardNum;
 
   late double _cardHeight;
-  late Animation<double> _animation;
-  AnimationController? _animationController;
   late bool _canUpdateFocalLatLng;
   late LeafletMapPresenter presenter;
 
@@ -49,31 +42,13 @@ class _PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
     _currentSelectedIndex = 0;
     _cardNum = 0;
     _canUpdateFocalLatLng = true;
-    _mapController = MapTileLayerController();
 
-    _animationController = AnimationController(
-      duration: const Duration(seconds: 3),
-      vsync: this,
-    );
-
-    _animation = CurvedAnimation(
-      parent: _animationController!,
-      curve: Curves.easeInOut,
-    );
-    _zoomPanBehavior = MapZoomPanBehavior(
-      minZoomLevel: 3,
-      maxZoomLevel: 18,
-      zoomLevel: 12,
-      enableDoubleTapZooming: true,
-    );
     super.initState();
   }
 
   @override
   void dispose() {
     _pageViewController.dispose();
-    _mapController.dispose();
-    _animationController!.dispose();
     super.dispose();
   }
 
@@ -84,9 +59,8 @@ class _PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
             .select((notifier) => notifier.touristicPoisSortedByDistance))
         .first;
 
-    final mapPresenter = ref.watch(leafletMapMVPProvider(widget.key).notifier);
-    //mapPresenter.addHike(widget.hike);
-    //mapPresenter.mapCenter = widget.hike.startPoint;
+    final mapPresenter =
+        ref.watch(leafletMapMVPProvider(widget.hike.id).notifier);
 
     _cardHeight = (MediaQuery.of(context).orientation == Orientation.landscape)
         ? 90
@@ -103,12 +77,6 @@ class _PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
             _cardNum = pois.length;
           }
 
-          if (pois != null && pois.isNotEmpty) {
-            _zoomPanBehavior.focalLatLng = MapLatLng(
-                pois[_currentSelectedIndex].location.lat,
-                pois[_currentSelectedIndex].location.lon);
-          }
-
           _pageViewController = PageController(
               initialPage: _currentSelectedIndex,
               viewportFraction:
@@ -118,7 +86,10 @@ class _PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
 
           markerBuilder(BuildContext context, Poi poi, int index) {
             final double _markerSize = _currentSelectedIndex == index ? 40 : 25;
+
             return Marker(
+                height: _markerSize,
+                width: _markerSize,
                 point: LatLng(poi.location.lat, poi.location.lon),
                 builder: (BuildContext _c) {
                   return GestureDetector(
@@ -134,9 +105,7 @@ class _PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
                       }
                     },
                     child: AnimatedContainer(
-                        duration: const Duration(milliseconds: 250),
-                        height: _markerSize,
-                        width: _markerSize,
+                        duration: const Duration(milliseconds: 2500),
                         child: FittedBox(
                             child: PhysicalModel(
                                 color: Colors.black,
@@ -159,8 +128,9 @@ class _PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
                       ),
                     ),
                     LeafletMap(
-                        key: widget.key,
+                        mapKey: widget.hike.id,
                         poiMarkerBuilder: markerBuilder,
+                        hike: widget.hike,
                         pois: pois),
                     Align(
                       alignment: Alignment.bottomCenter,
@@ -172,7 +142,7 @@ class _PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
                         child: PageView.builder(
                           itemCount: pois.length,
                           onPageChanged: (index) =>
-                              _handlePageChange(index, pois),
+                              _handlePageChange(index, pois, mapPresenter),
                           controller: _pageViewController,
                           itemBuilder: (BuildContext context, int index) {
                             final item = pois[index];
@@ -237,21 +207,23 @@ class _PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
         });
   }
 
-  void _handlePageChange(int index, List<domain.Poi> pois) {
+  void _handlePageChange(
+      int index, List<domain.Poi> pois, LeafletMapPresenter mapPresenter) {
     /// While updating the page viewer through interaction, selected position's
     /// marker should be moved to the center of the maps. However, when the
     /// marker is directly clicked, only the respective card should be moved to
     /// center and the marker itself should not move to the center of the maps.
     if (!_canUpdateFocalLatLng) {
       if (_tappedMarkerIndex == index) {
-        _updateSelectedCard(index, pois);
+        _updateSelectedCard(index, pois, mapPresenter);
       }
     } else if (_canUpdateFocalLatLng) {
-      _updateSelectedCard(index, pois);
+      _updateSelectedCard(index, pois, mapPresenter);
     }
   }
 
-  void _updateSelectedCard(int index, List<domain.Poi> pois) {
+  void _updateSelectedCard(
+      int index, List<domain.Poi> pois, LeafletMapPresenter mapPresenter) {
     setState(() {
       _previousSelectedIndex = _currentSelectedIndex;
       _currentSelectedIndex = index;
@@ -262,15 +234,14 @@ class _PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
     /// marker is directly clicked, only the respective card should be moved to
     /// center and the marker itself should not move to the center of the maps.
     if (_canUpdateFocalLatLng) {
-      _zoomPanBehavior.focalLatLng = MapLatLng(
-          pois[_currentSelectedIndex].location.lat,
-          pois[_currentSelectedIndex].location.lon);
+      mapPresenter.mapCenter = pois[_currentSelectedIndex].location;
+      mapPresenter.replacePois(pois);
     }
 
     /// Updating the design of the selected marker. Please check the
     /// `markerBuilder` section in the build method to know how this is done.
-    _mapController
-        .updateMarkers(<int>[_currentSelectedIndex, _previousSelectedIndex]);
+    //_mapController
+    //  .updateMarkers(<int>[_currentSelectedIndex, _previousSelectedIndex]);
     _canUpdateFocalLatLng = true;
   }
 }

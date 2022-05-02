@@ -92,6 +92,7 @@ class PoiInfoScreen extends ConsumerWidget {
                               borderRadius: BorderRadius.circular(
                                   YahaBorderRadius.general),
                               child: LeafletMap(
+                                  mapKey: poi.id,
                                   poiMarkerBuilder: _markerBuilder,
                                   pois: [poi])),
                         ),

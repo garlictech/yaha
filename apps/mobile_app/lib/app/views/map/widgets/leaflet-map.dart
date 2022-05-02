@@ -13,7 +13,15 @@ typedef PoiMarkerBuilder = Marker Function(
 class LeafletMap extends ConsumerStatefulWidget {
   final PoiMarkerBuilder? poiMarkerBuilder;
   final List<Poi>? pois;
-  const LeafletMap({Key? key, this.poiMarkerBuilder, this.pois})
+  final Hike? hike;
+  final String mapKey;
+
+  const LeafletMap(
+      {Key? key,
+      this.poiMarkerBuilder,
+      this.pois,
+      required this.mapKey,
+      this.hike})
       : super(key: key);
 
   @override
@@ -29,13 +37,18 @@ class _LeafletMapState extends ConsumerState<LeafletMap> {
 
   @override
   Widget build(BuildContext context) {
-    final mapCenter = ref
-        .watch(leafletMapMVPProvider(widget.key).select((md) => md.mapCenter));
+    final mapCenter = ref.watch(
+        leafletMapMVPProvider(widget.mapKey).select((md) => md.mapCenter));
+
+    final presenter = ref.watch(leafletMapMVPProvider(widget.mapKey).notifier);
 
     return FlutterMap(
       options: MapOptions(
-          onMapCreated: (ctr) => _mapController = ctr,
-          center: LatLng(mapCenter.lat, mapCenter.lon),
+          onMapCreated: (ctr) {
+            _mapController = ctr;
+            presenter.mapController = ctr;
+          },
+          center: LatLng(mapCenter?.lat ?? 0, mapCenter?.lon ?? 0),
           zoom: _mapController?.zoom ?? 12),
       children: <Widget>[
         TileLayerWidget(
@@ -43,25 +56,28 @@ class _LeafletMapState extends ConsumerState<LeafletMap> {
                 urlTemplate:
                     "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
                 subdomains: ['a', 'b', 'c'])),
+        _getHikeLayerWidget(),
         _getMarkerLayerWidget(),
-        _getHikeLayerWidget()
       ],
     );
   }
 
   Consumer _getHikeLayerWidget() {
     return Consumer(builder: (c, ref, _child) {
-      final hikes =
-          ref.watch(leafletMapMVPProvider(widget.key).select((md) => md.hikes));
+      final hikes = ref
+          .watch(leafletMapMVPProvider(widget.mapKey).select((md) => md.hikes));
 
-      final polylines = hikes
+      final mapHikes =
+          hikes.isEmpty ? (widget.hike == null ? [] : [widget.hike]) : hikes;
+
+      final polylines = mapHikes
           .map<Polyline>((hike) => Polyline(
               color: const Color(0xAAFF0000),
               strokeWidth: 4,
               borderColor: Colors.blue,
               borderStrokeWidth: 1,
               points: hike.route.coordinates
-                  .map((coord) => LatLng(coord[1], coord[0]))
+                  .map<LatLng>((coord) => LatLng(coord[1], coord[0]))
                   .toList()))
           .toList();
 
@@ -71,13 +87,20 @@ class _LeafletMapState extends ConsumerState<LeafletMap> {
   }
 
   _getMarkerLayerWidget() {
-    final markers = widget.poiMarkerBuilder == null || widget.pois == null
-        ? const <Marker>[]
-        : widget.pois!
-            .mapIndexed<Marker>(
-                (index, poi) => widget.poiMarkerBuilder!(context, poi, index))
-            .toList();
+    return Consumer(builder: (c, ref, _child) {
+      final pois = ref
+          .watch(leafletMapMVPProvider(widget.mapKey).select((md) => md.pois));
 
-    return MarkerLayerWidget(options: MarkerLayerOptions(markers: markers));
+      final markerPois = pois.isEmpty ? widget.pois : pois;
+
+      final markers = widget.poiMarkerBuilder == null || markerPois == null
+          ? const <Marker>[]
+          : markerPois
+              .mapIndexed<Marker>(
+                  (index, poi) => widget.poiMarkerBuilder!(context, poi, index))
+              .toList();
+
+      return MarkerLayerWidget(options: MarkerLayerOptions(markers: markers));
+    });
   }
 }

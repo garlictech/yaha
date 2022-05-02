@@ -1,6 +1,6 @@
 module.exports = {
-  displayName: 'backend-hike-search-services',
-  preset: '../../../../jest.preset.js',
+  displayName: 'backend-image-tagger',
+
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
@@ -11,5 +11,6 @@ module.exports = {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../../../coverage/libs/backend/hike-search/services',
+  coverageDirectory: '../../../coverage/libs/backend/image-tagger',
+  preset: '../../../jest.preset.ts',
 };

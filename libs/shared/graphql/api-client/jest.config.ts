@@ -1,6 +1,6 @@
 module.exports = {
-  displayName: 'backend-image-tagger',
-  preset: '../../../jest.preset.js',
+  displayName: 'shared-graphql-api-client',
+
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
@@ -11,5 +11,6 @@ module.exports = {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../../coverage/libs/backend/image-tagger',
+  coverageDirectory: '../../../../coverage/libs/shared/graphql/api-client',
+  preset: '../../../../jest.preset.ts',
 };

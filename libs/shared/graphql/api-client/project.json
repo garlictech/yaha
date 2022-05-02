@@ -1,0 +1,23 @@
+{
+  "root": "libs/shared/graphql/api-client",
+  "sourceRoot": "libs/shared/graphql/api-client/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/shared/graphql/api-client/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/shared/graphql/api-client"],
+      "options": {
+        "jestConfig": "libs/shared/graphql/api-client/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["platform:nodejs", "layer:utils"]
+}

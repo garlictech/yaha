@@ -1,0 +1,23 @@
+{
+  "root": "libs/backend/hike-search/utils",
+  "sourceRoot": "libs/backend/hike-search/utils/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/backend/hike-search/utils/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/backend/hike-search/utils"],
+      "options": {
+        "jestConfig": "libs/backend/hike-search/utils/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["platform:nodejs", "layer:utils"]
+}

@@ -1,0 +1,23 @@
+{
+  "root": "libs/neptune-gql",
+  "sourceRoot": "libs/neptune-gql/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/neptune-gql/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/neptune-gql"],
+      "options": {
+        "jestConfig": "libs/neptune-gql/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["layer:service", "platform:nodejs"]
+}

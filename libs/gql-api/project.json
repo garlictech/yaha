@@ -1,0 +1,23 @@
+{
+  "root": "libs/gql-api",
+  "sourceRoot": "libs/gql-api/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/gql-api/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/gql-api"],
+      "options": {
+        "jestConfig": "libs/gql-api/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["layer:utils", "platform:nodejs"]
+}

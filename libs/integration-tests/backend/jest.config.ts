@@ -1,6 +1,6 @@
 module.exports = {
-  displayName: 'neptune-gql',
-  preset: '../../jest.preset.js',
+  displayName: 'integration-tests-backend',
+
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
@@ -11,5 +11,6 @@ module.exports = {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../coverage/libs/neptune-gql',
+  coverageDirectory: '../../../coverage/libs/integration-tests/backend',
+  preset: '../../../jest.preset.ts',
 };
