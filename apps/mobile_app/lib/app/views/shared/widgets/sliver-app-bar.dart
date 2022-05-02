@@ -12,6 +12,7 @@ class YahaSliverAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
     return SliverAppBar(
       stretch: false,
       pinned: true,
@@ -19,24 +20,30 @@ class YahaSliverAppBar extends StatelessWidget {
       floating: false,
       expandedHeight: 240.0,
       backgroundColor: YahaColors.primary,
-      flexibleSpace: FlexibleSpaceBar(
-        titlePadding: const EdgeInsets.only(
-            left: YahaSpaceSizes.general,
-            bottom: YahaSpaceSizes.small,
-            right: YahaSpaceSizes.general),
-        centerTitle: false,
-        title: ConstrainedBox(
-          constraints:
-              BoxConstraints(maxWidth: MediaQuery.of(context).size.width / 1.5),
-          child: Text(
-            title,
-            style: const TextStyle(
-                color: YahaColors.background,
-                fontWeight: FontWeight.w700,
-                fontSize: YahaFontSizes.small),
-          ),
-        ),
-        background: content,
+      flexibleSpace: LayoutBuilder(
+        builder: (context, constraints) {
+          double appBarHeight = constraints.biggest.height;
+          bool isExpanded = appBarHeight > height * 0.2;
+          return FlexibleSpaceBar(
+            titlePadding: const EdgeInsets.only(
+                left: YahaSpaceSizes.general,
+                bottom: YahaSpaceSizes.small,
+                right: YahaSpaceSizes.general),
+            centerTitle: isExpanded ? false : true,
+            title: ConstrainedBox(
+              constraints: BoxConstraints(
+                  maxWidth: MediaQuery.of(context).size.width / 1.5),
+              child: Text(
+                title,
+                style: const TextStyle(
+                    color: YahaColors.background,
+                    fontWeight: FontWeight.w700,
+                    fontSize: YahaFontSizes.small),
+              ),
+            ),
+            background: content,
+          );
+        },
       ),
     );
   }
