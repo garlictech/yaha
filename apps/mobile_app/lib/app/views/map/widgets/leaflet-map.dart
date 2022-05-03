@@ -37,8 +37,12 @@ class _LeafletMapState extends ConsumerState<LeafletMap> {
 
   @override
   Widget build(BuildContext context) {
-    final mapCenter = ref.watch(
-        leafletMapMVPProvider(widget.mapKey).select((md) => md.mapCenter));
+    final mapCenter = ref.watch(leafletMapMVPProvider(widget.mapKey).select(
+        (md) =>
+            md.mapCenter ??
+            widget.hike?.startPoint ??
+            widget.pois?.first.location ??
+            const Location(lat: 0, lon: 0)));
 
     final presenter = ref.watch(leafletMapMVPProvider(widget.mapKey).notifier);
 
@@ -48,7 +52,7 @@ class _LeafletMapState extends ConsumerState<LeafletMap> {
             _mapController = ctr;
             presenter.mapController = ctr;
           },
-          center: LatLng(mapCenter?.lat ?? 0, mapCenter?.lon ?? 0),
+          center: LatLng(mapCenter.lat, mapCenter.lon),
           zoom: _mapController?.zoom ?? 12),
       children: <Widget>[
         TileLayerWidget(

@@ -31,7 +31,7 @@ class PoiInfoScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        leading: YahaBackButton(),
+        leading: const YahaBackButton(),
         backgroundColor: YahaColors.background,
         elevation: 0,
         title: Padding(
@@ -41,7 +41,7 @@ class PoiInfoScreen extends ConsumerWidget {
             poi.title,
             maxLines: 2,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: YahaFontSizes.medium,
               color: YahaColors.textColor,
               fontWeight: FontWeight.w600,
@@ -53,7 +53,7 @@ class PoiInfoScreen extends ConsumerWidget {
             padding: const EdgeInsets.only(right: YahaSpaceSizes.small),
             child: IconButton(
               onPressed: () {},
-              icon: Icon(
+              icon: const Icon(
                 Icons.chat_outlined,
               ),
               iconSize: YahaIconSizes.medium,
@@ -94,48 +94,23 @@ class PoiInfoScreen extends ConsumerWidget {
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
                 return SafeArea(
-                  child: Container(
-                    padding: const EdgeInsets.only(
-                        left: YahaSpaceSizes.general,
-                        right: YahaSpaceSizes.general),
-                    child: Column(
-                      children: [
-                        Row(children: [
-                          SizedBox(
+                    child: Container(
+                  padding: const EdgeInsets.only(
+                      left: YahaSpaceSizes.general,
+                      right: YahaSpaceSizes.general),
+                  child: Column(
+                    children: [
+                      Padding(
+                          padding: const EdgeInsets.only(
+                              top: YahaSpaceSizes.general,
+                              bottom: YahaSpaceSizes.general),
+                          child: SizedBox(
                               child: PoiIcon(poiType: poi.poiType),
-                              height: 40,
-                              width: 40),
-                          Column(children: [
-                            Text(
-                                'LAT: ${(poi.location.lon * 100000).round() / 100000}'),
-                            Text(
-                                'LON: ${(poi.location.lat * 100000).round() / 100000}'),
-                            poi.elevation != null
-                                ? Text('ELEVATION: ${poi.elevation!.round()}m')
-                                : Container(),
-                          ])
-                        ]),
-                        Container(
-                            padding: const EdgeInsets.only(
-                                bottom: YahaSpaceSizes.general),
-                            child: summary),
-                        Container(
-                          height: 340,
-                          width: MediaQuery.of(context).size.width,
+                              height: 80,
+                              width: 80)),
+                      Container(
                           padding: const EdgeInsets.only(
                               bottom: YahaSpaceSizes.general),
-                          child: ClipRRect(
-                              borderRadius: BorderRadius.circular(
-                                  YahaBorderRadius.general),
-                              child: LeafletMap(
-                                  mapKey: poi.id,
-                                  poiMarkerBuilder: _markerBuilder,
-                                  pois: [poi])),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.only(
-                            bottom: YahaSpaceSizes.general,
-                          ),
                           child: summary),
                       Align(
                         alignment: Alignment.centerLeft,
@@ -144,11 +119,11 @@ class PoiInfoScreen extends ConsumerWidget {
                           children: [
                             RichText(
                               text: TextSpan(
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontSize: YahaFontSizes.small,
                                     color: YahaColors.textColor),
                                 children: [
-                                  TextSpan(
+                                  const TextSpan(
                                     text: 'Latitude: ',
                                     style:
                                         TextStyle(fontWeight: FontWeight.w600),
@@ -166,11 +141,11 @@ class PoiInfoScreen extends ConsumerWidget {
                                   bottom: YahaSpaceSizes.small),
                               child: RichText(
                                 text: TextSpan(
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontSize: YahaFontSizes.small,
                                       color: YahaColors.textColor),
                                   children: [
-                                    TextSpan(
+                                    const TextSpan(
                                       text: 'Longitude: ',
                                       style: TextStyle(
                                           fontWeight: FontWeight.w600),
@@ -186,11 +161,11 @@ class PoiInfoScreen extends ConsumerWidget {
                             poi.elevation != null
                                 ? RichText(
                                     text: TextSpan(
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: YahaFontSizes.small,
                                           color: YahaColors.textColor),
                                       children: [
-                                        TextSpan(
+                                        const TextSpan(
                                           text: 'Elevation: ',
                                           style: TextStyle(
                                               fontWeight: FontWeight.w600),
@@ -215,7 +190,9 @@ class PoiInfoScreen extends ConsumerWidget {
                             borderRadius:
                                 BorderRadius.circular(YahaBorderRadius.general),
                             child: LeafletMap(
-                                poiMarkerBuilder: _markerBuilder, pois: [poi])),
+                                mapKey: poi.id,
+                                poiMarkerBuilder: _markerBuilder,
+                                pois: [poi])),
                       ),
                       Container(
                         padding: const EdgeInsets.only(
@@ -326,7 +303,7 @@ class PoiInfoScreen extends ConsumerWidget {
                       ),
                     ],
                   ),
-                );
+                ));
               },
               childCount: 1,
             ),
