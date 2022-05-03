@@ -2,9 +2,9 @@
   "adminRoleNames": [
     "admin",
     "yaha-cicd",
-    "yaha-lambda",
     "zsolt",
     "kezymate",
-    "szimeonovn"
+    "szimeonovn",
+    "yaha-lambda"
   ]
 }
