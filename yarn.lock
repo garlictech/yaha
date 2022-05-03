@@ -21874,28 +21874,28 @@ neo-async@^2.5.0, neo-async@^2.6.0, neo-async@^2.6.1, neo-async@^2.6.2:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
-neo4j-driver-bolt-connection@^4.4.2:
-  version "4.4.2"
-  resolved "https://registry.yarnpkg.com/neo4j-driver-bolt-connection/-/neo4j-driver-bolt-connection-4.4.2.tgz#d6651cf98807ff39838b171b470c11894bb87d46"
-  integrity sha512-SoXJla+2J4f9qo35ZRVwQwfB2syMbnl9fAvWs6vQlx/HC5tiObxyrvXP4mM0U5Hton+Jz6PTPAs1jh1GH61W5Q==
+neo4j-driver-bolt-connection@^4.4.5:
+  version "4.4.5"
+  resolved "https://registry.yarnpkg.com/neo4j-driver-bolt-connection/-/neo4j-driver-bolt-connection-4.4.5.tgz#9f8853c1e117fab15834df367338d7515a58372f"
+  integrity sha512-CMRc4LXle20AesrqZzhDsHTgNnHqEwF7rYvNiDKC40gA2F6QrKcp+4tg17dhrptWd5C2mOWaP4WoytZt8tMlAA==
   dependencies:
     buffer "^6.0.3"
-    neo4j-driver-core "^4.4.2"
+    neo4j-driver-core "^4.4.5"
     string_decoder "^1.3.0"
 
-neo4j-driver-core@^4.4.2:
-  version "4.4.2"
-  resolved "https://registry.yarnpkg.com/neo4j-driver-core/-/neo4j-driver-core-4.4.2.tgz#ad697ddba76228d06865f2a725b29fd203c110a5"
-  integrity sha512-SSHJh+xmaBirnGFlkaiLqAanUfAm9TaQO2c3YOvFvn9KDIHxBQvXC5pXGYiIj1dlObluRdYnFA3YXHZFa5j4ZA==
+neo4j-driver-core@^4.4.5:
+  version "4.4.5"
+  resolved "https://registry.yarnpkg.com/neo4j-driver-core/-/neo4j-driver-core-4.4.5.tgz#5b1e1c7fb9cc0cd323ca33639f1ae8bacfabb949"
+  integrity sha512-gG22aP7pSDtrP6+fVODd0X6oufRl05M0Z5Q5DT9KSXYJxVCB1rlRiIjORX6rX2M0n2tX5n8XZjeh+io7mhDRsQ==
 
-neo4j-driver@4.4.2:
-  version "4.4.2"
-  resolved "https://registry.yarnpkg.com/neo4j-driver/-/neo4j-driver-4.4.2.tgz#507937f7fc750872139e18d56c37087250c00825"
-  integrity sha512-6OVyS2zuysB/8OqX1MiAt7e0DsaoZZ7ahGFwJ2SljoPRP9amC4Lw3+n4AhgKoQX0AsBIl86fwQSBieFg2gZnTg==
+neo4j-driver@4.4.5:
+  version "4.4.5"
+  resolved "https://registry.yarnpkg.com/neo4j-driver/-/neo4j-driver-4.4.5.tgz#136b7517e2f82a7d5dd7ef249d53037f6faa1f51"
+  integrity sha512-oY510+rE6Cu8hAYaELc0/0XkVCKvdo5ZkKvQT+gbfBFiD9SPoVGYdSkCzIAhH9+0Tpwu1OQIASQpnnz8J28R/A==
   dependencies:
     "@babel/runtime" "^7.5.5"
-    neo4j-driver-bolt-connection "^4.4.2"
-    neo4j-driver-core "^4.4.2"
+    neo4j-driver-bolt-connection "^4.4.5"
+    neo4j-driver-core "^4.4.5"
     rxjs "^6.6.3"
 
 nerf-dart@^1.0.0:
