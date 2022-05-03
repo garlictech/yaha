@@ -28,40 +28,44 @@ class PoiInfoScreen extends ConsumerWidget {
         : (poi.description?[0].type == 'html'
             ? Html(data: poi.description?[0].summary)
             : Markdown(data: poi.description?[0].summary ?? ''));
+    final bool noImagesOfPoi = ref.watch(imagesOfPoiProvider(poi.id)) == null;
 
     return Scaffold(
-      appBar: AppBar(
-        leading: YahaBackButton(),
-        backgroundColor: YahaColors.background,
-        elevation: 0,
-        title: Padding(
-          padding: const EdgeInsets.only(
-              left: YahaSpaceSizes.general, right: YahaSpaceSizes.general),
-          child: Text(
-            poi.title,
-            maxLines: 2,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: YahaFontSizes.medium,
-              color: YahaColors.textColor,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: YahaSpaceSizes.small),
-            child: IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.chat_outlined,
+      appBar: noImagesOfPoi
+          ? AppBar(
+              leading: YahaBackButton(),
+              backgroundColor: YahaColors.background,
+              elevation: 0,
+              title: Padding(
+                padding: const EdgeInsets.only(
+                    left: YahaSpaceSizes.general,
+                    right: YahaSpaceSizes.general),
+                child: Text(
+                  poi.title,
+                  maxLines: 2,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: YahaFontSizes.medium,
+                    color: YahaColors.textColor,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ),
-              iconSize: YahaIconSizes.medium,
-              color: YahaColors.textColor,
-            ),
-          )
-        ],
-      ),
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.only(right: YahaSpaceSizes.small),
+                  child: IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.chat_outlined,
+                    ),
+                    iconSize: YahaIconSizes.medium,
+                    color: YahaColors.textColor,
+                  ),
+                )
+              ],
+            )
+          : null,
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: <Widget>[
@@ -100,15 +104,17 @@ class PoiInfoScreen extends ConsumerWidget {
                       top: YahaSpaceSizes.general),
                   child: Column(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            top: YahaSpaceSizes.general,
-                            bottom: YahaSpaceSizes.general),
-                        child: SizedBox(
-                            child: PoiIcon(poiType: poi.poiType),
-                            height: 80,
-                            width: 80),
-                      ),
+                      noImagesOfPoi
+                          ? Padding(
+                              padding: const EdgeInsets.only(
+                                  top: YahaSpaceSizes.general,
+                                  bottom: YahaSpaceSizes.general),
+                              child: SizedBox(
+                                  child: PoiIcon(poiType: poi.poiType),
+                                  height: 80,
+                                  width: 80),
+                            )
+                          : Container(),
                       Container(
                           alignment: Alignment.centerLeft,
                           padding: const EdgeInsets.only(
@@ -207,7 +213,7 @@ class PoiInfoScreen extends ConsumerWidget {
                             const Text('Open',
                                 style: TextStyle(
                                     fontSize: YahaFontSizes.small,
-                                    fontWeight: FontWeight.w400,
+                                    fontWeight: FontWeight.w500,
                                     color: YahaColors.primary)),
                             const Text(' - closing: 18:00',
                                 style: TextStyle(
@@ -232,7 +238,7 @@ class PoiInfoScreen extends ConsumerWidget {
                                 padding: const EdgeInsets.only(
                                     right: YahaSpaceSizes.small),
                                 child: const Icon(Icons.location_on_outlined)),
-                            const Text('Opening hours',
+                            const Text('Location',
                                 style: TextStyle(
                                     fontSize: YahaFontSizes.small,
                                     fontWeight: FontWeight.w400,
