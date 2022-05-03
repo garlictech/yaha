@@ -64,14 +64,12 @@ class ImageRepositoryAmplify implements ImageRepository {
         }
       }
     ''';
-    debugPrint("*** $input");
 
     var request = GraphQLRequest<String>(
         document: gqlDocument, variables: Map.from({'query': input.toJson()}));
     var operation = Amplify.API.query(request: request);
 
     return operation.response.then((response) {
-      debugPrint("*** ${response.data}");
       return List<String>.from(
           jsonDecode(response.data)['searchSafeImagesAroundHike']['items']);
     });
@@ -91,8 +89,10 @@ class ImageRepositoryAmplify implements ImageRepository {
     ''';
     var request = GraphQLRequest<String>(
         document: gqlDocument, variables: Map.from({'query': input.toJson()}));
-    var response = await Amplify.API.query(request: request).response;
-    return List<String>.from(
-        jsonDecode(response.data)['searchSafeImagesAroundLocation']['items']);
+    var operation = Amplify.API.query(request: request);
+    return operation.response.then((response) {
+      return List<String>.from(
+          jsonDecode(response.data)['searchSafeImagesAroundLocation']['items']);
+    });
   }
 }
