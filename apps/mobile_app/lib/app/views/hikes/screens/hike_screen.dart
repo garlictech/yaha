@@ -203,7 +203,7 @@ class HikeScreen extends ConsumerWidget {
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
                 return Container(
-                  padding: const EdgeInsets.only(
+                  padding: EdgeInsets.only(
                     left: YahaSpaceSizes.general,
                     right: YahaSpaceSizes.general,
                     top: YahaSpaceSizes.general,
@@ -232,7 +232,7 @@ class HikeScreen extends ConsumerWidget {
                       Container(
                         padding: const EdgeInsets.only(
                             top: YahaSpaceSizes.small,
-                            bottom: YahaSpaceSizes.small),
+                            bottom: YahaSpaceSizes.medium),
                         child: Column(
                           children: const [
                             SizedBox(
@@ -256,7 +256,7 @@ class HikeScreen extends ConsumerWidget {
                       }),
                       Container(
                         padding: const EdgeInsets.only(
-                          top: YahaSpaceSizes.general,
+                          top: YahaSpaceSizes.large,
                           bottom: YahaSpaceSizes.medium,
                         ),
                         child: Column(
@@ -296,16 +296,19 @@ class HikeScreen extends ConsumerWidget {
                           child: ShowMoreButton(
                             nextScreen: PlacesOnRouteScreen(hike: hike),
                           )),
-                      Container(
-                          height: 340,
-                          margin:
+                      UnconstrainedBox(
+                        child: Container(
+                          padding:
                               const EdgeInsets.only(top: YahaSpaceSizes.large),
+                          height: 340,
                           width: MediaQuery.of(context).size.width,
-                          child: ClipRRect(
+                          /*child: ClipRRect(
                             borderRadius:
-                                BorderRadius.circular(YahaBorderRadius.general),
-                            child: LeafletMap(mapKey: mapKey, hike: hike),
-                          )),
+                                BorderRadius.circular(YahaBorderRadius.general),*/
+                          child: LeafletMap(mapKey: mapKey, hike: hike),
+                          //),
+                        ),
+                      ),
                       Container(
                         padding:
                             const EdgeInsets.only(top: YahaSpaceSizes.large),
