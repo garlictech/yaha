@@ -1,0 +1,23 @@
+{
+  "root": "libs/integration-tests/backend",
+  "sourceRoot": "libs/integration-tests/backend/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/integration-tests/backend/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/integration-tests/backend"],
+      "options": {
+        "jestConfig": "libs/integration-tests/backend/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["type:integration-tests", "platform:nodejs"]
+}

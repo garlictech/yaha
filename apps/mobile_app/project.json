@@ -1,0 +1,197 @@
+{
+  "root": "apps/mobile_app",
+  "sourceRoot": "apps/mobile_app/src",
+  "projectType": "application",
+  "targets": {
+    "analyze": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "flutter analyze",
+        "cwd": "apps/mobile_app"
+      }
+    },
+    "clean": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "flutter clean",
+        "cwd": "apps/mobile_app"
+      }
+    },
+    "format": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "flutter format apps/mobile_app/*",
+        "cwd": "apps/mobile_app"
+      }
+    },
+    "test": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "flutter test",
+        "cwd": "apps/mobile_app"
+      }
+    },
+    "test-ci": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "docker run --platform linux/amd64 --rm -v ${PWD}:/build -v /tmp/x:/root/.pub-cache --workdir /build 697486207432.dkr.ecr.us-east-1.amazonaws.com/yaha-flutter flutter test",
+        "cwd": "apps/mobile_app"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "flutter analyze",
+        "cwd": "apps/mobile_app"
+      }
+    },
+    "lint-ci": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "docker run --platform linux/amd64 --rm -v ${PWD}:/build -v /tmp/x:/root/.pub-cache --workdir /build  697486207432.dkr.ecr.us-east-1.amazonaws.com/yaha-flutter flutter analyze",
+        "cwd": "apps/mobile_app"
+      }
+    },
+    "assemble": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "flutter assemble",
+        "cwd": "apps/mobile_app"
+      }
+    },
+    "attach": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "flutter attach",
+        "cwd": "apps/mobile_app"
+      }
+    },
+    "drive": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "flutter drive",
+        "cwd": "apps/mobile_app"
+      }
+    },
+    "genL10n": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "flutter gen-l10n",
+        "cwd": "apps/mobile_app"
+      }
+    },
+    "install": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "flutter install",
+        "cwd": "apps/mobile_app"
+      }
+    },
+    "run": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "flutter run",
+        "cwd": "apps/mobile_app"
+      }
+    },
+    "buildAar": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "flutter build aar",
+        "cwd": "apps/mobile_app"
+      }
+    },
+    "buildApk": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "flutter build apk",
+        "cwd": "apps/mobile_app"
+      }
+    },
+    "buildApk-ci": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "docker run --platform linux/amd64 --rm -v ${PWD}:/build -v /tmp/x:/root/.pub-cache --workdir /build 697486207432.dkr.ecr.us-east-1.amazonaws.com/yaha-flutter flutter build apk",
+        "cwd": "apps/mobile_app"
+      }
+    },
+    "buildAppbundle": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "flutter build appbundle",
+        "cwd": "apps/mobile_app"
+      }
+    },
+    "buildAppbundle-ci": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "docker run --platform linux/amd64 --rm -v ${PWD}:/build -v /tmp/x:/root/.pub-cache --workdir /build 697486207432.dkr.ecr.us-east-1.amazonaws.com/yaha-flutter flutter build appbundle",
+        "cwd": "apps/mobile_app"
+      }
+    },
+    "buildBundle": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "flutter build bundle",
+        "cwd": "apps/mobile_app"
+      }
+    },
+    "buildIos": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "flutter build ios",
+        "cwd": "apps/mobile_app"
+      }
+    },
+    "buildIosFramework": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "flutter build ios-framework",
+        "cwd": "apps/mobile_app"
+      }
+    },
+    "buildIpa": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "flutter build ipa",
+        "cwd": "apps/mobile_app"
+      }
+    },
+    "codegen": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "parallel": false,
+        "command": "flutter packages pub run build_runner build lib --delete-conflicting-outputs",
+        "cwd": "apps/mobile_app"
+      }
+    },
+    "graphql-codegen-ci": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "parallel": false,
+        "command": "docker run --platform linux/amd64 --rm -v ${PWD}:/build -v /tmp/x:/root/.pub-cache --workdir /build  ${AWS_ACCOUNT}.dkr.ecr.eu-west-1.amazonaws.com/yaha-flutter flutter packages pub run build_runner build lib --delete-conflicting-outputs",
+        "cwd": "apps/mobile_app"
+      }
+    },
+    "build-schema": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "cwd": "apps/mobile_app",
+        "commands": ["../../tools/build-schema-mobile_app.sh '{args.env}'"]
+      },
+      "outputs": [
+        "apps/mobile_app/lib/awsconfiguration.dart",
+        "apps/mobile_app/lib/models"
+      ]
+    },
+    "deploy-amplify": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "cwd": "apps/mobile_app",
+        "parallel": false,
+        "commands": ["../../tools/deploy-amplify-backend.sh '{args.env}'"]
+      }
+    }
+  },
+  "tags": ["layer:app", "platform:flutter"]
+}

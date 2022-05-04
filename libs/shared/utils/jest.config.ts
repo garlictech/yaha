@@ -1,6 +1,6 @@
 module.exports = {
-  displayName: 'integration-tests-backend',
-  preset: '../../../jest.preset.js',
+  displayName: 'shared-utils',
+
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
@@ -11,5 +11,6 @@ module.exports = {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../../coverage/libs/integration-tests/backend',
+  coverageDirectory: '../../../coverage/libs/shared/utils',
+  preset: '../../../jest.preset.ts',
 };

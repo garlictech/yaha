@@ -1,5 +1,6 @@
 // ignore: file_names
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/app/presenters/map/map.dart';
@@ -156,12 +157,15 @@ class HikeScreenDescription extends StatelessWidget {
 
 class HikeScreen extends ConsumerWidget {
   final Hike hike;
+  late final String mapKey;
 
-  const HikeScreen({Key? key, required this.hike}) : super(key: key);
+  HikeScreen({Key? key, required this.hike}) : super(key: key) {
+    mapKey = hike.id + 'hike_screen';
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final mapPresenter = ref.watch(leafletMapMVPProvider(key).notifier);
+    final mapPresenter = ref.watch(leafletMapMVPProvider(mapKey).notifier);
     final defaults = ref.watch(defaultsProvider);
     mapPresenter.addHike(hike);
     mapPresenter.mapCenter = hike.startPoint;
@@ -173,14 +177,24 @@ class HikeScreen extends ConsumerWidget {
           Consumer(builder: (c, ref, _child) {
             final imageUrl = ref.watch(imagesAlongHikeNotifierProvider(hike.id)
                 .select((vm) => vm.firstImageUrl));
-            final content = Container(
-              foregroundDecoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.35),
-              ),
-              child: AnimatedSwitcher(
-                duration: const Duration(milliseconds: 1000),
-                child: YahaImage(key: UniqueKey(), imageUrl: imageUrl),
-              ),
+            final content = Stack(
+              children: [
+                AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 1000),
+                  child: YahaImage(key: UniqueKey(), imageUrl: imageUrl),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.topCenter,
+                        colors: [
+                          Colors.black.withOpacity(0.6),
+                          Colors.black.withOpacity(0.2),
+                        ]),
+                  ),
+                ),
+              ],
             );
             return YahaSliverAppBar(
                 title: hike.description.first.title ?? '', content: content);
@@ -290,7 +304,7 @@ class HikeScreen extends ConsumerWidget {
                           child: ClipRRect(
                             borderRadius:
                                 BorderRadius.circular(YahaBorderRadius.general),
-                            child: const LeafletMap(),
+                            child: LeafletMap(mapKey: mapKey, hike: hike),
                           )),
                       Container(
                         padding:

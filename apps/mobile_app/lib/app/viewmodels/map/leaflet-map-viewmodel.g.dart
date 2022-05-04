@@ -11,7 +11,7 @@ abstract class $LeafletMapViewmodel {
 
   List<Hike> get hikes;
   List<Poi> get pois;
-  Location get mapCenter;
+  Location? get mapCenter;
 
   LeafletMapViewmodel copyWith({
     List<Hike>? hikes,
@@ -72,7 +72,7 @@ class LeafletMapViewmodel$Change {
 
   List<Hike> hikes;
   List<Poi> pois;
-  Location mapCenter;
+  Location? mapCenter;
 }
 
 // ignore: avoid_classes_with_only_static_members
@@ -87,7 +87,7 @@ class LeafletMapViewmodel$ {
     (poisContainer, pois) => poisContainer.copyWith(pois: pois),
   );
 
-  static final mapCenter = Lens<LeafletMapViewmodel, Location>(
+  static final mapCenter = Lens<LeafletMapViewmodel, Location?>(
     (mapCenterContainer) => mapCenterContainer.mapCenter,
     (mapCenterContainer, mapCenter) =>
         mapCenterContainer.copyWith(mapCenter: mapCenter),

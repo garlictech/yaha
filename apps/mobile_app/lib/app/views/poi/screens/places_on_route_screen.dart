@@ -54,6 +54,6 @@ class PlacesOnRouteScreen extends ConsumerWidget {
           ),
           leading: const YahaBackButton(),
         ),
-        body: SafeArea(child: PoisOfHikeMap(hike: hike)));
+        body: SafeArea(child: PoisOfHikeMap(key: UniqueKey(), hike: hike)));
   }
 }

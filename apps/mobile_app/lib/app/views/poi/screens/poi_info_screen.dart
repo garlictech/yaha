@@ -97,11 +97,11 @@ class PoiInfoScreen extends ConsumerWidget {
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
-                return Container(
+                return SafeArea(
+                    child: Container(
                   padding: const EdgeInsets.only(
                       left: YahaSpaceSizes.general,
-                      right: YahaSpaceSizes.general,
-                      top: YahaSpaceSizes.general),
+                      right: YahaSpaceSizes.general),
                   child: Column(
                     children: [
                       noImagesOfPoi
@@ -116,10 +116,8 @@ class PoiInfoScreen extends ConsumerWidget {
                             )
                           : Container(),
                       Container(
-                          alignment: Alignment.centerLeft,
                           padding: const EdgeInsets.only(
-                            bottom: YahaSpaceSizes.general,
-                          ),
+                              bottom: YahaSpaceSizes.general),
                           child: summary),
                       Align(
                         alignment: Alignment.centerLeft,
@@ -128,11 +126,11 @@ class PoiInfoScreen extends ConsumerWidget {
                           children: [
                             RichText(
                               text: TextSpan(
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontSize: YahaFontSizes.small,
                                     color: YahaColors.textColor),
                                 children: [
-                                  TextSpan(
+                                  const TextSpan(
                                     text: 'Latitude: ',
                                     style:
                                         TextStyle(fontWeight: FontWeight.w600),
@@ -150,11 +148,11 @@ class PoiInfoScreen extends ConsumerWidget {
                                   bottom: YahaSpaceSizes.small),
                               child: RichText(
                                 text: TextSpan(
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontSize: YahaFontSizes.small,
                                       color: YahaColors.textColor),
                                   children: [
-                                    TextSpan(
+                                    const TextSpan(
                                       text: 'Longitude: ',
                                       style: TextStyle(
                                           fontWeight: FontWeight.w600),
@@ -170,11 +168,11 @@ class PoiInfoScreen extends ConsumerWidget {
                             poi.elevation != null
                                 ? RichText(
                                     text: TextSpan(
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: YahaFontSizes.small,
                                           color: YahaColors.textColor),
                                       children: [
-                                        TextSpan(
+                                        const TextSpan(
                                           text: 'Elevation: ',
                                           style: TextStyle(
                                               fontWeight: FontWeight.w600),
@@ -199,7 +197,9 @@ class PoiInfoScreen extends ConsumerWidget {
                             borderRadius:
                                 BorderRadius.circular(YahaBorderRadius.general),
                             child: LeafletMap(
-                                poiMarkerBuilder: _markerBuilder, pois: [poi])),
+                                mapKey: poi.id,
+                                poiMarkerBuilder: _markerBuilder,
+                                pois: [poi])),
                       ),
                       Container(
                         padding: const EdgeInsets.only(
@@ -310,7 +310,7 @@ class PoiInfoScreen extends ConsumerWidget {
                       ),
                     ],
                   ),
-                );
+                ));
               },
               childCount: 1,
             ),

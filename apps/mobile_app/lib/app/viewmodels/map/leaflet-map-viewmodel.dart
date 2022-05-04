@@ -10,10 +10,8 @@ class LeafletMapViewmodel extends $LeafletMapViewmodel {
   @override
   final List<Poi> pois;
   @override
-  final Location mapCenter;
+  final Location? mapCenter;
 
   LeafletMapViewmodel(
-      {this.hikes = const [],
-      this.pois = const [],
-      this.mapCenter = const Location(lat: 0, lon: 0)});
+      {this.hikes = const [], this.pois = const [], this.mapCenter});
 }

@@ -64,11 +64,17 @@ class ImageRepositoryAmplify implements ImageRepository {
         }
       }
     ''';
+    debugPrint("*** $input");
+
     var request = GraphQLRequest<String>(
         document: gqlDocument, variables: Map.from({'query': input.toJson()}));
     var operation = Amplify.API.query(request: request);
-    return operation.response.then((response) => List<String>.from(
-        jsonDecode(response.data)['searchSafeImagesAroundHike']['items']));
+
+    return operation.response.then((response) {
+      debugPrint("*** ${response.data}");
+      return List<String>.from(
+          jsonDecode(response.data)['searchSafeImagesAroundHike']['items']);
+    });
   }
 
   @override
