@@ -1,6 +1,6 @@
 module.exports = {
-  displayName: 'backend-shared-utils',
-  preset: '../../../../jest.preset.js',
+  displayName: 'backend-hike-search-services',
+
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
@@ -11,5 +11,6 @@ module.exports = {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../../../coverage/libs/backend/shared/utils',
+  coverageDirectory: '../../../../coverage/libs/backend/hike-search/services',
+  preset: '../../../../jest.preset.ts',
 };

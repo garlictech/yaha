@@ -1,6 +1,6 @@
 module.exports = {
-  displayName: 'backend-hike-search-utils',
-  preset: '../../../../jest.preset.js',
+  displayName: 'backend-amplify-resolvers',
+
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
@@ -11,5 +11,6 @@ module.exports = {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../../../coverage/libs/backend/hike-search/utils',
+  coverageDirectory: '../../../coverage/libs/backend/amplify-resolvers',
+  preset: '../../../jest.preset.ts',
 };

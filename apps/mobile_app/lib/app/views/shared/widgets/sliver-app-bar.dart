@@ -32,7 +32,7 @@ class YahaSliverAppBar extends StatelessWidget {
             centerTitle: isExpanded ? false : true,
             title: ConstrainedBox(
               constraints: BoxConstraints(
-                  maxWidth: MediaQuery.of(context).size.width / 1.5),
+                  maxWidth: MediaQuery.of(context).size.width / 1.6),
               child: Text(
                 title,
                 style: const TextStyle(

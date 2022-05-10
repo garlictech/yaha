@@ -156,12 +156,15 @@ class HikeScreenDescription extends StatelessWidget {
 
 class HikeScreen extends ConsumerWidget {
   final Hike hike;
+  late final String mapKey;
 
-  const HikeScreen({Key? key, required this.hike}) : super(key: key);
+  HikeScreen({Key? key, required this.hike}) : super(key: key) {
+    mapKey = hike.id + 'hike_screen';
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final mapPresenter = ref.watch(leafletMapMVPProvider(key).notifier);
+    final mapPresenter = ref.watch(leafletMapMVPProvider(mapKey).notifier);
     final defaults = ref.watch(defaultsProvider);
     mapPresenter.addHike(hike);
     mapPresenter.mapCenter = hike.startPoint;
@@ -199,19 +202,21 @@ class HikeScreen extends ConsumerWidget {
                       const HikeScreenStartHikeButton(),
                       HikeScreenDescription(
                           summary: hike.description.first.summary ?? ''),
-                      Container(
-                          margin: const EdgeInsets.only(
-                              bottom: YahaSpaceSizes.large),
-                          height: YahaBoxSizes.heightMedium,
-                          width: MediaQuery.of(context).size.width,
-                          child: Consumer(builder: (c, ref, _child) {
-                            final imageUrls = ref.watch(
-                                imagesAlongHikeNotifierProvider(hike.id)
-                                    .select((vm) => vm.imageUrls));
+                      UnconstrainedBox(
+                        child: Container(
+                            margin: const EdgeInsets.only(
+                                bottom: YahaSpaceSizes.large),
+                            height: YahaBoxSizes.heightMedium,
+                            width: MediaQuery.of(context).size.width,
+                            child: Consumer(builder: (c, ref, _child) {
+                              final imageUrls = ref.watch(
+                                  imagesAlongHikeNotifierProvider(hike.id)
+                                      .select((vm) => vm.imageUrls));
 
-                            return GalleryWidget(
-                                key: UniqueKey(), imageUrls: imageUrls);
-                          })),
+                              return GalleryWidget(
+                                  key: UniqueKey(), imageUrls: imageUrls);
+                            })),
+                      ),
                       HikeProperties(
                           hike: hike,
                           averageSpeedKmh: defaults.averageSpeedKmh),
@@ -290,7 +295,7 @@ class HikeScreen extends ConsumerWidget {
                           child: ClipRRect(
                             borderRadius:
                                 BorderRadius.circular(YahaBorderRadius.general),
-                            child: const LeafletMap(),
+                            child: LeafletMap(mapKey: mapKey, hike: hike),
                           )),
                       Container(
                         padding:
