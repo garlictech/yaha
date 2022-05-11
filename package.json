@@ -54,7 +54,7 @@
     "aws-sdk": "2.1069.0",
     "bunyan": "1.8.15",
     "enum-values": "1.2.1",
-    "fp-ts": "2.11.8",
+    "fp-ts": "2.12.1",
     "fp-ts-rxjs": "0.6.15",
     "gpx-builder": "4.0.3",
     "graphql": "15.8.0",
