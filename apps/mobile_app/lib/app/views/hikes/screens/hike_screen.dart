@@ -213,19 +213,21 @@ class HikeScreen extends ConsumerWidget {
                       const HikeScreenStartHikeButton(),
                       HikeScreenDescription(
                           summary: hike.description.first.summary ?? ''),
-                      Container(
-                          margin: const EdgeInsets.only(
-                              bottom: YahaSpaceSizes.large),
-                          height: YahaBoxSizes.heightMedium,
-                          width: MediaQuery.of(context).size.width,
-                          child: Consumer(builder: (c, ref, _child) {
-                            final imageUrls = ref.watch(
-                                imagesAlongHikeNotifierProvider(hike.id)
-                                    .select((vm) => vm.imageUrls));
+                      UnconstrainedBox(
+                        child: Container(
+                            margin: const EdgeInsets.only(
+                                bottom: YahaSpaceSizes.large),
+                            height: YahaBoxSizes.heightMedium,
+                            width: MediaQuery.of(context).size.width,
+                            child: Consumer(builder: (c, ref, _child) {
+                              final imageUrls = ref.watch(
+                                  imagesAlongHikeNotifierProvider(hike.id)
+                                      .select((vm) => vm.imageUrls));
 
-                            return GalleryWidget(
-                                key: UniqueKey(), imageUrls: imageUrls);
-                          })),
+                              return GalleryWidget(
+                                  key: UniqueKey(), imageUrls: imageUrls);
+                            })),
+                      ),
                       HikeProperties(
                           hike: hike,
                           averageSpeedKmh: defaults.averageSpeedKmh),
