@@ -15102,6 +15102,32 @@ esbuild-windows-arm64@0.14.36:
   resolved "https://registry.yarnpkg.com/esbuild-windows-arm64/-/esbuild-windows-arm64-0.14.36.tgz#ba21546fecb7297667d0052d00150de22c044b24"
   integrity sha512-fBB4WlDqV1m18EF/aheGYQkQZHfPHiHJSBYzXIo8yKehek+0BtBwo/4PNwKGJ5T0YK0oc8pBKjgwPbzSrPLb+Q==
 
+esbuild@0.14.36:
+  version "0.14.36"
+  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.14.36.tgz#0023a73eab57886ac5605df16ee421e471a971b3"
+  integrity sha512-HhFHPiRXGYOCRlrhpiVDYKcFJRdO0sBElZ668M4lh2ER0YgnkLxECuFe7uWCf23FrcLc59Pqr7dHkTqmRPDHmw==
+  optionalDependencies:
+    esbuild-android-64 "0.14.36"
+    esbuild-android-arm64 "0.14.36"
+    esbuild-darwin-64 "0.14.36"
+    esbuild-darwin-arm64 "0.14.36"
+    esbuild-freebsd-64 "0.14.36"
+    esbuild-freebsd-arm64 "0.14.36"
+    esbuild-linux-32 "0.14.36"
+    esbuild-linux-64 "0.14.36"
+    esbuild-linux-arm "0.14.36"
+    esbuild-linux-arm64 "0.14.36"
+    esbuild-linux-mips64le "0.14.36"
+    esbuild-linux-ppc64le "0.14.36"
+    esbuild-linux-riscv64 "0.14.36"
+    esbuild-linux-s390x "0.14.36"
+    esbuild-netbsd-64 "0.14.36"
+    esbuild-openbsd-64 "0.14.36"
+    esbuild-sunos-64 "0.14.36"
+    esbuild-windows-32 "0.14.36"
+    esbuild-windows-64 "0.14.36"
+    esbuild-windows-arm64 "0.14.36"
+
 esbuild@^0.12.20:
   version "0.12.29"
   resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.12.29.tgz#be602db7c4dc78944a9dbde0d1ea19d36c1f882d"
@@ -15130,32 +15156,6 @@ esbuild@^0.14.11:
     esbuild-windows-32 "0.14.18"
     esbuild-windows-64 "0.14.18"
     esbuild-windows-arm64 "0.14.18"
-
-esbuild@^0.14.36:
-  version "0.14.36"
-  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.14.36.tgz#0023a73eab57886ac5605df16ee421e471a971b3"
-  integrity sha512-HhFHPiRXGYOCRlrhpiVDYKcFJRdO0sBElZ668M4lh2ER0YgnkLxECuFe7uWCf23FrcLc59Pqr7dHkTqmRPDHmw==
-  optionalDependencies:
-    esbuild-android-64 "0.14.36"
-    esbuild-android-arm64 "0.14.36"
-    esbuild-darwin-64 "0.14.36"
-    esbuild-darwin-arm64 "0.14.36"
-    esbuild-freebsd-64 "0.14.36"
-    esbuild-freebsd-arm64 "0.14.36"
-    esbuild-linux-32 "0.14.36"
-    esbuild-linux-64 "0.14.36"
-    esbuild-linux-arm "0.14.36"
-    esbuild-linux-arm64 "0.14.36"
-    esbuild-linux-mips64le "0.14.36"
-    esbuild-linux-ppc64le "0.14.36"
-    esbuild-linux-riscv64 "0.14.36"
-    esbuild-linux-s390x "0.14.36"
-    esbuild-netbsd-64 "0.14.36"
-    esbuild-openbsd-64 "0.14.36"
-    esbuild-sunos-64 "0.14.36"
-    esbuild-windows-32 "0.14.36"
-    esbuild-windows-64 "0.14.36"
-    esbuild-windows-arm64 "0.14.36"
 
 escalade@^3.1.1:
   version "3.1.1"
