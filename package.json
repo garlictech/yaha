@@ -47,7 +47,7 @@
     "@turf/turf": "6.5.0",
     "apollo-client": "2.6.10",
     "apollo-server-lambda": "2.25.3",
-    "aws-amplify": "4.3.21",
+    "aws-amplify": "4.3.22",
     "aws-appsync": "4.1.6",
     "aws-elasticsearch-js": "1.0.3",
     "aws-lambda": "1.0.7",
