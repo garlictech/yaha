@@ -28,12 +28,11 @@ class PoiInfoScreen extends ConsumerWidget {
         : (poi.description?[0].type == 'html'
             ? Html(data: poi.description?[0].summary)
             : Markdown(data: poi.description?[0].summary ?? ''));
-    final bool noImagesOfPoi = ref.watch(imagesOfPoiProvider(poi.id)) == null;
 
     return Scaffold(
-      appBar: noImagesOfPoi
+      /*appBar: ifShowAppBar
           ? AppBar(
-              leading: YahaBackButton(),
+              leading: const YahaBackButton(),
               backgroundColor: YahaColors.background,
               elevation: 0,
               title: Padding(
@@ -44,7 +43,7 @@ class PoiInfoScreen extends ConsumerWidget {
                   poi.title,
                   maxLines: 2,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: YahaFontSizes.medium,
                     color: YahaColors.textColor,
                     fontWeight: FontWeight.w600,
@@ -56,7 +55,7 @@ class PoiInfoScreen extends ConsumerWidget {
                   padding: const EdgeInsets.only(right: YahaSpaceSizes.small),
                   child: IconButton(
                     onPressed: () {},
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.chat_outlined,
                     ),
                     iconSize: YahaIconSizes.medium,
@@ -65,58 +64,61 @@ class PoiInfoScreen extends ConsumerWidget {
                 )
               ],
             )
-          : null,
+          : null,*/
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: <Widget>[
-          Consumer(builder: (c, ref, _child) {
-            final imagesOfPoi = ref.watch(imagesOfPoiProvider(poi.id));
-            poiIcon() =>
-                SizedBox(height: 240, child: PoiIcon(poiType: poi.poiType));
+          Visibility(
+            visible: true,
+            child: Consumer(builder: (c, ref, _child) {
+              final imagesOfPoi = ref.watch(imagesOfPoiProvider(poi.id));
+              poiIcon() =>
+                  SizedBox(height: 240, child: PoiIcon(poiType: poi.poiType));
 
-            imageContent(imageUrl) => Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: NetworkImage(imageUrl),
-                      fit: BoxFit.cover,
+              imageContent(imageUrl) => Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: NetworkImage(imageUrl),
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                  ),
-                );
+                  );
 
-            return imagesOfPoi.when(
-                error: (_e, _s) =>
-                    YahaSliverAppBar(title: poi.title, content: poiIcon()),
-                loading: () =>
-                    YahaSliverAppBar(title: poi.title, content: poiIcon()),
-                data: (imageUrls) => YahaSliverAppBar(
-                    title: poi.title,
-                    content: imageUrls.isEmpty
-                        ? poiIcon()
-                        : imageContent(imageUrls.first)));
-          }),
+              return imagesOfPoi.when(
+                  error: (_e, _s) =>
+                      YahaSliverAppBar(title: poi.title, content: poiIcon()),
+                  loading: () =>
+                      YahaSliverAppBar(title: poi.title, content: poiIcon()),
+                  data: (imageUrls) => YahaSliverAppBar(
+                      title: poi.title,
+                      content: imageUrls.isEmpty
+                          ? poiIcon()
+                          : imageContent(imageUrls.first)));
+            }),
+          ),
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
-                return SafeArea(
-                    child: Container(
+                return Container(
                   padding: const EdgeInsets.only(
                       left: YahaSpaceSizes.general,
                       right: YahaSpaceSizes.general),
                   child: Column(
                     children: [
-                      noImagesOfPoi
-                          ? Padding(
-                              padding: const EdgeInsets.only(
-                                  top: YahaSpaceSizes.general,
-                                  bottom: YahaSpaceSizes.general),
-                              child: SizedBox(
-                                  child: PoiIcon(poiType: poi.poiType),
-                                  height: 80,
-                                  width: 80),
-                            )
-                          : Container(),
+                      Visibility(
+                        visible: false,
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              top: YahaSpaceSizes.general),
+                          child: SizedBox(
+                              child: PoiIcon(poiType: poi.poiType),
+                              height: 80,
+                              width: 80),
+                        ),
+                      ),
                       Container(
                           padding: const EdgeInsets.only(
+                              top: YahaSpaceSizes.general,
                               bottom: YahaSpaceSizes.general),
                           child: summary),
                       Align(
@@ -310,7 +312,7 @@ class PoiInfoScreen extends ConsumerWidget {
                       ),
                     ],
                   ),
-                ));
+                );
               },
               childCount: 1,
             ),
