@@ -276,7 +276,9 @@ class HikeScreen extends ConsumerWidget {
                         ),
                       ),
                       Container(
-                        padding: const EdgeInsets.all(YahaSpaceSizes.general),
+                        padding: const EdgeInsets.only(
+                            left: YahaSpaceSizes.general,
+                            bottom: YahaSpaceSizes.medium),
                         width: MediaQuery.of(context).size.width,
                         child: Consumer(builder: (c, ref, _child) {
                           final pois = ref.watch(
