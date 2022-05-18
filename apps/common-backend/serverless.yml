@@ -1,7 +1,6 @@
 org: garlictech
 service: common-backend
 configValidationMode: error
-frameworkVersion: ^2.16.1
 
 plugins:
   - serverless-bundle

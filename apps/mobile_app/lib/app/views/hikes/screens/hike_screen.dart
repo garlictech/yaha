@@ -1,5 +1,6 @@
 // ignore: file_names
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/app/presenters/map/map.dart';
@@ -176,14 +177,24 @@ class HikeScreen extends ConsumerWidget {
           Consumer(builder: (c, ref, _child) {
             final imageUrl = ref.watch(imagesAlongHikeNotifierProvider(hike.id)
                 .select((vm) => vm.firstImageUrl));
-            final content = Container(
-              foregroundDecoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.35),
-              ),
-              child: AnimatedSwitcher(
-                duration: const Duration(milliseconds: 1000),
-                child: YahaImage(key: UniqueKey(), imageUrl: imageUrl),
-              ),
+            final content = Stack(
+              children: [
+                AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 1000),
+                  child: YahaImage(key: UniqueKey(), imageUrl: imageUrl),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.topCenter,
+                        colors: [
+                          Colors.black.withOpacity(0.6),
+                          Colors.black.withOpacity(0.2),
+                        ]),
+                  ),
+                ),
+              ],
             );
             return YahaSliverAppBar(
                 title: hike.description.first.title ?? '', content: content);
@@ -192,7 +203,7 @@ class HikeScreen extends ConsumerWidget {
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
                 return Container(
-                  padding: const EdgeInsets.only(
+                  padding: EdgeInsets.only(
                     left: YahaSpaceSizes.general,
                     right: YahaSpaceSizes.general,
                     top: YahaSpaceSizes.general,
@@ -202,26 +213,28 @@ class HikeScreen extends ConsumerWidget {
                       const HikeScreenStartHikeButton(),
                       HikeScreenDescription(
                           summary: hike.description.first.summary ?? ''),
-                      Container(
-                          margin: const EdgeInsets.only(
-                              bottom: YahaSpaceSizes.large),
-                          height: YahaBoxSizes.heightMedium,
-                          width: MediaQuery.of(context).size.width,
-                          child: Consumer(builder: (c, ref, _child) {
-                            final imageUrls = ref.watch(
-                                imagesAlongHikeNotifierProvider(hike.id)
-                                    .select((vm) => vm.imageUrls));
+                      UnconstrainedBox(
+                        child: Container(
+                            margin: const EdgeInsets.only(
+                                bottom: YahaSpaceSizes.large),
+                            height: YahaBoxSizes.heightMedium,
+                            width: MediaQuery.of(context).size.width,
+                            child: Consumer(builder: (c, ref, _child) {
+                              final imageUrls = ref.watch(
+                                  imagesAlongHikeNotifierProvider(hike.id)
+                                      .select((vm) => vm.imageUrls));
 
-                            return GalleryWidget(
-                                key: UniqueKey(), imageUrls: imageUrls);
-                          })),
+                              return GalleryWidget(
+                                  key: UniqueKey(), imageUrls: imageUrls);
+                            })),
+                      ),
                       HikeProperties(
                           hike: hike,
                           averageSpeedKmh: defaults.averageSpeedKmh),
                       Container(
                         padding: const EdgeInsets.only(
                             top: YahaSpaceSizes.small,
-                            bottom: YahaSpaceSizes.small),
+                            bottom: YahaSpaceSizes.medium),
                         child: Column(
                           children: const [
                             SizedBox(
@@ -245,7 +258,7 @@ class HikeScreen extends ConsumerWidget {
                       }),
                       Container(
                         padding: const EdgeInsets.only(
-                          top: YahaSpaceSizes.general,
+                          top: YahaSpaceSizes.large,
                           bottom: YahaSpaceSizes.medium,
                         ),
                         child: Column(
@@ -285,16 +298,19 @@ class HikeScreen extends ConsumerWidget {
                           child: ShowMoreButton(
                             nextScreen: PlacesOnRouteScreen(hike: hike),
                           )),
-                      Container(
-                          height: 340,
-                          margin:
+                      UnconstrainedBox(
+                        child: Container(
+                          padding:
                               const EdgeInsets.only(top: YahaSpaceSizes.large),
+                          height: 340,
                           width: MediaQuery.of(context).size.width,
-                          child: ClipRRect(
+                          /*child: ClipRRect(
                             borderRadius:
-                                BorderRadius.circular(YahaBorderRadius.general),
-                            child: LeafletMap(mapKey: mapKey, hike: hike),
-                          )),
+                                BorderRadius.circular(YahaBorderRadius.general),*/
+                          child: LeafletMap(mapKey: mapKey, hike: hike),
+                          //),
+                        ),
+                      ),
                       Container(
                         padding:
                             const EdgeInsets.only(top: YahaSpaceSizes.large),
