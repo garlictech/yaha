@@ -203,7 +203,7 @@ class HikeScreen extends ConsumerWidget {
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
                 return Container(
-                  padding: EdgeInsets.only(
+                  padding: const EdgeInsets.only(
                     left: YahaSpaceSizes.general,
                     right: YahaSpaceSizes.general,
                     top: YahaSpaceSizes.general,
@@ -216,7 +216,7 @@ class HikeScreen extends ConsumerWidget {
                       UnconstrainedBox(
                         child: Container(
                             margin: const EdgeInsets.only(
-                                bottom: YahaSpaceSizes.large),
+                                bottom: YahaSpaceSizes.xLarge),
                             height: YahaBoxSizes.heightMedium,
                             width: MediaQuery.of(context).size.width,
                             child: Consumer(builder: (c, ref, _child) {
@@ -233,7 +233,7 @@ class HikeScreen extends ConsumerWidget {
                           averageSpeedKmh: defaults.averageSpeedKmh),
                       Container(
                         padding: const EdgeInsets.only(
-                            top: YahaSpaceSizes.small,
+                            top: YahaSpaceSizes.medium,
                             bottom: YahaSpaceSizes.medium),
                         child: Column(
                           children: const [
@@ -258,7 +258,7 @@ class HikeScreen extends ConsumerWidget {
                       }),
                       Container(
                         padding: const EdgeInsets.only(
-                          top: YahaSpaceSizes.large,
+                          top: YahaSpaceSizes.xLarge,
                           bottom: YahaSpaceSizes.medium,
                         ),
                         child: Column(
@@ -315,7 +315,7 @@ class HikeScreen extends ConsumerWidget {
                       ),
                       Container(
                         padding:
-                            const EdgeInsets.only(top: YahaSpaceSizes.large),
+                            const EdgeInsets.only(top: YahaSpaceSizes.xLarge),
                         alignment: Alignment.centerLeft,
                         child: const Text('Weather',
                             style: TextStyle(
