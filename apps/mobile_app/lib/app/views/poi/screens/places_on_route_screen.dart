@@ -45,6 +45,7 @@ class PlacesOnRouteScreen extends ConsumerWidget {
           elevation: 0,
           centerTitle: true,
           titleSpacing: 20.0,
+          toolbarHeight: 80.0,
           title: const Padding(
             padding: EdgeInsets.only(right: 45.0),
             child: Text(
