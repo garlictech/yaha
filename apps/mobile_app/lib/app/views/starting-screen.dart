@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:yaha/app/views/home/views/screens/guest-home-screen.dart';
+import 'package:yaha/app/views/personal/screen/profile-page.dart';
 import 'package:yaha/app/views/shared/shared.dart';
+import 'package:yaha/app/views/track/screens/timecapsule-new-comments-screen.dart';
+import 'package:yaha/app/views/track/screens/tracking.dart';
 
 class StartingScreen extends StatelessWidget {
   const StartingScreen({Key? key}) : super(key: key);
@@ -28,8 +32,21 @@ class StartingScreen extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    const BottomNavBarWidget()));
+                                builder: (context) => const BottomNavBarWidget(
+                                      firstScreen: HomePageGuest(),
+                                      firstScreenIcon: Icons.home_rounded,
+                                      firstScreenName: 'Home',
+                                      secondScreen:
+                                          TimeCapsuleNewCommentsScreen(),
+                                      secondScreenIcon: Icons.travel_explore,
+                                      secondScreenName: 'Explore',
+                                      thirdScreen: TrackingScreen(),
+                                      thirdScreenIcon: Icons.play_circle_fill,
+                                      thirdScreenName: 'Track',
+                                      fourthScreen: ProfilePage(),
+                                      fourthScreenIcon: Icons.face_rounded,
+                                      fourthScreenName: 'Profile',
+                                    )));
                       },
                       child: Container(
                         color: YahaColors.grey600,
