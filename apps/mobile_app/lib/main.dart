@@ -8,6 +8,7 @@ import 'package:yaha/app/views/personal/screen/profile-page.dart';
 import 'package:yaha/app/views/personal/screen/settings-screen.dart';
 import 'package:yaha/app/views/shared/widgets/bottom-nav-bar-widget.dart';
 import 'package:yaha/app/views/shared/widgets/yaha-colors.dart';
+import 'package:yaha/app/views/starting-screen.dart';
 import 'package:yaha/app/views/track/screens/tracking.dart';
 import 'amplifyconfiguration.dart';
 import 'package:amplify_api/amplify_api.dart';
@@ -49,7 +50,7 @@ class _MyAppState extends State<MyApp> {
           focusColor: YahaColors.primary,
           scaffoldBackgroundColor: YahaColors.background,
           fontFamily: 'Inter'),
-      home: const BottomNavBarWidget(),
+      home: const StartingScreen(),
       initialRoute: '/',
       routes: {
         '/profile': (context) => const ProfilePage(),
