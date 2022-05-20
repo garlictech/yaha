@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:yaha/app/views/home/views/screens/guest-home-screen.dart';
-import 'package:yaha/app/views/personal/screen/profile-page.dart';
+import 'package:yaha/app/views/hikes/home/views/screens/guest-home-screen.dart';
+import 'package:yaha/app/views/hikes/personal/screen/profile-page.dart';
+import 'package:yaha/app/views/hikes/track/screens/timecapsule-new-comments-screen.dart';
+import 'package:yaha/app/views/hikes/track/screens/tracking.dart';
 import 'package:yaha/app/views/shared/shared.dart';
-import 'package:yaha/app/views/track/screens/timecapsule-new-comments-screen.dart';
-import 'package:yaha/app/views/track/screens/tracking.dart';
 
 class StartingScreen extends StatelessWidget {
   const StartingScreen({Key? key}) : super(key: key);

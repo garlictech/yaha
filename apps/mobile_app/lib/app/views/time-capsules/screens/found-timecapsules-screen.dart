@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:yaha/app/views/hikes/hike/widgets/list-section-title-box-widget.dart';
 
-import '../../hikes/widgets/list-section-title-box-widget.dart';
 import '../../shared/widgets/yaha-border-width.dart';
 import '../../shared/widgets/yaha-colors.dart';
 import '../../shared/widgets/yaha-space-sizes.dart';
