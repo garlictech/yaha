@@ -115,7 +115,7 @@
     "cypress-localstorage-commands": "1.7.0",
     "dotenv": "16.0.1",
     "esbuild": "0.14.39",
-    "eslint": "8.12.0",
+    "eslint": "8.16.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-cypress": "2.12.1",
     "eslint-plugin-unused-imports": "2.0.0",
