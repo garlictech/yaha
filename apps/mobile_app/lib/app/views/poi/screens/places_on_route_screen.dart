@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:yaha/app/views/hikes/map/widgets/pois-of-hike-map.dart';
 import 'package:yaha/domain/domain.dart';
-import '../../map/widgets/pois-of-hike-map.dart';
 import '../../shared/shared.dart';
 import '../widgets/poi_list_tile_widget.dart';
 

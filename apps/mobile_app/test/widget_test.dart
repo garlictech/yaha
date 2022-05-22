@@ -7,38 +7,43 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/app/views/auth/screens/login-screen.dart';
 import 'package:yaha/app/views/auth/screens/signup-screen.dart';
-import 'package:yaha/app/views/events/screens/all-events.dart';
-import 'package:yaha/app/views/events/screens/event-detail-screen.dart';
-import 'package:yaha/app/views/events/screens/event-prize-screen.dart';
-import 'package:yaha/app/views/events/screens/events.dart';
-import 'package:yaha/app/views/events/screens/ongoing-events.dart';
-import 'package:yaha/app/views/hikes/screens/explore-screen.dart';
-import 'package:yaha/app/views/hikes/screens/hike-filter-screen.dart';
-import 'package:yaha/app/views/hikes/screens/hike-outline-screen.dart';
-import 'package:yaha/app/views/hikes/screens/places-on-route-screen.dart';
-import 'package:yaha/app/views/hikes/screens/search-results-screen.dart';
-import 'package:yaha/app/views/hikes/screens/weather-screen.dart';
-import 'package:yaha/app/views/personal/screen/all-challenges.dart';
-import 'package:yaha/app/views/personal/screen/application-screen.dart';
-import 'package:yaha/app/views/personal/screen/bookmarked-hikes.dart';
-import 'package:yaha/app/views/personal/screen/challenge-detail-screen.dart';
-import 'package:yaha/app/views/personal/screen/challenges.dart';
-import 'package:yaha/app/views/personal/screen/my-challenges.dart';
-import 'package:yaha/app/views/personal/screen/profile-page.dart';
-import 'package:yaha/app/views/personal/screen/settings-screen.dart';
-import 'package:yaha/app/views/personal/screen/statistics-screen.dart';
+import 'package:yaha/app/views/hikes/events/screens/all-events.dart';
+import 'package:yaha/app/views/hikes/events/screens/event-detail-screen.dart';
+import 'package:yaha/app/views/hikes/events/screens/event-prize-screen.dart';
+import 'package:yaha/app/views/hikes/events/screens/events.dart';
+import 'package:yaha/app/views/hikes/events/screens/ongoing-events.dart';
+import 'package:yaha/app/views/hikes/hike/screens/explore-screen.dart';
+import 'package:yaha/app/views/hikes/hike/screens/hike-filter-screen.dart';
+import 'package:yaha/app/views/hikes/hike/screens/hike-outline-screen.dart';
+import 'package:yaha/app/views/hikes/home/views/screens/guest-home-screen.dart';
+import 'package:yaha/app/views/hikes/hike/screens/search-results-screen.dart';
+import 'package:yaha/app/views/hikes/hike/screens/weather-screen.dart';
+import 'package:yaha/app/views/hikes/personal/screen/all-challenges.dart';
+import 'package:yaha/app/views/hikes/personal/screen/application-screen.dart';
+import 'package:yaha/app/views/hikes/personal/screen/bookmarked-hikes.dart';
+import 'package:yaha/app/views/hikes/personal/screen/challenge-detail-screen.dart';
+import 'package:yaha/app/views/hikes/personal/screen/challenges.dart';
+import 'package:yaha/app/views/hikes/personal/screen/my-challenges.dart';
+import 'package:yaha/app/views/hikes/personal/screen/profile-page.dart';
+import 'package:yaha/app/views/hikes/personal/screen/settings-screen.dart';
+import 'package:yaha/app/views/hikes/personal/screen/statistics-screen.dart';
+import 'package:yaha/app/views//hikes/personal/screen/statistics-screen.dart';
+import 'package:yaha/app/views/hikes/personal/screen/challenge-detail-screen.dart';
+import 'package:yaha/app/views/hikes/personal/screen/challenges.dart';
+import 'package:yaha/app/views/hikes/personal/screen/statistics-screen.dart';
 import 'package:yaha/app/views/shared/widgets/bottom-nav-bar-widget.dart';
-import 'package:yaha/app/views/track/screens/leave-a-timecapsule-screen.dart';
-import 'package:yaha/app/views/track/screens/summary-screen.dart';
-import 'package:yaha/app/views/track/screens/timecapsule-in-track-mode-screen.dart';
-import 'package:yaha/app/views/track/screens/timecapsule-new-comments-screen.dart';
-import 'package:yaha/app/views/track/screens/tracking-data-screen.dart';
-import 'package:yaha/app/views/track/screens/tracking-map-screen.dart';
-import 'package:yaha/app/views/track/screens/tracking-timecapsule-screen.dart';
-import 'package:yaha/app/views/track/screens/tracking-timeline-screen.dart';
-import 'package:yaha/app/views/track/screens/tracking.dart';
-import 'package:yaha/app/views/track/widgets/tracking-rating-widget.dart';
-import 'package:yaha/app/views/track/widgets/tracking-timeline-customize-widget.dart';
+import 'package:yaha/app/views/starting-screen.dart';
+import 'package:yaha/app/views/hikes/track/screens/leave-a-timecapsule-screen.dart';
+import 'package:yaha/app/views/hikes/track/screens/summary-screen.dart';
+import 'package:yaha/app/views/hikes/track/screens/timecapsule-in-track-mode-screen.dart';
+import 'package:yaha/app/views/hikes/track/screens/timecapsule-new-comments-screen.dart';
+import 'package:yaha/app/views/hikes/track/screens/tracking-data-screen.dart';
+import 'package:yaha/app/views/hikes/track/screens/tracking-map-screen.dart';
+import 'package:yaha/app/views/hikes/track/screens/tracking-timecapsule-screen.dart';
+import 'package:yaha/app/views/hikes/track/screens/tracking-timeline-screen.dart';
+import 'package:yaha/app/views/hikes/track/screens/tracking.dart';
+import 'package:yaha/app/views/hikes/track/widgets/tracking-rating-widget.dart';
+import 'package:yaha/app/views/hikes/track/widgets/tracking-timeline-customize-widget.dart';
 import 'package:yaha/domain/entities/hike/hike.dart';
 import 'package:yaha/domain/entities/shared/linestring.dart';
 import 'package:yaha/domain/entities/shared/textual-description.dart';
@@ -138,8 +143,24 @@ void main() {
     await tester.pumpAndSettle();
   });*/
   testWidgets('Bottom nav bar smoke test', (WidgetTester tester) async {
-    await tester
-        .pumpWidget(createWidgetForTesting(child: const BottomNavBarWidget()));
+    await tester.pumpWidget(
+      createWidgetForTesting(
+        child: const BottomNavBarWidget(
+          firstScreen: HomePageGuest(),
+          firstScreenIcon: Icons.home_rounded,
+          firstScreenName: 'Home',
+          secondScreen: TimeCapsuleNewCommentsScreen(),
+          secondScreenIcon: Icons.travel_explore,
+          secondScreenName: 'Explore',
+          thirdScreen: TrackingScreen(),
+          thirdScreenIcon: Icons.play_circle_fill,
+          thirdScreenName: 'Track',
+          fourthScreen: ProfilePage(),
+          fourthScreenIcon: Icons.face_rounded,
+          fourthScreenName: 'Profile',
+        ),
+      ),
+    );
 
     await tester.pumpAndSettle();
   });
@@ -277,13 +298,13 @@ void main() {
 
     await tester.pumpAndSettle();
   });
-  testWidgets('Most Interesting Places on Route Screen smoke test',
+  /*testWidgets('Most Interesting Places on Route Screen smoke test',
       (WidgetTester tester) async {
     await tester
         .pumpWidget(createWidgetForTesting(child: const PlacesOnRouteScreen()));
 
     await tester.pumpAndSettle();
-  });
+  });*/
   testWidgets('Event Prize Screen smoke test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: EventPrizeScreen()));
 
@@ -421,6 +442,13 @@ void main() {
       (WidgetTester tester) async {
     await tester.pumpWidget(
         createWidgetForTesting(child: const TimeCapsuleNewCommentsScreen()));
+
+    await tester.pumpAndSettle();
+  });
+
+  testWidgets('Starting Screen smoke test', (WidgetTester tester) async {
+    await tester
+        .pumpWidget(createWidgetForTesting(child: const StartingScreen()));
 
     await tester.pumpAndSettle();
   });
