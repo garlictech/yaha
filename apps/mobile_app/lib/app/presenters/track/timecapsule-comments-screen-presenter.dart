@@ -1,8 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yaha/entities/comments/comment.dart';
-import 'package:yaha/states/comments/comments-state.dart';
-import 'package:yaha/use-cases/comments/comments-use-cases-provider.dart';
-import 'package:yaha/viewmodels/track/timecapsule-comments-screen-viewmodel.dart';
+import 'package:yaha/app/viewmodels/track/timecapsule-comments-screen-viewmodel.dart';
+import 'package:yaha/domain/states/comments/comments-state.dart';
+import 'package:yaha/domain/use-cases/comments/comments-use-cases-provider.dart';
+
+import '../../../domain/entities/comments/comment.dart';
 
 class TimeCapsuleCommentsScreenPresenter
     extends StateNotifier<TimeCapsuleCommentsScreenViewModel> {

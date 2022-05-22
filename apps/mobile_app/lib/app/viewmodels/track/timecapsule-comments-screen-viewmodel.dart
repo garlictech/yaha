@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yaha/entities/comments/comment.dart';
+
+import '../../../domain/entities/comments/comment.dart';
 
 class TimeCapsuleCommentsScreenViewModel {
   final bool commentInputShown;

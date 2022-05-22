@@ -1,5 +1,5 @@
-import 'package:yaha/core/core.dart';
 import 'package:flutter/services.dart';
+import 'package:yaha/utils/core.dart';
 
 class CognitoException extends AppException {
   static const CODE = 'LOGIN_EXCEPTION';

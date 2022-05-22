@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:yaha/app/views/hikes/map/widgets/pois-of-hike-map.dart';
 import 'package:yaha/domain/domain.dart';
-import '../../map/widgets/pois-of-hike-map.dart';
 import '../../shared/shared.dart';
 import '../widgets/poi_list_tile_widget.dart';
 
@@ -45,6 +45,7 @@ class PlacesOnRouteScreen extends ConsumerWidget {
           elevation: 0,
           centerTitle: true,
           titleSpacing: 20.0,
+          toolbarHeight: 80.0,
           title: const Padding(
             padding: EdgeInsets.only(right: 45.0),
             child: Text(
