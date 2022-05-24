@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:yaha/app/views/achievements/market/widgets/time-capsule-box-widget.dart';
+import 'package:yaha/app/views/achievements/market/screens/a-market-screen.dart';
+import 'package:yaha/app/views/achievements/market/widgets/time-capsule-box-widget-found.dart';
+import 'package:yaha/app/views/achievements/market/widgets/time-capsule-box-widget-not-found.dart';
+import 'package:yaha/app/views/achievements/market/widgets/time-capsule-box-widget-own.dart';
 import 'package:yaha/app/views/shared/shared.dart';
 
 class AHomeScreen extends StatelessWidget {
@@ -90,13 +93,21 @@ class AHomeScreen extends StatelessWidget {
                                 color: YahaColors.textColor),
                           ),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            TimeCapsuleBoxWidget(),
-                            TimeCapsuleBoxWidget(),
-                          ],
-                        )
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          child: Wrap(
+                            direction: Axis.horizontal,
+                            alignment: WrapAlignment.spaceBetween,
+                            runSpacing: YahaSpaceSizes.medium,
+                            children: [
+                              TimeCapsuleBoxWidgetFound(),
+                              TimeCapsuleBoxWidgetOwn(),
+                              TimeCapsuleBoxWidgetNotFound(),
+                              TimeCapsuleBoxWidgetFound(),
+                            ],
+                          ),
+                        ),
+                        ShowMoreButton(nextScreen: AMarketScreen()),
                       ],
                     ),
                   ),

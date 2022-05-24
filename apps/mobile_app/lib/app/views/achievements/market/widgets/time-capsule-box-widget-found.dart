@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:yaha/app/views/shared/shared.dart';
 import 'package:yaha/app/views/time-capsules/widgets/poi-with-image-widget.dart';
 
-class TimeCapsuleBoxWidget extends StatelessWidget {
-  const TimeCapsuleBoxWidget({Key? key}) : super(key: key);
+class TimeCapsuleBoxWidgetFound extends StatelessWidget {
+  const TimeCapsuleBoxWidgetFound({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
