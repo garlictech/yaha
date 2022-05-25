@@ -36,7 +36,7 @@ class TimeCapsuleBoxWidgetOwn extends StatelessWidget {
                 padding: YahaSpaceSizes.small),
             Padding(
               padding: const EdgeInsets.only(
-                  top: YahaSpaceSizes.small, bottom: YahaSpaceSizes.xSmall),
+                  top: YahaSpaceSizes.small, bottom: YahaSpaceSizes.xxxSmall),
               child: Text(
                 'TimeCapsule',
                 style: TextStyle(

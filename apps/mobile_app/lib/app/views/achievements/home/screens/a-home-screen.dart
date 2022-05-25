@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yaha/app/views/achievements/home/widgets/patch-box-widget.dart';
 import 'package:yaha/app/views/achievements/market/screens/a-market-screen.dart';
 import 'package:yaha/app/views/achievements/market/widgets/time-capsule-box-widget-found.dart';
 import 'package:yaha/app/views/achievements/market/widgets/time-capsule-box-widget-not-found.dart';
@@ -69,8 +70,7 @@ class AHomeScreen extends StatelessWidget {
                         //MAP COMES HERE
                         /*Padding(
                           padding: const EdgeInsets.only(
-                              top: YahaSpaceSizes.general,
-                              bottom: YahaSpaceSizes.general),
+                              top: YahaSpaceSizes.general),
                           child: UnconstrainedBox(
                             child: Container(
                               padding: const EdgeInsets.only(
@@ -82,7 +82,7 @@ class AHomeScreen extends StatelessWidget {
                         ),*/
                         Container(
                           padding: const EdgeInsets.only(
-                              top: YahaSpaceSizes.general,
+                              top: YahaSpaceSizes.semiLarge,
                               bottom: YahaSpaceSizes.medium),
                           alignment: Alignment.centerLeft,
                           child: const Text(
@@ -107,7 +107,35 @@ class AHomeScreen extends StatelessWidget {
                             ],
                           ),
                         ),
-                        ShowMoreButton(nextScreen: AMarketScreen()),
+                        const ShowMoreButton(nextScreen: AMarketScreen()),
+                        Container(
+                          padding: const EdgeInsets.only(
+                              top: YahaSpaceSizes.general,
+                              bottom: YahaSpaceSizes.medium),
+                          alignment: Alignment.centerLeft,
+                          child: const Text(
+                            'Patches',
+                            style: TextStyle(
+                                fontSize: YahaFontSizes.small,
+                                fontWeight: FontWeight.w600,
+                                color: YahaColors.textColor),
+                          ),
+                        ),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          child: Wrap(
+                            direction: Axis.horizontal,
+                            alignment: WrapAlignment.spaceBetween,
+                            runSpacing: YahaSpaceSizes.medium,
+                            children: [
+                              PatchBoxWidget(
+                                  patchImage: 'assets/images/patch-01@2x.png'),
+                              PatchBoxWidget(
+                                  patchImage: 'assets/images/patch-02@2x.png'),
+                            ],
+                          ),
+                        ),
+                        const ShowMoreButton(nextScreen: AMarketScreen()),
                       ],
                     ),
                   ),
