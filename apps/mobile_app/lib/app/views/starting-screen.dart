@@ -3,9 +3,9 @@ import 'package:yaha/app/views/achievements/explore/screens/a-explore.dart';
 import 'package:yaha/app/views/achievements/home/screens/a-home-screen.dart';
 import 'package:yaha/app/views/achievements/market/screens/a-market-screen.dart';
 import 'package:yaha/app/views/achievements/profile/screens/a-profile-screen.dart';
+import 'package:yaha/app/views/hikes/hike/screens/explore-screen.dart';
 import 'package:yaha/app/views/hikes/home/views/screens/guest-home-screen.dart';
 import 'package:yaha/app/views/hikes/personal/screen/profile-page.dart';
-import 'package:yaha/app/views/hikes/track/screens/timecapsule-new-comments-screen.dart';
 import 'package:yaha/app/views/hikes/track/screens/tracking.dart';
 import 'package:yaha/app/views/shared/shared.dart';
 
@@ -40,8 +40,7 @@ class StartingScreen extends StatelessWidget {
                                       firstScreen: HomePageGuest(),
                                       firstScreenIcon: Icons.home_rounded,
                                       firstScreenName: 'Home',
-                                      secondScreen:
-                                          TimeCapsuleNewCommentsScreen(),
+                                      secondScreen: ExploreScreen(),
                                       secondScreenIcon: Icons.travel_explore,
                                       secondScreenName: 'Explore',
                                       thirdScreen: TrackingScreen(),

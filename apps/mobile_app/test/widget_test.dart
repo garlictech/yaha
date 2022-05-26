@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:yaha/app/views/achievements/explore/screens/a-explore.dart';
 import 'package:yaha/app/views/achievements/home/screens/a-home-screen.dart';
 import 'package:yaha/app/views/auth/screens/login-screen.dart';
 import 'package:yaha/app/views/auth/screens/signup-screen.dart';
@@ -453,6 +454,14 @@ void main() {
   testWidgets('Achievements Home Screen smoke test',
       (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: const AHomeScreen()));
+
+    await tester.pumpAndSettle();
+  });
+
+  testWidgets('Achievements Explore Screen smoke test',
+      (WidgetTester tester) async {
+    await tester
+        .pumpWidget(createWidgetForTesting(child: const AExploreScreen()));
 
     await tester.pumpAndSettle();
   });

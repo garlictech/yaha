@@ -44,7 +44,8 @@ class _YahaTextFieldState extends State<YahaTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
+      height: 40.0,
       child: TextFormField(
         validator: (value) {
           if (value!.isNotEmpty &&

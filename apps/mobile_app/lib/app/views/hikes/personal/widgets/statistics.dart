@@ -25,7 +25,7 @@ class Statistics extends StatelessWidget {
           borderRadius: BorderRadius.circular(YahaBorderRadius.general),
         ),
         child: Container(
-          margin: const EdgeInsets.all(YahaSpaceSizes.small),
+          margin: const EdgeInsets.all(YahaSpaceSizes.xSmall),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [

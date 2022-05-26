@@ -30,95 +30,91 @@ class _ExploreScreenState extends State<ExploreScreen> {
                 Stack(
                   alignment: AlignmentDirectional.center,
                   children: [
-                    Align(
+                    const Align(
                       alignment: Alignment.center,
-                      child: Container(
-                        child: const Text(
-                          'Explore',
-                          style: TextStyle(
-                              fontSize: YahaFontSizes.medium,
-                              fontWeight: FontWeight.w600,
-                              color: YahaColors.textColor),
-                        ),
+                      child: Text(
+                        'Explore',
+                        style: TextStyle(
+                            fontSize: YahaFontSizes.medium,
+                            fontWeight: FontWeight.w600,
+                            color: YahaColors.textColor),
                       ),
                     ),
                     Align(
                       alignment: Alignment.centerRight,
-                      child: Container(
-                        child: IconButton(
-                          iconSize: YahaFontSizes.xxLarge,
-                          icon: Image.asset(
-                            'assets/images/filter-icon.png',
-                            width: YahaIconSizes.medium,
-                          ),
-                          onPressed: () => showBarModalBottomSheet(
-                            expand: false,
-                            useRootNavigator: true,
-                            context: context,
-                            builder: (context) {
-                              return SingleChildScrollView(
-                                controller: ModalScrollController.of(context),
-                                child: Container(
-                                  color: YahaColors.accentColor,
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        padding: const EdgeInsets.only(
-                                          left: YahaSpaceSizes.medium,
-                                          right: YahaSpaceSizes.general,
-                                        ),
-                                        color: YahaColors.accentColor,
-                                        child: Stack(
-                                          alignment: Alignment.center,
-                                          children: [
-                                            Align(
-                                              alignment: Alignment.centerLeft,
-                                              child: TextButton(
-                                                onPressed: () {},
-                                                child: const Text("Reset"),
-                                                style: TextButton.styleFrom(
-                                                  primary: YahaColors
-                                                      .secondaryAccentColor,
-                                                ),
-                                              ),
-                                            ),
-                                            const Align(
-                                              alignment: Alignment.center,
-                                              child: Text(
-                                                "Filters",
-                                                style: TextStyle(
-                                                  fontSize: YahaFontSizes.small,
-                                                  fontWeight: FontWeight.w600,
-                                                  color: YahaColors.textColor,
-                                                ),
-                                              ),
-                                            ),
-                                            Align(
-                                              alignment: Alignment.centerRight,
-                                              child: InkWell(
-                                                onTap: () {
-                                                  Navigator.of(context).pop();
-                                                },
-                                                child: const Icon(
-                                                  Icons.close_outlined,
-                                                  color: YahaColors
-                                                      .secondaryAccentColor,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
+                      child: IconButton(
+                        iconSize: YahaFontSizes.xxLarge,
+                        icon: Image.asset(
+                          'assets/images/filter-icon.png',
+                          width: YahaIconSizes.medium,
+                        ),
+                        onPressed: () => showBarModalBottomSheet(
+                          expand: false,
+                          useRootNavigator: true,
+                          context: context,
+                          builder: (context) {
+                            return SingleChildScrollView(
+                              controller: ModalScrollController.of(context),
+                              child: Container(
+                                color: YahaColors.accentColor,
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      padding: const EdgeInsets.only(
+                                        left: YahaSpaceSizes.medium,
+                                        right: YahaSpaceSizes.general,
                                       ),
-                                      Container(
-                                        color: YahaColors.background,
-                                        child: const HikeFilterPage(),
+                                      color: YahaColors.accentColor,
+                                      child: Stack(
+                                        alignment: Alignment.center,
+                                        children: [
+                                          Align(
+                                            alignment: Alignment.centerLeft,
+                                            child: TextButton(
+                                              onPressed: () {},
+                                              child: const Text("Reset"),
+                                              style: TextButton.styleFrom(
+                                                primary: YahaColors
+                                                    .secondaryAccentColor,
+                                              ),
+                                            ),
+                                          ),
+                                          const Align(
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                              "Filters",
+                                              style: TextStyle(
+                                                fontSize: YahaFontSizes.small,
+                                                fontWeight: FontWeight.w600,
+                                                color: YahaColors.textColor,
+                                              ),
+                                            ),
+                                          ),
+                                          Align(
+                                            alignment: Alignment.centerRight,
+                                            child: InkWell(
+                                              onTap: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: const Icon(
+                                                Icons.close_outlined,
+                                                color: YahaColors
+                                                    .secondaryAccentColor,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                    Container(
+                                      color: YahaColors.background,
+                                      child: const HikeFilterPage(),
+                                    ),
+                                  ],
                                 ),
-                              );
-                            },
-                          ),
+                              ),
+                            );
+                          },
                         ),
                       ),
                     ),
@@ -137,34 +133,40 @@ class _ExploreScreenState extends State<ExploreScreen> {
                     icon: Icons.gps_not_fixed,
                   ),
                 ),
-                Container(
-                  padding: const EdgeInsets.only(top: YahaSpaceSizes.general),
-                  child: SizedBox(
-                    height: YahaBoxSizes.buttonHeight,
-                    width: YahaBoxSizes.buttonWidthBig,
-                    child: ElevatedButton.icon(
-                      icon: const Icon(
-                        Icons.search,
-                        color: YahaColors.accentColor,
-                        size: YahaFontSizes.large,
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const SearchResultsScreen()));
-                      },
-                      label: const Text('Explore',
-                          style: TextStyle(
-                            fontSize: YahaFontSizes.small,
-                            fontWeight: FontWeight.w600,
-                          )),
-                      style: ElevatedButton.styleFrom(
-                        primary: YahaColors.primary,
-                        shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(
-                                Radius.circular(YahaBorderRadius.general))),
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Padding(
+                      padding:
+                          const EdgeInsets.only(bottom: YahaSpaceSizes.medium),
+                      child: SizedBox(
+                        height: YahaBoxSizes.buttonHeight,
+                        width: MediaQuery.of(context).size.width,
+                        child: ElevatedButton.icon(
+                          icon: const Icon(
+                            Icons.search,
+                            color: YahaColors.accentColor,
+                            size: YahaFontSizes.large,
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const SearchResultsScreen()));
+                          },
+                          label: const Text('Explore',
+                              style: TextStyle(
+                                fontSize: YahaFontSizes.small,
+                                fontWeight: FontWeight.w600,
+                              )),
+                          style: ElevatedButton.styleFrom(
+                            primary: YahaColors.primary,
+                            shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(
+                                    Radius.circular(YahaBorderRadius.general))),
+                          ),
+                        ),
                       ),
                     ),
                   ),
