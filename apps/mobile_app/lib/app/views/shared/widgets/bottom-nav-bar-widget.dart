@@ -88,6 +88,7 @@ class BottomNavBarWidget extends StatelessWidget {
         activeColorPrimary: YahaColors.accentColorDark,
         activeColorSecondary: YahaColors.primary,
         inactiveColorPrimary: YahaColors.textColor,
+        textStyle: const TextStyle(fontWeight: FontWeight.w600),
       ),
       PersistentBottomNavBarItem(
         icon: Icon(secondScreenIcon),
@@ -95,6 +96,7 @@ class BottomNavBarWidget extends StatelessWidget {
         activeColorPrimary: YahaColors.accentColorDark,
         activeColorSecondary: YahaColors.primary,
         inactiveColorPrimary: YahaColors.textColor,
+        textStyle: const TextStyle(fontWeight: FontWeight.w600),
       ),
       PersistentBottomNavBarItem(
         icon: Icon(thirdScreenIcon),
@@ -102,6 +104,7 @@ class BottomNavBarWidget extends StatelessWidget {
         activeColorPrimary: YahaColors.accentColorDark,
         activeColorSecondary: YahaColors.primary,
         inactiveColorPrimary: YahaColors.textColor,
+        textStyle: const TextStyle(fontWeight: FontWeight.w600),
       ),
       PersistentBottomNavBarItem(
         icon: Icon(fourthScreenIcon),
@@ -109,6 +112,7 @@ class BottomNavBarWidget extends StatelessWidget {
         activeColorPrimary: YahaColors.accentColorDark,
         activeColorSecondary: YahaColors.primary,
         inactiveColorPrimary: YahaColors.textColor,
+        textStyle: const TextStyle(fontWeight: FontWeight.w600),
       ),
     ];
   }

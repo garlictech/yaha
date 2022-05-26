@@ -5,6 +5,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:yaha/app/views/achievements/explore/screens/a-explore.dart';
+import 'package:yaha/app/views/achievements/home/screens/a-home-screen.dart';
 import 'package:yaha/app/views/auth/screens/login-screen.dart';
 import 'package:yaha/app/views/auth/screens/signup-screen.dart';
 import 'package:yaha/app/views/hikes/events/screens/all-events.dart';
@@ -26,10 +28,6 @@ import 'package:yaha/app/views/hikes/personal/screen/challenges.dart';
 import 'package:yaha/app/views/hikes/personal/screen/my-challenges.dart';
 import 'package:yaha/app/views/hikes/personal/screen/profile-page.dart';
 import 'package:yaha/app/views/hikes/personal/screen/settings-screen.dart';
-import 'package:yaha/app/views/hikes/personal/screen/statistics-screen.dart';
-import 'package:yaha/app/views//hikes/personal/screen/statistics-screen.dart';
-import 'package:yaha/app/views/hikes/personal/screen/challenge-detail-screen.dart';
-import 'package:yaha/app/views/hikes/personal/screen/challenges.dart';
 import 'package:yaha/app/views/hikes/personal/screen/statistics-screen.dart';
 import 'package:yaha/app/views/shared/widgets/bottom-nav-bar-widget.dart';
 import 'package:yaha/app/views/starting-screen.dart';
@@ -142,7 +140,7 @@ void main() {
 
     await tester.pumpAndSettle();
   });*/
-  testWidgets('Bottom nav bar smoke test', (WidgetTester tester) async {
+  /*testWidgets('Bottom nav bar smoke test', (WidgetTester tester) async {
     await tester.pumpWidget(
       createWidgetForTesting(
         child: const BottomNavBarWidget(
@@ -163,7 +161,7 @@ void main() {
     );
 
     await tester.pumpAndSettle();
-  });
+  });*/
   testWidgets('Filter Screen smoke test', (WidgetTester tester) async {
     await tester
         .pumpWidget(createWidgetForTesting(child: const HikeFilterPage()));
@@ -449,6 +447,21 @@ void main() {
   testWidgets('Starting Screen smoke test', (WidgetTester tester) async {
     await tester
         .pumpWidget(createWidgetForTesting(child: const StartingScreen()));
+
+    await tester.pumpAndSettle();
+  });
+
+  testWidgets('Achievements Home Screen smoke test',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetForTesting(child: const AHomeScreen()));
+
+    await tester.pumpAndSettle();
+  });
+
+  testWidgets('Achievements Explore Screen smoke test',
+      (WidgetTester tester) async {
+    await tester
+        .pumpWidget(createWidgetForTesting(child: const AExploreScreen()));
 
     await tester.pumpAndSettle();
   });

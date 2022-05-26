@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:yaha/app/views/achievements/explore/screens/a-explore.dart';
+import 'package:yaha/app/views/achievements/home/screens/a-home-screen.dart';
+import 'package:yaha/app/views/achievements/market/screens/a-market-screen.dart';
+import 'package:yaha/app/views/achievements/profile/screens/a-profile-screen.dart';
+import 'package:yaha/app/views/hikes/hike/screens/explore-screen.dart';
 import 'package:yaha/app/views/hikes/home/views/screens/guest-home-screen.dart';
 import 'package:yaha/app/views/hikes/personal/screen/profile-page.dart';
-import 'package:yaha/app/views/hikes/track/screens/timecapsule-new-comments-screen.dart';
 import 'package:yaha/app/views/hikes/track/screens/tracking.dart';
 import 'package:yaha/app/views/shared/shared.dart';
 
@@ -36,8 +40,7 @@ class StartingScreen extends StatelessWidget {
                                       firstScreen: HomePageGuest(),
                                       firstScreenIcon: Icons.home_rounded,
                                       firstScreenName: 'Home',
-                                      secondScreen:
-                                          TimeCapsuleNewCommentsScreen(),
+                                      secondScreen: ExploreScreen(),
                                       secondScreenIcon: Icons.travel_explore,
                                       secondScreenName: 'Explore',
                                       thirdScreen: TrackingScreen(),
@@ -72,10 +75,32 @@ class StartingScreen extends StatelessWidget {
                   ClipRRect(
                     borderRadius:
                         BorderRadius.circular(YahaBorderRadius.general),
-                    child: Container(
-                      color: YahaColors.grey600,
-                      height: 168,
-                      width: 168,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const BottomNavBarWidget(
+                                      firstScreen: AHomeScreen(),
+                                      secondScreen: AExploreScreen(),
+                                      thirdScreen: AMarketScreen(),
+                                      fourthScreen: AProfileScreen(),
+                                      firstScreenIcon: Icons.home_rounded,
+                                      secondScreenIcon: Icons.travel_explore,
+                                      thirdScreenIcon:
+                                          Icons.shopping_bag_rounded,
+                                      fourthScreenIcon: Icons.face_rounded,
+                                      firstScreenName: 'Home',
+                                      secondScreenName: 'Explore',
+                                      thirdScreenName: 'Market',
+                                      fourthScreenName: 'Profile',
+                                    )));
+                      },
+                      child: Container(
+                        color: YahaColors.grey600,
+                        height: 168,
+                        width: 168,
+                      ),
                     ),
                   ),
                   const Padding(
