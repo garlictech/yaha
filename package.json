@@ -130,7 +130,7 @@
     "semantic-release": "19.0.2",
     "serverless": "3.18.1",
     "serverless-bundle": "4.4.0",
-    "serverless-offline": "8.4.0",
+    "serverless-offline": "8.8.0",
     "supertest": "6.2.3",
     "ts-jest": "27.1.4",
     "ts-node": "10.8.0",
