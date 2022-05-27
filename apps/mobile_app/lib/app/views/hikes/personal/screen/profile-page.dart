@@ -70,7 +70,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         Container(
                           padding: const EdgeInsets.only(
                               top: YahaSpaceSizes.general),
-                          height: YahaBoxSizes.heigthXSmall,
+                          height: YahaBoxSizes.heightXSmall,
                           width: MediaQuery.of(context).size.width,
                           child: const Statistics(
                             hikes: 34,

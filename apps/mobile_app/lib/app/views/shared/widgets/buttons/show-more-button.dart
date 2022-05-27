@@ -19,6 +19,7 @@ class ShowMoreButton extends StatelessWidget {
               Navigator.push(
                   context, MaterialPageRoute(builder: (context) => nextScreen));
             },
+            style: TextButton.styleFrom(padding: EdgeInsets.zero),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -27,7 +28,7 @@ class ShowMoreButton extends StatelessWidget {
                   'Show more',
                   style: TextStyle(
                       fontSize: YahaFontSizes.small,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w600,
                       color: YahaColors.textColor),
                 ),
                 Icon(
