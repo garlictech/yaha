@@ -7,43 +7,43 @@ class AExploreScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Explore',
+          style: TextStyle(
+              fontSize: YahaFontSizes.medium,
+              fontWeight: FontWeight.w600,
+              color: YahaColors.textColor),
+        ),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: YahaSpaceSizes.medium),
+            child: IconButton(
+              iconSize: YahaFontSizes.xxLarge,
+              icon: Image.asset(
+                'assets/images/filter-icon.png',
+                width: YahaIconSizes.medium,
+              ),
+              onPressed: () {},
+            ),
+          ),
+        ],
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(
-              left: YahaSpaceSizes.general, right: YahaSpaceSizes.general),
+              left: YahaSpaceSizes.general,
+              right: YahaSpaceSizes.general,
+              top: YahaSpaceSizes.general),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Stack(
-                alignment: AlignmentDirectional.center,
-                children: [
-                  const Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      'Explore',
-                      style: TextStyle(
-                          fontSize: YahaFontSizes.medium,
-                          fontWeight: FontWeight.w600,
-                          color: YahaColors.textColor),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: IconButton(
-                        iconSize: YahaFontSizes.xxLarge,
-                        icon: Image.asset(
-                          'assets/images/filter-icon.png',
-                          width: YahaIconSizes.medium,
-                        ),
-                        onPressed: () {}),
-                  ),
-                ],
-              ),
               Container(
                 constraints:
                     const BoxConstraints(maxWidth: YahaBoxSizes.maxWidth400),
-                padding: const EdgeInsets.only(
-                    bottom: YahaSpaceSizes.large, top: YahaSpaceSizes.large),
+                padding: const EdgeInsets.only(bottom: YahaSpaceSizes.large),
                 child: const YahaTextField(title: "Search for TimeCapsules"),
               ),
               const Text(

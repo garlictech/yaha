@@ -20,7 +20,7 @@ class PatchBoxWidget extends StatelessWidget {
             BoxShadow(
               color: Colors.black.withOpacity(0.16),
               spreadRadius: 2.0,
-              blurRadius: 8.0,
+              blurRadius: 6.0,
               offset: const Offset(3.0, 3.0),
             ),
           ],
