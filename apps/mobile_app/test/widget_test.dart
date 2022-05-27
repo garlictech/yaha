@@ -7,6 +7,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/app/views/achievements/explore/screens/a-explore.dart';
 import 'package:yaha/app/views/achievements/home/screens/a-home-screen.dart';
+import 'package:yaha/app/views/achievements/market/screens/a-market-screen.dart';
 import 'package:yaha/app/views/auth/screens/login-screen.dart';
 import 'package:yaha/app/views/auth/screens/signup-screen.dart';
 import 'package:yaha/app/views/hikes/events/screens/all-events.dart';
@@ -462,6 +463,14 @@ void main() {
       (WidgetTester tester) async {
     await tester
         .pumpWidget(createWidgetForTesting(child: const AExploreScreen()));
+
+    await tester.pumpAndSettle();
+  });
+
+  testWidgets('Achievements Market Screen smoke test',
+      (WidgetTester tester) async {
+    await tester
+        .pumpWidget(createWidgetForTesting(child: const AMarketScreen()));
 
     await tester.pumpAndSettle();
   });

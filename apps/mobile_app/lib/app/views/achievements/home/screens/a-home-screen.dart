@@ -100,10 +100,18 @@ class AHomeScreen extends StatelessWidget {
                             alignment: WrapAlignment.spaceBetween,
                             runSpacing: YahaSpaceSizes.medium,
                             children: [
-                              TimeCapsuleBoxWidgetFound(),
-                              TimeCapsuleBoxWidgetOwn(),
-                              TimeCapsuleBoxWidgetNotFound(),
-                              TimeCapsuleBoxWidgetFound(),
+                              TimeCapsuleBoxWidgetFound(
+                                size: MediaQuery.of(context).size.width * 0.43,
+                              ),
+                              TimeCapsuleBoxWidgetOwn(
+                                size: MediaQuery.of(context).size.width * 0.43,
+                              ),
+                              TimeCapsuleBoxWidgetNotFound(
+                                size: MediaQuery.of(context).size.width * 0.43,
+                              ),
+                              TimeCapsuleBoxWidgetFound(
+                                size: MediaQuery.of(context).size.width * 0.43,
+                              ),
                             ],
                           ),
                         ),
