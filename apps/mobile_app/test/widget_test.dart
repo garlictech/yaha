@@ -8,6 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/app/views/achievements/explore/screens/a-explore.dart';
 import 'package:yaha/app/views/achievements/home/screens/a-home-screen.dart';
 import 'package:yaha/app/views/achievements/market/screens/a-market-screen.dart';
+import 'package:yaha/app/views/achievements/profile/screens/a-profile-screen.dart';
 import 'package:yaha/app/views/auth/screens/login-screen.dart';
 import 'package:yaha/app/views/auth/screens/signup-screen.dart';
 import 'package:yaha/app/views/hikes/events/screens/all-events.dart';
@@ -18,7 +19,6 @@ import 'package:yaha/app/views/hikes/events/screens/ongoing-events.dart';
 import 'package:yaha/app/views/hikes/hike/screens/explore-screen.dart';
 import 'package:yaha/app/views/hikes/hike/screens/hike-filter-screen.dart';
 import 'package:yaha/app/views/hikes/hike/screens/hike-outline-screen.dart';
-import 'package:yaha/app/views/hikes/home/views/screens/guest-home-screen.dart';
 import 'package:yaha/app/views/hikes/hike/screens/search-results-screen.dart';
 import 'package:yaha/app/views/hikes/hike/screens/weather-screen.dart';
 import 'package:yaha/app/views/hikes/personal/screen/all-challenges.dart';
@@ -27,10 +27,9 @@ import 'package:yaha/app/views/hikes/personal/screen/bookmarked-hikes.dart';
 import 'package:yaha/app/views/hikes/personal/screen/challenge-detail-screen.dart';
 import 'package:yaha/app/views/hikes/personal/screen/challenges.dart';
 import 'package:yaha/app/views/hikes/personal/screen/my-challenges.dart';
-import 'package:yaha/app/views/hikes/personal/screen/profile-page.dart';
+import 'package:yaha/app/views/hikes/personal/screen/profile-screen.dart';
 import 'package:yaha/app/views/hikes/personal/screen/settings-screen.dart';
 import 'package:yaha/app/views/hikes/personal/screen/statistics-screen.dart';
-import 'package:yaha/app/views/shared/widgets/bottom-nav-bar-widget.dart';
 import 'package:yaha/app/views/starting-screen.dart';
 import 'package:yaha/app/views/hikes/track/screens/leave-a-timecapsule-screen.dart';
 import 'package:yaha/app/views/hikes/track/screens/summary-screen.dart';
@@ -88,7 +87,8 @@ void main() {
   });
   */
   testWidgets('Profile Screen smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: const ProfilePage()));
+    await tester
+        .pumpWidget(createWidgetForTesting(child: const ProfileScreen()));
 
     await tester.pumpAndSettle();
   });
@@ -471,6 +471,14 @@ void main() {
       (WidgetTester tester) async {
     await tester
         .pumpWidget(createWidgetForTesting(child: const AMarketScreen()));
+
+    await tester.pumpAndSettle();
+  });
+
+  testWidgets('Achievements Profile Screen smoke test',
+      (WidgetTester tester) async {
+    await tester
+        .pumpWidget(createWidgetForTesting(child: const AProfileScreen()));
 
     await tester.pumpAndSettle();
   });

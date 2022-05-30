@@ -130,9 +130,12 @@ class HomePageGuest extends ConsumerWidget {
                                 height: YahaBoxSizes.heightXSmall,
                                 width: MediaQuery.of(context).size.width,
                                 child: const Statistics(
-                                  hikes: 0,
-                                  km: 0,
-                                  hours: 0,
+                                  leftNumber: 0,
+                                  rightNumber: 0,
+                                  middleNumber: 0,
+                                  leftName: 'hikes',
+                                  middleName: 'km',
+                                  rightName: 'hours',
                                 ),
                               ),
                               const ShowMoreButton(

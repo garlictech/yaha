@@ -5,7 +5,7 @@ import 'package:yaha/app/views/achievements/market/screens/a-market-screen.dart'
 import 'package:yaha/app/views/achievements/profile/screens/a-profile-screen.dart';
 import 'package:yaha/app/views/hikes/hike/screens/explore-screen.dart';
 import 'package:yaha/app/views/hikes/home/views/screens/guest-home-screen.dart';
-import 'package:yaha/app/views/hikes/personal/screen/profile-page.dart';
+import 'package:yaha/app/views/hikes/personal/screen/profile-screen.dart';
 import 'package:yaha/app/views/hikes/track/screens/tracking.dart';
 import 'package:yaha/app/views/shared/shared.dart';
 
@@ -46,7 +46,7 @@ class StartingScreen extends StatelessWidget {
                                       thirdScreen: TrackingScreen(),
                                       thirdScreenIcon: Icons.play_circle_fill,
                                       thirdScreenName: 'Track',
-                                      fourthScreen: ProfilePage(),
+                                      fourthScreen: ProfileScreen(),
                                       fourthScreenIcon: Icons.face_rounded,
                                       fourthScreenName: 'Profile',
                                     )));

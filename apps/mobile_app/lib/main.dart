@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/app/views/auth/screens/signup-screen.dart';
 import 'package:yaha/app/views/hikes/events/screens/event-detail-screen.dart';
 import 'package:yaha/app/views/hikes/hike/screens/explore-screen.dart';
-import 'package:yaha/app/views/hikes/personal/screen/profile-page.dart';
+import 'package:yaha/app/views/hikes/personal/screen/profile-screen.dart';
 import 'package:yaha/app/views/hikes/personal/screen/settings-screen.dart';
 import 'package:yaha/app/views/shared/widgets/yaha-colors.dart';
 import 'package:yaha/app/views/starting-screen.dart';
@@ -52,7 +52,7 @@ class _MyAppState extends State<MyApp> {
       home: const StartingScreen(),
       initialRoute: '/',
       routes: {
-        '/profile': (context) => const ProfilePage(),
+        '/profile': (context) => const ProfileScreen(),
         '/event': (context) => const EventDetailScreen(),
         '/settings': (context) => const SettingsScreen(),
         '/signup': (context) => const SignupScreen(),

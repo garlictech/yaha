@@ -3,22 +3,27 @@ import 'package:flutter/material.dart';
 import '../../../shared/shared.dart';
 
 class Statistics extends StatelessWidget {
-  final int hikes;
-  final int km;
-  final int hours;
+  final int leftNumber;
+  final int middleNumber;
+  final int rightNumber;
+  final String leftName;
+  final String middleName;
+  final String rightName;
 
   const Statistics({
     Key? key,
-    required this.hikes,
-    required this.km,
-    required this.hours,
+    required this.leftNumber,
+    required this.middleNumber,
+    required this.rightNumber,
+    required this.leftName,
+    required this.middleName,
+    required this.rightName,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        height: YahaBoxSizes.heightXXSmall,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
           color: YahaColors.accentColor,
@@ -30,14 +35,15 @@ class Statistics extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(hikes.toString(),
+                  Text(leftNumber.toString(),
                       style: const TextStyle(
                           fontSize: YahaFontSizes.medium,
                           fontWeight: FontWeight.w600,
                           color: YahaColors.textColor)),
-                  const Text('hikes',
-                      style: TextStyle(
+                  Text(leftName,
+                      style: const TextStyle(
                           fontSize: YahaFontSizes.small,
                           fontWeight: FontWeight.w400,
                           color: YahaColors.textColor)),
@@ -46,14 +52,15 @@ class Statistics extends StatelessWidget {
               const VerticalDivider(
                   color: YahaColors.divider, thickness: YahaBorderWidth.small),
               Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(km.toString(),
+                  Text(middleNumber.toString(),
                       style: const TextStyle(
                           fontSize: YahaFontSizes.medium,
                           fontWeight: FontWeight.w600,
                           color: YahaColors.textColor)),
-                  const Text('km',
-                      style: TextStyle(
+                  Text(middleName,
+                      style: const TextStyle(
                           fontSize: YahaFontSizes.small,
                           fontWeight: FontWeight.w400,
                           color: YahaColors.textColor)),
@@ -62,14 +69,15 @@ class Statistics extends StatelessWidget {
               const VerticalDivider(
                   color: YahaColors.divider, thickness: YahaBorderWidth.small),
               Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(hours.toString(),
+                  Text(rightNumber.toString(),
                       style: const TextStyle(
                           fontSize: YahaFontSizes.medium,
                           fontWeight: FontWeight.w600,
                           color: YahaColors.textColor)),
-                  const Text('hours',
-                      style: TextStyle(
+                  Text(rightName,
+                      style: const TextStyle(
                           fontSize: YahaFontSizes.small,
                           fontWeight: FontWeight.w400,
                           color: YahaColors.textColor)),
