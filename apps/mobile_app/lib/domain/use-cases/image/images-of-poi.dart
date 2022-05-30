@@ -12,10 +12,10 @@ class ImagesOfPoiUsecases {
   Future<List<String>> get imageUrls {
     final imageUsecases = ref.read(imageUsecasesProvider);
     final poiRepo = ref.read(poiRepositoryProvider);
-    return _imageUrls ??= poiRepo
-        .getPoi(poiId)
-        .then((poi) => imageUsecases.getImagesAroundPoi(poi))
-        .then(
-            (images) => images.map<String>((image) => image.card.url).toList());
+    return _imageUrls ??= poiRepo.getPoi(poiId).then((poi) {
+      return imageUsecases.getImagesAroundPoi(poi);
+    }).then((images) {
+      return images.map<String>((image) => image.card.url).toList();
+    });
   }
 }
