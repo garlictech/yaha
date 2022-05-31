@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yaha/app/views/achievements/profile/screens/connect-wallet-1-screen.dart';
 import 'package:yaha/app/views/hikes/personal/screen/settings-screen.dart';
 import 'package:yaha/app/views/hikes/personal/widgets/statistics.dart';
 import 'package:yaha/app/views/shared/shared.dart';
@@ -103,7 +104,14 @@ class AProfileScreen extends StatelessWidget {
                         color: YahaColors.divider,
                         thickness: YahaBorderWidth.xxSmall),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ConnectWallet1Screen(),
+                          ),
+                        );
+                      },
                       child: Container(
                         margin: const EdgeInsets.only(
                             top: YahaSpaceSizes.xSmall,
