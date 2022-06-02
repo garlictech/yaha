@@ -50,7 +50,8 @@ class _YahaTextFieldPasswordState extends State<YahaTextFieldPassword> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
+      height: 40.0,
       child: TextFormField(
         validator: (value) {
           if (value!.contains(RegExp(

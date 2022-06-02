@@ -20,7 +20,7 @@ class YahaCtaBig extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: YahaBoxSizes.buttonHeight,
-      width: YahaBoxSizes.buttonWidthBig,
+      width: MediaQuery.of(context).size.width,
       child: ElevatedButton(
         onPressed: () {},
         child: Text(

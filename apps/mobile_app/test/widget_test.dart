@@ -9,6 +9,9 @@ import 'package:yaha/app/views/achievements/explore/screens/a-explore.dart';
 import 'package:yaha/app/views/achievements/home/screens/a-home-screen.dart';
 import 'package:yaha/app/views/achievements/market/screens/a-market-screen.dart';
 import 'package:yaha/app/views/achievements/profile/screens/a-profile-screen.dart';
+import 'package:yaha/app/views/achievements/profile/screens/connect-wallet-1-screen.dart';
+import 'package:yaha/app/views/achievements/profile/screens/connect-wallet-2-screen.dart';
+import 'package:yaha/app/views/achievements/profile/screens/how-to-create-wallet-screen.dart';
 import 'package:yaha/app/views/auth/screens/login-screen.dart';
 import 'package:yaha/app/views/auth/screens/signup-screen.dart';
 import 'package:yaha/app/views/hikes/events/screens/all-events.dart';
@@ -479,6 +482,30 @@ void main() {
       (WidgetTester tester) async {
     await tester
         .pumpWidget(createWidgetForTesting(child: const AProfileScreen()));
+
+    await tester.pumpAndSettle();
+  });
+
+  testWidgets('Achievements Connect Wallet 1 Screen smoke test',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(
+        createWidgetForTesting(child: const ConnectWallet1Screen()));
+
+    await tester.pumpAndSettle();
+  });
+
+  testWidgets('Achievements Connect Wallet 2 Screen smoke test',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(
+        createWidgetForTesting(child: const ConnectWallet2Screen()));
+
+    await tester.pumpAndSettle();
+  });
+
+  testWidgets('Achievements How To Create A Wallet Screen smoke test',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(
+        createWidgetForTesting(child: const HowToCreateWalletScreen()));
 
     await tester.pumpAndSettle();
   });

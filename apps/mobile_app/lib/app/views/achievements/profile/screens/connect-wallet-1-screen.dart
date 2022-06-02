@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:yaha/app/views/achievements/profile/screens/connect-wallet-2-screen.dart';
+import 'package:yaha/app/views/achievements/profile/screens/how-to-create-wallet-screen.dart';
 import 'package:yaha/app/views/achievements/profile/widgets/wallet-icon-box-widget.dart';
 import 'package:yaha/app/views/achievements/profile/widgets/wallet-logo-box-widget.dart';
 import 'package:yaha/app/views/shared/shared.dart';
@@ -77,7 +79,14 @@ class ConnectWallet1Screen extends StatelessWidget {
               Column(
                 children: [
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ConnectWallet2Screen(),
+                        ),
+                      );
+                    },
                     child: Container(
                       margin: const EdgeInsets.only(
                           top: YahaSpaceSizes.xSmall,
@@ -86,83 +95,10 @@ class ConnectWallet1Screen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: const [
                           WalletLogoBox(
-                              width: 40.0,
-                              height: 40.0,
-                              logo: 'assets/images/MetaMask_logo.png'),
-                          Expanded(
-                            child: Padding(
-                              padding:
-                                  EdgeInsets.only(left: YahaSpaceSizes.medium),
-                              child: Text('MetaMask',
-                                  style: TextStyle(
-                                      fontSize: YahaFontSizes.small,
-                                      fontWeight: FontWeight.w600,
-                                      color: YahaColors.textColor)),
-                            ),
-                          ),
-                          Icon(
-                            Icons.chevron_right_rounded,
-                            color: YahaColors.primary,
-                            size: YahaIconSizes.xLarge,
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                  const Divider(
-                      color: YahaColors.divider,
-                      thickness: YahaBorderWidth.xxSmall),
-                  InkWell(
-                    onTap: () {},
-                    child: Container(
-                      margin: const EdgeInsets.only(
-                          top: YahaSpaceSizes.xSmall,
-                          bottom: YahaSpaceSizes.xSmall),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          WalletLogoBox(
-                              width: 40.0,
-                              height: 40.0,
-                              logo: 'assets/images/coinbase-logo.png'),
-                          Expanded(
-                            child: Padding(
-                              padding:
-                                  EdgeInsets.only(left: YahaSpaceSizes.medium),
-                              child: Text('MetaMask',
-                                  style: TextStyle(
-                                      fontSize: YahaFontSizes.small,
-                                      fontWeight: FontWeight.w600,
-                                      color: YahaColors.textColor)),
-                            ),
-                          ),
-                          Icon(
-                            Icons.chevron_right_rounded,
-                            color: YahaColors.primary,
-                            size: YahaIconSizes.xLarge,
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                  const Divider(
-                      color: YahaColors.divider,
-                      thickness: YahaBorderWidth.xxSmall),
-                  InkWell(
-                    onTap: () {},
-                    child: Container(
-                      margin: const EdgeInsets.only(
-                          top: YahaSpaceSizes.xSmall,
-                          bottom: YahaSpaceSizes.xSmall),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          WalletIconBox(
                             width: 40.0,
                             height: 40.0,
-                            icon: Icons.more_horiz_rounded,
-                            iconSize: YahaIconSizes.large,
-                            iconColor: YahaColors.textColor,
+                            logo: 'assets/images/MetaMask_logo.png',
+                            padding: YahaSpaceSizes.xxSmall,
                             borderRadius: YahaBorderRadius.xSmall,
                           ),
                           Expanded(
@@ -189,7 +125,107 @@ class ConnectWallet1Screen extends StatelessWidget {
                       color: YahaColors.divider,
                       thickness: YahaBorderWidth.xxSmall),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ConnectWallet2Screen(),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(
+                          top: YahaSpaceSizes.xSmall,
+                          bottom: YahaSpaceSizes.xSmall),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: const [
+                          WalletLogoBox(
+                            width: 40.0,
+                            height: 40.0,
+                            logo: 'assets/images/coinbase-logo.png',
+                            padding: YahaSpaceSizes.xxSmall,
+                            borderRadius: YahaBorderRadius.xSmall,
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding:
+                                  EdgeInsets.only(left: YahaSpaceSizes.medium),
+                              child: Text('Coinbase',
+                                  style: TextStyle(
+                                      fontSize: YahaFontSizes.small,
+                                      fontWeight: FontWeight.w600,
+                                      color: YahaColors.textColor)),
+                            ),
+                          ),
+                          Icon(
+                            Icons.chevron_right_rounded,
+                            color: YahaColors.primary,
+                            size: YahaIconSizes.xLarge,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  const Divider(
+                      color: YahaColors.divider,
+                      thickness: YahaBorderWidth.xxSmall),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ConnectWallet2Screen(),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(
+                          top: YahaSpaceSizes.xSmall,
+                          bottom: YahaSpaceSizes.xSmall),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: const [
+                          WalletIconBox(
+                            width: 40.0,
+                            height: 40.0,
+                            icon: Icons.more_horiz_rounded,
+                            iconSize: YahaIconSizes.large,
+                            iconColor: YahaColors.textColor,
+                            borderRadius: YahaBorderRadius.xSmall,
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding:
+                                  EdgeInsets.only(left: YahaSpaceSizes.medium),
+                              child: Text('Other',
+                                  style: TextStyle(
+                                      fontSize: YahaFontSizes.small,
+                                      fontWeight: FontWeight.w600,
+                                      color: YahaColors.textColor)),
+                            ),
+                          ),
+                          Icon(
+                            Icons.chevron_right_rounded,
+                            color: YahaColors.primary,
+                            size: YahaIconSizes.xLarge,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  const Divider(
+                      color: YahaColors.divider,
+                      thickness: YahaBorderWidth.xxSmall),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const HowToCreateWalletScreen(),
+                        ),
+                      );
+                    },
                     child: Container(
                       margin: const EdgeInsets.only(
                           top: YahaSpaceSizes.xSmall,
