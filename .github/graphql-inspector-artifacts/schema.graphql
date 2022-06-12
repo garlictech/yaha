@@ -200,6 +200,13 @@ input SearchByRadiusInput {
   nextToken: String
 }
 
+input SearchHikeByRadiusInput {
+  location: LocationInput!
+  radiusInMeters: Float!
+  limit: Int
+  nextToken: String
+}
+
 input SearchInShapeInput {
   shape: GeoShapeInput!
   objectType: GeoSearchableObjectType!
@@ -253,6 +260,7 @@ type Query {
   listHikes(filter: ModelHikeFilterInput, limit: Int, nextToken: String): ModelHikeConnection @aws_api_key @aws_iam
   searchHikes(filter: SearchableHikeFilterInput, sort: [SearchableHikeSortInput], limit: Int, nextToken: String, from: Int, aggregates: [SearchableHikeAggregationInput]): SearchableHikeConnection @aws_api_key @aws_iam
   searchByRadius(query: SearchByRadiusInput!): GeoSearchConnection @aws_iam @aws_api_key
+  searchHikeByRadius(query: SearchHikeByRadiusInput!): GeoSearchConnection @aws_iam @aws_api_key
   searchInEnvelope(query: SearchInEnvelopeInput!): GeoSearchConnection @aws_iam @aws_api_key
   searchInShape(query: SearchInShapeInput!): GeoSearchConnection @aws_iam @aws_api_key
   searchInMultipolygon(query: SearchInMultipolygonInput!): GeoSearchConnection @aws_iam @aws_api_key

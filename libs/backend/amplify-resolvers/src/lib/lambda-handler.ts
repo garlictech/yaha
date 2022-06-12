@@ -2,6 +2,7 @@ import { Context, Handler } from 'aws-lambda';
 import {
   searchAroundHikeResolver,
   searchByRadiusResolver,
+  searchHikeByRadiusResolver,
   searchInEnvelopeResolver,
   searchInMultipolygonResolver,
   searchInShapeResolver,
@@ -55,6 +56,7 @@ export const handler: Handler<AmplifyRequest, unknown> = (
         searchSafeImagesAroundHikeResolver(searchDeps),
       searchSafeImagesAroundLocation:
         searchSafeImagesAroundLocationResolver(searchDeps),
+      searchHikeByRadius: searchHikeByRadiusResolver(searchDeps),
     },
   };
 

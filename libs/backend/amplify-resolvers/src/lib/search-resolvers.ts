@@ -7,6 +7,7 @@ import { defer, from, map, Observable, of, throwError } from 'rxjs';
 import { Client } from '@elastic/elasticsearch';
 import * as R from 'ramda';
 import { flow, pipe } from 'fp-ts/lib/function';
+import * as turf from '@turf/turf';
 
 export interface SearchResolverDeps {
   osClient: Client;
@@ -107,6 +108,67 @@ export const searchByRadiusResolver =
       },
       body =>
         executeQuery(deps)(body, args.query.nextToken, args.query.objectType),
+    );
+
+const normalizeLon = (input: number[]) => {
+  let coordinates = [...input];
+
+  if (coordinates[0] > 180) {
+    coordinates[0] = (coordinates[0] % 180) - 180;
+  } else if (coordinates[0] < -180) {
+    coordinates[0] = (coordinates[0] % 180) + 180;
+  }
+
+  return coordinates;
+};
+
+export const searchHikeByRadiusResolver =
+  (deps: SearchResolverDeps) =>
+  (
+    args: YahaApi.QuerySearchHikeByRadiusArgs,
+  ): Observable<YahaApi.GeoSearchConnection> =>
+    pipe(
+      turf.circle(
+        [args.query.location.lon, args.query.location.lat],
+        args.query.radiusInMeters / 1000,
+      ),
+      turf.envelope,
+      envelope => ({
+        type: 'envelope',
+        coordinates: [
+          normalizeLon(envelope.geometry.coordinates[0][3]),
+          normalizeLon(envelope.geometry.coordinates[0][1]),
+        ],
+      }),
+      shape => ({
+        query: {
+          bool: {
+            must: {
+              match_all: {},
+            },
+            filter: {
+              geo_shape: {
+                route: {
+                  shape,
+                },
+              },
+            },
+          },
+        },
+        sort: [
+          {
+            createdAt: 'desc',
+          },
+        ],
+        size: args.query.limit ?? 10,
+        track_total_hits: !args.query.nextToken,
+      }),
+      body =>
+        executeQuery(deps)(
+          body,
+          args.query.nextToken,
+          YahaApi.GeoSearchableObjectType.hike,
+        ),
     );
 
 export const searchInShapeResolver =

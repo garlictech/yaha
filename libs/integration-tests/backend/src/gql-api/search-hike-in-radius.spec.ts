@@ -1,6 +1,14 @@
-import { getGraphqlSdkForIAM, YahaApi } from '@yaha/gql-api';
+const { createConnector } = require('aws-elasticsearch-js');
+import { Client } from '@elastic/elasticsearch';
+import { AmplifyApiConfig, getGraphqlSdkForIAM, YahaApi } from '@yaha/gql-api';
 import { delay, forkJoin, switchMap, tap } from 'rxjs';
 import * as R from 'ramda';
+import * as hikeFixtureRaw from './hike-fixture.json';
+import {
+  searchInEnvelopeResolver,
+  SearchResolverDeps,
+} from '@yaha/backend/amplify-resolvers';
+import { searchHikeByRadiusResolver } from 'libs/backend/amplify-resolvers/src/lib/search-resolvers';
 
 const hikeId = '12-search-hike-in-radius-c86e6484-a2c7-11ec-b909-0242ac120002';
 
@@ -11,29 +19,41 @@ const sdk = getGraphqlSdkForIAM(
 
 const cleanup$ = forkJoin([sdk.DeleteHike({ input: { id: hikeId } })]);
 
+const hikeFixture: YahaApi.CreateHikeInput = {
+  ...hikeFixtureRaw,
+  description: [
+    {
+      ...hikeFixtureRaw.description[0],
+      type: YahaApi.TextualDescriptionType.markdown,
+    },
+  ],
+};
+
 afterAll(done => {
   cleanup$.subscribe(() => done());
 });
 
+const deps: SearchResolverDeps = {
+  osClient: new Client({
+    nodes: [AmplifyApiConfig.openSearchEndpoint],
+    Connection: createConnector({ region: process.env.AWS_REGION || '' }),
+  }),
+  sdk,
+};
+
 test('Search for a hike in radius', done => {
   sdk
-    .CreateHike({
-      input: {
-        id: hikeId,
-        location: {
-          lat: 1,
-          lon: 1,
-        },
-      },
-    })
+    .CreateHike({ input: hikeFixture })
     .pipe(
       delay(3000),
-      switchMap(() =>
-        sdk.SearchByRadius({
-          input: {
-            location: { lat: 1, lon: 1 },
-            radiusInMeters: 100,
-            objectType: YahaApi.GeoSearchableObjectType.hike,
+      switchMap(hike =>
+        searchHikeByRadiusResolver(deps)({
+          query: {
+            location: {
+              lon: 19.960138,
+              lat: 47.844277,
+            },
+            radiusInMeters: 1000000,
             limit: 1,
           },
         }),
@@ -41,22 +61,6 @@ test('Search for a hike in radius', done => {
       tap(console.warn),
       tap(res =>
         expect(R.omit(['nextToken'], res)).toMatchSnapshot('SHOULD FIND HIKE'),
-      ),
-      switchMap(() =>
-        sdk.SearchByRadius({
-          input: {
-            location: { lat: 2, lon: 2 },
-            radiusInMeters: 100,
-            objectType: YahaApi.GeoSearchableObjectType.hike,
-            limit: 1,
-          },
-        }),
-      ),
-      tap(console.warn),
-      tap(res =>
-        expect(R.omit(['nextToken'], res)).toMatchSnapshot(
-          'SHOULD NOT FIND HIKE',
-        ),
       ),
     )
     .subscribe(() => done());
