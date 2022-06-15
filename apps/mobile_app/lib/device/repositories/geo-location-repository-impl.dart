@@ -37,6 +37,16 @@ class GeoLocationRepositoryImpl implements GeoLocationRepository {
 
     // When we reach here, permissions are granted and we can
     // continue accessing the position of the device.
+/*    return Position(
+        heading: 0,
+        speedAccuracy: 0,
+        speed: 0,
+        longitude: 19.960138,
+        latitude: 47.844277,
+        accuracy: 0,
+        altitude: 0,
+        timestamp: DateTime(1));
+  */
     return await Geolocator.getCurrentPosition();
   }
 }

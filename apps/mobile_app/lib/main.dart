@@ -7,11 +7,12 @@ import 'package:yaha/app/views/hikes/hike/screens/explore-screen.dart';
 import 'package:yaha/app/views/hikes/personal/screen/profile-page.dart';
 import 'package:yaha/app/views/hikes/personal/screen/settings-screen.dart';
 import 'package:yaha/app/views/shared/widgets/yaha-colors.dart';
-import 'package:yaha/app/views/starting-screen.dart';
 import 'package:yaha/app/views/hikes/track/screens/tracking.dart';
 import 'amplifyconfiguration.dart';
 import 'package:amplify_api/amplify_api.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
+
+import 'app/views/hikes/home/views/screens/guest-home-screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,7 +50,7 @@ class _MyAppState extends State<MyApp> {
           focusColor: YahaColors.primary,
           scaffoldBackgroundColor: YahaColors.background,
           fontFamily: 'Inter'),
-      home: const StartingScreen(),
+      home: const HomePageGuest(),
       initialRoute: '/',
       routes: {
         '/profile': (context) => const ProfilePage(),

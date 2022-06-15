@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:amplify_api/amplify_api.dart';
+import 'package:flutter/foundation.dart';
 import 'package:yaha/data/utils/cache/cache.dart';
 import 'package:yaha/domain/domain.dart';
 
@@ -43,6 +44,27 @@ class HikeRepositoryAmplify implements HikeRepository {
   }
 
   @override
+  searchHikeByRadius(SearchHikeByRadiusInput input) async {
+    String gqlDocument = ''' 
+      query SearchHikeByRadius(\$query: SearchHikeByRadiusInput!) {
+        searchHikeByRadius(query: \$query) {
+          items
+          nextToken
+          total
+        }
+      }
+    ''';
+
+    var request = GraphQLRequest<String>(
+        document: gqlDocument, variables: Map.from({'query': input.toJson()}));
+    var operation = Amplify.API.query(request: request);
+    return operation.response.then((response) {
+      return List<String>.from(
+          jsonDecode(response.data)['searchHikeByRadius']['items']);
+    });
+  }
+
+  @override
   getHike(String id) async {
     if (_hikeCache.containsKey(id)) {
       return _hikeCache.getData(id);
@@ -67,7 +89,8 @@ class HikeRepositoryAmplify implements HikeRepository {
       }
     ''';
 
-    var request = GraphQLRequest<String>(document: gqlDocument);
+    var request =
+        GraphQLRequest<String>(document: gqlDocument, variables: {"id": id});
     var operation = Amplify.API.query(request: request);
     return operation.response.then((response) {
       final hike = Hike.fromJson(jsonDecode(response.data)['getHike']);
