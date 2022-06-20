@@ -1,10 +1,10 @@
-FROM cirrusci/flutter:stable
+FROM cirrusci/flutter:2.10.0
 
 RUN flutter doctor
 
-COPY apps/mobile_app mobile_app
-
-RUN cd mobile_app \
-  && flutter pub get \
-  && cd .. \
-  && rm -rf mobile_app
+RUN  sdkmanager "platform-tools" "platforms;android-28" "emulator" "system-images;android-28;default;x86" \
+  && echo "no" | avdmanager --verbose create avd --force --name "int_test" --package "system-images;android-28;default;x86" --tag "default" --abi "x86"
+RUN  sdkmanager "platform-tools" "platforms;android-29" "emulator" "system-images;android-29;default;x86" \
+  && echo "no" | avdmanager --verbose create avd --force --name "int_test" --package "system-images;android-29;default;x86" --tag "default" --abi "x86"
+RUN  sdkmanager "platform-tools" "platforms;android-29" "emulator" "system-images;android-29;default;x86" \
+  && echo "no" | avdmanager --verbose create avd --force --name "int_test" --package "system-images;android-29;default;x86" --tag "default" --abi "x86"
