@@ -2,10 +2,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yaha/app/views/poi/widgets/poi-icon.dart';
-import 'package:yaha/app/views/shared/shared.dart';
+import 'package:yaha/ui/views/poi/widgets/poi-icon.dart';
+import 'package:yaha/ui/views/shared/shared.dart';
 import 'package:yaha/domain/entities/entities.dart';
-import 'package:yaha/providers/providers.dart';
+import 'package:yaha/app/providers.dart';
 
 class PoiListItem extends ConsumerWidget {
   final Poi poi;

@@ -1,7 +1,7 @@
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:yaha/app/viewmodels/map/leaflet-map-viewmodel.dart';
+import 'package:yaha/ui/viewmodels/map/leaflet-map-viewmodel.dart';
 import 'package:yaha/domain/domain.dart';
 
 class LeafletMapPresenter extends StateNotifier<LeafletMapViewmodel> {

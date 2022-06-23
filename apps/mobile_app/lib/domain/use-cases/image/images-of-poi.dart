@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yaha/providers/providers.dart';
+import 'package:yaha/app/providers.dart';
 
 class ImagesOfPoiUsecases {
   final String poiId;

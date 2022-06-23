@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yaha/app/views/hikes/hike/widgets/list-section-title-box-widget.dart';
+import 'package:yaha/ui/views/hikes/hike/widgets/list-section-title-box-widget.dart';
 
 import '../../shared/shared.dart';
 import '../widgets/timecapsule-list-tile-widget.dart';

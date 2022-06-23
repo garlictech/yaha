@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:yaha/app/views/achievements/home/widgets/patch-box-widget.dart';
-import 'package:yaha/app/views/achievements/market/screens/a-market-screen.dart';
-import 'package:yaha/app/views/achievements/market/widgets/time-capsule-box-widget-found.dart';
-import 'package:yaha/app/views/achievements/market/widgets/time-capsule-box-widget-not-found.dart';
-import 'package:yaha/app/views/achievements/market/widgets/time-capsule-box-widget-own.dart';
-import 'package:yaha/app/views/shared/shared.dart';
+import 'package:yaha/ui/views/achievements/home/widgets/patch-box-widget.dart';
+import 'package:yaha/ui/views/achievements/market/screens/a-market-screen.dart';
+import 'package:yaha/ui/views/achievements/market/widgets/time-capsule-box-widget-found.dart';
+import 'package:yaha/ui/views/achievements/market/widgets/time-capsule-box-widget-not-found.dart';
+import 'package:yaha/ui/views/achievements/market/widgets/time-capsule-box-widget-own.dart';
+import 'package:yaha/ui/views/shared/shared.dart';
 
 class AHomeScreen extends StatelessWidget {
   const AHomeScreen({Key? key}) : super(key: key);

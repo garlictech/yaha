@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yaha/providers/hike-providers.dart';
+import 'package:yaha/app/hike-providers.dart';
 
 import '../../viewmodels/hikes/guest-home-screen-viewmodel.dart';
 

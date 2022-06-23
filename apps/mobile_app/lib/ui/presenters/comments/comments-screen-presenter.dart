@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yaha/app/viewmodels/comments/comments-screen-viewmodel.dart';
+import 'package:yaha/ui/viewmodels/comments/comments-screen-viewmodel.dart';
 import 'package:yaha/domain/domain.dart';
 import 'package:yaha/domain/states/comments/comments-state.dart';
 

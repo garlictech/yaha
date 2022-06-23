@@ -9,7 +9,7 @@ import 'yaha-space-sizes.dart';
 class YahaTextField extends StatefulWidget {
   final String title;
   final IconData? icon;
-  final controller;
+  final TextEditingController? controller;
 
   const YahaTextField({
     Key? key,

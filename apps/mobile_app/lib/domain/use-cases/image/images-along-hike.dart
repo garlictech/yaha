@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../providers/image-providers.dart';
+import '../../../app/image-providers.dart';
 
 class ImagesAlongHikeUsecases extends ChangeNotifier {
   List<String> imageUrls = [

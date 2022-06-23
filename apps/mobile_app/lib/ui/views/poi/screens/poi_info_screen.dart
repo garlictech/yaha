@@ -4,9 +4,9 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:yaha/app/views/hikes/map/widgets/leaflet-map.dart';
+import 'package:yaha/ui/views/hikes/map/widgets/leaflet-map.dart';
 import 'package:yaha/domain/domain.dart' as domain;
-import 'package:yaha/providers/providers.dart';
+import 'package:yaha/app/providers.dart';
 
 import '../../shared/shared.dart';
 import '../widgets/poi-icon.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/domain/domain.dart' as domain;
-import 'package:yaha/providers/image-providers.dart';
+import 'package:yaha/app/image-providers.dart';
 
 import '../../../shared/shared.dart';
 import '../../../shared/widgets/yaha-image.dart';

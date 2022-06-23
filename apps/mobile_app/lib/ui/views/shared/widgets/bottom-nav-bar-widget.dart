@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-import 'package:yaha/app/views/hikes/hike/screens/explore-screen.dart';
+import 'package:yaha/ui/views/hikes/hike/screens/explore-screen.dart';
 
 import '../../hikes/home/views/screens/guest-home-screen.dart';
 import '../../hikes/personal/screen/profile-page.dart';

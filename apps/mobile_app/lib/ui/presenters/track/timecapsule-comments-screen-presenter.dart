@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yaha/app/viewmodels/track/timecapsule-comments-screen-viewmodel.dart';
+import 'package:yaha/ui/viewmodels/track/timecapsule-comments-screen-viewmodel.dart';
 import 'package:yaha/domain/states/comments/comments-state.dart';
 import 'package:yaha/domain/use-cases/comments/comments-use-cases-provider.dart';
 

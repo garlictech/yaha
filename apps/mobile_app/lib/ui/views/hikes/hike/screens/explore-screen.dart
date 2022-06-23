@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import '../../../shared/shared.dart';
+import '../../../shared/widgets/location_search_by_google.dart';
 import 'hike-filter-screen.dart';
 import 'search-results-screen.dart';
 
@@ -127,12 +128,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
                         top: YahaSpaceSizes.general),
                     child: const YahaTextField(title: "Search for hike")),
                 Container(
-                  constraints: const BoxConstraints(maxWidth: 400),
-                  child: const YahaTextField(
-                    title: 'Search around location',
-                    icon: Icons.gps_not_fixed,
-                  ),
-                ),
+                    constraints: const BoxConstraints(maxWidth: 400),
+                    child: const LocationSearchByGoogleField()),
                 Expanded(
                   child: Align(
                     alignment: Alignment.bottomCenter,

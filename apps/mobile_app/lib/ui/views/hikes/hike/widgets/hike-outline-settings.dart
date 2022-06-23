@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yaha/app/views/shared/shared.dart';
+import 'package:yaha/ui/views/shared/shared.dart';
 
 import '../../personal/screen/app-settings-state.dart';
 

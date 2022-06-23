@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:yaha/app/views/poi/screens/poi_info_screen.dart';
+import 'package:yaha/ui/views/poi/screens/poi_info_screen.dart';
 
-import 'package:yaha/app/views/poi/widgets/poi-icon.dart';
-import 'package:yaha/app/views/poi/widgets/poi_list_item.dart';
+import 'package:yaha/ui/views/poi/widgets/poi-icon.dart';
+import 'package:yaha/ui/views/poi/widgets/poi_list_item.dart';
 import 'package:yaha/domain/domain.dart' as domain;
 import 'package:yaha/domain/entities/poi/poi_entity.dart';
-import 'package:yaha/providers/providers.dart';
+import 'package:yaha/app/providers.dart';
 
 import '../../../../presenters/map/map.dart';
 import 'leaflet-map.dart';
