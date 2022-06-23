@@ -55,7 +55,7 @@ dependencies:
   flutter_chat_ui: ^1.4.4
   image_picker: ^0.8.4+4
   amplify_flutter: ^0.3.2
-  amplify_api: ^0.3.2
+  amplify_api: ^0.6.0
   amplify_auth_cognito: ^0.3.2
   amplify_datastore: ^0.3.2
   location: ^4.3.0
