@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yaha/app/presenters/auth/signup-screen-presenter.dart';
+import 'package:yaha/ui/presenters/auth/signup-screen-presenter.dart';
 import '../../shared/widgets/buttons/back-button.dart';
 import '../../shared/widgets/yaha-border-radius.dart';
 import '../../shared/widgets/yaha-box-sizes.dart';

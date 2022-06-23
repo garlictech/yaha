@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaha/app/views/time-capsules/screens/timecapsules-screen.dart';
+import 'package:yaha/ui/views/time-capsules/screens/timecapsules-screen.dart';
 import '../../../shared/shared.dart';
 import '../../events/screens/events.dart';
 import '../widgets/statistics.dart';

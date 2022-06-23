@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yaha/app/views/time-capsules/widgets/poi-with-image-widget.dart';
+import 'package:yaha/ui/views/time-capsules/widgets/poi-with-image-widget.dart';
 
 import '../../../shared/shared.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yaha/app/presenters/track/timecapsule-comments-screen-presenter.dart';
+import 'package:yaha/ui/presenters/track/timecapsule-comments-screen-presenter.dart';
 
 import '../../../shared/shared.dart';
 import '../widgets/timecapsule-comment-widget.dart';

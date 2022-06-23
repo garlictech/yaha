@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:yaha/app/views/achievements/explore/screens/a-explore.dart';
-import 'package:yaha/app/views/achievements/home/screens/a-home-screen.dart';
-import 'package:yaha/app/views/achievements/market/screens/a-market-screen.dart';
-import 'package:yaha/app/views/achievements/profile/screens/a-profile-screen.dart';
-import 'package:yaha/app/views/hikes/hike/screens/explore-screen.dart';
-import 'package:yaha/app/views/hikes/home/views/screens/guest-home-screen.dart';
-import 'package:yaha/app/views/hikes/personal/screen/profile-page.dart';
-import 'package:yaha/app/views/hikes/track/screens/tracking.dart';
-import 'package:yaha/app/views/shared/shared.dart';
+import 'package:yaha/ui/views/achievements/explore/screens/a-explore.dart';
+import 'package:yaha/ui/views/achievements/home/screens/a-home-screen.dart';
+import 'package:yaha/ui/views/achievements/market/screens/a-market-screen.dart';
+import 'package:yaha/ui/views/achievements/profile/screens/a-profile-screen.dart';
+import 'package:yaha/ui/views/hikes/hike/screens/explore-screen.dart';
+import 'package:yaha/ui/views/hikes/home/views/screens/guest-home-screen.dart';
+import 'package:yaha/ui/views/hikes/personal/screen/profile-page.dart';
+import 'package:yaha/ui/views/hikes/track/screens/tracking.dart';
+import 'package:yaha/ui/views/shared/shared.dart';
 
 class StartingScreen extends StatelessWidget {
   const StartingScreen({Key? key}) : super(key: key);

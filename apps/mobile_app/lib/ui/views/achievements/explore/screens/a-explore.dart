@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaha/app/views/shared/shared.dart';
+import 'package:yaha/ui/views/shared/shared.dart';
 
 class AExploreScreen extends StatelessWidget {
   const AExploreScreen({Key? key}) : super(key: key);

@@ -1,13 +1,12 @@
 // ignore: file_names
 import 'package:flutter/material.dart';
-import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yaha/app/presenters/map/map.dart';
-import 'package:yaha/app/views/poi/widgets/poi-title-list.dart';
+import 'package:yaha/ui/presenters/map/map.dart';
+import 'package:yaha/ui/views/poi/widgets/poi-title-list.dart';
 import 'package:yaha/domain/domain.dart';
 
-import '../../../../../providers/providers.dart';
+import '../../../../../app/providers.dart';
 import '../../../poi/poi.dart';
 import '../../../shared/shared.dart';
 import '../../../shared/widgets/yaha-image.dart';

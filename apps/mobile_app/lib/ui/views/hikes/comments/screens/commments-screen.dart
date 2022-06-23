@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yaha/app/presenters/comments/comments-screen-presenter.dart';
+import 'package:yaha/ui/presenters/comments/comments-screen-presenter.dart';
 import '../../../shared/shared.dart';
 import '../widgets/comment-widget.dart';
 

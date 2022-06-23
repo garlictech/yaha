@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yaha/app/presenters/personal/settings-screen-presenter.dart';
+import 'package:yaha/ui/presenters/personal/settings-screen-presenter.dart';
 
 import '../../../shared/shared.dart';
 import '../../hike/widgets/list-section-title-box-widget.dart';

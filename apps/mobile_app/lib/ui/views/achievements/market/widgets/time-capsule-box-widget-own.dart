@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yaha/app/views/shared/shared.dart';
-import 'package:yaha/app/views/time-capsules/widgets/poi-with-image-widget.dart';
+import 'package:yaha/ui/views/shared/shared.dart';
+import 'package:yaha/ui/views/time-capsules/widgets/poi-with-image-widget.dart';
 
 class TimeCapsuleBoxWidgetOwn extends StatelessWidget {
   final double size;

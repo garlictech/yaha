@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/domain/domain.dart';
 import 'package:yaha/domain/use-cases/poi/utils.dart';
-import 'package:yaha/providers/providers.dart';
+import 'package:yaha/app/providers.dart';
 import 'package:yaha/utils/geometry/geocalc_js.dart';
 import 'package:rxdart/rxdart.dart';
 
