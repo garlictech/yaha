@@ -1,5 +1,4 @@
 {
-  "root": "libs/backend/image-tagger",
   "sourceRoot": "libs/backend/image-tagger/src",
   "projectType": "library",
   "targets": {

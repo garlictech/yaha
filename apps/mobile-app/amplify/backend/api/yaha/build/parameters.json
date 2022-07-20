@@ -1,0 +1,19 @@
+{
+    "AppSyncApiName": "yaha",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": false,
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authyaha104d6cd7",
+            "Outputs.UserPoolId"
+        ]
+    },
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "S3DeploymentBucket": "amplify-yaha-dev-201801-deployment",
+    "S3DeploymentRootKey": "amplify-appsync-files/ecd2787b4e57c9d0b41072f48c48adcb72845fce"
+}

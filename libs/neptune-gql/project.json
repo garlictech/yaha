@@ -1,5 +1,4 @@
 {
-  "root": "libs/neptune-gql",
   "sourceRoot": "libs/neptune-gql/src",
   "projectType": "library",
   "targets": {

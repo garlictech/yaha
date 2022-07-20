@@ -1,0 +1,2696 @@
+{
+    "Parameters": {
+        "env": {
+            "Type": "String",
+            "Default": "NONE"
+        },
+        "DynamoDBModelTableReadIOPS": {
+            "Type": "Number",
+            "Default": 5,
+            "Description": "The number of read IOPS the table should support."
+        },
+        "DynamoDBModelTableWriteIOPS": {
+            "Type": "Number",
+            "Default": 5,
+            "Description": "The number of write IOPS the table should support."
+        },
+        "DynamoDBBillingMode": {
+            "Type": "String",
+            "Default": "PAY_PER_REQUEST",
+            "AllowedValues": [
+                "PAY_PER_REQUEST",
+                "PROVISIONED"
+            ],
+            "Description": "Configure @model types to create DynamoDB tables with PAY_PER_REQUEST or PROVISIONED billing modes."
+        },
+        "DynamoDBEnablePointInTimeRecovery": {
+            "Type": "String",
+            "Default": "false",
+            "AllowedValues": [
+                "true",
+                "false"
+            ],
+            "Description": "Whether to enable Point in Time Recovery on the table."
+        },
+        "DynamoDBEnableServerSideEncryption": {
+            "Type": "String",
+            "Default": "true",
+            "AllowedValues": [
+                "true",
+                "false"
+            ],
+            "Description": "Enable server side encryption powered by KMS."
+        },
+        "AuthCognitoUserPoolId": {
+            "Type": "String"
+        },
+        "AppSyncApiName": {
+            "Type": "String",
+            "Default": "AppSyncSimpleTransform"
+        },
+        "authRoleName": {
+            "Type": "String"
+        },
+        "unauthRoleName": {
+            "Type": "String"
+        },
+        "S3DeploymentBucket": {
+            "Type": "String",
+            "Description": "An S3 Bucket name where assets are deployed"
+        },
+        "S3DeploymentRootKey": {
+            "Type": "String",
+            "Description": "An S3 key relative to the S3DeploymentBucket that points to the root of the deployment directory."
+        },
+        "OpenSearchAccessIAMRoleName": {
+            "Type": "String",
+            "Default": "AppSyncOpenSearchRole",
+            "Description": "The name of the IAM role assumed by AppSync for OpenSearch."
+        },
+        "OpenSearchStreamingLambdaHandlerName": {
+            "Type": "String",
+            "Default": "python_streaming_function.lambda_handler",
+            "Description": "The name of the lambda handler."
+        },
+        "OpenSearchStreamingLambdaRuntime": {
+            "Type": "String",
+            "Default": "python3.6",
+            "Description": "The lambda runtime                 (https://docs.aws.amazon.com/lambda/latest/dg/API_CreateFunction.html#SSS-CreateFunction-request-Runtime)"
+        },
+        "OpenSearchStreamingFunctionName": {
+            "Type": "String",
+            "Default": "DdbToEsFn",
+            "Description": "The name of the streaming lambda function."
+        },
+        "OpenSearchStreamBatchSize": {
+            "Type": "Number",
+            "Default": 100,
+            "Description": "The maximum number of records to stream to OpenSearch per batch."
+        },
+        "OpenSearchStreamMaximumBatchingWindowInSeconds": {
+            "Type": "Number",
+            "Default": 1,
+            "Description": "The maximum amount of time in seconds to wait for DynamoDB stream records before sending to streaming lambda."
+        },
+        "OpenSearchStreamingIAMRoleName": {
+            "Type": "String",
+            "Default": "SearchLambdaIAMRole",
+            "Description": "The name of the streaming lambda function IAM role."
+        },
+        "OpenSearchDebugStreamingLambda": {
+            "Type": "Number",
+            "Default": 1,
+            "AllowedValues": [
+                "0",
+                "1"
+            ],
+            "Description": "Enable debug logs for the Dynamo -> OpenSearch streaming lambda."
+        },
+        "OpenSearchInstanceCount": {
+            "Type": "Number",
+            "Default": 1,
+            "Description": "The number of instances to launch into the OpenSearch domain."
+        },
+        "OpenSearchInstanceType": {
+            "Type": "String",
+            "Default": "t2.small.elasticsearch",
+            "AllowedValues": [
+                "t2.small.elasticsearch",
+                "t2.medium.elasticsearch",
+                "c4.large.elasticsearch",
+                "c4.xlarge.elasticsearch",
+                "c4.2xlarge.elasticsearch",
+                "c4.4xlarge.elasticsearch",
+                "c4.8xlarge.elasticsearch",
+                "m3.medium.elasticsearch",
+                "m3.large.elasticsearch",
+                "m3.xlarge.elasticsearch",
+                "m3.2xlarge.elasticsearch",
+                "m4.large.elasticsearch",
+                "m4.xlarge.elasticsearch",
+                "m4.2xlarge.elasticsearch",
+                "m4.4xlarge.elasticsearch",
+                "m4.10xlarge.elasticsearch",
+                "r3.large.elasticsearch",
+                "r3.xlarge.elasticsearch",
+                "r3.2xlarge.elasticsearch",
+                "r3.4xlarge.elasticsearch",
+                "r3.8xlarge.elasticsearch",
+                "r4.large.elasticsearch",
+                "r4.xlarge.elasticsearch",
+                "r4.2xlarge.elasticsearch",
+                "r4.4xlarge.elasticsearch",
+                "r4.8xlarge.elasticsearch",
+                "r4.16xlarge.elasticsearch",
+                "i2.xlarge.elasticsearch",
+                "i2.2xlarge.elasticsearch",
+                "i3.large.elasticsearch",
+                "i3.xlarge.elasticsearch",
+                "i3.2xlarge.elasticsearch",
+                "i3.4xlarge.elasticsearch",
+                "i3.8xlarge.elasticsearch",
+                "i3.16xlarge.elasticsearch",
+                "r6gd.12xlarge.elasticsearch",
+                "ultrawarm1.xlarge.elasticsearch",
+                "m5.4xlarge.elasticsearch",
+                "t3.xlarge.elasticsearch",
+                "m6g.xlarge.elasticsearch",
+                "m6g.12xlarge.elasticsearch",
+                "t2.micro.elasticsearch",
+                "r6gd.16xlarge.elasticsearch",
+                "d2.2xlarge.elasticsearch",
+                "t3.micro.elasticsearch",
+                "m5.large.elasticsearch",
+                "d2.4xlarge.elasticsearch",
+                "t3.small.elasticsearch",
+                "c5.2xlarge.elasticsearch",
+                "c6g.2xlarge.elasticsearch",
+                "d2.8xlarge.elasticsearch",
+                "c5.4xlarge.elasticsearch",
+                "t4g.medium.elasticsearch",
+                "c6g.4xlarge.elasticsearch",
+                "c6g.xlarge.elasticsearch",
+                "c6g.12xlarge.elasticsearch",
+                "t3.small.search",
+                "t3.medium.search",
+                "t2.micro.search",
+                "t2.small.search",
+                "t2.medium.search",
+                "m6g.large.search",
+                "m6g.xlarge.search",
+                "m6g.2xlarge.search",
+                "m6g.4xlarge.search",
+                "m6g.8xlarge.search",
+                "m6g.12xlarge.search",
+                "m5.large.search",
+                "m5.xlarge.search",
+                "m5.2xlarge.search",
+                "m5.4xlarge.search",
+                "m5.12xlarge.search",
+                "m4.large.search",
+                "m4.xlarge.search",
+                "m4.2xlarge.search",
+                "m4.4xlarge.search",
+                "m4.10xlarge.search",
+                "c6g.large.search",
+                "c6g.xlarge.search",
+                "c6g.2xlarge.search",
+                "c6g.4xlarge.search",
+                "c6g.8xlarge.search",
+                "c6g.12xlarge.search",
+                "c5.large.search",
+                "c5.xlarge.search",
+                "c5.2xlarge.search",
+                "c5.4xlarge.search",
+                "c5.9xlarge.search",
+                "c5.18xlarge.search",
+                "c4.large.search",
+                "c4.xlarge.search",
+                "c4.2xlarge.search",
+                "c4.4xlarge.search",
+                "c4.8xlarge.search",
+                "r6g.large.search",
+                "r6g.xlarge.search",
+                "r6g.2xlarge.search",
+                "r6g.4xlarge.search",
+                "r6g.8xlarge.search",
+                "r6g.12xlarge.search",
+                "r6gd.large.search",
+                "r6gd.xlarge.search",
+                "r6gd.2xlarge.search",
+                "r6gd.4xlarge.search",
+                "r6gd.8xlarge.search",
+                "r6gd.12xlarge.search",
+                "r6gd.16xlarge.search",
+                "r5.large.search",
+                "r5.xlarge.search",
+                "r5.2xlarge.search",
+                "r5.4xlarge.search",
+                "r5.12xlarge.search",
+                "r4.large.search",
+                "r4.xlarge.search",
+                "r4.2xlarge.search",
+                "r4.4xlarge.search",
+                "r4.8xlarge.search",
+                "r4.16xlarge.search",
+                "r3.large.search",
+                "r3.xlarge.search",
+                "r3.2xlarge.search",
+                "r3.4xlarge.search",
+                "r3.8xlarge.search",
+                "i3.large.search",
+                "i3.xlarge.search",
+                "i3.2xlarge.search",
+                "i3.4xlarge.search",
+                "i3.8xlarge.search",
+                "i3.16xlarge.search",
+                "m3.medium.search",
+                "m3.large.search",
+                "m3.xlarge.search",
+                "m3.2xlarge.search",
+                "i2.xlarge.search",
+                "i2.2xlarge.search"
+            ],
+            "Description": "The type of instance to launch into the OpenSearch domain."
+        },
+        "OpenSearchEBSVolumeGB": {
+            "Type": "Number",
+            "Default": 10,
+            "Description": "The size in GB of the EBS volumes that contain our data."
+        }
+    },
+    "Resources": {
+        "GraphQLAPI": {
+            "Type": "AWS::AppSync::GraphQLApi",
+            "Properties": {
+                "AuthenticationType": "API_KEY",
+                "Name": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            {
+                                "Ref": "AppSyncApiName"
+                            },
+                            "-",
+                            {
+                                "Ref": "env"
+                            }
+                        ]
+                    ]
+                },
+                "AdditionalAuthenticationProviders": [
+                    {
+                        "AuthenticationType": "AMAZON_COGNITO_USER_POOLS",
+                        "UserPoolConfig": {
+                            "AwsRegion": {
+                                "Ref": "AWS::Region"
+                            },
+                            "UserPoolId": {
+                                "Ref": "AuthCognitoUserPoolId"
+                            }
+                        }
+                    },
+                    {
+                        "AuthenticationType": "AWS_IAM"
+                    }
+                ]
+            }
+        },
+        "GraphQLAPITransformerSchema3CB2AE18": {
+            "Type": "AWS::AppSync::GraphQLSchema",
+            "Properties": {
+                "ApiId": {
+                    "Fn::GetAtt": [
+                        "GraphQLAPI",
+                        "ApiId"
+                    ]
+                },
+                "DefinitionS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "/",
+                            {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "/schema.graphql"
+                        ]
+                    ]
+                }
+            }
+        },
+        "GraphQLAPIDefaultApiKey215A6DD7": {
+            "Type": "AWS::AppSync::ApiKey",
+            "Properties": {
+                "ApiId": {
+                    "Fn::GetAtt": [
+                        "GraphQLAPI",
+                        "ApiId"
+                    ]
+                },
+                "Description": "default",
+                "Expires": 1686939729
+            }
+        },
+        "GraphQLAPINONEDS95A13CF0": {
+            "Type": "AWS::AppSync::DataSource",
+            "Properties": {
+                "ApiId": {
+                    "Fn::GetAtt": [
+                        "GraphQLAPI",
+                        "ApiId"
+                    ]
+                },
+                "Name": "NONE_DS",
+                "Type": "NONE"
+            }
+        },
+        "Image": {
+            "Type": "AWS::CloudFormation::Stack",
+            "Properties": {
+                "TemplateURL": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "https://s3.",
+                            {
+                                "Ref": "AWS::Region"
+                            },
+                            ".",
+                            {
+                                "Ref": "AWS::URLSuffix"
+                            },
+                            "/",
+                            {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "/",
+                            {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "/stacks/Image.json"
+                        ]
+                    ]
+                },
+                "Parameters": {
+                    "DynamoDBModelTableReadIOPS": {
+                        "Ref": "DynamoDBModelTableReadIOPS"
+                    },
+                    "DynamoDBModelTableWriteIOPS": {
+                        "Ref": "DynamoDBModelTableWriteIOPS"
+                    },
+                    "DynamoDBBillingMode": {
+                        "Ref": "DynamoDBBillingMode"
+                    },
+                    "DynamoDBEnablePointInTimeRecovery": {
+                        "Ref": "DynamoDBEnablePointInTimeRecovery"
+                    },
+                    "DynamoDBEnableServerSideEncryption": {
+                        "Ref": "DynamoDBEnableServerSideEncryption"
+                    },
+                    "referencetotransformerrootstackenv10C5A902Ref": {
+                        "Ref": "env"
+                    },
+                    "referencetotransformerrootstackGraphQLAPI20497F53ApiId": {
+                        "Fn::GetAtt": [
+                            "GraphQLAPI",
+                            "ApiId"
+                        ]
+                    },
+                    "referencetotransformerrootstackGraphQLAPINONEDS2BA9D1C8Name": {
+                        "Fn::GetAtt": [
+                            "GraphQLAPINONEDS95A13CF0",
+                            "Name"
+                        ]
+                    },
+                    "referencetotransformerrootstackS3DeploymentBucket7592718ARef": {
+                        "Ref": "S3DeploymentBucket"
+                    },
+                    "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref": {
+                        "Ref": "S3DeploymentRootKey"
+                    },
+                    "referencetotransformerrootstackauthRoleNameFB872D50Ref": {
+                        "Ref": "authRoleName"
+                    },
+                    "referencetotransformerrootstackunauthRoleName49F3C1FERef": {
+                        "Ref": "unauthRoleName"
+                    }
+                }
+            },
+            "DependsOn": [
+                "GraphQLAPITransformerSchema3CB2AE18"
+            ]
+        },
+        "Poi": {
+            "Type": "AWS::CloudFormation::Stack",
+            "Properties": {
+                "TemplateURL": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "https://s3.",
+                            {
+                                "Ref": "AWS::Region"
+                            },
+                            ".",
+                            {
+                                "Ref": "AWS::URLSuffix"
+                            },
+                            "/",
+                            {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "/",
+                            {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "/stacks/Poi.json"
+                        ]
+                    ]
+                },
+                "Parameters": {
+                    "DynamoDBModelTableReadIOPS": {
+                        "Ref": "DynamoDBModelTableReadIOPS"
+                    },
+                    "DynamoDBModelTableWriteIOPS": {
+                        "Ref": "DynamoDBModelTableWriteIOPS"
+                    },
+                    "DynamoDBBillingMode": {
+                        "Ref": "DynamoDBBillingMode"
+                    },
+                    "DynamoDBEnablePointInTimeRecovery": {
+                        "Ref": "DynamoDBEnablePointInTimeRecovery"
+                    },
+                    "DynamoDBEnableServerSideEncryption": {
+                        "Ref": "DynamoDBEnableServerSideEncryption"
+                    },
+                    "referencetotransformerrootstackenv10C5A902Ref": {
+                        "Ref": "env"
+                    },
+                    "referencetotransformerrootstackGraphQLAPI20497F53ApiId": {
+                        "Fn::GetAtt": [
+                            "GraphQLAPI",
+                            "ApiId"
+                        ]
+                    },
+                    "referencetotransformerrootstackGraphQLAPINONEDS2BA9D1C8Name": {
+                        "Fn::GetAtt": [
+                            "GraphQLAPINONEDS95A13CF0",
+                            "Name"
+                        ]
+                    },
+                    "referencetotransformerrootstackS3DeploymentBucket7592718ARef": {
+                        "Ref": "S3DeploymentBucket"
+                    },
+                    "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref": {
+                        "Ref": "S3DeploymentRootKey"
+                    },
+                    "referencetotransformerrootstackauthRoleNameFB872D50Ref": {
+                        "Ref": "authRoleName"
+                    },
+                    "referencetotransformerrootstackunauthRoleName49F3C1FERef": {
+                        "Ref": "unauthRoleName"
+                    }
+                }
+            },
+            "DependsOn": [
+                "GraphQLAPITransformerSchema3CB2AE18"
+            ]
+        },
+        "Hike": {
+            "Type": "AWS::CloudFormation::Stack",
+            "Properties": {
+                "TemplateURL": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "https://s3.",
+                            {
+                                "Ref": "AWS::Region"
+                            },
+                            ".",
+                            {
+                                "Ref": "AWS::URLSuffix"
+                            },
+                            "/",
+                            {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "/",
+                            {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "/stacks/Hike.json"
+                        ]
+                    ]
+                },
+                "Parameters": {
+                    "DynamoDBModelTableReadIOPS": {
+                        "Ref": "DynamoDBModelTableReadIOPS"
+                    },
+                    "DynamoDBModelTableWriteIOPS": {
+                        "Ref": "DynamoDBModelTableWriteIOPS"
+                    },
+                    "DynamoDBBillingMode": {
+                        "Ref": "DynamoDBBillingMode"
+                    },
+                    "DynamoDBEnablePointInTimeRecovery": {
+                        "Ref": "DynamoDBEnablePointInTimeRecovery"
+                    },
+                    "DynamoDBEnableServerSideEncryption": {
+                        "Ref": "DynamoDBEnableServerSideEncryption"
+                    },
+                    "referencetotransformerrootstackenv10C5A902Ref": {
+                        "Ref": "env"
+                    },
+                    "referencetotransformerrootstackGraphQLAPI20497F53ApiId": {
+                        "Fn::GetAtt": [
+                            "GraphQLAPI",
+                            "ApiId"
+                        ]
+                    },
+                    "referencetotransformerrootstackGraphQLAPINONEDS2BA9D1C8Name": {
+                        "Fn::GetAtt": [
+                            "GraphQLAPINONEDS95A13CF0",
+                            "Name"
+                        ]
+                    },
+                    "referencetotransformerrootstackS3DeploymentBucket7592718ARef": {
+                        "Ref": "S3DeploymentBucket"
+                    },
+                    "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref": {
+                        "Ref": "S3DeploymentRootKey"
+                    },
+                    "referencetotransformerrootstackauthRoleNameFB872D50Ref": {
+                        "Ref": "authRoleName"
+                    },
+                    "referencetotransformerrootstackunauthRoleName49F3C1FERef": {
+                        "Ref": "unauthRoleName"
+                    }
+                }
+            },
+            "DependsOn": [
+                "GraphQLAPITransformerSchema3CB2AE18"
+            ]
+        },
+        "FunctionDirectiveStack": {
+            "Type": "AWS::CloudFormation::Stack",
+            "Properties": {
+                "TemplateURL": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "https://s3.",
+                            {
+                                "Ref": "AWS::Region"
+                            },
+                            ".",
+                            {
+                                "Ref": "AWS::URLSuffix"
+                            },
+                            "/",
+                            {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "/",
+                            {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "/stacks/FunctionDirectiveStack.json"
+                        ]
+                    ]
+                },
+                "Parameters": {
+                    "referencetotransformerrootstackenv10C5A902Ref": {
+                        "Ref": "env"
+                    },
+                    "referencetotransformerrootstackGraphQLAPI20497F53ApiId": {
+                        "Fn::GetAtt": [
+                            "GraphQLAPI",
+                            "ApiId"
+                        ]
+                    },
+                    "referencetotransformerrootstackS3DeploymentBucket7592718ARef": {
+                        "Ref": "S3DeploymentBucket"
+                    },
+                    "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref": {
+                        "Ref": "S3DeploymentRootKey"
+                    },
+                    "referencetotransformerrootstackauthRoleNameFB872D50Ref": {
+                        "Ref": "authRoleName"
+                    },
+                    "referencetotransformerrootstackunauthRoleName49F3C1FERef": {
+                        "Ref": "unauthRoleName"
+                    },
+                    "referencetotransformerrootstackGraphQLAPINONEDS2BA9D1C8Name": {
+                        "Fn::GetAtt": [
+                            "GraphQLAPINONEDS95A13CF0",
+                            "Name"
+                        ]
+                    }
+                }
+            },
+            "DependsOn": [
+                "GraphQLAPITransformerSchema3CB2AE18"
+            ]
+        },
+        "SearchableStack": {
+            "Type": "AWS::CloudFormation::Stack",
+            "Properties": {
+                "TemplateURL": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "https://s3.",
+                            {
+                                "Ref": "AWS::Region"
+                            },
+                            ".",
+                            {
+                                "Ref": "AWS::URLSuffix"
+                            },
+                            "/",
+                            {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "/",
+                            {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "/stacks/SearchableStack.json"
+                        ]
+                    ]
+                },
+                "Parameters": {
+                    "referencetotransformerrootstackenv10C5A902Ref": {
+                        "Ref": "env"
+                    },
+                    "referencetotransformerrootstackGraphQLAPI20497F53ApiId": {
+                        "Fn::GetAtt": [
+                            "GraphQLAPI",
+                            "ApiId"
+                        ]
+                    },
+                    "referencetotransformerrootstackOpenSearchEBSVolumeGBC5EEE310Ref": {
+                        "Ref": "OpenSearchEBSVolumeGB"
+                    },
+                    "referencetotransformerrootstackOpenSearchInstanceCount6D2C6DD4Ref": {
+                        "Ref": "OpenSearchInstanceCount"
+                    },
+                    "referencetotransformerrootstackOpenSearchInstanceTypeA365CDC7Ref": {
+                        "Ref": "OpenSearchInstanceType"
+                    },
+                    "referencetotransformerrootstackOpenSearchStreamingIAMRoleName68D92152Ref": {
+                        "Ref": "OpenSearchStreamingIAMRoleName"
+                    },
+                    "referencetotransformerrootstackImageNestedStackImageNestedStackResource64DE1EC9OutputstransformerrootstackImageImageTable573568D3StreamArn": {
+                        "Fn::GetAtt": [
+                            "Image",
+                            "Outputs.transformerrootstackImageImageTable573568D3StreamArn"
+                        ]
+                    },
+                    "referencetotransformerrootstackPoiNestedStackPoiNestedStackResourceFB73472COutputstransformerrootstackPoiPoiTableFC5CAD5CStreamArn": {
+                        "Fn::GetAtt": [
+                            "Poi",
+                            "Outputs.transformerrootstackPoiPoiTableFC5CAD5CStreamArn"
+                        ]
+                    },
+                    "referencetotransformerrootstackHikeNestedStackHikeNestedStackResourceD197E9CBOutputstransformerrootstackHikeHikeTableF619A62CStreamArn": {
+                        "Fn::GetAtt": [
+                            "Hike",
+                            "Outputs.transformerrootstackHikeHikeTableF619A62CStreamArn"
+                        ]
+                    },
+                    "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref": {
+                        "Ref": "S3DeploymentRootKey"
+                    },
+                    "referencetotransformerrootstackS3DeploymentBucket7592718ARef": {
+                        "Ref": "S3DeploymentBucket"
+                    },
+                    "referencetotransformerrootstackOpenSearchDebugStreamingLambdaF4C579C7Ref": {
+                        "Ref": "OpenSearchDebugStreamingLambda"
+                    },
+                    "referencetotransformerrootstackOpenSearchStreamingLambdaHandlerName4CC1792ERef": {
+                        "Ref": "OpenSearchStreamingLambdaHandlerName"
+                    },
+                    "referencetotransformerrootstackOpenSearchStreamBatchSizeADC05434Ref": {
+                        "Ref": "OpenSearchStreamBatchSize"
+                    },
+                    "referencetotransformerrootstackOpenSearchStreamMaximumBatchingWindowInSeconds78A36D49Ref": {
+                        "Ref": "OpenSearchStreamMaximumBatchingWindowInSeconds"
+                    },
+                    "referencetotransformerrootstackGraphQLAPINONEDS2BA9D1C8Name": {
+                        "Fn::GetAtt": [
+                            "GraphQLAPINONEDS95A13CF0",
+                            "Name"
+                        ]
+                    },
+                    "referencetotransformerrootstackauthRoleNameFB872D50Ref": {
+                        "Ref": "authRoleName"
+                    },
+                    "referencetotransformerrootstackunauthRoleName49F3C1FERef": {
+                        "Ref": "unauthRoleName"
+                    }
+                }
+            },
+            "DependsOn": [
+                "GraphQLAPITransformerSchema3CB2AE18"
+            ]
+        },
+        "AuthRolePolicy01921FC820": {
+            "Type": "AWS::IAM::ManagedPolicy",
+            "Properties": {
+                "PolicyDocument": {
+                    "Statement": [
+                        {
+                            "Action": "appsync:GraphQL",
+                            "Effect": "Allow",
+                            "Resource": [
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/*",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Image"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/*",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Poi"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/*",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Hike"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "GeoSearchConnection",
+                                            "fieldName": "items"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "GeoSearchConnection",
+                                            "fieldName": "nextToken"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "GeoSearchConnection",
+                                            "fieldName": "total"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Query",
+                                            "fieldName": "searchByRadius"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Query",
+                                            "fieldName": "searchHikeByRadius"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Query",
+                                            "fieldName": "searchInEnvelope"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Query",
+                                            "fieldName": "searchInShape"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Query",
+                                            "fieldName": "searchInMultipolygon"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Query",
+                                            "fieldName": "searchAroundHike"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Query",
+                                            "fieldName": "searchSafeImagesAroundHike"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Query",
+                                            "fieldName": "searchSafeImagesAroundLocation"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Query",
+                                            "fieldName": "getImage"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Query",
+                                            "fieldName": "listImages"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Mutation",
+                                            "fieldName": "createImage"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Mutation",
+                                            "fieldName": "updateImage"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Mutation",
+                                            "fieldName": "deleteImage"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Query",
+                                            "fieldName": "searchImages"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Subscription",
+                                            "fieldName": "onCreateImage"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Subscription",
+                                            "fieldName": "onUpdateImage"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Subscription",
+                                            "fieldName": "onDeleteImage"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/*",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Location"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/*",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "ImageInfo"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/*",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "PoiSourceObject"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Query",
+                                            "fieldName": "getPoi"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Query",
+                                            "fieldName": "listPois"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Mutation",
+                                            "fieldName": "createPoi"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Mutation",
+                                            "fieldName": "updatePoi"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Mutation",
+                                            "fieldName": "deletePoi"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Query",
+                                            "fieldName": "searchPois"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Subscription",
+                                            "fieldName": "onCreatePoi"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Subscription",
+                                            "fieldName": "onUpdatePoi"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Subscription",
+                                            "fieldName": "onDeletePoi"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/*",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "TextualDescription"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Query",
+                                            "fieldName": "getHike"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Query",
+                                            "fieldName": "listHikes"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Mutation",
+                                            "fieldName": "createHike"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Mutation",
+                                            "fieldName": "updateHike"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Mutation",
+                                            "fieldName": "deleteHike"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Query",
+                                            "fieldName": "searchHikes"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Subscription",
+                                            "fieldName": "onCreateHike"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Subscription",
+                                            "fieldName": "onUpdateHike"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Subscription",
+                                            "fieldName": "onDeleteHike"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/*",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "LineString"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/*",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "HikeStopData"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/*",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Checkpoint"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/*",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Point"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "Version": "2012-10-17"
+                },
+                "Description": "",
+                "Path": "/",
+                "Roles": [
+                    {
+                        "Ref": "authRoleName"
+                    }
+                ]
+            }
+        },
+        "UnauthRolePolicy019D4A6CE4": {
+            "Type": "AWS::IAM::ManagedPolicy",
+            "Properties": {
+                "PolicyDocument": {
+                    "Statement": [
+                        {
+                            "Action": "appsync:GraphQL",
+                            "Effect": "Allow",
+                            "Resource": [
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/*",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Image"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/*",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Poi"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/*",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Hike"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "GeoSearchConnection",
+                                            "fieldName": "items"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "GeoSearchConnection",
+                                            "fieldName": "nextToken"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "GeoSearchConnection",
+                                            "fieldName": "total"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Query",
+                                            "fieldName": "searchByRadius"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Query",
+                                            "fieldName": "searchHikeByRadius"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Query",
+                                            "fieldName": "searchInEnvelope"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Query",
+                                            "fieldName": "searchInShape"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Query",
+                                            "fieldName": "searchInMultipolygon"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Query",
+                                            "fieldName": "searchAroundHike"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Query",
+                                            "fieldName": "searchSafeImagesAroundHike"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Query",
+                                            "fieldName": "searchSafeImagesAroundLocation"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Query",
+                                            "fieldName": "getImage"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Query",
+                                            "fieldName": "listImages"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Mutation",
+                                            "fieldName": "createImage"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Mutation",
+                                            "fieldName": "updateImage"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Mutation",
+                                            "fieldName": "deleteImage"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Query",
+                                            "fieldName": "searchImages"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Subscription",
+                                            "fieldName": "onCreateImage"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Subscription",
+                                            "fieldName": "onUpdateImage"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Subscription",
+                                            "fieldName": "onDeleteImage"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/*",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Location"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/*",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "ImageInfo"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/*",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "PoiSourceObject"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Query",
+                                            "fieldName": "getPoi"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Query",
+                                            "fieldName": "listPois"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Mutation",
+                                            "fieldName": "createPoi"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Mutation",
+                                            "fieldName": "updatePoi"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Mutation",
+                                            "fieldName": "deletePoi"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Query",
+                                            "fieldName": "searchPois"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Subscription",
+                                            "fieldName": "onCreatePoi"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Subscription",
+                                            "fieldName": "onUpdatePoi"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Subscription",
+                                            "fieldName": "onDeletePoi"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/*",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "TextualDescription"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Query",
+                                            "fieldName": "getHike"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Query",
+                                            "fieldName": "listHikes"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Mutation",
+                                            "fieldName": "createHike"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Mutation",
+                                            "fieldName": "updateHike"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Mutation",
+                                            "fieldName": "deleteHike"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Query",
+                                            "fieldName": "searchHikes"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Subscription",
+                                            "fieldName": "onCreateHike"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Subscription",
+                                            "fieldName": "onUpdateHike"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/fields/${fieldName}",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Subscription",
+                                            "fieldName": "onDeleteHike"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/*",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "LineString"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/*",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "HikeStopData"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/*",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Checkpoint"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Fn::Sub": [
+                                        "arn:aws:appsync:${AWS::Region}:${AWS::AccountId}:apis/${apiId}/types/${typeName}/*",
+                                        {
+                                            "apiId": {
+                                                "Fn::GetAtt": [
+                                                    "GraphQLAPI",
+                                                    "ApiId"
+                                                ]
+                                            },
+                                            "typeName": "Point"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "Version": "2012-10-17"
+                },
+                "Description": "",
+                "Path": "/",
+                "Roles": [
+                    {
+                        "Ref": "unauthRoleName"
+                    }
+                ]
+            }
+        },
+        "GeoSearchConnectionItemsDataResolverFnGeoSearchConnectionItemsDataResolverFnAppSyncFunction68EE75F3": {
+            "Type": "AWS::AppSync::FunctionConfiguration",
+            "Properties": {
+                "ApiId": {
+                    "Fn::GetAtt": [
+                        "GraphQLAPI",
+                        "ApiId"
+                    ]
+                },
+                "DataSourceName": {
+                    "Fn::GetAtt": [
+                        "GraphQLAPINONEDS95A13CF0",
+                        "Name"
+                    ]
+                },
+                "FunctionVersion": "2018-05-29",
+                "Name": "GeoSearchConnectionItemsDataResolverFn",
+                "RequestMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "/",
+                            {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "/resolvers/GeoSearchConnection.items.req.vtl"
+                        ]
+                    ]
+                },
+                "ResponseMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "/",
+                            {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "/resolvers/GeoSearchConnection.items.res.vtl"
+                        ]
+                    ]
+                }
+            },
+            "DependsOn": [
+                "GraphQLAPITransformerSchema3CB2AE18"
+            ]
+        },
+        "GeoSearchConnectionitemsResolver": {
+            "Type": "AWS::AppSync::Resolver",
+            "Properties": {
+                "ApiId": {
+                    "Fn::GetAtt": [
+                        "GraphQLAPI",
+                        "ApiId"
+                    ]
+                },
+                "FieldName": "items",
+                "TypeName": "GeoSearchConnection",
+                "Kind": "PIPELINE",
+                "PipelineConfig": {
+                    "Functions": [
+                        {
+                            "Fn::GetAtt": [
+                                "GeoSearchConnectionItemsDataResolverFnGeoSearchConnectionItemsDataResolverFnAppSyncFunction68EE75F3",
+                                "FunctionId"
+                            ]
+                        }
+                    ]
+                },
+                "RequestMappingTemplate": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "$util.qr($ctx.stash.put(\"typeName\", \"GeoSearchConnection\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"items\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"NONE\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+                            {
+                                "Fn::GetAtt": [
+                                    "GraphQLAPI",
+                                    "ApiId"
+                                ]
+                            },
+                            "\"))\n\n$util.qr($ctx.stash.put(\"authRole\", \"arn:aws:sts::",
+                            {
+                                "Ref": "AWS::AccountId"
+                            },
+                            ":assumed-role/",
+                            {
+                                "Ref": "authRoleName"
+                            },
+                            "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"unauthRole\", \"arn:aws:sts::",
+                            {
+                                "Ref": "AWS::AccountId"
+                            },
+                            ":assumed-role/",
+                            {
+                                "Ref": "unauthRoleName"
+                            },
+                            "/CognitoIdentityCredentials\"))\n$util.toJson({})"
+                        ]
+                    ]
+                },
+                "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)"
+            },
+            "DependsOn": [
+                "GraphQLAPITransformerSchema3CB2AE18"
+            ]
+        },
+        "GeoSearchConnectionNextTokenDataResolverFnGeoSearchConnectionNextTokenDataResolverFnAppSyncFunction656E7AA8": {
+            "Type": "AWS::AppSync::FunctionConfiguration",
+            "Properties": {
+                "ApiId": {
+                    "Fn::GetAtt": [
+                        "GraphQLAPI",
+                        "ApiId"
+                    ]
+                },
+                "DataSourceName": {
+                    "Fn::GetAtt": [
+                        "GraphQLAPINONEDS95A13CF0",
+                        "Name"
+                    ]
+                },
+                "FunctionVersion": "2018-05-29",
+                "Name": "GeoSearchConnectionNextTokenDataResolverFn",
+                "RequestMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "/",
+                            {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "/resolvers/GeoSearchConnection.nextToken.req.vtl"
+                        ]
+                    ]
+                },
+                "ResponseMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "/",
+                            {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "/resolvers/GeoSearchConnection.nextToken.res.vtl"
+                        ]
+                    ]
+                }
+            },
+            "DependsOn": [
+                "GraphQLAPITransformerSchema3CB2AE18"
+            ]
+        },
+        "GeoSearchConnectionnextTokenResolver": {
+            "Type": "AWS::AppSync::Resolver",
+            "Properties": {
+                "ApiId": {
+                    "Fn::GetAtt": [
+                        "GraphQLAPI",
+                        "ApiId"
+                    ]
+                },
+                "FieldName": "nextToken",
+                "TypeName": "GeoSearchConnection",
+                "Kind": "PIPELINE",
+                "PipelineConfig": {
+                    "Functions": [
+                        {
+                            "Fn::GetAtt": [
+                                "GeoSearchConnectionNextTokenDataResolverFnGeoSearchConnectionNextTokenDataResolverFnAppSyncFunction656E7AA8",
+                                "FunctionId"
+                            ]
+                        }
+                    ]
+                },
+                "RequestMappingTemplate": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "$util.qr($ctx.stash.put(\"typeName\", \"GeoSearchConnection\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"nextToken\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"NONE\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+                            {
+                                "Fn::GetAtt": [
+                                    "GraphQLAPI",
+                                    "ApiId"
+                                ]
+                            },
+                            "\"))\n\n$util.qr($ctx.stash.put(\"authRole\", \"arn:aws:sts::",
+                            {
+                                "Ref": "AWS::AccountId"
+                            },
+                            ":assumed-role/",
+                            {
+                                "Ref": "authRoleName"
+                            },
+                            "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"unauthRole\", \"arn:aws:sts::",
+                            {
+                                "Ref": "AWS::AccountId"
+                            },
+                            ":assumed-role/",
+                            {
+                                "Ref": "unauthRoleName"
+                            },
+                            "/CognitoIdentityCredentials\"))\n$util.toJson({})"
+                        ]
+                    ]
+                },
+                "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)"
+            },
+            "DependsOn": [
+                "GraphQLAPITransformerSchema3CB2AE18"
+            ]
+        },
+        "GeoSearchConnectionTotalDataResolverFnGeoSearchConnectionTotalDataResolverFnAppSyncFunction9B6541B0": {
+            "Type": "AWS::AppSync::FunctionConfiguration",
+            "Properties": {
+                "ApiId": {
+                    "Fn::GetAtt": [
+                        "GraphQLAPI",
+                        "ApiId"
+                    ]
+                },
+                "DataSourceName": {
+                    "Fn::GetAtt": [
+                        "GraphQLAPINONEDS95A13CF0",
+                        "Name"
+                    ]
+                },
+                "FunctionVersion": "2018-05-29",
+                "Name": "GeoSearchConnectionTotalDataResolverFn",
+                "RequestMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "/",
+                            {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "/resolvers/GeoSearchConnection.total.req.vtl"
+                        ]
+                    ]
+                },
+                "ResponseMappingTemplateS3Location": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "s3://",
+                            {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "/",
+                            {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "/resolvers/GeoSearchConnection.total.res.vtl"
+                        ]
+                    ]
+                }
+            },
+            "DependsOn": [
+                "GraphQLAPITransformerSchema3CB2AE18"
+            ]
+        },
+        "GeoSearchConnectiontotalResolver": {
+            "Type": "AWS::AppSync::Resolver",
+            "Properties": {
+                "ApiId": {
+                    "Fn::GetAtt": [
+                        "GraphQLAPI",
+                        "ApiId"
+                    ]
+                },
+                "FieldName": "total",
+                "TypeName": "GeoSearchConnection",
+                "Kind": "PIPELINE",
+                "PipelineConfig": {
+                    "Functions": [
+                        {
+                            "Fn::GetAtt": [
+                                "GeoSearchConnectionTotalDataResolverFnGeoSearchConnectionTotalDataResolverFnAppSyncFunction9B6541B0",
+                                "FunctionId"
+                            ]
+                        }
+                    ]
+                },
+                "RequestMappingTemplate": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "$util.qr($ctx.stash.put(\"typeName\", \"GeoSearchConnection\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"total\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"NONE\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+                            {
+                                "Fn::GetAtt": [
+                                    "GraphQLAPI",
+                                    "ApiId"
+                                ]
+                            },
+                            "\"))\n\n$util.qr($ctx.stash.put(\"authRole\", \"arn:aws:sts::",
+                            {
+                                "Ref": "AWS::AccountId"
+                            },
+                            ":assumed-role/",
+                            {
+                                "Ref": "authRoleName"
+                            },
+                            "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"unauthRole\", \"arn:aws:sts::",
+                            {
+                                "Ref": "AWS::AccountId"
+                            },
+                            ":assumed-role/",
+                            {
+                                "Ref": "unauthRoleName"
+                            },
+                            "/CognitoIdentityCredentials\"))\n$util.toJson({})"
+                        ]
+                    ]
+                },
+                "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)"
+            },
+            "DependsOn": [
+                "GraphQLAPITransformerSchema3CB2AE18"
+            ]
+        },
+        "CustomResourcesjson": {
+            "Type": "AWS::CloudFormation::Stack",
+            "Properties": {
+                "Parameters": {
+                    "AppSyncApiId": {
+                        "Fn::GetAtt": [
+                            "GraphQLAPI",
+                            "ApiId"
+                        ]
+                    },
+                    "AppSyncApiName": {
+                        "Ref": "AppSyncApiName"
+                    },
+                    "env": {
+                        "Ref": "env"
+                    },
+                    "S3DeploymentBucket": {
+                        "Ref": "S3DeploymentBucket"
+                    },
+                    "S3DeploymentRootKey": {
+                        "Ref": "S3DeploymentRootKey"
+                    }
+                },
+                "TemplateURL": {
+                    "Fn::Join": [
+                        "/",
+                        [
+                            "https://s3.amazonaws.com",
+                            {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "stacks",
+                            "CustomResources.json"
+                        ]
+                    ]
+                }
+            },
+            "DependsOn": [
+                "GraphQLAPI",
+                "GraphQLAPITransformerSchema3CB2AE18",
+                "Image",
+                "Poi",
+                "Hike",
+                "FunctionDirectiveStack",
+                "SearchableStack"
+            ]
+        }
+    },
+    "Outputs": {
+        "GraphQLAPIKeyOutput": {
+            "Description": "Your GraphQL API ID.",
+            "Value": {
+                "Fn::GetAtt": [
+                    "GraphQLAPIDefaultApiKey215A6DD7",
+                    "ApiKey"
+                ]
+            },
+            "Export": {
+                "Name": {
+                    "Fn::Join": [
+                        ":",
+                        [
+                            {
+                                "Ref": "AWS::StackName"
+                            },
+                            "GraphQLApiKey"
+                        ]
+                    ]
+                }
+            }
+        },
+        "GraphQLAPIIdOutput": {
+            "Description": "Your GraphQL API ID.",
+            "Value": {
+                "Fn::GetAtt": [
+                    "GraphQLAPI",
+                    "ApiId"
+                ]
+            },
+            "Export": {
+                "Name": {
+                    "Fn::Join": [
+                        ":",
+                        [
+                            {
+                                "Ref": "AWS::StackName"
+                            },
+                            "GraphQLApiId"
+                        ]
+                    ]
+                }
+            }
+        },
+        "GraphQLAPIEndpointOutput": {
+            "Description": "Your GraphQL API endpoint.",
+            "Value": {
+                "Fn::GetAtt": [
+                    "GraphQLAPI",
+                    "GraphQLUrl"
+                ]
+            },
+            "Export": {
+                "Name": {
+                    "Fn::Join": [
+                        ":",
+                        [
+                            {
+                                "Ref": "AWS::StackName"
+                            },
+                            "GraphQLApiEndpoint"
+                        ]
+                    ]
+                }
+            }
+        }
+    }
+}

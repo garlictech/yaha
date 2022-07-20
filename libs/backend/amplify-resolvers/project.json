@@ -1,5 +1,4 @@
 {
-  "root": "libs/backend/amplify-resolvers",
   "sourceRoot": "libs/backend/amplify-resolvers/src",
   "projectType": "library",
   "targets": {

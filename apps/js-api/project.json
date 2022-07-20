@@ -1,5 +1,4 @@
 {
-  "root": "apps/js-api",
   "sourceRoot": "apps/js-api/src",
   "projectType": "application",
   "targets": {

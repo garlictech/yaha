@@ -1,0 +1,10 @@
+## [Start] Sandbox Mode Enabled. **
+#if( !$ctx.stash.get("hasAuth") )
+  #if( $util.authType() != "API Key Authorization" )
+    $util.unauthorized()
+  #else
+    $util.qr($ctx.stash.put("allowedAggFields", ["id","location","original","card","thumbnail","sourceObject","attributions","labels","tagged","banned"]))
+  #end
+#end
+$util.toJson({})
+## [End] Sandbox Mode Enabled. **

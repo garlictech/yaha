@@ -2,7 +2,7 @@
 set -e
 IFS='|'
 
-pushd 'apps/mobile_app'
+pushd 'apps/mobile-app'
 
 #ENVNAME=$(amplify status | grep "Current Environment" | rev | cut -d ' ' -f 1 | rev)
 ENVNAME=$1

@@ -1,0 +1,102 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-yaha-dev-201801-authRole",
+      "UnauthRoleArn": "arn:aws:iam::697486207432:role/amplify-yaha-dev-201801-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::697486207432:role/amplify-yaha-dev-201801-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-yaha-dev-201801-deployment",
+      "UnauthRoleName": "amplify-yaha-dev-201801-unauthRole",
+      "StackName": "amplify-yaha-dev-201801",
+      "StackId": "arn:aws:cloudformation:us-east-1:697486207432:stack/amplify-yaha-dev-201801/9100d830-a239-11ec-bdc5-1205e75b64c9",
+      "AmplifyAppId": "dpci4mn8xnq6i"
+    }
+  },
+  "api": {
+    "yaha": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 365,
+              "apiKeyExpirationDate": "2023-03-12T19:20:57.786Z",
+              "description": "default"
+            }
+          },
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+              "userPoolConfig": {
+                "userPoolId": "authyaha104d6cd7"
+              }
+            },
+            {
+              "authenticationType": "AWS_IAM"
+            }
+          ]
+        },
+        "GraphQLAPIIdOutput": "sexmuz7jszefzivk7ps6265fyu",
+        "GraphQLAPIEndpointOutput": "https://y5hivusu4vgp3jzg46h5revgfa.appsync-api.us-east-1.amazonaws.com/graphql",
+        "GraphQLAPIKeyOutput": "da2-rl4ag3qecfgzzomxqnfltbatfi"
+      },
+      "lastPushTimeStamp": "2022-06-16T18:22:05.321Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-yaha-dev-201801-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "logicalId": "apiyaha"
+      }
+    }
+  },
+  "auth": {
+    "yaha104d6cd7": {
+      "service": "Cognito",
+      "serviceType": "imported",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "output": {
+        "UserPoolId": "us-east-1_r0VBHq6to",
+        "UserPoolName": "dev-yaha-consumer-user-pool",
+        "AppClientID": "1d79g7kuqo1mj4lr8pmj1ec3pm",
+        "AppClientSecret": "7fftot4cgfpjrrbvnihshkm4v3bedmskf2oggk3jiab30fpn9j2",
+        "AppClientIDWeb": "5m1n884d7kooteqvree1p2ed8b",
+        "HostedUIDomain": "dev-yaha-consumer",
+        "IdentityPoolId": "us-east-1:b6943e16-0ef1-4727-ae68-56ba8916ac36",
+        "IdentityPoolName": "IdentityPool_mpVvsLWupM3n",
+        "CreatedSNSRole": "arn:aws:iam::697486207432:role/dev-yaha-cognito-ConsumerUserPoolsmsRoleC92BB0E3-1AFRHARUOEDNJ",
+        "OAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"aws.cognito.signin.user.admin\",\"email\",\"openid\",\"phone\",\"profile\"],\"CallbackURLs\":[\"yaha://signin/\"],\"LogoutURLs\":[\"yaha://signout/\"]}"
+      },
+      "frontendAuthConfig": {
+        "socialProviders": [
+          "FACEBOOK",
+          "GOOGLE",
+          "APPLE"
+        ],
+        "usernameAttributes": [],
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 12,
+          "passwordPolicyCharacters": [
+            "REQUIRES_LOWERCASE",
+            "REQUIRES_UPPERCASE",
+            "REQUIRES_NUMBERS"
+          ]
+        },
+        "mfaConfiguration": "OPTIONAL",
+        "mfaTypes": [
+          "SMS",
+          "TOTP"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "lastPushTimeStamp": "2022-03-12T19:41:59.626Z"
+    }
+  },
+  "geo": {}
+}

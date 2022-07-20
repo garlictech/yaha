@@ -25,5 +25,6 @@
   "cli": {
     "defaultCollection": "@nrwl/node"
   },
-  "defaultProject": "cicd"
+  "defaultProject": "cicd",
+  "plugins": ["@nxrocks/nx-flutter"]
 }

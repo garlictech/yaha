@@ -1,5 +1,4 @@
 {
-  "root": "libs/integration-tests/backend",
   "sourceRoot": "libs/integration-tests/backend/src",
   "projectType": "library",
   "targets": {

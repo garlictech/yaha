@@ -1,0 +1,862 @@
+
+enum PublicationState {
+  draft
+  published
+  archived
+}
+
+enum LengthUnit {
+  imperial
+  metric
+}
+
+enum TextualDescriptionType {
+  markdown
+  html
+}
+
+type TextualDescription @aws_iam @aws_api_key {
+  languageKey: String!
+  title: String
+  summary: String
+  fullDescription: String
+  type: TextualDescriptionType!
+}
+
+type ImageInfo @aws_iam @aws_api_key {
+  url: String!
+  width: Int
+  height: Int
+}
+
+type Image @aws_iam @aws_api_key {
+  id: ID!
+  location: Location!
+  original: ImageInfo!
+  card: ImageInfo!
+  thumbnail: ImageInfo!
+  sourceObject: PoiSourceObject!
+  attributions: String
+  labels: [String!]
+  tagged: Boolean
+  banned: Boolean
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+enum PoiSource {
+  google
+  wikipedia
+  osmAmenity
+  osmNatural
+  osmRoute
+  osmPublicTransport
+  osmEmergency
+  osmHistoric
+  osmLeisure
+  osmManMade
+  osmMilitary
+  osmShop
+  osmTourism
+  mapillary
+  flickr
+}
+
+type PoiSourceObject @aws_iam @aws_api_key {
+  objectType: PoiSource!
+  languageKey: String
+  objectId: String!
+  url: String
+}
+
+type Poi @aws_iam @aws_api_key {
+  id: ID!
+  elevation: Float
+  location: Location!
+  type: String
+  description: [TextualDescription]
+  tags: [String!]
+  sourceObject: PoiSourceObject
+  address: String
+  phoneNumber: String
+  openingHours: String
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type Point @aws_iam @aws_api_key {
+  lat: Float!
+  lon: Float!
+  elevation: Float
+}
+
+type Location @aws_iam @aws_api_key {
+  lat: Float!
+  lon: Float!
+}
+
+type BoundingBox {
+  NorthEast: Point!
+  SouthWest: Point!
+}
+
+enum PlaceType {
+  poi
+  hike
+  message
+  image
+}
+
+type HikeStopData @aws_iam @aws_api_key {
+  poiId: ID!
+  description: [TextualDescription!]
+}
+
+type Checkpoint @aws_iam @aws_api_key {
+  poiId: String
+  point: Point
+}
+
+type RouteData {
+  distance: Int!
+  uphill: Int!
+  downhill: Int!
+  averageTime: Int!
+  score: Int!
+  difficulty: Int!
+  bounds: BoundingBox!
+  isRoundTrip: Boolean!
+  poiSearchBox: BoundingBox!
+}
+
+type LineString @aws_iam @aws_api_key {
+  type: String!
+  coordinates: [[Float!]!]!
+}
+
+type GeoShape {
+  type: String!
+  coordinates: [[[Float]]]!
+}
+
+input GeoShapeInput {
+  type: String!
+  coordinates: [[[Float]]]!
+}
+
+type Hike @aws_iam @aws_api_key {
+  id: ID!
+  description: [TextualDescription]
+  route: LineString!
+  publicationState: PublicationState
+  featured: Boolean
+  rate: String
+  featuredStops: [HikeStopData]
+  checkpoints: [Checkpoint]
+  tags: [String]
+  closestPlace: String
+  location: Location
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type Profile {
+  username: String!
+  birthDate: String
+  firstName: String
+  lastName: String
+  languages: [String!]
+  picture: String
+  phone: String
+}
+
+type Settings {
+  averageSpeed: Int
+  lengthUnit: LengthUnit
+}
+
+type Customer {
+  profile: Profile
+  settings: Settings
+  bookmarkedHikes: [ID]
+}
+
+input LocationInput {
+  lon: Float!
+  lat: Float!
+}
+
+enum GeoSearchableObjectType {
+  poi
+  hike
+  image
+}
+
+input SearchByRadiusInput {
+  location: LocationInput!
+  radiusInMeters: Float!
+  objectType: GeoSearchableObjectType!
+  limit: Int
+  nextToken: String
+}
+
+input SearchHikeByRadiusInput {
+  location: LocationInput!
+  radiusInMeters: Float!
+  limit: Int
+  nextToken: String
+}
+
+input SearchInShapeInput {
+  shape: GeoShapeInput!
+  objectType: GeoSearchableObjectType!
+  limit: Int
+  nextToken: String
+}
+
+input SearchInMultipolygonInput {
+  coordinates: [[[[Float!]]]]!
+  objectType: GeoSearchableObjectType!
+  limit: Int
+  nextToken: String
+}
+
+input SearchInEnvelopeInput {
+  envelope: [[Float]]!
+  objectType: GeoSearchableObjectType!
+  limit: Int
+  nextToken: String
+}
+
+input SearchAroundHikeInput {
+  hikeId: String!
+  distanceInMeters: Float!
+  objectType: GeoSearchableObjectType!
+  limit: Int
+  nextToken: String
+}
+
+input SearchSafeImagesAroundHikeInput {
+  hikeId: String!
+  distanceInMeters: Float!
+  limit: Int
+  nextToken: String
+}
+
+type GeoSearchConnection {
+  items: [String!] @aws_iam @aws_api_key
+  nextToken: String @aws_iam @aws_api_key
+  total: Int @aws_iam @aws_api_key
+}
+
+type Query {
+  getImage(id: ID!): Image @aws_api_key @aws_iam
+  listImages(filter: ModelImageFilterInput, limit: Int, nextToken: String): ModelImageConnection @aws_api_key @aws_iam
+  searchImages(filter: SearchableImageFilterInput, sort: [SearchableImageSortInput], limit: Int, nextToken: String, from: Int, aggregates: [SearchableImageAggregationInput]): SearchableImageConnection @aws_api_key @aws_iam
+  getPoi(id: ID!): Poi @aws_api_key @aws_iam
+  listPois(filter: ModelPoiFilterInput, limit: Int, nextToken: String): ModelPoiConnection @aws_api_key @aws_iam
+  searchPois(filter: SearchablePoiFilterInput, sort: [SearchablePoiSortInput], limit: Int, nextToken: String, from: Int, aggregates: [SearchablePoiAggregationInput]): SearchablePoiConnection @aws_api_key @aws_iam
+  getHike(id: ID!): Hike @aws_api_key @aws_iam
+  listHikes(filter: ModelHikeFilterInput, limit: Int, nextToken: String): ModelHikeConnection @aws_api_key @aws_iam
+  searchHikes(filter: SearchableHikeFilterInput, sort: [SearchableHikeSortInput], limit: Int, nextToken: String, from: Int, aggregates: [SearchableHikeAggregationInput]): SearchableHikeConnection @aws_api_key @aws_iam
+  searchByRadius(query: SearchByRadiusInput!): GeoSearchConnection @aws_iam @aws_api_key
+  searchHikeByRadius(query: SearchHikeByRadiusInput!): GeoSearchConnection @aws_iam @aws_api_key
+  searchInEnvelope(query: SearchInEnvelopeInput!): GeoSearchConnection @aws_iam @aws_api_key
+  searchInShape(query: SearchInShapeInput!): GeoSearchConnection @aws_iam @aws_api_key
+  searchInMultipolygon(query: SearchInMultipolygonInput!): GeoSearchConnection @aws_iam @aws_api_key
+  searchAroundHike(query: SearchAroundHikeInput!): GeoSearchConnection @aws_iam @aws_api_key
+  searchSafeImagesAroundHike(query: SearchSafeImagesAroundHikeInput!): GeoSearchConnection @aws_iam @aws_api_key
+  searchSafeImagesAroundLocation(query: SearchByRadiusInput!): GeoSearchConnection @aws_iam @aws_api_key
+}
+
+type SearchableImageConnection @aws_api_key @aws_iam {
+  items: [Image]!
+  nextToken: String
+  total: Int
+  aggregateItems: [SearchableAggregateResult]!
+}
+
+type SearchableAggregateResult @aws_iam @aws_api_key {
+  name: String!
+  result: SearchableAggregateGenericResult
+}
+
+type SearchableAggregateScalarResult @aws_iam @aws_api_key {
+  value: Float!
+}
+
+type SearchableAggregateBucketResult @aws_iam @aws_api_key {
+  buckets: [SearchableAggregateBucketResultItem]
+}
+
+type SearchableAggregateBucketResultItem @aws_iam @aws_api_key {
+  key: String!
+  doc_count: Int!
+}
+
+union SearchableAggregateGenericResult = SearchableAggregateScalarResult | SearchableAggregateBucketResult
+
+type SearchablePoiConnection @aws_api_key @aws_iam {
+  items: [Poi]!
+  nextToken: String
+  total: Int
+  aggregateItems: [SearchableAggregateResult]!
+}
+
+type SearchableHikeConnection @aws_api_key @aws_iam {
+  items: [Hike]!
+  nextToken: String
+  total: Int
+  aggregateItems: [SearchableAggregateResult]!
+}
+
+input ModelStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelBooleanInput {
+  ne: Boolean
+  eq: Boolean
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+enum ModelAttributeTypes {
+  binary
+  binarySet
+  bool
+  list
+  map
+  number
+  numberSet
+  string
+  stringSet
+  _null
+}
+
+input ModelSizeInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+input ImageInfoInput {
+  url: String!
+  width: Int
+  height: Int
+}
+
+input PoiSourceObjectInput {
+  objectType: PoiSource!
+  languageKey: String
+  objectId: String!
+  url: String
+}
+
+type ModelImageConnection @aws_api_key @aws_iam {
+  items: [Image]!
+  nextToken: String
+}
+
+input ModelImageFilterInput {
+  id: ModelIDInput
+  attributions: ModelStringInput
+  labels: ModelStringInput
+  tagged: ModelBooleanInput
+  banned: ModelBooleanInput
+  and: [ModelImageFilterInput]
+  or: [ModelImageFilterInput]
+  not: ModelImageFilterInput
+}
+
+input ModelImageConditionInput {
+  attributions: ModelStringInput
+  labels: ModelStringInput
+  tagged: ModelBooleanInput
+  banned: ModelBooleanInput
+  and: [ModelImageConditionInput]
+  or: [ModelImageConditionInput]
+  not: ModelImageConditionInput
+}
+
+input CreateImageInput {
+  id: ID
+  location: LocationInput!
+  original: ImageInfoInput!
+  card: ImageInfoInput!
+  thumbnail: ImageInfoInput!
+  sourceObject: PoiSourceObjectInput!
+  attributions: String
+  labels: [String!]
+  tagged: Boolean
+  banned: Boolean
+}
+
+input UpdateImageInput {
+  id: ID!
+  location: LocationInput
+  original: ImageInfoInput
+  card: ImageInfoInput
+  thumbnail: ImageInfoInput
+  sourceObject: PoiSourceObjectInput
+  attributions: String
+  labels: [String!]
+  tagged: Boolean
+  banned: Boolean
+}
+
+input DeleteImageInput {
+  id: ID!
+}
+
+type Mutation {
+  createImage(input: CreateImageInput!, condition: ModelImageConditionInput): Image @aws_api_key @aws_iam
+  updateImage(input: UpdateImageInput!, condition: ModelImageConditionInput): Image @aws_api_key @aws_iam
+  deleteImage(input: DeleteImageInput!, condition: ModelImageConditionInput): Image @aws_api_key @aws_iam
+  createPoi(input: CreatePoiInput!, condition: ModelPoiConditionInput): Poi @aws_api_key @aws_iam
+  updatePoi(input: UpdatePoiInput!, condition: ModelPoiConditionInput): Poi @aws_api_key @aws_iam
+  deletePoi(input: DeletePoiInput!, condition: ModelPoiConditionInput): Poi @aws_api_key @aws_iam
+  createHike(input: CreateHikeInput!, condition: ModelHikeConditionInput): Hike @aws_api_key @aws_iam
+  updateHike(input: UpdateHikeInput!, condition: ModelHikeConditionInput): Hike @aws_api_key @aws_iam
+  deleteHike(input: DeleteHikeInput!, condition: ModelHikeConditionInput): Hike @aws_api_key @aws_iam
+}
+
+type Subscription {
+  onCreateImage: Image @aws_subscribe(mutations: ["createImage"]) @aws_api_key @aws_iam
+  onUpdateImage: Image @aws_subscribe(mutations: ["updateImage"]) @aws_api_key @aws_iam
+  onDeleteImage: Image @aws_subscribe(mutations: ["deleteImage"]) @aws_api_key @aws_iam
+  onCreatePoi: Poi @aws_subscribe(mutations: ["createPoi"]) @aws_api_key @aws_iam
+  onUpdatePoi: Poi @aws_subscribe(mutations: ["updatePoi"]) @aws_api_key @aws_iam
+  onDeletePoi: Poi @aws_subscribe(mutations: ["deletePoi"]) @aws_api_key @aws_iam
+  onCreateHike: Hike @aws_subscribe(mutations: ["createHike"]) @aws_api_key @aws_iam
+  onUpdateHike: Hike @aws_subscribe(mutations: ["updateHike"]) @aws_api_key @aws_iam
+  onDeleteHike: Hike @aws_subscribe(mutations: ["deleteHike"]) @aws_api_key @aws_iam
+}
+
+input TextualDescriptionInput {
+  languageKey: String!
+  title: String
+  summary: String
+  fullDescription: String
+  type: TextualDescriptionType!
+}
+
+type ModelPoiConnection @aws_api_key @aws_iam {
+  items: [Poi]!
+  nextToken: String
+}
+
+input ModelPoiFilterInput {
+  id: ModelIDInput
+  elevation: ModelFloatInput
+  type: ModelStringInput
+  tags: ModelStringInput
+  address: ModelStringInput
+  phoneNumber: ModelStringInput
+  openingHours: ModelStringInput
+  and: [ModelPoiFilterInput]
+  or: [ModelPoiFilterInput]
+  not: ModelPoiFilterInput
+}
+
+input ModelPoiConditionInput {
+  elevation: ModelFloatInput
+  type: ModelStringInput
+  tags: ModelStringInput
+  address: ModelStringInput
+  phoneNumber: ModelStringInput
+  openingHours: ModelStringInput
+  and: [ModelPoiConditionInput]
+  or: [ModelPoiConditionInput]
+  not: ModelPoiConditionInput
+}
+
+input CreatePoiInput {
+  id: ID
+  elevation: Float
+  location: LocationInput!
+  type: String
+  description: [TextualDescriptionInput]
+  tags: [String!]
+  sourceObject: PoiSourceObjectInput
+  address: String
+  phoneNumber: String
+  openingHours: String
+}
+
+input UpdatePoiInput {
+  id: ID!
+  elevation: Float
+  location: LocationInput
+  type: String
+  description: [TextualDescriptionInput]
+  tags: [String!]
+  sourceObject: PoiSourceObjectInput
+  address: String
+  phoneNumber: String
+  openingHours: String
+}
+
+input DeletePoiInput {
+  id: ID!
+}
+
+input LineStringInput {
+  type: String!
+  coordinates: [[Float!]!]!
+}
+
+input HikeStopDataInput {
+  poiId: ID!
+  description: [TextualDescriptionInput!]
+}
+
+input CheckpointInput {
+  poiId: String
+  point: PointInput
+}
+
+input PointInput {
+  lat: Float!
+  lon: Float!
+  elevation: Float
+}
+
+type ModelHikeConnection @aws_api_key @aws_iam {
+  items: [Hike]!
+  nextToken: String
+}
+
+input ModelPublicationStateInput {
+  eq: PublicationState
+  ne: PublicationState
+}
+
+input ModelHikeFilterInput {
+  id: ModelIDInput
+  publicationState: ModelPublicationStateInput
+  featured: ModelBooleanInput
+  rate: ModelStringInput
+  tags: ModelStringInput
+  closestPlace: ModelStringInput
+  and: [ModelHikeFilterInput]
+  or: [ModelHikeFilterInput]
+  not: ModelHikeFilterInput
+}
+
+input ModelHikeConditionInput {
+  publicationState: ModelPublicationStateInput
+  featured: ModelBooleanInput
+  rate: ModelStringInput
+  tags: ModelStringInput
+  closestPlace: ModelStringInput
+  and: [ModelHikeConditionInput]
+  or: [ModelHikeConditionInput]
+  not: ModelHikeConditionInput
+}
+
+input CreateHikeInput {
+  id: ID
+  description: [TextualDescriptionInput]
+  route: LineStringInput!
+  publicationState: PublicationState
+  featured: Boolean
+  rate: String
+  featuredStops: [HikeStopDataInput]
+  checkpoints: [CheckpointInput]
+  tags: [String]
+  closestPlace: String
+  location: LocationInput
+}
+
+input UpdateHikeInput {
+  id: ID!
+  description: [TextualDescriptionInput]
+  route: LineStringInput
+  publicationState: PublicationState
+  featured: Boolean
+  rate: String
+  featuredStops: [HikeStopDataInput]
+  checkpoints: [CheckpointInput]
+  tags: [String]
+  closestPlace: String
+  location: LocationInput
+}
+
+input DeleteHikeInput {
+  id: ID!
+}
+
+input SearchableStringFilterInput {
+  ne: String
+  gt: String
+  lt: String
+  gte: String
+  lte: String
+  eq: String
+  match: String
+  matchPhrase: String
+  matchPhrasePrefix: String
+  multiMatch: String
+  exists: Boolean
+  wildcard: String
+  regexp: String
+  range: [String]
+}
+
+input SearchableIntFilterInput {
+  ne: Int
+  gt: Int
+  lt: Int
+  gte: Int
+  lte: Int
+  eq: Int
+  range: [Int]
+}
+
+input SearchableFloatFilterInput {
+  ne: Float
+  gt: Float
+  lt: Float
+  gte: Float
+  lte: Float
+  eq: Float
+  range: [Float]
+}
+
+input SearchableBooleanFilterInput {
+  eq: Boolean
+  ne: Boolean
+}
+
+input SearchableIDFilterInput {
+  ne: ID
+  gt: ID
+  lt: ID
+  gte: ID
+  lte: ID
+  eq: ID
+  match: ID
+  matchPhrase: ID
+  matchPhrasePrefix: ID
+  multiMatch: ID
+  exists: Boolean
+  wildcard: ID
+  regexp: ID
+  range: [ID]
+}
+
+input SearchableImageFilterInput {
+  id: SearchableIDFilterInput
+  attributions: SearchableStringFilterInput
+  labels: SearchableStringFilterInput
+  tagged: SearchableBooleanFilterInput
+  banned: SearchableBooleanFilterInput
+  createdAt: SearchableStringFilterInput
+  updatedAt: SearchableStringFilterInput
+  and: [SearchableImageFilterInput]
+  or: [SearchableImageFilterInput]
+  not: SearchableImageFilterInput
+}
+
+enum SearchableSortDirection {
+  asc
+  desc
+}
+
+enum SearchableImageSortableFields {
+  id
+  attributions
+  labels
+  tagged
+  banned
+  createdAt
+  updatedAt
+}
+
+input SearchableImageSortInput {
+  field: SearchableImageSortableFields
+  direction: SearchableSortDirection
+}
+
+enum SearchableAggregateType {
+  terms
+  avg
+  min
+  max
+  sum
+}
+
+enum SearchableImageAggregateField {
+  id
+  attributions
+  labels
+  tagged
+  banned
+  createdAt
+  updatedAt
+}
+
+input SearchableImageAggregationInput {
+  name: String!
+  type: SearchableAggregateType!
+  field: SearchableImageAggregateField!
+}
+
+input SearchablePoiFilterInput {
+  id: SearchableIDFilterInput
+  elevation: SearchableFloatFilterInput
+  type: SearchableStringFilterInput
+  tags: SearchableStringFilterInput
+  address: SearchableStringFilterInput
+  phoneNumber: SearchableStringFilterInput
+  openingHours: SearchableStringFilterInput
+  createdAt: SearchableStringFilterInput
+  updatedAt: SearchableStringFilterInput
+  and: [SearchablePoiFilterInput]
+  or: [SearchablePoiFilterInput]
+  not: SearchablePoiFilterInput
+}
+
+enum SearchablePoiSortableFields {
+  id
+  elevation
+  type
+  tags
+  address
+  phoneNumber
+  openingHours
+  createdAt
+  updatedAt
+}
+
+input SearchablePoiSortInput {
+  field: SearchablePoiSortableFields
+  direction: SearchableSortDirection
+}
+
+enum SearchablePoiAggregateField {
+  id
+  elevation
+  type
+  tags
+  address
+  phoneNumber
+  openingHours
+  createdAt
+  updatedAt
+}
+
+input SearchablePoiAggregationInput {
+  name: String!
+  type: SearchableAggregateType!
+  field: SearchablePoiAggregateField!
+}
+
+input SearchableHikeFilterInput {
+  id: SearchableIDFilterInput
+  featured: SearchableBooleanFilterInput
+  rate: SearchableStringFilterInput
+  tags: SearchableStringFilterInput
+  closestPlace: SearchableStringFilterInput
+  createdAt: SearchableStringFilterInput
+  updatedAt: SearchableStringFilterInput
+  publicationState: SearchableStringFilterInput
+  and: [SearchableHikeFilterInput]
+  or: [SearchableHikeFilterInput]
+  not: SearchableHikeFilterInput
+}
+
+enum SearchableHikeSortableFields {
+  id
+  featured
+  rate
+  tags
+  closestPlace
+  createdAt
+  updatedAt
+}
+
+input SearchableHikeSortInput {
+  field: SearchableHikeSortableFields
+  direction: SearchableSortDirection
+}
+
+enum SearchableHikeAggregateField {
+  id
+  publicationState
+  featured
+  rate
+  tags
+  closestPlace
+  createdAt
+  updatedAt
+}
+
+input SearchableHikeAggregationInput {
+  name: String!
+  type: SearchableAggregateType!
+  field: SearchableHikeAggregateField!
+}
+
