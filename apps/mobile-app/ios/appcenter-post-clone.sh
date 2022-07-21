@@ -23,6 +23,6 @@ cd ../..
 aws s3 cp s3://yaha-build-artifacts-${APPCENTER_BRANCH}/${ARTIFACT_NAME} .
 tar -zxf ${ARTIFACT_NAME}
 
-cd apps/mobile_app
+cd apps/mobile-app
 flutter build ios --release --no-codesign
 

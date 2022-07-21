@@ -1,4 +1,4 @@
-# mobile_app
+# mobile-app
 
 Yet another hiking app
 
