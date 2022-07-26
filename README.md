@@ -70,7 +70,7 @@ Execute this command when:
 - you change the project stage (dev, production, qa)
 
 The command fetches the config parameters and writes them into files in
-`libs/shared/config`, `apps/mobile-app/lib/awsconfiguration.dart`, etc. You need AWS credentials set in your environment with the
+`libs/shared/config`, `apps/mobile_app/lib/awsconfiguration.dart`, etc. You need AWS credentials set in your environment with the
 appropriate access!
 
 **IMPORTANT**

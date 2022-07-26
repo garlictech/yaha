@@ -13,7 +13,7 @@ const targetDir = `${__dirname}/../libs/shared/config/src/lib/generated`;
 const targetFile = `${targetDir}/config.json`;
 
 const amplifyMetaConfigFile = `${__dirname}/../apps/amplify-app/amplify/backend/amplify-meta.json`;
-//const mobileAppConfigurationFile = `${__dirname}/../apps/mobile-app/lib/awsconfiguration.dart`;
+//const mobileAppConfigurationFile = `${__dirname}/../apps/mobile_app/lib/awsconfiguration.dart`;
 
 //--- Read generated crud amplify backend (meta-) config
 /*const amplifyConfig = JSON.parse(

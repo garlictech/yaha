@@ -79,8 +79,8 @@ CATEGORIES="{\
 \"auth\":$AUTHCONFIG\
 }"
 
-echo "...pulling mobile-app..."
-pushd apps/mobile-app
+echo "...pulling mobile_app..."
+pushd apps/mobile_app
 amplify pull \
 --amplify $AMPLIFY \
 --frontend $FLUTTERFRONTEND \

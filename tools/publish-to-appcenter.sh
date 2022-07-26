@@ -8,7 +8,7 @@ PLATFORM=$2
 appId="yaha-$PLATFORM-$STAGE"
 
 if [ $PLATFORM = 'android' ]; then
-  appImagePath=${CODEBUILD_SRC_DIR:-$PWD}/apps/mobile-app/build/app/outputs/bundle/release/app-release.aab
+  appImagePath=${CODEBUILD_SRC_DIR:-$PWD}/apps/mobile_app/build/app/outputs/bundle/release/app-release.aab
 else
   echo "Unsupported platform: ${PLATFORM}"
   exit 1
