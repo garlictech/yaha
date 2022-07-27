@@ -83,19 +83,9 @@ class LocationSearchByGoogleField extends ConsumerWidget {
     final presenter = ref.watch(presenterInstance.notifier);
     final searchState = ref.watch(hikeSearchStateProvider);
 
-    return Column(children: [
-      Expanded(
-          child: Row(children: [
-        InkWell(
-            child: const Icon(Icons.gps_not_fixed),
-            onTap: () => presenter.onTapCurrentLocation()),
-        TextFormField(
-          decoration:
-              const InputDecoration(labelText: 'Search around location'),
-          controller: presenter.controller,
-        )
-      ])),
-      /*...model.hits
+    return Row(
+        children: [const Icon(Icons.gps_not_fixed), const Text("atyal;a")]);
+    /*...model.hits
           .map((hit) => InkWell(
               child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
@@ -110,7 +100,6 @@ class LocationSearchByGoogleField extends ConsumerWidget {
           padding: const EdgeInsets.fromLTRB(0, 100, 0, 20),
           child: Text(
               'Origin lon: ${searchState.origin.lon}, lat: ${searchState.origin.lat}')),
-    */
-    ]);
+    ]);*/
   }
 }

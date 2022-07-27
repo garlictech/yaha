@@ -19,10 +19,10 @@ class YahaTextField extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _YahaTextFieldState createState() => _YahaTextFieldState();
+  YahaTextFieldState createState() => YahaTextFieldState();
 }
 
-class _YahaTextFieldState extends State<YahaTextField> {
+class YahaTextFieldState extends State<YahaTextField> {
   FocusNode _focusNode = FocusNode();
   @override
   void initState() {
@@ -62,7 +62,7 @@ class _YahaTextFieldState extends State<YahaTextField> {
         focusNode: _focusNode,
         onTap: _requestFocus,
         keyboardType: TextInputType.text,
-        enableSuggestions: false,
+        enableSuggestions: true,
         autocorrect: false,
         style: const TextStyle(
             fontWeight: FontWeight.w500,
@@ -77,23 +77,8 @@ class _YahaTextFieldState extends State<YahaTextField> {
               color: _focusNode.hasFocus
                   ? YahaColors.primary
                   : YahaColors.textColor),
-          contentPadding: const EdgeInsets.only(left: YahaSpaceSizes.medium),
-          enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(YahaBorderRadius.general),
-              borderSide: const BorderSide(
-                  color: YahaColors.textColor, width: YahaBorderWidth.xSmall)),
-          focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(YahaBorderRadius.general),
-              borderSide: const BorderSide(
-                  color: YahaColors.primary, width: YahaBorderWidth.xSmall)),
-          errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(YahaBorderRadius.general),
-              borderSide: const BorderSide(
-                  color: YahaColors.error, width: YahaBorderWidth.xSmall)),
-          focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(YahaBorderRadius.general),
-              borderSide: const BorderSide(
-                  color: YahaColors.error, width: YahaBorderWidth.xSmall)),
+          contentPadding: const EdgeInsets.only(
+              left: YahaSpaceSizes.medium, bottom: YahaSpaceSizes.small),
           errorStyle: const TextStyle(
               fontSize: YahaFontSizes.xSmall, fontWeight: FontWeight.w500),
         ),

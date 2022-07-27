@@ -1,10 +1,10 @@
 // ignore: file_names
 import 'package:flutter/material.dart';
-import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:yaha/domain/domain.dart';
 import 'package:yaha/ui/presenters/map/map.dart';
 import 'package:yaha/ui/views/poi/widgets/poi-title-list.dart';
-import 'package:yaha/domain/domain.dart';
 
 import '../../../../../app/providers.dart';
 import '../../../poi/poi.dart';
@@ -18,8 +18,6 @@ import 'weather-screen.dart';
 SpeedDial buildSpeedDial() {
   return SpeedDial(
     /// both default to 16
-    marginEnd: 18,
-    marginBottom: 720,
     // animatedIcon: AnimatedIcons.menu_close,
     // animatedIconTheme: IconThemeData(size: 22.0),
     /// This is ignored if animatedIcon is non null
@@ -34,7 +32,7 @@ SpeedDial buildSpeedDial() {
     /// Transition Builder between label and activeLabel, defaults to FadeTransition.
     // labelTransitionBuilder: (widget, animation) => ScaleTransition(scale: animation,child: widget),
     /// The below button size defaults to 56 itself, its the FAB size + It also affects relative padding and other elements
-    buttonSize: 56.0,
+    buttonSize: const Size(56, 56),
     visible: true,
 
     /// If true user is forced to close dial manually
@@ -52,7 +50,7 @@ SpeedDial buildSpeedDial() {
     elevation: 8.0,
     shape: const CircleBorder(),
 
-    orientation: SpeedDialOrientation.Down,
+    direction: SpeedDialDirection.down,
     // childMarginBottom: 2,
     // childMarginTop: 2,
     // gradientBoxShape: BoxShape.rectangle,
@@ -104,62 +102,12 @@ SpeedDial buildSpeedDial() {
   );
 }
 
-class HikeScreenStartHikeButton extends StatelessWidget {
-  const HikeScreenStartHikeButton({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: YahaBoxSizes.buttonHeight,
-      width: YahaBoxSizes.buttonWidthBig,
-      child: ElevatedButton.icon(
-        icon: const Icon(
-          Icons.play_circle_rounded,
-          color: YahaColors.accentColor,
-          size: YahaFontSizes.large,
-        ),
-        onPressed: () {},
-        label: const Text('Start hike',
-            style: TextStyle(
-              fontSize: YahaFontSizes.small,
-              fontWeight: FontWeight.w600,
-            )),
-        style: ElevatedButton.styleFrom(
-          primary: YahaColors.primary,
-          shape: const RoundedRectangleBorder(
-              borderRadius:
-                  BorderRadius.all(Radius.circular(YahaBorderRadius.general))),
-        ),
-      ),
-    );
-  }
-}
-
-class HikeScreenDescription extends StatelessWidget {
-  final String summary;
-
-  const HikeScreenDescription({this.summary = '', Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(
-          top: YahaSpaceSizes.general, bottom: YahaSpaceSizes.general),
-      child: Text(summary,
-          style: const TextStyle(
-              fontSize: YahaFontSizes.small,
-              fontWeight: FontWeight.w400,
-              color: YahaColors.textColor)),
-    );
-  }
-}
-
 class HikeScreen extends ConsumerWidget {
   final Hike hike;
   late final String mapKey;
 
   HikeScreen({Key? key, required this.hike}) : super(key: key) {
-    mapKey = hike.id + 'hike_screen';
+    mapKey = '${hike.id}hike_screen';
   }
 
   @override
@@ -173,7 +121,7 @@ class HikeScreen extends ConsumerWidget {
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: <Widget>[
-          Consumer(builder: (c, ref, _child) {
+          Consumer(builder: (c, ref, child) {
             final imageUrl = ref.watch(imagesAlongHikeNotifierProvider(hike.id)
                 .select((vm) => vm.firstImageUrl));
             final content = Stack(
@@ -218,7 +166,7 @@ class HikeScreen extends ConsumerWidget {
                                 bottom: YahaSpaceSizes.large),
                             height: YahaBoxSizes.heightMedium,
                             width: MediaQuery.of(context).size.width,
-                            child: Consumer(builder: (c, ref, _child) {
+                            child: Consumer(builder: (c, ref, child) {
                               final imageUrls = ref.watch(
                                   imagesAlongHikeNotifierProvider(hike.id)
                                       .select((vm) => vm.imageUrls));
@@ -248,7 +196,7 @@ class HikeScreen extends ConsumerWidget {
                           ],
                         ),
                       ),
-                      Consumer(builder: (c, ref, _child) {
+                      Consumer(builder: (c, ref, child) {
                         final types = ref.watch(
                             poisAlongHikeUsecasesProvider(hike.id)
                                 .select((notifier) => notifier.uniqueTypes));
@@ -277,7 +225,12 @@ class HikeScreen extends ConsumerWidget {
                       Container(
                         padding: const EdgeInsets.all(YahaSpaceSizes.general),
                         width: MediaQuery.of(context).size.width,
-                        child: Consumer(builder: (c, ref, _child) {
+                        decoration: BoxDecoration(
+                          color: YahaColors.accentColor,
+                          borderRadius:
+                              BorderRadius.circular(YahaBorderRadius.general),
+                        ),
+                        child: Consumer(builder: (c, ref, child) {
                           final pois = ref.watch(
                               poisAlongHikeUsecasesProvider(hike.id)
                                   .select((notifier) => notifier.touristicPois))
@@ -285,11 +238,6 @@ class HikeScreen extends ConsumerWidget {
 
                           return PoiTitleList(pois: pois?.take(10).toList());
                         }),
-                        decoration: BoxDecoration(
-                          color: YahaColors.accentColor,
-                          borderRadius:
-                              BorderRadius.circular(YahaBorderRadius.general),
-                        ),
                       ),
                       Container(
                           padding:
@@ -332,6 +280,17 @@ class HikeScreen extends ConsumerWidget {
                           Container(
                             padding:
                                 const EdgeInsets.all(YahaSpaceSizes.medium),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(
+                                    YahaBorderRadius.general),
+                                gradient: LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  colors: [
+                                    Colors.red.shade300,
+                                    Colors.orange.shade300,
+                                  ],
+                                )),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -363,6 +322,10 @@ class HikeScreen extends ConsumerWidget {
                                 ),
                               ],
                             ),
+                          ),
+                          Container(
+                            padding:
+                                const EdgeInsets.all(YahaSpaceSizes.medium),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(
                                     YahaBorderRadius.general),
@@ -370,14 +333,10 @@ class HikeScreen extends ConsumerWidget {
                                   begin: Alignment.topCenter,
                                   end: Alignment.bottomCenter,
                                   colors: [
-                                    Colors.red.shade300,
-                                    Colors.orange.shade300,
+                                    Colors.green.shade100,
+                                    Colors.blue.shade200,
                                   ],
                                 )),
-                          ),
-                          Container(
-                            padding:
-                                const EdgeInsets.all(YahaSpaceSizes.medium),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -409,34 +368,23 @@ class HikeScreen extends ConsumerWidget {
                                 ),
                               ],
                             ),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(
-                                    YahaBorderRadius.general),
-                                gradient: LinearGradient(
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                  colors: [
-                                    Colors.green.shade100,
-                                    Colors.blue.shade200,
-                                  ],
-                                )),
                           ),
                           Container(
                             alignment: Alignment.center,
                             padding: const EdgeInsets.all(YahaSpaceSizes.small),
-                            child: const Text(
-                              'The day of your hike',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: YahaColors.textColor,
-                                  fontSize: YahaFontSizes.small),
-                            ),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(
                                   YahaBorderRadius.general),
                               border: Border.all(
                                   width: YahaBorderWidth.small,
                                   color: YahaColors.textColor),
+                            ),
+                            child: const Text(
+                              'The day of your hike',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: YahaColors.textColor,
+                                  fontSize: YahaFontSizes.small),
                             ),
                           ),
                         ],
@@ -487,6 +435,56 @@ class HikeScreen extends ConsumerWidget {
         ],
       ),
       floatingActionButton: buildSpeedDial(),
+    );
+  }
+}
+
+class HikeScreenDescription extends StatelessWidget {
+  final String summary;
+
+  const HikeScreenDescription({this.summary = '', Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.only(
+          top: YahaSpaceSizes.general, bottom: YahaSpaceSizes.general),
+      child: Text(summary,
+          style: const TextStyle(
+              fontSize: YahaFontSizes.small,
+              fontWeight: FontWeight.w400,
+              color: YahaColors.textColor)),
+    );
+  }
+}
+
+class HikeScreenStartHikeButton extends StatelessWidget {
+  const HikeScreenStartHikeButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: YahaBoxSizes.buttonHeight,
+      width: YahaBoxSizes.buttonWidthBig,
+      child: ElevatedButton.icon(
+        icon: const Icon(
+          Icons.play_circle_rounded,
+          color: YahaColors.accentColor,
+          size: YahaFontSizes.large,
+        ),
+        onPressed: () {},
+        label: const Text('Start hike',
+            style: TextStyle(
+              fontSize: YahaFontSizes.small,
+              fontWeight: FontWeight.w600,
+            )),
+        style: ElevatedButton.styleFrom(
+          primary: YahaColors.primary,
+          shape: const RoundedRectangleBorder(
+              borderRadius:
+                  BorderRadius.all(Radius.circular(YahaBorderRadius.general))),
+        ),
+      ),
     );
   }
 }

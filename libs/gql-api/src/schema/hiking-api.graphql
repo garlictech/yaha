@@ -214,6 +214,13 @@ input SearchByRadiusInput {
   nextToken: String
 }
 
+input SearchByContent {
+  content: String!
+  objectType: GeoSearchableObjectType!
+  limit: Int
+  nextToken: String
+}
+
 input SearchHikeByRadiusInput {
   location: LocationInput!
   radiusInMeters: Float!
@@ -268,6 +275,10 @@ type GeoSearchConnection {
 }
 
 type Query {
+  searchHikeByContent(query: SearchByContentInput!): GeoSearchConnection
+    @auth(rules: [{ allow: public }, { allow: public, provider: iam }])
+    @function(name: "${env}-yaha-amplify-resolvers")
+
   searchByRadius(query: SearchByRadiusInput!): GeoSearchConnection
     @auth(rules: [{ allow: public }, { allow: public, provider: iam }])
     @function(name: "${env}-yaha-amplify-resolvers")

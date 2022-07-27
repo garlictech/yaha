@@ -46,7 +46,6 @@ class HikeRepositoryAmplify implements HikeRepository {
 
   @override
   searchHikeByRadius(SearchHikeByRadiusInput input) async {
-    debugPrint("****** $input");
     String gqlDocument = ''' 
       query SearchHikeByRadius(\$query: SearchHikeByRadiusInput!) {
         searchHikeByRadius(query: \$query) {
@@ -104,6 +103,27 @@ class HikeRepositoryAmplify implements HikeRepository {
       } else {
         return null;
       }
+    });
+  }
+
+  @override
+  searchHikeByContent(String content) async {
+    String gqlDocument = ''' 
+      query SearchHikeByContent() {
+        searchHike(query: \$query) {
+          items
+          nextToken
+          total
+        }
+      }
+    ''';
+
+    var request = GraphQLRequest<String>(document: gqlDocument);
+    var operation = Amplify.API.query(request: request);
+    return operation.response.then((response) {
+      return response.data != null
+          ? List<String>.from(jsonDecode(response.data!)['searchHike']['items'])
+          : [];
     });
   }
 }

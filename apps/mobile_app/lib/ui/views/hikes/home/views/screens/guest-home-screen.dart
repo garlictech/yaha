@@ -8,7 +8,7 @@ import '../../../../shared/shared.dart';
 import '../../../events/screens/event-detail-screen.dart';
 import '../../../events/screens/events.dart';
 import '../../../events/widgets/event-box.dart';
-import '../../../hike/screens/explore-screen.dart';
+import '../../../hike/screens/search_hike_screen.dart';
 import '../../../hike/widgets/horizontal-hike-cards.dart';
 import '../../../personal/screen/challenge-detail-screen.dart';
 import '../../../personal/screen/challenges.dart';
@@ -162,7 +162,7 @@ class HomePageGuest extends ConsumerWidget {
                                 topTitle:
                                     "You don’t have any activities yet. Once you complete a hike, you will see it here.",
                                 bottomTitle: "Isn’t it time you got outside?",
-                                onPressed: ExploreScreen(),
+                                onPressed: SearchHikeScreen(),
                               ),
                             ],
                           ),
@@ -188,7 +188,7 @@ class HomePageGuest extends ConsumerWidget {
                                 topTitle:
                                     "You haven’t started any hikes yet. If you pause a hike you can continue it here.",
                                 bottomTitle: "Isn’t it time you got outside?",
-                                onPressed: ExploreScreen(),
+                                onPressed: SearchHikeScreen(),
                               ),
                             ],
                           ),

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/ui/views/auth/screens/signup-screen.dart';
 import 'package:yaha/ui/views/hikes/events/screens/event-detail-screen.dart';
-import 'package:yaha/ui/views/hikes/hike/screens/explore-screen.dart';
 import 'package:yaha/ui/views/hikes/personal/screen/profile-page.dart';
 import 'package:yaha/ui/views/hikes/personal/screen/settings-screen.dart';
 import 'package:yaha/ui/views/shared/widgets/yaha-colors.dart';
@@ -58,7 +57,6 @@ class _MyAppState extends State<MyApp> {
         '/settings': (context) => const SettingsScreen(),
         '/signup': (context) => const SignupScreen(),
         '/track': (context) => const TrackingScreen(),
-        '/explore': (context) => const ExploreScreen(),
       },
     );
   }

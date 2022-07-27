@@ -111,7 +111,7 @@ export const searchByRadiusResolver =
     );
 
 const normalizeLon = (input: number[]) => {
-  let coordinates = [...input];
+  const coordinates = [...input];
 
   if (coordinates[0] > 180) {
     coordinates[0] = (coordinates[0] % 180) - 180;
@@ -382,6 +382,44 @@ export const searchSafeImagesAroundLocationResolver =
             createdAt: 'desc',
           },
           '_score',
+        ],
+        size: args.query.limit ?? 10,
+        track_total_hits: !args.query.nextToken,
+      },
+      body =>
+        executeQuery(deps)(body, args.query.nextToken, args.query.objectType),
+    );
+
+export const searchByContentResolver =
+  (deps: SearchResolverDeps) =>
+  (
+    args: YahaApi.QuerySearchByRadiusArgs,
+  ): Observable<YahaApi.GeoSearchConnection> =>
+    pipe(
+      {
+        query: {
+          bool: {
+            must: {
+              match_all: {},
+            },
+            filter: {
+              geo_distance: {
+                distance: `${args.query.radiusInMeters / 1000}km`,
+                location: args.query.location,
+              },
+            },
+          },
+        },
+        sort: [
+          {
+            _geo_distance: {
+              location: args.query.location,
+              order: 'asc',
+              unit: 'km',
+              distance_type: 'plane',
+            },
+            createdAt: 'desc',
+          },
         ],
         size: args.query.limit ?? 10,
         track_total_hits: !args.query.nextToken,
