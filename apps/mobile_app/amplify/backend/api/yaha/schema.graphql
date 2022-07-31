@@ -277,41 +277,41 @@ type GeoSearchConnection {
 type Query {
   searchByContent(query: SearchByContentInput!): GeoSearchConnection
     @auth(rules: [{ allow: public }, { allow: public, provider: iam }])
-    @function(name: "${env}-yaha-amplify-resolvers")
+    @function(name: "dev-yaha-amplify-resolvers")
 
   searchByRadius(query: SearchByRadiusInput!): GeoSearchConnection
     @auth(rules: [{ allow: public }, { allow: public, provider: iam }])
-    @function(name: "${env}-yaha-amplify-resolvers")
+    @function(name: "dev-yaha-amplify-resolvers")
 
   searchHikeByRadius(query: SearchHikeByRadiusInput!): GeoSearchConnection
     @auth(rules: [{ allow: public }, { allow: public, provider: iam }])
-    @function(name: "${env}-yaha-amplify-resolvers")
+    @function(name: "dev-yaha-amplify-resolvers")
 
   searchInEnvelope(query: SearchInEnvelopeInput!): GeoSearchConnection
     @auth(rules: [{ allow: public }, { allow: public, provider: iam }])
-    @function(name: "${env}-yaha-amplify-resolvers")
+    @function(name: "dev-yaha-amplify-resolvers")
 
   searchInShape(query: SearchInShapeInput!): GeoSearchConnection
     @auth(rules: [{ allow: public }, { allow: public, provider: iam }])
-    @function(name: "${env}-yaha-amplify-resolvers")
+    @function(name: "dev-yaha-amplify-resolvers")
 
   searchInMultipolygon(query: SearchInMultipolygonInput!): GeoSearchConnection
     @auth(rules: [{ allow: public }, { allow: public, provider: iam }])
-    @function(name: "${env}-yaha-amplify-resolvers")
+    @function(name: "dev-yaha-amplify-resolvers")
 
   searchAroundHike(query: SearchAroundHikeInput!): GeoSearchConnection
     @auth(rules: [{ allow: public }, { allow: public, provider: iam }])
-    @function(name: "${env}-yaha-amplify-resolvers")
+    @function(name: "dev-yaha-amplify-resolvers")
 
   searchSafeImagesAroundHike(
     query: SearchSafeImagesAroundHikeInput!
   ): GeoSearchConnection
     @auth(rules: [{ allow: public }, { allow: public, provider: iam }])
-    @function(name: "${env}-yaha-amplify-resolvers")
+    @function(name: "dev-yaha-amplify-resolvers")
 
   searchSafeImagesAroundLocation(
     query: SearchByRadiusInput!
   ): GeoSearchConnection
     @auth(rules: [{ allow: public }, { allow: public, provider: iam }])
-    @function(name: "${env}-yaha-amplify-resolvers")
+    @function(name: "dev-yaha-amplify-resolvers")
 }

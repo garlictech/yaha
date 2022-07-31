@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Search for a poi in radius: SHOULD FIND poi 1`] = `
+Object {
+  "items": Array [
+    "12-search-poi-in-radius-c86e6484-a2c7-11ec-b909-0242ac120002",
+  ],
+  "total": 1,
+}
+`;
+
+exports[`Search for a poi in radius: SHOULD NOT FIND POI 1`] = `
+Object {
+  "items": Array [],
+  "total": undefined,
+}
+`;

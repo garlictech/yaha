@@ -1,8 +1,8 @@
 import { YahaApi } from '@yaha/gql-api';
 import { tap } from 'rxjs';
-import { searchByRadiusResolver } from './search-resolvers';
+import { searchByContentResolver } from './search-resolvers';
 
-test('All the parameters are specified', done => {
+test('Search in title', done => {
   const deps = {
     osClient: {
       search: jest.fn().mockReturnValue(
@@ -28,10 +28,9 @@ test('All the parameters are specified', done => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } as any;
 
-  searchByRadiusResolver(deps)({
+  searchByContentResolver(deps)({
     query: {
-      location: { lat: 1.0, lon: 2.0 },
-      radiusInMeters: 1200,
+      content: 'CONTENT',
       objectType: YahaApi.GeoSearchableObjectType.hike,
       limit: 3,
       nextToken: '[4]',
@@ -69,10 +68,9 @@ test('Default parameters', done => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } as any;
 
-  searchByRadiusResolver(deps)({
+  searchByContentResolver(deps)({
     query: {
-      location: { lat: 1.0, lon: 2.0 },
-      radiusInMeters: 1200,
+      content: 'CONTENT',
       objectType: YahaApi.GeoSearchableObjectType.hike,
     },
   })

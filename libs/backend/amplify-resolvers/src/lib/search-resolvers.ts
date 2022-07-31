@@ -393,31 +393,20 @@ export const searchSafeImagesAroundLocationResolver =
 export const searchByContentResolver =
   (deps: SearchResolverDeps) =>
   (
-    args: YahaApi.QuerySearchByRadiusArgs,
+    args: YahaApi.QuerySearchByContentArgs,
   ): Observable<YahaApi.GeoSearchConnection> =>
     pipe(
       {
         query: {
-          bool: {
-            must: {
-              match_all: {},
-            },
-            filter: {
-              geo_distance: {
-                distance: `${args.query.radiusInMeters / 1000}km`,
-                location: args.query.location,
-              },
+          match: {
+            'description.title': {
+              query: args.query.content,
+              fuzziness: 'AUTO',
             },
           },
         },
         sort: [
           {
-            _geo_distance: {
-              location: args.query.location,
-              order: 'asc',
-              unit: 'km',
-              distance_type: 'plane',
-            },
             createdAt: 'desc',
           },
         ],

@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Default parameters: RESULT 1`] = `
+Object {
+  "items": Array [
+    "RETURNED_ID",
+  ],
+  "nextToken": undefined,
+  "total": undefined,
+}
+`;
+
+exports[`Default parameters: SEARCH CALLS 1`] = `
+Array [
+  Array [
+    Object {
+      "body": Object {
+        "query": Object {
+          "match": Object {
+            "description.title": "CONTENT",
+          },
+        },
+        "size": 10,
+        "sort": Array [
+          Object {
+            "createdAt": "desc",
+          },
+        ],
+        "track_total_hits": true,
+      },
+      "index": "hike",
+    },
+  ],
+]
+`;
+
+exports[`Search in title: RESULT 1`] = `
+Object {
+  "items": Array [
+    "RETURNED_ID",
+  ],
+  "nextToken": "[12345]",
+  "total": 10,
+}
+`;
+
+exports[`Search in title: SEARCH CALLS 1`] = `
+Array [
+  Array [
+    Object {
+      "body": Object {
+        "query": Object {
+          "match": Object {
+            "description.title": "CONTENT",
+          },
+        },
+        "search_after": Array [
+          4,
+        ],
+        "size": 3,
+        "sort": Array [
+          Object {
+            "createdAt": "desc",
+          },
+        ],
+        "track_total_hits": false,
+      },
+      "index": "hike",
+    },
+  ],
+]
+`;
