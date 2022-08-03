@@ -107,10 +107,10 @@ class HikeRepositoryAmplify implements HikeRepository {
   }
 
   @override
-  searchHikeByContent(String content) async {
+  searchHikeByContent(SearchByContentInput input) async {
     String gqlDocument = ''' 
-      query SearchHikeByContent() {
-        searchHike(query: \$query) {
+      query SearchHikeByContent(\$query: SearchByContentInput!) {
+        searchByContent(query: \$query) {
           items
           nextToken
           total
@@ -118,11 +118,14 @@ class HikeRepositoryAmplify implements HikeRepository {
       }
     ''';
 
-    var request = GraphQLRequest<String>(document: gqlDocument);
+    var request = GraphQLRequest<String>(
+        document: gqlDocument, variables: Map.from({'query': input.toJson()}));
     var operation = Amplify.API.query(request: request);
     return operation.response.then((response) {
+      debugPrint(response.toString());
       return response.data != null
-          ? List<String>.from(jsonDecode(response.data!)['searchHike']['items'])
+          ? List<String>.from(
+              jsonDecode(response.data!)['searchByContent']['items'])
           : [];
     });
   }

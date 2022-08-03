@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../hikes/hike/widgets/hike-card.dart';
+import 'location_search_by_google.dart';
 
-import '../../../shared/shared.dart';
-import '../../../shared/widgets/location_search_by_google.dart';
+import '../shared/shared.dart';
+import 'hike_search_by_content.dart';
 
 class SearchHikeScreen extends ConsumerStatefulWidget {
   const SearchHikeScreen({Key? key}) : super(key: key);
@@ -34,20 +36,39 @@ class SearchHikeScreenState extends ConsumerState<SearchHikeScreen>
 
   @override
   Widget build(BuildContext context) {
+    final searchByContentPresenter =
+        ref.watch(searchByContentPresenterInstance);
+
     return Scaffold(
-      appBar: AppBar(title: TabBar(controller: _tabController, tabs: myTabs)),
-      body: SafeArea(
-        child: Container(
-          padding: const EdgeInsets.only(
-            left: YahaSpaceSizes.general,
-            right: YahaSpaceSizes.general,
-            top: YahaSpaceSizes.small,
-          ),
-          child: TabBarView(controller: _tabController, children: [
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                /*Align(
+        appBar: AppBar(title: TabBar(controller: _tabController, tabs: myTabs)),
+        body: SafeArea(
+            child: Column(children: [
+          Container(
+              height: 80,
+              padding: const EdgeInsets.only(
+                left: YahaSpaceSizes.small,
+                right: YahaSpaceSizes.small,
+                top: YahaSpaceSizes.small,
+              ),
+              child: TabBarView(controller: _tabController, children: const [
+                LocationSearchByGoogleField(),
+                HikeSearchByContentField()
+              ])),
+          Expanded(
+              //padding: const EdgeInsets.all(20),
+              child: ListView(
+                  itemExtent: 230,
+                  children: searchByContentPresenter.hits
+                      .map((hit) => Container(
+                          padding: const EdgeInsets.only(
+                              bottom: 5, left: 5, right: 5),
+                          child: HikeCard(
+                              hike: hit, distanceFromCurrentLocation: 2)))
+                      .toList())),
+        ])));
+  }
+}
+/*Align(
                 alignment: Alignment.centerRight,
                 child: IconButton(
                   iconSize: YahaFontSizes.xxLarge,
@@ -125,59 +146,3 @@ class SearchHikeScreenState extends ConsumerState<SearchHikeScreen>
                   ),
                 ),
               ),*/
-                Container(
-                    //constraints: const BoxConstraints(maxWidth: 400),
-                    padding: const EdgeInsets.only(
-                        bottom: YahaSpaceSizes.general,
-                        top: YahaSpaceSizes.general),
-                    child: const YahaTextField(title: "Search for hike")),
-                const LocationSearchByGoogleField(),
-                /*Expanded(
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.only(bottom: YahaSpaceSizes.medium),
-                    child: SizedBox(
-                      height: YahaBoxSizes.buttonHeight,
-                      width: MediaQuery.of(context).size.width,
-                      child: ElevatedButton.icon(
-                        icon: const Icon(
-                          Icons.search,
-                          color: YahaColors.accentColor,
-                          size: YahaFontSizes.large,
-                        ),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const SearchResultsScreen()));
-                        },
-                        label: const Text('Explore',
-                            style: TextStyle(
-                              fontSize: YahaFontSizes.small,
-                              fontWeight: FontWeight.w600,
-                            )),
-                        style: ElevatedButton.styleFrom(
-                          primary: YahaColors.primary,
-                          shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(YahaBorderRadius.general))),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),*/
-              ],
-            ),
-            Column(
-                mainAxisSize: MainAxisSize.min,
-                children: const [YahaTextField(title: "Search for hike")]),
-          ]),
-        ),
-      ),
-    );
-  }
-}

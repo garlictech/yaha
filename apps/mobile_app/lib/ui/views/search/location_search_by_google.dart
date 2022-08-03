@@ -8,7 +8,6 @@ import 'package:yaha/app/providers.dart';
 import 'package:yaha/domain/domain.dart';
 
 import '/domain/domain.dart' as domain;
-import 'yaha-text-input.dart';
 
 const kGoogleApiKey = "AIzaSyDZjCPlj3vAGrVYfimxRlcKk72F1aoAPxo";
 final places = GoogleMapsPlaces(apiKey: kGoogleApiKey);
