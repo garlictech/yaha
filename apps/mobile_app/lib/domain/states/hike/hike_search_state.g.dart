@@ -17,6 +17,7 @@ abstract class $HikeSearchState {
   int get difficulty;
   int get difficultyIndex;
   Location get origin;
+  List<Hike> get hits;
 
   HikeSearchState copyWith({
     double? lengthMin,
@@ -27,6 +28,7 @@ abstract class $HikeSearchState {
     int? difficulty,
     int? difficultyIndex,
     Location? origin,
+    List<Hike>? hits,
   }) =>
       HikeSearchState(
         lengthMin: lengthMin ?? this.lengthMin,
@@ -37,6 +39,7 @@ abstract class $HikeSearchState {
         difficulty: difficulty ?? this.difficulty,
         difficultyIndex: difficultyIndex ?? this.difficultyIndex,
         origin: origin ?? this.origin,
+        hits: hits ?? this.hits,
       );
 
   HikeSearchState copyUsing(
@@ -50,6 +53,7 @@ abstract class $HikeSearchState {
       this.difficulty,
       this.difficultyIndex,
       this.origin,
+      this.hits,
     );
     mutator(change);
     return HikeSearchState(
@@ -61,12 +65,13 @@ abstract class $HikeSearchState {
       difficulty: change.difficulty,
       difficultyIndex: change.difficultyIndex,
       origin: change.origin,
+      hits: change.hits,
     );
   }
 
   @override
   String toString() =>
-      "HikeSearchState(lengthMin: $lengthMin, lengthMax: $lengthMax, durationMin: $durationMin, durationMax: $durationMax, searchRadius: $searchRadius, difficulty: $difficulty, difficultyIndex: $difficultyIndex, origin: $origin)";
+      "HikeSearchState(lengthMin: $lengthMin, lengthMax: $lengthMax, durationMin: $durationMin, durationMax: $durationMax, searchRadius: $searchRadius, difficulty: $difficulty, difficultyIndex: $difficultyIndex, origin: $origin, hits: $hits)";
 
   @override
   // ignore: avoid_equals_and_hash_code_on_mutable_classes
@@ -80,7 +85,8 @@ abstract class $HikeSearchState {
       searchRadius == other.searchRadius &&
       difficulty == other.difficulty &&
       difficultyIndex == other.difficultyIndex &&
-      origin == other.origin;
+      origin == other.origin &&
+      hits == other.hits;
 
   @override
   // ignore: avoid_equals_and_hash_code_on_mutable_classes
@@ -94,6 +100,7 @@ abstract class $HikeSearchState {
     result = 37 * result + difficulty.hashCode;
     result = 37 * result + difficultyIndex.hashCode;
     result = 37 * result + origin.hashCode;
+    result = 37 * result + hits.hashCode;
     return result;
   }
 }
@@ -108,6 +115,7 @@ class HikeSearchState$Change {
     this.difficulty,
     this.difficultyIndex,
     this.origin,
+    this.hits,
   );
 
   double lengthMin;
@@ -118,6 +126,7 @@ class HikeSearchState$Change {
   int difficulty;
   int difficultyIndex;
   Location origin;
+  List<Hike> hits;
 }
 
 // ignore: avoid_classes_with_only_static_members
@@ -167,5 +176,10 @@ class HikeSearchState$ {
   static final origin = Lens<HikeSearchState, Location>(
     (originContainer) => originContainer.origin,
     (originContainer, origin) => originContainer.copyWith(origin: origin),
+  );
+
+  static final hits = Lens<HikeSearchState, List<Hike>>(
+    (hitsContainer) => hitsContainer.hits,
+    (hitsContainer, hits) => hitsContainer.copyWith(hits: hits),
   );
 }

@@ -22,6 +22,8 @@ class HikeSearchState extends $HikeSearchState {
   final int difficultyIndex;
   @override
   final Location origin;
+  @override
+  final List<Hike> hits;
 
   HikeSearchState(
       {this.lengthMin = 3.0,
@@ -31,6 +33,7 @@ class HikeSearchState extends $HikeSearchState {
       this.searchRadius = 50.0,
       this.difficulty = 1,
       this.difficultyIndex = 0,
+      this.hits = const [],
       this.origin = const Location(lat: 0, lon: 0)});
 }
 
@@ -52,6 +55,8 @@ class HikeSearchStateNotifier extends StateNotifier<HikeSearchState> {
       state = state.copyWith(difficulty: newState, difficultyIndex: index);
 
   updateOrigin(Location newOrigin) => state = state.copyWith(origin: newOrigin);
+
+  updateHits(List<Hike> newHits) => state = state.copyWith(hits: newHits);
 }
 
 final hikeSearchStateProvider =

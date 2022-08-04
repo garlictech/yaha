@@ -9,9 +9,7 @@ import '../shared/widgets/yaha-text-input.dart';
 import '/domain/domain.dart' as domain;
 
 class HikeSearchByContentFieldViewModel {
-  final List<domain.Hike> hits;
-
-  HikeSearchByContentFieldViewModel({required this.hits});
+  HikeSearchByContentFieldViewModel();
 }
 
 class HikeSearchByContentFieldPresenter
@@ -21,17 +19,19 @@ class HikeSearchByContentFieldPresenter
   final Reader read;
 
   HikeSearchByContentFieldPresenter({required this.read})
-      : super(HikeSearchByContentFieldViewModel(hits: [])) {
+      : super(HikeSearchByContentFieldViewModel()) {
     final subject = PublishSubject<String>();
-    final hikeSearchUseCases = read(hikeSearchUsecasesProvider);
 
     _subscription = subject
         .debounceTime(const Duration(seconds: 1))
         .where((text) => text.length > 2)
-        .switchMap((String text) => Stream.fromFuture(
-            hikeSearchUseCases.searchHikesByContent(text, 10)))
-        .doOnData(
-            (hits) => state = HikeSearchByContentFieldViewModel(hits: hits))
+        .switchMap((String text) {
+          final hikeSearchUseCases = read(hikeSearchUsecasesProvider);
+          return Stream.fromFuture(
+              hikeSearchUseCases.searchHikesByContent(text, 10));
+        })
+        .doOnData((hits) =>
+            read(domain.hikeSearchStateProvider.notifier).updateHits(hits))
         .listen(null);
 
     controller.addListener(() {
@@ -58,6 +58,6 @@ class HikeSearchByContentField extends ConsumerWidget {
     final presenter = ref.watch(searchByContentPresenterInstance.notifier);
 
     return YahaTextField(
-        title: "Search for hike", controller: presenter.controller);
+        title: "Search hike", controller: presenter.controller);
   }
 }

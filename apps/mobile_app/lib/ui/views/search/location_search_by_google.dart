@@ -1,12 +1,9 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_webservice/places.dart';
-import 'package:rxdart/rxdart.dart';
 import 'package:yaha/app/providers.dart';
-import 'package:yaha/domain/domain.dart';
-
+import 'package:flutter_typeahead/flutter_typeahead.dart';
+import '../shared/shared.dart';
 import '/domain/domain.dart' as domain;
 
 const kGoogleApiKey = "AIzaSyDZjCPlj3vAGrVYfimxRlcKk72F1aoAPxo";
@@ -14,57 +11,42 @@ final places = GoogleMapsPlaces(apiKey: kGoogleApiKey);
 
 class LocationSearchByGoogleFieldViewModel {
   final List<PlacesSearchResult> hits;
-
   LocationSearchByGoogleFieldViewModel({required this.hits});
 }
 
 class LocationSearchByGoogleFieldPresenter
     extends StateNotifier<LocationSearchByGoogleFieldViewModel> {
-  final controller = TextEditingController();
-  late final StreamSubscription _subscription;
   final Reader read;
 
   LocationSearchByGoogleFieldPresenter({required this.read})
-      : super(LocationSearchByGoogleFieldViewModel(hits: [])) {
-    final subject = PublishSubject<String>();
-    _subscription = subject
-        .debounceTime(const Duration(seconds: 1))
-        .where((text) => text.length > 2)
-        .switchMap((String text) {
-          return Stream.fromFuture(places.searchByText(text));
-        })
-        .map((res) => res.results.toList())
-        .doOnData(
-            (hits) => state = LocationSearchByGoogleFieldViewModel(hits: hits))
-        .listen(null);
+      : super(LocationSearchByGoogleFieldViewModel(hits: []));
 
-    controller.addListener(() {
-      subject.add(controller.text);
-    });
+  getSuggestions(String pattern) {
+    return places.searchByText(pattern).then((response) => response.results);
   }
 
-  onTapHit(Geometry geometry) {
-    state = LocationSearchByGoogleFieldViewModel(hits: []);
-    read(domain.hikeSearchStateProvider.notifier).updateOrigin(domain.Location(
-        lat: geometry.location.lat, lon: geometry.location.lng));
-    debugPrint(geometry.location.lat.toString());
+  suggestionSelected(PlacesSearchResult result) async {
+    final location = result.geometry?.location;
+
+    if (location != null) {
+      await _getHikes(domain.Location(lat: location.lat, lon: location.lng));
+    }
   }
 
-  onTapCurrentLocation() {
-    debugPrint("****");
+  onTapCurrentLocation() async {
     final geoLoc = read(geoLocationRepositoryProvider);
-
-    geoLoc.getCurrentLocation().then((currentLocation) =>
-        read(domain.hikeSearchStateProvider.notifier).updateOrigin(
-            domain.Location(
-                lat: currentLocation.latitude,
-                lon: currentLocation.longitude)));
+    await geoLoc.getCurrentLocation().then((currentLocation) => _getHikes(
+        domain.Location(
+            lat: currentLocation.latitude, lon: currentLocation.longitude)));
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    _subscription.cancel();
+  _getHikes(domain.Location origin) {
+    final searchState = read(domain.hikeSearchStateProvider.notifier);
+    searchState.updateOrigin(origin);
+    final hikeSearchUseCases = read(hikeSearchUsecasesProvider);
+    return hikeSearchUseCases
+        .searchHikesAroundLocation(origin, 500000, 10)
+        .then((hits) => searchState.updateHits(hits));
   }
 }
 
@@ -78,27 +60,42 @@ class LocationSearchByGoogleField extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final model = ref.watch(presenterInstance);
     final presenter = ref.watch(presenterInstance.notifier);
-    final searchState = ref.watch(hikeSearchStateProvider);
 
-    return Row(
-        children: [const Icon(Icons.gps_not_fixed), const Text("atyal;a")]);
-    /*...model.hits
-          .map((hit) => InkWell(
-              child: Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
-                  child: Text(hit.name)),
-              onTap: () {
-                if (hit.geometry != null) {
-                  presenter.onTapHit(hit.geometry!);
-                }
-              }))
-          .toList(),
-      Padding(
-          padding: const EdgeInsets.fromLTRB(0, 100, 0, 20),
-          child: Text(
-              'Origin lon: ${searchState.origin.lon}, lat: ${searchState.origin.lat}')),
-    ]);*/
+    return Row(children: [
+      InkWell(
+          onTap: presenter.onTapCurrentLocation,
+          child: const Icon(Icons.gps_not_fixed)),
+      Expanded(
+          child: TypeAheadField(
+        textFieldConfiguration: const TextFieldConfiguration(
+            autocorrect: false,
+            style: TextStyle(
+                fontWeight: FontWeight.w500,
+                color: YahaColors.textColor,
+                fontSize: YahaFontSizes.small),
+            cursorColor: YahaColors.primary,
+            decoration: InputDecoration(
+                focusColor: YahaColors.military,
+                labelText: "Search hike",
+                labelStyle: TextStyle(color: YahaColors.primary),
+                contentPadding: EdgeInsets.only(
+                    left: YahaSpaceSizes.medium, bottom: YahaSpaceSizes.small),
+                errorStyle: TextStyle(
+                    fontSize: YahaFontSizes.xSmall,
+                    fontWeight: FontWeight.w500))),
+        suggestionsCallback: (pattern) async {
+          return await presenter.getSuggestions(pattern);
+        },
+        itemBuilder: (context, hit) {
+          return ListTile(
+            title: Text((hit as PlacesSearchResult).name),
+          );
+        },
+        onSuggestionSelected: (suggestion) {
+          presenter.suggestionSelected(suggestion as PlacesSearchResult);
+        },
+      ))
+    ]);
   }
 }

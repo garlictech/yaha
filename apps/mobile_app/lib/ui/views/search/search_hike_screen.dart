@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '/domain/domain.dart';
 import '../hikes/hike/widgets/hike-card.dart';
 import 'location_search_by_google.dart';
 
@@ -39,6 +40,8 @@ class SearchHikeScreenState extends ConsumerState<SearchHikeScreen>
     final searchByContentPresenter =
         ref.watch(searchByContentPresenterInstance);
 
+    final searchState = ref.watch(hikeSearchStateProvider);
+
     return Scaffold(
         appBar: AppBar(title: TabBar(controller: _tabController, tabs: myTabs)),
         body: SafeArea(
@@ -58,7 +61,7 @@ class SearchHikeScreenState extends ConsumerState<SearchHikeScreen>
               //padding: const EdgeInsets.all(20),
               child: ListView(
                   itemExtent: 230,
-                  children: searchByContentPresenter.hits
+                  children: searchState.hits
                       .map((hit) => Container(
                           padding: const EdgeInsets.only(
                               bottom: 5, left: 5, right: 5),

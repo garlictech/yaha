@@ -24,7 +24,6 @@ class HikeCard extends ConsumerWidget {
         borderRadius: BorderRadius.circular(YahaBorderRadius.xSmall),
         child: InkWell(
           onTap: () {
-            debugPrint("CLICKED");
             Navigator.push(
                 context,
                 MaterialPageRoute(
