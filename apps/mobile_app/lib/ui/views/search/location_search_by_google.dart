@@ -41,12 +41,7 @@ class LocationSearchByGoogleFieldPresenter
   }
 
   _getHikes(domain.Location origin) {
-    final searchState = read(domain.hikeSearchStateProvider.notifier);
-    searchState.updateOrigin(origin);
-    final hikeSearchUseCases = read(hikeSearchUsecasesProvider);
-    return hikeSearchUseCases
-        .searchHikesAroundLocation(origin, 500000, 10)
-        .then((hits) => searchState.updateHits(hits));
+    read(domain.hikeSearchStateProvider.notifier).searchAroundLocation(origin);
   }
 }
 

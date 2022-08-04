@@ -37,9 +37,6 @@ class SearchHikeScreenState extends ConsumerState<SearchHikeScreen>
 
   @override
   Widget build(BuildContext context) {
-    final searchByContentPresenter =
-        ref.watch(searchByContentPresenterInstance);
-
     final searchState = ref.watch(hikeSearchStateProvider);
 
     return Scaffold(
@@ -58,16 +55,21 @@ class SearchHikeScreenState extends ConsumerState<SearchHikeScreen>
                 HikeSearchByContentField()
               ])),
           Expanded(
-              //padding: const EdgeInsets.all(20),
-              child: ListView(
-                  itemExtent: 230,
-                  children: searchState.hits
-                      .map((hit) => Container(
-                          padding: const EdgeInsets.only(
-                              bottom: 5, left: 5, right: 5),
-                          child: HikeCard(
-                              hike: hit, distanceFromCurrentLocation: 2)))
-                      .toList())),
+            //padding: const EdgeInsets.all(20),
+            child: searchState.searching
+                ? const Center(child: CircularProgressIndicator())
+                : searchState.noHits
+                    ? const Center(child: Text("No hikes"))
+                    : ListView(
+                        itemExtent: 230,
+                        children: searchState.hits
+                            .map((hit) => Container(
+                                padding: const EdgeInsets.only(
+                                    bottom: 5, left: 5, right: 5),
+                                child: HikeCard(
+                                    hike: hit, distanceFromCurrentLocation: 2)))
+                            .toList()),
+          ),
         ])));
   }
 }

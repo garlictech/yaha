@@ -122,7 +122,6 @@ class HikeRepositoryAmplify implements HikeRepository {
         document: gqlDocument, variables: Map.from({'query': input.toJson()}));
     var operation = Amplify.API.query(request: request);
     return operation.response.then((response) {
-      debugPrint(response.toString());
       return response.data != null
           ? List<String>.from(
               jsonDecode(response.data!)['searchByContent']['items'])

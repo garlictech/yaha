@@ -25,13 +25,8 @@ class HikeSearchByContentFieldPresenter
     _subscription = subject
         .debounceTime(const Duration(seconds: 1))
         .where((text) => text.length > 2)
-        .switchMap((String text) {
-          final hikeSearchUseCases = read(hikeSearchUsecasesProvider);
-          return Stream.fromFuture(
-              hikeSearchUseCases.searchHikesByContent(text, 10));
-        })
-        .doOnData((hits) =>
-            read(domain.hikeSearchStateProvider.notifier).updateHits(hits))
+        .doOnData((String text) =>
+            read(domain.hikeSearchStateProvider.notifier).searchInContent(text))
         .listen(null);
 
     controller.addListener(() {
