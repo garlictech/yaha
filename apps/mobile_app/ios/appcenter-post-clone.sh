@@ -10,7 +10,7 @@ curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
 sudo installer -pkg AWSCLIV2.pkg -target /
 
 cd ..
-git clone https://github.com/flutter/flutter.git -b 2.10.5 --depth 1
+git clone https://github.com/flutter/flutter.git -b 3.0.4 --depth 1
 export PATH=`pwd`/flutter/bin:$PATH
 echo "Installed flutter to `pwd`/flutter"
 
@@ -23,6 +23,6 @@ cd ../..
 aws s3 cp s3://yaha-build-artifacts-${APPCENTER_BRANCH}/${ARTIFACT_NAME} .
 tar -zxf ${ARTIFACT_NAME}
 
-cd apps/mobile-app
+cd apps/mobile_app
 flutter build ios --release --no-codesign
 

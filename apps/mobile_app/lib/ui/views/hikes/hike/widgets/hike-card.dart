@@ -21,7 +21,7 @@ class HikeCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       body: ClipRRect(
-        borderRadius: BorderRadius.circular(YahaBorderRadius.poiSmall),
+        borderRadius: BorderRadius.circular(YahaBorderRadius.xSmall),
         child: InkWell(
           onTap: () {
             Navigator.push(
@@ -36,7 +36,7 @@ class HikeCard extends ConsumerWidget {
                 child: ColorFiltered(
                   colorFilter: ColorFilter.mode(
                       Colors.black.withOpacity(0.35), BlendMode.darken),
-                  child: Consumer(builder: (c, ref, _child) {
+                  child: Consumer(builder: (c, ref, child) {
                     final imageUrl = ref.watch(
                         imagesAlongHikeNotifierProvider(hike.id)
                             .select((vm) => vm.firstImageUrl));

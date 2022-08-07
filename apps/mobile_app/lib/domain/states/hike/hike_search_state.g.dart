@@ -17,6 +17,9 @@ abstract class $HikeSearchState {
   int get difficulty;
   int get difficultyIndex;
   Location get origin;
+  List<Hike> get hits;
+  bool get searching;
+  bool get noHits;
 
   HikeSearchState copyWith({
     double? lengthMin,
@@ -27,6 +30,9 @@ abstract class $HikeSearchState {
     int? difficulty,
     int? difficultyIndex,
     Location? origin,
+    List<Hike>? hits,
+    bool? searching,
+    bool? noHits,
   }) =>
       HikeSearchState(
         lengthMin: lengthMin ?? this.lengthMin,
@@ -37,6 +43,9 @@ abstract class $HikeSearchState {
         difficulty: difficulty ?? this.difficulty,
         difficultyIndex: difficultyIndex ?? this.difficultyIndex,
         origin: origin ?? this.origin,
+        hits: hits ?? this.hits,
+        searching: searching ?? this.searching,
+        noHits: noHits ?? this.noHits,
       );
 
   HikeSearchState copyUsing(
@@ -50,6 +59,9 @@ abstract class $HikeSearchState {
       this.difficulty,
       this.difficultyIndex,
       this.origin,
+      this.hits,
+      this.searching,
+      this.noHits,
     );
     mutator(change);
     return HikeSearchState(
@@ -61,12 +73,15 @@ abstract class $HikeSearchState {
       difficulty: change.difficulty,
       difficultyIndex: change.difficultyIndex,
       origin: change.origin,
+      hits: change.hits,
+      searching: change.searching,
+      noHits: change.noHits,
     );
   }
 
   @override
   String toString() =>
-      "HikeSearchState(lengthMin: $lengthMin, lengthMax: $lengthMax, durationMin: $durationMin, durationMax: $durationMax, searchRadius: $searchRadius, difficulty: $difficulty, difficultyIndex: $difficultyIndex, origin: $origin)";
+      "HikeSearchState(lengthMin: $lengthMin, lengthMax: $lengthMax, durationMin: $durationMin, durationMax: $durationMax, searchRadius: $searchRadius, difficulty: $difficulty, difficultyIndex: $difficultyIndex, origin: $origin, hits: $hits, searching: $searching, noHits: $noHits)";
 
   @override
   // ignore: avoid_equals_and_hash_code_on_mutable_classes
@@ -80,7 +95,10 @@ abstract class $HikeSearchState {
       searchRadius == other.searchRadius &&
       difficulty == other.difficulty &&
       difficultyIndex == other.difficultyIndex &&
-      origin == other.origin;
+      origin == other.origin &&
+      hits == other.hits &&
+      searching == other.searching &&
+      noHits == other.noHits;
 
   @override
   // ignore: avoid_equals_and_hash_code_on_mutable_classes
@@ -94,6 +112,9 @@ abstract class $HikeSearchState {
     result = 37 * result + difficulty.hashCode;
     result = 37 * result + difficultyIndex.hashCode;
     result = 37 * result + origin.hashCode;
+    result = 37 * result + hits.hashCode;
+    result = 37 * result + searching.hashCode;
+    result = 37 * result + noHits.hashCode;
     return result;
   }
 }
@@ -108,6 +129,9 @@ class HikeSearchState$Change {
     this.difficulty,
     this.difficultyIndex,
     this.origin,
+    this.hits,
+    this.searching,
+    this.noHits,
   );
 
   double lengthMin;
@@ -118,6 +142,9 @@ class HikeSearchState$Change {
   int difficulty;
   int difficultyIndex;
   Location origin;
+  List<Hike> hits;
+  bool searching;
+  bool noHits;
 }
 
 // ignore: avoid_classes_with_only_static_members
@@ -167,5 +194,21 @@ class HikeSearchState$ {
   static final origin = Lens<HikeSearchState, Location>(
     (originContainer) => originContainer.origin,
     (originContainer, origin) => originContainer.copyWith(origin: origin),
+  );
+
+  static final hits = Lens<HikeSearchState, List<Hike>>(
+    (hitsContainer) => hitsContainer.hits,
+    (hitsContainer, hits) => hitsContainer.copyWith(hits: hits),
+  );
+
+  static final searching = Lens<HikeSearchState, bool>(
+    (searchingContainer) => searchingContainer.searching,
+    (searchingContainer, searching) =>
+        searchingContainer.copyWith(searching: searching),
+  );
+
+  static final noHits = Lens<HikeSearchState, bool>(
+    (noHitsContainer) => noHitsContainer.noHits,
+    (noHitsContainer, noHits) => noHitsContainer.copyWith(noHits: noHits),
   );
 }

@@ -4,11 +4,11 @@ import 'package:yaha/ui/presenters/home/guest-home-screen-presenter.dart';
 import 'package:yaha/domain/states/auth/auth-state.dart';
 import 'package:yaha/domain/states/user/user-state.dart';
 
+import '../../../../search/search_hike_screen.dart';
 import '../../../../shared/shared.dart';
 import '../../../events/screens/event-detail-screen.dart';
 import '../../../events/screens/events.dart';
 import '../../../events/widgets/event-box.dart';
-import '../../../hike/screens/search_hike_screen.dart';
 import '../../../hike/widgets/horizontal-hike-cards.dart';
 import '../../../personal/screen/challenge-detail-screen.dart';
 import '../../../personal/screen/challenges.dart';
