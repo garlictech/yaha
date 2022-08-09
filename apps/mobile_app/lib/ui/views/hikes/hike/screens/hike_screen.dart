@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:yaha/domain/domain.dart';
-import 'package:yaha/ui/presenters/map/map.dart';
 import 'package:yaha/ui/views/poi/widgets/poi-title-list.dart';
 
 import '../../../../../app/providers.dart';
@@ -104,18 +103,12 @@ SpeedDial buildSpeedDial() {
 
 class HikeScreen extends ConsumerWidget {
   final Hike hike;
-  late final String mapKey;
 
-  HikeScreen({Key? key, required this.hike}) : super(key: key) {
-    mapKey = '${hike.id}hike_screen';
-  }
+  const HikeScreen({Key? key, required this.hike}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final mapPresenter = ref.watch(leafletMapMVPProvider(mapKey).notifier);
     final defaults = ref.watch(defaultsProvider);
-    mapPresenter.addHike(hike);
-    mapPresenter.mapCenter = hike.startPoint;
 
     return Scaffold(
       body: CustomScrollView(
@@ -254,7 +247,7 @@ class HikeScreen extends ConsumerWidget {
                           /*child: ClipRRect(
                             borderRadius:
                                 BorderRadius.circular(YahaBorderRadius.general),*/
-                          child: LeafletMap(mapKey: mapKey, hike: hike),
+                          child: LeafletMap(hikes: [hike], pois: const []),
                           //),
                         ),
                       ),

@@ -2,33 +2,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:yaha/ui/presenters/map/leaflet-map-presenter.dart';
 import 'package:collection/collection.dart';
 
 import '../../../../../domain/entities/entities.dart';
+import '../../../../presenters/map/map.dart';
 
 typedef PoiMarkerBuilder = Marker Function(
     BuildContext context, Poi poi, int poiIndex);
 
 class LeafletMap extends ConsumerStatefulWidget {
   final PoiMarkerBuilder? poiMarkerBuilder;
-  final List<Poi>? pois;
-  final Hike? hike;
-  final String mapKey;
+  final List<Poi> pois;
+  final List<Hike> hikes;
 
   const LeafletMap(
       {Key? key,
       this.poiMarkerBuilder,
-      this.pois,
-      required this.mapKey,
-      this.hike})
+      this.pois = const [],
+      this.hikes = const []})
       : super(key: key);
 
   @override
-  _LeafletMapState createState() => _LeafletMapState();
+  LeafletMapState createState() => LeafletMapState();
 }
 
-class _LeafletMapState extends ConsumerState<LeafletMap> {
+class LeafletMapState extends ConsumerState<LeafletMap> {
   MapController? _mapController;
   @override
   void initState() {
@@ -37,14 +35,12 @@ class _LeafletMapState extends ConsumerState<LeafletMap> {
 
   @override
   Widget build(BuildContext context) {
-    final mapCenter = ref.watch(leafletMapMVPProvider(widget.mapKey).select(
-        (md) =>
-            md.mapCenter ??
-            widget.hike?.startPoint ??
-            widget.pois?.first.location ??
-            const Location(lat: 0, lon: 0)));
+    final mapCenter =
+        (widget.hikes.isNotEmpty ? widget.hikes.first.startPoint : null) ??
+            (widget.pois.isNotEmpty ? widget.pois.first.location : null) ??
+            const Location(lat: 0, lon: 0);
 
-    final presenter = ref.watch(leafletMapMVPProvider(widget.mapKey).notifier);
+    final presenter = ref.watch(leafletMapMVPProvider.notifier);
 
     return FlutterMap(
       options: MapOptions(
@@ -67,14 +63,8 @@ class _LeafletMapState extends ConsumerState<LeafletMap> {
   }
 
   Consumer _getHikeLayerWidget() {
-    return Consumer(builder: (c, ref, _child) {
-      final hikes = ref
-          .watch(leafletMapMVPProvider(widget.mapKey).select((md) => md.hikes));
-
-      final mapHikes =
-          hikes.isEmpty ? (widget.hike == null ? [] : [widget.hike]) : hikes;
-
-      final polylines = mapHikes
+    return Consumer(builder: (c, ref, child) {
+      final polylines = widget.hikes
           .map<Polyline>((hike) => Polyline(
               color: const Color(0xAAFF0000),
               strokeWidth: 4,
@@ -91,15 +81,10 @@ class _LeafletMapState extends ConsumerState<LeafletMap> {
   }
 
   _getMarkerLayerWidget() {
-    return Consumer(builder: (c, ref, _child) {
-      final pois = ref
-          .watch(leafletMapMVPProvider(widget.mapKey).select((md) => md.pois));
-
-      final markerPois = pois.isEmpty ? widget.pois : pois;
-
-      final markers = widget.poiMarkerBuilder == null || markerPois == null
+    return Consumer(builder: (c, ref, child) {
+      final markers = widget.poiMarkerBuilder == null
           ? const <Marker>[]
-          : markerPois
+          : widget.pois
               .mapIndexed<Marker>(
                   (index, poi) => widget.poiMarkerBuilder!(context, poi, index))
               .toList();

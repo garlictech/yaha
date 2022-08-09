@@ -6,12 +6,7 @@ part 'leaflet-map-viewmodel.g.dart';
 @FunctionalData()
 class LeafletMapViewmodel extends $LeafletMapViewmodel {
   @override
-  final List<Hike> hikes;
-  @override
-  final List<Poi> pois;
-  @override
   final Location? mapCenter;
 
-  LeafletMapViewmodel(
-      {this.hikes = const [], this.pois = const [], this.mapCenter});
+  LeafletMapViewmodel({this.mapCenter});
 }

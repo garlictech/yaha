@@ -70,7 +70,7 @@ class PoiInfoScreen extends ConsumerWidget {
         slivers: <Widget>[
           Visibility(
             visible: true,
-            child: Consumer(builder: (c, ref, _child) {
+            child: Consumer(builder: (c, ref, child) {
               final imagesOfPoi = ref.watch(imagesOfPoiProvider(poi.id));
               poiIcon() =>
                   SizedBox(height: 240, child: PoiIcon(poiType: poi.poiType));
@@ -85,7 +85,7 @@ class PoiInfoScreen extends ConsumerWidget {
                   );
 
               return imagesOfPoi.when(
-                  error: (_e, _s) =>
+                  error: (e, s) =>
                       YahaSliverAppBar(title: poi.title, content: poiIcon()),
                   loading: () =>
                       YahaSliverAppBar(title: poi.title, content: poiIcon()),
@@ -111,9 +111,10 @@ class PoiInfoScreen extends ConsumerWidget {
                           padding: const EdgeInsets.only(
                               top: YahaSpaceSizes.general),
                           child: SizedBox(
-                              child: PoiIcon(poiType: poi.poiType),
-                              height: 80,
-                              width: 80),
+                            height: 80,
+                            width: 80,
+                            child: PoiIcon(poiType: poi.poiType),
+                          ),
                         ),
                       ),
                       Container(
@@ -199,9 +200,9 @@ class PoiInfoScreen extends ConsumerWidget {
                             borderRadius:
                                 BorderRadius.circular(YahaBorderRadius.general),
                             child: LeafletMap(
-                                mapKey: poi.id,
-                                poiMarkerBuilder: _markerBuilder,
-                                pois: [poi])),
+                              poiMarkerBuilder: _markerBuilder,
+                              pois: [poi],
+                            )),
                       ),
                       Container(
                         padding: const EdgeInsets.only(
@@ -265,11 +266,11 @@ class PoiInfoScreen extends ConsumerWidget {
                           ],
                         ),
                       ),
-                      Consumer(builder: (c, ref, _child) {
+                      Consumer(builder: (c, ref, child) {
                         final imagesOfPoi =
                             ref.watch(imagesOfPoiProvider(poi.id));
                         return imagesOfPoi.when(
-                            error: (_e, _s) => Container(),
+                            error: (e, s) => Container(),
                             loading: () => const CircularProgressIndicator(),
                             data: (imageUrls) => imageUrls.isEmpty
                                 ? Container()
@@ -324,13 +325,13 @@ class PoiInfoScreen extends ConsumerWidget {
 
   get _markerBuilder {
     return (BuildContext context, domain.Poi poi, int index) {
-      const double _markerSize = 40;
+      const double markerSize = 40;
       return Marker(
           point: LatLng(poi.location.lat, poi.location.lon),
-          builder: (BuildContext _c) {
+          builder: (BuildContext c) {
             return SizedBox(
-                height: _markerSize,
-                width: _markerSize,
+                height: markerSize,
+                width: markerSize,
                 child: PhysicalModel(
                     color: Colors.black,
                     shadowColor: Colors.black,

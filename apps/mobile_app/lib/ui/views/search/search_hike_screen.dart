@@ -1,11 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../hikes/map/widgets/leaflet-map.dart';
 import '/domain/domain.dart';
 import '../hikes/hike/widgets/hike-card.dart';
 import 'location_search_by_google.dart';
 
 import '../shared/shared.dart';
 import 'hike_search_by_content.dart';
+
+class SearchHikeScreenFieldViewModel {
+  final bool mapShown;
+  SearchHikeScreenFieldViewModel({this.mapShown = false});
+}
+
+class SearchHikeScreenFieldPresenter
+    extends StateNotifier<SearchHikeScreenFieldViewModel> {
+  final Ref ref;
+  late final dynamic mapPresenter;
+
+  SearchHikeScreenFieldPresenter({required this.ref})
+      : super(SearchHikeScreenFieldViewModel());
+
+  onMapToggle() {
+    state = SearchHikeScreenFieldViewModel(mapShown: !state.mapShown);
+  }
+}
+
+final presenterInstance = StateNotifierProvider<SearchHikeScreenFieldPresenter,
+    SearchHikeScreenFieldViewModel>((ref) {
+  return SearchHikeScreenFieldPresenter(ref: ref);
+});
 
 class SearchHikeScreen extends ConsumerStatefulWidget {
   const SearchHikeScreen({Key? key}) : super(key: key);
@@ -22,6 +46,7 @@ class SearchHikeScreenState extends ConsumerState<SearchHikeScreen>
   ];
 
   late TabController _tabController;
+  late final dynamic mapPresenter;
 
   @override
   void initState() {
@@ -38,6 +63,8 @@ class SearchHikeScreenState extends ConsumerState<SearchHikeScreen>
   @override
   Widget build(BuildContext context) {
     final searchState = ref.watch(hikeSearchStateProvider);
+    final model = ref.watch(presenterInstance);
+    final presenter = ref.watch(presenterInstance.notifier);
 
     return Scaffold(
         appBar: AppBar(title: TabBar(controller: _tabController, tabs: myTabs)),
@@ -50,26 +77,36 @@ class SearchHikeScreenState extends ConsumerState<SearchHikeScreen>
                 right: YahaSpaceSizes.small,
                 top: YahaSpaceSizes.small,
               ),
-              child: TabBarView(controller: _tabController, children: const [
-                LocationSearchByGoogleField(),
-                HikeSearchByContentField()
+              child: Row(children: [
+                Expanded(
+                    child: TabBarView(
+                        controller: _tabController,
+                        children: const [
+                      LocationSearchByGoogleField(),
+                      HikeSearchByContentField()
+                    ])),
+                InkWell(
+                    onTap: presenter.onMapToggle,
+                    child: Icon(model.mapShown ? Icons.list : Icons.map))
               ])),
           Expanded(
-            //padding: const EdgeInsets.all(20),
-            child: searchState.searching
-                ? const Center(child: CircularProgressIndicator())
-                : searchState.noHits
-                    ? const Center(child: Text("No hikes"))
-                    : ListView(
-                        itemExtent: 230,
-                        children: searchState.hits
-                            .map((hit) => Container(
-                                padding: const EdgeInsets.only(
-                                    bottom: 5, left: 5, right: 5),
-                                child: HikeCard(
-                                    hike: hit, distanceFromCurrentLocation: 2)))
-                            .toList()),
-          ),
+              //padding: const EdgeInsets.all(20),
+              child: searchState.searching
+                  ? const Center(child: CircularProgressIndicator())
+                  : searchState.noHits
+                      ? const Center(child: Text("No hikes"))
+                      : model.mapShown
+                          ? LeafletMap(hikes: searchState.hits)
+                          : ListView(
+                              itemExtent: 230,
+                              children: searchState.hits
+                                  .map((hit) => Container(
+                                      padding: const EdgeInsets.only(
+                                          bottom: 5, left: 5, right: 5),
+                                      child: HikeCard(
+                                          hike: hit,
+                                          distanceFromCurrentLocation: 2)))
+                                  .toList())),
         ])));
   }
 }

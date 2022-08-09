@@ -21,10 +21,10 @@ class PoisOfHikeMap extends ConsumerStatefulWidget {
   const PoisOfHikeMap({Key? key, required this.hike}) : super(key: key);
 
   @override
-  _PoisOfHikeMapState createState() => _PoisOfHikeMapState();
+  PoisOfHikeMapState createState() => PoisOfHikeMapState();
 }
 
-class _PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
+class PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
     with SingleTickerProviderStateMixin {
   late PageController _pageViewController;
 
@@ -59,8 +59,7 @@ class _PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
             .select((notifier) => notifier.touristicPoisSortedByDistance))
         .first;
 
-    final mapPresenter =
-        ref.watch(leafletMapMVPProvider(widget.hike.id).notifier);
+    final mapPresenter = ref.watch(leafletMapMVPProvider.notifier);
 
     _cardHeight = (MediaQuery.of(context).orientation == Orientation.landscape)
         ? 90
@@ -85,13 +84,13 @@ class _PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
                       : 0.8);
 
           markerBuilder(BuildContext context, Poi poi, int index) {
-            final double _markerSize = _currentSelectedIndex == index ? 40 : 25;
+            final double markerSize = _currentSelectedIndex == index ? 40 : 25;
 
             return Marker(
-                height: _markerSize,
-                width: _markerSize,
+                height: markerSize,
+                width: markerSize,
                 point: LatLng(poi.location.lat, poi.location.lon),
-                builder: (BuildContext _c) {
+                builder: (BuildContext c) {
                   return GestureDetector(
                     onTap: () {
                       if (_currentSelectedIndex != index) {
@@ -128,9 +127,8 @@ class _PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
                       ),
                     ),
                     LeafletMap(
-                        mapKey: widget.hike.id,
                         poiMarkerBuilder: markerBuilder,
-                        hike: widget.hike,
+                        hikes: [widget.hike],
                         pois: pois),
                     Align(
                       alignment: Alignment.bottomCenter,
@@ -235,7 +233,6 @@ class _PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
     /// center and the marker itself should not move to the center of the maps.
     if (_canUpdateFocalLatLng) {
       mapPresenter.mapCenter = pois[_currentSelectedIndex].location;
-      mapPresenter.replacePois(pois);
     }
 
     /// Updating the design of the selected marker. Please check the
