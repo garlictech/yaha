@@ -18,11 +18,11 @@ class PoiIconList extends ConsumerWidget {
           .map((type) => Tooltip(
               message: type.kind.replaceAll('_', ' '),
               child: SizedBox(
+                  height: 40,
+                  width: 40,
                   child: PoiIcon(
                     poiType: type,
-                  ),
-                  height: 40,
-                  width: 40)))
+                  ))))
           .toList();
     }
     return Wrap(

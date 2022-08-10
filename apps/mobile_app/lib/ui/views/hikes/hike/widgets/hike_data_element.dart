@@ -20,10 +20,13 @@ class HikeDataElement extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(YahaSpaceSizes.small),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(YahaBorderRadius.general),
+          border: Border.all(width: 4.0, color: color)),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Icon(icon, size: YahaIconSizes.large, color: color),
+          Expanded(child: Icon(icon, size: YahaIconSizes.large, color: color)),
           Text(value,
               style: TextStyle(
                   fontSize: YahaFontSizes.small,
@@ -36,9 +39,6 @@ class HikeDataElement extends StatelessWidget {
                   color: color)),
         ],
       ),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(YahaBorderRadius.general),
-          border: Border.all(width: 4.0, color: color)),
     );
   }
 }

@@ -151,43 +151,36 @@ class HikeScreen extends ConsumerWidget {
                   child: Column(
                     children: [
                       const HikeScreenStartHikeButton(),
+                      const HikeScreenShowOutlineButton(),
                       HikeScreenDescription(
                           summary: hike.description.first.summary ?? ''),
-                      UnconstrainedBox(
-                        child: Container(
-                            margin: const EdgeInsets.only(
-                                bottom: YahaSpaceSizes.large),
-                            height: YahaBoxSizes.heightMedium,
-                            width: MediaQuery.of(context).size.width,
-                            child: Consumer(builder: (c, ref, child) {
-                              final imageUrls = ref.watch(
-                                  imagesAlongHikeNotifierProvider(hike.id)
-                                      .select((vm) => vm.imageUrls));
+                      Container(
+                          margin: const EdgeInsets.only(
+                              bottom: YahaSpaceSizes.large),
+                          height: YahaBoxSizes.heightMedium,
+                          width: MediaQuery.of(context).size.width,
+                          child: Consumer(builder: (c, ref, child) {
+                            final imageUrls = ref.watch(
+                                imagesAlongHikeNotifierProvider(hike.id)
+                                    .select((vm) => vm.imageUrls));
 
-                              return GalleryWidget(
-                                  key: UniqueKey(), imageUrls: imageUrls);
-                            })),
-                      ),
+                            return GalleryWidget(
+                                key: UniqueKey(), imageUrls: imageUrls);
+                          })),
                       HikeProperties(
                           hike: hike,
                           averageSpeedKmh: defaults.averageSpeedKmh),
                       Container(
+                        width: double.infinity,
                         padding: const EdgeInsets.only(
                             top: YahaSpaceSizes.small,
                             bottom: YahaSpaceSizes.medium),
-                        child: Column(
-                          children: const [
-                            SizedBox(
-                              width: double.infinity,
-                              child: Text('Things on route',
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                      fontSize: YahaFontSizes.medium,
-                                      fontWeight: FontWeight.w600,
-                                      color: YahaColors.textColor)),
-                            ),
-                          ],
-                        ),
+                        child: const Text('Things on route',
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                                fontSize: YahaFontSizes.medium,
+                                fontWeight: FontWeight.w600,
+                                color: YahaColors.textColor)),
                       ),
                       Consumer(builder: (c, ref, child) {
                         final types = ref.watch(
@@ -238,18 +231,16 @@ class HikeScreen extends ConsumerWidget {
                           child: ShowMoreButton(
                             nextScreen: PlacesOnRouteScreen(hike: hike),
                           )),
-                      UnconstrainedBox(
-                        child: Container(
-                          padding:
-                              const EdgeInsets.only(top: YahaSpaceSizes.large),
-                          height: 340,
-                          width: MediaQuery.of(context).size.width,
-                          /*child: ClipRRect(
+                      Container(
+                        padding:
+                            const EdgeInsets.only(top: YahaSpaceSizes.large),
+                        height: 340,
+                        width: MediaQuery.of(context).size.width,
+                        /*child: ClipRRect(
                             borderRadius:
                                 BorderRadius.circular(YahaBorderRadius.general),*/
-                          child: LeafletMap(hikes: [hike], pois: const []),
-                          //),
-                        ),
+                        child: LeafletMap(hikes: [hike], pois: const []),
+                        //),
                       ),
                       Container(
                         padding:
@@ -383,41 +374,6 @@ class HikeScreen extends ConsumerWidget {
                         ],
                       ),
                       const ShowMoreButton(nextScreen: WeatherScreen()),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            top: YahaSpaceSizes.large,
-                            bottom: YahaSpaceSizes.general),
-                        child: SizedBox(
-                          height: YahaBoxSizes.buttonHeight,
-                          width: YahaBoxSizes.buttonWidthBig,
-                          child: ElevatedButton.icon(
-                            icon: const Icon(
-                              Icons.timeline,
-                              color: YahaColors.accentColor,
-                              size: YahaFontSizes.large,
-                            ),
-                            onPressed: () {
-                              Navigator.of(context).push(
-                                  MaterialPageRoute<dynamic>(
-                                      builder: (BuildContext context) {
-                                return const HikeOutlineScreen();
-                              }));
-                            },
-                            label: const Text('Hike outline',
-                                style: TextStyle(
-                                  fontSize: YahaFontSizes.small,
-                                  fontWeight: FontWeight.w600,
-                                )),
-                            style: ElevatedButton.styleFrom(
-                              primary: YahaColors.primary,
-                              shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(
-                                      Radius.circular(
-                                          YahaBorderRadius.general))),
-                            ),
-                          ),
-                        ),
-                      ),
                     ],
                   ),
                 );
@@ -447,6 +403,46 @@ class HikeScreenDescription extends StatelessWidget {
               fontSize: YahaFontSizes.small,
               fontWeight: FontWeight.w400,
               color: YahaColors.textColor)),
+    );
+  }
+}
+
+class HikeScreenShowOutlineButton extends StatelessWidget {
+  const HikeScreenShowOutlineButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(
+          top: YahaSpaceSizes.large, bottom: YahaSpaceSizes.general),
+      child: SizedBox(
+        height: YahaBoxSizes.buttonHeight,
+        width: YahaBoxSizes.buttonWidthBig,
+        child: ElevatedButton.icon(
+          icon: const Icon(
+            Icons.timeline,
+            color: YahaColors.accentColor,
+            size: YahaFontSizes.large,
+          ),
+          onPressed: () {
+            Navigator.of(context).push(
+                MaterialPageRoute<dynamic>(builder: (BuildContext context) {
+              return const HikeOutlineScreen();
+            }));
+          },
+          label: const Text('Hike outline',
+              style: TextStyle(
+                fontSize: YahaFontSizes.small,
+                fontWeight: FontWeight.w600,
+              )),
+          style: ElevatedButton.styleFrom(
+            primary: YahaColors.primary,
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
+                    Radius.circular(YahaBorderRadius.general))),
+          ),
+        ),
+      ),
     );
   }
 }

@@ -5,24 +5,24 @@ import 'package:toggle_switch/toggle_switch.dart';
 import 'package:yaha/domain/domain.dart';
 
 import '../../../shared/shared.dart';
-import 'search-results-screen.dart';
 
-class HikeFilterPage extends ConsumerWidget {
-  const HikeFilterPage({Key? key}) : super(key: key);
+class HikeFilters extends ConsumerWidget {
+  const HikeFilters({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var filterSettingsStateNotifier =
         ref.watch(hikeSearchStateProvider.notifier);
     var filterSettingsState = ref.watch(hikeSearchStateProvider);
-    SfRangeValues _lengthValues = SfRangeValues(
+    SfRangeValues lengthValues = SfRangeValues(
         filterSettingsState.lengthMin, filterSettingsState.lengthMax);
-    SfRangeValues _durationValues = SfRangeValues(
+    SfRangeValues durationValues = SfRangeValues(
         filterSettingsState.durationMin, filterSettingsState.durationMax);
 
-    double _durationValue = filterSettingsState.searchRadius;
+    double durationValue = filterSettingsState.searchRadius;
 
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         Container(
           padding: const EdgeInsets.only(
@@ -53,7 +53,7 @@ class HikeFilterPage extends ConsumerWidget {
             showLabels: false,
             enableTooltip: true,
             minorTicksPerInterval: 1,
-            values: _lengthValues,
+            values: lengthValues,
             onChanged: (dynamic value) {
               filterSettingsStateNotifier.updateLength(value.start, value.end);
             },
@@ -87,7 +87,7 @@ class HikeFilterPage extends ConsumerWidget {
             showLabels: false,
             enableTooltip: true,
             minorTicksPerInterval: 1,
-            values: _durationValues,
+            values: durationValues,
             onChanged: (dynamic value) {
               filterSettingsStateNotifier.updateDuration(
                   value.start, value.end);
@@ -117,7 +117,7 @@ class HikeFilterPage extends ConsumerWidget {
           child: SfSlider(
             min: 0.0,
             max: 100.0,
-            value: _durationValue,
+            value: durationValue,
             interval: 20,
             showTicks: false,
             showLabels: false,
@@ -174,35 +174,7 @@ class HikeFilterPage extends ConsumerWidget {
             },
           ),
         ),
-        Container(
-          padding: const EdgeInsets.only(bottom: YahaSpaceSizes.large),
-          child: SizedBox(
-            height: YahaBoxSizes.buttonHeight,
-            width: YahaBoxSizes.buttonWidthBig,
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const SearchResultsScreen()));
-              },
-              child: const Text('Show results',
-                  style: TextStyle(
-                    fontSize: YahaFontSizes.small,
-                    fontWeight: FontWeight.w600,
-                  )),
-              style: ElevatedButton.styleFrom(
-                primary: YahaColors.primary,
-                shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(
-                        Radius.circular(YahaBorderRadius.general))),
-              ),
-            ),
-          ),
-        ),
       ],
     );
   }
 }
-
-void setState(Null Function() param0) {}

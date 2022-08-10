@@ -3,6 +3,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:collection/collection.dart';
+import '/app/geolocation-providers.dart';
 
 import '../../../../../domain/entities/entities.dart';
 import '../../../../presenters/map/map.dart';
@@ -37,10 +38,18 @@ class LeafletMapState extends ConsumerState<LeafletMap> {
   Widget build(BuildContext context) {
     final mapCenter =
         (widget.hikes.isNotEmpty ? widget.hikes.first.startPoint : null) ??
-            (widget.pois.isNotEmpty ? widget.pois.first.location : null) ??
-            const Location(lat: 0, lon: 0);
-
+            (widget.pois.isNotEmpty ? widget.pois.first.location : null);
     final presenter = ref.watch(leafletMapMVPProvider.notifier);
+
+    if (mapCenter == null) {
+      ref
+          .read(geoLocationRepositoryProvider)
+          .getCurrentLocation()
+          .then((currentLocation) {
+        presenter.mapCenter = Location(
+            lat: currentLocation.latitude, lon: currentLocation.longitude);
+      });
+    }
 
     return FlutterMap(
       options: MapOptions(
@@ -48,7 +57,7 @@ class LeafletMapState extends ConsumerState<LeafletMap> {
             _mapController = ctr;
             presenter.mapController = ctr;
           },
-          center: LatLng(mapCenter.lat, mapCenter.lon),
+          center: LatLng(mapCenter?.lat ?? 0, mapCenter?.lon ?? 0),
           zoom: _mapController?.zoom ?? 12),
       children: <Widget>[
         TileLayerWidget(

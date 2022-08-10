@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../hikes/hike/screens/hike-filter-screen.dart';
 import '../hikes/map/widgets/leaflet-map.dart';
-import '/domain/domain.dart';
+import '/domain/domain.dart' as domain;
 import '../hikes/hike/widgets/hike-card.dart';
 import 'location_search_by_google.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import '../shared/shared.dart';
 import 'hike_search_by_content.dart';
@@ -62,7 +64,7 @@ class SearchHikeScreenState extends ConsumerState<SearchHikeScreen>
 
   @override
   Widget build(BuildContext context) {
-    final searchState = ref.watch(hikeSearchStateProvider);
+    final searchState = ref.watch(domain.hikeSearchStateProvider);
     final model = ref.watch(presenterInstance);
     final presenter = ref.watch(presenterInstance.notifier);
 
@@ -85,9 +87,20 @@ class SearchHikeScreenState extends ConsumerState<SearchHikeScreen>
                       LocationSearchByGoogleField(),
                       HikeSearchByContentField()
                     ])),
-                InkWell(
-                    onTap: presenter.onMapToggle,
-                    child: Icon(model.mapShown ? Icons.list : Icons.map))
+                IconButton(
+                    onPressed: presenter.onMapToggle,
+                    icon: Icon(model.mapShown ? Icons.list : Icons.map)),
+                IconButton(
+                    onPressed: () {
+                      showMaterialModalBottomSheet(
+                        context: context,
+                        builder: (context) => const HikeFilters(),
+                      );
+                    },
+                    icon: Image.asset(
+                      'assets/images/filter-icon.png',
+                      width: YahaIconSizes.small,
+                    )),
               ])),
           Expanded(
               //padding: const EdgeInsets.all(20),
@@ -110,81 +123,3 @@ class SearchHikeScreenState extends ConsumerState<SearchHikeScreen>
         ])));
   }
 }
-/*Align(
-                alignment: Alignment.centerRight,
-                child: IconButton(
-                  iconSize: YahaFontSizes.xxLarge,
-                  icon: Image.asset(
-                    'assets/images/filter-icon.png',
-                    width: YahaIconSizes.medium,
-                  ),
-                  onPressed: () => showBarModalBottomSheet(
-                    expand: false,
-                    useRootNavigator: true,
-                    context: context,
-                    builder: (context) {
-                      return SingleChildScrollView(
-                        controller: ModalScrollController.of(context),
-                        child: Container(
-                          color: YahaColors.accentColor,
-                          child: Column(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.only(
-                                  left: YahaSpaceSizes.medium,
-                                  right: YahaSpaceSizes.general,
-                                ),
-                                color: YahaColors.accentColor,
-                                child: Stack(
-                                  alignment: Alignment.center,
-                                  children: [
-                                    Align(
-                                      alignment: Alignment.centerLeft,
-                                      child: TextButton(
-                                        onPressed: () {},
-                                        style: TextButton.styleFrom(
-                                          primary:
-                                              YahaColors.secondaryAccentColor,
-                                        ),
-                                        child: const Text("Reset"),
-                                      ),
-                                    ),
-                                    const Align(
-                                      alignment: Alignment.center,
-                                      child: Text(
-                                        "Filters",
-                                        style: TextStyle(
-                                          fontSize: YahaFontSizes.small,
-                                          fontWeight: FontWeight.w600,
-                                          color: YahaColors.textColor,
-                                        ),
-                                      ),
-                                    ),
-                                    Align(
-                                      alignment: Alignment.centerRight,
-                                      child: InkWell(
-                                        onTap: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: const Icon(
-                                          Icons.close_outlined,
-                                          color:
-                                              YahaColors.secondaryAccentColor,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                color: YahaColors.background,
-                                child: const HikeFilterPage(),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ),*/

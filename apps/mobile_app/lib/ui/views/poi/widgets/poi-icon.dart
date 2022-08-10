@@ -7,7 +7,7 @@ import '../../shared/shared.dart';
 class PoiIcon extends StatelessWidget {
   final PoiType poiType;
 
-  PoiIcon({
+  const PoiIcon({
     Key? key,
     required this.poiType,
   }) : super(key: key);
@@ -23,11 +23,12 @@ class PoiIcon extends StatelessWidget {
 
     return Container(
         //padding: const EdgeInsets.all(3),
-        child: svgPicture,
         decoration: BoxDecoration(
             color: color,
             shape: BoxShape.circle,
-            border: Border.all(width: YahaBorderRadius.xSmall, color: color)));
+            border: Border.all(width: YahaBorderRadius.xSmall, color: color)),
+        //padding: const EdgeInsets.all(3),
+        child: svgPicture);
   }
 
   static const _colorMap = {
