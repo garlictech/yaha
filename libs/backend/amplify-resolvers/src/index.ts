@@ -7,4 +7,6 @@ export {
   searchAroundHikeResolver,
   searchSafeImagesAroundHikeResolver,
   searchSafeImagesAroundLocationResolver,
+  searchHikeByRadiusResolver,
+  searchByContentResolver,
 } from './lib/search-resolvers';

@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { createConnector } = require('aws-elasticsearch-js');
 import { Client } from '@elastic/elasticsearch';
 import { AmplifyApiConfig, getGraphqlSdkForIAM, YahaApi } from '@yaha/gql-api';
@@ -5,7 +6,7 @@ import { delay, forkJoin, switchMap, tap } from 'rxjs';
 import * as R from 'ramda';
 import * as hikeFixtureRaw from './hike-fixture.json';
 import { SearchResolverDeps } from '@yaha/backend/amplify-resolvers';
-import { searchHikeByRadiusResolver } from 'libs/backend/amplify-resolvers/src/lib/search-resolvers';
+import { searchHikeByRadiusResolver } from '@yaha/backend/amplify-resolvers';
 
 const hikeId = '12-search-hike-in-radius-c86e6484-a2c7-11ec-b909-0242ac120002';
 
@@ -43,7 +44,7 @@ test('Search for a hike in radius', done => {
     .CreateHike({ input: hikeFixture })
     .pipe(
       delay(3000),
-      switchMap(hike =>
+      switchMap(() =>
         searchHikeByRadiusResolver(deps)({
           query: {
             location: {

@@ -1,11 +1,11 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { createConnector } = require('aws-elasticsearch-js');
 import { AmplifyApiConfig, getGraphqlSdkForIAM, YahaApi } from '@yaha/gql-api';
 import { delay, forkJoin, switchMap, tap } from 'rxjs';
 import * as R from 'ramda';
-import { TextualDescriptionType } from 'libs/gql-api/src/lib/generated/yaha-api';
 import { SearchResolverDeps } from '@yaha/backend/amplify-resolvers';
 import { Client } from '@elastic/elasticsearch';
-import { searchByContentResolver } from 'libs/backend/amplify-resolvers/src/lib/search-resolvers';
+import { searchByContentResolver } from '@yaha/backend/amplify-resolvers';
 
 const poiId = '12-search-poi-in-radius-c86e6484-a2c7-11ec-b909-0242ac120002';
 
@@ -40,12 +40,12 @@ test('Search for a poi in radius', done => {
         description: [
           {
             languageKey: 'en_US',
-            type: TextualDescriptionType.markdown,
+            type: YahaApi.TextualDescriptionType.markdown,
             title: 'foobar',
           },
           {
             languageKey: 'hu_HU',
-            type: TextualDescriptionType.markdown,
+            type: YahaApi.TextualDescriptionType.markdown,
             title: 'THIS IS A FOOBAR',
           },
         ],
