@@ -1,45 +1,102 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/app/providers.dart';
-import 'package:async/async.dart';
+import 'package:yaha/domain/services/poi-utility-services.dart';
+import 'package:dartz/dartz.dart';
+import 'package:yaha/domain/domain.dart';
 
-import '../../entities/entities.dart';
+final poisAroundHikeProvider =
+    FutureProvider.family<List<PoiOfHike>, String>((ref, hikeId) async {
+  final defaults = ref.read(defaultsProvider);
+  final poiUtilities = ref.read(poiUtilityServicesProvider);
+  return poiUtilities
+      .getPoisOfHike(hikeId, defaults.bigGeoBufferSizeInMeters)
+      .last;
+});
 
-abstract class PoiUsecases {
-  Stream<List<Poi>> getPoisAlongHike(String hikeId);
-  Stream<List<Poi>> getPoisAroundHike(String hikeId);
-}
+final poisAlongHikeProvider =
+    FutureProvider.family<List<PoiOfHike>, String>((ref, hikeId) async {
+  final defaults = ref.read(defaultsProvider);
+  final poiUtilities = ref.read(poiUtilityServicesProvider);
+  return poiUtilities
+      .getPoisOfHike(hikeId, defaults.smallGeoBufferSizeInMeters)
+      .last;
+});
 
-class PoiUsecasesImpl implements PoiUsecases {
-  final ProviderReference ref;
+final endPointsOfHikeProvider =
+    FutureProvider.family<Tuple2<PoiOfHike, PoiOfHike>, String>(
+        (ref, hikeId) async {
+  final hike = await ref.read(hikeProvider(hikeId).future);
 
-  PoiUsecasesImpl({required this.ref});
+  final start = PoiOfHike(
+      poi: Poi(
+          id: "${hikeId}_STARTPOI",
+          location: hike.startPoint,
+          elevation: hike.route.coordinates.first[2],
+          type: "yaha:start_hike",
+          description: [
+            TextualDescription(
+                languageKey: "en_US", type: "markdown", title: "Start hike")
+          ]),
+      hike: hike,
+      ref: ref);
 
-  @override
-  getPoisAlongHike(String hikeId) {
-    final defaults = ref.read(defaultsProvider);
-    return _getPoisOfHike(hikeId, defaults.smallGeoBufferSizeInMeters);
+  final end = PoiOfHike(
+      poi: Poi(
+          id: "${hikeId}_ENDPOI",
+          location: hike.endPoint,
+          type: "yaha:finish_hike",
+          elevation: hike.route.coordinates.last[2],
+          description: [
+            TextualDescription(
+                languageKey: "en_US", type: "markdown", title: "Finish hike")
+          ]),
+      hike: hike,
+      ref: ref);
+
+  return Tuple2(start, end);
+});
+
+final touristicPoisAlongHikeProvider =
+    FutureProvider.family<List<PoiOfHike>, String>((ref, hikeId) async {
+  final poisAlongHike = await ref.watch(poisAlongHikeProvider(hikeId).future);
+  return PoiUtils.selectTouristicPois<PoiOfHike>(poisAlongHike);
+});
+
+final touristicPoisAlongHikeWithYahaPoisProvider =
+    FutureProvider.family<List<PoiOfHike>, String>((ref, hikeId) async {
+  final poisAlongHike = await ref
+      .watch(touristicPoisAlongHikeSortedByDistanceProvider(hikeId).future);
+  final endPoints = await ref.watch(endPointsOfHikeProvider(hikeId).future);
+  return [
+    endPoints.value1,
+    ...PoiUtils.selectTouristicPois<PoiOfHike>(poisAlongHike),
+    endPoints.value2
+  ];
+});
+
+final randomTouristicPoisAlongHikeProvider =
+    FutureProvider.family<List<PoiOfHike>, String>((ref, hikeId) async {
+  final poisAlongHike =
+      await ref.watch(touristicPoisAlongHikeProvider(hikeId).future);
+  final copiedPois = [...poisAlongHike];
+  copiedPois.shuffle();
+  return copiedPois.take(10).toList();
+});
+
+final touristicPoisAlongHikeSortedByDistanceProvider =
+    FutureProvider.family<List<PoiOfHike>, String>((ref, hikeId) async {
+  final poisAlongHike =
+      await ref.watch(touristicPoisAlongHikeProvider(hikeId).future);
+  List<Tuple2<double, PoiOfHike>> forSorting = [];
+
+  for (var poi in poisAlongHike) {
+    final val = await poi.distanceFromStart;
+    forSorting.add(Tuple2(val, poi));
   }
 
-  @override
-  getPoisAroundHike(String hikeId) {
-    final defaults = ref.read(defaultsProvider);
-    return _getPoisOfHike(hikeId, defaults.bigGeoBufferSizeInMeters);
-  }
+  forSorting.sort((a, b) {
+    return a.value1.compareTo(b.value1);
+  });
 
-  Stream<List<Poi>> _getPoisOfHike(
-      String hikeId, double distanceInMeters) async* {
-    final poiRepo = ref.read(poiRepositoryProvider);
-
-    var poiChunks = poiRepo.searchPoisAroundHike(SearchAroundHikeInput(
-        objectType: 'poi', hikeId: hikeId, distanceInMeters: distanceInMeters));
-
-    await for (final pois in poiChunks) {
-      final futureGroup = FutureGroup<Poi?>();
-      fv(r) => futureGroup.add(poiRepo.getPoi(r));
-      pois.forEach(fv);
-      futureGroup.close();
-      yield await futureGroup.future
-          .then((pois) => pois.whereType<Poi>().toList());
-    }
-  }
-}
+  return forSorting.map((t) => t.value2).toList();
+});

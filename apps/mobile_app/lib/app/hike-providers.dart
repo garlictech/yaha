@@ -15,3 +15,13 @@ final bestHikesNearbyProvider = FutureProvider<List<Hike>>((ref) async {
 final bestHikesOfTheWorldProvider = FutureProvider<List<Hike>>((ref) async {
   return ref.read(hikeRepositoryProvider).getHikeList();
 });
+
+final hikeProvider = FutureProvider.family<Hike, String>((ref, hikeId) async {
+  return ref.read(hikeRepositoryProvider).getHike(hikeId).then((hike) {
+    if (hike == null) {
+      throw Exception("Hike not found");
+    }
+
+    return hike;
+  });
+});

@@ -8,7 +8,6 @@ import 'package:yaha/ui/views/poi/widgets/poi-icon.dart';
 import 'package:yaha/ui/views/poi/widgets/poi_list_item.dart';
 import 'package:yaha/domain/domain.dart' as domain;
 import 'package:yaha/domain/entities/poi/poi_entity.dart';
-import 'package:yaha/app/providers.dart';
 
 import '../../../../presenters/map/map.dart';
 import 'leaflet-map.dart';
@@ -54,8 +53,8 @@ class PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
 
   @override
   Widget build(BuildContext context) {
-    final poisFuture = ref
-        .watch(touristicPoisAlongHikeSortedByDistanceProvider(widget.hike.id));
+    final poisFuture = ref.watch(
+        domain.touristicPoisAlongHikeWithYahaPoisProvider(widget.hike.id));
 
     final mapPresenter = ref.watch(leafletMapMVPProvider.notifier);
 
@@ -68,7 +67,7 @@ class PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
             const Center(child: Text("Something bad happened 😱")),
         loading: () => const Center(child: CircularProgressIndicator()),
         data: (pois) {
-          if (pois != null && pois.length != _cardNum) {
+          if (pois.length != _cardNum) {
             _currentSelectedIndex = 0;
             _cardNum = pois.length;
           }
@@ -124,7 +123,7 @@ class PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
               LeafletMap(
                   poiMarkerBuilder: markerBuilder,
                   hikes: [widget.hike],
-                  pois: pois ?? const []),
+                  pois: pois),
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Container(
@@ -133,12 +132,12 @@ class PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
 
                   /// PageView which shows the poi details at the bottom.
                   child: PageView.builder(
-                    itemCount: pois?.length ?? 0,
-                    onPageChanged: (index) => _handlePageChange(
-                        index, pois ?? const [], mapPresenter),
+                    itemCount: pois.length,
+                    onPageChanged: (index) =>
+                        _handlePageChange(index, pois, mapPresenter),
                     controller: _pageViewController,
                     itemBuilder: (BuildContext context, int index) {
-                      final item = (pois ?? const [])[index];
+                      final item = pois[index];
                       return Transform.scale(
                         scale: index == _currentSelectedIndex ? 1 : 0.85,
                         child: Stack(

@@ -43,6 +43,7 @@ class PoiIcon extends StatelessWidget {
     "shop": Color(0xff5DC8BD),
     "tourism": Color(0xff66C547),
     "sight": Color(0xff66C547),
-    "generic": Color(0xffFF8C00)
+    "generic": Color(0xffFF8C00),
+    "yaha": Color(0xff000000)
   };
 }

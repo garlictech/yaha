@@ -12,6 +12,6 @@ CI=$2
 
 yarn nx deploy-amplify mobile_app --env=${ENVNAME}
 yarn nx deploy backend --env=${ENVNAME}
-yarn nx buildAppbundle-ci mobile_app
+#yarn nx buildAppbundle-ci mobile_app
 
 npx cowsay "PROJECT BUILD OK!!!"

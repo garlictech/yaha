@@ -1,30 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/domain/domain.dart';
 
 import '../../shared/shared.dart';
 import 'poi-icon.dart';
 
-class PoiIconList extends ConsumerWidget {
-  final List<PoiType>? types;
+class PoiIconList extends StatelessWidget {
+  final List<PoiType> types;
   const PoiIconList({Key? key, required this.types}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    List<Widget> children = [const CircularProgressIndicator()];
+  Widget build(BuildContext context) {
+    final children = types
+        .map((type) => Tooltip(
+            message: type.kind.replaceAll('_', ' '),
+            child: SizedBox(
+                height: 40,
+                width: 40,
+                child: PoiIcon(
+                  poiType: type,
+                ))))
+        .toList();
 
-    if (types != null) {
-      children = types!
-          .map((type) => Tooltip(
-              message: type.kind.replaceAll('_', ' '),
-              child: SizedBox(
-                  height: 40,
-                  width: 40,
-                  child: PoiIcon(
-                    poiType: type,
-                  ))))
-          .toList();
-    }
     return Wrap(
         direction: Axis.horizontal,
         spacing: YahaSpaceSizes.medium,

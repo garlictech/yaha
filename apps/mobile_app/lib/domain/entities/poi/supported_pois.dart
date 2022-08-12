@@ -506,6 +506,7 @@ const Map<String, Set<String>> supportedTags = {
     'zoo',
     'outdoor'
   },
+  "yaha": {"start_hike", "finish_hike"}
 };
 
 const touristicCategories = {
@@ -513,7 +514,8 @@ const touristicCategories = {
   'natural',
   'leisure',
   'historic',
-  'sight'
+  'sight',
+  "yaha"
 };
 
 const nonTouristicKinds = {

@@ -3,10 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:yaha/domain/domain.dart' as domain;
-import 'package:yaha/ui/views/poi/poi.dart';
 
-import '../../../../../app/poi-providers.dart';
-import '../../../../../domain/entities/entities.dart' as entities;
+import '/domain/domain.dart' as domain;
 import '../../../shared/shared.dart';
 import '../widgets/hike-outline-filters.dart';
 import '../widgets/hike-outline-settings.dart';
@@ -17,13 +15,13 @@ import 'timecapsule-on-hike-outline-widget.dart';
 import 'weather-astronomical-data.dart';
 
 class HikeOutlineScreen extends ConsumerWidget {
-  final entities.Hike hike;
+  final domain.Hike hike;
   const HikeOutlineScreen({Key? key, required this.hike}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final pois =
-        ref.watch(touristicPoisAlongHikeSortedByDistanceProvider(hike.id));
+        ref.watch(domain.touristicPoisAlongHikeWithYahaPoisProvider(hike.id));
 
     return Scaffold(
         appBar: AppBar(
@@ -188,9 +186,7 @@ class HikeOutlineScreen extends ConsumerWidget {
           ],
         ),
         body: pois.when(
-            data: (pois) => pois != null
-                ? _createMainWidget(pois)
-                : const Center(child: CircularProgressIndicator()),
+            data: (pois) => _createMainWidget(pois),
             error: (err, s) =>
                 const Center(child: Text("Something bad happened 😱")),
             loading: () => const Center(child: CircularProgressIndicator())));

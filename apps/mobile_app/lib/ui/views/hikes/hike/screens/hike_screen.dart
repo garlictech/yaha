@@ -6,6 +6,7 @@ import 'package:yaha/domain/domain.dart' as domain;
 import 'package:yaha/ui/views/poi/widgets/poi-title-list.dart';
 
 import '../../../../../app/providers.dart';
+import '../../../../../domain/domain.dart';
 import '../../../poi/poi.dart';
 import '../../../shared/shared.dart';
 import '../../../shared/widgets/yaha-image.dart';
@@ -179,14 +180,16 @@ class HikeScreen extends ConsumerWidget {
                               averageSpeedKmh: defaults.averageSpeedKmh)),
                       const HikeScreenSectionTitle(title: 'Things on route'),
                       Consumer(builder: (c, ref, child) {
-                        final types = ref.watch(
-                            poisAlongHikeUsecasesProvider(hike.id)
-                                .select((notifier) => notifier.uniqueTypes));
-
-                        return PoiIconList(types: types);
+                        return ref.watch(poisAlongHikeProvider(hike.id)).when(
+                            loading: () => const Center(
+                                child: CircularProgressIndicator()),
+                            error: (e, s) =>
+                                const Text("Something bad happened"),
+                            data: (pois) =>
+                                PoiIconList(types: PoiUtils.uniqueTypes(pois)));
                       }),
                       const HikeScreenSectionTitle(
-                          title: 'Most interesting places on route'),
+                          title: 'Some interesting places on route'),
                       Container(
                         padding: const EdgeInsets.all(YahaSpaceSizes.general),
                         width: MediaQuery.of(context).size.width,
@@ -196,13 +199,15 @@ class HikeScreen extends ConsumerWidget {
                               BorderRadius.circular(YahaBorderRadius.general),
                         ),
                         child: Consumer(builder: (c, ref, child) {
-                          final pois = ref
-                              .watch(touristicPoisAlongHikeProvider(hike.id))
-                            ?..shuffle();
-
-                          final headPois = pois?.take(10).toList();
-
-                          return PoiTitleList(pois: headPois);
+                          return ref
+                              .watch(
+                                  randomTouristicPoisAlongHikeProvider(hike.id))
+                              .when(
+                                  loading: () => const Center(
+                                      child: CircularProgressIndicator()),
+                                  error: (e, s) => const Center(
+                                      child: Text("Something bad happened")),
+                                  data: (pois) => PoiTitleList(pois: pois));
                         }),
                       ),
                       Container(
