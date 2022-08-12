@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:yaha/ui/presenters/home/guest-home-screen-presenter.dart';
 import 'package:yaha/domain/states/auth/auth-state.dart';
 import 'package:yaha/domain/states/user/user-state.dart';
 
-import '../../../../search/search_hike_screen.dart';
 import '../../../../shared/shared.dart';
 import '../../../events/screens/event-detail-screen.dart';
 import '../../../events/screens/events.dart';
@@ -18,7 +18,10 @@ import '../../../personal/widgets/statistics.dart';
 import '../widgets/explore-hike-box.dart';
 
 class HomePageGuest extends ConsumerWidget {
-  const HomePageGuest({Key? key}) : super(key: key);
+  final PersistentTabController tabController;
+
+  const HomePageGuest({Key? key, required this.tabController})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -158,11 +161,11 @@ class HomePageGuest extends ConsumerWidget {
                                       color: YahaColors.textColor),
                                 ),
                               ),
-                              const ExploreHikeBox(
+                              ExploreHikeBox(
                                 topTitle:
                                     "You don’t have any activities yet. Once you complete a hike, you will see it here.",
                                 bottomTitle: "Isn’t it time you got outside?",
-                                onPressed: SearchHikeScreen(),
+                                tabController: tabController,
                               ),
                             ],
                           ),
@@ -184,11 +187,11 @@ class HomePageGuest extends ConsumerWidget {
                                       color: YahaColors.textColor),
                                 ),
                               ),
-                              const ExploreHikeBox(
+                              ExploreHikeBox(
                                 topTitle:
                                     "You haven’t started any hikes yet. If you pause a hike you can continue it here.",
                                 bottomTitle: "Isn’t it time you got outside?",
-                                onPressed: SearchHikeScreen(),
+                                tabController: tabController,
                               ),
                             ],
                           ),

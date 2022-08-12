@@ -21,7 +21,7 @@ class PoiTitleList extends ConsumerWidget {
           child: Row(
             children: [
               SizedBox(
-                  child: PoiIcon(poiType: poi.poiType), height: 40, width: 40),
+                  height: 40, width: 40, child: PoiIcon(poiType: poi.poiType)),
               Container(
                 padding: const EdgeInsets.only(left: YahaSpaceSizes.small),
                 child: Text(poi.title,

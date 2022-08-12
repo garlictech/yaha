@@ -8,6 +8,7 @@ import 'package:yaha/domain/entities/poi/supported_pois.dart';
 import '../shared/location.dart';
 import '../shared/textual-description.dart';
 import 'poi_type.dart';
+import '/utils/string.dart';
 
 part 'poi_entity.g.dart';
 
@@ -72,8 +73,7 @@ class Poi extends $Poi {
   }
 
   get title {
-    return description?.first.title ??
-        "Unknown " + poiType.kind.replaceAll('_', ' ');
+    return description?.first.title ?? poiType.kind.replaceAll('_', ' ');
   }
 
   factory Poi.fromJson(Map<String, dynamic> json) => _$PoiFromJson(json);

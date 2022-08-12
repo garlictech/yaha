@@ -6,7 +6,7 @@ import 'location.dart';
 part 'search-by-radius-input.g.dart';
 
 @FunctionalData()
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class SearchByRadiusInput extends $SearchByRadiusInput {
   @override
   final Location location;

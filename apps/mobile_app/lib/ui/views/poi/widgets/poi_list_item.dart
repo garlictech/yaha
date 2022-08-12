@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/ui/views/poi/widgets/poi-icon.dart';
@@ -26,7 +24,7 @@ class PoiListItem extends ConsumerWidget {
           flex: 2,
           child: Row(
             children: imagesOfPoi.when(
-              error: (_e, _s) => [
+              error: (e, s) => [
                 Flexible(
                   child: Padding(
                     padding: const EdgeInsets.only(left: YahaSpaceSizes.small),
@@ -73,14 +71,16 @@ class PoiListItem extends ConsumerWidget {
             width: cardHeight - 10,
             child: imagesOfPoi.when(
                 loading: () => PoiIcon(poiType: poi.poiType),
-                error: (_err, _val) => PoiIcon(poiType: poi.poiType),
-                data: (imageUrls) => imageUrls.isEmpty
-                    ? PoiIcon(poiType: poi.poiType)
-                    : Container(
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: NetworkImage(imageUrls.first),
-                                fit: BoxFit.cover)))),
+                error: (err, val) => PoiIcon(poiType: poi.poiType),
+                data: (imageUrls) {
+                  return imageUrls.isEmpty
+                      ? PoiIcon(poiType: poi.poiType)
+                      : Container(
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: NetworkImage(imageUrls.first),
+                                  fit: BoxFit.cover)));
+                }),
           ),
         )
       ],

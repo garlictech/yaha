@@ -9,7 +9,7 @@ import 'timecapsule-on-hike-outline-widget.dart';
 import 'weather-astronomical-data.dart';
 
 const List<Object> defaultNodeList = [
-  CheckpointModel(
+  /*CheckpointModel(
     title: "Start",
     boxBackgorundColor: YahaColors.secondary,
     backgroundColor: YahaColors.secondary,
@@ -115,7 +115,7 @@ const List<Object> defaultNodeList = [
     estimatedArrival: "7:43",
     padding: YahaSpaceSizes.small,
     radius: YahaBoxSizes.circleAvatarRadiusLarge,
-  ),
+  ),*/
 ];
 
 class HikeOutlineState {

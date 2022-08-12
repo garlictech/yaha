@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
-import '../../../shared/shared.dart';
-import 'checkpoint-poi-list-preview.dart';
+import '../../../../../domain/entities/poi/poi_entity.dart';
+import '../../../poi/widgets/poi-icon.dart';
+import '../../../poi/widgets/poi_list_item.dart';
+import '../../../shared/widgets/yaha-box-sizes.dart';
 
 // We have to move these classes somewhere else
 class CheckpointModel {
   final String title;
   final Color boxBackgorundColor;
   final Color backgroundColor;
-  final IconData icon;
+  final PoiIcon icon;
   final double iconSize;
   final String estimatedArrival;
   final double padding;
@@ -27,17 +29,21 @@ class CheckpointModel {
 }
 
 class Checkpoint extends StatelessWidget {
-  final CheckpointModel checkpointModel;
+  final Poi poi;
 
-  const Checkpoint({Key? key, required this.checkpointModel}) : super(key: key);
+  const Checkpoint({Key? key, required this.poi}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      /*onTap: () {
+    return SizedBox(
+        height: YahaBoxSizes.checkpointHeight,
+        child: PoiListItem(poi: poi, cardHeight: 200));
+
+    /*GestureDetector(
+      onTap: () {
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => const MorePoiScreen()));
-      },*/
+      },
       child: ClipRRect(
         borderRadius: BorderRadius.circular(YahaBorderRadius.general),
         child: Container(
@@ -116,6 +122,6 @@ class Checkpoint extends StatelessWidget {
           ),
         ),
       ),
-    );
+    ); */
   }
 }

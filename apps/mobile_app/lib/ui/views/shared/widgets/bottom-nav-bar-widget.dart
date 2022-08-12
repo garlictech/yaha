@@ -6,18 +6,18 @@ import '../../hikes/personal/screen/profile-page.dart';
 import '../../hikes/track/screens/tracking.dart';
 import '../../search/search_hike_screen.dart';
 import 'yaha-colors.dart';
-// PersistentTabController _controller;
-
-// _controller = PersistentTabController(initialIndex: 0);
 
 class BottomNavBarWidget extends StatelessWidget {
-  const BottomNavBarWidget({Key? key}) : super(key: key);
+  late final PersistentTabController controller;
+  BottomNavBarWidget({Key? key}) : super(key: key) {
+    controller = PersistentTabController(initialIndex: 0);
+  }
 
   @override
   Widget build(BuildContext context) {
     return PersistentTabView(
       context,
-      // controller: _controller,
+      controller: controller,
       screens: _buildScreens(),
       items: _navBarsItems(),
       confineInSafeArea: true,
@@ -48,46 +48,46 @@ class BottomNavBarWidget extends StatelessWidget {
           NavBarStyle.style1, // Choose the nav bar style with this property.
     );
   }
-}
 
-List<Widget> _buildScreens() {
-  return [
-    const HomePageGuest(),
-    const SearchHikeScreen(),
-    const TrackingScreen(),
-    const ProfilePage()
-  ];
-}
+  List<Widget> _buildScreens() {
+    return [
+      HomePageGuest(tabController: controller),
+      const SearchHikeScreen(),
+      const TrackingScreen(),
+      const ProfilePage()
+    ];
+  }
 
-List<PersistentBottomNavBarItem> _navBarsItems() {
-  return [
-    PersistentBottomNavBarItem(
-      icon: const Icon(Icons.home_rounded),
-      title: ("Home"),
-      activeColorPrimary: YahaColors.accentColorDark,
-      activeColorSecondary: YahaColors.primary,
-      inactiveColorPrimary: YahaColors.textColor,
-    ),
-    PersistentBottomNavBarItem(
-      icon: const Icon(Icons.travel_explore),
-      title: ("Explore"),
-      activeColorPrimary: YahaColors.accentColorDark,
-      activeColorSecondary: YahaColors.primary,
-      inactiveColorPrimary: YahaColors.textColor,
-    ),
-    PersistentBottomNavBarItem(
-      icon: const Icon(Icons.play_circle_fill),
-      title: ("Track"),
-      activeColorPrimary: YahaColors.accentColorDark,
-      activeColorSecondary: YahaColors.primary,
-      inactiveColorPrimary: YahaColors.textColor,
-    ),
-    PersistentBottomNavBarItem(
-      icon: const Icon(Icons.face_rounded),
-      title: ("Profile"),
-      activeColorPrimary: YahaColors.accentColorDark,
-      activeColorSecondary: YahaColors.primary,
-      inactiveColorPrimary: YahaColors.textColor,
-    ),
-  ];
+  List<PersistentBottomNavBarItem> _navBarsItems() {
+    return [
+      PersistentBottomNavBarItem(
+        icon: const Icon(Icons.home_rounded),
+        title: ("Home"),
+        activeColorPrimary: YahaColors.accentColorDark,
+        activeColorSecondary: YahaColors.primary,
+        inactiveColorPrimary: YahaColors.textColor,
+      ),
+      PersistentBottomNavBarItem(
+        icon: const Icon(Icons.travel_explore),
+        title: ("Explore"),
+        activeColorPrimary: YahaColors.accentColorDark,
+        activeColorSecondary: YahaColors.primary,
+        inactiveColorPrimary: YahaColors.textColor,
+      ),
+      PersistentBottomNavBarItem(
+        icon: const Icon(Icons.play_circle_fill),
+        title: ("Track"),
+        activeColorPrimary: YahaColors.accentColorDark,
+        activeColorSecondary: YahaColors.primary,
+        inactiveColorPrimary: YahaColors.textColor,
+      ),
+      PersistentBottomNavBarItem(
+        icon: const Icon(Icons.face_rounded),
+        title: ("Profile"),
+        activeColorPrimary: YahaColors.accentColorDark,
+        activeColorSecondary: YahaColors.primary,
+        inactiveColorPrimary: YahaColors.textColor,
+      ),
+    ];
+  }
 }

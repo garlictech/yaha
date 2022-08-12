@@ -3,6 +3,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:collection/collection.dart';
+import '../../../poi/widgets/poi-icon.dart';
 import '/app/geolocation-providers.dart';
 
 import '../../../../../domain/entities/entities.dart';
@@ -67,6 +68,7 @@ class LeafletMapState extends ConsumerState<LeafletMap> {
                 subdomains: ['a', 'b', 'c'])),
         _getHikeLayerWidget(),
         _getMarkerLayerWidget(),
+        _getHikeStartLayerWidget()
       ],
     );
   }
@@ -97,6 +99,36 @@ class LeafletMapState extends ConsumerState<LeafletMap> {
               .mapIndexed<Marker>(
                   (index, poi) => widget.poiMarkerBuilder!(context, poi, index))
               .toList();
+
+      return MarkerLayerWidget(options: MarkerLayerOptions(markers: markers));
+    });
+  }
+
+  _getHikeStartLayerWidget() {
+    return Consumer(builder: (c, ref, child) {
+      markerBuilder(BuildContext context, Poi poi, int index) {
+        const double markerSize = 40;
+        return Marker(
+            point: LatLng(poi.location.lat, poi.location.lon),
+            builder: (BuildContext c) {
+              return SizedBox(
+                  height: markerSize,
+                  width: markerSize,
+                  child: PhysicalModel(
+                      color: Colors.black,
+                      shadowColor: Colors.black,
+                      elevation: 8.0,
+                      shape: BoxShape.circle,
+                      child: PoiIcon(poiType: poi.poiType)));
+            });
+      }
+
+      final markers = widget.hikes.map<Marker>((hike) {
+        final poi =
+            Poi(id: 'xxx', location: hike.startPoint, type: "tourism:outdoor");
+
+        return markerBuilder(context, poi, 0);
+      }).toList();
 
       return MarkerLayerWidget(options: MarkerLayerOptions(markers: markers));
     });

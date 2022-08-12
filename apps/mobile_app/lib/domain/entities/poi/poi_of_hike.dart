@@ -1,18 +1,16 @@
 import 'dart:core';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:yaha/utils/geometry/geocalc_js.dart';
 
+import '../../../app/calculation-providers.dart';
 import '../hike/hike.dart';
 import 'poi_entity.dart';
 
 class PoiOfHike extends Poi {
   final Hike hike;
-  final GeocalcService geocalcService;
-  late Stream<double> distanceFromStart;
-  late double? distanceFromStartSync;
+  final Ref ref;
 
-  PoiOfHike(
-      {required Poi poi, required this.hike, required this.geocalcService})
+  PoiOfHike({required Poi poi, required this.hike, required this.ref})
       : super(
             id: poi.id,
             location: poi.location,
@@ -22,10 +20,13 @@ class PoiOfHike extends Poi {
             openingHours: poi.openingHours,
             phoneNumber: poi.phoneNumber,
             address: poi.address,
-            tags: poi.tags) {
-    distanceFromStart = DeferStream(() => Stream.fromFuture(geocalcService
-            .distanceOnLine(hike.startPoint, poi.location, hike.route)))
-        .doOnData((dist) => distanceFromStartSync = dist)
-        .shareReplay();
+            tags: poi.tags);
+
+  Future<double> get distanceFromStart async {
+    final geocalc = ref.read(geoCalcProvider);
+    return DeferStream(() => Stream.fromFuture(
+            geocalc.distanceOnLine(hike.startPoint, location, hike.route)))
+        .shareReplay()
+        .last;
   }
 }

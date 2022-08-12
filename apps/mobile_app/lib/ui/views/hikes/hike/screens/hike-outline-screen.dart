@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:dotted_line/dotted_line.dart';
+import 'package:yaha/domain/domain.dart' as domain;
+import 'package:yaha/ui/views/poi/poi.dart';
 
+import '../../../../../app/poi-providers.dart';
+import '../../../../../domain/entities/entities.dart' as entities;
 import '../../../shared/shared.dart';
 import '../widgets/hike-outline-filters.dart';
 import '../widgets/hike-outline-settings.dart';
@@ -13,11 +17,13 @@ import 'timecapsule-on-hike-outline-widget.dart';
 import 'weather-astronomical-data.dart';
 
 class HikeOutlineScreen extends ConsumerWidget {
-  const HikeOutlineScreen({Key? key}) : super(key: key);
+  final entities.Hike hike;
+  const HikeOutlineScreen({Key? key, required this.hike}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var hikeOutlineState = ref.watch(hikeOutlineStateProvider);
+    final pois =
+        ref.watch(touristicPoisAlongHikeSortedByDistanceProvider(hike.id));
 
     return Scaffold(
         appBar: AppBar(
@@ -33,7 +39,7 @@ class HikeOutlineScreen extends ConsumerWidget {
             ),
           ),
           centerTitle: true,
-          leading: YahaBackButton(),
+          leading: const YahaBackButton(),
           actions: [
             Padding(
               padding: const EdgeInsets.only(right: YahaSpaceSizes.xSmall),
@@ -61,10 +67,10 @@ class HikeOutlineScreen extends ConsumerWidget {
                                   alignment: Alignment.centerLeft,
                                   child: TextButton(
                                     onPressed: () {},
-                                    child: const Text("Reset"),
                                     style: TextButton.styleFrom(
                                       primary: YahaColors.secondaryAccentColor,
                                     ),
+                                    child: const Text("Reset"),
                                   ),
                                 ),
                                 const Align(
@@ -132,10 +138,10 @@ class HikeOutlineScreen extends ConsumerWidget {
                                 alignment: Alignment.centerLeft,
                                 child: TextButton(
                                   onPressed: () {},
-                                  child: const Text("Reset"),
                                   style: TextButton.styleFrom(
                                     primary: YahaColors.secondaryAccentColor,
                                   ),
+                                  child: const Text("Reset"),
                                 ),
                               ),
                               const Align(
@@ -181,15 +187,32 @@ class HikeOutlineScreen extends ConsumerWidget {
             ),
           ],
         ),
-        body: hikeOutlineState.when(
-            loading: () => const CircularProgressIndicator(),
-            error: (err, stack) => const Text('😱'),
-            data: (state) => _createMainWidget(state)));
+        body: pois.when(
+            data: (pois) => pois != null
+                ? _createMainWidget(pois)
+                : const Center(child: CircularProgressIndicator()),
+            error: (err, s) =>
+                const Center(child: Text("Something bad happened 😱")),
+            loading: () => const Center(child: CircularProgressIndicator())));
   }
 
-  _createMainWidget(HikeOutlineState state) {
-    var nodes = state.nodeList.map((node) {
-      if (node is CheckpointModel) {
+  _createMainWidget(List<domain.PoiOfHike> pois) {
+    var nodes = pois.map((poi) {
+      return Padding(
+          padding: const EdgeInsets.only(bottom: YahaSpaceSizes.general),
+          child: Checkpoint(
+              /*checkpointModel: CheckpointModel(
+            title: poi.title,
+            boxBackgorundColor: YahaColors.generic,
+            backgroundColor: YahaColors.generic,
+            icon: PoiIcon(poiType: poi.poiType),
+            iconSize: YahaIconSizes.xxLarge,
+            estimatedArrival: "7:38",
+            padding: YahaSpaceSizes.small,
+            radius: YahaBoxSizes.circleAvatarRadiusLarge,*/
+              poi: poi));
+    });
+    /*if (node is CheckpointModel) {
         return Checkpoint(checkpointModel: node);
       } else if (node is RouteSectionModel) {
         return RouteSection(routeSectionModel: node);
@@ -214,7 +237,7 @@ class HikeOutlineScreen extends ConsumerWidget {
       } else {
         throw "Wrong data";
       }
-    });
+    });*/
 
     return CustomScrollView(
       physics: const BouncingScrollPhysics(),

@@ -55,9 +55,7 @@ class PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
   @override
   Widget build(BuildContext context) {
     final poisFuture = ref
-        .watch(poisAlongHikeUsecasesProvider(widget.hike.id)
-            .select((notifier) => notifier.touristicPoisSortedByDistance))
-        .first;
+        .watch(touristicPoisAlongHikeSortedByDistanceProvider(widget.hike.id));
 
     final mapPresenter = ref.watch(leafletMapMVPProvider.notifier);
 
@@ -65,12 +63,11 @@ class PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
         ? 90
         : 110;
 
-    return FutureBuilder<List<domain.PoiOfHike>>(
-        future: poisFuture,
-        builder: (BuildContext context,
-            AsyncSnapshot<List<domain.PoiOfHike>> snapshot) {
-          final pois = snapshot.data;
-
+    return poisFuture.when(
+        error: (err, s) =>
+            const Center(child: Text("Something bad happened 😱")),
+        loading: () => const Center(child: CircularProgressIndicator()),
+        data: (pois) {
           if (pois != null && pois.length != _cardNum) {
             _currentSelectedIndex = 0;
             _cardNum = pois.length;
@@ -116,92 +113,87 @@ class PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
                 });
           }
 
-          return pois == null
-              ? const CircularProgressIndicator()
-              : Stack(
-                  children: <Widget>[
-                    Positioned.fill(
-                      child: Image.asset(
-                        'assets/images/maps_grid.png',
-                        repeat: ImageRepeat.repeat,
-                      ),
-                    ),
-                    LeafletMap(
-                        poiMarkerBuilder: markerBuilder,
-                        hikes: [widget.hike],
-                        pois: pois),
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Container(
-                        height: _cardHeight,
-                        padding: const EdgeInsets.only(bottom: 10),
+          return Stack(
+            children: <Widget>[
+              Positioned.fill(
+                child: Image.asset(
+                  'assets/images/maps_grid.png',
+                  repeat: ImageRepeat.repeat,
+                ),
+              ),
+              LeafletMap(
+                  poiMarkerBuilder: markerBuilder,
+                  hikes: [widget.hike],
+                  pois: pois ?? const []),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  height: _cardHeight,
+                  padding: const EdgeInsets.only(bottom: 10),
 
-                        /// PageView which shows the poi details at the bottom.
-                        child: PageView.builder(
-                          itemCount: pois.length,
-                          onPageChanged: (index) =>
-                              _handlePageChange(index, pois, mapPresenter),
-                          controller: _pageViewController,
-                          itemBuilder: (BuildContext context, int index) {
-                            final item = pois[index];
-                            return Transform.scale(
-                              scale: index == _currentSelectedIndex ? 1 : 0.85,
-                              child: Stack(
-                                children: <Widget>[
-                                  Container(
-                                      padding: const EdgeInsets.all(10.0),
-                                      decoration: BoxDecoration(
-                                        color: Theme.of(context).brightness ==
-                                                Brightness.light
-                                            ? const Color.fromRGBO(
-                                                255, 255, 255, 1)
-                                            : const Color.fromRGBO(
-                                                66, 66, 66, 1),
-                                        border: Border.all(
-                                          color: const Color.fromRGBO(
-                                              153, 153, 153, 1),
-                                          width: 0.5,
-                                        ),
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: PoiListItem(
-                                        poi: item,
-                                        cardHeight: _cardHeight,
-                                      )),
-                                  // Adding splash to card while tapping.
-                                  Material(
-                                    color: Colors.transparent,
-                                    child: InkWell(
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.elliptical(10, 10)),
-                                      onTap: () {
-                                        if (_currentSelectedIndex != index) {
-                                          _pageViewController.animateToPage(
-                                            index,
-                                            duration: const Duration(
-                                                milliseconds: 500),
-                                            curve: Curves.easeInOut,
-                                          );
-                                        } else {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      PoiInfoScreen(
-                                                          poi: item)));
-                                        }
-                                      },
-                                    ),
+                  /// PageView which shows the poi details at the bottom.
+                  child: PageView.builder(
+                    itemCount: pois?.length ?? 0,
+                    onPageChanged: (index) => _handlePageChange(
+                        index, pois ?? const [], mapPresenter),
+                    controller: _pageViewController,
+                    itemBuilder: (BuildContext context, int index) {
+                      final item = (pois ?? const [])[index];
+                      return Transform.scale(
+                        scale: index == _currentSelectedIndex ? 1 : 0.85,
+                        child: Stack(
+                          children: <Widget>[
+                            Container(
+                                padding: const EdgeInsets.all(10.0),
+                                decoration: BoxDecoration(
+                                  color: Theme.of(context).brightness ==
+                                          Brightness.light
+                                      ? const Color.fromRGBO(255, 255, 255, 1)
+                                      : const Color.fromRGBO(66, 66, 66, 1),
+                                  border: Border.all(
+                                    color:
+                                        const Color.fromRGBO(153, 153, 153, 1),
+                                    width: 0.5,
                                   ),
-                                ],
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: PoiListItem(
+                                  poi: item,
+                                  cardHeight: _cardHeight,
+                                )),
+                            // Adding splash to card while tapping.
+                            Material(
+                              color: Colors.transparent,
+                              child: InkWell(
+                                borderRadius: const BorderRadius.all(
+                                    Radius.elliptical(10, 10)),
+                                onTap: () {
+                                  if (_currentSelectedIndex != index) {
+                                    _pageViewController.animateToPage(
+                                      index,
+                                      duration:
+                                          const Duration(milliseconds: 500),
+                                      curve: Curves.easeInOut,
+                                    );
+                                  } else {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                PoiInfoScreen(poi: item)));
+                                  }
+                                },
                               ),
-                            );
-                          },
+                            ),
+                          ],
                         ),
-                      ),
-                    ),
-                  ],
-                );
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ],
+          );
         });
   }
 

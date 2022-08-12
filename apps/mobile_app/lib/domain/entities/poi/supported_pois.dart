@@ -504,6 +504,7 @@ const Map<String, Set<String>> supportedTags = {
     'viewpoint',
     'wilderness_hut',
     'zoo',
+    'outdoor'
   },
 };
 

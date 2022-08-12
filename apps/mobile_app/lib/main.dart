@@ -35,10 +35,10 @@ class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  _MyAppState createState() => _MyAppState();
+  MyAppState createState() => MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -49,7 +49,7 @@ class _MyAppState extends State<MyApp> {
           focusColor: YahaColors.primary,
           scaffoldBackgroundColor: YahaColors.background,
           fontFamily: 'Inter'),
-      home: const BottomNavBarWidget(),
+      home: BottomNavBarWidget(),
       initialRoute: '/',
       routes: {
         '/profile': (context) => const ProfilePage(),

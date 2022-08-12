@@ -28,9 +28,10 @@ class TrackingTimelineScreen extends ConsumerWidget {
 
   _createMainWidget(TrackingTimelineScreenState state) {
     var nodes = state.nodeList.map((node) {
-      if (node is CheckpointModel) {
+      /* if (node is CheckpointModel) {
         return Checkpoint(checkpointModel: node);
-      } else if (node is RouteSectionModel) {
+      } else*/
+      if (node is RouteSectionModel) {
         return RouteSection(routeSectionModel: node);
       } else if (node is DottedLine) {
         return DottedLine(

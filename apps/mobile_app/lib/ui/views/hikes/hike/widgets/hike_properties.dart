@@ -17,9 +17,6 @@ class HikeProperties extends StatelessWidget {
     return GridView.count(
       shrinkWrap: true,
       primary: false,
-      padding: const EdgeInsets.only(
-        bottom: YahaSpaceSizes.general,
-      ),
       crossAxisSpacing: YahaSpaceSizes.medium,
       mainAxisSpacing: YahaSpaceSizes.medium,
       crossAxisCount: 3,
