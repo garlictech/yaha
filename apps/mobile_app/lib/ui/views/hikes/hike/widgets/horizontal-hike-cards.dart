@@ -42,7 +42,7 @@ class HorizontalHikeCards extends ConsumerWidget {
                           width: YahaBoxSizes.widthMedium,
                           child: HikeCard(hike: hike)))
                       .toList()),
-              loading: () => const CircularProgressIndicator(),
+              loading: () => const Center(child: CircularProgressIndicator()),
               error: (err, stack) => Text('Error: $err'))),
       //ShowMoreButton(nextScreen: BestHikesOfTheWorld())
     ]);

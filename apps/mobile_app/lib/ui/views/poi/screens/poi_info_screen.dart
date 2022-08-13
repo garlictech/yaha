@@ -30,72 +30,28 @@ class PoiInfoScreen extends ConsumerWidget {
             : Markdown(data: poi.description?[0].summary ?? ''));
 
     return Scaffold(
-      /*appBar: ifShowAppBar
-          ? AppBar(
-              leading: const YahaBackButton(),
-              backgroundColor: YahaColors.background,
-              elevation: 0,
-              title: Padding(
-                padding: const EdgeInsets.only(
-                    left: YahaSpaceSizes.general,
-                    right: YahaSpaceSizes.general),
-                child: Text(
-                  poi.title,
-                  maxLines: 2,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: YahaFontSizes.medium,
-                    color: YahaColors.textColor,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-              actions: [
-                Padding(
-                  padding: const EdgeInsets.only(right: YahaSpaceSizes.small),
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.chat_outlined,
-                    ),
-                    iconSize: YahaIconSizes.medium,
-                    color: YahaColors.textColor,
-                  ),
-                )
-              ],
-            )
-          : null,*/
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: <Widget>[
-          Visibility(
-            visible: true,
-            child: Consumer(builder: (c, ref, child) {
-              final imagesOfPoi = ref.watch(imagesOfPoiProvider(poi.id));
-              poiIcon() =>
-                  SizedBox(height: 240, child: PoiIcon(poiType: poi.poiType));
+          Consumer(builder: (c, ref, child) {
+            final imagesOfPoi = ref.watch(imagesOfPoiProvider(poi.id));
 
-              imageContent(imageUrl) => Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: NetworkImage(imageUrl),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  );
+            getAppBar(List<String> imageUrls) {
+              return YahaSliverAppBar(
+                  title: poi.title,
+                  content: imageUrls.isEmpty
+                      ? Image.asset('assets/images/default_poi_header.jpg',
+                          fit: BoxFit.cover)
+                      : Image.network(imageUrls.first, fit: BoxFit.cover));
+            }
 
-              return imagesOfPoi.when(
-                  error: (e, s) =>
-                      YahaSliverAppBar(title: poi.title, content: poiIcon()),
-                  loading: () =>
-                      YahaSliverAppBar(title: poi.title, content: poiIcon()),
-                  data: (imageUrls) => YahaSliverAppBar(
-                      title: poi.title,
-                      content: imageUrls.isEmpty
-                          ? poiIcon()
-                          : imageContent(imageUrls.first)));
-            }),
-          ),
+            getEmptyAppbar() => getAppBar(const []);
+
+            return imagesOfPoi.when(
+                error: (e, s) => getEmptyAppbar(),
+                loading: () => getEmptyAppbar(),
+                data: (imageUrls) => getAppBar(imageUrls));
+          }),
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
