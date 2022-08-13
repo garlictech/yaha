@@ -16,9 +16,11 @@ import 'leaflet-map.dart';
 /// Renders the map widget with OSM map.
 class PoisOfHikeMap extends ConsumerStatefulWidget {
   final domain.Hike hike;
+  final List<domain.PoiType>? filteredPoiTypes;
 
   /// Creates the map widget with OSM map.
-  const PoisOfHikeMap({Key? key, required this.hike}) : super(key: key);
+  const PoisOfHikeMap({Key? key, required this.hike, this.filteredPoiTypes})
+      : super(key: key);
 
   @override
   PoisOfHikeMapState createState() => PoisOfHikeMapState();
@@ -54,8 +56,9 @@ class PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
 
   @override
   Widget build(BuildContext context) {
-    final poisFuture = ref.watch(
-        domain.touristicPoisAlongHikeWithYahaPoisProvider(widget.hike.id));
+    final poisFuture = ref.watch(widget.filteredPoiTypes == null
+        ? domain.touristicPoisAlongHikeWithYahaPoisProvider(widget.hike.id)
+        : domain.poisAlongHikeProvider(widget.hike.id));
 
     final mapPresenter = ref.watch(leafletMapMVPProvider.notifier);
 
@@ -66,7 +69,12 @@ class PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
             const Center(child: Text("Something bad happened 😱")),
         loading: () => const Center(
             child: YahaProgressIndicator(text: "Looking for some places...")),
-        data: (pois) {
+        data: (obtainedPois) {
+          final pois = widget.filteredPoiTypes == null
+              ? obtainedPois
+              : domain.PoiUtils.filterPoisByTypes(
+                  obtainedPois, widget.filteredPoiTypes!);
+
           if (pois.length != _cardNum) {
             _currentSelectedIndex = 0;
             _cardNum = pois.length;

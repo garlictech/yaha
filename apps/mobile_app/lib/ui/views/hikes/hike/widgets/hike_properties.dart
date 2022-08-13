@@ -43,7 +43,6 @@ class HikeProperties extends StatelessWidget {
             icon: Icons.emoji_events_rounded,
             value: hike.score.toString()),
         HikeDataElement(
-            title: "Difficulty",
             icon: Icons.stars_rounded,
             value: _difficulty[1],
             color: _difficulty[0])

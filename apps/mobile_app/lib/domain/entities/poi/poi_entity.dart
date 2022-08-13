@@ -61,7 +61,7 @@ class Poi extends $Poi {
     category =
         supportedTags.keys.toSet().contains(category) ? category : 'generic';
     final isContained = supportedTags[category]?.contains(kind);
-    kind = isContained == null || isContained == false ? 'asterisco' : kind;
+    kind = isContained == null || isContained == false ? 'unknown' : kind;
 
     final newType = '$category:$kind';
 

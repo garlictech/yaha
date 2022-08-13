@@ -148,7 +148,8 @@ const Map<String, Set<String>> supportedTags = {
     'waste_transfer_station',
     'watering_place',
     'water_point',
-    'pub'
+    'pub',
+    'game_feeding'
   },
   "public_transport": {'stop_position', 'platform', 'station', 'stop_area'},
   "emergency": {

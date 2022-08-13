@@ -20,4 +20,15 @@ class PoiUtils {
   static List<PoiType> uniqueTypes(List<Poi> pois) {
     return PoiUtils.typeList(pois).toSet().toList();
   }
+
+  static List<PoiType> uniqueThings(List<Poi> pois) {
+    return PoiUtils.uniqueTypes(pois)
+        .where((poi) => poi.kind != 'unknown')
+        .toList();
+  }
+
+  static List<T> filterPoisByTypes<T extends Poi>(
+      List<T> pois, List<PoiType> poiTypes) {
+    return pois.where((poi) => poiTypes.contains(poi.poiType)).toList();
+  }
 }

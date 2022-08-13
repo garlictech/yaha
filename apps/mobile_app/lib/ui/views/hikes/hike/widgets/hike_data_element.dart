@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import '../../../shared/shared.dart';
 
 class HikeDataElement extends StatelessWidget {
-  final String title;
+  final String? title;
   final IconData icon;
   final String value;
   final Color color;
 
   const HikeDataElement(
-      {required this.title,
+      {this.title,
       required this.icon,
       required this.value,
       this.color = YahaColors.secondaryAccentColor,
@@ -32,11 +32,12 @@ class HikeDataElement extends StatelessWidget {
                   fontSize: YahaFontSizes.small,
                   fontWeight: FontWeight.w600,
                   color: color)),
-          Text(title,
-              style: TextStyle(
-                  fontSize: YahaFontSizes.small,
-                  fontWeight: FontWeight.w500,
-                  color: color)),
+          if (title != null)
+            Text(title!,
+                style: TextStyle(
+                    fontSize: YahaFontSizes.small,
+                    fontWeight: FontWeight.w500,
+                    color: color)),
         ],
       ),
     );

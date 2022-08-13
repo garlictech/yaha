@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:yaha/domain/domain.dart' as domain;
-import 'package:yaha/ui/views/poi/widgets/poi-title-list.dart';
 
 import '../../../../../app/providers.dart';
 import '../../../../../domain/domain.dart';
 import '../../../poi/poi.dart';
+import '../../../poi/widgets/poi_icon_list.dart';
 import '../../../shared/shared.dart';
 import '../../../shared/widgets/yaha-image.dart';
 import '../../map/widgets/leaflet-map.dart';
@@ -182,11 +182,12 @@ class HikeScreen extends ConsumerWidget {
                       Consumer(builder: (c, ref, child) {
                         return ref.watch(poisAlongHikeProvider(hike.id)).when(
                             loading: () => const Center(
-                                child: CircularProgressIndicator()),
+                                child: YahaProgressIndicator(
+                                    text: "Searching for things...")),
                             error: (e, s) =>
                                 const Text("Something bad happened"),
-                            data: (pois) =>
-                                PoiIconList(types: PoiUtils.uniqueTypes(pois)));
+                            data: (pois) => PoiIconList(
+                                types: PoiUtils.uniqueTypes(pois), hike: hike));
                       }),
                       const HikeScreenSectionTitle(
                           title: 'Some interesting places on route'),
@@ -204,7 +205,8 @@ class HikeScreen extends ConsumerWidget {
                                   randomTouristicPoisAlongHikeProvider(hike.id))
                               .when(
                                   loading: () => const Center(
-                                      child: CircularProgressIndicator()),
+                                      child: YahaProgressIndicator(
+                                          text: "Searching for places...")),
                                   error: (e, s) => const Center(
                                       child: Text("Something bad happened")),
                                   data: (pois) => PoiTitleList(pois: pois));

@@ -3,38 +3,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/ui/views/hikes/map/widgets/pois-of-hike-map.dart';
 import 'package:yaha/domain/domain.dart';
 import '../../shared/shared.dart';
-import '../widgets/poi_list_tile_widget.dart';
-
-class PlacesOnRouteItem extends StatelessWidget {
-  final Poi poi;
-  final double distanceFromStart;
-
-  const PlacesOnRouteItem(
-      {Key? key, required this.poi, required this.distanceFromStart})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(children: [
-      PoiListTileWidget(
-        poi: poi,
-        title: poi.title,
-        distanceFromStart: distanceFromStart,
-      ),
-      const Padding(
-        padding: EdgeInsets.only(
-            top: YahaSpaceSizes.small, bottom: YahaSpaceSizes.small),
-        child: Divider(
-            color: YahaColors.divider, thickness: YahaBorderWidth.xxSmall),
-      )
-    ]);
-  }
-}
 
 class PlacesOnRouteScreen extends ConsumerWidget {
   final Hike hike;
+  final List<PoiType>? filteredPoiTypes;
 
-  const PlacesOnRouteScreen({Key? key, required this.hike}) : super(key: key);
+  const PlacesOnRouteScreen(
+      {Key? key, this.filteredPoiTypes, required this.hike})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -51,6 +27,7 @@ class PlacesOnRouteScreen extends ConsumerWidget {
                 child: YahaScreenHeadTitleText(
                     text: hike.title, color: textColor))),
         extendBodyBehindAppBar: true,
-        body: PoisOfHikeMap(key: UniqueKey(), hike: hike));
+        body: PoisOfHikeMap(
+            key: UniqueKey(), hike: hike, filteredPoiTypes: filteredPoiTypes));
   }
 }
