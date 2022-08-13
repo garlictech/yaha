@@ -14,8 +14,8 @@ tar -cvf ${CODEBUILD_RESOLVED_SOURCE_VERSION}.tgz \
 
 aws s3 cp ${CODEBUILD_RESOLVED_SOURCE_VERSION}.tgz s3://$BUCKET_NAME/
 
-#echo 'Pushing Android AAB to appcenter'
-#./tools/publish-to-appcenter.sh ${ENVNAME} android
+echo 'Pushing Android AAB to appcenter'
+./tools/publish-to-appcenter.sh ${ENVNAME} android
 
 echo 'Triggering ios app build in appcenter...'
 ./tools/trigger-appcenter-builds.sh ${ENVNAME} ios
