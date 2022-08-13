@@ -121,7 +121,7 @@
     "eslint-plugin-unused-imports": "2.0.0",
     "fast-xml-parser": "4.0.9",
     "husky": "7.0.4",
-    "hygen": "6.2.0",
+    "hygen": "6.2.8",
     "jest": "27.5.1",
     "patch-package": "6.4.7",
     "prettier": "2.6.2",
