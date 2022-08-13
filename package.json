@@ -119,7 +119,7 @@
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-cypress": "2.12.1",
     "eslint-plugin-unused-imports": "2.0.0",
-    "fast-xml-parser": "4.0.7",
+    "fast-xml-parser": "4.0.9",
     "husky": "7.0.4",
     "hygen": "6.2.0",
     "jest": "27.5.1",
