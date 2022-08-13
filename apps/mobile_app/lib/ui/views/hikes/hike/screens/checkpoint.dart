@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../../../domain/entities/poi/poi_entity.dart';
 import '../../../poi/widgets/poi-icon.dart';
-import '../../../poi/widgets/poi_list_item.dart';
 import '../../../shared/widgets/yaha-box-sizes.dart';
 
 // We have to move these classes somewhere else
@@ -37,7 +36,7 @@ class Checkpoint extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
         height: YahaBoxSizes.checkpointHeight,
-        child: PoiListItem(poi: poi, cardHeight: 200));
+        child: Container()); //PoiListItem(poi: poi, cardHeight: 200));
 
     /*GestureDetector(
       onTap: () {

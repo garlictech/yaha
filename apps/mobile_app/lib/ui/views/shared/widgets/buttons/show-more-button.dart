@@ -25,7 +25,7 @@ class ShowMoreButton extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: const [
                 Text(
-                  'Show more',
+                  'More on hike details...',
                   style: TextStyle(
                       fontSize: YahaFontSizes.small,
                       fontWeight: FontWeight.w600,

@@ -159,6 +159,16 @@ class HikeScreen extends ConsumerWidget {
                               horizontal: YahaSpaceSizes.small),
                           child: HikeScreenDescription(
                               summary: hike.description.first.summary ?? '')),
+                      Padding(
+                          padding: const EdgeInsets.only(
+                              bottom: YahaSpaceSizes.large),
+                          child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: const [
+                                Text("Start time: 9:00"),
+                                Text("Start date: today")
+                              ])),
                       Container(
                           margin: const EdgeInsets.only(
                               bottom: YahaSpaceSizes.large),
@@ -401,7 +411,7 @@ class HikeScreenShowOutlineButton extends StatelessWidget {
       onPressed: () {
         Navigator.of(context)
             .push(MaterialPageRoute<dynamic>(builder: (BuildContext context) {
-          return HikeOutlineScreen(hike: hike);
+          return PlacesOnRouteScreen(hike: hike);
         }));
       },
       label: const Text('Hike outline',

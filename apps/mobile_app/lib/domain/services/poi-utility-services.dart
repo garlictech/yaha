@@ -10,8 +10,8 @@ class PoiUtilityServices {
 
   PoiUtilityServices({required this.ref});
 
-  Stream<List<PoiOfHike>> getPoisOfHike(
-      String hikeId, double distanceInMeters) async* {
+  Stream<List<PoiOfHike>> getPoisOfHike(String hikeId, double distanceInMeters,
+      HikingSettings hikingSettings) async* {
     final poiRepo = ref.read(poiRepositoryProvider);
     final hike = await ref.read(hikeProvider(hikeId).future);
 
@@ -25,7 +25,8 @@ class PoiUtilityServices {
       futureGroup.close();
       yield await futureGroup.future.then((pois) => pois
           .whereType<Poi>()
-          .map((poi) => PoiOfHike(poi: poi, hike: hike, ref: ref))
+          .map((poi) => PoiOfHike(
+              poi: poi, hike: hike, ref: ref, settings: hikingSettings))
           .toList());
     }
   }

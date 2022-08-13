@@ -9,7 +9,8 @@ final poisAroundHikeProvider =
   final defaults = ref.read(defaultsProvider);
   final poiUtilities = ref.read(poiUtilityServicesProvider);
   return poiUtilities
-      .getPoisOfHike(hikeId, defaults.bigGeoBufferSizeInMeters)
+      .getPoisOfHike(hikeId, defaults.bigGeoBufferSizeInMeters,
+          HikingSettings(speed: defaults.averageSpeedKmh))
       .last;
 });
 
@@ -18,7 +19,8 @@ final poisAlongHikeProvider =
   final defaults = ref.read(defaultsProvider);
   final poiUtilities = ref.read(poiUtilityServicesProvider);
   return poiUtilities
-      .getPoisOfHike(hikeId, defaults.smallGeoBufferSizeInMeters)
+      .getPoisOfHike(hikeId, defaults.smallGeoBufferSizeInMeters,
+          HikingSettings(speed: defaults.averageSpeedKmh))
       .last;
 });
 
@@ -26,6 +28,7 @@ final endPointsOfHikeProvider =
     FutureProvider.family<Tuple2<PoiOfHike, PoiOfHike>, String>(
         (ref, hikeId) async {
   final hike = await ref.read(hikeProvider(hikeId).future);
+  final defaults = ref.read(defaultsProvider);
 
   final start = PoiOfHike(
       poi: Poi(
@@ -38,6 +41,7 @@ final endPointsOfHikeProvider =
                 languageKey: "en_US", type: "markdown", title: "Start hike")
           ]),
       hike: hike,
+      settings: HikingSettings(speed: defaults.averageSpeedKmh),
       ref: ref);
 
   final end = PoiOfHike(
@@ -51,6 +55,7 @@ final endPointsOfHikeProvider =
                 languageKey: "en_US", type: "markdown", title: "Finish hike")
           ]),
       hike: hike,
+      settings: HikingSettings(speed: defaults.averageSpeedKmh),
       ref: ref);
 
   return Tuple2(start, end);

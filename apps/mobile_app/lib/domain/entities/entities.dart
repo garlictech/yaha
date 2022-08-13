@@ -12,3 +12,4 @@ export 'shared/textual-description.dart';
 export 'shared/geolocation.dart';
 export 'auth/oauth2-entity.dart';
 export 'comments/comment.dart';
+export 'hike/hiking-settings.dart';
