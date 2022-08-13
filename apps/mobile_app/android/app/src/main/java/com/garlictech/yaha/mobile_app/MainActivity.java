@@ -1,4 +1,4 @@
-package com.garlictech.yaha.mobile-app;
+package com.garlictech.yaha;
 
 import io.flutter.embedding.android.FlutterActivity;
 
