@@ -38,28 +38,19 @@ class PlacesOnRouteScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    const textColor = YahaColors.textColor;
+
     return Scaffold(
         appBar: AppBar(
-          leading: const YahaBackButton(),
-          backgroundColor: YahaColors.background,
-          elevation: 0,
-          centerTitle: true,
-          titleSpacing: 20.0,
-          toolbarHeight: 80.0,
-          title: const Padding(
-            padding: EdgeInsets.only(right: 45.0),
-            child: Text(
-              'Most interesting places on route',
-              maxLines: 2,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: YahaFontSizes.medium,
-                color: YahaColors.textColor,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-        ),
-        body: SafeArea(child: PoisOfHikeMap(key: UniqueKey(), hike: hike)));
+            leading: const YahaBackButton(color: textColor),
+            backgroundColor: Colors.black.withOpacity(0.2),
+            elevation: 0,
+            centerTitle: true,
+            title: Padding(
+                padding: const EdgeInsets.only(right: 45.0),
+                child: YahaScreenHeadTitleText(
+                    text: hike.title, color: textColor))),
+        extendBodyBehindAppBar: true,
+        body: PoisOfHikeMap(key: UniqueKey(), hike: hike));
   }
 }

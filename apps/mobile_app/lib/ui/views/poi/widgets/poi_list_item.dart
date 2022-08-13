@@ -5,6 +5,8 @@ import 'package:yaha/ui/views/shared/shared.dart';
 import 'package:yaha/domain/entities/entities.dart';
 import 'package:yaha/app/providers.dart';
 
+import '../../shared/widgets/yaha-image.dart';
+
 class PoiListItem extends ConsumerWidget {
   final Poi poi;
   final double cardHeight;
@@ -15,75 +17,41 @@ class PoiListItem extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final imagesOfPoi = ref.watch(imagesOfPoiProvider(poi.id));
+    const spacing = YahaSpaceSizes.xSmall;
 
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        // Adding title and description for card.
+    textContent(double fontSize) {
+      return Row(children: [
+        SizedBox(height: 30, width: 30, child: PoiIcon(poiType: poi.poiType)),
         Expanded(
-          flex: 2,
-          child: Row(
-            children: imagesOfPoi.when(
-              error: (e, s) => [
-                Flexible(
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: YahaSpaceSizes.small),
-                    child: Text(poi.title,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: YahaFontSizes.small),
-                        textAlign: TextAlign.start),
-                  ),
-                )
-              ],
-              loading: () => [
-                Text(poi.title,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: YahaFontSizes.small),
-                    textAlign: TextAlign.start)
-              ],
-              data: (imageUrls) => imageUrls.isEmpty
-                  ? [
-                      Text(poi.title,
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: YahaFontSizes.small),
-                          textAlign: TextAlign.start)
-                    ]
-                  : [
-                      SizedBox(
-                          height: 30,
-                          width: 30,
-                          child: PoiIcon(poiType: poi.poiType)),
-                      Text(poi.title,
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: YahaFontSizes.small),
-                          textAlign: TextAlign.start)
-                    ],
-            ),
-          ),
-        ),
+            child: Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                    padding:
+                        const EdgeInsets.only(left: spacing, right: spacing),
+                    child: Text(poi.title.toUpperCase(),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 3,
+                        style: TextStyle(fontSize: fontSize),
+                        textAlign: TextAlign.start))))
+      ]);
+    }
+
+    return imagesOfPoi.when(
+      error: (e, s) => textContent(YahaFontSizes.small),
+      loading: () => textContent(YahaFontSizes.small),
+      data: (imageUrls) => Row(children: [
         Expanded(
-          child: SizedBox(
-            height: cardHeight - 10,
-            width: cardHeight - 10,
-            child: imagesOfPoi.when(
-                loading: () => PoiIcon(poiType: poi.poiType),
-                error: (err, val) => PoiIcon(poiType: poi.poiType),
-                data: (imageUrls) {
-                  return imageUrls.isEmpty
-                      ? PoiIcon(poiType: poi.poiType)
-                      : Container(
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: NetworkImage(imageUrls.first),
-                                  fit: BoxFit.cover)));
-                }),
-          ),
-        )
-      ],
+            child: textContent(imageUrls.isNotEmpty
+                ? YahaFontSizes.xSmall
+                : YahaFontSizes.small)),
+        if (imageUrls.isNotEmpty)
+          SizedBox(
+              height: cardHeight,
+              width: cardHeight,
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(YahaBorderRadius.xSmall),
+                  child: YahaImage(imageUrl: imageUrls.first)))
+      ]),
     );
   }
 }

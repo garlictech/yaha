@@ -1,20 +1,30 @@
 import 'package:flutter/material.dart';
-
-import '../yaha-colors.dart';
-import '../yaha-icon-sizes.dart';
+import 'package:yaha/ui/views/shared/shared.dart';
 
 class YahaBackButton extends StatelessWidget {
-  const YahaBackButton({Key? key}) : super(key: key);
+  final Color color;
+  final bool withBackgroundBlur;
+
+  const YahaBackButton(
+      {this.color = YahaColors.textColor,
+      this.withBackgroundBlur = false,
+      Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      onPressed: () => Navigator.of(context).pop(),
-      icon: const Icon(
-        Icons.arrow_back_ios_rounded,
-        size: YahaIconSizes.medium,
-        color: YahaColors.textColor,
-      ),
-    );
+    return Container(
+        decoration: BoxDecoration(
+            color: Colors.black.withOpacity(withBackgroundBlur ? 0.4 : 0),
+            shape: BoxShape.circle),
+        margin: const EdgeInsets.all(YahaSpaceSizes.xSmall),
+        child: IconButton(
+          onPressed: () => Navigator.of(context).pop(),
+          icon: Icon(
+            Icons.arrow_back_rounded,
+            size: YahaIconSizes.medium,
+            color: color,
+          ),
+        ));
   }
 }

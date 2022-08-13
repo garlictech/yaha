@@ -13,34 +13,43 @@ class YahaSliverAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
+
     return SliverAppBar(
       stretch: false,
       pinned: true,
       snap: false,
       floating: false,
       expandedHeight: 240.0,
-      backgroundColor: YahaColors.primary,
+      backgroundColor: YahaColors.background,
+      leading: const YahaBackButton(color: Colors.black),
       flexibleSpace: LayoutBuilder(
         builder: (context, constraints) {
           double appBarHeight = constraints.biggest.height;
           bool isExpanded = appBarHeight > height * 0.2;
+          double opacity = isExpanded ? 0.4 : 0;
+
+          final textColor = isExpanded ? YahaColors.background : Colors.black;
+
           return FlexibleSpaceBar(
-            titlePadding: const EdgeInsets.only(
-                left: YahaSpaceSizes.general,
-                bottom: YahaSpaceSizes.small,
-                right: YahaSpaceSizes.general),
+            titlePadding: isExpanded
+                ? const EdgeInsets.only(
+                    left: YahaSpaceSizes.general,
+                    bottom: YahaSpaceSizes.small,
+                    right: YahaSpaceSizes.general)
+                : null,
             centerTitle: isExpanded ? false : true,
             title: ConstrainedBox(
-              constraints: BoxConstraints(
-                  maxWidth: MediaQuery.of(context).size.width / 1.6),
-              child: Text(
-                title,
-                style: const TextStyle(
-                    color: YahaColors.background,
-                    fontWeight: FontWeight.w700,
-                    fontSize: YahaFontSizes.small),
-              ),
-            ),
+                constraints: BoxConstraints(
+                    maxWidth: MediaQuery.of(context).size.width / 1.6),
+                child: Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(opacity),
+                        borderRadius:
+                            BorderRadius.circular(YahaBorderRadius.xxSmall)),
+                    padding: const EdgeInsets.all(YahaSpaceSizes.xxSmall),
+                    child: YahaScreenHeadTitleText(
+                        text: title, color: textColor))),
             background: content,
           );
         },

@@ -19,3 +19,5 @@ export 'widgets/yaha-icon-sizes.dart';
 export 'widgets/yaha-space-sizes.dart';
 export 'widgets/yaha-text-input-password.dart';
 export 'widgets/sliver-app-bar.dart';
+export 'widgets/screen_head_title_text.dart';
+export 'widgets/progress_indicator.dart';

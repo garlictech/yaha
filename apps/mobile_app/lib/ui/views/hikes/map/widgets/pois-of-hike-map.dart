@@ -8,6 +8,7 @@ import 'package:yaha/ui/views/poi/widgets/poi-icon.dart';
 import 'package:yaha/ui/views/poi/widgets/poi_list_item.dart';
 import 'package:yaha/domain/domain.dart' as domain;
 import 'package:yaha/domain/entities/poi/poi_entity.dart';
+import 'package:yaha/ui/views/shared/shared.dart';
 
 import '../../../../presenters/map/map.dart';
 import 'leaflet-map.dart';
@@ -58,14 +59,13 @@ class PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
 
     final mapPresenter = ref.watch(leafletMapMVPProvider.notifier);
 
-    _cardHeight = (MediaQuery.of(context).orientation == Orientation.landscape)
-        ? 90
-        : 110;
+    _cardHeight = 90;
 
     return poisFuture.when(
         error: (err, s) =>
             const Center(child: Text("Something bad happened 😱")),
-        loading: () => const Center(child: CircularProgressIndicator()),
+        loading: () => const Center(
+            child: YahaProgressIndicator(text: "Looking for some places...")),
         data: (pois) {
           if (pois.length != _cardNum) {
             _currentSelectedIndex = 0;

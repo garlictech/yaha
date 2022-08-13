@@ -56,6 +56,13 @@ class Hike {
   Location get endPoint =>
       Location(lon: route.coordinates.last[0], lat: route.coordinates.last[1]);
 
+  String get title {
+    const unknownTitle = 'Unknown Hike';
+    return description.isNotEmpty
+        ? (description.first.title ?? unknownTitle)
+        : unknownTitle;
+  }
+
   factory Hike.fromJson(Map<String, dynamic> json) => _$HikeFromJson(json);
 
   Map<String, dynamic> toJson() => _$HikeToJson(this);
