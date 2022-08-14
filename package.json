@@ -31,7 +31,8 @@
     "codegen:models": "if [ -d libs/api/graphql/schema/src/lib/models ]; then rm -r libs/api/graphql/schema/src/lib/models; fi; amplify codegen models; if [ -d apps/admin/src/models ]; then mv apps/admin/src/models libs/api/graphql/schema/src/lib/models; fi",
     "deleteAllTableData": "yarn ts-node --project ./tools/tsconfig.tools.json -r tsconfig-paths/register ./tools/delete-all-table-data.ts",
     "prepare": "husky install",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package",
+    "build_geocalc": "yarn esbuild libs/shared/utils/src/lib/geometry/line-calculations.ts --bundle  --outfile=apps/mobile_app/assets/js/geocalc.js"
   },
   "private": true,
   "dependencies": {
@@ -45,6 +46,7 @@
     "@neo4j/graphql-ogm": "1.2.4",
     "@turf/line-chunk": "6.5.0",
     "@turf/turf": "6.5.0",
+    "@types/d3-geo": "^3.0.2",
     "apollo-client": "2.6.10",
     "apollo-server-lambda": "2.25.4",
     "aws-amplify": "4.3.30",
@@ -53,9 +55,11 @@
     "aws-lambda": "1.0.7",
     "aws-sdk": "2.1069.0",
     "bunyan": "1.8.15",
+    "d3-geo": "^3.0.1",
     "enum-values": "1.2.1",
     "fp-ts": "2.12.2",
     "fp-ts-rxjs": "0.6.15",
+    "geojson-rewind": "^0.3.1",
     "gpx-builder": "4.0.3",
     "graphql": "15.8.0",
     "graphql-subscriptions": "2.0.0",

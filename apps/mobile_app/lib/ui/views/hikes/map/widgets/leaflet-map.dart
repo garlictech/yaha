@@ -3,6 +3,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:collection/collection.dart';
+import '../../../../../app/providers.dart';
 import '/app/geolocation-providers.dart';
 
 import '../../../../../domain/entities/entities.dart';
@@ -40,6 +41,15 @@ class LeafletMapState extends ConsumerState<LeafletMap> {
         (widget.hikes.isNotEmpty ? widget.hikes.first.startPoint : null) ??
             (widget.pois.isNotEmpty ? widget.pois.first.location : null);
     final presenter = ref.watch(leafletMapMVPProvider.notifier);
+    final geocalc = ref.read(geoCalcProvider);
+
+    final Future<LatLngBounds> bounds = geocalc
+        .boundingBoxOfPaths(widget.hikes.map((hike) => hike.route).toList())
+        .then((boundingBox) {
+      return LatLngBounds(
+          LatLng(boundingBox.SouthWest.lat, boundingBox.SouthWest.lon),
+          LatLng(boundingBox.NorthEast.lat, boundingBox.NorthEast.lon));
+    });
 
     if (mapCenter == null) {
       ref
@@ -51,24 +61,32 @@ class LeafletMapState extends ConsumerState<LeafletMap> {
       });
     }
 
-    return FlutterMap(
-      options: MapOptions(
-          onMapCreated: (ctr) {
-            _mapController = ctr;
-            presenter.mapController = ctr;
-          },
-          center: LatLng(mapCenter?.lat ?? 0, mapCenter?.lon ?? 0),
-          zoom: _mapController?.zoom ?? 12),
-      children: <Widget>[
-        TileLayerWidget(
-            options: TileLayerOptions(
-                urlTemplate:
-                    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                subdomains: ['a', 'b', 'c'])),
-        _getHikeLayerWidget(),
-        _getMarkerLayerWidget(),
-      ],
-    );
+    return FutureBuilder(
+        future: bounds,
+        builder: (context, snapshot) {
+          if (_mapController != null && snapshot.data != null) {
+            _mapController!.fitBounds(snapshot.data! as LatLngBounds);
+          }
+
+          return FlutterMap(
+            options: MapOptions(onMapCreated: (ctr) {
+              _mapController = ctr;
+              presenter.mapController = ctr;
+              if (snapshot.data != null) {
+                ctr.fitBounds(snapshot.data! as LatLngBounds);
+              }
+            }),
+            children: <Widget>[
+              TileLayerWidget(
+                  options: TileLayerOptions(
+                      urlTemplate:
+                          "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                      subdomains: ['a', 'b', 'c'])),
+              _getHikeLayerWidget(),
+              _getMarkerLayerWidget(),
+            ],
+          );
+        });
   }
 
   Consumer _getHikeLayerWidget() {
