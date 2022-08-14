@@ -3884,10 +3884,17 @@
     "@babel/types" "^7.4.4"
     esutils "^2.0.2"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.15.4", "@babel/runtime@^7.5.4", "@babel/runtime@^7.5.5", "@babel/runtime@^7.8.4", "@babel/runtime@^7.9.6":
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.5.4", "@babel/runtime@^7.5.5", "@babel/runtime@^7.8.4", "@babel/runtime@^7.9.6":
   version "7.18.3"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.18.3.tgz#c7b654b57f6f63cf7f8b418ac9ca04408c4579f4"
   integrity sha512-38Y8f7YUhce/K7RMwTp7m0uCumpv9hZkitCbBClqQIow1qSbCvGkcegKOXpEWCQLfWmevgRiWokZ1GkpfhbZug==
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
+"@babel/runtime@^7.17.8":
+  version "7.18.9"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.18.9.tgz#b4fcfce55db3d2e5e080d2490f608a3b9f407f4a"
+  integrity sha512-lkqXDcvlFT5rvEjiu6+QYO+1GXrEHRo2LOtS7E4GtX5ESIZOgepqsZBVIj6Pv+a6zqsya9VCgiK1KAK4BvJDAw==
   dependencies:
     regenerator-runtime "^0.13.4"
 
@@ -15048,12 +15055,12 @@ got@^9.6.0:
     to-readable-stream "^1.0.0"
     url-parse-lax "^3.0.0"
 
-gpx-builder@4.0.3:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/gpx-builder/-/gpx-builder-4.0.3.tgz#78531f39d59d2833a44e159848037d673188ddbe"
-  integrity sha512-tgLYu49nXDHi82gGgQfEy9xeo1lMtiKr/eIsL6AIY0wIaG0W1CYoUktYWtdG5/WuO0+fsYc5YJrg0AqNiuA8sQ==
+gpx-builder@4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/gpx-builder/-/gpx-builder-4.1.0.tgz#5ada590345ba0dd731cf4e16e3158b0c744aecac"
+  integrity sha512-OXoOvCGIcgaat0UvLRH3jlbrHBbsVPC4CANJA8ylJtv46/rmr6sscTNWY/sJlqt4vT5wZmyuZNhO2OI1hT61Hg==
   dependencies:
-    "@babel/runtime" "^7.15.4"
+    "@babel/runtime" "^7.17.8"
     xmlbuilder "^15.1.1"
 
 graceful-fs@^4.1.10, graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.3, graceful-fs@^4.1.6, graceful-fs@^4.2.0, graceful-fs@^4.2.10, graceful-fs@^4.2.2, graceful-fs@^4.2.3, graceful-fs@^4.2.4, graceful-fs@^4.2.6, graceful-fs@^4.2.9:
