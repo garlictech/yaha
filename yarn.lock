@@ -9002,10 +9002,10 @@
   dependencies:
     "@types/node" "*"
 
-"@types/gremlin@3.5.2":
-  version "3.5.2"
-  resolved "https://registry.yarnpkg.com/@types/gremlin/-/gremlin-3.5.2.tgz#9d26f6a4a774605daedd40c59f8963d91852fe80"
-  integrity sha512-guOs0Y7ZiZAd12kf86KmyzxvwmmVYznXy+/jbiO9tPViLUCSUT9JtJ/lHMSast/yxJpkkd2a3VG7+kgwqax9WA==
+"@types/gremlin@3.6.0":
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/@types/gremlin/-/gremlin-3.6.0.tgz#39f3c6230858877a4286aa58b2791e2d5bcaa8fe"
+  integrity sha512-+DL5D5IcPg7xHibL3skH1EMimf6nF4IBSIllwjJkp8lrJI0p3hsXH66dY9z5nwB3b08uOTJjCH6vhyqZA1Xc7g==
 
 "@types/http-assert@*":
   version "1.5.3"
@@ -16358,10 +16358,10 @@ graphql@^14.6.0:
   dependencies:
     iterall "^1.2.2"
 
-gremlin@3.5.2:
-  version "3.5.2"
-  resolved "https://registry.yarnpkg.com/gremlin/-/gremlin-3.5.2.tgz#fa1da392d9f37ee06e4c86b100fcd56150792202"
-  integrity sha512-GPFevKxQZwOSweuMDDyy1+bwQ7bDc1+41DRYeoYJOgkbiR5fbQslFCjOuWvsVF+FEQr/De4pG8ZqVP6wJMrYMQ==
+gremlin@3.6.1:
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/gremlin/-/gremlin-3.6.1.tgz#eb28da563a285b465196e1e302439c38871f265b"
+  integrity sha512-KflKBadWpz/UwjHnyXqumxKZXspUHNMptCaWUg4ChLXsPtvCkZ63UY2t3qTkXZi1IjNoZI0Nzf+TQ1Rk9IB0eg==
   dependencies:
     ws "^6.2.2"
 
