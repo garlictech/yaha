@@ -1,4 +1,4 @@
-FROM cirrusci/flutter:3.0.4
+FROM cirrusci/flutter:3.1.0
 
 RUN flutter doctor
 
