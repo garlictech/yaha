@@ -100,7 +100,7 @@ dev_dependencies:
   functional_data_generator: ^1.0.0
   json_serializable: ^6.0.0
   flutter_lints: ^2.0.1
-  flutter_launcher_icons: ^0.9.2
+  flutter_launcher_icons: ^0.10.0
   test: ^1.19.5
 
 # For information on the generic Dart part of this file, see the
