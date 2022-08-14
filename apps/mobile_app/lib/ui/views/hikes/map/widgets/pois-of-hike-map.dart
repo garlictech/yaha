@@ -166,7 +166,6 @@ class PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
                                 ),
                                 child: PoiListItem(
                                   poi: item,
-                                  cardHeight: _cardHeight,
                                 )),
                             // Adding splash to card while tapping.
                             Material(

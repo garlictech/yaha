@@ -37,8 +37,7 @@ final endPointsOfHikeProvider =
           elevation: hike.route.coordinates.first[2],
           type: "yaha:start_hike",
           description: [
-            TextualDescription(
-                languageKey: "en_US", type: "markdown", title: "Start hike")
+            TextualDescription(languageKey: "en_US", type: "markdown")
           ]),
       hike: hike,
       settings: HikingSettings(speed: defaults.averageSpeedKmh),
@@ -51,8 +50,7 @@ final endPointsOfHikeProvider =
           type: "yaha:finish_hike",
           elevation: hike.route.coordinates.last[2],
           description: [
-            TextualDescription(
-                languageKey: "en_US", type: "markdown", title: "Finish hike")
+            TextualDescription(languageKey: "en_US", type: "markdown")
           ]),
       hike: hike,
       settings: HikingSettings(speed: defaults.averageSpeedKmh),

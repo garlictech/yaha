@@ -73,7 +73,15 @@ class Poi extends $Poi {
   }
 
   get title {
-    return description?.first.title ?? poiType.kind.replaceAll('_', ' ');
+    return description?.first.title ?? kindAsStr;
+  }
+
+  get hasOwnTitle {
+    return description?.first.title != null;
+  }
+
+  get kindAsStr {
+    return poiType.kind.replaceAll('_', ' ');
   }
 
   factory Poi.fromJson(Map<String, dynamic> json) => _$PoiFromJson(json);

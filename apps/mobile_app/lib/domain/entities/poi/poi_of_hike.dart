@@ -53,7 +53,7 @@ class PoiOfHike extends Poi {
   Future<String> get arrivalStr async {
     final duration = await durationInMin;
     final arrival = settings.startTime.add(Duration(minutes: duration));
-    return "${arrival.hour}h ${arrival.minute}m";
+    return "${arrival.hour}:${arrival.minute.toString().padLeft(2, '0')}";
   }
 
   Future<DateTime> get arrival async {
