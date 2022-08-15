@@ -8995,7 +8995,7 @@
     "@types/keygrip" "*"
     "@types/node" "*"
 
-"@types/d3-geo@^3.0.2":
+"@types/d3-geo@3.0.2":
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/@types/d3-geo/-/d3-geo-3.0.2.tgz#e7ec5f484c159b2c404c42d260e6d99d99f45d9a"
   integrity sha512-DbqK7MLYA8LpyHQfv6Klz0426bQEf7bRTvhMy44sNGVyZoWn//B0c+Qbeg8Osi2Obdc9BLLXYAKpyWege2/7LQ==
@@ -12812,7 +12812,7 @@ d3-geo@1.7.1:
   dependencies:
     d3-array "1"
 
-d3-geo@^3.0.1:
+d3-geo@3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/d3-geo/-/d3-geo-3.0.1.tgz#4f92362fd8685d93e3b1fae0fd97dc8980b1ed7e"
   integrity sha512-Wt23xBych5tSy9IYAM1FR2rWIBFWa52B/oF/GYe5zbdHrg08FU8+BuI6X4PvTwPDdqdAdq04fuWJpELtsaEjeA==
@@ -15304,7 +15304,7 @@ geojson-rbush@3.x:
     "@types/geojson" "7946.0.8"
     rbush "^3.0.1"
 
-geojson-rewind@^0.3.1:
+geojson-rewind@0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/geojson-rewind/-/geojson-rewind-0.3.1.tgz#22240797c847cc2f0c1d313e4aa0c915afa7f29d"
   integrity sha512-mdR8a2JjahsZ+pR3oav3XO+R4HpEomhjAwD+RkTQQdm5vE+AOhxH9x+3aaz8vVDb1r5oklUMM89zRW5xyOTiGw==
