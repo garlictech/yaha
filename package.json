@@ -39,7 +39,7 @@
     "@acuris/aws-es-connection": "2.3.0",
     "@aws-amplify/auth": "4.6.1",
     "@aws-cdk/aws-neptune-alpha": "2.9.0-alpha.0",
-    "@elastic/elasticsearch": "7.13.0",
+    "@elastic/elasticsearch": "8.2.1",
     "@googlemaps/google-maps-services-js": "3.3.16",
     "@mapbox/togeojson": "0.16.0",
     "@neo4j/graphql": "2.5.9",
