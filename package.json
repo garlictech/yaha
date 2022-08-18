@@ -37,7 +37,7 @@
   "private": true,
   "dependencies": {
     "@acuris/aws-es-connection": "2.3.0",
-    "@aws-amplify/auth": "4.6.1",
+    "@aws-amplify/auth": "4.6.3",
     "@aws-cdk/aws-neptune-alpha": "2.9.0-alpha.0",
     "@elastic/elasticsearch": "7.13.0",
     "@googlemaps/google-maps-services-js": "3.3.16",
