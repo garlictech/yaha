@@ -125,7 +125,7 @@
     "request-promise": "4.2.6",
     "serverless": "3.21.0",
     "serverless-bundle": "4.4.0",
-    "serverless-offline": "9.2.0",
+    "serverless-offline": "9.2.5",
     "supertest": "6.2.4",
     "ts-jest": "28.0.8",
     "ts-node": "10.9.1",
