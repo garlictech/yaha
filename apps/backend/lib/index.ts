@@ -2,9 +2,7 @@ import { App, Stack } from '@serverless-stack/resources';
 import { CognitoStack } from './app/cognito-stack';
 import { ParamsStack } from './app/params-stack';
 import { SecretsManagerStack } from './app/secretsmanager-stack';
-//import { NeptuneApiStack } from './app/neptune-stack';
 import { LambdaStack } from './app/lambda-stack';
-import { aws_ec2 as ec2 } from 'aws-cdk-lib';
 import { ConfiguratorStack } from './app/configurator-stack';
 
 export class yahaStack extends Stack {
@@ -15,18 +13,10 @@ export class yahaStack extends Stack {
       'SecretsManagerStack',
     );
 
-    const vpc = new ec2.Vpc(this, 'yahaNeptuneVPC');
     const paramsStack = new ParamsStack(scope, 'ParamsStack');
-
-    //    const neptuneStack = new NeptuneApiStack(scope, 'neptune', { vpc });
 
     new LambdaStack(scope, 'LambdaStack', {
       secretsManager: secretsManagerStack.secretsManager,
-      //neptuneReaderAddress: neptuneStack.readerAddress,
-      //neptuneWriterAddress: neptuneStack.writerAddress,
-      neptuneReaderAddress: '',
-      neptuneWriterAddress: '',
-      vpc,
       apiAccessKeyId: secretsManagerStack.apiAccessKeyId,
       apiSecretAccessKey: secretsManagerStack.apiSecretAccessKey,
     });

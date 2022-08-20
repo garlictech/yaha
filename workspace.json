@@ -13,7 +13,6 @@
     "integration-tests-backend": "libs/integration-tests/backend",
     "js-api": "apps/js-api",
     "mobile_app": "apps/mobile_app",
-    "neptune-gql": "libs/neptune-gql",
     "shared-config": "libs/shared/config",
     "shared-graphql-api-client": "libs/shared/graphql/api-client",
     "shared-utils": "libs/shared/utils"

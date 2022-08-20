@@ -45,7 +45,6 @@
       "@yaha/integration-tests/backend": [
         "libs/integration-tests/backend/src/index.ts"
       ],
-      "@yaha/neptune-gql": ["libs/neptune-gql/src/index.ts"],
       "@yaha/shared/config": ["libs/shared/config/src/index.ts"],
       "@yaha/shared/graphql/api-client": [
         "libs/shared/graphql/api-client/src/index.ts"

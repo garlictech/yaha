@@ -39,12 +39,6 @@ functions:
   stack-seeder:
     handler: lib/lambda/stack-seeder/index.handler
 
-  consumer-pre-signup:
-    handler: lib/lambda/consumer-pre-signup/index.handler
-
-  neptune-resolvers:
-    handler: lib/lambda/neptune-resolvers/index.handler
-
   amplify-resolvers:
     handler: lib/lambda/amplify-resolvers/index.handler
 
