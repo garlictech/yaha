@@ -28647,10 +28647,20 @@
     );
   }
   function snappedLineSlice(start, end, path) {
-    return es_default5(
-      convertPointToTurfPoint(start),
-      convertPointToTurfPoint(end),
-      path
+    return (0, import_function2.pipe)(
+      es_default5(
+        convertPointToTurfPoint(start),
+        convertPointToTurfPoint(end),
+        path
+      ),
+      (slice2) => {
+        const coords = slice2.geometry.coordinates;
+        if (coords.length >= 1 && start.elevation != void 0 && end.elevation != void 0) {
+          coords[0][2] = start.elevation;
+          coords[coords.length - 1][2] = end.elevation;
+        }
+        return slice2;
+      }
     );
   }
   function distanceOnLine(start, end, path) {
@@ -28792,6 +28802,7 @@
   global.boundingBoxOfPaths = (paths) => {
     return JSON.stringify(boundingBoxOfPaths(paths));
   };
+  global.snappedLineSlice = (start, end, path) => (0, import_function2.pipe)(snappedLineSlice(start, end, path), JSON.stringify);
 })();
 /*
 object-assign

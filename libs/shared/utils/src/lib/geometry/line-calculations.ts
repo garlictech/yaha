@@ -57,19 +57,35 @@ export function distanceFromRoute<POINT extends LatLon>(
   );
 }
 
-/** Calculate the linestring between two snapped pontint of a linestring. First, snap all the points to the line, then return the slice between the snapped points.-m-20 */
-export function snappedLineSlice<POINT1 extends LatLon, POINT2 extends LatLon>(
-  start: POINT1,
-  end: POINT2,
-  path: Feature<LineString>,
-): Feature<LineString> {
-  return lineSlice(
-    convertPointToTurfPoint(start),
-    convertPointToTurfPoint(end),
-    path,
+/** Calculate the linestring between two snapped pontint of a linestring. First,
+ * snap all the points to the line, then return the slice between the
+ * snapped points.-m-20 */
+export function snappedLineSlice<
+  POINT1 extends { lat: number; lon: number; elevation?: number },
+  POINT2 extends { lat: number; lon: number; elevation?: number },
+>(start: POINT1, end: POINT2, path: Feature<LineString>): Feature<LineString> {
+  return pipe(
+    lineSlice(
+      convertPointToTurfPoint(start),
+      convertPointToTurfPoint(end),
+      path,
+    ),
+    slice => {
+      const coords = slice.geometry.coordinates;
+
+      if (
+        coords.length >= 1 &&
+        start.elevation != undefined &&
+        end.elevation != undefined
+      ) {
+        coords[0][2] = start.elevation;
+        coords[coords.length - 1][2] = end.elevation;
+      }
+
+      return slice;
+    },
   );
 }
-
 /**
  * Snap points to the given line and return with the segment's length, plus the point distances from the path.
  */
@@ -261,9 +277,13 @@ export const splitBoundingBox = (
     }
   }
 };
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 (global as any).distanceOnLineForFlutter = distanceOnLineForFlutter;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 (global as any).boundingBoxOfPaths = (paths: LineString[]): string => {
   return JSON.stringify(boundingBoxOfPaths(paths));
 };
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+(global as any).snappedLineSlice = (start: any, end: any, path: any): string =>
+  pipe(snappedLineSlice(start, end, path), JSON.stringify);

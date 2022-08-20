@@ -12,7 +12,6 @@ import '../../../shared/shared.dart';
 import '../../../shared/widgets/yaha-image.dart';
 import '../../map/widgets/leaflet-map.dart';
 import '../widgets/hike_properties.dart';
-import 'hike-outline-screen.dart';
 import 'weather-screen.dart';
 
 SpeedDial buildSpeedDial() {

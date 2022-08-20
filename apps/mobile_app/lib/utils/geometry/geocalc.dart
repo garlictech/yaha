@@ -1,7 +1,9 @@
 import 'dart:math';
+import 'package:flutter/foundation.dart';
+import 'package:turf/turf.dart';
 
 class GeoCalc {
-  static double lineLength(List<List<double>> coordinates) {
+  static double lineLength(List<List<num>> coordinates) {
     double _calculateDistance(lat1, lon1, lat2, lon2) {
       var p = 0.017453292519943295;
       var c = cos;
@@ -21,16 +23,28 @@ class GeoCalc {
     return _length;
   }
 
-  static double calculateUphill(List<List<double>> coordinates) {
+  static double lineLengthByPositions(List<Position> coordinates) {
+    return _opByPositions(coordinates, GeoCalc.lineLength);
+  }
+
+  static double calculateUphill(List<List<num>> coordinates) {
     return _calculateHill(coordinates, (diff) => diff > 0, 1);
   }
 
-  static double calculateDownhill(List<List<double>> coordinates) {
+  static double calculateUphillByPositions(List<Position> coordinates) {
+    return _opByPositions(coordinates, GeoCalc.calculateUphill);
+  }
+
+  static double calculateDownhill(List<List<num>> coordinates) {
     return _calculateHill(coordinates, (diff) => diff < 0, -1);
   }
 
-  static double _calculateHill(List<List<double>> coordinates,
-      Function(double) bigEnough, double multiplier) {
+  static double calculateDownhillByPositions(List<Position> coordinates) {
+    return _opByPositions(coordinates, GeoCalc.calculateDownhill);
+  }
+
+  static double _calculateHill(
+      List<List<num>> coordinates, Function(num) bigEnough, num multiplier) {
     double sum = 0;
 
     for (var i = 1; i < coordinates.length; i++) {
@@ -42,5 +56,16 @@ class GeoCalc {
     }
 
     return sum.round().toDouble();
+  }
+
+  static _opByPositions(List<Position> positions, Function op) {
+    final coords = positions.map((pos) {
+      if (pos.alt == null) {
+        throw "Altitude missing!";
+      }
+
+      return [pos.lng, pos.lat, pos.alt!];
+    }).toList();
+    return op(coords);
   }
 }

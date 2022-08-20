@@ -57,7 +57,7 @@ class PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
   @override
   Widget build(BuildContext context) {
     final poisFuture = ref.watch(widget.filteredPoiTypes == null
-        ? domain.touristicPoisAlongHikeWithYahaPoisProvider(widget.hike.id)
+        ? domain.importantPoisAlongHikeWithYahaPoisProvider(widget.hike.id)
         : domain.poisAlongHikeProvider(widget.hike.id));
 
     final mapPresenter = ref.watch(leafletMapMVPProvider.notifier);

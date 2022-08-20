@@ -69,13 +69,16 @@ class LeafletMapState extends ConsumerState<LeafletMap> {
           }
 
           return FlutterMap(
-            options: MapOptions(onMapCreated: (ctr) {
-              _mapController = ctr;
-              presenter.mapController = ctr;
-              if (snapshot.data != null) {
-                ctr.fitBounds(snapshot.data! as LatLngBounds);
-              }
-            }),
+            options: MapOptions(
+                onMapCreated: (ctr) {
+                  _mapController = ctr;
+                  presenter.mapController = ctr;
+                  if (snapshot.data != null) {
+                    ctr.fitBounds(snapshot.data! as LatLngBounds);
+                  }
+                },
+                center: LatLng(mapCenter?.lat ?? 0, mapCenter?.lon ?? 0),
+                zoom: _mapController?.zoom ?? 12),
             children: <Widget>[
               TileLayerWidget(
                   options: TileLayerOptions(

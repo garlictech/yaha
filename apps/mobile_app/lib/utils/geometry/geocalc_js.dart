@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_js/flutter_js.dart';
+import 'package:turf/turf.dart';
 
 import '../../domain/entities/entities.dart';
 
@@ -12,6 +13,9 @@ abstract class GeocalcService {
       Location start, Location end, LineStringData path);
 
   Future<BoundingBox> boundingBoxOfPaths(List<LineStringData> paths);
+  Future<LineString> snappedLineSlice(
+      Location start, Location end, LineStringData path);
+  Future<num> approximateAltitude(Location pointOnLinee, LineStringData path);
 }
 
 class GeocalcJs implements GeocalcService {
@@ -45,5 +49,44 @@ class GeocalcJs implements GeocalcService {
             global.boundingBoxOfPaths([$pathStr]);""")).then((res) {
       return BoundingBox.fromJson(jsonDecode(res.stringResult));
     });
+  }
+
+  @override
+  snappedLineSlice(Location start, Location end, LineStringData path) async {
+    final pathStr = path.toLinestringFeatureString();
+    final startStr = start.toJson().toString();
+    final endStr = end.toJson().toString();
+
+    return _isLoaded
+        .then((_x) => _jsRuntime.evaluateAsync("""
+            global. snappedLineSlice($startStr, $endStr, $pathStr);"""))
+        .then((res) {
+      return LineString.fromJson(jsonDecode(res.stringResult)['geometry']);
+    });
+  }
+
+  @override
+  approximateAltitude(Location pointOnLinee, LineStringData path) async {
+    final firstPoint = (await snappedLineSlice(
+            Location(
+                lat: path.coordinates.first[1], lon: path.coordinates.first[0]),
+            pointOnLinee,
+            path))
+        .coordinates
+        .last;
+
+    final lastPoint = (await snappedLineSlice(
+            pointOnLinee,
+            Location(
+                lat: path.coordinates.last[1], lon: path.coordinates.last[0]),
+            path))
+        .coordinates
+        .first;
+
+    if (firstPoint[2] == null || lastPoint[2] == null) {
+      throw "Missing altitude!";
+    }
+
+    return (firstPoint[2]! + lastPoint[2]!) / 2;
   }
 }

@@ -14,3 +14,4 @@ export 'auth/oauth2-entity.dart';
 export 'comments/comment.dart';
 export 'hike/hiking-settings.dart';
 export 'shared/bounding_box.dart';
+export 'weather/weather.dart';

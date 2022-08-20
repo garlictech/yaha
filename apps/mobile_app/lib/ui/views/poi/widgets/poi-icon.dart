@@ -31,19 +31,20 @@ class PoiIcon extends StatelessWidget {
         child: svgPicture);
   }
 
-  static const _colorMap = {
-    "natural": Color(0xff108E4C),
-    "amenity": Color(0xff265DB2),
-    "public_ransport": Color(0xff9D7050),
-    "emergency": Color(0xffBF3638),
-    "historic": Color(0xff8D4EB8),
-    "leisure": Color(0xffFF8A21),
-    "man_made": Color(0xffC259B5),
-    "military": Color(0xffA8A8A8),
-    "shop": Color(0xff5DC8BD),
-    "tourism": Color(0xff66C547),
-    "sight": Color(0xff66C547),
-    "generic": Color(0xffFF8C00),
-    "yaha": Color(0xff000000)
+  static final _colorMap = {
+    "natural": const Color(0xff108E4C),
+    "amenity": const Color(0xff265DB2),
+    "public_ransport": const Color(0xff9D7050),
+    "emergency": const Color(0xffBF3638),
+    "historic": const Color(0xff8D4EB8),
+    "leisure": const Color(0xffFF8A21),
+    "man_made": const Color(0xffC259B5),
+    "military": const Color(0xffA8A8A8),
+    "shop": const Color(0xff5DC8BD),
+    "tourism": const Color(0xff66C547),
+    "sight": const Color(0xff66C547),
+    "generic": const Color(0xffFF8C00),
+    "yaha": Colors.red.shade300,
+    "weather": Colors.orange.shade300
   };
 }

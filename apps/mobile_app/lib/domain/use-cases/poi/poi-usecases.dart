@@ -65,16 +65,16 @@ final touristicPoisAlongHikeProvider =
   return PoiUtils.selectTouristicPois<PoiOfHike>(poisAlongHike);
 });
 
-final touristicPoisAlongHikeWithYahaPoisProvider =
+final importantPoisAlongHikeWithYahaPoisProvider =
     FutureProvider.family<List<PoiOfHike>, String>((ref, hikeId) async {
   final poisAlongHike = await ref
       .watch(touristicPoisAlongHikeSortedByDistanceProvider(hikeId).future);
   final endPoints = await ref.watch(endPointsOfHikeProvider(hikeId).future);
-  return [
-    endPoints.value1,
-    ...PoiUtils.selectTouristicPois<PoiOfHike>(poisAlongHike),
-    endPoints.value2
-  ];
+  final weatherPois = await ref.watch(weatherPoisOfHikeProvider(hikeId).future);
+  final sortedPois = await PoiUtils.sortByDistanceFromHikeStart(
+      PoiUtils.selectTouristicPois<PoiOfHike>(poisAlongHike) + weatherPois);
+
+  return [endPoints.value1, ...sortedPois, endPoints.value2];
 });
 
 final randomTouristicPoisAlongHikeProvider =
@@ -90,16 +90,5 @@ final touristicPoisAlongHikeSortedByDistanceProvider =
     FutureProvider.family<List<PoiOfHike>, String>((ref, hikeId) async {
   final poisAlongHike =
       await ref.watch(touristicPoisAlongHikeProvider(hikeId).future);
-  List<Tuple2<double, PoiOfHike>> forSorting = [];
-
-  for (var poi in poisAlongHike) {
-    final val = await poi.distanceFromStart;
-    forSorting.add(Tuple2(val, poi));
-  }
-
-  forSorting.sort((a, b) {
-    return a.value1.compareTo(b.value1);
-  });
-
-  return forSorting.map((t) => t.value2).toList();
+  return PoiUtils.sortByDistanceFromHikeStart(poisAlongHike);
 });
