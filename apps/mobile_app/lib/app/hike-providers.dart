@@ -5,7 +5,8 @@ import 'package:yaha/domain/domain.dart';
 import 'use-case-providers.dart';
 
 final hikeRepositoryProvider = Provider<HikeRepository>(
-  (ref) => HikeRepositoryAmplify(),
+//  (ref) => HikeRepositoryAmplify(),
+  (ref) => HikeRepositoryNeo4j(),
 );
 
 final bestHikesNearbyProvider = FutureProvider<List<Hike>>((ref) async {
