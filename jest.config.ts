@@ -14,6 +14,8 @@ module.exports = {
     '<rootDir>/libs/backend/hike-search/utils',
     '<rootDir>/libs/backend/amplify-resolvers',
     '<rootDir>/libs/backend/image-tagger',
+    '<rootDir>/libs/content',
+    '<rootDir>/libs/flutter-js',
   ],
   modulePaths: ['<rootDir>'],
 };
