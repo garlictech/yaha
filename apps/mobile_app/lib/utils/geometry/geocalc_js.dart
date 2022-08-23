@@ -59,7 +59,7 @@ class GeocalcJs implements GeocalcService {
 
     return _isLoaded
         .then((_x) => _jsRuntime.evaluateAsync("""
-            global. snappedLineSlice($startStr, $endStr, $pathStr);"""))
+            global.snappedLineSlice($startStr, $endStr, $pathStr);"""))
         .then((res) {
       return LineString.fromJson(jsonDecode(res.stringResult)['geometry']);
     });

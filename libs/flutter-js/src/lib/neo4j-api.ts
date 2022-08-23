@@ -13,8 +13,8 @@ const driver = neo4j.driver(
 
 const session = driver.session({ database: 'neo4j' });
 
-export const hikeSearchInCircle = () =>
-  defer(() =>
+const hikeSearchInCircle = async () =>
+  await defer(() =>
     session.writeTransaction(tx =>
       tx.run(`
         match (w:Waypoint) where point.distance(point({latitude: w.latitude, longitude: w.longitude}), point({latitude: 47.858627, longitude: 19.99034})) < 20000
@@ -25,3 +25,6 @@ export const hikeSearchInCircle = () =>
   )
     .pipe(map(x => JSON.stringify(x)))
     .toPromise();
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+(global as any).hikeSearchInCircle = hikeSearchInCircle;
