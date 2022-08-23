@@ -98,6 +98,6 @@ class PoiOfHike extends Poi {
     return (elevation as num) ?? (altitude_ ??= DeferStream(() => Stream.fromFuture(
                     geocalc.approximateAltitude(location, hike.route)))
             .shareReplay())
-        .last;*/
-  }
+        .last;
+  }*/
 }
