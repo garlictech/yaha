@@ -9,6 +9,8 @@
     "backend-shared-utils": "libs/backend/shared/utils",
     "cicd": "apps/cicd",
     "common-backend": "apps/common-backend",
+    "content": "libs/content",
+    "flutter-js": "libs/flutter-js",
     "gql-api": "libs/gql-api",
     "integration-tests-backend": "libs/integration-tests/backend",
     "js-api": "apps/js-api",
