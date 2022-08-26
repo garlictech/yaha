@@ -23,12 +23,12 @@ export class LambdaStack extends sst.Stack {
       ...commonLambdaProps,
       // It must be relative to the serverless.yml file
       functionName: `${scope.stage}-yaha-amplify-resolvers`,
-      handler: 'lib/lambda/amplify-resolvers/index.handler',
+      handler: 'index.handler',
+      code: lambda.Code.fromAsset(
+        path.join(__dirname, '../../build/amplify-resolvers'),
+      ),
       timeout: Duration.seconds(30),
       memorySize: 512,
-      code: lambda.Code.fromAsset(
-        path.join(__dirname, '../../.serverless/amplify-resolvers.zip'),
-      ),
       environment: {
         OPENSEARCH_ENDPOINT: AmplifyApiConfig.openSearchEndpoint,
         API_ACCESS_KEY_ID: props.apiAccessKeyId,

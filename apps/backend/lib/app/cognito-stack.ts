@@ -1,5 +1,4 @@
 import {
-  aws_lambda as lambda,
   aws_cognito as cognito,
   aws_iam as iam,
   aws_ssm as ssm,
@@ -8,8 +7,6 @@ import {
   RemovalPolicy,
 } from 'aws-cdk-lib';
 import { App, Stack, StackProps } from '@serverless-stack/resources';
-import path from 'path';
-import { commonLambdaProps } from './lambda-common';
 import { getFQParamName } from './utils';
 
 export interface CognitoStackProps extends StackProps {
@@ -367,8 +364,6 @@ export class CognitoStack extends Stack {
   }
 
   private createConsumerUserPool(app: App) {
-    const preSignUp = this.createConsumerPreSignupTriggerLambda();
-
     return new cognito.UserPool(this, 'ConsumerUserPool', {
       userPoolName: app.logicalPrefixedName('consumer-user-pool'),
       ...this.getCommonUserPoolProperties(),
@@ -417,9 +412,6 @@ export class CognitoStack extends Stack {
           required: false,
         },
       },
-      lambdaTriggers: {
-        preSignUp,
-      },
     });
   }
 
@@ -456,32 +448,6 @@ export class CognitoStack extends Stack {
     });
 
     return userPool;
-  }
-
-  private createConsumerPreSignupTriggerLambda() {
-    const lambdaFn = new lambda.Function(
-      this,
-      'ConsumerPreSignupTriggerLambda',
-      {
-        ...commonLambdaProps,
-        // It must be relative to the serverless.yml file
-        handler: 'lib/lambda/consumer-pre-signup/index.handler',
-        code: lambda.Code.fromAsset(
-          path.join(__dirname, '../../.serverless/consumer-pre-signup.zip'),
-        ),
-      },
-    );
-
-    if (lambdaFn.role) {
-      lambdaFn.role.addToPrincipalPolicy(
-        new iam.PolicyStatement({
-          actions: ['cognito-idp:ListUsers'],
-          resources: ['*'],
-        }),
-      );
-    }
-
-    return lambdaFn;
   }
 
   private configureIdentityPool(identityPool: cognito.CfnIdentityPool) {

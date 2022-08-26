@@ -29,9 +29,10 @@ const generatedParams = [
   'ConsumerWebUserPoolClientId',
   'ConsumerUserPoolDomain',
   'ConsumerUserPoolId',
+  'Neo4jOsmEndpoint',
 ].map(paramName => `/${prefix}/generated/${paramName}`);
 
-const fixParams = ['GoogleApiKey', 'FlickrApiKey', 'Neo4jOsmEndpoint'].map(
+const fixParams = ['GoogleApiKey', 'FlickrApiKey'].map(
   paramName => `/${prefix}/${paramName}`,
 );
 
@@ -66,35 +67,6 @@ pipe(
         config['Region'] = region;
         fs.writeFileSync(targetFile, JSON.stringify(config, null, 2));
         console.log(`Config written to ${targetFile}`);
-      }),
-      fp.tap(_config => {
-        /*const apiKeyName = Object.keys(amplifyConfig['api'])[0];
-        if (!amplifyConfig['storage']) {
-          throw Error(
-            'No bucket configured for this Amplify environment! amplify-meta.json must have a "bucket": section.',
-          );
-        }
-        const bucketKeyName = Object.keys(amplifyConfig['storage'])[0];
-        config['Region'] = region;
-        config['Stage'] = environment;
-        config['CrudGraphqlApiUrl'] =
-          amplifyConfig['api'][apiKeyName]['output'][
-          'GraphQLAPIEndpointOutput'
-          ];
-        config['CrudGraphqlApiKey'] =
-          amplifyConfig['api'][apiKeyName]['output']['GraphQLAPIKeyOutput'];
-        config['S3BucketName'] =
-          amplifyConfig['storage'][bucketKeyName]['output']['BucketName'];
-        console.log(config);
-
-        fs.writeFileSync(
-          mobileAppConfigurationFile,
-          `const AWSCONFIG = '''${JSON.stringify(config, null, 2)}''';`,
-        );
-        console.log(
-          `Mobile application config written to ${mobileAppConfigurationFile}`,
-        );
-        */
       }),
     ),
   ),
