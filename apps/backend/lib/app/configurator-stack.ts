@@ -15,9 +15,9 @@ export class ConfiguratorStack extends sst.Stack {
 
     const updaterLambda = new lambda.Function(this, 'YahaApiUpdaterLambda', {
       ...commonLambdaProps,
-      handler: 'lib/lambda/yaha-api-updater/index.handler',
+      handler: 'index.handler',
       code: lambda.Code.fromAsset(
-        path.join(__dirname, '../../.serverless/yaha-api-updater.zip'),
+        path.join(__dirname, '../../build/yaha-api-updater'),
       ),
     });
 

@@ -8,9 +8,9 @@
       "options": {
         "cwd": "apps/backend",
         "parallel": false,
-        "commands": ["yarn sls package --stage='{args.env}'"]
+        "commands": ["../../tools/build-backend.sh '{args.env}'"]
       },
-      "outputs": ["apps/backend/.serverless"]
+      "outputs": ["apps/backend/build"]
     },
     "synth": {
       "executor": "@nrwl/workspace:run-commands",

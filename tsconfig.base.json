@@ -18,7 +18,8 @@
     "importHelpers": true,
     "removeComments": true,
     "downlevelIteration": true,
-    "target": "es2015",
+    "noUnusedLocals": false,
+    "target": "es2020",
     "module": "esnext",
     "typeRoots": ["./typings", "./node_modules/@types"],
     "types": ["node", "jest"],
@@ -54,5 +55,13 @@
       "@yaha/shared/utils": ["libs/shared/utils/src/index.ts"]
     }
   },
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules",
+    "tmp",
+    "dist",
+    "artifacts",
+    ".git",
+    "cyreport",
+    "coverage"
+  ]
 }
