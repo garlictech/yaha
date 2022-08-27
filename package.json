@@ -143,5 +143,7 @@
     "apps/backend",
     "apps/common-backend"
   ],
-  "resolutions": {}
+  "resolutions": {
+    "fsevents": "1.2.13"
+  }
 }

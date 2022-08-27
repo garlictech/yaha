@@ -4,16 +4,16 @@ import 'package:yaha/utils/geometry/geocalc.dart';
 import '../../game-rules.dart';
 import '../shared/linestring.dart';
 import '../shared/location.dart';
-import '../shared/textual-description.dart';
+import '../shared/description.dart';
+import '../shared/route.dart';
 
 part 'hike.g.dart';
 
 @JsonSerializable()
 class Hike {
   final String id;
-  final List<TextualDescription> description;
-  final LineStringData route;
-  final String? closestPlace;
+  final List<Description> descriptions;
+  final Route route;
 
   @JsonKey(ignore: true)
   double? trailLength_;
@@ -32,9 +32,8 @@ class Hike {
 
   Hike({
     required this.id,
-    required this.description,
+    required this.descriptions,
     required this.route,
-    this.closestPlace,
   });
 
   double get trailLength =>
@@ -50,16 +49,16 @@ class Hike {
 
   int get score => score_ ??= GameRules.calculateScore(trailLength, uphill);
 
-  Location get startPoint => Location(
-      lon: route.coordinates.first[0], lat: route.coordinates.first[1]);
+  Location get startPoint =>
+      Location(lon: route.startPoint.longitude, lat: route.startPoint.latitude);
 
   Location get endPoint =>
-      Location(lon: route.coordinates.last[0], lat: route.coordinates.last[1]);
+      Location(lon: route.endPoint.longitude, lat: route.endPoint.latitude);
 
   String get title {
     const unknownTitle = 'Unknown Hike';
-    return description.isNotEmpty
-        ? (description.first.title ?? unknownTitle)
+    return descriptions.isNotEmpty
+        ? (descriptions.first.title ?? unknownTitle)
         : unknownTitle;
   }
 

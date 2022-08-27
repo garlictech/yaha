@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'textual-description.dart';
+part of 'description.dart';
 
 // **************************************************************************
 // FunctionalDataGenerator
 // **************************************************************************
 
-abstract class $TextualDescription {
-  const $TextualDescription();
+abstract class $Description {
+  const $Description();
 
   String get languageKey;
   String? get title;
@@ -15,14 +15,14 @@ abstract class $TextualDescription {
   String? get fullDescription;
   String get type;
 
-  TextualDescription copyWith({
+  Description copyWith({
     String? languageKey,
     String? title,
     String? summary,
     String? fullDescription,
     String? type,
   }) =>
-      TextualDescription(
+      Description(
         languageKey: languageKey ?? this.languageKey,
         title: title ?? this.title,
         summary: summary ?? this.summary,
@@ -30,9 +30,8 @@ abstract class $TextualDescription {
         type: type ?? this.type,
       );
 
-  TextualDescription copyUsing(
-      void Function(TextualDescription$Change change) mutator) {
-    final change = TextualDescription$Change._(
+  Description copyUsing(void Function(Description$Change change) mutator) {
+    final change = Description$Change._(
       this.languageKey,
       this.title,
       this.summary,
@@ -40,7 +39,7 @@ abstract class $TextualDescription {
       this.type,
     );
     mutator(change);
-    return TextualDescription(
+    return Description(
       languageKey: change.languageKey,
       title: change.title,
       summary: change.summary,
@@ -51,12 +50,12 @@ abstract class $TextualDescription {
 
   @override
   String toString() =>
-      "TextualDescription(languageKey: $languageKey, title: $title, summary: $summary, fullDescription: $fullDescription, type: $type)";
+      "Description(languageKey: $languageKey, title: $title, summary: $summary, fullDescription: $fullDescription, type: $type)";
 
   @override
   // ignore: avoid_equals_and_hash_code_on_mutable_classes
   bool operator ==(Object other) =>
-      other is TextualDescription &&
+      other is Description &&
       other.runtimeType == runtimeType &&
       languageKey == other.languageKey &&
       title == other.title &&
@@ -77,8 +76,8 @@ abstract class $TextualDescription {
   }
 }
 
-class TextualDescription$Change {
-  TextualDescription$Change._(
+class Description$Change {
+  Description$Change._(
     this.languageKey,
     this.title,
     this.summary,
@@ -94,30 +93,30 @@ class TextualDescription$Change {
 }
 
 // ignore: avoid_classes_with_only_static_members
-class TextualDescription$ {
-  static final languageKey = Lens<TextualDescription, String>(
+class Description$ {
+  static final languageKey = Lens<Description, String>(
     (languageKeyContainer) => languageKeyContainer.languageKey,
     (languageKeyContainer, languageKey) =>
         languageKeyContainer.copyWith(languageKey: languageKey),
   );
 
-  static final title = Lens<TextualDescription, String?>(
+  static final title = Lens<Description, String?>(
     (titleContainer) => titleContainer.title,
     (titleContainer, title) => titleContainer.copyWith(title: title),
   );
 
-  static final summary = Lens<TextualDescription, String?>(
+  static final summary = Lens<Description, String?>(
     (summaryContainer) => summaryContainer.summary,
     (summaryContainer, summary) => summaryContainer.copyWith(summary: summary),
   );
 
-  static final fullDescription = Lens<TextualDescription, String?>(
+  static final fullDescription = Lens<Description, String?>(
     (fullDescriptionContainer) => fullDescriptionContainer.fullDescription,
     (fullDescriptionContainer, fullDescription) =>
         fullDescriptionContainer.copyWith(fullDescription: fullDescription),
   );
 
-  static final type = Lens<TextualDescription, String>(
+  static final type = Lens<Description, String>(
     (typeContainer) => typeContainer.type,
     (typeContainer, type) => typeContainer.copyWith(type: type),
   );
@@ -127,8 +126,7 @@ class TextualDescription$ {
 // JsonSerializableGenerator
 // **************************************************************************
 
-TextualDescription _$TextualDescriptionFromJson(Map<String, dynamic> json) =>
-    TextualDescription(
+Description _$DescriptionFromJson(Map<String, dynamic> json) => Description(
       languageKey: json['languageKey'] as String,
       title: json['title'] as String?,
       summary: json['summary'] as String?,
@@ -136,7 +134,7 @@ TextualDescription _$TextualDescriptionFromJson(Map<String, dynamic> json) =>
       type: json['type'] as String,
     );
 
-Map<String, dynamic> _$TextualDescriptionToJson(TextualDescription instance) =>
+Map<String, dynamic> _$DescriptionToJson(Description instance) =>
     <String, dynamic>{
       'languageKey': instance.languageKey,
       'title': instance.title,

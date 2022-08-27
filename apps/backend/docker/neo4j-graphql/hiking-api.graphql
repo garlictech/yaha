@@ -1,0 +1,160 @@
+## ------ Generic types -----------------------------------------------------
+enum PublicationState {
+  draft
+  published
+  archived
+}
+
+enum LengthUnit {
+  imperial
+  metric
+}
+
+# ------ TEXTUAL DESCRIPTION -----------------------------------------------------
+enum DescriptionType {
+  markdown
+  html
+  plaintext
+}
+
+type Description {
+  languageKey: String!
+  title: String
+  summary: String
+  fullDescription: String
+  type: DescriptionType!
+}
+
+# ------ IMAGES -----------------------------------------------------
+type ImageInfo {
+  url: String!
+  width: Int
+  height: Int
+}
+
+type Image {
+  externalId: String!
+  original: ImageInfo!
+  card: ImageInfo!
+  thumbnail: ImageInfo!
+  attributions: String
+  labels: [String!]
+  tagged: Boolean
+  banned: Boolean
+}
+
+# ------ POIS -----------------------------------------------------
+enum PoiSource {
+  google
+  wikipedia
+  osmAmenity
+  osmNatural
+  osmRoute
+  osmPublicTransport
+  osmEmergency
+  osmHistoric
+  osmLeisure
+  osmManMade
+  osmMilitary
+  osmShop
+  osmTourism
+  mapillary
+  flickr
+}
+
+type PoiSourceObject {
+  objectType: PoiSource!
+  languageKey: String
+  objectId: String!
+  url: String
+}
+
+type Poi {
+  externalId: String
+  type: String
+  tags: [String!]
+  address: String
+  phoneFloat: String
+  openingHours: String
+}
+
+# ------ ROUTES -----------------------------------------------------
+type Location {
+  lat: Float!
+  lon: Float!
+}
+
+type BoundingBox {
+  NorthEast: Waypoint!
+  SouthWest: Waypoint!
+}
+
+# ------ GEO SEARCH -----------------------------------------------------
+enum PlaceType {
+  poi
+  hike
+  message
+  image
+}
+
+# ------ HIKES -----------------------------------------------------
+type HikeStopData {
+  poiId: ID!
+  description: [Description!]
+}
+
+type Checkpoint {
+  poiId: String
+  point: Waypoint
+}
+
+type Waypoint {
+  latitude: Float!
+  longitude: Float!
+  height: Float!
+}
+
+type Route {
+  id: String
+  coordinates: [Waypoint!]! @relationship(type: "CONTAINS", direction: OUT)
+  startPoint: Waypoint! @relationship(type: "STARTS", direction: OUT)
+  endPoint: Waypoint! @relationship(type: "ENDS", direction: OUT)
+}
+
+type Hike {
+  id: String
+  publicationState: PublicationState
+  featured: Boolean
+  rate: String
+  tags: [String]
+  route: Route! @relationship(type: "GOES_ON", direction: OUT)
+  descriptions: [Description!]! @relationship(type: "EXPLAINS", direction: IN)
+}
+
+# ------ PROFILES -----------------------------------------------------
+type Profile {
+  username: String!
+  birthDate: String
+  firstName: String
+  lastName: String
+  languages: [String!]
+  picture: String
+  phone: String
+}
+
+type Settings {
+  averageSpeed: Int
+  lengthUnit: LengthUnit
+}
+
+type Customer {
+  profile: Profile
+  settings: Settings
+  bookmarkedHikes: [ID]
+}
+
+enum GeoSearchableObjectType {
+  poi
+  hike
+  image
+}

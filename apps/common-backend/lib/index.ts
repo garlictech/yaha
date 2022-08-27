@@ -1,9 +1,15 @@
-import { aws_ec2 as ec2, aws_ssm as ssm, CfnOutput } from 'aws-cdk-lib';
+import {
+  aws_ec2 as ec2,
+  aws_ecs,
+  aws_ssm as ssm,
+  CfnOutput,
+} from 'aws-cdk-lib';
 import { App, Stack } from '@serverless-stack/resources';
 import {
   yahaVpcName,
   yahaVpcSecurityGroupParamName,
   yahaVpcIdParamName,
+  yahaFargateClusterName,
 } from '@yaha/backend/shared/utils';
 
 export class YahaCommonStack extends Stack {
@@ -11,6 +17,11 @@ export class YahaCommonStack extends Stack {
     super(scope, id);
 
     const vpc = new ec2.Vpc(this, yahaVpcName);
+
+    new aws_ecs.Cluster(this, 'YahaCluster', {
+      vpc,
+      clusterName: yahaFargateClusterName,
+    });
 
     new ssm.StringParameter(this, 'YahaVpcIdParam', {
       allowedPattern: '.*',

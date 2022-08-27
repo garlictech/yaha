@@ -1,7 +1,7 @@
 {
   "common-backend-yaha": {
-    "YahaVpcSecurityGroupOutput": "sg-040d32494dd25d9bf",
-    "YahaVpcSubnetOutput": "subnet-074bda49d548c1c67",
-    "YahaVpcIdOutput": "vpc-05253c74e21d43cda"
+    "YahaVpcSecurityGroupOutput": "sg-0fa253b563d18bc0b",
+    "YahaVpcSubnetOutput": "subnet-094d8b7b865ecbf2e",
+    "YahaVpcIdOutput": "vpc-02f52f9c6df26e8f9"
   }
 }

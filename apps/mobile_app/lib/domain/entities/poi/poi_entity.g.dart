@@ -190,9 +190,7 @@ Poi _$PoiFromJson(Map<String, dynamic> json) => Poi(
       location: Location.fromJson(json['location'] as Map<String, dynamic>),
       elevation: (json['elevation'] as num?)?.toDouble(),
       type: json['type'] as String? ?? "generic:unknown",
-      description: (json['description'] as List<dynamic>?)
-          ?.map((e) => TextualDescription.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      description: json['description'] as List<dynamic>?,
       openingHours: json['openingHours'] as String?,
       phoneNumber: json['phoneNumber'] as String?,
       address: json['address'] as String?,

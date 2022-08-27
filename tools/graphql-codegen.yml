@@ -1,10 +1,7 @@
 overwrite: true
 schema:
-  - libs/gql-api/src/schema/aws.graphql
-  - apps/mobile_app/amplify/backend/api/yaha/build/schema.graphql
-documents:
-  - libs/gql-api/src/lib/generated/graphql/*.ts
-  - libs/gql-api/src/gql-documents/*.graphql
+  - libs/gql-api/src/schema/neo4j-types.graphql
+  - apps/backend/docker/neo4j-graphql/hiking-api.graphql
 generates:
   libs/gql-api/src/lib/generated/yaha-api.ts:
     hooks:
