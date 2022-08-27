@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:amplify_flutter/amplify_flutter.dart';
-import 'package:flutter/foundation.dart';
 import 'package:yaha/data/utils/cache/cache.dart';
 import 'package:yaha/domain/domain.dart';
 

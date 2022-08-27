@@ -1,5 +1,9 @@
 import { aws_ssm as ssm, CfnOutput } from 'aws-cdk-lib';
 import * as sst from '@serverless-stack/resources';
+import {
+  yahaVpcSecurityGroupParamName,
+  yahaVpcIdParamName,
+} from '@yaha/backend/shared/utils';
 
 const rootAppName = 'yaha';
 
@@ -11,6 +15,8 @@ export class ParamsStack extends sst.Stack {
   public appleKeyId: string;
   public appleServiceId: string;
   public neo4jEndpoint: string;
+  public vpcId: string;
+  public securityGroupId: string;
 
   constructor(scope: sst.App, id: string) {
     super(scope, id);
@@ -105,6 +111,26 @@ export class ParamsStack extends sst.Stack {
     new CfnOutput(this, 'neo4jEndpointOutput', {
       value: this.neo4jEndpoint,
       exportName: app.logicalPrefixedName('neo4jEndpoint'),
+    });
+
+    this.vpcId = ssm.StringParameter.valueFromLookup(this, yahaVpcIdParamName);
+
+    new CfnOutput(this, 'vpcIdOutput', {
+      value: this.vpcId,
+      exportName: app.logicalPrefixedName('vpcId'),
+    });
+
+    this.securityGroupId = ssm.StringParameter.fromStringParameterAttributes(
+      this,
+      'yahaSecurityGroupName',
+      {
+        parameterName: yahaVpcSecurityGroupParamName,
+      },
+    ).stringValue;
+
+    new CfnOutput(this, 'securityGroupId', {
+      value: this.securityGroupId,
+      exportName: app.logicalPrefixedName('securityGroupId'),
     });
   }
 }

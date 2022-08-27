@@ -1,9 +1,10 @@
 import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:turf/turf.dart';
+import 'package:yaha/domain/entities/entities.dart';
 
 class GeoCalc {
-  static double lineLength(List<List<num>> coordinates) {
+  static double lineLength(List<Waypoint> coordinates) {
     double _calculateDistance(lat1, lon1, lat2, lon2) {
       var p = 0.017453292519943295;
       var c = cos;
@@ -13,21 +14,22 @@ class GeoCalc {
       return 12742 * asin(sqrt(a)) * 1000.0;
     }
 
-    var _length = 0.0;
+    var length = 0.0;
     for (var i = 0; i < coordinates.length - 1; i++) {
       var p1 = coordinates[i];
       var p2 = coordinates[i + 1];
-      _length += _calculateDistance(p1[1], p1[0], p2[1], p2[0]);
+      length += _calculateDistance(
+          p1.latitude, p1.longitude, p2.latitude, p2.longitude);
     }
 
-    return _length;
+    return length;
   }
 
   static double lineLengthByPositions(List<Position> coordinates) {
     return _opByPositions(coordinates, GeoCalc.lineLength);
   }
 
-  static double calculateUphill(List<List<num>> coordinates) {
+  static double calculateUphill(List<Waypoint> coordinates) {
     return _calculateHill(coordinates, (diff) => diff > 0, 1);
   }
 
@@ -35,7 +37,7 @@ class GeoCalc {
     return _opByPositions(coordinates, GeoCalc.calculateUphill);
   }
 
-  static double calculateDownhill(List<List<num>> coordinates) {
+  static double calculateDownhill(List<Waypoint> coordinates) {
     return _calculateHill(coordinates, (diff) => diff < 0, -1);
   }
 
@@ -44,11 +46,11 @@ class GeoCalc {
   }
 
   static double _calculateHill(
-      List<List<num>> coordinates, Function(num) bigEnough, num multiplier) {
+      List<Waypoint> coordinates, Function(num) bigEnough, num multiplier) {
     double sum = 0;
 
     for (var i = 1; i < coordinates.length; i++) {
-      final diff = coordinates[i][2] - coordinates[i - 1][2];
+      final diff = coordinates[i].height - coordinates[i - 1].height;
 
       if (bigEnough(diff)) {
         sum += diff * multiplier;

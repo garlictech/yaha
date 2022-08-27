@@ -26,11 +26,6 @@ import { addRouteToNeo4j } from '../libs/content/src';
 
 const domParser = new DOMParser();
 
-const sdk = getGraphqlSdkForIAM(
-  process.env.AWS_ACCESS_KEY_ID || 'AWS_ACCESS_KEY_ID NOT DEFINED',
-  process.env.AWS_SECRET_ACCESS_KEY || 'AWS_SECRET_ACCESS_KEY NOT DEFINED',
-);
-
 const googleMapsClient = new GoogleMapsClient({});
 
 const neo4jUsername = process.env.NEO4J_USERNAME || '';
@@ -49,21 +44,20 @@ const hikeIds = [
   //118158194, 20239810, 22601701, 22605620, 22668771, 22680751,
 ];
 
-const deps: ProcessRouteSegmentDeps = {
+const deps = {
   googleApiKey: process.env.GOOGLE_API_KEY || '',
   flickrApiKey: process.env.FLICKR_API_KEY || '',
   http: new HttpClientImpl(),
-  sdk,
   googleMapsClient: new GoogleMapsClient({}),
 };
 
+/*
 const processSegments = (segments: number[][][]) =>
   from(segments).pipe(
     concatMap(segment => processRouteSegment(deps)(segment)),
     tap(() => console.warn('One segment processed')),
     toArray(),
   );
-/*
 type Environment = {
   segments: Position[][];
   route: Route;
@@ -229,7 +223,6 @@ console.log('STARTING...');
 
 of(1)
   .pipe(
-    delay(3000),
     switchMap(() => from(hikeIds)),
     concatMap(routeId => fetchRoute(routeId)),
     toArray(),

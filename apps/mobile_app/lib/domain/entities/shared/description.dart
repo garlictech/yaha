@@ -1,11 +1,11 @@
 import 'package:functional_data/functional_data.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'textual-description.g.dart';
+part 'description.g.dart';
 
 @FunctionalData()
 @JsonSerializable()
-class TextualDescription extends $TextualDescription {
+class Description extends $Description {
   @override
   final String languageKey;
   @override
@@ -17,15 +17,15 @@ class TextualDescription extends $TextualDescription {
   @override
   final String type;
 
-  TextualDescription(
+  Description(
       {required this.languageKey,
       this.title,
       this.summary,
       this.fullDescription,
       required this.type});
 
-  factory TextualDescription.fromJson(Map<String, dynamic> json) =>
-      _$TextualDescriptionFromJson(json);
+  factory Description.fromJson(Map<String, dynamic> json) =>
+      _$DescriptionFromJson(json);
 
-  Map<String, dynamic> toJson() => _$TextualDescriptionToJson(this);
+  Map<String, dynamic> toJson() => _$DescriptionToJson(this);
 }

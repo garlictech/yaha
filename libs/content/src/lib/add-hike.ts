@@ -1,5 +1,5 @@
 import { Neo4jdeps } from './utils';
-import { defer, of } from 'rxjs';
+import { defer } from 'rxjs';
 import { pipe } from 'fp-ts/lib/function';
 import * as R from 'ramda';
 
@@ -15,7 +15,7 @@ const checkCoordinates = (coordinates: number[][]) =>
   R.tap(() =>
     coordinates.forEach((point, index) => {
       if (point.length != 3 || point[2] === undefined || point[2] === null) {
-        throw `Found invalid point at index : ${point}`;
+        throw `Found invalid point at index : ${index}`;
       }
     }),
   );
@@ -52,31 +52,31 @@ const createEndpointRelations = (coordinates: number[][]) =>
     coordinates.length - 1
   })`;
 
+const createDescription = (title: string, summary?: string) =>
+  `
+  merge (hikeDesc:Description {languageKey: "hu_HU", title: "${title}", summary: "${summary}"})
+  merge (hikeDesc)-[:EXPLAINS]->(hike)
+  `;
+
 export const addRouteToNeo4j =
   (deps: Neo4jdeps) => (coordinates: number[][], hikeData: HikeData) =>
     pipe(
       coordinates,
       checkCoordinates,
       () => `
-      create (route:Route {externalId: "${hikeData.externalId}"})
-      create (hike:Hike {externalId: "${hikeData.externalId}", title: "${hikeData.title}", languageKey: "${hikeData.languageKey}"})
+      merge (route:Route {id: "${hikeData.externalId}"})
+      merge (hike:Hike {id: "${hikeData.externalId}"})
       merge (hike)-[:GOES_ON]->(route)
       `,
-      res =>
-        R.isNil(hikeData.summary)
-          ? res
-          : res + `\nset hike.summary="${hikeData.summary}"`,
-      res =>
-        R.isNil(hikeData.description)
-          ? res
-          : res + `\nset hike.description="${hikeData.description}"`,
-      res =>
-        [
-          createWaypoints,
-          createNextRelations,
-          createContainsRelations,
-          createEndpointRelations,
-        ].reduce((prev, fv) => prev + '\n' + fv(coordinates), res),
+      res => res + createDescription(hikeData.title, hikeData.summary),
+      /*res =>
+      [
+        createWaypoints,
+        createNextRelations,
+        createContainsRelations,
+        createEndpointRelations,
+      ].reduce((prev, fv) => prev + '\n' + fv(coordinates), res),
+  */
       //query => of(query),
       query => defer(() => deps.session.writeTransaction(tx => tx.run(query))),
     );

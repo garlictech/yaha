@@ -8,9 +8,7 @@ part of 'hike.dart';
 
 Hike _$HikeFromJson(Map<String, dynamic> json) => Hike(
       id: json['id'] as String,
-      description: (json['description'] as List<dynamic>)
-          .map((e) => TextualDescription.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      description: json['description'] as List<dynamic>,
       route: LineStringData.fromJson(json['route'] as Map<String, dynamic>),
       closestPlace: json['closestPlace'] as String?,
     );
