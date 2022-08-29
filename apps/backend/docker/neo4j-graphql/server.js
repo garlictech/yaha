@@ -5,12 +5,11 @@ const fs = require('fs');
 const schemaFilename = `${__dirname}/hiking-api.graphql`;
 const typeDefs = fs.readFileSync(schemaFilename).toString('utf-8');
 
+console.log('Starting the server...');
 // (You may need to replace your connection details, username and password)
-const AURA_ENDPOINT =
-  process.env.NEO4J_URI || 'neo4j+s://cf48806f.databases.neo4j.io';
-const USERNAME = process.env.NEO4J_USERNAME || 'neo4j';
-const PASSWORD =
-  process.env.NEO4J_PASSWORD || 'LoaFhpCe4xTAvjTxBV4qh60POy4Hi7pC9n2DhhKPQdU';
+const AURA_ENDPOINT = process.env.NEO4J_URI;
+const USERNAME = process.env.NEO4J_USERNAME;
+const PASSWORD = process.env.NEO4J_PASSWORD;
 
 // Create Neo4j driver instance
 const driver = neo4j.driver(
@@ -35,7 +34,7 @@ neo4jGraphQL.getSchema().then(schema => {
   // Start ApolloServer
   server
     .listen({
-      port: 80,
+      port: 4000,
     })
     .then(({ url }) => {
       console.log(`GraphQL server ready at ${url}`);

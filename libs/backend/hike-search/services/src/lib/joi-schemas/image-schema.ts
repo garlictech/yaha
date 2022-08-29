@@ -2,10 +2,7 @@ import { YahaApi } from '@yaha/gql-api';
 import * as Joi from 'joi';
 
 import { validateSchema } from '../joi-validator';
-import {
-  coordinatesSchemaFragment,
-  poiSourceObjectSchema,
-} from './schema-utils';
+import { coordinatesSchemaFragment } from './schema-utils';
 
 const imageInfoSchema = {
   url: Joi.string().uri().required(),
@@ -23,7 +20,7 @@ export const createImageInputSchema = {
   original: Joi.object().keys(imageInfoSchema).required(),
   card: Joi.object().keys(imageInfoSchema).required(),
   thumbnail: Joi.object().keys(imageInfoSchema).required(),
-  sourceObject: Joi.object().keys(poiSourceObjectSchema).required(),
+  id: Joi.string(),
   attributions: Joi.string(),
   banned: Joi.boolean(),
   labels: Joi.array().items(Joi.object(imageLabelSchema)),
@@ -32,4 +29,4 @@ export const createImageInputSchema = {
 export const {
   validate: validateCreateImageInput,
   isType: isCreateImageInput,
-} = validateSchema<YahaApi.CreateImageInput>(createImageInputSchema);
+} = validateSchema<YahaApi.Image>(createImageInputSchema);

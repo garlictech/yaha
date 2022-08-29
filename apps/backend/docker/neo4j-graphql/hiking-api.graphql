@@ -114,9 +114,20 @@ type Waypoint {
   height: Float!
 }
 
+interface WaypointIndex @relationshipProperties {
+  orderIndex: [Int!]
+}
+
 type Route {
   id: String
-  coordinates: [Waypoint!]! @relationship(type: "CONTAINS", direction: OUT)
+  coordinates: [Waypoint!]!
+    @cypher(
+      statement: """
+      match (this)-[c:CONTAINS]->(w:Waypoint)
+      return w
+      order by c.orderIndex
+      """
+    )
   startPoint: Waypoint! @relationship(type: "STARTS", direction: OUT)
   endPoint: Waypoint! @relationship(type: "ENDS", direction: OUT)
 }

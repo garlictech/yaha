@@ -9,9 +9,9 @@ import { Option, fromNullable, mapNullable, map } from 'fp-ts/lib/Option';
 import { pipe } from 'fp-ts/lib/function';
 
 export function convertPointToTurfPoint<
-  POINT extends { lat: number; lon: number },
+  POINT extends { latitude: number; longitude: number },
 >(point: POINT): Feature<TurfPoint> {
-  return turfPoint([point.lon, point.lat]);
+  return turfPoint([point.longitude, point.latitude]);
 }
 
 export const convertGeojsonPositionToPoint = (
@@ -20,14 +20,14 @@ export const convertGeojsonPositionToPoint = (
   return {
     lat: geojsonPoint[1],
     lon: geojsonPoint[0],
-    elevation: geojsonPoint[2],
+    ele: geojsonPoint[2],
   };
 };
 
 export const convertPointToGeojsonPosition = (
   point: YahaApi.Point,
 ): Position => {
-  return [point.lon, point.lat, point.elevation as number];
+  return [point.lon, point.lat, point.ele as number];
 };
 
 export const convertGeojsonPositionToTurfPoint = (
@@ -45,7 +45,7 @@ export const convertGeojsonPointFeatureToPoint = (
     map((coordinates: Position) => ({
       lat: coordinates[1],
       lon: coordinates[0],
-      elevation: coordinates[2],
+      ele: coordinates[2],
     })),
   );
 };

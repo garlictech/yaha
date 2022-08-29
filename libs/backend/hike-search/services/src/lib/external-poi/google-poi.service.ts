@@ -14,7 +14,6 @@ import {
   take,
   toArray,
 } from 'rxjs/operators';
-import { ExternalPoiFp } from './lib/external-poi.fp';
 import { ExternalPoi } from './lib/types';
 import { YahaApi } from '@yaha/gql-api';
 import { HttpClient } from '../http';
@@ -72,12 +71,9 @@ export const { validate: validateGoogleData, isType: isGoogleData } =
 
 export const getGooglePois =
   (deps: GooglePoiDeps) =>
-  (
-    bounds: YahaApi.BoundingBox,
-    alreadyProcessedSourceObjectIds: string[] = [],
-  ): Observable<YahaApi.CreatePoiInput[]> => {
+  (bounds: YahaApi.BoundingBox): Observable<ExternalPoi[]> => {
     // eslint-disable-next-line prefer-rest-params
-    const resultOption: Option<Observable<YahaApi.CreatePoiInput[]>> = fptsPipe(
+    const resultOption: Option<Observable<ExternalPoi[]>> = fptsPipe(
       getCenterRadiusOfBox(bounds),
       fptsMap((circle: Circle) => {
         const url = `${PLACE_API_URL}/nearbysearch/json`;
@@ -113,24 +109,17 @@ export const getGooglePois =
           expand(({ pageToken }) => (pageToken ? getPage(pageToken) : EMPTY)),
           concatMap(({ items }) => items),
           toArray(),
-          switchMap(placeIds =>
-            _getPoiDetails(deps)(placeIds, alreadyProcessedSourceObjectIds),
-          ),
+          switchMap(placeIds => _getPoiDetails(deps)(placeIds)),
         );
       }),
     );
 
-    return isSome(resultOption)
-      ? resultOption.value
-      : of([] as YahaApi.CreatePoiInput[]);
+    return isSome(resultOption) ? resultOption.value : of([] as ExternalPoi[]);
   };
 
 const _getPoiDetails =
   (deps: GooglePoiDeps) =>
-  (
-    objectIds: string[],
-    alreadyProcessedSourceObjectIds: string[],
-  ): Observable<YahaApi.CreatePoiInput[]> => {
+  (objectIds: string[]): Observable<ExternalPoi[]> => {
     const pickUsedFields = (data: unknown, schema: unknown): GoogleData =>
       fp.flow(
         () => fp.keys(schema),
@@ -146,12 +135,8 @@ const _getPoiDetails =
     const createPoi = (data: GoogleData): ExternalPoi | undefined =>
       isGoogleData(data)
         ? {
-            sourceObject: {
-              objectType: YahaApi.PoiSource.google,
-              languageKey: 'en_US',
-              objectId: data.place_id,
-              url: data.website,
-            },
+            infoUrl: data.website,
+            externalId: `${YahaApi.PoiSource.google}:${data.place_id}`,
             address: data.formatted_address,
             phoneNumber: data.international_phone_number,
             openingHours: _.get(data, 'opening_hours.periods'),
@@ -159,35 +144,19 @@ const _getPoiDetails =
               lat: data.geometry.location.lat,
               lon: data.geometry.location.lng,
             },
-            description: [
-              {
-                languageKey: 'en_US',
-                title: data.name,
-                type: YahaApi.TextualDescriptionType.markdown,
-              },
-            ],
+            description: {
+              languageKey: 'en_US',
+              title: data.name,
+              type: YahaApi.DescriptionType.plaintext,
+            },
+
             type: data?.types?.[0],
-            elevation: -1,
-            id: '',
           }
         : undefined;
 
-    const newObjectIds = fp.flow(
-      fp.filter(
-        (objectId: string) =>
-          !fp.includes(
-            ExternalPoiFp.idFromSourceObject(
-              YahaApi.PoiSource.google,
-              objectId,
-            ),
-            alreadyProcessedSourceObjectIds,
-          ),
-      ),
-    )(objectIds);
-
     // execute search for the same place on different languages.
     // merge the descriptions
-    return fp.isEmpty(newObjectIds)
+    return fp.isEmpty(objectIds)
       ? of([])
       : forkJoin(
           fp.map((objectId: string) =>
@@ -216,6 +185,6 @@ const _getPoiDetails =
                   return of([]);
                 }),
               ),
-          )(newObjectIds),
+          )(objectIds),
         ).pipe(map(fp.flatten));
   };

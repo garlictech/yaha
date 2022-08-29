@@ -31,7 +31,6 @@ import { Client as GoogleMapsClient } from '@googlemaps/google-maps-services-js'
 const averageSpeed = 4; // KM/H
 
 export interface ProcessRouteSegmentDeps {
-  sdk: GraphqlSdk;
   googleApiKey: string;
   flickrApiKey: string;
   http: HttpClient;
