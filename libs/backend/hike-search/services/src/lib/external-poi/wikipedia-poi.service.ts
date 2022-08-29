@@ -65,7 +65,7 @@ const get =
                     {
                       languageKey,
                       title: _point.title,
-                      type: YahaApi.TextualDescriptionType.html,
+                      type: YahaApi.DescriptionType.html,
                     },
                   ],
                   sourceObject,
@@ -95,7 +95,7 @@ const _getPoiDetails =
     for (const lng of languageCodesShort) {
       const langPois = _.filter(
         pois,
-        p => p.description?.[0]?.languageKey === LanguageFp.shortToLocale(lng),
+        p => p.description?.languageKey === LanguageFp.shortToLocale(lng),
       );
 
       promises.push(_getPageExtracts(deps)(langPois, lng));
@@ -108,7 +108,8 @@ const _getPoiDetails =
 const _getPageExtracts =
   (deps: WikipediaDeps) =>
   async (_pois: ExternalPoi[], lng: string): Promise<ExternalPoi[]> => {
-    const _poiIds = _pois.map((p: ExternalPoi) => p.sourceObject?.objectId);
+    const getWikiId = (externalId: string) => externalId.split(':')[1];
+    const _poiIds = _pois.map((p: ExternalPoi) => getWikiId(p.externalId));
     const _chunks = _.chunk(_poiIds, 20);
 
     return interval(100)
@@ -135,13 +136,13 @@ const _getPageExtracts =
                     if (_exData.extract) {
                       const _targetPoi = _pois.find(p =>
                         fp.isEqual(
-                          p.sourceObject?.objectId,
+                          getWikiId(p.externalId),
                           _exData.pageid.toString(),
                         ),
                       );
 
-                      if (_targetPoi?.description?.[0]) {
-                        _targetPoi.description[0].summary = _exData.extract;
+                      if (_targetPoi?.description) {
+                        _targetPoi.description.summary = _exData.extract;
                       }
                     }
                   }

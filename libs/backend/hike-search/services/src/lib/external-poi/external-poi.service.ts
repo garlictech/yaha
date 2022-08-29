@@ -2,7 +2,7 @@ import { isCreateImageInput } from '../joi-schemas/image-schema';
 import * as fp from 'lodash/fp';
 import { forkJoin, from, Observable, of } from 'rxjs';
 import { catchError, delay, map, toArray, mergeMap } from 'rxjs/operators';
-import { ExternalPoi, OsmPoiTypes } from './lib/types';
+import { ExternalImage, ExternalPoi, OsmPoiTypes } from './lib/types';
 import { YahaApi } from '@yaha/gql-api';
 import { HttpClient } from '../http';
 import { getFlickrImages } from './flickr.service';
@@ -38,7 +38,6 @@ export const getExternalPois =
   (
     bounds: YahaApi.BoundingBox,
     allLanguages: string[],
-    alreadyProcessedSourceObjectIds: string[],
   ): Observable<ExternalPoi[]> =>
     forkJoin([
       getAllWikipediaPois(deps)(bounds, allLanguages),
@@ -46,7 +45,7 @@ export const getExternalPois =
       getGooglePois({
         apiKey: deps.googleApiKey,
         http: deps.http,
-      })(bounds, alreadyProcessedSourceObjectIds),
+      })(bounds),
     ]).pipe(
       map(
         fp.flow(
@@ -73,7 +72,7 @@ export const getExternalImages =
     bounds: YahaApi.BoundingBox,
     _allLanguages: string[],
     _alreadyProcessedSourceObjectIds: string[],
-  ): Observable<YahaApi.CreateImageInput[]> =>
+  ): Observable<ExternalImage[]> =>
     getFlickrImages(deps)(bounds).pipe(
       map(
         fp.flow(
@@ -90,7 +89,7 @@ export const getExternalImages =
       ),
       catchError(err => {
         console.error(`Error in external IMAGE fetch: ${err}`);
-        return of([] as YahaApi.CreateImageInput[]);
+        return of([] as ExternalImage[]);
       }),
     );
 

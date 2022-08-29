@@ -14,7 +14,9 @@ import { PathType } from '../interfaces';
 import * as O from 'fp-ts/lib/Option';
 import { pipe } from 'fp-ts/lib/function';
 
-export function distanceFromRoute<POINT extends { lat: number; lon: number }>(
+type PT = { latitude: number; longitude: number };
+
+export function distanceFromRoute<POINT extends PT>(
   point: POINT,
   path: Feature<LineString>,
 ): number {
@@ -27,10 +29,11 @@ export function distanceFromRoute<POINT extends { lat: number; lon: number }>(
 }
 
 /** Calculate the linestring between two snapped pontint of a linestring. First, snap all the points to the line, then return the slice between the snapped points.-m-20 */
-export function snappedLineSlice<
-  POINT1 extends { lat: number; lon: number },
-  POINT2 extends { lat: number; lon: number },
->(start: POINT1, end: POINT2, path: Feature<LineString>): Feature<LineString> {
+export function snappedLineSlice<POINT1 extends PT, POINT2 extends PT>(
+  start: POINT1,
+  end: POINT2,
+  path: Feature<LineString>,
+): Feature<LineString> {
   return lineSlice(
     convertPointToTurfPoint(start),
     convertPointToTurfPoint(end),
@@ -41,10 +44,11 @@ export function snappedLineSlice<
 /**
  * Snap points to the given line and return with the segment's length, plus the point distances from the path.
  */
-export function distanceOnLine<
-  POINT1 extends { lat: number; lon: number },
-  POINT2 extends { lat: number; lon: number },
->(start: POINT1, end: POINT2, path: Feature<LineString>): number {
+export function distanceOnLine<POINT1 extends PT, POINT2 extends PT>(
+  start: POINT1,
+  end: POINT2,
+  path: Feature<LineString>,
+): number {
   const startDistanceFromPath = distanceFromRoute(start, path);
   const endDistanceFromPath = distanceFromRoute(end, path);
   const pathBetweenSnappedPoints = snappedLineSlice(start, end, path);

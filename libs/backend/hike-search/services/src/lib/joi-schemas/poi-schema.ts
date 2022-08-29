@@ -3,7 +3,6 @@ import { YahaApi } from '@yaha/gql-api';
 import * as Joi from 'joi';
 import {
   coordinatesSchemaFragment,
-  poiSourceObjectSchema,
   textualDescriptionSchema,
 } from './schema-utils';
 
@@ -11,7 +10,7 @@ import {
 export const createPoiInputSchema = {
   elevation: Joi.number(),
   type: Joi.string(),
-  sourceObject: Joi.object(poiSourceObjectSchema),
+  id: Joi.string(),
   location: Joi.object(coordinatesSchemaFragment).required(),
   address: Joi.string(),
   phoneNumber: Joi.string(),
@@ -20,4 +19,4 @@ export const createPoiInputSchema = {
 };
 
 export const { validate: validateCreatePoiInput, isType: isCreatePoiInput } =
-  validateSchema<YahaApi.CreatePoiInput>(createPoiInputSchema);
+  validateSchema<YahaApi.Poi>(createPoiInputSchema);

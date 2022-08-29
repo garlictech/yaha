@@ -33,12 +33,14 @@ export const getPaddedBoundingBoxOfFeature = (
 
   return {
     SouthWest: {
-      lat: env[1] + padding,
-      lon: env[0] + padding,
+      latitude: env[1] + padding,
+      longitude: env[0] + padding,
+      height: 0,
     },
     NorthEast: {
-      lat: env[3] - padding,
-      lon: env[2] - padding,
+      latitude: env[3] - padding,
+      longitude: env[2] - padding,
+      height: 0,
     },
   };
 };
@@ -143,32 +145,64 @@ export const splitBoundingBox = (
       // Chech quarter rectangles
       splitBoundingBox(
         {
-          SouthWest: { lat: bounds.SouthWest.lat, lon: bounds.SouthWest.lon },
-          NorthEast: geo.center,
+          SouthWest: {
+            latitude: bounds.SouthWest.latitude,
+            longitude: bounds.SouthWest.longitude,
+            height: 0,
+          },
+          NorthEast: {
+            latitude: geo.center.lat,
+            longitude: geo.center.lon,
+            height: 0,
+          },
         },
         maxRadius,
         boundsArr,
       );
       splitBoundingBox(
         {
-          SouthWest: { lat: geo.center.lat, lon: bounds.SouthWest.lon },
-          NorthEast: { lat: bounds.NorthEast.lat, lon: geo.center.lon },
+          SouthWest: {
+            latitude: geo.center.lat,
+            longitude: bounds.SouthWest.longitude,
+            height: 0,
+          },
+          NorthEast: {
+            latitude: bounds.NorthEast.latitude,
+            longitude: geo.center.lon,
+            height: 0,
+          },
         },
         maxRadius,
         boundsArr,
       );
       splitBoundingBox(
         {
-          SouthWest: { lat: bounds.SouthWest.lat, lon: geo.center.lon },
-          NorthEast: { lat: geo.center.lat, lon: bounds.NorthEast.lon },
+          SouthWest: {
+            latitude: bounds.SouthWest.latitude,
+            longitude: geo.center.lon,
+            height: 0,
+          },
+          NorthEast: {
+            latitude: geo.center.lat,
+            longitude: bounds.NorthEast.longitude,
+            height: 0,
+          },
         },
         maxRadius,
         boundsArr,
       );
       splitBoundingBox(
         {
-          SouthWest: geo.center,
-          NorthEast: { lat: bounds.NorthEast.lat, lon: bounds.NorthEast.lon },
+          SouthWest: {
+            latitude: geo.center.lat,
+            longitude: geo.center.lon,
+            height: 0,
+          },
+          NorthEast: {
+            latitude: bounds.NorthEast.latitude,
+            longitude: bounds.NorthEast.longitude,
+            height: 0,
+          },
         },
         maxRadius,
         boundsArr,

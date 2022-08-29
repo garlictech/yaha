@@ -2,7 +2,6 @@
   "version": 2,
   "projects": {
     "backend": "apps/backend",
-    "backend-amplify-resolvers": "libs/backend/amplify-resolvers",
     "backend-hike-search-services": "libs/backend/hike-search/services",
     "backend-hike-search-utils": "libs/backend/hike-search/utils",
     "backend-image-tagger": "libs/backend/image-tagger",
@@ -13,7 +12,6 @@
     "flutter-js": "libs/flutter-js",
     "gql-api": "libs/gql-api",
     "integration-tests-backend": "libs/integration-tests/backend",
-    "js-api": "apps/js-api",
     "mobile_app": "apps/mobile_app",
     "shared-config": "libs/shared/config",
     "shared-graphql-api-client": "libs/shared/graphql/api-client",
