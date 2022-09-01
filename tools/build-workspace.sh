@@ -10,3 +10,4 @@ aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --
 
 yarn nx config shared-config --env=$ENVNAME
 yarn nx build backend --env=$ENVNAME
+yarn nx build gql-api --skip-nx-cache

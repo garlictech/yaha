@@ -3,7 +3,7 @@ import { Feature, LineString, Position } from '@turf/helpers';
 
 export interface Circle {
   radius: number;
-  center: YahaApi.Point;
+  center: YahaApi.Waypoint;
 }
 
 export type PathType = Feature<LineString>;

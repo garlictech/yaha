@@ -21,7 +21,7 @@ export type RouteTotals = typeof emptyRouteTotals;
 export interface RouteSegment extends RouteTotals {
   coordinates: Position[];
   difficulty: number;
-  endPoint: YahaApi.Point;
-  startPoint: YahaApi.Point;
+  endPoint: YahaApi.Waypoint;
+  startPoint: YahaApi.Waypoint;
   geojsonFeature: PathType;
 }

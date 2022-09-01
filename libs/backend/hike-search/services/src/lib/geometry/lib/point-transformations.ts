@@ -16,18 +16,18 @@ export function convertPointToTurfPoint<
 
 export const convertGeojsonPositionToPoint = (
   geojsonPoint: Position,
-): YahaApi.Point => {
+): YahaApi.Waypoint => {
   return {
-    lat: geojsonPoint[1],
-    lon: geojsonPoint[0],
-    ele: geojsonPoint[2],
+    latitude: geojsonPoint[1],
+    longitude: geojsonPoint[0],
+    height: geojsonPoint[2],
   };
 };
 
 export const convertPointToGeojsonPosition = (
-  point: YahaApi.Point,
+  point: YahaApi.Waypoint,
 ): Position => {
-  return [point.lon, point.lat, point.ele as number];
+  return [point.longitude, point.latitude, point.height];
 };
 
 export const convertGeojsonPositionToTurfPoint = (
@@ -38,14 +38,14 @@ export const convertGeojsonPositionToTurfPoint = (
 
 export const convertGeojsonPointFeatureToPoint = (
   point: Feature<TurfPoint>,
-): Option<YahaApi.Point> => {
+): Option<YahaApi.Waypoint> => {
   return pipe(
     fromNullable(point.geometry),
     mapNullable(geometry => geometry.coordinates),
     map((coordinates: Position) => ({
-      lat: coordinates[1],
-      lon: coordinates[0],
-      ele: coordinates[2],
+      latitude: coordinates[1],
+      longitude: coordinates[0],
+      height: coordinates[2],
     })),
   );
 };

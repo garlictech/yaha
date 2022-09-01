@@ -1,7 +1,5 @@
 overwrite: true
-schema:
-  - libs/gql-api/src/schema/neo4j-types.graphql
-  - apps/backend/docker/neo4j-graphql/hiking-api.graphql
+schema: https://dev.api.yaha.app/GraphQL
 generates:
   libs/gql-api/src/lib/generated/yaha-api.ts:
     hooks:

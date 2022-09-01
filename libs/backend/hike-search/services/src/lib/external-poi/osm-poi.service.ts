@@ -24,16 +24,16 @@ interface OsmPoiResponse {
 }
 
 const osmTypeMap = {
-  natural: YahaApi.PoiSource.osmnatural,
-  amenity: YahaApi.PoiSource.osmamenity,
-  public_transport: YahaApi.PoiSource.osmpublictransport,
-  emergency: YahaApi.PoiSource.osmemergency,
-  historic: YahaApi.PoiSource.osmhistoric,
-  leisure: YahaApi.PoiSource.osmleisure,
-  man_made: YahaApi.PoiSource.osmmanmade,
-  military: YahaApi.PoiSource.osmmilitary,
-  shop: YahaApi.PoiSource.osmshop,
-  tourism: YahaApi.PoiSource.osmtourism,
+  natural: 'osmnatural',
+  amenity: 'osmamenity',
+  public_transport: 'osmpublictransport',
+  emergency: 'osmemergency',
+  historic: 'osmhistoric',
+  leisure: 'osmleisure',
+  man_made: 'osmmanmade',
+  military: 'osmmilitary',
+  shop: 'osmshop',
+  tourism: 'osmtourism',
 };
 
 export interface OsmPoiDeps {

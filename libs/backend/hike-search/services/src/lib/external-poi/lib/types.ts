@@ -12,11 +12,7 @@ export interface ExternalPoi {
   address?: string;
   openingHours?: string;
   phoneNumber?: string;
-}
-
-export interface ImageDesc {
-  url: string;
-  width: number;
+  elevation?: number;
 }
 
 export interface ExternalImage {
@@ -25,9 +21,9 @@ export interface ExternalImage {
     lat: number;
     lon: number;
   };
-  original: ImageDesc;
-  card: ImageDesc;
-  thumbnail: ImageDesc;
+  original: string;
+  card: string;
+  thumbnail: string;
 }
 
 export enum OsmPoiTypes {

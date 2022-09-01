@@ -1,5 +1,0 @@
-type Point {
-  lat: Float!
-  lon: Float!
-  ele: Float
-}

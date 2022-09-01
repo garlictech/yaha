@@ -51,9 +51,10 @@ export const getExternalPois =
         fp.flow(
           fp.flattenDeep,
           filterTypesFv,
-          fp.tap(res =>
+          /*fp.tap(res =>
             console.warn('Number of external poi candidates:', res.length),
-          ),
+          ),*/
+          fp.tap(res => console.warn('externalPoi', res)),
           fp.filter(x => isCreatePoiInput(x)),
           fp.tap(res =>
             console.warn('Number of correct external pois:', res.length),
