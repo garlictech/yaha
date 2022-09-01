@@ -63,7 +63,7 @@ export const getCenterRadiusOfBox = (
   return pipe(
     midpoint(p1, p2),
     convertGeojsonPointFeatureToPoint,
-    chain((center: YahaApi.Point) =>
+    chain((center: YahaApi.Waypoint) =>
       some({
         radius: distance(p1, p2, { units: 'kilometers' }) * 500,
         center,
@@ -151,8 +151,8 @@ export const splitBoundingBox = (
             height: 0,
           },
           NorthEast: {
-            latitude: geo.center.lat,
-            longitude: geo.center.lon,
+            latitude: geo.center.latitude,
+            longitude: geo.center.longitude,
             height: 0,
           },
         },
@@ -162,13 +162,13 @@ export const splitBoundingBox = (
       splitBoundingBox(
         {
           SouthWest: {
-            latitude: geo.center.lat,
+            latitude: geo.center.latitude,
             longitude: bounds.SouthWest.longitude,
             height: 0,
           },
           NorthEast: {
             latitude: bounds.NorthEast.latitude,
-            longitude: geo.center.lon,
+            longitude: geo.center.longitude,
             height: 0,
           },
         },
@@ -179,11 +179,11 @@ export const splitBoundingBox = (
         {
           SouthWest: {
             latitude: bounds.SouthWest.latitude,
-            longitude: geo.center.lon,
+            longitude: geo.center.longitude,
             height: 0,
           },
           NorthEast: {
-            latitude: geo.center.lat,
+            latitude: geo.center.latitude,
             longitude: bounds.NorthEast.longitude,
             height: 0,
           },
@@ -194,8 +194,8 @@ export const splitBoundingBox = (
       splitBoundingBox(
         {
           SouthWest: {
-            latitude: geo.center.lat,
-            longitude: geo.center.lon,
+            latitude: geo.center.latitude,
+            longitude: geo.center.longitude,
             height: 0,
           },
           NorthEast: {

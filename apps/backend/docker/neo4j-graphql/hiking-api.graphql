@@ -26,17 +26,11 @@ type Description {
 }
 
 # ------ IMAGES -----------------------------------------------------
-type ImageInfo {
-  url: String!
-  width: Int
-  height: Int
-}
-
 type Image {
-  externalId: String!
-  original: ImageInfo!
-  card: ImageInfo!
-  thumbnail: ImageInfo!
+  id: String!
+  original: String!
+  card: String!
+  thumbnail: String!
   attributions: String
   labels: [String!]
   tagged: Boolean
@@ -62,52 +56,23 @@ enum PoiSource {
   flickr
 }
 
-type PoiSourceObject {
-  objectType: PoiSource!
-  languageKey: String
-  objectId: String!
-  url: String
-}
-
 type Poi {
-  externalId: String
+  id: String
   type: String
   tags: [String!]
   address: String
-  phoneFloat: String
+  phone: String
   openingHours: String
+  infoUrl: String
 }
 
 # ------ ROUTES -----------------------------------------------------
-type Location {
-  lat: Float!
-  lon: Float!
-}
-
 type BoundingBox {
   NorthEast: Waypoint!
   SouthWest: Waypoint!
 }
 
-# ------ GEO SEARCH -----------------------------------------------------
-enum PlaceType {
-  poi
-  hike
-  message
-  image
-}
-
 # ------ HIKES -----------------------------------------------------
-type HikeStopData {
-  poiId: ID!
-  description: [Description!]
-}
-
-type Checkpoint {
-  poiId: String
-  point: Waypoint
-}
-
 type Waypoint {
   latitude: Float!
   longitude: Float!

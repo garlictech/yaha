@@ -1,14 +1,12 @@
 import * as Joi from 'joi';
 
-export const textualDescriptionSchema = Joi.array().items(
-  Joi.object({
-    languageKey: Joi.string().required(),
-    title: Joi.string(),
-    summary: Joi.string(),
-    fullDescription: Joi.string(),
-    type: Joi.string().required(),
-  }),
-);
+export const textualDescriptionSchema = {
+  languageKey: Joi.string().required(),
+  title: Joi.string(),
+  summary: Joi.string(),
+  fullDescription: Joi.string(),
+  type: Joi.string().required(),
+};
 
 export const latitudeSchema = Joi.number().min(-90).max(90).precision(8);
 
@@ -21,7 +19,7 @@ export const coordinatesSchemaFragment = {
 
 export const pointSchema = Joi.object({
   ...coordinatesSchemaFragment,
-  elevation: Joi.number(),
+  height: Joi.number(),
 });
 
 export const checkpointSchema = Joi.alternatives().try(
@@ -37,7 +35,7 @@ export const poiSourceObjectSchema = {
 };
 
 export const descriptionSchemaFragment = {
-  description: textualDescriptionSchema.required(),
+  description: Joi.object(textualDescriptionSchema).required(),
 };
 
 // BoundingBox

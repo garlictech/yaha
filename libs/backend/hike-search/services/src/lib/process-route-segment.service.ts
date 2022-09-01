@@ -12,7 +12,7 @@ import { getElevationOfPointsFromGoogle } from './elevation';
 import { ImageFp } from './image.fp';
 import { RouteSegmentFp, RouteSegment, EBuffer } from './route-segment';
 import { DESCRIPTION_LANGUAGES_SHORT } from './language/language.fp';
-import { YahaApi, GraphqlSdk } from '@yaha/gql-api';
+import { YahaApi } from '@yaha/gql-api';
 import { getAllPaginatedData } from '@yaha/shared/graphql/api-client';
 import {
   ExternalPoi,

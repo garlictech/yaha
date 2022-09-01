@@ -28,7 +28,7 @@ export const PLACE_API_URL = 'https://maps.googleapis.com/maps/api/place';
 //const hiddenTypes = ['premise', 'political'];
 
 interface GoogleData {
-  objectType?: YahaApi.PoiSource;
+  objectType?: string;
   languageKey?: string;
   place_id: string;
   website?: string;
@@ -82,7 +82,7 @@ export const getGooglePois =
           fp.flow(
             () => ({
               params: {
-                location: `${circle.center.lat},${circle.center.lon}`,
+                location: `${circle.center.latitude},${circle.center.longitude}`,
                 radius: circle.radius.toString(),
                 key: deps.apiKey,
                 cahcheBreaker: _.uniqueId(Math.random().toString()),
@@ -136,7 +136,7 @@ const _getPoiDetails =
       isGoogleData(data)
         ? {
             infoUrl: data.website,
-            externalId: `${YahaApi.PoiSource.google}:${data.place_id}`,
+            externalId: `google:${data.place_id}`,
             address: data.formatted_address,
             phoneNumber: data.international_phone_number,
             openingHours: _.get(data, 'opening_hours.periods'),

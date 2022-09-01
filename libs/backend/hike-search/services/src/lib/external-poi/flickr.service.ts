@@ -1,9 +1,7 @@
 import * as fp from 'lodash/fp';
-import { EMPTY } from 'rxjs';
-import { concatMap, delay, expand, map, toArray } from 'rxjs/operators';
-import { GtrackDefaults } from '../defaults/defaults';
+import { EMPTY, Observable } from 'rxjs';
+import { concatMap, delay, expand, map, tap, toArray } from 'rxjs/operators';
 import { HttpClient } from '../http';
-import { Logger } from '../bunyan-logger';
 import { YahaApi } from '@yaha/gql-api';
 import { ExternalImage } from './lib/types';
 
@@ -13,20 +11,10 @@ const createImageObject = (data: any): ExternalImage => ({
     lat: data.latitude,
     lon: data.longitude,
   },
-  externalId: `${YahaApi.PoiSource.flickr}:${data.id}`,
-  original: {
-    // DOCS: https://www.flickr.com/services/api/misc.urls.html
-    url: data.url_o || data.url_k || data.url_h,
-    width: data.width_o || data.width_k || data.width_h,
-  },
-  card: {
-    url: data.url_z,
-    width: parseInt(data.width_z, 10) || GtrackDefaults.cardImageWidthInPixel(),
-  },
-  thumbnail: {
-    url: data.url_n,
-    width: parseInt(data.width_n, 10) || GtrackDefaults.thumbnailWidthInPixel(),
-  },
+  externalId: `flickr:${data.id}`,
+  original: data.url_o || data.url_k || data.url_h,
+  card: data.url_z,
+  thumbnail: data.url_n,
 });
 
 export interface FlickrPoiDeps {
@@ -35,13 +23,10 @@ export interface FlickrPoiDeps {
 }
 
 export const getFlickrImages =
-  (deps: FlickrPoiDeps) => (bounds: YahaApi.BoundingBox) => {
-    // eslint-disable-next-line prefer-rest-params
-    Logger.info(
-      `Flickr poi fetch started with params ${JSON.stringify(bounds, null, 2)}`,
-    );
-
+  (deps: FlickrPoiDeps) =>
+  (bounds: YahaApi.BoundingBox): Observable<ExternalImage[]> => {
     const url = 'https://api.flickr.com/services/rest/';
+    console.log('Start searching for flickr images...');
 
     const getPage = (page: number) =>
       fp.flow(
@@ -80,8 +65,8 @@ export const getFlickrImages =
 
     return getPage(1).pipe(
       expand(({ pageToken }) => (pageToken ? getPage(pageToken) : EMPTY)),
-      concatMap(({ items }) => items),
+      concatMap(({ items }) => items as ExternalImage[]),
       toArray(),
-      //buildRetryLogic({}),
+      tap(res => console.log(`Found ${res.length} flickr images`)),
     );
   };

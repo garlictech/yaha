@@ -5,7 +5,7 @@
 import axios from 'axios';
 import '@aws-amplify/datastore';
 import { defer, from, of } from 'rxjs';
-import { concatMap, map, delay, switchMap, tap, toArray } from 'rxjs/operators';
+import { concatMap, map, switchMap, tap, toArray } from 'rxjs/operators';
 import { DOMParser } from 'xmldom';
 const togeojson = require('@mapbox/togeojson');
 import * as r from 'ramda';
@@ -84,73 +84,12 @@ const fetchRoute = (routeId: number) => {
         },
       }),
     ),
-    tap(res => console.warn(res)),
-    //switchMap(processSegments),
-    /*    switchMap(
-      ({
-        hikeData,
-        segments,
-      }: {
-        hikeData: Partial<Hike>;
-        segments: Position[][];
-      }) =>
-        processSegments(segments).pipe(
-          tap(() => console.log('A segment is processed')),
-          toArray(),
-          tap((results: any[]) =>
-            console.log(`Processed ${results.length} segments`),
-          ),
-          delay(10000),
-          switchMap(() => getEnvironment(segments)),
-          switchMap(
-            ({
-              graphqlClient,
-              poiApiService,
-              route,
-              searchPolygon,
-              waypoints,
-              routeData,
-            }) =>
-              forkJoin([
-                getCityFromGoogle(route.startPoint),
-                resolveDataInPolygon<Poi>({
-                  searchPolygon,
-                  placeType: PlaceType.poi,
-                })({
-                  graphqlClient: graphqlClient.backendClient,
-                  queryExecutor: poiApiService.api.getWithQuery,
-                }),
-              ]).pipe(
-                map(([location, pois]) => ({ location, pois })),
-                map(sequenceS(E.either)),
-                switchMap(foldObservableEither),
-                map(({ location, pois }) =>
-                  pipe(
-                    CheckpointAdminFp.getCheckpoints(route, pois),
-                    checkpoints => ({
-                      ...hikeData,
-                      checkpoints,
-                      location,
-                      segments: waypoints,
-                      route: routeData,
-                    }),
-                  ),
-                ),
-                switchMap(newHike =>
-                  graphqlClient.backendClient.mutate(CreateHike, {
-                    input: newHike,
-                  }),
-                ),
-                tap(hike => console.log(`Hike created, id: ${hike.id}`)),
-              ),
-          ),
-          catchError(() => {
-            console.log('ERROR AT ROUTE ID ', routeId);
-            return of({});
-          }),
-        ),
-    ),*/
-    tap(() => console.log(`Hike upload result for route ${routeId} is OK`)),
+    toArray(),
+    tap(res =>
+      console.log(
+        `Hike upload result for route ${routeId} is OK, with ${res.length} segments.`,
+      ),
+    ),
   );
 };
 console.log('STARTING...');
@@ -160,6 +99,8 @@ of(1)
     switchMap(() => from(hikeIds)),
     concatMap(routeId => fetchRoute(routeId)),
     toArray(),
-    tap(() => session.close()),
   )
-  .subscribe(x => console.log(`PROCESSED ${x?.length ?? 0} HIKES.`));
+  .subscribe(x => {
+    console.log(`PROCESSED ${x?.length ?? 0} HIKES.`);
+    session.close();
+  });
