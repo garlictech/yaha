@@ -2,14 +2,13 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:yaha/utils/geometry/geocalc.dart';
 
 import '../../game-rules.dart';
-import '../shared/linestring.dart';
 import '../shared/location.dart';
 import '../shared/description.dart';
 import '../shared/route.dart';
 
 part 'hike.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Hike {
   final String id;
   final List<Description> descriptions;

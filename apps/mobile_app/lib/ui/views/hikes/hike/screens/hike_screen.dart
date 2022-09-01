@@ -136,7 +136,7 @@ class HikeScreen extends ConsumerWidget {
               ],
             );
             return YahaSliverAppBar(
-                title: hike.description.first.title ?? '', content: content);
+                title: hike.descriptions.first.title ?? '', content: content);
           }),
           SliverList(
             delegate: SliverChildBuilderDelegate(
@@ -157,7 +157,7 @@ class HikeScreen extends ConsumerWidget {
                           padding: const EdgeInsets.symmetric(
                               horizontal: YahaSpaceSizes.small),
                           child: HikeScreenDescription(
-                              summary: hike.description.first.summary ?? '')),
+                              summary: hike.descriptions.first.summary ?? '')),
                       Padding(
                           padding: const EdgeInsets.only(
                               bottom: YahaSpaceSizes.large),

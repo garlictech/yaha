@@ -1,62 +1,210 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-import 'package:yaha/data/utils/cache/cache.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:graphql/client.dart';
 import 'package:yaha/domain/domain.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter_js/flutter_js.dart';
+
+import '../../utils/cache/cache.dart';
+import '../repositories.dart';
 
 class HikeRepositoryNeo4j implements HikeRepository {
+  late final GraphQLClient client;
   final _hikeCache = DataCache();
-  final JavascriptRuntime _jsRuntime;
-  late Future<bool> _isLoaded;
-  static const username = "neo4j";
-  static const password = "LoaFhpCe4xTAvjTxBV4qh60POy4Hi7pC9n2DhhKPQdU";
-  static const apiUrl = "https://cf48806f.databases.neo4j.io/db/neo4j/tx";
+
+  HikeRepositoryNeo4j({required Ref ref}) {
+    client = ref.read(graphqlClientProvider);
+  }
 
   @override
   getHikeList() async {
-    return [];
+    const String query = r'''
+    query Hikes {
+      hikes {
+        id
+        route {
+          id
+          coordinates {
+            latitude
+            longitude
+            height
+          }
+          startPoint {
+            latitude
+            longitude
+            height
+          }
+          endPoint {
+            latitude
+            longitude
+            height
+          }
+        }
+        descriptions {
+          languageKey
+          title
+          summary
+          fullDescription
+          type
+        }
+      }
+    }''';
+
+    final QueryOptions options = QueryOptions(document: gql(query));
+    final QueryResult result = await client.query(options);
+
+    if (result.hasException) {
+      debugPrint(result.exception.toString());
+    }
+
+    var hikes = result.data != null
+        ? result.data!['hikes']
+            .map<Hike>((hike) => Hike.fromJson(hike))
+            .toList()
+        : const [];
+
+    hikes.forEach((hike) => _hikeCache.addData(hike.id, hike));
+    return hikes;
   }
 
   @override
   searchHikeByRadius(SearchHikeByRadiusInput input) async {
-    final inputStr = input.toJson().toString();
+    const String query = r'''
+    query Hikes {
+      hikes {
+        id
+      }
+    }''';
 
-    return _isLoaded.then((_x) => _jsRuntime.evaluateAsync("""
-            global.searchHikeByRadius($inputStr);""")).then((res) {
-      return jsonDecode(res.stringResult);
-    });
-    String basicAuth =
-        'Basic ${base64.encode(utf8.encode('$username:$password'))}';
-    return Dio()
-        .post(apiUrl,
-            data: {
-              'statements': [
-                {
-                  'statement': """
-              match (w:Waypoint) where point.distance(point({latitude: w.latitude, longitude: w.longitude}), point({latitude: 47.858627, longitude: 19.99034})) < 20000
-match (h:Hike)-[:GOES_ON]->(:Route)-[:CONTAINS]->(w)
-return collect(distinct h) limit 25
-            """
-                }
-              ]
-            },
-            options:
-                Options(headers: <String, String>{'authorization': basicAuth}))
-        .then((result) {
-      debugPrint("$result");
-      return [];
-    });
+    final QueryOptions options = QueryOptions(document: gql(query));
+    final QueryResult result = await client.query(options);
+
+    if (result.hasException) {
+      debugPrint(result.exception.toString());
+    }
+
+    final List<String> hikeIds = result.data != null
+        ? (result.data!['hikes'] as List<dynamic>).map((hike) {
+            return hike['id'] as String;
+          }).toList()
+        : const [];
+
+    return hikeIds;
   }
 
   @override
   getHike(String id) async {
-    return null;
+    if (_hikeCache.containsKey(id)) {
+      return _hikeCache.getData(id);
+    }
+
+    const String query = r'''
+    query Hikes($where: HikeWhere) {
+      hikes(where: $where) {
+        id
+        route {
+          id
+          coordinates {
+            latitude
+            longitude
+            height
+          }
+          startPoint {
+            latitude
+            longitude
+            height
+          }
+          endPoint {
+            latitude
+            longitude
+            height
+          }
+        }
+        descriptions {
+          languageKey
+          title
+          summary
+          fullDescription
+          type
+        }
+      }
+    }''';
+
+    final QueryOptions options =
+        QueryOptions(document: gql(query), variables: <String, dynamic>{
+      "where": {"id": id}
+    });
+
+    final QueryResult result = await client.query(options);
+
+    if (result.hasException) {
+      debugPrint(result.exception.toString());
+    }
+
+    final hikeData = result.data?['hikes']?[0];
+
+    if (hikeData != null) {
+      final hike = Hike.fromJson(result.data!['hikes']![0]);
+      _hikeCache.addData(id, hike);
+      return hike;
+    } else {
+      return null;
+    }
   }
 
   @override
   searchHikeByContent(SearchByContentInput input) async {
-    return [];
+    const String query = r'''
+    query Hikes($where: HikeWhere) {
+      hikes(where: $where) {
+        id
+        route {
+          id
+          coordinates {
+            latitude
+            longitude
+            height
+          }
+          startPoint {
+            latitude
+            longitude
+            height
+          }
+          endPoint {
+            latitude
+            longitude
+            height
+          }
+        }
+        descriptions {
+          languageKey
+          title
+          summary
+          fullDescription
+          type
+        }
+      }
+    }''';
+
+    final QueryOptions options =
+        QueryOptions(document: gql(query), variables: <String, dynamic>{
+      "where": {
+        "descriptions_SOME": {"title_CONTAINS": input.content}
+      }
+    });
+
+    final QueryResult result = await client.query(options);
+
+    if (result.hasException) {
+      debugPrint(result.exception.toString());
+    }
+
+    final hikeData = result.data?['hikes'];
+    var hikes = hikeData != null
+        ? jsonDecode(hikeData).map<Hike>((hike) => Hike.fromJson(hike)).toList()
+        : const [];
+
+    hikes.forEach((hike) => _hikeCache.addData(hike.id, hike));
+    return hikes;
   }
 }
