@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:collection/collection.dart';
 import '../../../../../app/providers.dart';
-import '/app/geolocation-providers.dart';
 
 import '../../../../../domain/entities/entities.dart';
 import '../../../../presenters/map/map.dart';
@@ -44,7 +43,8 @@ class LeafletMapState extends ConsumerState<LeafletMap> {
     final geocalc = ref.read(geoCalcProvider);
 
     final Future<LatLngBounds> bounds = geocalc
-        .boundingBoxOfPaths(widget.hikes.map((hike) => hike.route).toList())
+        .boundingBoxOfPaths(
+            widget.hikes.map((hike) => hike.route.asLineString).toList())
         .then((boundingBox) {
       return LatLngBounds(
           LatLng(boundingBox.SouthWest.lat, boundingBox.SouthWest.lon),
@@ -101,7 +101,8 @@ class LeafletMapState extends ConsumerState<LeafletMap> {
               borderColor: Colors.blue,
               borderStrokeWidth: 1,
               points: hike.route.coordinates
-                  .map<LatLng>((coord) => LatLng(coord[1], coord[0]))
+                  .map<LatLng>(
+                      (coord) => LatLng(coord.latitude, coord.longitude))
                   .toList()))
           .toList();
 

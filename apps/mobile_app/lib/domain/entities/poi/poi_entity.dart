@@ -6,7 +6,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:yaha/domain/entities/poi/supported_pois.dart';
 
 import '../shared/location.dart';
-import '../shared/textual-description.dart';
+import '../shared/description.dart';
 import 'poi_type.dart';
 import '/utils/string.dart';
 
@@ -28,7 +28,7 @@ class Poi extends $Poi {
   final String type;
   @override
   @CustomEquality(Ignore())
-  final List<TextualDescription>? description;
+  final List<Description>? description;
   @override
   @CustomEquality(Ignore())
   final List<String>? tags;

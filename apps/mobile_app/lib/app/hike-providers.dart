@@ -6,7 +6,7 @@ import 'use-case-providers.dart';
 
 final hikeRepositoryProvider = Provider<HikeRepository>(
 //  (ref) => HikeRepositoryAmplify(),
-  (ref) => HikeRepositoryNeo4j(),
+  (ref) => HikeRepositoryNeo4j(ref: ref),
 );
 
 final bestHikesNearbyProvider = FutureProvider<List<Hike>>((ref) async {

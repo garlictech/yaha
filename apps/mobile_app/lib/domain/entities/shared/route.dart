@@ -1,27 +1,32 @@
-import 'package:functional_data/functional_data.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:yaha/domain/domain.dart';
 
 part 'route.g.dart';
 
-@FunctionalData()
-@JsonSerializable()
-class Route extends $Route {
-  @override
-  final String externalId;
-  @override
+@JsonSerializable(explicitToJson: true)
+class Route {
+  final String id;
   final List<Waypoint> coordinates;
-  @override
   final Waypoint startPoint;
-  @override
   final Waypoint endPoint;
 
-  const Route({
-    required this.externalId,
+  @JsonKey(ignore: true)
+  LineStringData? _asLineString;
+
+  Route({
+    required this.id,
     required this.coordinates,
     required this.startPoint,
     required this.endPoint,
   });
+
+  LineStringData get asLineString {
+    return _asLineString ??= LineStringData(
+        type: "LineString",
+        coordinates: coordinates
+            .map((coord) => [coord.longitude, coord.latitude, coord.height])
+            .toList());
+  }
 
   factory Route.fromJson(Map<String, dynamic> json) => _$RouteFromJson(json);
 

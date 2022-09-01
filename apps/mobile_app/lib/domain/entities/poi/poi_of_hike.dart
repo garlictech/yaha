@@ -42,13 +42,14 @@ class PoiOfHike extends Poi {
 
   Stream<LineString> get lineSliceFromStart {
     return lineSliceFromStart_ ??= DeferStream(() => Stream.fromFuture(
-            geocalc.snappedLineSlice(hike.startPoint, location, hike.route)))
-        .shareReplay();
+        geocalc.snappedLineSlice(
+            hike.startPoint, location, hike.route.asLineString))).shareReplay();
   }
 
   Future<double> get distanceFromStart async {
     return (distanceFromStart_ ??= DeferStream(() => Stream.fromFuture(
-                geocalc.distanceOnLine(hike.startPoint, location, hike.route)))
+                geocalc.distanceOnLine(
+                    hike.startPoint, location, hike.route.asLineString)))
             .shareReplay())
         .last;
   }

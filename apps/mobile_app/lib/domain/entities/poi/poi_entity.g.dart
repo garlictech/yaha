@@ -13,7 +13,7 @@ abstract class $Poi {
   Location get location;
   double? get elevation;
   String get type;
-  List<TextualDescription>? get description;
+  List<Description>? get description;
   List<String>? get tags;
   String? get address;
   String? get phoneNumber;
@@ -24,7 +24,7 @@ abstract class $Poi {
     Location? location,
     double? elevation,
     String? type,
-    List<TextualDescription>? description,
+    List<Description>? description,
     List<String>? tags,
     String? address,
     String? phoneNumber,
@@ -121,7 +121,7 @@ class Poi$Change {
   Location location;
   double? elevation;
   String type;
-  List<TextualDescription>? description;
+  List<Description>? description;
   List<String>? tags;
   String? address;
   String? phoneNumber;
@@ -152,7 +152,7 @@ class Poi$ {
     (typeContainer, type) => typeContainer.copyWith(type: type),
   );
 
-  static final description = Lens<Poi, List<TextualDescription>?>(
+  static final description = Lens<Poi, List<Description>?>(
     (descriptionContainer) => descriptionContainer.description,
     (descriptionContainer, description) =>
         descriptionContainer.copyWith(description: description),
@@ -190,7 +190,9 @@ Poi _$PoiFromJson(Map<String, dynamic> json) => Poi(
       location: Location.fromJson(json['location'] as Map<String, dynamic>),
       elevation: (json['elevation'] as num?)?.toDouble(),
       type: json['type'] as String? ?? "generic:unknown",
-      description: json['description'] as List<dynamic>?,
+      description: (json['description'] as List<dynamic>?)
+          ?.map((e) => Description.fromJson(e as Map<String, dynamic>))
+          .toList(),
       openingHours: json['openingHours'] as String?,
       phoneNumber: json['phoneNumber'] as String?,
       address: json['address'] as String?,
