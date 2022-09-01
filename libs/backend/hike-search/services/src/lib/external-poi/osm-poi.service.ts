@@ -24,16 +24,16 @@ interface OsmPoiResponse {
 }
 
 const osmTypeMap = {
-  natural: YahaApi.PoiSource.osmnatural,
-  amenity: YahaApi.PoiSource.osmamenity,
-  public_transport: YahaApi.PoiSource.osmpublictransport,
-  emergency: YahaApi.PoiSource.osmemergency,
-  historic: YahaApi.PoiSource.osmhistoric,
-  leisure: YahaApi.PoiSource.osmleisure,
-  man_made: YahaApi.PoiSource.osmmanmade,
-  military: YahaApi.PoiSource.osmmilitary,
-  shop: YahaApi.PoiSource.osmshop,
-  tourism: YahaApi.PoiSource.osmtourism,
+  natural: 'osmnatural',
+  amenity: 'osmamenity',
+  public_transport: 'osmpublictransport',
+  emergency: 'osmemergency',
+  historic: 'osmhistoric',
+  leisure: 'osmleisure',
+  man_made: 'osmmanmade',
+  military: 'osmmilitary',
+  shop: 'osmshop',
+  tourism: 'osmtourism',
 };
 
 export interface OsmPoiDeps {
@@ -54,15 +54,15 @@ export const getOsmPois =
         <union into="_">
           <query into="_" type="node">
             <has-kv k="${typeParam}" modv="" v=""/>
-            <bbox-query e="${bounds.NorthEast.lon}" into="_" n="${bounds.NorthEast.lat}" s="${bounds.SouthWest.lat}" w="${bounds.SouthWest.lon}"/>
+            <bbox-query e="${bounds.NorthEast.longitude}" into="_" n="${bounds.NorthEast.latitude}" s="${bounds.SouthWest.latitude}" w="${bounds.SouthWest.longitude}"/>
           </query>
           <query into="_" type="way">
             <has-kv k="${typeParam}" modv="" v=""/>
-            <bbox-query e="${bounds.NorthEast.lon}" into="_" n="${bounds.NorthEast.lat}" s="${bounds.SouthWest.lat}" w="${bounds.SouthWest.lon}"/>
+            <bbox-query e="${bounds.NorthEast.longitude}" into="_" n="${bounds.NorthEast.latitude}" s="${bounds.SouthWest.latitude}" w="${bounds.SouthWest.longitude}"/>
           </query>
           <query into="_" type="relation">
             <has-kv k="${typeParam}" modv="" v=""/>
-            <bbox-query e="${bounds.NorthEast.lon}" into="_" n="${bounds.NorthEast.lat}" s="${bounds.SouthWest.lat}" w="${bounds.SouthWest.lon}"/>
+            <bbox-query e="${bounds.NorthEast.longitude}" into="_" n="${bounds.NorthEast.latitude}" s="${bounds.SouthWest.latitude}" w="${bounds.SouthWest.longitude}"/>
           </query>
         </union>
         <print e="" from="_" geometry="skeleton" limit="" mode="body" n="" order="id" s="" w=""/>
@@ -90,26 +90,18 @@ export const getOsmPois =
             fp.map((_point: OsmPoiResponse) => {
               const type = _.get(_point.tags, typeParam);
 
-              const sourceObject = {
-                objectType: osmTypeMap[typeParam],
-                languageKey,
-                objectId: _point.id.toString(),
-              };
-
               return {
                 location: {
                   lat: _point.lat,
                   lon: _point.lon,
                 },
                 type: `${typeParam}:${type}`,
-                description: [
-                  {
-                    languageKey,
-                    title: _point.tags.name,
-                    type: YahaApi.TextualDescriptionType.markdown,
-                  },
-                ],
-                sourceObject,
+                description: {
+                  languageKey,
+                  title: _point.tags.name,
+                  type: YahaApi.DescriptionType.plaintext,
+                },
+                externalId: `${osmTypeMap[typeParam]}:${_point.id.toString()}`,
               } as ExternalPoi;
             }),
           )(response),

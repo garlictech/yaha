@@ -10,7 +10,6 @@ import { YahaApi } from '@yaha/gql-api';
 import { LanguageFp } from '../language';
 import { buildRetryLogic } from '@yaha/shared/utils';
 import { HttpClient } from '../http';
-import { Logger } from '../bunyan-logger';
 
 export interface WikipediaDeps {
   http: HttpClient;
@@ -31,7 +30,7 @@ const get =
         const radius = Math.floor(circle.radius);
 
         // eslint:disable:max-line-length
-        const request = `https://${lng}.wikipedia.org/w/api.php?action=query&list=geosearch&gsradius=${radius}&gscoord=${circle.center.lat}%7C${circle.center.lon}&format=json&gslimit=${gsLimit}&origin=*`;
+        const request = `https://${lng}.wikipedia.org/w/api.php?action=query&list=geosearch&gsradius=${radius}&gscoord=${circle.center.latitude}%7C${circle.center.longitude}&format=json&gslimit=${gsLimit}&origin=*`;
 
         // Get basic poi list
         return deps.http.get(request).pipe(
@@ -48,27 +47,19 @@ const get =
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 title: any;
               }) => {
-                const sourceObject = {
-                  objectType: YahaApi.PoiSource.wikipedia,
-                  languageKey,
-                  objectId: _point.pageid.toString(),
-                  url: `https://${lng}.wikipedia.org/?curid=${_point.pageid}`,
-                };
-
                 return {
                   location: {
                     lat: _point.lat,
                     lon: _point.lon,
                   },
                   type: 'tourism:sight',
-                  description: [
-                    {
-                      languageKey,
-                      title: _point.title,
-                      type: YahaApi.TextualDescriptionType.html,
-                    },
-                  ],
-                  sourceObject,
+                  infoUrl: `https://${lng}.wikipedia.org/?curid=${_point.pageid}`,
+                  description: {
+                    languageKey,
+                    title: _point.title,
+                    type: YahaApi.DescriptionType.html,
+                  },
+                  externalId: `wikipedia:${_point.pageid.toString()}`,
                 };
               },
             ),
@@ -95,7 +86,7 @@ const _getPoiDetails =
     for (const lng of languageCodesShort) {
       const langPois = _.filter(
         pois,
-        p => p.description?.[0]?.languageKey === LanguageFp.shortToLocale(lng),
+        p => p.description?.languageKey === LanguageFp.shortToLocale(lng),
       );
 
       promises.push(_getPageExtracts(deps)(langPois, lng));
@@ -108,7 +99,8 @@ const _getPoiDetails =
 const _getPageExtracts =
   (deps: WikipediaDeps) =>
   async (_pois: ExternalPoi[], lng: string): Promise<ExternalPoi[]> => {
-    const _poiIds = _pois.map((p: ExternalPoi) => p.sourceObject?.objectId);
+    const getWikiId = (externalId: string) => externalId.split(':')[1];
+    const _poiIds = _pois.map((p: ExternalPoi) => getWikiId(p.externalId));
     const _chunks = _.chunk(_poiIds, 20);
 
     return interval(100)
@@ -135,13 +127,13 @@ const _getPageExtracts =
                     if (_exData.extract) {
                       const _targetPoi = _pois.find(p =>
                         fp.isEqual(
-                          p.sourceObject?.objectId,
+                          getWikiId(p.externalId),
                           _exData.pageid.toString(),
                         ),
                       );
 
-                      if (_targetPoi?.description?.[0]) {
-                        _targetPoi.description[0].summary = _exData.extract;
+                      if (_targetPoi?.description) {
+                        _targetPoi.description.summary = _exData.extract;
                       }
                     }
                   }
@@ -163,14 +155,6 @@ export const getAllWikipediaPois =
     bounds: YahaApi.BoundingBox,
     languageCodesShort: string[],
   ): Observable<ExternalPoi[]> => {
-    // eslint-disable-next-line prefer-rest-params
-    Logger.info(
-      `Wikipedia poi fetch started with params ${JSON.stringify(
-        [bounds, languageCodesShort],
-        null,
-        2,
-      )}`,
-    );
     const boundsArr: YahaApi.BoundingBox[] = [];
     splitBoundingBox(bounds, 10000, boundsArr);
     const _observables: Observable<ExternalPoi[]>[] = _.flatten(

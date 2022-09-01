@@ -9,25 +9,25 @@ import { Option, fromNullable, mapNullable, map } from 'fp-ts/lib/Option';
 import { pipe } from 'fp-ts/lib/function';
 
 export function convertPointToTurfPoint<
-  POINT extends { lat: number; lon: number },
+  POINT extends { latitude: number; longitude: number },
 >(point: POINT): Feature<TurfPoint> {
-  return turfPoint([point.lon, point.lat]);
+  return turfPoint([point.longitude, point.latitude]);
 }
 
 export const convertGeojsonPositionToPoint = (
   geojsonPoint: Position,
-): YahaApi.Point => {
+): YahaApi.Waypoint => {
   return {
-    lat: geojsonPoint[1],
-    lon: geojsonPoint[0],
-    elevation: geojsonPoint[2],
+    latitude: geojsonPoint[1],
+    longitude: geojsonPoint[0],
+    height: geojsonPoint[2],
   };
 };
 
 export const convertPointToGeojsonPosition = (
-  point: YahaApi.Point,
+  point: YahaApi.Waypoint,
 ): Position => {
-  return [point.lon, point.lat, point.elevation as number];
+  return [point.longitude, point.latitude, point.height];
 };
 
 export const convertGeojsonPositionToTurfPoint = (
@@ -38,14 +38,14 @@ export const convertGeojsonPositionToTurfPoint = (
 
 export const convertGeojsonPointFeatureToPoint = (
   point: Feature<TurfPoint>,
-): Option<YahaApi.Point> => {
+): Option<YahaApi.Waypoint> => {
   return pipe(
     fromNullable(point.geometry),
     mapNullable(geometry => geometry.coordinates),
     map((coordinates: Position) => ({
-      lat: coordinates[1],
-      lon: coordinates[0],
-      elevation: coordinates[2],
+      latitude: coordinates[1],
+      longitude: coordinates[0],
+      height: coordinates[2],
     })),
   );
 };

@@ -1,23 +1,22 @@
 import { validateSchema } from '../joi-validator';
-import { YahaApi } from '@yaha/gql-api';
 import * as Joi from 'joi';
 import {
   coordinatesSchemaFragment,
-  poiSourceObjectSchema,
   textualDescriptionSchema,
 } from './schema-utils';
+import { ExternalPoi } from '../external-poi';
 
 // CreatePoiInput
 export const createPoiInputSchema = {
-  elevation: Joi.number(),
-  type: Joi.string(),
-  sourceObject: Joi.object(poiSourceObjectSchema),
+  externalId: Joi.string(),
   location: Joi.object(coordinatesSchemaFragment).required(),
+  description: Joi.object(textualDescriptionSchema).required(),
+  type: Joi.string(),
+  infoUrl: Joi.string(),
   address: Joi.string(),
   phoneNumber: Joi.string(),
   openingHours: Joi.string(),
-  description: textualDescriptionSchema,
 };
 
 export const { validate: validateCreatePoiInput, isType: isCreatePoiInput } =
-  validateSchema<YahaApi.CreatePoiInput>(createPoiInputSchema);
+  validateSchema<ExternalPoi>(createPoiInputSchema);

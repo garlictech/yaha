@@ -5,7 +5,7 @@
 import axios from 'axios';
 import '@aws-amplify/datastore';
 import { defer, from, of } from 'rxjs';
-import { concatMap, map, delay, switchMap, tap, toArray } from 'rxjs/operators';
+import { concatMap, map, switchMap, tap, toArray } from 'rxjs/operators';
 import { DOMParser } from 'xmldom';
 const togeojson = require('@mapbox/togeojson');
 import * as r from 'ramda';
@@ -22,7 +22,7 @@ import { Client as GoogleMapsClient } from '@googlemaps/google-maps-services-js'
 import { exit } from 'process';
 import { writeFileSync } from 'fs';
 import neo4j from 'neo4j-driver';
-import { addRouteToNeo4j } from '../libs/content/src';
+import { addHike, addRouteToNeo4j } from '../libs/content/src';
 
 const domParser = new DOMParser();
 
@@ -49,48 +49,9 @@ const deps = {
   flickrApiKey: process.env.FLICKR_API_KEY || '',
   http: new HttpClientImpl(),
   googleMapsClient: new GoogleMapsClient({}),
+  driver,
+  session,
 };
-
-/*
-const processSegments = (segments: number[][][]) =>
-  from(segments).pipe(
-    concatMap(segment => processRouteSegment(deps)(segment)),
-    tap(() => console.warn('One segment processed')),
-    toArray(),
-  );
-type Environment = {
-  segments: Position[][];
-  route: Route;
-  searchPolygon: Feature<Polygon>;
-  routeData: RouteData;
-};
-const getEnvironment = (segments: Position[][]): Observable<Environment> =>
-  pipe(
-    segments,
-    RouteFp.fromRouteSegmentCoordinates(GtrackDefaults.averageSpeed()),
-    route => ({
-      route,
-      waypoints: RouteFp.waypointsFromRouteSegmentCoordinates(segments),
-      routeData: O.chain(RouteFp.toRouteData)(route),
-    }),
-    sequenceS(O.option),
-    O.fold(
-      () => throwError('Cannot process segment coordinates'),
-      x => of(x),
-    ),
-    x => forkJoin([getGraphqlClient, getPoiApi, x]),
-    map(([graphqlClient, poiApiService, { routeData, route, waypoints }]) => ({
-      graphqlClient,
-      poiApiService,
-      route,
-      segments,
-      waypoints,
-      searchPolygon: route.bigBuffer,
-      routeData,
-    })),
-  );
-
-*/
 
 const state: any = {};
 
@@ -112,111 +73,23 @@ const fetchRoute = (routeId: number) => {
       state.geojson = geojson;
       return geojson;
     }),
-    switchMap(geojson =>
-      addRouteToNeo4j({ driver, session })(
-        geojson?.features?.[0]?.geometry.coordinates,
-        {
+    switchMap(path =>
+      addHike(deps)({
+        path,
+        hikeData: {
           externalId: `turistautak:${routeId}`,
           languageKey: 'hu_HU',
-          title: geojson?.features?.[0]?.properties?.name,
-          summary: geojson?.features?.[0]?.properties?.desc,
+          title: path?.features?.[0]?.properties?.name,
+          summary: path?.features?.[0]?.properties?.desc,
         },
+      }),
+    ),
+    toArray(),
+    tap(res =>
+      console.log(
+        `Hike upload result for route ${routeId} is OK, with ${res.length} segments.`,
       ),
     ),
-    tap(res => console.warn(res)),
-    /*  map(geojson => {
-      return {
-        route: geojson?.features?.[0]?.geometry,
-        description: [
-          {
-            languageKey: 'hu_HU',
-            title: geojson?.features?.[0]?.properties?.name,
-            summary: geojson?.features?.[0]?.properties?.desc,
-            type: YahaApi.TextualDescriptionType.markdown,
-          },
-        ],
-      };
-    }),
-    switchMap((hike: YahaApi.CreateHikeInput) =>
-      sdk.CreateHike({ input: hike }),
-    ),
-    map(() =>
-      pipe(
-        lineChunk(state.geojson, 2, {
-          units: 'kilometers',
-        }),
-        x => x.features,
-        fp.map((x: any) => x.geometry.coordinates),
-        fp.filter(fp.isArray),
-      ),
-    ),
-    switchMap(processSegments),
-    */
-    /*    switchMap(
-      ({
-        hikeData,
-        segments,
-      }: {
-        hikeData: Partial<Hike>;
-        segments: Position[][];
-      }) =>
-        processSegments(segments).pipe(
-          tap(() => console.log('A segment is processed')),
-          toArray(),
-          tap((results: any[]) =>
-            console.log(`Processed ${results.length} segments`),
-          ),
-          delay(10000),
-          switchMap(() => getEnvironment(segments)),
-          switchMap(
-            ({
-              graphqlClient,
-              poiApiService,
-              route,
-              searchPolygon,
-              waypoints,
-              routeData,
-            }) =>
-              forkJoin([
-                getCityFromGoogle(route.startPoint),
-                resolveDataInPolygon<Poi>({
-                  searchPolygon,
-                  placeType: PlaceType.poi,
-                })({
-                  graphqlClient: graphqlClient.backendClient,
-                  queryExecutor: poiApiService.api.getWithQuery,
-                }),
-              ]).pipe(
-                map(([location, pois]) => ({ location, pois })),
-                map(sequenceS(E.either)),
-                switchMap(foldObservableEither),
-                map(({ location, pois }) =>
-                  pipe(
-                    CheckpointAdminFp.getCheckpoints(route, pois),
-                    checkpoints => ({
-                      ...hikeData,
-                      checkpoints,
-                      location,
-                      segments: waypoints,
-                      route: routeData,
-                    }),
-                  ),
-                ),
-                switchMap(newHike =>
-                  graphqlClient.backendClient.mutate(CreateHike, {
-                    input: newHike,
-                  }),
-                ),
-                tap(hike => console.log(`Hike created, id: ${hike.id}`)),
-              ),
-          ),
-          catchError(() => {
-            console.log('ERROR AT ROUTE ID ', routeId);
-            return of({});
-          }),
-        ),
-    ),*/
-    tap(() => console.log(`Hike upload result for route ${routeId} is OK`)),
   );
 };
 console.log('STARTING...');
@@ -226,6 +99,8 @@ of(1)
     switchMap(() => from(hikeIds)),
     concatMap(routeId => fetchRoute(routeId)),
     toArray(),
-    tap(() => session.close()),
   )
-  .subscribe(x => console.log(`PROCESSED ${x?.length ?? 0} HIKES.`));
+  .subscribe(x => {
+    console.log(`PROCESSED ${x?.length ?? 0} HIKES.`);
+    session.close();
+  });

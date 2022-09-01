@@ -1,11 +1,13 @@
-import { aws_ec2 } from 'aws-cdk-lib';
+import {
+  aws_ec2,
+  aws_certificatemanager as aws_acm,
+  aws_route53,
+} from 'aws-cdk-lib';
 import { App, Stack } from '@serverless-stack/resources';
 import { CognitoStack } from './app/cognito-stack';
 import { ParamsStack } from './app/params-stack';
 import { SecretsManagerStack } from './app/secretsmanager-stack';
-//import { LambdaStack } from './app/lambda-stack';
 import { GraphqlNeo4jStack } from './app/graphql-neo4j-stack';
-import { ConfiguratorStack } from './app/configurator-stack';
 import { FargateStack } from './app/fargate-stack';
 
 export class yahaStack extends Stack {
@@ -18,12 +20,6 @@ export class yahaStack extends Stack {
 
     const paramsStack = new ParamsStack(scope, 'ParamsStack');
 
-    /*    new LambdaStack(scope, 'LambdaStack', {
-      secretsManager: secretsManagerStack.secretsManager,
-      apiAccessKeyId: secretsManagerStack.apiAccessKeyId,
-      apiSecretAccessKey: secretsManagerStack.apiSecretAccessKey,
-    });
-*/
     new CognitoStack(scope, 'cognito', {
       adminSiteUrl: 'https://admin.yaha.com',
       googleClientId: paramsStack.googleClientId,
@@ -36,8 +32,23 @@ export class yahaStack extends Stack {
       appleServiceId: paramsStack.appleServiceId,
     });
 
-    //    new ConfiguratorStack(scope, 'configurator');
+    const certificateArn =
+      'arn:aws:acm:us-east-1:697486207432:certificate/23373fad-50d0-4f6d-a76e-381fe5a6f89a';
 
+    const certificate = aws_acm.Certificate.fromCertificateArn(
+      this,
+      'AnyuppCertificate',
+      certificateArn,
+    );
+
+    const zone = aws_route53.HostedZone.fromHostedZoneAttributes(
+      this,
+      'YahaHostedZone',
+      {
+        hostedZoneId: 'Z03450602A2PNYLTVGU4F',
+        zoneName: 'yaha.app',
+      },
+    );
     const vpc = aws_ec2.Vpc.fromLookup(this, 'AnyuppVpc', {
       vpcId: paramsStack.vpcId,
     });
@@ -59,6 +70,8 @@ export class yahaStack extends Stack {
       neo4jPassword: secretsManagerStack.neo4jPassword,
       cluster: fargate.cluster,
       vpc,
+      certificate,
+      zone,
     });
   }
 }

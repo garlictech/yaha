@@ -9,13 +9,21 @@ export class CircleFp {
    *
    */
   static filterPointsInSmallCircle(
-    points: YahaApi.Point[],
+    points: YahaApi.Waypoint[],
     circle: Circle,
-  ): YahaApi.Point[] {
+  ): YahaApi.Waypoint[] {
     return fp.filter(fp.curry(CircleFp.isPointInSmallCircle)(circle), points);
   }
 
-  static isPointInSmallCircle(circle: Circle, point: YahaApi.Point): boolean {
-    return approximateDistance(point, circle.center) <= circle.radius;
+  static isPointInSmallCircle(
+    circle: Circle,
+    point: YahaApi.Waypoint,
+  ): boolean {
+    return (
+      approximateDistance(
+        { lat: point.latitude, lon: point.longitude },
+        { lat: circle.center.latitude, lon: circle.center.longitude },
+      ) <= circle.radius
+    );
   }
 }
