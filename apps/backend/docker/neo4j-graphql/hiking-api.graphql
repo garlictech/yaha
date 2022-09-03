@@ -68,15 +68,13 @@ type Poi {
 
 # ------ ROUTES -----------------------------------------------------
 type BoundingBox {
-  NorthEast: Waypoint!
-  SouthWest: Waypoint!
+  NorthEast: Point!
+  SouthWest: Point!
 }
 
 # ------ HIKES -----------------------------------------------------
 type Waypoint {
-  latitude: Float!
-  longitude: Float!
-  height: Float!
+  location: Point!
 }
 
 interface WaypointIndex @relationshipProperties {
@@ -85,16 +83,18 @@ interface WaypointIndex @relationshipProperties {
 
 type Route {
   id: String
-  coordinates: [Waypoint!]!
+  coordinates: [Point!]!
     @cypher(
       statement: """
       match (this)-[c:CONTAINS]->(w:Waypoint)
-      return w
+      return {
+        latitude: w.location.latitude,
+        longitude: w.location.longitude,
+        height: w.location.height,
+      }
       order by c.orderIndex
       """
     )
-  startPoint: Waypoint! @relationship(type: "STARTS", direction: OUT)
-  endPoint: Waypoint! @relationship(type: "ENDS", direction: OUT)
 }
 
 type Hike {
@@ -133,4 +133,30 @@ enum GeoSearchableObjectType {
   poi
   hike
   image
+}
+
+input SearchByRadiusInput {
+  origin: PointInput!
+  radiusInMeters: Int!
+}
+
+input SearchByContentInput {
+  origin: PointInput!
+  radiusInMeters: Int!
+}
+
+type TypeWithPoint {
+  location: Point!
+}
+
+type Query {
+  searchHikeByRadius(params: SearchByRadiusInput!): [String]!
+    @cypher(
+      statement: """
+      match (w:Waypoint) where point.distance(w.location, Point({latitude: $params.origin.latitude,
+      longitude: $params.origin.longitude, height: 0.0})) < $params.radiusInMeters
+      match (h:Hike)-[:GOES_ON]->(:Route)-[:CONTAINS]->(w)
+      return distinct h
+      """
+    )
 }
