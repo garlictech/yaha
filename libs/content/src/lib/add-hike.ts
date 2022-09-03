@@ -8,8 +8,6 @@ import {
   tap,
   toArray,
   catchError,
-  delay,
-  mergeMap,
   takeLast,
   mapTo,
   count,
@@ -59,17 +57,7 @@ const createWaypoints = (coordinates: number[][]) =>
   pipe(
     coordinates.reduce(
       (prev, point, index) =>
-        `${prev}\nmerge (p${index}:Waypoint {latitude: ${point[1]}, longitude: ${point[0]}, height: ${point[2]}})`,
-      '',
-    ),
-  );
-
-const createNextRelations = (coordinates: number[][]) =>
-  pipe(
-    coordinates.length,
-    R.range(1),
-    R.reduce(
-      (prev, curr) => `${prev}\nmerge (p${curr - 1})-[:NEXT]->(p${curr})`,
+        `${prev}\nmerge (p${index}:Waypoint {location: Point({latitude: ${point[1]}, longitude: ${point[0]}, height: ${point[2]}})})`,
       '',
     ),
   );
@@ -80,18 +68,13 @@ const createContainsRelations = (coordinates: number[][]) =>
     R.range(0),
     R.reduce((prev, curr) => `${prev},p${curr}`, 'p0'),
     res => `
-      with [${res}] as p
+      with route, [${res}] as p
       UNWIND range(0,size(p)-1) AS i
-      with p[i] as currentNode, i 
+      with route, p[i] as currentNode, i 
       merge (route)-[r:CONTAINS]->(currentNode)
       set r.orderIndex = i  
   `,
   );
-
-const createEndpointRelations = (coordinates: number[][]) =>
-  `merge (route)-[:STARTS]->(p0)
-   merge (route)-[:ENDS]->(p${coordinates.length - 1})
-  `;
 
 const createDescription = (title: string, summary?: string) =>
   `
@@ -120,12 +103,10 @@ export const addRouteToNeo4j =
       `,
       res => res + createDescription(hikeData.title, hikeData.summary),
       res =>
-        [
-          createWaypoints,
-          createNextRelations,
-          createContainsRelations,
-          createEndpointRelations,
-        ].reduce((prev, fv) => prev + '\n' + fv(coordinates), res),
+        [createWaypoints, createContainsRelations].reduce(
+          (prev, fv) => prev + '\n' + fv(coordinates),
+          res,
+        ),
       //query => of(query),
       query => defer(() => deps.session.writeTransaction(tx => tx.run(query))),
     );
@@ -151,7 +132,7 @@ export enum OsmPoiTypes {
   tourism = 'tourism',
 }
 
-const osmPois =
+/*const osmPois =
   (
     osmPoiService: (
       bounds: YahaApi.BoundingBox,
@@ -179,7 +160,7 @@ const osmPois =
       toArray(),
       map(R.flatten),
     );
-
+*/
 const getElevation =
   (deps: Neo4jdeps) =>
   (lat: number, lon: number): Observable<number> =>
@@ -227,8 +208,8 @@ merge (desc)-[:EXPLAINS]->(poi)
                   : descRes,
             )
           : res,
-      of,
-      //query => defer(() => deps.session.writeTransaction(tx => tx.run(query))),
+      //of,
+      query => defer(() => deps.session.writeTransaction(tx => tx.run(query))),
     );
   };
 
@@ -300,7 +281,6 @@ const addImageToDb = (deps: Neo4jdeps) => (image: ExternalImage) => {
          set image.card = "${image.card}"
          set image.thumbnail = "${image.thumbnail}"`,
 
-    //of,
     query => defer(() => deps.session.writeTransaction(tx => tx.run(query))),
   );
 };
@@ -447,8 +427,7 @@ export const addHike =
 
     return pipe(
       path?.features?.[0]?.geometry.coordinates,
-      of,
-      //addRouteToNeo4j(deps)(hikeData),
+      addRouteToNeo4j(deps)(hikeData),
       map(() => createRouteChunks(path)),
       switchMap(processSegments(deps)(hikeDataWithBuf)),
     );
