@@ -21,23 +21,17 @@ import { Feature, Polygon, Properties } from '@turf/turf';
 import {
   EBuffer,
   RouteSegmentFp,
-} from '../../../backend/hike-search/services/src/lib/route-segment';
-import { YahaApi } from '../../../gql-api/src';
-import {
   ExternalImage,
   ExternalPoi,
   getAllWikipediaPois,
   getFlickrImages,
-  getGooglePois,
-  getOsmPois,
-} from '../../../backend/hike-search/services/src/lib/external-poi';
-import { isCreatePoiInput } from '../../../backend/hike-search/services/src/lib/joi-schemas/poi-schema';
-import {
+  isCreatePoiInput,
   filterPointsCloseToReferencePoints,
   isPointInsidePolygon,
   removePointsOutsideOfPolygon,
-} from '../../../backend/hike-search/services/src/lib/geometry';
-import { isCreateImageInput } from '../../../backend/hike-search/services/src/lib/joi-schemas/image-schema';
+  isCreateImageInput,
+} from '@yaha/backend/hike-search/services';
+import { YahaApi } from '@yaha/gql-api';
 
 export interface HikeData {
   externalId: string;
