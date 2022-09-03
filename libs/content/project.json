@@ -19,5 +19,5 @@
       }
     }
   },
-  "tags": []
+  "tags": ["layer:service", "platform:nodejs"]
 }
