@@ -14,10 +14,6 @@ import { pipe } from 'fp-ts/lib/function';
 import lineChunk from '@turf/line-chunk';
 import * as fp from 'lodash/fp';
 import { HttpClientImpl } from '../libs/backend/hike-search/services/src/lib/http';
-import {
-  processRouteSegment,
-  ProcessRouteSegmentDeps,
-} from '../libs/backend/hike-search/services/src';
 import { Client as GoogleMapsClient } from '@googlemaps/google-maps-services-js';
 import { exit } from 'process';
 import { writeFileSync } from 'fs';
