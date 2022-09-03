@@ -1,5 +1,5 @@
 import neo4j from 'neo4j-driver';
-import { defer, of } from 'rxjs';
+import { defer } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 const neo4jUsername = 'neo4j';
