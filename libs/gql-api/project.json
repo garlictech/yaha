@@ -2,7 +2,7 @@
   "sourceRoot": "libs/gql-api/src",
   "projectType": "library",
   "targets": {
-    "build": {
+    "build-schema": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
         "parallel": false,
