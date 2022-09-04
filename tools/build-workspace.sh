@@ -9,5 +9,5 @@ AWS_ACCOUNT=$(aws sts get-caller-identity --query Account --output text)
 aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin ${AWS_ACCOUNT}.dkr.ecr.$AWS_REGION.amazonaws.com
 
 yarn nx config shared-config --env=$ENVNAME
+yarn nx build-schema gql-api
 yarn nx build backend --env=$ENVNAME
-yarn nx build gql-api --skip-nx-cache
