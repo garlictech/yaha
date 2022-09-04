@@ -83,16 +83,12 @@ interface WaypointIndex @relationshipProperties {
 
 type Route {
   id: String
-  coordinates: [Point!]!
+  coordinates: [Waypoint!]!
     @cypher(
       statement: """
       match (this)-[c:CONTAINS]->(w:Waypoint)
-      return {
-        latitude: w.location.latitude,
-        longitude: w.location.longitude,
-        height: w.location.height,
-      }
-      order by c.orderIndex
+      with w order by c.orderIndex
+      return w
       """
     )
 }
@@ -154,9 +150,9 @@ type Query {
     @cypher(
       statement: """
       match (w:Waypoint) where point.distance(w.location, Point({latitude: $params.origin.latitude,
-      longitude: $params.origin.longitude, height: 0.0})) < $params.radiusInMeters
-      match (h:Hike)-[:GOES_ON]->(:Route)-[:CONTAINS]->(w)
-      return distinct h
+            longitude: $params.origin.longitude, height: 0.0})) < $params.radiusInMeters
+                  match (h:Hike)-[:GOES_ON]->(:Route)-[:CONTAINS]->(w)
+                        return distinct h.id
       """
     )
 }
