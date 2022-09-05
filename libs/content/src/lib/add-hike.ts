@@ -276,10 +276,13 @@ export const getExternalPois =
 
 const addImageToDb = (deps: Neo4jdeps) => (image: ExternalImage) => {
   return pipe(
-    `merge (image:Image {id: "${image.externalId}"})
-         set image.original = "${image.original}"
-         set image.card = "${image.card}"
-         set image.thumbnail = "${image.thumbnail}"`,
+    `
+merge (image:Image {id: "${image.externalId}"})
+set image.original = "${image.original}"
+set image.card = "${image.card}"
+set image.thumbnail = "${image.thumbnail}"
+set image.location = Point({latitude: ${image.location.lat}, longitude: ${image.location.lon}})"
+    `,
 
     query => defer(() => deps.session.writeTransaction(tx => tx.run(query))),
   );

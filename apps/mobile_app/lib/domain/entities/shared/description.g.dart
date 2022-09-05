@@ -134,11 +134,20 @@ Description _$DescriptionFromJson(Map<String, dynamic> json) => Description(
       type: json['type'] as String,
     );
 
-Map<String, dynamic> _$DescriptionToJson(Description instance) =>
-    <String, dynamic>{
-      'languageKey': instance.languageKey,
-      'title': instance.title,
-      'summary': instance.summary,
-      'fullDescription': instance.fullDescription,
-      'type': instance.type,
-    };
+Map<String, dynamic> _$DescriptionToJson(Description instance) {
+  final val = <String, dynamic>{
+    'languageKey': instance.languageKey,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('title', instance.title);
+  writeNotNull('summary', instance.summary);
+  writeNotNull('fullDescription', instance.fullDescription);
+  val['type'] = instance.type;
+  return val;
+}

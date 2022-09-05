@@ -55,8 +55,7 @@ class ImageUsecasesImpl implements ImageUsecases {
 
     return imageRepo
         .searchImagesAroundLocation(SearchByRadiusInput(
-            location: poi.location,
-            objectType: 'image',
+            origin: poi.location,
             radiusInMeters: defaults.poiImageSearchRadiusInMeters))
         .then((res) {
       final futureGroup = FutureGroup<Image?>();

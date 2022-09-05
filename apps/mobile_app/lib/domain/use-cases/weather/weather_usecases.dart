@@ -7,7 +7,8 @@ final weatherPoisOfHikeProvider =
   final hike = await ref.read(hikeProvider(hikeId).future);
   final defaults = ref.read(defaultsProvider);
   final weatherApi = ref.read(weatherApiProvider);
-  final weather = await weatherApi.getWeatherAround(hike.startPoint);
+  final weather = await weatherApi.getWeatherAround(
+      Location(lat: hike.startPoint.latitude, lon: hike.startPoint.longitude));
   final geocalc = ref.read(geoCalcProvider);
   final settings = HikingSettings(speed: defaults.averageSpeedKmh);
 
@@ -16,9 +17,7 @@ final weatherPoisOfHikeProvider =
   getLocationOfEvent() async {
     for (final loc in hike.route.coordinates) {
       final distFromStart = await geocalc.distanceOnLine(
-          hike.startPoint,
-          Location(lat: loc.latitude, lon: loc.longitude),
-          hike.route.asLineString);
+          hike.startPoint, loc.location, hike.route.asLineString);
 
       final duration = (distFromStart / 1000 / settings.speed * 60).round();
       final arrival = settings.startTime.add(Duration(minutes: duration));
@@ -29,11 +28,9 @@ final weatherPoisOfHikeProvider =
     return PoiOfHike(
         poi: Poi(
             id: "${hikeId}_WEATHER",
-            location: Location(
-                lat: hike.route.coordinates[20].latitude,
-                lon: hike.route.coordinates[20].longitude),
+            location: hike.route.coordinates[20].location,
             type: "weather:${weatherItem.type}",
-            elevation: hike.route.coordinates[20].height,
+            elevation: hike.route.coordinates[20].location.height,
             description: [Description(languageKey: "en_US", type: "markdown")]),
         hike: hike,
         settings: HikingSettings(speed: defaults.averageSpeedKmh),

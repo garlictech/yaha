@@ -66,12 +66,6 @@ type Poi {
   infoUrl: String
 }
 
-# ------ ROUTES -----------------------------------------------------
-type BoundingBox {
-  NorthEast: Point!
-  SouthWest: Point!
-}
-
 # ------ HIKES -----------------------------------------------------
 type Waypoint {
   location: Point!
@@ -141,6 +135,10 @@ input SearchByContentInput {
   radiusInMeters: Int!
 }
 
+input SearchImagesAroundRoute {
+  routeId: String!
+}
+
 type TypeWithPoint {
   location: Point!
 }
@@ -150,9 +148,26 @@ type Query {
     @cypher(
       statement: """
       match (w:Waypoint) where point.distance(w.location, Point({latitude: $params.origin.latitude,
-            longitude: $params.origin.longitude, height: 0.0})) < $params.radiusInMeters
-                  match (h:Hike)-[:GOES_ON]->(:Route)-[:CONTAINS]->(w)
-                        return distinct h.id
+      longitude: $params.origin.longitude, height: 0.0})) < $params.radiusInMeters
+      match (h:Hike)-[:GOES_ON]->(:Route)-[:CONTAINS]->(w)
+      return distinct h.id
+      """
+    )
+
+  searchImageByRadius(params: SearchByRadiusInput!): [String]!
+    @cypher(
+      statement: """
+      match (img:Image) where point.distance(img.location, Point({latitude: $params.origin.latitude,
+      longitude: $params.origin.longitude, height: 0.0})) < $params.radiusInMeters
+      return distinct img.id limit 10
+      """
+    )
+
+  searchImagesAroundRoute(params: SearchImagesAroundRoute!): [String]!
+    @cypher(
+      statement: """
+      match (img:Image)-[:TAKEN_AT]->(r:Route) where r.id = "$params.routeId"
+      return distinct img.id limit 10
       """
     )
 }

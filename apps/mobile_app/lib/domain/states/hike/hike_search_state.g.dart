@@ -13,10 +13,10 @@ abstract class $HikeSearchState {
   double get lengthMax;
   double get durationMin;
   double get durationMax;
-  double get searchRadius;
+  int get searchRadius;
   int get difficulty;
   int get difficultyIndex;
-  Location get origin;
+  Point get origin;
   List<Hike> get hits;
   bool get searching;
   bool get noHits;
@@ -26,10 +26,10 @@ abstract class $HikeSearchState {
     double? lengthMax,
     double? durationMin,
     double? durationMax,
-    double? searchRadius,
+    int? searchRadius,
     int? difficulty,
     int? difficultyIndex,
-    Location? origin,
+    Point? origin,
     List<Hike>? hits,
     bool? searching,
     bool? noHits,
@@ -138,10 +138,10 @@ class HikeSearchState$Change {
   double lengthMax;
   double durationMin;
   double durationMax;
-  double searchRadius;
+  int searchRadius;
   int difficulty;
   int difficultyIndex;
-  Location origin;
+  Point origin;
   List<Hike> hits;
   bool searching;
   bool noHits;
@@ -173,7 +173,7 @@ class HikeSearchState$ {
         durationMaxContainer.copyWith(durationMax: durationMax),
   );
 
-  static final searchRadius = Lens<HikeSearchState, double>(
+  static final searchRadius = Lens<HikeSearchState, int>(
     (searchRadiusContainer) => searchRadiusContainer.searchRadius,
     (searchRadiusContainer, searchRadius) =>
         searchRadiusContainer.copyWith(searchRadius: searchRadius),
@@ -191,7 +191,7 @@ class HikeSearchState$ {
         difficultyIndexContainer.copyWith(difficultyIndex: difficultyIndex),
   );
 
-  static final origin = Lens<HikeSearchState, Location>(
+  static final origin = Lens<HikeSearchState, Point>(
     (originContainer) => originContainer.origin,
     (originContainer, origin) => originContainer.copyWith(origin: origin),
   );

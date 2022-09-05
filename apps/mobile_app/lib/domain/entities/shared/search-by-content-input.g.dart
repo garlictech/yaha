@@ -123,10 +123,19 @@ SearchByContentInput _$SearchByContentInputFromJson(
     );
 
 Map<String, dynamic> _$SearchByContentInputToJson(
-        SearchByContentInput instance) =>
-    <String, dynamic>{
-      'content': instance.content,
-      'objectType': instance.objectType,
-      'limit': instance.limit,
-      'nextToken': instance.nextToken,
-    };
+    SearchByContentInput instance) {
+  final val = <String, dynamic>{
+    'content': instance.content,
+    'objectType': instance.objectType,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('limit', instance.limit);
+  writeNotNull('nextToken', instance.nextToken);
+  return val;
+}

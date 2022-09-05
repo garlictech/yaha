@@ -29,18 +29,21 @@ class LocationSearchByGoogleFieldPresenter
     final location = result.geometry?.location;
 
     if (location != null) {
-      await _getHikes(domain.Location(lat: location.lat, lon: location.lng));
+      await _getHikes(domain.Point(
+          latitude: location.lat, longitude: location.lng, height: 0));
     }
   }
 
   onTapCurrentLocation() async {
     final geoLoc = read(geoLocationRepositoryProvider);
     await geoLoc.getCurrentLocation().then((currentLocation) => _getHikes(
-        domain.Location(
-            lat: currentLocation.latitude, lon: currentLocation.longitude)));
+        domain.Point(
+            latitude: currentLocation.latitude,
+            longitude: currentLocation.longitude,
+            height: 0)));
   }
 
-  _getHikes(domain.Location origin) {
+  _getHikes(domain.Point origin) {
     read(domain.hikeSearchStateProvider.notifier).searchAroundLocation(origin);
   }
 }

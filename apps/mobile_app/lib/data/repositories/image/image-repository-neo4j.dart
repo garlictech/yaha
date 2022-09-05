@@ -2,16 +2,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/data/utils/neo4j-repository.dart';
 import 'package:yaha/domain/domain.dart';
 
-class HikeRepositoryNeo4j extends RepositoryNeo4j<Hike>
-    implements HikeRepository {
-  HikeRepositoryNeo4j({required Ref ref})
-      : super(ref: ref, fromJson: Hike.fromJson);
+class ImageRepositoryNeo4j extends RepositoryNeo4j<Image>
+    implements ImageRepository {
+  ImageRepositoryNeo4j({required Ref ref})
+      : super(ref: ref, fromJson: Image.fromJson);
 
   @override
-  getHikeList() async {
+  getImageList() async {
     const String query = r'''
-    query Hikes {
-      hikes {
+    query images {
+      images {
         id
         route {
           id
@@ -33,25 +33,36 @@ class HikeRepositoryNeo4j extends RepositoryNeo4j<Hike>
       }
     }''';
 
-    return getEntityList(query, 'hikes');
+    return getEntityList(query, 'images');
   }
 
   @override
-  searchHikeByRadius(SearchByRadiusInput input) async {
+  searchImagesAroundLocation(SearchByRadiusInput input) async {
     const String query = r'''
 query Query($params: SearchByRadiusInput!) {
-  searchHikeByRadius(params: $params)
+  searchImageByRadius(params: $params)
 }
     ''';
 
-    return searchEntityByRadius(input, query, 'searchHikeByRadius');
+    return searchEntityByRadius(input, query, 'searchImageByRadius');
   }
 
   @override
-  getHike(String id) async {
+  searchImagesAroundHike(SearchSafeImagesAroundHikeInput input) async {
     const String query = r'''
-    query Hikes($where: HikeWhere) {
-      hikes(where: $where) {
+query Query($params: SearchByRadiusInput!) {
+  searchImageByRadius(params: $params)
+}
+    ''';
+
+    return searchEntityByRadius(input, query, 'searchImageByRadius');
+  }
+
+  @override
+  getImage(String id) async {
+    const String query = r'''
+    query images($where: ImageWhere) {
+      images(where: $where) {
         id
         route {
           id
@@ -73,19 +84,6 @@ query Query($params: SearchByRadiusInput!) {
       }
     }''';
 
-    return getEntity(query, id, 'hikes');
-  }
-
-  @override
-  searchHikeByContent(SearchByContentInput input) async {
-    const String query = r'''
-    query Hikes($where: HikeWhere) {
-      hikes(where: $where) {
-        id
-      }
-    }
-    ''';
-
-    return searchEntityByContent(input, query, 'hikes');
+    return getEntity(query, id, 'images');
   }
 }

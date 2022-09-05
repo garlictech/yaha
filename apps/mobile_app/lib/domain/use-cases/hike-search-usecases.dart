@@ -13,18 +13,20 @@ class HikeSearchUsecases {
   Future<List<Hike>> searchHikesAround() {
     return ref.read(geoLocationRepositoryProvider).getCurrentLocation().then(
         (currentLocation) => searchHikesAroundLocation(
-            Location(
-                lat: currentLocation.latitude, lon: currentLocation.longitude),
-            50000,
+            Point(
+                latitude: currentLocation.latitude,
+                longitude: currentLocation.longitude,
+                height: 0),
+            500000,
             10));
   }
 
   Future<List<Hike>> searchHikesAroundLocation(
-      Location origin, double radiusInMeters, int? limit) async {
+      Point origin, int radiusInMeters, int? limit) async {
     final hikeRepo = ref.read(hikeRepositoryProvider);
     final hikes = await hikeRepo
-        .searchHikeByRadius(SearchHikeByRadiusInput(
-            location: origin, radiusInMeters: radiusInMeters, limit: limit))
+        .searchHikeByRadius(
+            SearchByRadiusInput(origin: origin, radiusInMeters: radiusInMeters))
         .then((ids) => _getHikeList(ids, hikeRepo));
     return hikes;
   }

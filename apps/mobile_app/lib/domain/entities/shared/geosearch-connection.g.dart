@@ -108,9 +108,17 @@ GeosearchConnectionData _$GeosearchConnectionDataFromJson(
     );
 
 Map<String, dynamic> _$GeosearchConnectionDataToJson(
-        GeosearchConnectionData instance) =>
-    <String, dynamic>{
-      'items': instance.items,
-      'nextToken': instance.nextToken,
-      'total': instance.total,
-    };
+    GeosearchConnectionData instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('items', instance.items);
+  writeNotNull('nextToken', instance.nextToken);
+  writeNotNull('total', instance.total);
+  return val;
+}

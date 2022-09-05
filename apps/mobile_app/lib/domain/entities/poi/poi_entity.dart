@@ -5,8 +5,8 @@ import 'package:functional_data/functional_data.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:yaha/domain/entities/poi/supported_pois.dart';
 
-import '../shared/location.dart';
 import '../shared/description.dart';
+import '../shared/point.dart';
 import 'poi_type.dart';
 import '/utils/string.dart';
 
@@ -19,7 +19,7 @@ class Poi extends $Poi {
   final String id;
   @override
   @CustomEquality(Ignore())
-  final Location location;
+  final Point location;
   @override
   @CustomEquality(Ignore())
   final double? elevation;

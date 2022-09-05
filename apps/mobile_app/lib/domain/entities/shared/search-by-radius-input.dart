@@ -1,7 +1,7 @@
 import 'package:functional_data/functional_data.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import 'location.dart';
+import 'point.dart';
 
 part 'search-by-radius-input.g.dart';
 
@@ -9,20 +9,17 @@ part 'search-by-radius-input.g.dart';
 @JsonSerializable(explicitToJson: true)
 class SearchByRadiusInput extends $SearchByRadiusInput {
   @override
-  final Location location;
+  final Point origin;
   @override
-  final double radiusInMeters;
-  @override
-  final String objectType;
+  final int radiusInMeters;
   @override
   final int? limit;
   @override
   final String? nextToken;
 
   SearchByRadiusInput(
-      {required this.location,
+      {required this.origin,
       required this.radiusInMeters,
-      required this.objectType,
       this.limit,
       this.nextToken});
 

@@ -101,8 +101,18 @@ Imageinfo _$ImageinfoFromJson(Map<String, dynamic> json) => Imageinfo(
       height: json['height'] as int?,
     );
 
-Map<String, dynamic> _$ImageinfoToJson(Imageinfo instance) => <String, dynamic>{
-      'url': instance.url,
-      'width': instance.width,
-      'height': instance.height,
-    };
+Map<String, dynamic> _$ImageinfoToJson(Imageinfo instance) {
+  final val = <String, dynamic>{
+    'url': instance.url,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('width', instance.width);
+  writeNotNull('height', instance.height);
+  return val;
+}

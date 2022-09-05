@@ -7,7 +7,6 @@ import 'package:yaha/ui/views/poi/screens/poi_info_screen.dart';
 import 'package:yaha/ui/views/poi/widgets/poi-icon.dart';
 import 'package:yaha/ui/views/poi/widgets/poi_list_item.dart';
 import 'package:yaha/domain/domain.dart' as domain;
-import 'package:yaha/domain/entities/poi/poi_entity.dart';
 import 'package:yaha/ui/views/shared/shared.dart';
 
 import '../../../../presenters/map/map.dart';
@@ -87,13 +86,13 @@ class PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
                       ? 0.7
                       : 0.8);
 
-          markerBuilder(BuildContext context, Poi poi, int index) {
+          markerBuilder(BuildContext context, domain.Poi poi, int index) {
             final double markerSize = _currentSelectedIndex == index ? 40 : 25;
 
             return Marker(
                 height: markerSize,
                 width: markerSize,
-                point: LatLng(poi.location.lat, poi.location.lon),
+                point: LatLng(poi.location.latitude, poi.location.longitude),
                 builder: (BuildContext c) {
                   return GestureDetector(
                     onTap: () {
@@ -230,7 +229,10 @@ class PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
     /// marker is directly clicked, only the respective card should be moved to
     /// center and the marker itself should not move to the center of the maps.
     if (_canUpdateFocalLatLng) {
-      mapPresenter.mapCenter = pois[_currentSelectedIndex].location;
+      mapPresenter.mapCenter = domain.Location(
+        lat: pois[_currentSelectedIndex].location.latitude,
+        lon: pois[_currentSelectedIndex].location.longitude,
+      );
     }
 
     /// Updating the design of the selected marker. Please check the

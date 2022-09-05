@@ -28,7 +28,7 @@ import { Option, chain, some, isSome } from 'fp-ts/lib/Option';
 export const getPaddedBoundingBoxOfFeature = (
   features: AllGeoJSON,
   padding = 0,
-): YahaApi.BoundingBox => {
+) => {
   const env = bbox(features);
 
   return {
@@ -46,13 +46,11 @@ export const getPaddedBoundingBoxOfFeature = (
 };
 
 // about 330m padding
-export const getPaddedBoxOfTrack = (
-  track: Feature<LineString>,
-): YahaApi.BoundingBox => getPaddedBoundingBoxOfFeature(track, 0.003);
+export const getPaddedBoxOfTrack = (track: Feature<LineString>) =>
+  getPaddedBoundingBoxOfFeature(track, 0.003);
 
-export const getBoundingBoxOfTrack = (
-  features: AllGeoJSON,
-): YahaApi.BoundingBox => getPaddedBoundingBoxOfFeature(features);
+export const getBoundingBoxOfTrack = (features: AllGeoJSON) =>
+  getPaddedBoundingBoxOfFeature(features);
 
 export const getCenterRadiusOfBox = (
   bounds: YahaApi.BoundingBox,

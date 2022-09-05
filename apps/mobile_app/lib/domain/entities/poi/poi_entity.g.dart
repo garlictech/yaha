@@ -10,7 +10,7 @@ abstract class $Poi {
   const $Poi();
 
   String get id;
-  Location get location;
+  Point get location;
   double? get elevation;
   String get type;
   List<Description>? get description;
@@ -21,7 +21,7 @@ abstract class $Poi {
 
   Poi copyWith({
     String? id,
-    Location? location,
+    Point? location,
     double? elevation,
     String? type,
     List<Description>? description,
@@ -118,7 +118,7 @@ class Poi$Change {
   );
 
   String id;
-  Location location;
+  Point location;
   double? elevation;
   String type;
   List<Description>? description;
@@ -135,7 +135,7 @@ class Poi$ {
     (idContainer, id) => idContainer.copyWith(id: id),
   );
 
-  static final location = Lens<Poi, Location>(
+  static final location = Lens<Poi, Point>(
     (locationContainer) => locationContainer.location,
     (locationContainer, location) =>
         locationContainer.copyWith(location: location),
@@ -187,7 +187,7 @@ class Poi$ {
 
 Poi _$PoiFromJson(Map<String, dynamic> json) => Poi(
       id: json['id'] as String,
-      location: Location.fromJson(json['location'] as Map<String, dynamic>),
+      location: Point.fromJson(json['location'] as Map<String, dynamic>),
       elevation: (json['elevation'] as num?)?.toDouble(),
       type: json['type'] as String? ?? "generic:unknown",
       description: (json['description'] as List<dynamic>?)
@@ -199,14 +199,25 @@ Poi _$PoiFromJson(Map<String, dynamic> json) => Poi(
       tags: (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList(),
     );
 
-Map<String, dynamic> _$PoiToJson(Poi instance) => <String, dynamic>{
-      'id': instance.id,
-      'location': instance.location,
-      'elevation': instance.elevation,
-      'type': instance.type,
-      'description': instance.description,
-      'tags': instance.tags,
-      'address': instance.address,
-      'phoneNumber': instance.phoneNumber,
-      'openingHours': instance.openingHours,
-    };
+Map<String, dynamic> _$PoiToJson(Poi instance) {
+  final val = <String, dynamic>{
+    'id': instance.id,
+    'location': instance.location.toJson(),
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('elevation', instance.elevation);
+  val['type'] = instance.type;
+  writeNotNull(
+      'description', instance.description?.map((e) => e.toJson()).toList());
+  writeNotNull('tags', instance.tags);
+  writeNotNull('address', instance.address);
+  writeNotNull('phoneNumber', instance.phoneNumber);
+  writeNotNull('openingHours', instance.openingHours);
+  return val;
+}
