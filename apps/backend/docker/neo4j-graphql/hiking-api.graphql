@@ -64,13 +64,8 @@ type Poi {
   phone: String
   openingHours: String
   infoUrl: String
-  images: [Image]!
-    @cypher(
-      statement: """
-      match (image:Image)-[:TAKEN_AT]->(this)
-      return distinct image
-      """
-    )
+  descriptions: [Description!]! @relationship(type: "EXPLAINS", direction: IN)
+  images: [Image!]! @relationship(type: "TAKEN_AT", direction: IN)
 }
 
 # ------ HIKES -----------------------------------------------------

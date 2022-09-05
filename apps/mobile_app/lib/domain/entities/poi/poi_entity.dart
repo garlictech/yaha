@@ -19,12 +19,6 @@ class Poi extends $Poi {
   final String id;
   @override
   @CustomEquality(Ignore())
-  final Point location;
-  @override
-  @CustomEquality(Ignore())
-  final double? elevation;
-  @override
-  @CustomEquality(Ignore())
   final String type;
   @override
   @CustomEquality(Ignore())
@@ -37,19 +31,21 @@ class Poi extends $Poi {
   final String? address;
   @override
   @CustomEquality(Ignore())
-  final String? phoneNumber;
+  final String? phone;
   @override
   @CustomEquality(Ignore())
   final String? openingHours;
+  @override
+  @CustomEquality(Ignore())
+  final List<Image> images;
 
   Poi(
       {required this.id,
-      required this.location,
-      this.elevation,
       this.type = "generic:unknown",
       this.description,
       this.openingHours,
-      this.phoneNumber,
+      this.phone,
+      required this.images,
       this.address,
       this.tags});
 
