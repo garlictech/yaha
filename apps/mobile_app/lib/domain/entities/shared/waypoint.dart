@@ -1,22 +1,18 @@
 import 'package:functional_data/functional_data.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import '../entities.dart';
+
 part 'waypoint.g.dart';
 
 @FunctionalData()
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Waypoint extends $Waypoint {
   @override
-  final double latitude;
-  @override
-  final double longitude;
-  @override
-  final double height;
+  final Point location;
 
   const Waypoint({
-    required this.latitude,
-    required this.longitude,
-    required this.height,
+    required this.location,
   });
 
   factory Waypoint.fromJson(Map<String, dynamic> json) =>

@@ -2,8 +2,8 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:yaha/utils/geometry/geocalc.dart';
 
 import '../../game-rules.dart';
-import '../shared/location.dart';
 import '../shared/description.dart';
+import '../shared/point.dart';
 import '../shared/route.dart';
 
 part 'hike.g.dart';
@@ -36,23 +36,22 @@ class Hike {
   });
 
   double get trailLength =>
-      trailLength_ ??= GeoCalc.lineLength(route.coordinates);
+      trailLength_ ??= GeoCalc.lineLength(route.coordinatesAsPoints);
 
-  double get uphill => uphill_ ??= GeoCalc.calculateUphill(route.coordinates);
+  double get uphill =>
+      uphill_ ??= GeoCalc.calculateUphill(route.coordinatesAsPoints);
 
   double get downhill =>
-      downhill_ ??= GeoCalc.calculateDownhill(route.coordinates);
+      downhill_ ??= GeoCalc.calculateDownhill(route.coordinatesAsPoints);
 
   int get difficulty =>
       difficulty_ ??= GameRules.calculateDifficulty(trailLength, uphill);
 
   int get score => score_ ??= GameRules.calculateScore(trailLength, uphill);
 
-  Location get startPoint =>
-      Location(lon: route.startPoint.longitude, lat: route.startPoint.latitude);
+  Point get startPoint => route.startPoint;
 
-  Location get endPoint =>
-      Location(lon: route.endPoint.longitude, lat: route.endPoint.latitude);
+  Point get endPoint => route.endPoint;
 
   String get title {
     const unknownTitle = 'Unknown Hike';

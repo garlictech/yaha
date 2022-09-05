@@ -18,13 +18,13 @@ class HikeSearchState extends $HikeSearchState {
   @override
   final double durationMax;
   @override
-  final double searchRadius;
+  final int searchRadius;
   @override
   final int difficulty;
   @override
   final int difficultyIndex;
   @override
-  final Location origin;
+  final Point origin;
   @override
   final List<Hike> hits;
   @override
@@ -43,7 +43,7 @@ class HikeSearchState extends $HikeSearchState {
       this.hits = const [],
       this.searching = false,
       this.noHits = false,
-      this.origin = const Location(lat: 0, lon: 0)});
+      this.origin = const Point(latitude: 0, longitude: 0, height: 0)});
 }
 
 class HikeSearchStateNotifier extends StateNotifier<HikeSearchState> {
@@ -58,17 +58,17 @@ class HikeSearchStateNotifier extends StateNotifier<HikeSearchState> {
       state = state.copyWith(
           durationMin: newDurationMinState, durationMax: newDurationMaxState);
 
-  updateSearchRadius(double newState) =>
+  updateSearchRadius(int newState) =>
       state = state.copyWith(searchRadius: newState);
 
   updateDifficulty(int newState, int index) =>
       state = state.copyWith(difficulty: newState, difficultyIndex: index);
 
-  updateOrigin(Location newOrigin) => state = state.copyWith(origin: newOrigin);
+  updateOrigin(Point newOrigin) => state = state.copyWith(origin: newOrigin);
 
   updateHits(List<Hike> newHits) => state = state.copyWith(hits: newHits);
 
-  searchAroundLocation(Location origin) {
+  searchAroundLocation(Point origin) {
     final hikeSearchUseCases = read(hikeSearchUsecasesProvider);
     state = state.copyWith(searching: true, noHits: false);
     hikeSearchUseCases

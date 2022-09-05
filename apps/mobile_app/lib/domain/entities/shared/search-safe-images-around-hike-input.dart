@@ -9,17 +9,10 @@ class SearchSafeImagesAroundHikeInput extends $SearchSafeImagesAroundHikeInput {
   @override
   final String hikeId;
   @override
-  final double distanceInMeters;
-  @override
-  final int? limit;
-  @override
-  final String? nextToken;
+  final int distanceInMeters;
 
   SearchSafeImagesAroundHikeInput(
-      {required this.hikeId,
-      required this.distanceInMeters,
-      this.limit,
-      this.nextToken});
+      {required this.hikeId, required this.distanceInMeters});
 
   factory SearchSafeImagesAroundHikeInput.fromJson(Map<String, dynamic> json) =>
       _$SearchSafeImagesAroundHikeInputFromJson(json);

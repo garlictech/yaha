@@ -77,7 +77,8 @@ class LeafletMapState extends ConsumerState<LeafletMap> {
                     ctr.fitBounds(snapshot.data! as LatLngBounds);
                   }
                 },
-                center: LatLng(mapCenter?.lat ?? 0, mapCenter?.lon ?? 0),
+                center:
+                    LatLng(mapCenter?.latitude ?? 0, mapCenter?.longitude ?? 0),
                 zoom: _mapController?.zoom ?? 12),
             children: <Widget>[
               TileLayerWidget(
@@ -101,8 +102,8 @@ class LeafletMapState extends ConsumerState<LeafletMap> {
               borderColor: Colors.blue,
               borderStrokeWidth: 1,
               points: hike.route.coordinates
-                  .map<LatLng>(
-                      (coord) => LatLng(coord.latitude, coord.longitude))
+                  .map<LatLng>((coord) =>
+                      LatLng(coord.location.latitude, coord.location.longitude))
                   .toList()))
           .toList();
 

@@ -7,8 +7,6 @@ part 'route.g.dart';
 class Route {
   final String id;
   final List<Waypoint> coordinates;
-  final Waypoint startPoint;
-  final Waypoint endPoint;
 
   @JsonKey(ignore: true)
   LineStringData? _asLineString;
@@ -16,17 +14,25 @@ class Route {
   Route({
     required this.id,
     required this.coordinates,
-    required this.startPoint,
-    required this.endPoint,
   });
 
   LineStringData get asLineString {
     return _asLineString ??= LineStringData(
         type: "LineString",
         coordinates: coordinates
-            .map((coord) => [coord.longitude, coord.latitude, coord.height])
+            .map((coord) => [
+                  coord.location.longitude,
+                  coord.location.latitude,
+                  coord.location.height
+                ])
             .toList());
   }
+
+  Point get startPoint => coordinates.first.location;
+  Point get endPoint => coordinates.last.location;
+
+  List<Point> get coordinatesAsPoints =>
+      coordinates.map((coord) => coord.location).toList();
 
   factory Route.fromJson(Map<String, dynamic> json) => _$RouteFromJson(json);
 

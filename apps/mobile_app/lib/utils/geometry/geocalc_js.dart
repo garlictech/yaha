@@ -4,18 +4,17 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_js/flutter_js.dart';
-import 'package:turf/turf.dart';
+import 'package:turf/turf.dart' as turf;
 
 import '../../domain/entities/entities.dart';
 
 abstract class GeocalcService {
-  Future<double> distanceOnLine(
-      Location start, Location end, LineStringData path);
+  Future<double> distanceOnLine(Point start, Point end, LineStringData path);
 
   Future<BoundingBox> boundingBoxOfPaths(List<LineStringData> paths);
-  Future<LineString> snappedLineSlice(
-      Location start, Location end, LineStringData path);
-  Future<num> approximateAltitude(Location pointOnLinee, LineStringData path);
+  Future<turf.LineString> snappedLineSlice(
+      Point start, Point end, LineStringData path);
+  Future<num> approximateAltitude(Point pointOnLinee, LineStringData path);
 }
 
 class GeocalcJs implements GeocalcService {
@@ -31,13 +30,13 @@ class GeocalcJs implements GeocalcService {
   }
 
   @override
-  distanceOnLine(Location start, Location end, LineStringData path) async {
+  distanceOnLine(Point start, Point end, LineStringData path) async {
     final startStr = start.toJson().toString();
     final endStr = end.toJson().toString();
     final pathStr = path.toLinestringFeatureString();
 
     return _isLoaded
-        .then((_x) => _jsRuntime.evaluateAsync("""
+        .then((x) => _jsRuntime.evaluateAsync("""
             global.distanceOnLineForFlutter($startStr, $endStr, $pathStr);"""))
         .then((res) => double.parse(res.stringResult));
   }
@@ -45,31 +44,33 @@ class GeocalcJs implements GeocalcService {
   @override
   boundingBoxOfPaths(List<LineStringData> paths) async {
     final pathStr = paths.map((path) => jsonEncode(path)).join(",");
-    return _isLoaded.then((_x) => _jsRuntime.evaluateAsync("""
+    return _isLoaded.then((x) => _jsRuntime.evaluateAsync("""
             global.boundingBoxOfPaths([$pathStr]);""")).then((res) {
       return BoundingBox.fromJson(jsonDecode(res.stringResult));
     });
   }
 
   @override
-  snappedLineSlice(Location start, Location end, LineStringData path) async {
+  snappedLineSlice(Point start, Point end, LineStringData path) async {
     final pathStr = path.toLinestringFeatureString();
     final startStr = start.toJson().toString();
     final endStr = end.toJson().toString();
 
     return _isLoaded
-        .then((_x) => _jsRuntime.evaluateAsync("""
+        .then((x) => _jsRuntime.evaluateAsync("""
             global.snappedLineSlice($startStr, $endStr, $pathStr);"""))
         .then((res) {
-      return LineString.fromJson(jsonDecode(res.stringResult)['geometry']);
+      return turf.LineString.fromJson(jsonDecode(res.stringResult)['geometry']);
     });
   }
 
   @override
-  approximateAltitude(Location pointOnLinee, LineStringData path) async {
+  approximateAltitude(Point pointOnLinee, LineStringData path) async {
     final firstPoint = (await snappedLineSlice(
-            Location(
-                lat: path.coordinates.first[1], lon: path.coordinates.first[0]),
+            Point(
+                latitude: path.coordinates.first[1],
+                longitude: path.coordinates.first[0],
+                height: path.coordinates.first[2]),
             pointOnLinee,
             path))
         .coordinates
@@ -77,8 +78,10 @@ class GeocalcJs implements GeocalcService {
 
     final lastPoint = (await snappedLineSlice(
             pointOnLinee,
-            Location(
-                lat: path.coordinates.last[1], lon: path.coordinates.last[0]),
+            Point(
+                latitude: path.coordinates.last[1],
+                longitude: path.coordinates.last[0],
+                height: path.coordinates.last[2]),
             path))
         .coordinates
         .first;

@@ -122,10 +122,19 @@ PoiSourceObject _$PoiSourceObjectFromJson(Map<String, dynamic> json) =>
       url: json['url'] as String?,
     );
 
-Map<String, dynamic> _$PoiSourceObjectToJson(PoiSourceObject instance) =>
-    <String, dynamic>{
-      'objectType': instance.objectType,
-      'languageKey': instance.languageKey,
-      'objectId': instance.objectId,
-      'url': instance.url,
-    };
+Map<String, dynamic> _$PoiSourceObjectToJson(PoiSourceObject instance) {
+  final val = <String, dynamic>{
+    'objectType': instance.objectType,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('languageKey', instance.languageKey);
+  val['objectId'] = instance.objectId;
+  writeNotNull('url', instance.url);
+  return val;
+}

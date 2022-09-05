@@ -19,7 +19,7 @@ class HikeFilters extends ConsumerWidget {
     SfRangeValues durationValues = SfRangeValues(
         filterSettingsState.durationMin, filterSettingsState.durationMax);
 
-    double durationValue = filterSettingsState.searchRadius;
+    int durationValue = filterSettingsState.searchRadius;
 
     return Column(
       mainAxisSize: MainAxisSize.min,

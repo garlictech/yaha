@@ -8,3 +8,14 @@ export interface Circle {
 
 export type PathType = Feature<LineString>;
 export type GeojsonPointType = Position | [number, number, number];
+
+export interface GeoPoint {
+  latitude: number;
+  longitude: number;
+  height: number;
+}
+
+export interface BoundingBox {
+  NorthEast: GeoPoint;
+  SouthWest: GeoPoint;
+}

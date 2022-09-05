@@ -1,1 +1,1 @@
-export 'image-repository-amplify.dart';
+export 'image-repository-neo4j.dart';

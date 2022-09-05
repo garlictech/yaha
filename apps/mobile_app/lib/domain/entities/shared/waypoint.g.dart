@@ -9,88 +9,56 @@ part of 'waypoint.dart';
 abstract class $Waypoint {
   const $Waypoint();
 
-  double get latitude;
-  double get longitude;
-  double get height;
+  Point get location;
 
   Waypoint copyWith({
-    double? latitude,
-    double? longitude,
-    double? height,
+    Point? location,
   }) =>
       Waypoint(
-        latitude: latitude ?? this.latitude,
-        longitude: longitude ?? this.longitude,
-        height: height ?? this.height,
+        location: location ?? this.location,
       );
 
   Waypoint copyUsing(void Function(Waypoint$Change change) mutator) {
     final change = Waypoint$Change._(
-      this.latitude,
-      this.longitude,
-      this.height,
+      this.location,
     );
     mutator(change);
     return Waypoint(
-      latitude: change.latitude,
-      longitude: change.longitude,
-      height: change.height,
+      location: change.location,
     );
   }
 
   @override
-  String toString() =>
-      "Waypoint(latitude: $latitude, longitude: $longitude, height: $height)";
+  String toString() => "Waypoint(location: $location)";
 
   @override
   // ignore: avoid_equals_and_hash_code_on_mutable_classes
   bool operator ==(Object other) =>
       other is Waypoint &&
       other.runtimeType == runtimeType &&
-      latitude == other.latitude &&
-      longitude == other.longitude &&
-      height == other.height;
+      location == other.location;
 
   @override
   // ignore: avoid_equals_and_hash_code_on_mutable_classes
   int get hashCode {
-    var result = 17;
-    result = 37 * result + latitude.hashCode;
-    result = 37 * result + longitude.hashCode;
-    result = 37 * result + height.hashCode;
-    return result;
+    return location.hashCode;
   }
 }
 
 class Waypoint$Change {
   Waypoint$Change._(
-    this.latitude,
-    this.longitude,
-    this.height,
+    this.location,
   );
 
-  double latitude;
-  double longitude;
-  double height;
+  Point location;
 }
 
 // ignore: avoid_classes_with_only_static_members
 class Waypoint$ {
-  static final latitude = Lens<Waypoint, double>(
-    (latitudeContainer) => latitudeContainer.latitude,
-    (latitudeContainer, latitude) =>
-        latitudeContainer.copyWith(latitude: latitude),
-  );
-
-  static final longitude = Lens<Waypoint, double>(
-    (longitudeContainer) => longitudeContainer.longitude,
-    (longitudeContainer, longitude) =>
-        longitudeContainer.copyWith(longitude: longitude),
-  );
-
-  static final height = Lens<Waypoint, double>(
-    (heightContainer) => heightContainer.height,
-    (heightContainer, height) => heightContainer.copyWith(height: height),
+  static final location = Lens<Waypoint, Point>(
+    (locationContainer) => locationContainer.location,
+    (locationContainer, location) =>
+        locationContainer.copyWith(location: location),
   );
 }
 
@@ -99,13 +67,9 @@ class Waypoint$ {
 // **************************************************************************
 
 Waypoint _$WaypointFromJson(Map<String, dynamic> json) => Waypoint(
-      latitude: (json['latitude'] as num).toDouble(),
-      longitude: (json['longitude'] as num).toDouble(),
-      height: (json['height'] as num).toDouble(),
+      location: Point.fromJson(json['location'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$WaypointToJson(Waypoint instance) => <String, dynamic>{
-      'latitude': instance.latitude,
-      'longitude': instance.longitude,
-      'height': instance.height,
+      'location': instance.location.toJson(),
     };

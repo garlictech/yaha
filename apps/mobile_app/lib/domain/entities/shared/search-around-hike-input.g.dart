@@ -139,11 +139,20 @@ SearchAroundHikeInput _$SearchAroundHikeInputFromJson(
     );
 
 Map<String, dynamic> _$SearchAroundHikeInputToJson(
-        SearchAroundHikeInput instance) =>
-    <String, dynamic>{
-      'hikeId': instance.hikeId,
-      'distanceInMeters': instance.distanceInMeters,
-      'objectType': instance.objectType,
-      'limit': instance.limit,
-      'nextToken': instance.nextToken,
-    };
+    SearchAroundHikeInput instance) {
+  final val = <String, dynamic>{
+    'hikeId': instance.hikeId,
+    'distanceInMeters': instance.distanceInMeters,
+    'objectType': instance.objectType,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('limit', instance.limit);
+  writeNotNull('nextToken', instance.nextToken);
+  return val;
+}

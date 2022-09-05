@@ -34,7 +34,7 @@ final endPointsOfHikeProvider =
       poi: Poi(
           id: "${hikeId}_STARTPOI",
           location: hike.startPoint,
-          elevation: hike.route.coordinates.first.height,
+          elevation: hike.route.startPoint.height,
           type: "yaha:start_hike",
           description: [Description(languageKey: "en_US", type: "markdown")]),
       hike: hike,
@@ -46,7 +46,7 @@ final endPointsOfHikeProvider =
           id: "${hikeId}_ENDPOI",
           location: hike.endPoint,
           type: "yaha:finish_hike",
-          elevation: hike.route.coordinates.last.height,
+          elevation: hike.route.endPoint.height,
           description: [Description(languageKey: "en_US", type: "markdown")]),
       hike: hike,
       settings: HikingSettings(speed: defaults.averageSpeedKmh),

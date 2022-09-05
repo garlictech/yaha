@@ -96,7 +96,7 @@ class PoiInfoScreen extends ConsumerWidget {
                                   ),
                                   TextSpan(
                                     text:
-                                        '${(poi.location.lat * 100000).round() / 100000}',
+                                        '${(poi.location.latitude * 100000).round() / 100000}',
                                   ),
                                 ],
                               ),
@@ -118,7 +118,7 @@ class PoiInfoScreen extends ConsumerWidget {
                                     ),
                                     TextSpan(
                                       text:
-                                          '${(poi.location.lon * 100000).round() / 100000}',
+                                          '${(poi.location.longitude * 100000).round() / 100000}',
                                     ),
                                   ],
                                 ),
@@ -283,7 +283,7 @@ class PoiInfoScreen extends ConsumerWidget {
     return (BuildContext context, domain.Poi poi, int index) {
       const double markerSize = 40;
       return Marker(
-          point: LatLng(poi.location.lat, poi.location.lon),
+          point: LatLng(poi.location.latitude, poi.location.longitude),
           builder: (BuildContext c) {
             return SizedBox(
                 height: markerSize,

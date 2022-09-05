@@ -290,19 +290,28 @@ ApplicationSettingsState _$ApplicationSettingsStateFromJson(
     );
 
 Map<String, dynamic> _$ApplicationSettingsStateToJson(
-        ApplicationSettingsState instance) =>
-    <String, dynamic>{
-      'isEnglish': instance.isEnglish,
-      'isKm': instance.isKm,
-      'isCelsius': instance.isCelsius,
-      'isTimeFormat24': instance.isTimeFormat24,
-      'distanceInitialIndex': instance.distanceInitialIndex,
-      'temperatureInitialIndex': instance.temperatureInitialIndex,
-      'timeFormatInitialIndex': instance.timeFormatInitialIndex,
-      'startTime': instance.startTime?.toIso8601String(),
-      'finishTime': instance.finishTime?.toIso8601String(),
-      'startTimePickerVisibility': instance.startTimePickerVisibility,
-      'finishTimePickerVisibility': instance.finishTimePickerVisibility,
-      'currentLanguageTitle': instance.currentLanguageTitle,
-      'averageHikingSpeed': instance.averageHikingSpeed,
-    };
+    ApplicationSettingsState instance) {
+  final val = <String, dynamic>{
+    'isEnglish': instance.isEnglish,
+    'isKm': instance.isKm,
+    'isCelsius': instance.isCelsius,
+    'isTimeFormat24': instance.isTimeFormat24,
+    'distanceInitialIndex': instance.distanceInitialIndex,
+    'temperatureInitialIndex': instance.temperatureInitialIndex,
+    'timeFormatInitialIndex': instance.timeFormatInitialIndex,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('startTime', instance.startTime?.toIso8601String());
+  writeNotNull('finishTime', instance.finishTime?.toIso8601String());
+  val['startTimePickerVisibility'] = instance.startTimePickerVisibility;
+  val['finishTimePickerVisibility'] = instance.finishTimePickerVisibility;
+  val['currentLanguageTitle'] = instance.currentLanguageTitle;
+  val['averageHikingSpeed'] = instance.averageHikingSpeed;
+  return val;
+}

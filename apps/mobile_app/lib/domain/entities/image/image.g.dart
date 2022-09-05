@@ -202,14 +202,24 @@ Image _$ImageFromJson(Map<String, dynamic> json) => Image(
       banned: json['banned'] as bool?,
     );
 
-Map<String, dynamic> _$ImageToJson(Image instance) => <String, dynamic>{
-      'id': instance.id,
-      'location': instance.location,
-      'original': instance.original,
-      'card': instance.card,
-      'thumbnail': instance.thumbnail,
-      'sourceObject': instance.sourceObject,
-      'attributions': instance.attributions,
-      'labels': instance.labels,
-      'banned': instance.banned,
-    };
+Map<String, dynamic> _$ImageToJson(Image instance) {
+  final val = <String, dynamic>{
+    'id': instance.id,
+    'location': instance.location.toJson(),
+    'original': instance.original.toJson(),
+    'card': instance.card.toJson(),
+    'thumbnail': instance.thumbnail.toJson(),
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('sourceObject', instance.sourceObject?.toJson());
+  writeNotNull('attributions', instance.attributions);
+  writeNotNull('labels', instance.labels?.map((e) => e.toJson()).toList());
+  writeNotNull('banned', instance.banned);
+  return val;
+}
