@@ -64,6 +64,13 @@ type Poi {
   phone: String
   openingHours: String
   infoUrl: String
+  images: [Image]!
+    @cypher(
+      statement: """
+      match (image:Image)-[:TAKEN_AT]->(this)
+      return distinct image
+      """
+    )
 }
 
 # ------ HIKES -----------------------------------------------------
@@ -83,6 +90,27 @@ type Route {
       match (this)-[c:CONTAINS]->(w:Waypoint)
       with w order by c.orderIndex
       return w
+      """
+    )
+  onroutePois: [Poi]!
+    @cypher(
+      statement: """
+      match (poi:Poi)-[:ON_ROUTE]->(this)
+      return distinct poi
+      """
+    )
+  offroutePois: [Poi]!
+    @cypher(
+      statement: """
+      match (poi:Poi)-[:OFF_ROUTE]->(this)
+      return distinct poi
+      """
+    )
+  images: [Image]!
+    @cypher(
+      statement: """
+      match (image:Image)-[:TAKEN_AT]->(this)
+      return distinct image
       """
     )
 }
