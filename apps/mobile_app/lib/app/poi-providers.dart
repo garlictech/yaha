@@ -3,5 +3,5 @@ import 'package:yaha/data/data.dart';
 import 'package:yaha/domain/domain.dart';
 
 final poiRepositoryProvider = Provider<PoiRepository>(
-  (ref) => PoiRepositoryAmplify(),
+  (ref) => PoiRepositoryNeo4j(ref: ref),
 );
