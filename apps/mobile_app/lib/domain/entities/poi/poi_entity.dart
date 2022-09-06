@@ -5,6 +5,7 @@ import 'package:functional_data/functional_data.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:yaha/domain/entities/poi/supported_pois.dart';
 
+import '../image/image.dart';
 import '../shared/description.dart';
 import '../shared/point.dart';
 import 'poi_type.dart';
@@ -45,7 +46,7 @@ class Poi extends $Poi {
       this.description,
       this.openingHours,
       this.phone,
-      required this.images,
+      this.images = const [],
       this.address,
       this.tags});
 

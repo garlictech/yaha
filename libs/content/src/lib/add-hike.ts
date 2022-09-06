@@ -184,6 +184,8 @@ const addPoiToDb =
 match (route:Route) where route.id = "${hikeData.externalId}"
 merge (poi:Poi {id: "${poi.externalId}"})
 merge (poi)-[:${relation}]->(route)
+merge (w:Waypoint {location: Point({latitude: ${poi.location.lat}, longitude: ${poi.location.lon}, height: ${poi.elevation}})})
+merge (poi)-[:LOCATED_AT]->(w)
 `,
       res => (poi.type ? `${res}set poi.type = "${poi.type}"\n` : res),
       res => (poi.address ? `${res}set poi.address = "${poi.address}"\n` : res),

@@ -10,67 +10,62 @@ abstract class $Poi {
   const $Poi();
 
   String get id;
-  Point get location;
-  double? get elevation;
   String get type;
   List<Description>? get description;
   List<String>? get tags;
   String? get address;
-  String? get phoneNumber;
+  String? get phone;
   String? get openingHours;
+  List<Image> get images;
 
   Poi copyWith({
     String? id,
-    Point? location,
-    double? elevation,
     String? type,
     List<Description>? description,
     List<String>? tags,
     String? address,
-    String? phoneNumber,
+    String? phone,
     String? openingHours,
+    List<Image>? images,
   }) =>
       Poi(
         id: id ?? this.id,
-        location: location ?? this.location,
-        elevation: elevation ?? this.elevation,
         type: type ?? this.type,
         description: description ?? this.description,
         tags: tags ?? this.tags,
         address: address ?? this.address,
-        phoneNumber: phoneNumber ?? this.phoneNumber,
+        phone: phone ?? this.phone,
         openingHours: openingHours ?? this.openingHours,
+        images: images ?? this.images,
       );
 
   Poi copyUsing(void Function(Poi$Change change) mutator) {
     final change = Poi$Change._(
       this.id,
-      this.location,
-      this.elevation,
       this.type,
       this.description,
       this.tags,
       this.address,
-      this.phoneNumber,
+      this.phone,
       this.openingHours,
+      this.images,
     );
     mutator(change);
     return Poi(
       id: change.id,
-      location: change.location,
-      elevation: change.elevation,
       type: change.type,
       description: change.description,
       tags: change.tags,
       address: change.address,
-      phoneNumber: change.phoneNumber,
+      phone: change.phone,
       openingHours: change.openingHours,
+      images: change.images,
     );
   }
 
   @override
   String toString() =>
-      "Poi(id: $id, location: $location, elevation: $elevation, type: $type, description: $description, tags: $tags, address: $address, phoneNumber: $phoneNumber, openingHours: $openingHours)";
+      "Poi(id: $id, type: $type, description: $description, tags: $tags, address: $address, phone: $phone, openingHours: $openingHours, images: $images)";
 
   @override
   // ignore: avoid_equals_and_hash_code_on_mutable_classes
@@ -78,28 +73,26 @@ abstract class $Poi {
       other is Poi &&
       other.runtimeType == runtimeType &&
       id == other.id &&
-      const Ignore().equals(location, other.location) &&
-      const Ignore().equals(elevation, other.elevation) &&
       const Ignore().equals(type, other.type) &&
       const Ignore().equals(description, other.description) &&
       const Ignore().equals(tags, other.tags) &&
       const Ignore().equals(address, other.address) &&
-      const Ignore().equals(phoneNumber, other.phoneNumber) &&
-      const Ignore().equals(openingHours, other.openingHours);
+      const Ignore().equals(phone, other.phone) &&
+      const Ignore().equals(openingHours, other.openingHours) &&
+      const Ignore().equals(images, other.images);
 
   @override
   // ignore: avoid_equals_and_hash_code_on_mutable_classes
   int get hashCode {
     var result = 17;
     result = 37 * result + id.hashCode;
-    result = 37 * result + const Ignore().hash(location);
-    result = 37 * result + const Ignore().hash(elevation);
     result = 37 * result + const Ignore().hash(type);
     result = 37 * result + const Ignore().hash(description);
     result = 37 * result + const Ignore().hash(tags);
     result = 37 * result + const Ignore().hash(address);
-    result = 37 * result + const Ignore().hash(phoneNumber);
+    result = 37 * result + const Ignore().hash(phone);
     result = 37 * result + const Ignore().hash(openingHours);
+    result = 37 * result + const Ignore().hash(images);
     return result;
   }
 }
@@ -107,25 +100,23 @@ abstract class $Poi {
 class Poi$Change {
   Poi$Change._(
     this.id,
-    this.location,
-    this.elevation,
     this.type,
     this.description,
     this.tags,
     this.address,
-    this.phoneNumber,
+    this.phone,
     this.openingHours,
+    this.images,
   );
 
   String id;
-  Point location;
-  double? elevation;
   String type;
   List<Description>? description;
   List<String>? tags;
   String? address;
-  String? phoneNumber;
+  String? phone;
   String? openingHours;
+  List<Image> images;
 }
 
 // ignore: avoid_classes_with_only_static_members
@@ -133,18 +124,6 @@ class Poi$ {
   static final id = Lens<Poi, String>(
     (idContainer) => idContainer.id,
     (idContainer, id) => idContainer.copyWith(id: id),
-  );
-
-  static final location = Lens<Poi, Point>(
-    (locationContainer) => locationContainer.location,
-    (locationContainer, location) =>
-        locationContainer.copyWith(location: location),
-  );
-
-  static final elevation = Lens<Poi, double?>(
-    (elevationContainer) => elevationContainer.elevation,
-    (elevationContainer, elevation) =>
-        elevationContainer.copyWith(elevation: elevation),
   );
 
   static final type = Lens<Poi, String>(
@@ -168,16 +147,20 @@ class Poi$ {
     (addressContainer, address) => addressContainer.copyWith(address: address),
   );
 
-  static final phoneNumber = Lens<Poi, String?>(
-    (phoneNumberContainer) => phoneNumberContainer.phoneNumber,
-    (phoneNumberContainer, phoneNumber) =>
-        phoneNumberContainer.copyWith(phoneNumber: phoneNumber),
+  static final phone = Lens<Poi, String?>(
+    (phoneContainer) => phoneContainer.phone,
+    (phoneContainer, phone) => phoneContainer.copyWith(phone: phone),
   );
 
   static final openingHours = Lens<Poi, String?>(
     (openingHoursContainer) => openingHoursContainer.openingHours,
     (openingHoursContainer, openingHours) =>
         openingHoursContainer.copyWith(openingHours: openingHours),
+  );
+
+  static final images = Lens<Poi, List<Image>>(
+    (imagesContainer) => imagesContainer.images,
+    (imagesContainer, images) => imagesContainer.copyWith(images: images),
   );
 }
 
@@ -187,14 +170,16 @@ class Poi$ {
 
 Poi _$PoiFromJson(Map<String, dynamic> json) => Poi(
       id: json['id'] as String,
-      location: Point.fromJson(json['location'] as Map<String, dynamic>),
-      elevation: (json['elevation'] as num?)?.toDouble(),
       type: json['type'] as String? ?? "generic:unknown",
       description: (json['description'] as List<dynamic>?)
           ?.map((e) => Description.fromJson(e as Map<String, dynamic>))
           .toList(),
       openingHours: json['openingHours'] as String?,
-      phoneNumber: json['phoneNumber'] as String?,
+      phone: json['phone'] as String?,
+      images: (json['images'] as List<dynamic>?)
+              ?.map((e) => Image.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
       address: json['address'] as String?,
       tags: (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList(),
     );
@@ -202,7 +187,7 @@ Poi _$PoiFromJson(Map<String, dynamic> json) => Poi(
 Map<String, dynamic> _$PoiToJson(Poi instance) {
   final val = <String, dynamic>{
     'id': instance.id,
-    'location': instance.location.toJson(),
+    'type': instance.type,
   };
 
   void writeNotNull(String key, dynamic value) {
@@ -211,13 +196,12 @@ Map<String, dynamic> _$PoiToJson(Poi instance) {
     }
   }
 
-  writeNotNull('elevation', instance.elevation);
-  val['type'] = instance.type;
   writeNotNull(
       'description', instance.description?.map((e) => e.toJson()).toList());
   writeNotNull('tags', instance.tags);
   writeNotNull('address', instance.address);
-  writeNotNull('phoneNumber', instance.phoneNumber);
+  writeNotNull('phone', instance.phone);
   writeNotNull('openingHours', instance.openingHours);
+  val['images'] = instance.images.map((e) => e.toJson()).toList();
   return val;
 }

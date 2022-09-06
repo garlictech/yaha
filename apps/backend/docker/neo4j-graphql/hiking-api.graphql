@@ -32,7 +32,7 @@ type Image {
   card: String!
   thumbnail: String!
   attributions: String
-  labels: [String!]
+  labels: [String]
   tagged: Boolean
   banned: Boolean
 }
