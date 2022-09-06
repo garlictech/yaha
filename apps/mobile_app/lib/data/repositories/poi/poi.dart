@@ -1,1 +1,1 @@
-export 'poi-repository-amplify.dart';
+export 'poi-repository-neo4j.dart';

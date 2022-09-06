@@ -15,32 +15,23 @@ class Image extends $Image {
   @override
   final String id;
   @override
-  final Location location;
+  final String original;
   @override
-  final Imageinfo original;
+  final String card;
   @override
-  final Imageinfo card;
-  @override
-  final Imageinfo thumbnail;
-  @override
-  final PoiSourceObject? sourceObject;
+  final String thumbnail;
   @override
   final String? attributions;
   @override
   final List<Imagelabel>? labels;
-  @override
-  final bool? banned;
 
   Image(
       {required this.id,
-      required this.location,
       required this.original,
       required this.card,
       required this.thumbnail,
-      this.sourceObject,
       this.attributions,
-      this.labels,
-      this.banned});
+      this.labels});
 
   factory Image.fromJson(Map<String, dynamic> json) => _$ImageFromJson(json);
 

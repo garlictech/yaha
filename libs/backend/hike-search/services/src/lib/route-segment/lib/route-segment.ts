@@ -40,39 +40,6 @@ const calculateTime = (
 };
 
 export class RouteSegmentFp {
-  static fromCoordinatesWithElevation =
-    (averageSpeed: number) =>
-    (coords: Position[]): O.Option<RouteSegment> =>
-      pipe(
-        coords,
-        O.fromNullable,
-        O.chain(NEA.fromArray),
-        O.map(coordinates => ({
-          coordinates: O.some(coordinates),
-          distance: lineLengthInMeters(coordinates),
-        })),
-        O.chain(sequenceS(O.option)),
-        O.map(({ coordinates, distance }) => {
-          const downhill = ElevationFp.calculateDownhill(coordinates);
-          const uphill = ElevationFp.calculateUphill(coordinates);
-          const averageTime = calculateTime(distance, uphill, averageSpeed);
-
-          return {
-            coordinates,
-            distance,
-            uphill,
-            downhill,
-            averageTime,
-            score: score(distance, uphill),
-            difficulty: DifficultyFp.calculateDifficulty(distance, uphill),
-            startPoint: convertGeojsonPositionToPoint(NEA.head(coordinates)),
-            endPoint: convertGeojsonPositionToPoint(NEA.last(coordinates)),
-            geojsonFeature: turfLineString(coordinates),
-            currentTime: averageTime,
-          };
-        }),
-      );
-
   static timeWhenSpeedIs(speed: number, segment: RouteSegment): number {
     return calculateTime(segment.distance, segment.uphill, speed);
   }
@@ -103,9 +70,7 @@ export class RouteSegmentFp {
         },
       );
 
-  static calculatePoiSearchBox(
-    path: PathType | PathType[],
-  ): YahaApi.BoundingBox {
+  static calculatePoiSearchBox(path: PathType | PathType[]) {
     const featureCollection = turfFeatureCollection(
       fp.isArray(path) ? path : [path],
     );
