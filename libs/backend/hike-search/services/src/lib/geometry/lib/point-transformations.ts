@@ -1,4 +1,3 @@
-import { YahaApi } from '@yaha/gql-api';
 import {
   point as turfPoint,
   Position,
@@ -7,6 +6,7 @@ import {
 } from '@turf/helpers';
 import { Option, fromNullable, mapNullable, map } from 'fp-ts/lib/Option';
 import { pipe } from 'fp-ts/lib/function';
+import { GeoPoint } from './interfaces';
 
 export function convertPointToTurfPoint<
   POINT extends { latitude: number; longitude: number },
@@ -14,9 +14,9 @@ export function convertPointToTurfPoint<
   return turfPoint([point.longitude, point.latitude]);
 }
 
-export const convertGeojsonPositionToPoint = (
+export const convertGeojsonPositionToGeoPoint = (
   geojsonPoint: Position,
-): YahaApi.Waypoint => {
+): GeoPoint => {
   return {
     latitude: geojsonPoint[1],
     longitude: geojsonPoint[0],
@@ -24,9 +24,7 @@ export const convertGeojsonPositionToPoint = (
   };
 };
 
-export const convertPointToGeojsonPosition = (
-  point: YahaApi.Waypoint,
-): Position => {
+export const convertGeoPointToGeojsonPosition = (point: GeoPoint): Position => {
   return [point.longitude, point.latitude, point.height];
 };
 
@@ -36,9 +34,9 @@ export const convertGeojsonPositionToTurfPoint = (
   return turfPoint(point);
 };
 
-export const convertGeojsonPointFeatureToPoint = (
+export const convertGeojsonPointFeatureToGeoPoint = (
   point: Feature<TurfPoint>,
-): Option<YahaApi.Waypoint> => {
+): Option<GeoPoint> => {
   return pipe(
     fromNullable(point.geometry),
     mapNullable(geometry => geometry.coordinates),

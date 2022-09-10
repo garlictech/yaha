@@ -29,7 +29,7 @@ import {
   removePointsOutsideOfPolygon,
   isCreateImageInput,
 } from '@yaha/backend/hike-search/services';
-import { YahaApi } from '@yaha/gql-api';
+import { BoundingBox } from '@yaha/backend/hike-search/services';
 
 export interface HikeData {
   externalId: string;
@@ -218,7 +218,7 @@ merge (desc)-[:EXPLAINS]->(poi)
 export const getExternalPois =
   (deps: Neo4jdeps) =>
   (
-    bounds: YahaApi.BoundingBox,
+    bounds: BoundingBox,
     allLanguages: string[],
     hikeData: HikeData_WithBuffers,
   ): Observable<ExternalPoi[]> => {
@@ -350,7 +350,7 @@ merge (image)-[:TAKEN_AT]->(route)
 export const getExternalImages =
   (deps: Neo4jdeps) =>
   (
-    bounds: YahaApi.BoundingBox,
+    bounds: BoundingBox,
     hikeData: HikeData_WithBuffers,
     pois: ExternalPoi[],
   ): Observable<boolean> =>

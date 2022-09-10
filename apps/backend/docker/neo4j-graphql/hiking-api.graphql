@@ -66,6 +66,7 @@ type Poi {
   infoUrl: String
   descriptions: [Description!]! @relationship(type: "EXPLAINS", direction: IN)
   images: [Image!]! @relationship(type: "TAKEN_AT", direction: IN)
+  location: Waypoint! @relationship(type: "LOCATED_AT", direction: OUT)
 }
 
 # ------ HIKES -----------------------------------------------------

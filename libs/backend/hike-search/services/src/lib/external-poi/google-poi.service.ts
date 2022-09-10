@@ -19,7 +19,7 @@ import { YahaApi } from '@yaha/gql-api';
 import { HttpClient } from '../http';
 import { validateSchema } from '../joi-validator';
 import { Logger } from '../bunyan-logger';
-import { Circle, getCenterRadiusOfBox } from '../geometry';
+import { BoundingBox, Circle, getCenterRadiusOfBox } from '../geometry';
 import { buildRetryLogic } from '@yaha/shared/utils';
 import { latitudeSchema, longitudeSchema } from '../joi-schemas';
 
@@ -71,7 +71,7 @@ export const { validate: validateGoogleData, isType: isGoogleData } =
 
 export const getGooglePois =
   (deps: GooglePoiDeps) =>
-  (bounds: YahaApi.BoundingBox): Observable<ExternalPoi[]> => {
+  (bounds: BoundingBox): Observable<ExternalPoi[]> => {
     // eslint-disable-next-line prefer-rest-params
     const resultOption: Option<Observable<ExternalPoi[]>> = fptsPipe(
       getCenterRadiusOfBox(bounds),

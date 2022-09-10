@@ -5,7 +5,12 @@ import { combineAll, map, switchMap, take } from 'rxjs/operators';
 import { pipe as fptsPipe } from 'fp-ts/lib/function';
 import { map as fptsMap, isSome, Option } from 'fp-ts/lib/Option';
 import { ExternalPoi } from './lib/types';
-import { Circle, getCenterRadiusOfBox, splitBoundingBox } from '../geometry';
+import {
+  BoundingBox,
+  Circle,
+  getCenterRadiusOfBox,
+  splitBoundingBox,
+} from '../geometry';
 import { YahaApi } from '@yaha/gql-api';
 import { LanguageFp } from '../language';
 import { buildRetryLogic } from '@yaha/shared/utils';
@@ -18,7 +23,7 @@ export interface WikipediaDeps {
 const get =
   (deps: WikipediaDeps) =>
   (
-    bounds: YahaApi.BoundingBox,
+    bounds: BoundingBox,
     languageCodesShort: string[],
     lng: string,
   ): Observable<ExternalPoi[]> => {
@@ -152,10 +157,10 @@ const _getPageExtracts =
 export const getAllWikipediaPois =
   (deps: WikipediaDeps) =>
   (
-    bounds: YahaApi.BoundingBox,
+    bounds: BoundingBox,
     languageCodesShort: string[],
   ): Observable<ExternalPoi[]> => {
-    const boundsArr: YahaApi.BoundingBox[] = [];
+    const boundsArr: BoundingBox[] = [];
     splitBoundingBox(bounds, 10000, boundsArr);
     const _observables: Observable<ExternalPoi[]>[] = _.flatten(
       languageCodesShort.map(languageCode =>

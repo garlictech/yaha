@@ -3,13 +3,13 @@ import * as fp from 'lodash/fp';
 import { forkJoin, from, Observable, of } from 'rxjs';
 import { catchError, delay, map, toArray, mergeMap } from 'rxjs/operators';
 import { ExternalImage, ExternalPoi, OsmPoiTypes } from './lib/types';
-import { YahaApi } from '@yaha/gql-api';
 import { HttpClient } from '../http';
 import { getFlickrImages } from './flickr.service';
 import { isCreatePoiInput } from '../joi-schemas/poi-schema';
 import { getAllWikipediaPois } from './wikipedia-poi.service';
 import { getOsmPois } from './osm-poi.service';
 import { getGooglePois } from './google-poi.service';
+import { BoundingBox } from '../geometry';
 
 const filterTypes = fp.flow(
   type => (type === 'locality' ? 'city' : type),
@@ -35,10 +35,7 @@ export interface ExternalPoiServiceDeps {
 
 export const getExternalPois =
   (deps: ExternalPoiServiceDeps) =>
-  (
-    bounds: YahaApi.BoundingBox,
-    allLanguages: string[],
-  ): Observable<ExternalPoi[]> =>
+  (bounds: BoundingBox, allLanguages: string[]): Observable<ExternalPoi[]> =>
     forkJoin([
       getAllWikipediaPois(deps)(bounds, allLanguages),
       osmPois(getOsmPois(deps))(bounds),
@@ -70,7 +67,7 @@ export const getExternalPois =
 export const getExternalImages =
   (deps: ExternalPoiServiceDeps) =>
   (
-    bounds: YahaApi.BoundingBox,
+    bounds: BoundingBox,
     _allLanguages: string[],
     _alreadyProcessedSourceObjectIds: string[],
   ): Observable<ExternalImage[]> =>
@@ -97,11 +94,11 @@ export const getExternalImages =
 const osmPois =
   (
     osmPoiService: (
-      bounds: YahaApi.BoundingBox,
+      bounds: BoundingBox,
       typeParam: OsmPoiTypes,
     ) => Observable<ExternalPoi[]>,
   ) =>
-  (bounds: YahaApi.BoundingBox): Observable<ExternalPoi[]> =>
+  (bounds: BoundingBox): Observable<ExternalPoi[]> =>
     from([
       OsmPoiTypes.publicTransport,
       OsmPoiTypes.amenity,

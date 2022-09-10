@@ -1,6 +1,5 @@
-import { YahaApi } from '@yaha/gql-api';
 import * as fp from 'lodash/fp';
-import { Circle } from '../interfaces';
+import { Circle, GeoPoint } from './interfaces';
 import { approximateDistance } from './geospatial-calculations';
 
 export class CircleFp {
@@ -9,16 +8,13 @@ export class CircleFp {
    *
    */
   static filterPointsInSmallCircle(
-    points: YahaApi.Waypoint[],
+    points: GeoPoint[],
     circle: Circle,
-  ): YahaApi.Waypoint[] {
+  ): GeoPoint[] {
     return fp.filter(fp.curry(CircleFp.isPointInSmallCircle)(circle), points);
   }
 
-  static isPointInSmallCircle(
-    circle: Circle,
-    point: YahaApi.Waypoint,
-  ): boolean {
+  static isPointInSmallCircle(circle: Circle, point: GeoPoint): boolean {
     return (
       approximateDistance(
         { lat: point.latitude, lon: point.longitude },
