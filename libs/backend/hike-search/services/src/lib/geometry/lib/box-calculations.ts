@@ -1,6 +1,5 @@
 import * as O from 'fp-ts/lib/Option';
 import { pipe } from 'fp-ts/lib/function';
-import { YahaApi } from '@yaha/gql-api';
 import {
   circle,
   distance,
@@ -17,9 +16,9 @@ import {
   featureCollection,
 } from '@turf/turf';
 import * as fp from 'lodash/fp';
-import { Circle } from '../interfaces';
+import { BoundingBox, Circle } from './interfaces';
 import {
-  convertGeojsonPointFeatureToPoint,
+  convertGeojsonPointFeatureToGeoPoint,
   convertGeojsonPositionToTurfPoint,
   convertPointToTurfPoint,
 } from './point-transformations';
@@ -52,16 +51,14 @@ export const getPaddedBoxOfTrack = (track: Feature<LineString>) =>
 export const getBoundingBoxOfTrack = (features: AllGeoJSON) =>
   getPaddedBoundingBoxOfFeature(features);
 
-export const getCenterRadiusOfBox = (
-  bounds: YahaApi.BoundingBox,
-): Option<Circle> => {
+export const getCenterRadiusOfBox = (bounds: BoundingBox): Option<Circle> => {
   const p1 = convertPointToTurfPoint(bounds.SouthWest);
   const p2 = convertPointToTurfPoint(bounds.NorthEast);
 
   return pipe(
     midpoint(p1, p2),
-    convertGeojsonPointFeatureToPoint,
-    chain((center: YahaApi.Waypoint) =>
+    convertGeojsonPointFeatureToGeoPoint,
+    chain(center =>
       some({
         radius: distance(p1, p2, { units: 'kilometers' }) * 500,
         center,
@@ -110,9 +107,7 @@ export const envelopeOfPaths = (
   );
 };
 
-export const boundingBoxOfPaths = (
-  paths: LineString[],
-): YahaApi.BoundingBox => {
+export const boundingBoxOfPaths = (paths: LineString[]): BoundingBox => {
   return fp.flow(envelopeOfPaths, (bounds: [Position, Position]) => ({
     SouthWest: { lat: bounds[0][0], lon: bounds[0][1] },
     NorthEast: { lat: bounds[1][0], lon: bounds[1][1] },
@@ -129,9 +124,9 @@ export const envelopeOfCircle = (
 };
 
 export const splitBoundingBox = (
-  bounds: YahaApi.BoundingBox,
+  bounds: BoundingBox,
   maxRadius: number,
-  boundsArr: YahaApi.BoundingBox[],
+  boundsArr: BoundingBox[],
 ): void => {
   const center = getCenterRadiusOfBox(bounds);
 

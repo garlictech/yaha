@@ -8,6 +8,7 @@ import { YahaApi } from '@yaha/gql-api';
 import { HttpClient } from '../http';
 import { LanguageFp } from '../language';
 import { buildRetryLogic } from '@yaha/shared/utils';
+import { BoundingBox } from '../geometry';
 
 interface OsmPoiResponse {
   tags: {
@@ -43,7 +44,7 @@ export interface OsmPoiDeps {
 export const getOsmPois =
   (deps: OsmPoiDeps) =>
   (
-    bounds: YahaApi.BoundingBox,
+    bounds: BoundingBox,
     typeParam: OsmPoiTypes,
     lng = 'en',
   ): Observable<ExternalPoi[]> => {

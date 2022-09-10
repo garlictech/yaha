@@ -10,9 +10,9 @@ import turfLength from '@turf/length';
 import lineSlice from '@turf/line-slice';
 import nearestPointOnLine from '@turf/nearest-point-on-line';
 import { convertPointToTurfPoint } from './point-transformations';
-import { PathType } from '../interfaces';
 import * as O from 'fp-ts/lib/Option';
 import { pipe } from 'fp-ts/lib/function';
+import { PathType } from './interfaces';
 
 type PT = { latitude: number; longitude: number };
 

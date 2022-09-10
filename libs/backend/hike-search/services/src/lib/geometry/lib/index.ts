@@ -8,3 +8,4 @@ export * from './geospatial-calculations';
 export * from './filter-points-close-to-reference-points';
 export * from './hike-calculations';
 export * from './circle-fp';
+export * from './interfaces';

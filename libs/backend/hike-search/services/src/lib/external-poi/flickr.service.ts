@@ -2,8 +2,8 @@ import * as fp from 'lodash/fp';
 import { EMPTY, Observable } from 'rxjs';
 import { concatMap, delay, expand, map, tap, toArray } from 'rxjs/operators';
 import { HttpClient } from '../http';
-import { YahaApi } from '@yaha/gql-api';
 import { ExternalImage } from './lib/types';
+import { BoundingBox } from '../geometry';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const createImageObject = (data: any): ExternalImage => ({
@@ -24,7 +24,7 @@ export interface FlickrPoiDeps {
 
 export const getFlickrImages =
   (deps: FlickrPoiDeps) =>
-  (bounds: YahaApi.BoundingBox): Observable<ExternalImage[]> => {
+  (bounds: BoundingBox): Observable<ExternalImage[]> => {
     const url = 'https://api.flickr.com/services/rest/';
     console.log('Start searching for flickr images...');
 
