@@ -7,8 +7,8 @@ part 'route.g.dart';
 class Route {
   final String id;
   final List<Waypoint> coordinates;
-  final List<Poi> onroutePois;
-  final List<Poi> offroutePois;
+  final List<String> onroutePois;
+  final List<String> offroutePois;
   final List<Image> images;
 
   @JsonKey(ignore: true)
