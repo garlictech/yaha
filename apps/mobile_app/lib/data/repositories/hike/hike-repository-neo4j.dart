@@ -49,6 +49,7 @@ query Query($params: SearchByRadiusInput!) {
           type
         }
         route {
+          id
           coordinates {
             location {
               longitude
@@ -56,7 +57,6 @@ query Query($params: SearchByRadiusInput!) {
               height
             }
           }
-
           onroutePois {
             id
             type
@@ -71,11 +71,6 @@ query Query($params: SearchByRadiusInput!) {
               summary
               fullDescription
               type
-            }
-            images {
-              original
-              card
-              thumbnail
             }
             location {
               location {
@@ -99,11 +94,6 @@ query Query($params: SearchByRadiusInput!) {
               summary
               fullDescription
               type
-            }
-            images {
-              original
-              card
-              thumbnail
             }
             location {
               location {
