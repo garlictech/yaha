@@ -92,7 +92,8 @@ class PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
             return Marker(
                 height: markerSize,
                 width: markerSize,
-                point: LatLng(poi.location.latitude, poi.location.longitude),
+                point: LatLng(poi.location.location.latitude,
+                    poi.location.location.longitude),
                 builder: (BuildContext c) {
                   return GestureDetector(
                     onTap: () {
@@ -230,8 +231,8 @@ class PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
     /// center and the marker itself should not move to the center of the maps.
     if (_canUpdateFocalLatLng) {
       mapPresenter.mapCenter = domain.Location(
-        lat: pois[_currentSelectedIndex].location.latitude,
-        lon: pois[_currentSelectedIndex].location.longitude,
+        lat: pois[_currentSelectedIndex].location.location.latitude,
+        lon: pois[_currentSelectedIndex].location.location.longitude,
       );
     }
 

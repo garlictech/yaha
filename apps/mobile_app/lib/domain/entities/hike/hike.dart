@@ -2,6 +2,9 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:yaha/utils/geometry/geocalc.dart';
 
 import '../../game-rules.dart';
+import '../image/image.dart';
+import '../poi/poi_entity.dart';
+import '../poi/poi_of_hike.dart';
 import '../shared/description.dart';
 import '../shared/point.dart';
 import '../shared/route.dart';
@@ -58,6 +61,14 @@ class Hike {
     return descriptions.isNotEmpty
         ? (descriptions.first.title ?? unknownTitle)
         : unknownTitle;
+  }
+
+  List<Image> get images {
+    return route.images;
+  }
+
+  List<String> get imageCardUrls {
+    return route.images.map((image) => image.card).toList();
   }
 
   factory Hike.fromJson(Map<String, dynamic> json) => _$HikeFromJson(json);

@@ -6,7 +6,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:yaha/ui/views/hikes/map/widgets/leaflet-map.dart';
 import 'package:yaha/domain/domain.dart' as domain;
-import 'package:yaha/app/providers.dart';
 
 import '../../shared/shared.dart';
 import '../widgets/poi-icon.dart';
@@ -19,39 +18,26 @@ class PoiInfoScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final summary = poi.description?[0].summary == null
+    final summary = poi.descriptions?[0].summary == null
         ? const Text(
             "No description yet",
             style: TextStyle(
                 color: YahaColors.textColor, fontSize: YahaFontSizes.small),
           )
-        : (poi.description?[0].type == 'html'
-            ? Html(data: poi.description?[0].summary)
-            : Markdown(data: poi.description?[0].summary ?? ''));
+        : (poi.descriptions?[0].type == 'html'
+            ? Html(data: poi.descriptions?[0].summary)
+            : Markdown(data: poi.descriptions?[0].summary ?? ''));
 
     return Scaffold(
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: <Widget>[
-          Consumer(builder: (c, ref, child) {
-            final imagesOfPoi = ref.watch(imagesOfPoiProvider(poi.id));
-
-            getAppBar(List<String> imageUrls) {
-              return YahaSliverAppBar(
-                  title: poi.title,
-                  content: imageUrls.isEmpty
-                      ? Image.asset('assets/images/default_poi_header.jpg',
-                          fit: BoxFit.cover)
-                      : Image.network(imageUrls.first, fit: BoxFit.cover));
-            }
-
-            getEmptyAppbar() => getAppBar(const []);
-
-            return imagesOfPoi.when(
-                error: (e, s) => getEmptyAppbar(),
-                loading: () => getEmptyAppbar(),
-                data: (imageUrls) => getAppBar(imageUrls));
-          }),
+          YahaSliverAppBar(
+              title: poi.title,
+              content: poi.imageCardUrls.isEmpty
+                  ? Image.asset('assets/images/default_poi_header.jpg',
+                      fit: BoxFit.cover)
+                  : Image.network(poi.imageCardUrls.first, fit: BoxFit.cover)),
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
@@ -96,7 +82,7 @@ class PoiInfoScreen extends ConsumerWidget {
                                   ),
                                   TextSpan(
                                     text:
-                                        '${(poi.location.latitude * 100000).round() / 100000}',
+                                        '${(poi.geoPoint.latitude * 100000).round() / 100000}',
                                   ),
                                 ],
                               ),
@@ -118,13 +104,13 @@ class PoiInfoScreen extends ConsumerWidget {
                                     ),
                                     TextSpan(
                                       text:
-                                          '${(poi.location.longitude * 100000).round() / 100000}',
+                                          '${(poi.geoPoint.longitude * 100000).round() / 100000}',
                                     ),
                                   ],
                                 ),
                               ),
                             ),
-                            poi.elevation != null
+                            poi.geoPoint.height != null
                                 ? RichText(
                                     text: TextSpan(
                                       style: const TextStyle(
@@ -137,7 +123,8 @@ class PoiInfoScreen extends ConsumerWidget {
                                               fontWeight: FontWeight.w600),
                                         ),
                                         TextSpan(
-                                          text: '${poi.elevation!.round()} m',
+                                          text:
+                                              '${poi.geoPoint.height!.round()} m',
                                         ),
                                       ],
                                     ),
@@ -222,22 +209,15 @@ class PoiInfoScreen extends ConsumerWidget {
                           ],
                         ),
                       ),
-                      Consumer(builder: (c, ref, child) {
-                        final imagesOfPoi =
-                            ref.watch(imagesOfPoiProvider(poi.id));
-                        return imagesOfPoi.when(
-                            error: (e, s) => Container(),
-                            loading: () => const CircularProgressIndicator(),
-                            data: (imageUrls) => imageUrls.isEmpty
-                                ? Container()
-                                : Container(
-                                    margin: const EdgeInsets.only(
-                                        bottom: YahaSpaceSizes.large),
-                                    height: YahaBoxSizes.heightMedium,
-                                    width: MediaQuery.of(context).size.width,
-                                    child:
-                                        GalleryWidget(imageUrls: imageUrls)));
-                      }),
+                      poi.imageCardUrls.isEmpty
+                          ? Container()
+                          : Container(
+                              margin: const EdgeInsets.only(
+                                  bottom: YahaSpaceSizes.large),
+                              height: YahaBoxSizes.heightMedium,
+                              width: MediaQuery.of(context).size.width,
+                              child:
+                                  GalleryWidget(imageUrls: poi.imageCardUrls)),
                       Padding(
                         padding: const EdgeInsets.only(
                             top: YahaSpaceSizes.xLarge,
@@ -283,7 +263,7 @@ class PoiInfoScreen extends ConsumerWidget {
     return (BuildContext context, domain.Poi poi, int index) {
       const double markerSize = 40;
       return Marker(
-          point: LatLng(poi.location.latitude, poi.location.longitude),
+          point: LatLng(poi.geoPoint.latitude, poi.geoPoint.longitude),
           builder: (BuildContext c) {
             return SizedBox(
                 height: markerSize,

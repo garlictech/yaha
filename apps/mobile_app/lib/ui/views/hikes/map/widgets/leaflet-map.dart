@@ -36,9 +36,9 @@ class LeafletMapState extends ConsumerState<LeafletMap> {
 
   @override
   Widget build(BuildContext context) {
-    final mapCenter =
+    final Point? mapCenter =
         (widget.hikes.isNotEmpty ? widget.hikes.first.startPoint : null) ??
-            (widget.pois.isNotEmpty ? widget.pois.first.location : null);
+            (widget.pois.isNotEmpty ? widget.pois.first.geoPoint : null);
     final presenter = ref.watch(leafletMapMVPProvider.notifier);
     final geocalc = ref.read(geoCalcProvider);
 

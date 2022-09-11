@@ -2,9 +2,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/app/providers.dart';
 import 'package:yaha/domain/domain.dart';
 
+import '../hike/hike_provider.dart';
+
 final weatherPoisOfHikeProvider =
     FutureProvider.family<List<PoiOfHike>, String>((ref, hikeId) async {
-  final hike = await ref.read(hikeProvider(hikeId).future);
+  final hike = await ref.watch(hikeProvider(hikeId).future);
+
   final defaults = ref.read(defaultsProvider);
   final weatherApi = ref.read(weatherApiProvider);
   final weather = await weatherApi.getWeatherAround(
@@ -28,10 +31,11 @@ final weatherPoisOfHikeProvider =
     return PoiOfHike(
         poi: Poi(
             id: "${hikeId}_WEATHER",
-            location: hike.route.coordinates[20].location,
+            location: hike.route.coordinates[20],
             type: "weather:${weatherItem.type}",
-            elevation: hike.route.coordinates[20].location.height,
-            description: [Description(languageKey: "en_US", type: "markdown")]),
+            descriptions: [
+              Description(languageKey: "en_US", type: "markdown")
+            ]),
         hike: hike,
         settings: HikingSettings(speed: defaults.averageSpeedKmh),
         ref: ref);

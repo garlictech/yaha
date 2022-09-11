@@ -113,31 +113,28 @@ class HikeScreen extends ConsumerWidget {
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: <Widget>[
-          Consumer(builder: (c, ref, child) {
-            final imageUrl = ref.watch(imagesAlongHikeNotifierProvider(hike.id)
-                .select((vm) => vm.firstImageUrl));
-            final content = Stack(
-              children: [
-                AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 1000),
-                  child: YahaImage(key: UniqueKey(), imageUrl: imageUrl),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                        begin: Alignment.bottomCenter,
-                        end: Alignment.topCenter,
-                        colors: [
-                          Colors.black.withOpacity(0.6),
-                          Colors.black.withOpacity(0.2),
-                        ]),
+          YahaSliverAppBar(
+              title: hike.descriptions.first.title ?? '',
+              content: Stack(
+                children: [
+                  AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 1000),
+                    child: YahaImage(
+                        key: UniqueKey(), imageUrl: hike.images.first.card),
                   ),
-                ),
-              ],
-            );
-            return YahaSliverAppBar(
-                title: hike.descriptions.first.title ?? '', content: content);
-          }),
+                  Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                          begin: Alignment.bottomCenter,
+                          end: Alignment.topCenter,
+                          colors: [
+                            Colors.black.withOpacity(0.6),
+                            Colors.black.withOpacity(0.2),
+                          ]),
+                    ),
+                  ),
+                ],
+              )),
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
@@ -173,14 +170,8 @@ class HikeScreen extends ConsumerWidget {
                               bottom: YahaSpaceSizes.large),
                           height: YahaBoxSizes.heightMedium,
                           width: MediaQuery.of(context).size.width,
-                          child: Consumer(builder: (c, ref, child) {
-                            final imageUrls = ref.watch(
-                                imagesAlongHikeNotifierProvider(hike.id)
-                                    .select((vm) => vm.imageUrls));
-
-                            return GalleryWidget(
-                                key: UniqueKey(), imageUrls: imageUrls);
-                          })),
+                          child: GalleryWidget(
+                              key: UniqueKey(), imageUrls: hike.imageCardUrls)),
                       Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: YahaSpaceSizes.small),

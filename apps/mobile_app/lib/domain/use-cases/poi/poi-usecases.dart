@@ -4,39 +4,38 @@ import 'package:yaha/domain/services/poi-utility-services.dart';
 import 'package:dartz/dartz.dart';
 import 'package:yaha/domain/domain.dart';
 
+import '../hike/hike_provider.dart';
+
 final poisAroundHikeProvider =
     FutureProvider.family<List<PoiOfHike>, String>((ref, hikeId) async {
   final defaults = ref.read(defaultsProvider);
   final poiUtilities = ref.read(poiUtilityServicesProvider);
-  return poiUtilities
-      .getPoisOfHike(hikeId, defaults.bigGeoBufferSizeInMeters,
-          HikingSettings(speed: defaults.averageSpeedKmh))
-      .last;
+  final hike = await ref.watch(hikeProvider(hikeId).future);
+  return poiUtilities.getPoisOfHike(hike, defaults.bigGeoBufferSizeInMeters,
+      HikingSettings(speed: defaults.averageSpeedKmh));
 });
 
 final poisAlongHikeProvider =
     FutureProvider.family<List<PoiOfHike>, String>((ref, hikeId) async {
   final defaults = ref.read(defaultsProvider);
   final poiUtilities = ref.read(poiUtilityServicesProvider);
-  return poiUtilities
-      .getPoisOfHike(hikeId, defaults.smallGeoBufferSizeInMeters,
-          HikingSettings(speed: defaults.averageSpeedKmh))
-      .last;
+  final hike = await ref.watch(hikeProvider(hikeId).future);
+  return poiUtilities.getPoisOfHike(hike, defaults.smallGeoBufferSizeInMeters,
+      HikingSettings(speed: defaults.averageSpeedKmh));
 });
 
 final endPointsOfHikeProvider =
     FutureProvider.family<Tuple2<PoiOfHike, PoiOfHike>, String>(
         (ref, hikeId) async {
-  final hike = await ref.read(hikeProvider(hikeId).future);
+  final hike = await ref.watch(hikeProvider(hikeId).future);
   final defaults = ref.read(defaultsProvider);
 
   final start = PoiOfHike(
       poi: Poi(
           id: "${hikeId}_STARTPOI",
-          location: hike.startPoint,
-          elevation: hike.route.startPoint.height,
+          location: Waypoint(location: hike.startPoint),
           type: "yaha:start_hike",
-          description: [Description(languageKey: "en_US", type: "markdown")]),
+          descriptions: [Description(languageKey: "en_US", type: "markdown")]),
       hike: hike,
       settings: HikingSettings(speed: defaults.averageSpeedKmh),
       ref: ref);
@@ -44,14 +43,12 @@ final endPointsOfHikeProvider =
   final end = PoiOfHike(
       poi: Poi(
           id: "${hikeId}_ENDPOI",
-          location: hike.endPoint,
+          location: Waypoint(location: hike.endPoint),
           type: "yaha:finish_hike",
-          elevation: hike.route.endPoint.height,
-          description: [Description(languageKey: "en_US", type: "markdown")]),
+          descriptions: [Description(languageKey: "en_US", type: "markdown")]),
       hike: hike,
       settings: HikingSettings(speed: defaults.averageSpeedKmh),
       ref: ref);
-
   return Tuple2(start, end);
 });
 

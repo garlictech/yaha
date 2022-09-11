@@ -9,17 +9,11 @@ class SearchByContentInput extends $SearchByContentInput {
   @override
   final String content;
   @override
-  final String objectType;
-  @override
   final int? limit;
   @override
   final String? nextToken;
 
-  SearchByContentInput(
-      {required this.content,
-      required this.objectType,
-      this.limit,
-      this.nextToken});
+  SearchByContentInput({required this.content, this.limit, this.nextToken});
 
   factory SearchByContentInput.fromJson(Map<String, dynamic> json) =>
       _$SearchByContentInputFromJson(json);

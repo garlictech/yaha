@@ -14,7 +14,7 @@ abstract class $Image {
   String get card;
   String get thumbnail;
   String? get attributions;
-  List<Imagelabel>? get labels;
+  List<String>? get labels;
 
   Image copyWith({
     String? id,
@@ -22,7 +22,7 @@ abstract class $Image {
     String? card,
     String? thumbnail,
     String? attributions,
-    List<Imagelabel>? labels,
+    List<String>? labels,
   }) =>
       Image(
         id: id ?? this.id,
@@ -98,7 +98,7 @@ class Image$Change {
   String card;
   String thumbnail;
   String? attributions;
-  List<Imagelabel>? labels;
+  List<String>? labels;
 }
 
 // ignore: avoid_classes_with_only_static_members
@@ -131,7 +131,7 @@ class Image$ {
         attributionsContainer.copyWith(attributions: attributions),
   );
 
-  static final labels = Lens<Image, List<Imagelabel>?>(
+  static final labels = Lens<Image, List<String>?>(
     (labelsContainer) => labelsContainer.labels,
     (labelsContainer, labels) => labelsContainer.copyWith(labels: labels),
   );
@@ -147,9 +147,8 @@ Image _$ImageFromJson(Map<String, dynamic> json) => Image(
       card: json['card'] as String,
       thumbnail: json['thumbnail'] as String,
       attributions: json['attributions'] as String?,
-      labels: (json['labels'] as List<dynamic>?)
-          ?.map((e) => Imagelabel.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      labels:
+          (json['labels'] as List<dynamic>?)?.map((e) => e as String).toList(),
     );
 
 Map<String, dynamic> _$ImageToJson(Image instance) {
@@ -167,6 +166,6 @@ Map<String, dynamic> _$ImageToJson(Image instance) {
   }
 
   writeNotNull('attributions', instance.attributions);
-  writeNotNull('labels', instance.labels?.map((e) => e.toJson()).toList());
+  writeNotNull('labels', instance.labels);
   return val;
 }
