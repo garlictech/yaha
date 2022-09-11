@@ -76,6 +76,7 @@ type Poi {
     @cypher(
       statement: """
       match (i:Image)-[:TAKEN_AT]->(this)
+      where i.banned = false
       return distinct i
       """
     )
@@ -120,6 +121,7 @@ type Route {
     @cypher(
       statement: """
       match (image:Image)-[:TAKEN_AT]->(this)
+      where image.banned = false
       return distinct image
       """
     )
