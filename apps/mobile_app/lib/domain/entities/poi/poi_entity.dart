@@ -7,7 +7,7 @@ import 'package:yaha/domain/entities/poi/supported_pois.dart';
 
 import '../image/image.dart';
 import '../shared/description.dart';
-import '../shared/point.dart';
+import '../shared/waypoint.dart';
 import 'poi_type.dart';
 import '/utils/string.dart';
 
@@ -23,7 +23,7 @@ class Poi extends $Poi {
   final String type;
   @override
   @CustomEquality(Ignore())
-  final List<Description>? description;
+  final List<Description>? descriptions;
   @override
   @CustomEquality(Ignore())
   final List<String>? tags;
@@ -38,16 +38,24 @@ class Poi extends $Poi {
   final String? openingHours;
   @override
   @CustomEquality(Ignore())
+  final String? infoUrl;
+  @override
+  @CustomEquality(Ignore())
   final List<Image> images;
+  @override
+  @CustomEquality(Ignore())
+  final Waypoint location;
 
   Poi(
       {required this.id,
       this.type = "generic:unknown",
-      this.description,
+      this.descriptions,
       this.openingHours,
       this.phone,
       this.images = const [],
       this.address,
+      this.infoUrl,
+      required this.location,
       this.tags});
 
   get poiType {
@@ -70,15 +78,23 @@ class Poi extends $Poi {
   }
 
   get title {
-    return description?.first.title ?? kindAsStr;
+    return descriptions?.first.title ?? kindAsStr;
   }
 
   get hasOwnTitle {
-    return description?.first.title != null;
+    return descriptions?.first.title != null;
   }
 
   get kindAsStr {
     return poiType.kind.replaceAll('_', ' ');
+  }
+
+  get geoPoint {
+    return location.location;
+  }
+
+  List<String> get imageCardUrls {
+    return images.map((image) => image.card).toList();
   }
 
   factory Poi.fromJson(Map<String, dynamic> json) => _$PoiFromJson(json);

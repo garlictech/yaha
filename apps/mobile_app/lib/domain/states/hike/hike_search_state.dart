@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:functional_data/functional_data.dart';
 import 'package:yaha/domain/domain.dart';
@@ -26,7 +25,7 @@ class HikeSearchState extends $HikeSearchState {
   @override
   final Point origin;
   @override
-  final List<Hike> hits;
+  final List<String> hits;
   @override
   final bool searching;
   @override
@@ -66,24 +65,26 @@ class HikeSearchStateNotifier extends StateNotifier<HikeSearchState> {
 
   updateOrigin(Point newOrigin) => state = state.copyWith(origin: newOrigin);
 
-  updateHits(List<Hike> newHits) => state = state.copyWith(hits: newHits);
+  updateHits(List<String> newHits) => state = state.copyWith(hits: newHits);
 
   searchAroundLocation(Point origin) {
-    final hikeSearchUseCases = read(hikeSearchUsecasesProvider);
+    final hikeRepository = read(hikeRepositoryProvider);
     state = state.copyWith(searching: true, noHits: false);
-    hikeSearchUseCases
-        .searchHikesAroundLocation(origin, state.searchRadius, 10)
+    hikeRepository
+        .searchHikeByRadius(SearchByRadiusInput(
+            origin: origin, radiusInMeters: state.searchRadius))
         .then((hits) {
-      debugPrint(hits.toString());
       state =
           state.copyWith(hits: hits, searching: false, noHits: hits.isEmpty);
     });
   }
 
   searchInContent(String text) {
-    final hikeSearchUseCases = read(hikeSearchUsecasesProvider);
+    final hikeRepository = read(hikeRepositoryProvider);
     state = state.copyWith(searching: true, noHits: false);
-    hikeSearchUseCases.searchHikesByContent(text, 10).then((hits) {
+    hikeRepository
+        .searchHikeByContent(SearchByContentInput(content: text))
+        .then((hits) {
       state =
           state.copyWith(hits: hits, searching: false, noHits: hits.isEmpty);
     });

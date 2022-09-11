@@ -1,5 +1,4 @@
 import 'dart:core';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:turf/turf.dart';
@@ -30,27 +29,27 @@ class PoiOfHike extends Poi {
       : super(
             id: poi.id,
             location: poi.location,
-            elevation: poi.elevation,
             type: poi.type,
-            description: poi.description,
+            descriptions: poi.descriptions,
             openingHours: poi.openingHours,
-            phoneNumber: poi.phoneNumber,
+            phone: poi.phone,
             address: poi.address,
+            images: poi.images,
             tags: poi.tags) {
     geocalc = ref.read(geoCalcProvider);
   }
 
   Stream<LineString> get lineSliceFromStart {
     return lineSliceFromStart_ ??= DeferStream(() => Stream.fromFuture(
-        geocalc.snappedLineSlice(
-            hike.startPoint, location, hike.route.asLineString))).shareReplay();
+            geocalc.snappedLineSlice(
+                hike.startPoint, location.location, hike.route.asLineString)))
+        .shareReplay();
   }
 
   Future<double> get distanceFromStart async {
     return (distanceFromStart_ ??= DeferStream(() => Stream.fromFuture(
-                geocalc.distanceOnLine(
-                    hike.startPoint, location, hike.route.asLineString)))
-            .shareReplay())
+            geocalc.distanceOnLine(hike.startPoint, location.location,
+                hike.route.asLineString))).shareReplay())
         .last;
   }
 

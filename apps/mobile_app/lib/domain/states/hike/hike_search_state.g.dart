@@ -17,7 +17,7 @@ abstract class $HikeSearchState {
   int get difficulty;
   int get difficultyIndex;
   Point get origin;
-  List<Hike> get hits;
+  List<String> get hits;
   bool get searching;
   bool get noHits;
 
@@ -30,7 +30,7 @@ abstract class $HikeSearchState {
     int? difficulty,
     int? difficultyIndex,
     Point? origin,
-    List<Hike>? hits,
+    List<String>? hits,
     bool? searching,
     bool? noHits,
   }) =>
@@ -142,7 +142,7 @@ class HikeSearchState$Change {
   int difficulty;
   int difficultyIndex;
   Point origin;
-  List<Hike> hits;
+  List<String> hits;
   bool searching;
   bool noHits;
 }
@@ -196,7 +196,7 @@ class HikeSearchState$ {
     (originContainer, origin) => originContainer.copyWith(origin: origin),
   );
 
-  static final hits = Lens<HikeSearchState, List<Hike>>(
+  static final hits = Lens<HikeSearchState, List<String>>(
     (hitsContainer) => hitsContainer.hits,
     (hitsContainer, hits) => hitsContainer.copyWith(hits: hits),
   );

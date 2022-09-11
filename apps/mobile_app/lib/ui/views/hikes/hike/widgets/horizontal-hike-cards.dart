@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yaha/domain/domain.dart';
 //import 'package:yaha/utility/buttons/show-more-button.dart';
 
 import '../../../shared/shared.dart';
+import '../../../utils/error-utils.dart';
 import 'hike-card.dart';
 
 class HorizontalHikeCards extends ConsumerWidget {
   final String title;
-  final FutureProvider<List<Hike>> hikeListProvider;
+  final FutureProvider<List<String>> hikeListProvider;
 
   const HorizontalHikeCards(
       {required this.title, required this.hikeListProvider, Key? key})
@@ -36,14 +36,14 @@ class HorizontalHikeCards extends ConsumerWidget {
               data: (data) => ListView(
                   scrollDirection: Axis.horizontal,
                   children: data
-                      .map((hike) => Container(
+                      .map((hikeId) => Container(
                           padding: const EdgeInsets.only(
                               right: YahaSpaceSizes.general),
                           width: YahaBoxSizes.widthMedium,
-                          child: HikeCard(hike: hike)))
+                          child: HikeCard(hikeId: hikeId)))
                       .toList()),
               loading: () => const Center(child: CircularProgressIndicator()),
-              error: (err, stack) => Text('Error: $err'))),
+              error: errorWidget))
       //ShowMoreButton(nextScreen: BestHikesOfTheWorld())
     ]);
   }

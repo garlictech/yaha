@@ -17,7 +17,7 @@ class RepositoryNeo4j<T> {
     client = ref.read(graphqlClientProvider);
   }
 
-  getEntityList(String query, String gqlLabel) async {
+  Future<List<String>> getEntityList(String query, String gqlLabel) async {
     final QueryOptions options = QueryOptions(document: gql(query));
     final QueryResult result = await client.query(options);
 
@@ -26,20 +26,21 @@ class RepositoryNeo4j<T> {
     }
 
     final entities = result.data != null
-        ? result.data![gqlLabel].map<T>((entity) => fromJson(entity)).toList()
+        ? result.data![gqlLabel]
+            .map<String>((entity) => entity['id'] as String)
+            .toList()
         : const [];
 
-    entities.forEach((entity) => _entityCache.addData(entity.id, entity));
     return entities;
   }
 
-  searchEntityByRadius(
+  Future<List<String>> searchEntityByRadius(
       SearchByRadiusInput input, String query, String gqlLabel) async {
     final params = {"params": input.toJson()};
     return _executeEntityIdQuery(query, gqlLabel, params);
   }
 
-  getEntity(String query, String id, String gqlLabel) async {
+  Future<T> getEntity(String query, String id, String gqlLabel) async {
     if (_entityCache.containsKey(id)) {
       return _entityCache.getData(id);
     }
@@ -62,11 +63,11 @@ class RepositoryNeo4j<T> {
       _entityCache.addData(id, entity);
       return entity;
     } else {
-      return null;
+      throw "Entity $id cannot be found.";
     }
   }
 
-  searchEntityByContent(
+  Future<List<String>> searchEntityByContent(
       SearchByContentInput input, String query, String gqlLabel) async {
     final variables = {
       "where": {
@@ -90,18 +91,15 @@ class RepositoryNeo4j<T> {
       String resultPropName, Map<String, dynamic>? variables) async {
     final QueryOptions options =
         QueryOptions(document: gql(query), variables: variables ?? {});
-    debugPrint('****1 $variables');
     final QueryResult result = await client.query(options);
 
     if (result.hasException) {
       debugPrint(result.exception.toString());
     }
-    debugPrint('****2 ${result.data![resultPropName]}');
-    final List<String> entityIds =
+
+    final List<dynamic> entityIds =
         result.data != null ? (result.data![resultPropName]) : const [];
 
-    debugPrint('****2.5 ${entityIds.runtimeType}');
-    debugPrint('****3 $entityIds');
-    return entityIds;
+    return entityIds.map((id) => id as String).toList();
   }
 }

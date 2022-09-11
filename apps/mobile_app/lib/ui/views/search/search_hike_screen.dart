@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:yaha/domain/services/services.dart';
+import '../../../domain/entities/hike/hike.dart';
 import '../hikes/hike/screens/hike-filter-screen.dart';
 import '../hikes/map/widgets/leaflet-map.dart';
 import '/domain/domain.dart' as domain;
@@ -67,6 +69,7 @@ class SearchHikeScreenState extends ConsumerState<SearchHikeScreen>
     final searchState = ref.watch(domain.hikeSearchStateProvider);
     final model = ref.watch(presenterInstance);
     final presenter = ref.watch(presenterInstance.notifier);
+    final hikeUtilityServices = ref.read(hikeUtilityServicesProvider);
 
     return Scaffold(
         appBar: AppBar(title: TabBar(controller: _tabController, tabs: myTabs)),
@@ -109,7 +112,11 @@ class SearchHikeScreenState extends ConsumerState<SearchHikeScreen>
                   : searchState.noHits
                       ? const Center(child: Text("No hikes"))
                       : model.mapShown
-                          ? LeafletMap(hikes: searchState.hits)
+                          ? FutureBuilder<List<Hike>>(
+                              future: hikeUtilityServices
+                                  .getHikes(searchState.hits),
+                              builder: (context, data) =>
+                                  LeafletMap(hikes: data.data ?? const []))
                           : ListView(
                               itemExtent: 230,
                               children: searchState.hits
@@ -117,7 +124,7 @@ class SearchHikeScreenState extends ConsumerState<SearchHikeScreen>
                                       padding: const EdgeInsets.only(
                                           bottom: 5, left: 5, right: 5),
                                       child: HikeCard(
-                                          hike: hit,
+                                          hikeId: hit,
                                           distanceFromCurrentLocation: 2)))
                                   .toList())),
         ])));

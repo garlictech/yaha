@@ -13,23 +13,6 @@ class HikeRepositoryNeo4j extends RepositoryNeo4j<Hike>
     query Hikes {
       hikes {
         id
-        route {
-          id
-          coordinates {
-            location {
-              latitude
-              longitude
-              height
-            }  
-          }
-        }
-        descriptions {
-          languageKey
-          title
-          summary
-          fullDescription
-          type
-        }
       }
     }''';
 
@@ -44,7 +27,8 @@ query Query($params: SearchByRadiusInput!) {
 }
     ''';
 
-    return searchEntityByRadius(input, query, 'searchHikeByRadius');
+    final x = searchEntityByRadius(input, query, 'searchHikeByRadius');
+    return x;
   }
 
   @override
@@ -53,22 +37,87 @@ query Query($params: SearchByRadiusInput!) {
     query Hikes($where: HikeWhere) {
       hikes(where: $where) {
         id
-        route {
-          id
-          coordinates {
-            location {
-              latitude
-              longitude
-              height  
-            }
-          }
-        }
+        featured
+        rate
+        tags
+        publicationState
         descriptions {
           languageKey
           title
           summary
           fullDescription
           type
+        }
+        route {
+          coordinates {
+            location {
+              longitude
+              latitude
+              height
+            }
+          }
+
+          onroutePois {
+            id
+            type
+            tags
+            address
+            phone
+            openingHours
+            infoUrl
+            descriptions {
+              languageKey
+              title
+              summary
+              fullDescription
+              type
+            }
+            images {
+              original
+              card
+              thumbnail
+            }
+            location {
+              location {
+                longitude
+                latitude
+                height
+              }
+            }
+          }
+          offroutePois {
+            id
+            type
+            tags
+            address
+            phone
+            openingHours
+            infoUrl
+            descriptions {
+              languageKey
+              title
+              summary
+              fullDescription
+              type
+            }
+            images {
+              original
+              card
+              thumbnail
+            }
+            location {
+              location {
+                longitude
+                latitude
+                height
+              }
+            }
+          }
+          images {
+            original
+            card
+            thumbnail
+          }
         }
       }
     }''';
