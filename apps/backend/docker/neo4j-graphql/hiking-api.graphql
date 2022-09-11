@@ -102,18 +102,18 @@ type Route {
       return w
       """
     )
-  onroutePois: [Poi]!
+  onroutePois: [String]!
     @cypher(
       statement: """
       match (poi:Poi)-[:ON_ROUTE]->(this)
-      return distinct poi
+      return distinct poi.id
       """
     )
-  offroutePois: [Poi]!
+  offroutePois: [String]!
     @cypher(
       statement: """
       match (poi:Poi)-[:OFF_ROUTE]->(this)
-      return distinct poi
+      return distinct poi.id
       """
     )
   images: [Image]!
