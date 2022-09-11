@@ -9,7 +9,7 @@ part of 'image.dart';
 abstract class $Image {
   const $Image();
 
-  String get id;
+  String? get id;
   String get original;
   String get card;
   String get thumbnail;
@@ -93,7 +93,7 @@ class Image$Change {
     this.labels,
   );
 
-  String id;
+  String? id;
   String original;
   String card;
   String thumbnail;
@@ -103,7 +103,7 @@ class Image$Change {
 
 // ignore: avoid_classes_with_only_static_members
 class Image$ {
-  static final id = Lens<Image, String>(
+  static final id = Lens<Image, String?>(
     (idContainer) => idContainer.id,
     (idContainer, id) => idContainer.copyWith(id: id),
   );
@@ -142,7 +142,7 @@ class Image$ {
 // **************************************************************************
 
 Image _$ImageFromJson(Map<String, dynamic> json) => Image(
-      id: json['id'] as String,
+      id: json['id'] as String?,
       original: json['original'] as String,
       card: json['card'] as String,
       thumbnail: json['thumbnail'] as String,
@@ -152,12 +152,7 @@ Image _$ImageFromJson(Map<String, dynamic> json) => Image(
     );
 
 Map<String, dynamic> _$ImageToJson(Image instance) {
-  final val = <String, dynamic>{
-    'id': instance.id,
-    'original': instance.original,
-    'card': instance.card,
-    'thumbnail': instance.thumbnail,
-  };
+  final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
     if (value != null) {
@@ -165,6 +160,10 @@ Map<String, dynamic> _$ImageToJson(Image instance) {
     }
   }
 
+  writeNotNull('id', instance.id);
+  val['original'] = instance.original;
+  val['card'] = instance.card;
+  val['thumbnail'] = instance.thumbnail;
   writeNotNull('attributions', instance.attributions);
   writeNotNull('labels', instance.labels);
   return val;

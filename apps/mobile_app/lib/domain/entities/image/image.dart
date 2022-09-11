@@ -7,7 +7,7 @@ part 'image.g.dart';
 @JsonSerializable()
 class Image extends $Image {
   @override
-  final String id;
+  final String? id;
   @override
   final String original;
   @override
@@ -20,7 +20,7 @@ class Image extends $Image {
   final List<String>? labels;
 
   Image(
-      {required this.id,
+      {this.id,
       required this.original,
       required this.card,
       required this.thumbnail,
