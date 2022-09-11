@@ -80,7 +80,7 @@ type Poi {
       """
     )
 
-  location: Waypoint! @relationship(type: "LOCATED_AT", direction: OUT)
+  location: Waypoint @relationship(type: "LOCATED_AT", direction: OUT)
 }
 
 # ------ HIKES -----------------------------------------------------
