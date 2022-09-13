@@ -116,7 +116,7 @@ type Route {
       return distinct poi
       """
     )
-  offroutePois: [String]!
+  offroutePois: [Poi]!
     @cypher(
       statement: """
       match (poi:Poi)-[:OFF_ROUTE]->(this)
