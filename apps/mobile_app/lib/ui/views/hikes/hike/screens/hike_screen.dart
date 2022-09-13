@@ -10,6 +10,7 @@ import '../../../poi/poi.dart';
 import '../../../poi/widgets/poi_icon_list.dart';
 import '../../../shared/shared.dart';
 import '../../../shared/widgets/yaha-image.dart';
+import '../../../utils/error-utils.dart';
 import '../../map/widgets/leaflet-map.dart';
 import '../widgets/hike_properties.dart';
 import 'weather-screen.dart';
@@ -184,8 +185,7 @@ class HikeScreen extends ConsumerWidget {
                             loading: () => const Center(
                                 child: YahaProgressIndicator(
                                     text: "Searching for things...")),
-                            error: (e, s) =>
-                                const Text("Something bad happened"),
+                            error: errorWidget,
                             data: (pois) => PoiIconList(
                                 types: PoiUtils.uniqueTypes(pois), hike: hike));
                       }),
@@ -207,8 +207,7 @@ class HikeScreen extends ConsumerWidget {
                                   loading: () => const Center(
                                       child: YahaProgressIndicator(
                                           text: "Searching for places...")),
-                                  error: (e, s) => const Center(
-                                      child: Text("Something bad happened")),
+                                  error: errorWidget,
                                   data: (pois) => PoiTitleList(pois: pois));
                         }),
                       ),

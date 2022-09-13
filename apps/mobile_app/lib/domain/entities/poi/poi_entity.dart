@@ -46,6 +46,8 @@ class Poi extends $Poi {
   @CustomEquality(Ignore())
   final Waypoint location;
 
+  PoiType? poiType_;
+
   Poi(
       {required this.id,
       this.type = "generic:unknown",
@@ -59,22 +61,30 @@ class Poi extends $Poi {
       this.tags});
 
   get poiType {
-    final convertedType = temporaryTypeConversions(type);
-    final splitted = convertedType.split(':');
-    var category = splitted.length > 1 ? splitted[0] : 'unknown';
-    var kind = splitted.length > 1 ? splitted[1] : splitted[0];
-    category =
-        supportedTags.keys.toSet().contains(category) ? category : 'generic';
-    final isContained = supportedTags[category]?.contains(kind);
-    kind = isContained == null || isContained == false ? 'unknown' : kind;
+    getPoitype() {
+      final convertedType = temporaryTypeConversions(type);
+      final splitted = convertedType.split(':');
+      var category = splitted.length > 1 ? splitted[0] : null;
+      var kind = splitted.length > 1 ? splitted[1] : splitted[0];
 
-    final newType = '$category:$kind';
+      category ??= supportedTags.keys.toSet().firstWhere(
+          (key) => supportedTags[key]!.contains(kind),
+          orElse: () => '');
 
-    if (newType != convertedType) {
-      debugPrint('Found unsupported POI: $type');
+      category =
+          supportedTags.keys.toSet().contains(category) ? category : 'generic';
+
+      final isContained = supportedTags[category]?.contains(kind);
+      kind = isContained == null || isContained == false ? 'unknown' : kind;
+
+      if (kind == 'unknown') {
+        debugPrint('Found unsupported POI: $type');
+      }
+
+      return PoiType(category: category, kind: kind);
     }
 
-    return PoiType(category: category, kind: kind);
+    return poiType_ ??= getPoitype();
   }
 
   get title {

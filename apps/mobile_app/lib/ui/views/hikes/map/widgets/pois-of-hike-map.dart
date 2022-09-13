@@ -10,6 +10,7 @@ import 'package:yaha/domain/domain.dart' as domain;
 import 'package:yaha/ui/views/shared/shared.dart';
 
 import '../../../../presenters/map/map.dart';
+import '../../../utils/error-utils.dart';
 import 'leaflet-map.dart';
 
 /// Renders the map widget with OSM map.
@@ -64,8 +65,7 @@ class PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
     _cardHeight = 90;
 
     return poisFuture.when(
-        error: (err, s) =>
-            const Center(child: Text("Something bad happened 😱")),
+        error: errorWidget,
         loading: () => const Center(
             child: YahaProgressIndicator(text: "Looking for some places...")),
         data: (obtainedPois) {

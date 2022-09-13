@@ -19,6 +19,11 @@ class Point extends $Point {
     required this.height,
   });
 
+  get asGeojsonPoint => [longitude, latitude, height];
+  get asLatLon => {"lon": longitude, "lat": latitude, "elevation": height};
+
+  get asGeojsonPointJsonStr => jsonEncode([longitude, latitude, height]);
+
   factory Point.fromJson(Map<String, dynamic> json) => _$PointFromJson(json);
 
   Map<String, dynamic> toJson() => _$PointToJson(this);

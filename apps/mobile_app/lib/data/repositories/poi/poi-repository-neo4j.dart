@@ -34,6 +34,20 @@ query Pois($where: PoiWhere) {
       card
       original
     }
+    location {
+      location {
+        longitude
+        latitude
+        height
+      }
+    }
+    descriptions {
+      languageKey
+      title
+      summary
+      fullDescription
+      type
+    }
   }
 }''';
 
