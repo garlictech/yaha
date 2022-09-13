@@ -28,6 +28,7 @@ class PoiInfoScreen extends ConsumerWidget {
             ? Html(data: poi.descriptions?[0].summary)
             : Markdown(data: poi.descriptions?[0].summary ?? ''));
 
+    debugPrint("***** ${poi.images}");
     return Scaffold(
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),

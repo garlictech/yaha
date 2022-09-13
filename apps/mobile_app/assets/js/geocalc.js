@@ -28673,13 +28673,10 @@
   var lineLengthInMeters = (lineCoordinates) => O.tryCatch(
     () => length(lineString(lineCoordinates), { units: "kilometers" }) * 1e3
   );
-  var lineStringLengthInMeters = (line) => {
-    var _a;
-    return (0, import_function2.pipe)(
-      O.fromNullable((_a = line == null ? void 0 : line.geometry) == null ? void 0 : _a.coordinates),
-      O.chain(lineLengthInMeters)
-    );
-  };
+  var lineStringLengthInMeters = (line) => (0, import_function2.pipe)(
+    O.fromNullable(line?.geometry?.coordinates),
+    O.chain(lineLengthInMeters)
+  );
   var distanceOnLineForFlutter = (start, end, path) => {
     return distanceOnLine(start, end, path).toString();
   };
