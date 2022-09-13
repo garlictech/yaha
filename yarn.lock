@@ -6752,6 +6752,25 @@
     "@neo4j/graphql" "^3.6.3"
     prettier "2.7.1"
 
+"@neo4j/graphql@3.7.0":
+  version "3.7.0"
+  resolved "https://registry.yarnpkg.com/@neo4j/graphql/-/graphql-3.7.0.tgz#a3b0556075424afed93be546dc72cf69672df48e"
+  integrity sha512-zXp8prX2IOVCS9ZxA5IOz/dGihwLaHvcGaz8tQKsgIz27fqznz2gcjn/wHsBnV2EXl2recumuA/YhcLac1JZgA==
+  dependencies:
+    "@graphql-tools/merge" "^8.3.3"
+    "@graphql-tools/resolvers-composition" "^6.5.3"
+    "@graphql-tools/schema" "9.0.1"
+    "@graphql-tools/utils" "^8.10.0"
+    camelcase "^6.3.0"
+    debug "^4.3.4"
+    deep-equal "^2.0.5"
+    dot-prop "^6.0.1"
+    graphql-compose "^9.0.8"
+    graphql-parse-resolve-info "^4.12.3"
+    graphql-relay "^0.10.0"
+    pluralize "^8.0.0"
+    semver "^7.3.7"
+
 "@neo4j/graphql@^3.6.3":
   version "3.6.3"
   resolved "https://registry.yarnpkg.com/@neo4j/graphql/-/graphql-3.6.3.tgz#aba4ad1b994aafa9174bcd201430cadc82aee734"
@@ -6770,25 +6789,6 @@
     graphql-relay "0.10.0"
     pluralize "8.0.0"
     semver "7.3.7"
-
-"@neo4j/graphql@^3.7.0":
-  version "3.7.0"
-  resolved "https://registry.yarnpkg.com/@neo4j/graphql/-/graphql-3.7.0.tgz#a3b0556075424afed93be546dc72cf69672df48e"
-  integrity sha512-zXp8prX2IOVCS9ZxA5IOz/dGihwLaHvcGaz8tQKsgIz27fqznz2gcjn/wHsBnV2EXl2recumuA/YhcLac1JZgA==
-  dependencies:
-    "@graphql-tools/merge" "^8.3.3"
-    "@graphql-tools/resolvers-composition" "^6.5.3"
-    "@graphql-tools/schema" "9.0.1"
-    "@graphql-tools/utils" "^8.10.0"
-    camelcase "^6.3.0"
-    debug "^4.3.4"
-    deep-equal "^2.0.5"
-    dot-prop "^6.0.1"
-    graphql-compose "^9.0.8"
-    graphql-parse-resolve-info "^4.12.3"
-    graphql-relay "^0.10.0"
-    pluralize "^8.0.0"
-    semver "^7.3.7"
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
@@ -19634,7 +19634,7 @@ neo4j-driver-core@^4.4.7:
   resolved "https://registry.yarnpkg.com/neo4j-driver-core/-/neo4j-driver-core-4.4.7.tgz#d2475e107b3fea2b9d1c36b0c273da5c5a291c37"
   integrity sha512-NhvVuQYgG7eO/vXxRaoJfkWUNkjvIpmCIS9UWU9Bbhb4V+wCOyX/MVOXqD0Yizhs4eyIkD7x90OXb79q+vi+oA==
 
-neo4j-driver@^4.4.7:
+neo4j-driver@4.4.7:
   version "4.4.7"
   resolved "https://registry.yarnpkg.com/neo4j-driver/-/neo4j-driver-4.4.7.tgz#51b3fb48241e66eb3be94e90032cc494c44e59f3"
   integrity sha512-N7GddPhp12gVJe4eB84u5ik5SmrtRv8nH3rK47Qy7IUKnJkVEos/F1QjOJN6zt1jLnDXwDcGzCKK8XklYpzogw==
