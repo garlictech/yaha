@@ -1,5 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:async/async.dart';
+import 'package:rxdart/rxdart.dart';
 
 import '../entities/entities.dart';
 import '../use-cases/poi/poi_provider.dart';
@@ -11,15 +12,10 @@ class PoiUtilityServices {
 
   Future<List<PoiOfHike>> getPoisOfHike(
       Hike hike, HikingSettings hikingSettings) async {
-    FutureGroup<Poi> group = FutureGroup<Poi>();
-
-    for (var id in hike.route.onroutePois) {
-      final poi = ref.read(poiProvider(id).future);
-      group.add(poi);
-    }
-
-    group.close();
-    final pois = await group.future;
+    final pois = await ConcatStream(hike.route.onroutePois.map(
+            (poiId) => Stream.fromFuture(ref.read(poiProvider(poiId).future))))
+        .doOnData((x) => debugPrint(x.toString()))
+        .toSet();
 
     return pois
         .whereType<Poi>()

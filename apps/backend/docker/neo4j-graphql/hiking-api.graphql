@@ -81,7 +81,13 @@ type Poi {
       """
     )
 
-  location: Waypoint @relationship(type: "LOCATED_AT", direction: OUT)
+  location: Waypoint!
+    @cypher(
+      statement: """
+      match (this)-[:LOCATED_AT]->(w:Waypoint)
+      return w
+      """
+    )
 }
 
 # ------ HIKES -----------------------------------------------------
@@ -103,18 +109,18 @@ type Route {
       return w
       """
     )
-  onroutePois: [String]!
+  onroutePois: [Poi]!
     @cypher(
       statement: """
       match (poi:Poi)-[:ON_ROUTE]->(this)
-      return collect(distinct poi.id)
+      return distinct poi
       """
     )
   offroutePois: [String]!
     @cypher(
       statement: """
       match (poi:Poi)-[:OFF_ROUTE]->(this)
-      return collect(distinct poi.id)
+      return distinct poi
       """
     )
   images: [Image]!

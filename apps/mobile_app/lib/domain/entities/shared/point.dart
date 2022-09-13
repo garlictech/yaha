@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:functional_data/functional_data.dart';
 import 'package:json_annotation/json_annotation.dart';
 

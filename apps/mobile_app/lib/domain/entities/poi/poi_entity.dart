@@ -88,11 +88,15 @@ class Poi extends $Poi {
   }
 
   get title {
-    return descriptions?.first.title ?? kindAsStr;
+    return (descriptions?.isNotEmpty ?? false)
+        ? descriptions!.first.title
+        : kindAsStr;
   }
 
   get hasOwnTitle {
-    return descriptions?.first.title != null;
+    return (descriptions?.isNotEmpty ?? false)
+        ? descriptions!.first.title != null
+        : false;
   }
 
   get kindAsStr {
