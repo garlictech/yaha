@@ -27,10 +27,12 @@ return image limit 1000
           () =>
             of({
               banned: true,
+              labels: '',
             }),
-          _labels =>
+          labels =>
             of({
               banned: false,
+              labels: JSON.stringify(labels),
             }),
         ),
         tap(x => console.warn('Image updated with: ', x)),
@@ -39,6 +41,7 @@ return image limit 1000
             `
 match (image:Image) where image.id = "${image.id}"
 set image.banned = ${newProps.banned}
+set image.labels = '${newProps.labels}' 
 set image.processed = true
 `,
             query =>

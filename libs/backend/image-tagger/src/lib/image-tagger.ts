@@ -100,7 +100,8 @@ const isRelevantImage =
             (label: Rekognition.Label) =>
               !!label.Name &&
               !!label.Confidence &&
-              ['Nature', 'Outdoors', 'Vegetation'].includes(label.Name),
+              ['Nature', 'Outdoors', 'Vegetation'].includes(label.Name) &&
+              !['Human', 'Person'].includes(label.Name),
           )(labels)
             ? OE.right(
                 pipe(
