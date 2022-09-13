@@ -66,8 +66,16 @@ class GeoCalc {
         throw "Altitude missing!";
       }
 
-      return [pos.lng, pos.lat, pos.alt!];
+      return Point(
+          latitude: pos.lat.toDouble(),
+          longitude: pos.lng.toDouble(),
+          height: pos.alt!.toDouble());
     }).toList();
-    return op(coords);
+    try {
+      return op(coords);
+    } catch (err, stack) {
+      debugPrint(err.toString());
+      debugPrint(stack.toString());
+    }
   }
 }

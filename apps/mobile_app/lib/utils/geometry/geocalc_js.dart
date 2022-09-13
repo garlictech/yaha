@@ -31,14 +31,16 @@ class GeocalcJs implements GeocalcService {
 
   @override
   distanceOnLine(Point start, Point end, LineStringData path) async {
-    final startStr = start.toJson().toString();
-    final endStr = end.toJson().toString();
+    final startStr = start.asLatLon;
+    final endStr = end.asLatLon;
     final pathStr = path.toLinestringFeatureString();
 
     return _isLoaded
         .then((x) => _jsRuntime.evaluateAsync("""
             global.distanceOnLineForFlutter($startStr, $endStr, $pathStr);"""))
-        .then((res) => double.parse(res.stringResult));
+        .then((res) {
+      return double.parse(res.stringResult);
+    });
   }
 
   @override
@@ -53,8 +55,8 @@ class GeocalcJs implements GeocalcService {
   @override
   snappedLineSlice(Point start, Point end, LineStringData path) async {
     final pathStr = path.toLinestringFeatureString();
-    final startStr = start.toJson().toString();
-    final endStr = end.toJson().toString();
+    final startStr = start.asLatLon;
+    final endStr = end.asLatLon;
 
     return _isLoaded
         .then((x) => _jsRuntime.evaluateAsync("""

@@ -11,8 +11,8 @@ final poisAroundHikeProvider =
   final defaults = ref.read(defaultsProvider);
   final poiUtilities = ref.read(poiUtilityServicesProvider);
   final hike = await ref.watch(hikeProvider(hikeId).future);
-  return poiUtilities.getPoisOfHike(hike, defaults.bigGeoBufferSizeInMeters,
-      HikingSettings(speed: defaults.averageSpeedKmh));
+  return poiUtilities.getPoisOfHike(
+      hike, HikingSettings(speed: defaults.averageSpeedKmh));
 });
 
 final poisAlongHikeProvider =
@@ -20,8 +20,8 @@ final poisAlongHikeProvider =
   final defaults = ref.read(defaultsProvider);
   final poiUtilities = ref.read(poiUtilityServicesProvider);
   final hike = await ref.watch(hikeProvider(hikeId).future);
-  return poiUtilities.getPoisOfHike(hike, defaults.smallGeoBufferSizeInMeters,
-      HikingSettings(speed: defaults.averageSpeedKmh));
+  return poiUtilities.getPoisOfHike(
+      hike, HikingSettings(speed: defaults.averageSpeedKmh));
 });
 
 final endPointsOfHikeProvider =

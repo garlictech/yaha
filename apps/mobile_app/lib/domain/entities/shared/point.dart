@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:functional_data/functional_data.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -18,6 +20,11 @@ class Point extends $Point {
     required this.longitude,
     required this.height,
   });
+
+  get asGeojsonPoint => [longitude, latitude, height];
+  get asLatLon => {"lon": longitude, "lat": latitude, "elevation": height};
+
+  get asGeojsonPointJsonStr => jsonEncode([longitude, latitude, height]);
 
   factory Point.fromJson(Map<String, dynamic> json) => _$PointFromJson(json);
 
