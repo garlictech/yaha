@@ -3,11 +3,6 @@ set -e
 
 ENVNAME=$1
 BUCKET_NAME=$2
-APPNAME=yaha
-
-pushd apps/backend
-#yarn sst remove $ENVNAME-$APPNAME-configurator --stage=$ENVNAME
-popd 
 
 tar -cvf ${CODEBUILD_RESOLVED_SOURCE_VERSION}.tgz \
   apps/mobile_app/lib/amplifyconfiguration.dart

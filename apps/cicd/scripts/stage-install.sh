@@ -2,5 +2,5 @@
 set -e
 
 ./apps/cicd/scripts/common-install.sh
-npm install -g @aws-amplify/cli cowsay appcenter-cli
+npm install -g cowsay appcenter-cli
 npx cowsay "STARTING THE BUILD"

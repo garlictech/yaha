@@ -10,7 +10,6 @@ CI=$2
 #  yarn nx deploy common-backend --env=${ENVNAME}
 #fi
 
-yarn nx deploy-amplify mobile_app --env=${ENVNAME}
 yarn nx deploy backend --env=${ENVNAME}
 yarn nx buildAppbundle-ci mobile_app
 
