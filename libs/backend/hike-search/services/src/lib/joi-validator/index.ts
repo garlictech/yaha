@@ -5,6 +5,7 @@ import { map, catchError } from 'rxjs/operators';
 
 export const validationOptions: Joi.ValidationOptions = {
   abortEarly: false,
+  allowUnknown: true,
 };
 export interface SchemaValidation<T> {
   validate: (_arg: unknown) => Observable<T>;
@@ -12,13 +13,12 @@ export interface SchemaValidation<T> {
 }
 export const validateSchema = <REQUIRED_TYPE>(
   schema: Record<string, Joi.Schema>,
-  stripUnknown = false,
 ): SchemaValidation<REQUIRED_TYPE> => {
   return {
     validate: (arg: unknown): Observable<REQUIRED_TYPE> =>
       from(
         Joi.object(schema)
-          .options({ stripUnknown })
+          .options({ allowUnknown: true })
           .validateAsync(arg, validationOptions),
       ).pipe(
         map(x => x as REQUIRED_TYPE),

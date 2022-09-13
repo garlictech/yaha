@@ -9,6 +9,7 @@ import {
   toArray,
   catchError,
   takeLast,
+  delay,
   mapTo,
   count,
 } from 'rxjs/operators';
@@ -21,13 +22,13 @@ import {
   RouteSegmentFp,
   ExternalImage,
   ExternalPoi,
-  getAllWikipediaPois,
   getFlickrImages,
   isCreatePoiInput,
   filterPointsCloseToReferencePoints,
   isPointInsidePolygon,
   removePointsOutsideOfPolygon,
   isCreateImageInput,
+  getOsmPois,
 } from '@yaha/backend/hike-search/services';
 import { BoundingBox } from '@yaha/backend/hike-search/services';
 
@@ -132,16 +133,16 @@ export enum OsmPoiTypes {
   tourism = 'tourism',
 }
 
-/*const osmPois =
+const osmPois =
   (
     osmPoiService: (
-      bounds: YahaApi.BoundingBox,
+      bounds: BoundingBox,
       typeParam: OsmPoiTypes,
     ) => Observable<ExternalPoi[]>,
   ) =>
-  (bounds: YahaApi.BoundingBox): Observable<ExternalPoi[]> =>
+  (bounds: BoundingBox): Observable<ExternalPoi[]> =>
     from([
-      OsmPoiTypes.publicTransport,
+      //OsmPoiTypes.publicTransport,
       OsmPoiTypes.amenity,
       OsmPoiTypes.natural,
       OsmPoiTypes.emergency,
@@ -152,15 +153,13 @@ export enum OsmPoiTypes {
       OsmPoiTypes.shop,
       OsmPoiTypes.tourism,
     ]).pipe(
-      mergeMap(
-        (osmPoiType: OsmPoiTypes) =>
-          osmPoiService(bounds, osmPoiType).pipe(delay(2000)),
-        1,
+      concatMap((osmPoiType: OsmPoiTypes) =>
+        osmPoiService(bounds, osmPoiType).pipe(delay(2000)),
       ),
       toArray(),
       map(R.flatten),
     );
-*/
+
 const getElevation =
   (deps: Neo4jdeps) =>
   (lat: number, lon: number): Observable<number> =>
@@ -223,12 +222,12 @@ export const getExternalPois =
     hikeData: HikeData_WithBuffers,
   ): Observable<ExternalPoi[]> => {
     const calc1 = forkJoin([
-      getAllWikipediaPois(deps)(bounds, allLanguages),
-      //osmPois(getOsmPois(deps))(bounds),
-      /* getGooglePois({
-          apiKey: deps.googleApiKey,
-          http: deps.http,
-        })(bounds, []),*/
+      //getAllWikipediaPois(deps)(bounds, allLanguages),
+      osmPois(getOsmPois(deps))(bounds),
+      /*getGooglePois({
+        apiKey: deps.googleApiKey,
+        http: deps.http,
+      })(bounds),*/
     ]).pipe(
       map(pois =>
         pipe(
@@ -258,6 +257,7 @@ export const getExternalPois =
             ...poi,
             elevation,
           })),
+          delay(200),
         ),
       ),
       toArray(),
