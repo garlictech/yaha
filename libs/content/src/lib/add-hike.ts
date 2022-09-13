@@ -29,6 +29,8 @@ import {
   removePointsOutsideOfPolygon,
   isCreateImageInput,
   getOsmPois,
+  getAllWikipediaPois,
+  getGooglePois,
 } from '@yaha/backend/hike-search/services';
 import { BoundingBox } from '@yaha/backend/hike-search/services';
 
@@ -142,7 +144,7 @@ const osmPois =
   ) =>
   (bounds: BoundingBox): Observable<ExternalPoi[]> =>
     from([
-      //OsmPoiTypes.publicTransport,
+      OsmPoiTypes.publicTransport,
       OsmPoiTypes.amenity,
       OsmPoiTypes.natural,
       OsmPoiTypes.emergency,
@@ -222,12 +224,12 @@ export const getExternalPois =
     hikeData: HikeData_WithBuffers,
   ): Observable<ExternalPoi[]> => {
     const calc1 = forkJoin([
-      //getAllWikipediaPois(deps)(bounds, allLanguages),
+      getAllWikipediaPois(deps)(bounds, allLanguages),
       osmPois(getOsmPois(deps))(bounds),
-      /*getGooglePois({
+      getGooglePois({
         apiKey: deps.googleApiKey,
         http: deps.http,
-      })(bounds),*/
+      })(bounds),
     ]).pipe(
       map(pois =>
         pipe(

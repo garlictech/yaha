@@ -8,21 +8,12 @@ import { defer, from, of } from 'rxjs';
 import { concatMap, map, switchMap, tap, toArray } from 'rxjs/operators';
 import { DOMParser } from 'xmldom';
 const togeojson = require('@mapbox/togeojson');
-import * as r from 'ramda';
-import { YahaApi, getGraphqlSdkForIAM } from '../libs/gql-api/src';
-import { pipe } from 'fp-ts/lib/function';
-import lineChunk from '@turf/line-chunk';
-import * as fp from 'lodash/fp';
 import { HttpClientImpl } from '../libs/backend/hike-search/services/src/lib/http';
 import { Client as GoogleMapsClient } from '@googlemaps/google-maps-services-js';
-import { exit } from 'process';
-import { writeFileSync } from 'fs';
 import neo4j from 'neo4j-driver';
-import { addHike, addRouteToNeo4j } from '../libs/content/src';
+import { addHike } from '../libs/content/src';
 
 const domParser = new DOMParser();
-
-const googleMapsClient = new GoogleMapsClient({});
 
 const neo4jUsername = process.env.NEO4J_USERNAME || '';
 const neo4jPassword = process.env.NEO4J_PASSWORD || '';
@@ -36,8 +27,9 @@ const driver = neo4j.driver(
 const session = driver.session({ database: 'neo4j' });
 
 const hikeIds = [
-  113261124,
-  //118158194, 20239810, 22601701, 22605620, 22668771, 22680751,
+  //113261124,
+  118158194,
+  //20239810, 22601701, 22605620, 22668771, 22680751,
 ];
 
 const deps = {
