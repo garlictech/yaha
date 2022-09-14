@@ -18,17 +18,20 @@ class PoiInfoScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final summary = poi.descriptions?[0].summary == null
-        ? const Text(
-            "No description yet",
-            style: TextStyle(
-                color: YahaColors.textColor, fontSize: YahaFontSizes.small),
-          )
-        : (poi.descriptions?[0].type == 'html'
-            ? Html(data: poi.descriptions?[0].summary)
-            : Markdown(data: poi.descriptions?[0].summary ?? ''));
+    const noDesc = Text(
+      "No description yet",
+      style:
+          TextStyle(color: YahaColors.textColor, fontSize: YahaFontSizes.small),
+    );
 
-    debugPrint("***** ${poi.images}");
+    final summary = (poi.descriptions?.isNotEmpty ?? false)
+        ? poi.descriptions!.first.summary == null
+            ? noDesc
+            : (poi.descriptions!.first.type == 'html'
+                ? Html(data: poi.descriptions!.first.summary)
+                : Markdown(data: poi.descriptions!.first.summary ?? ''))
+        : noDesc;
+
     return Scaffold(
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),

@@ -73,6 +73,10 @@ class Poi {
         : kindAsStr;
   }
 
+  get summary {
+    return (descriptions?.isNotEmpty ?? false) ? descriptions!.first : null;
+  }
+
   get hasOwnTitle {
     return (descriptions?.isNotEmpty ?? false)
         ? descriptions!.first.title != null
