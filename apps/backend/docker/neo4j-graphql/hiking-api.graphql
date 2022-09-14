@@ -199,21 +199,4 @@ type Query {
       return distinct h.id
       """
     )
-
-  searchImageByRadius(params: SearchByRadiusInput!): [String]!
-    @cypher(
-      statement: """
-      match (img:Image) where point.distance(img.location, Point({latitude: $params.origin.latitude,
-      longitude: $params.origin.longitude, height: 0.0})) < $params.radiusInMeters
-      return distinct img.id limit 10
-      """
-    )
-
-  searchImagesAroundRoute(params: SearchImagesAroundRoute!): [String]!
-    @cypher(
-      statement: """
-      match (img:Image)-[:TAKEN_AT]->(r:Route) where r.id = "$params.routeId"
-      return distinct img.id limit 10
-      """
-    )
 }

@@ -100,6 +100,6 @@ class RepositoryNeo4j<T> {
     final List<dynamic> entityIds =
         result.data != null ? (result.data![resultPropName]) : const [];
 
-    return entityIds.map((id) => id as String).toList();
+    return entityIds.map((entity) => entity['id'] as String).toList();
   }
 }
