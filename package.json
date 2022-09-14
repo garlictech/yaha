@@ -38,7 +38,7 @@
   "private": true,
   "dependencies": {
     "@acuris/aws-es-connection": "2.3.0",
-    "@aws-amplify/auth": "4.6.3",
+    "@aws-amplify/auth": "4.6.6",
     "@elastic/elasticsearch": "7.13.0",
     "@googlemaps/google-maps-services-js": "3.3.16",
     "@mapbox/togeojson": "0.16.0",
