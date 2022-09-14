@@ -7,8 +7,12 @@ import {
   aws_ecs,
   aws_elasticloadbalancingv2,
 } from 'aws-cdk-lib';
-import path from 'path';
 import * as sst from '@serverless-stack/resources';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 import { aws_ecs_patterns } from 'aws-cdk-lib';
 

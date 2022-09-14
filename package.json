@@ -84,7 +84,7 @@
     "@nrwl/workspace": "14.7.5",
     "@nxrocks/nx-flutter": "4.0.2",
     "@serverless-stack/cli": "1.14.1",
-    "@serverless-stack/resources": "0.69.7",
+    "@serverless-stack/resources": "1.14.1",
     "@types/bunyan": "1.8.8",
     "@types/googlemaps": "3.43.3",
     "@types/jest": "29.0.2",
