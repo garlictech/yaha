@@ -81,7 +81,7 @@ const createContainsRelations = (coordinates: number[][]) =>
 
 const createDescription = (title: string, summary?: string) =>
   `
-  merge (hikeDesc:Description {languageKey: "hu_HU", title: "${title}", summary: "${summary}"})
+  merge (hikeDesc:Description {languageKey: "hu_HU", title: "${title}", summary: "${summary}", type: "plaintext"})
   merge (hikeDesc)-[:EXPLAINS]->(hike)
   `;
 
