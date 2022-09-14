@@ -8,7 +8,6 @@ import 'package:yaha/ui/views/hikes/personal/screen/settings-screen.dart';
 import 'package:yaha/ui/views/shared/widgets/yaha-colors.dart';
 import 'package:yaha/ui/views/hikes/track/screens/tracking.dart';
 import 'amplifyconfiguration.dart';
-import 'package:amplify_api/amplify_api.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 
 import 'ui/views/shared/widgets/bottom-nav-bar-widget.dart';
@@ -22,7 +21,7 @@ void main() async {
 initialization() async {
   // Add the following lines to your app initialization to add the DataStore plugin
   try {
-    await Amplify.addPlugins([AmplifyAPI(), AmplifyAuthCognito()]);
+    await Amplify.addPlugins([AmplifyAuthCognito()]);
     await Amplify.configure(amplifyconfig);
     debugPrint("Amplify config done");
   } on AmplifyAlreadyConfiguredException {

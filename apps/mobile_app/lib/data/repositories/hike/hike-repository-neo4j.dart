@@ -57,8 +57,62 @@ query Query($params: SearchByRadiusInput!) {
               height
             }
           }
-          onroutePois 
-          offroutePois 
+          onroutePois {
+            id
+            type
+            tags
+            address
+            phone
+            infoUrl
+            openingHours
+            images {
+              thumbnail
+              card
+              original
+            }
+            location {
+              location {
+                longitude
+                latitude
+                height
+              }
+            }
+            descriptions {
+              languageKey
+              title
+              summary
+              fullDescription
+              type
+            }
+          }          
+          offroutePois {
+            id
+            type
+            tags
+            address
+            phone
+            infoUrl
+            openingHours
+            images {
+              thumbnail
+              card
+              original
+            }
+            location {
+              location {
+                longitude
+                latitude
+                height
+              }
+            }
+            descriptions {
+              languageKey
+              title
+              summary
+              fullDescription
+              type
+            }
+          }
           images {
             original
             card

@@ -3,8 +3,6 @@ import 'package:yaha/utils/geometry/geocalc.dart';
 
 import '../../game-rules.dart';
 import '../image/image.dart';
-import '../poi/poi_entity.dart';
-import '../poi/poi_of_hike.dart';
 import '../shared/description.dart';
 import '../shared/point.dart';
 import '../shared/route.dart';

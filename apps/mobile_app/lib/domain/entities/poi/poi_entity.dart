@@ -1,6 +1,5 @@
 import 'dart:core';
 import 'package:flutter/foundation.dart';
-import 'package:functional_data/functional_data.dart';
 
 import 'package:json_annotation/json_annotation.dart';
 import 'package:yaha/domain/entities/poi/supported_pois.dart';
@@ -13,40 +12,21 @@ import '/utils/string.dart';
 
 part 'poi_entity.g.dart';
 
-@FunctionalData()
-@JsonSerializable()
-class Poi extends $Poi {
-  @override
+@JsonSerializable(explicitToJson: true)
+class Poi {
   final String id;
-  @override
-  @CustomEquality(Ignore())
   final String type;
-  @override
-  @CustomEquality(Ignore())
   final List<Description>? descriptions;
-  @override
-  @CustomEquality(Ignore())
   final List<String>? tags;
-  @override
-  @CustomEquality(Ignore())
   final String? address;
-  @override
-  @CustomEquality(Ignore())
   final String? phone;
-  @override
-  @CustomEquality(Ignore())
   final String? openingHours;
-  @override
-  @CustomEquality(Ignore())
   final String? infoUrl;
-  @override
-  @CustomEquality(Ignore())
   final List<Image> images;
-  @override
-  @CustomEquality(Ignore())
   final Waypoint location;
 
-  PoiType? poiType_;
+  @JsonKey(ignore: true)
+  PoiType? _poiType;
 
   Poi(
       {required this.id,
@@ -84,12 +64,12 @@ class Poi extends $Poi {
       return PoiType(category: category, kind: kind);
     }
 
-    return poiType_ ??= getPoitype();
+    return _poiType ??= getPoitype();
   }
 
   get title {
     return (descriptions?.isNotEmpty ?? false)
-        ? descriptions!.first.title
+        ? descriptions!.first.title ?? kindAsStr
         : kindAsStr;
   }
 
