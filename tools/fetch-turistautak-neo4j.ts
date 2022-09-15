@@ -3,7 +3,6 @@
 //
 /* eslint no-console: "off" */
 import axios from 'axios';
-import '@aws-amplify/datastore';
 import { defer, from, of } from 'rxjs';
 import { concatMap, map, switchMap, tap, toArray } from 'rxjs/operators';
 import { DOMParser } from 'xmldom';
@@ -28,8 +27,8 @@ const session = driver.session({ database: 'neo4j' });
 
 const hikeIds = [
   //113261124,
-  118158194,
-  //20239810, 22601701, 22605620, 22668771, 22680751,
+  //118158194,
+  20239810, 22601701, 22605620, 22668771, 22680751,
 ];
 
 const deps = {
