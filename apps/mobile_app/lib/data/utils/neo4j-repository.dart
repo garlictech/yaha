@@ -41,8 +41,8 @@ class RepositoryNeo4j<T> {
   }
 
   Future<List<String>> searchEntityByContent(
-      SearchByContentInput input, String query, String gqlLabel) async {
-    final params = {"params": input.toJson()};
+      String input, String query, String gqlLabel) async {
+    final params = {"params": input};
     return _executeEntityIdQuery(query, gqlLabel, params);
   }
 
@@ -79,7 +79,6 @@ class RepositoryNeo4j<T> {
         QueryOptions(document: gql(query), variables: variables ?? {});
     final QueryResult result = await client.query(options);
 
-    debugPrint("***** ${result}");
     if (result.hasException) {
       debugPrint(result.exception.toString());
     }

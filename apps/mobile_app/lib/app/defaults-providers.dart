@@ -5,7 +5,7 @@ class YahaDefaults {
   final double bigGeoBufferSizeInMeters = 1000;
   final double averageSpeedKmh = 4;
   final int poiImageSearchRadiusInMeters = 50;
-  final int searchRadiusInMeters = 500000;
+  final int searchRadiusInMeters = 50000;
 }
 
 final defaultsProvider = Provider<YahaDefaults>(

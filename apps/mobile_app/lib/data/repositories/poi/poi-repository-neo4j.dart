@@ -64,6 +64,6 @@ query Pois($where: PoiWhere) {
     }
     ''';
 
-    return searchEntityByContent(input, query, 'pois');
+    return searchEntityByContent(input.content, query, 'pois');
   }
 }
