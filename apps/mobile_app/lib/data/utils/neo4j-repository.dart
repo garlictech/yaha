@@ -69,7 +69,7 @@ class RepositoryNeo4j<T> {
 
   Future<List<String>> searchEntityByContent(
       SearchByContentInput input, String query, String gqlLabel) async {
-    final variables = {
+    final variables = <String, dynamic>{
       "where": {
         "descriptions_SOME": {
           "OR": [
@@ -93,6 +93,7 @@ class RepositoryNeo4j<T> {
         QueryOptions(document: gql(query), variables: variables ?? {});
     final QueryResult result = await client.query(options);
 
+    debugPrint("***** ${result}");
     if (result.hasException) {
       debugPrint(result.exception.toString());
     }
@@ -100,6 +101,6 @@ class RepositoryNeo4j<T> {
     final List<dynamic> entityIds =
         result.data != null ? (result.data![resultPropName]) : const [];
 
-    return entityIds.map((entity) => entity['id'] as String).toList();
+    return entityIds.map((entity) => entity as String).toList();
   }
 }

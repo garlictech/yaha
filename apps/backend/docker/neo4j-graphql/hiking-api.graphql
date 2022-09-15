@@ -177,8 +177,7 @@ input SearchByRadiusInput {
 }
 
 input SearchByContentInput {
-  origin: PointInput!
-  radiusInMeters: Int!
+  content: String!
 }
 
 input SearchImagesAroundRoute {
@@ -197,6 +196,15 @@ type Query {
       longitude: $params.origin.longitude, height: 0.0})) < $params.radiusInMeters
       match (h:Hike)-[:GOES_ON]->(:Route)-[:CONTAINS]->(w)
       return distinct h.id
+      """
+    )
+
+  searchHikeByContent(params: SearchByContentInput!): [String]!
+    @cypher(
+      statement: """
+      CALL db.index.fulltext.queryNodes("descriptions", "$params.content") YIELD node
+      match (node)-[:EXPLAINS]->(h:Hike)
+      RETURN h.id
       """
     )
 }
