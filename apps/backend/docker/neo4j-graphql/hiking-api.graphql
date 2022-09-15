@@ -195,16 +195,16 @@ type Query {
       match (w:Waypoint) where point.distance(w.location, Point({latitude: $params.origin.latitude,
       longitude: $params.origin.longitude, height: 0.0})) < $params.radiusInMeters
       match (h:Hike)-[:GOES_ON]->(:Route)-[:CONTAINS]->(w)
-      return distinct h.id
+      return collect(distinct h.id)
       """
     )
 
-  searchHikeByContent(params: SearchByContentInput!): [String]!
+  searchHikeByContent(params: String!): [String]!
     @cypher(
       statement: """
-      CALL db.index.fulltext.queryNodes("descriptions", "$params.content") YIELD node
+      CALL db.index.fulltext.queryNodes('descriptions', $params) YIELD node
       match (node)-[:EXPLAINS]->(h:Hike)
-      RETURN h.id
+      RETURN collect(distinct h.id)
       """
     )
 }

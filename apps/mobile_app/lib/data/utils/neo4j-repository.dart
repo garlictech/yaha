@@ -40,6 +40,12 @@ class RepositoryNeo4j<T> {
     return _executeEntityIdQuery(query, gqlLabel, params);
   }
 
+  Future<List<String>> searchEntityByContent(
+      SearchByContentInput input, String query, String gqlLabel) async {
+    final params = {"params": input.toJson()};
+    return _executeEntityIdQuery(query, gqlLabel, params);
+  }
+
   Future<T> getEntity(String query, String id, String gqlLabel) async {
     if (_entityCache.containsKey(id)) {
       return _entityCache.getData(id);
@@ -65,26 +71,6 @@ class RepositoryNeo4j<T> {
     } else {
       throw "Entity $id cannot be found.";
     }
-  }
-
-  Future<List<String>> searchEntityByContent(
-      SearchByContentInput input, String query, String gqlLabel) async {
-    final variables = <String, dynamic>{
-      "where": {
-        "descriptions_SOME": {
-          "OR": [
-            {
-              "title_CONTAINS": input.content,
-            },
-            {
-              "summary_CONTAINS": input.content,
-            }
-          ]
-        }
-      }
-    };
-
-    return _executeEntityIdQuery(query, gqlLabel, variables);
   }
 
   Future<List<String>> _executeEntityIdQuery(String query,

@@ -22,13 +22,12 @@ class HikeRepositoryNeo4j extends RepositoryNeo4j<Hike>
   @override
   searchHikeByRadius(SearchByRadiusInput input) async {
     const String query = r'''
-query Query($params: SearchByRadiusInput!) {
+  query Query($params: SearchByRadiusInput!) {
   searchHikeByRadius(params: $params)
 }
     ''';
 
-    final x = searchEntityByRadius(input, query, 'searchHikeByRadius');
-    return x;
+    return searchEntityByRadius(input, query, 'searchHikeByRadius');
   }
 
   @override
@@ -128,13 +127,11 @@ query Query($params: SearchByRadiusInput!) {
   @override
   searchHikeByContent(SearchByContentInput input) async {
     const String query = r'''
-    query Hikes($where: HikeWhere) {
-      hikes(where: $where) {
-        id
-      }
-    }
+  query Query($params: SearchByContentInput!) {
+  searchHikeByContent(params: $params)
+}
     ''';
 
-    return searchEntityByContent(input, query, 'hikes');
+    return searchEntityByContent(input, query, 'searchHikeByContent');
   }
 }
