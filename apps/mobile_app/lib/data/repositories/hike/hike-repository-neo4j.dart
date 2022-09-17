@@ -127,11 +127,11 @@ class HikeRepositoryNeo4j extends RepositoryNeo4j<Hike>
   @override
   searchHikeByContent(SearchByContentInput input) async {
     const String query = r'''
-  query Query($params: SearchByContentInput!) {
+  query Query($params: String!) {
   searchHikeByContent(params: $params)
 }
     ''';
 
-    return searchEntityByContent(input, query, 'searchHikeByContent');
+    return searchEntityByContent(input.content, query, 'searchHikeByContent');
   }
 }

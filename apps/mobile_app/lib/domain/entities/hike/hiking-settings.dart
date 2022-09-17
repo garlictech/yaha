@@ -9,7 +9,7 @@ class HikingSettings {
 
   HikingSettings({required this.speed})
       : startTime = DateTime(DateTime.now().year, DateTime.now().month,
-            DateTime.now().day, 9, 0);
+            DateTime.now().day, 5, 0);
 
   factory HikingSettings.fromJson(Map<String, dynamic> json) =>
       _$HikingSettingsFromJson(json);

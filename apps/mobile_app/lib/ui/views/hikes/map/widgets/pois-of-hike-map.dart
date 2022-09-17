@@ -62,7 +62,7 @@ class PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
 
     final mapPresenter = ref.watch(leafletMapMVPProvider.notifier);
 
-    _cardHeight = 90;
+    _cardHeight = 100;
 
     return poisFuture.when(
         error: errorWidget,
