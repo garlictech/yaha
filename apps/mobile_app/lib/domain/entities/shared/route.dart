@@ -7,19 +7,12 @@ part 'route.g.dart';
 class Route {
   final String id;
   final List<Waypoint> coordinates;
-  final List<Poi> onroutePois;
-  final List<Poi> offroutePois;
   final List<Image> images;
 
   @JsonKey(ignore: true)
   LineStringData? _asLineString;
 
-  Route(
-      {required this.id,
-      required this.coordinates,
-      required this.onroutePois,
-      required this.offroutePois,
-      required this.images});
+  Route({required this.id, required this.coordinates, required this.images});
 
   LineStringData get asLineString {
     return _asLineString ??= LineStringData(

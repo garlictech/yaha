@@ -1,19 +1,28 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:yaha/domain/use-cases/hike/hike.dart';
 
 import '../entities/entities.dart';
 
 class PoiUtilityServices {
-  final ProviderReference ref;
+  final Ref ref;
 
   PoiUtilityServices({required this.ref});
 
-  Future<List<PoiOfHike>> getPoisOfHike(
-      Hike hike, HikingSettings hikingSettings) {
-    return Future.value(hike.route.onroutePois
+  Future<List<PoiOfHike>> getOnroutePoisOfHike(
+      Hike hike, HikingSettings hikingSettings) async {
+    final pois = await ref.read(onroutePoisProvider(hike.id).future);
+    return pois
         .whereType<Poi>()
+        .where((poi) => poi.isSupported())
         .map((poi) =>
             PoiOfHike(poi: poi, hike: hike, ref: ref, settings: hikingSettings))
-        .toList());
+        .toList();
+  }
+
+  Future<List<Poi>> getOffroutePoisOfHike(
+      Hike hike, HikingSettings hikingSettings) async {
+    final pois = await ref.read(onroutePoisProvider(hike.id).future);
+    return pois.whereType<Poi>().where((poi) => poi.isSupported()).toList();
   }
 }
 

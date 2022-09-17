@@ -42,8 +42,7 @@ class Poi {
 
   get poiType {
     getPoitype() {
-      final convertedType = temporaryTypeConversions(type);
-      final splitted = convertedType.split(':');
+      final splitted = type.split(':');
       var category = splitted.length > 1 ? splitted[0] : null;
       var kind = splitted.length > 1 ? splitted[1] : splitted[0];
 
@@ -65,6 +64,10 @@ class Poi {
     }
 
     return _poiType ??= getPoitype();
+  }
+
+  isSupported() {
+    return poiType.kind != 'unknown';
   }
 
   get title {

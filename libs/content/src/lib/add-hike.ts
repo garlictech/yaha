@@ -216,6 +216,22 @@ merge (desc)-[:EXPLAINS]->(poi)
     );
   };
 
+const isBannedPoi = (poi: { type?: string }) =>
+  (!R.isEmpty(poi.type) &&
+    [
+      'accounting',
+      'insurance_agency',
+      'moving_company',
+      'painter',
+      'real_estate_agency',
+      'roofing_contractor',
+      'travel_agency',
+      'general_contractor',
+      'car_dealer',
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    ].includes(poi.type!)) ??
+  false;
+
 export const getExternalPois =
   (deps: Neo4jdeps) =>
   (
@@ -239,6 +255,7 @@ export const getExternalPois =
           ),
           R.filter(poi => isCreatePoiInput(poi)),
           R.uniqBy(poi => poi.externalId),
+          R.reject((x: { type?: string }) => isBannedPoi(x)),
           R.tap(res =>
             console.warn('Number of correct unique external pois:', res.length),
           ),

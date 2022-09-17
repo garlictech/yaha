@@ -5,11 +5,11 @@ import 'package:dartz/dartz.dart';
 import 'package:yaha/domain/domain.dart';
 
 final poisAroundHikeProvider =
-    FutureProvider.family<List<PoiOfHike>, String>((ref, hikeId) async {
+    FutureProvider.family<List<Poi>, String>((ref, hikeId) async {
   final defaults = ref.read(defaultsProvider);
   final poiUtilities = ref.read(poiUtilityServicesProvider);
   final hike = await ref.watch(hikeProvider(hikeId).future);
-  return poiUtilities.getPoisOfHike(
+  return poiUtilities.getOffroutePoisOfHike(
       hike, HikingSettings(speed: defaults.averageSpeedKmh));
 });
 
@@ -18,7 +18,7 @@ final poisAlongHikeProvider =
   final defaults = ref.read(defaultsProvider);
   final poiUtilities = ref.read(poiUtilityServicesProvider);
   final hike = await ref.watch(hikeProvider(hikeId).future);
-  return poiUtilities.getPoisOfHike(
+  return poiUtilities.getOnroutePoisOfHike(
       hike, HikingSettings(speed: defaults.averageSpeedKmh));
 });
 

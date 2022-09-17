@@ -529,24 +529,3 @@ const nonTouristicKinds = {
   "tree",
   "playground"
 };
-
-// Must be handled in the POI search code!
-String temporaryTypeConversions(String type) {
-  if (type == "historic:yes") {
-    return "historic:unknown";
-  } else if (type == "tourist_attraction") {
-    return "tourism:attraction";
-  } else if (type == "point_of_interest") {
-    return "yaha:unknown";
-  } else if (type == "lodging") {
-    return "tourism:hotel";
-  } else if (type == "health") {
-    return "amenity:doctors";
-  } else if (type == "transit_station") {
-    return "public_transport:station";
-  } else if (type == "store") {
-    return "shop:general";
-  }
-
-  return type;
-}

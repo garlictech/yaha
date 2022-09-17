@@ -36,22 +36,28 @@ class HikeCard extends ConsumerWidget {
                       },
                       child: Stack(
                         children: [
-                          Align(
-                            alignment: Alignment.center,
-                            child: ColorFiltered(
-                                colorFilter: ColorFilter.mode(
-                                    Colors.black.withOpacity(0.35),
-                                    BlendMode.darken),
-                                child: AnimatedSwitcher(
-                                    duration:
-                                        const Duration(milliseconds: 1500),
-                                    child: YahaImage(
-                                        key: UniqueKey(),
-                                        imageUrl: hike.images.first.card))),
-                          ),
+                          if (hike.images.isNotEmpty)
+                            Align(
+                              alignment: Alignment.center,
+                              child: ColorFiltered(
+                                  colorFilter: ColorFilter.mode(
+                                      Colors.black.withOpacity(0.35),
+                                      BlendMode.darken),
+                                  child: AnimatedSwitcher(
+                                      duration:
+                                          const Duration(milliseconds: 1500),
+                                      child: YahaImage(
+                                          key: UniqueKey(),
+                                          imageUrl: (hike.images..shuffle())
+                                              .first
+                                              .card))),
+                            ),
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Container(
+                              color: hike.images.isNotEmpty
+                                  ? Colors.transparent
+                                  : Colors.black87,
                               padding: const EdgeInsets.only(
                                 left: YahaSpaceSizes.small,
                                 bottom: YahaSpaceSizes.small,
