@@ -56,9 +56,13 @@ const checkCoordinates = (coordinates: number[][]) =>
     }),
   );
 
+const sanitizeText = (text?: string) => text?.replace("'", "\\'");
+
 const createDescription = (title: string, summary?: string) =>
   `
-merge (hikeDesc:Description {languageKey: "hu_HU", title: "${title}", summary: "${summary}", type: "plaintext"})
+merge (hikeDesc:Description {languageKey: "hu_HU", title: "${sanitizeText(
+    title,
+  )}", summary: "${sanitizeText(summary)}", type: "plaintext"})
 merge (hikeDesc)-[:EXPLAINS]->(hike)
   `;
 
@@ -188,13 +192,15 @@ merge (poi)-[:LOCATED_AT]->(w)
 merge (desc:Description {languageKey: "${
                 poi.description.languageKey
               }", source: "${poi.externalId}"})
-set desc.title = '${poi.description.title}'
+set desc.title = '${sanitizeText(poi.description.title)}'
 set desc.type = "${poi.description.type || 'plaintext'}"
 mhealthpublic_transport:stationshop:generalerge (desc)-[:EXPLAINS]->(poi)
             `,
               descRes =>
                 poi.description?.summary
-                  ? `${descRes}set desc.summary = '${poi.description.summary}'
+                  ? `${descRes}set desc.summary = '${sanitizeText(
+                      poi.description.summary,
+                    )}'
             `
                   : descRes,
             )
