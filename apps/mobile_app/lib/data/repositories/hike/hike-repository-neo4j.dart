@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:graphql/client.dart';
 import 'package:yaha/data/utils/neo4j-repository.dart';
 import 'package:yaha/domain/domain.dart';
 
@@ -133,5 +135,74 @@ class HikeRepositoryNeo4j extends RepositoryNeo4j<Hike>
     ''';
 
     return searchEntityByContent(input.content, query, 'searchHikeByContent');
+  }
+
+  @override
+  getOnroutePois(String id) async {
+    return _getRoutePois(id, 'onroutePois');
+  }
+
+  @override
+  getOffroutePois(String id) async {
+    return _getRoutePois(id, 'offroutePois');
+  }
+
+  Future<List<Poi>> _getRoutePois(String id, String routeLabel) async {
+    String query = '''
+    query Hikes(\$where: HikeWhere) {
+      hikes(where: \$where) {
+        route {
+          $routeLabel {
+            id
+            type
+            tags
+            address
+            phone
+            infoUrl
+            openingHours
+            images {
+              thumbnail
+              card
+              original
+            }
+            location {
+              location {
+                longitude
+                latitude
+                height
+              }
+            }
+            descriptions {
+              languageKey
+              title
+              summary
+              fullDescription
+              type
+            }
+          }          
+        }
+      }
+    }''';
+
+    final QueryOptions options =
+        QueryOptions(document: gql(query), variables: <String, dynamic>{
+      "where": {"id": id}
+    });
+
+    final QueryResult result = await client.query(options);
+
+    if (result.hasException) {
+      debugPrint(result.exception.toString());
+    }
+
+    final entityData = result.data?['hikes']?[0]?['route']?[routeLabel];
+
+    if (entityData != null) {
+      return (entityData as List)
+          .map((entity) => Poi.fromJson(entity))
+          .toList();
+    } else {
+      throw "$routeLabel of hike $id cannot be found.";
+    }
   }
 }
