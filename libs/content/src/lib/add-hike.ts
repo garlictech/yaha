@@ -194,7 +194,7 @@ merge (desc:Description {languageKey: "${
               }", source: "${poi.externalId}"})
 set desc.title = '${sanitizeText(poi.description.title)}'
 set desc.type = "${poi.description.type || 'plaintext'}"
-mhealthpublic_transport:stationshop:generalerge (desc)-[:EXPLAINS]->(poi)
+merge (desc)-[:EXPLAINS]->(poi)
             `,
               descRes =>
                 poi.description?.summary
