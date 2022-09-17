@@ -36,8 +36,8 @@ export const tagImage = (
     getBase64BufferFromURL,
     OE.chain(bytes =>
       pipe(
-        isImageUnsafe(minConfidence)(bytes),
-        OE.chain(() => isFaceInImage(minConfidence)(bytes)),
+        isFaceInImage(minConfidence)(bytes),
+        OE.chain(() => isImageUnsafe(minConfidence)(bytes)),
         OE.chain(() => isRelevantImage(maxLabels, minConfidence)(bytes)),
       ),
     ),

@@ -56,33 +56,10 @@ const checkCoordinates = (coordinates: number[][]) =>
     }),
   );
 
-const createWaypoints = (coordinates: number[][]) =>
-  pipe(
-    coordinates.reduce(
-      (prev, point, index) =>
-        `${prev}\nmerge (p${index}:Waypoint {location: Point({latitude: ${point[1]}, longitude: ${point[0]}, height: ${point[2]}})})`,
-      '',
-    ),
-  );
-
-const createContainsRelations = (coordinates: number[][]) =>
-  pipe(
-    coordinates.length,
-    R.range(0),
-    R.reduce((prev, curr) => `${prev},p${curr}`, 'p0'),
-    res => `
-      with route, [${res}] as p
-      UNWIND range(0,size(p)-1) AS i
-      with route, p[i] as currentNode, i 
-      merge (route)-[r:CONTAINS]->(currentNode)
-      set r.orderIndex = i  
-  `,
-  );
-
 const createDescription = (title: string, summary?: string) =>
   `
-  merge (hikeDesc:Description {languageKey: "hu_HU", title: "${title}", summary: "${summary}", type: "plaintext"})
-  merge (hikeDesc)-[:EXPLAINS]->(hike)
+merge (hikeDesc:Description {languageKey: "hu_HU", title: "${title}", summary: "${summary}", type: "plaintext"})
+merge (hikeDesc)-[:EXPLAINS]->(hike)
   `;
 
 const createRouteChunks = (path: FeatureCollection<LineString>) =>
@@ -100,18 +77,29 @@ export const addRouteToNeo4j =
       coordinates,
       checkCoordinates,
       () => `
-      merge (route:Route {id: "${hikeData.externalId}"})
-      merge (hike:Hike {id: "${hikeData.externalId}"})
-      merge (hike)-[:GOES_ON]->(route)
+merge (route:Route {id: "${hikeData.externalId}"})
+merge (hike:Hike {id: "${hikeData.externalId}"})
+merge (hike)-[:GOES_ON]->(route)
       `,
       res => res + createDescription(hikeData.title, hikeData.summary),
-      res =>
-        [createWaypoints, createContainsRelations].reduce(
-          (prev, fv) => prev + '\n' + fv(coordinates),
-          res,
-        ),
-      //query => of(query),
       query => defer(() => deps.session.writeTransaction(tx => tx.run(query))),
+      switchMap(() =>
+        from(
+          coordinates.map(
+            (point, index) => `
+match (route:Route {id: "${hikeData.externalId}"})
+merge (p:Waypoint {location: Point({latitude: ${point[1]}, longitude: ${point[0]}, height: ${point[2]}})})
+merge (route)-[r:CONTAINS]->(p)
+set r.orderIndex = ${index}
+          `,
+          ),
+        ),
+      ),
+      concatMap(query =>
+        defer(() => deps.session.writeTransaction(tx => tx.run(query))),
+      ),
+      count(),
+      tap(x => console.log(`Added ${x} points to the route`)),
     );
 
 type BufferType = Feature<Polygon, Properties>;
@@ -202,7 +190,7 @@ merge (desc:Description {languageKey: "${
               }", source: "${poi.externalId}"})
 set desc.title = '${poi.description.title}'
 set desc.type = "${poi.description.type || 'plaintext'}"
-merge (desc)-[:EXPLAINS]->(poi)
+mhealthpublic_transport:stationshop:generalerge (desc)-[:EXPLAINS]->(poi)
             `,
               descRes =>
                 poi.description?.summary
@@ -228,9 +216,23 @@ const isBannedPoi = (poi: { type?: string }) =>
       'travel_agency',
       'general_contractor',
       'car_dealer',
+      //
+      'electrician',
+      'finance',
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     ].includes(poi.type!)) ??
   false;
+
+const poiTypeConversion: Record<string, string> = {
+  'historic:yes': 'historic:unknown',
+  tourist_attraction: 'tourism:attraction',
+  point_of_interest: 'yaha:unknown',
+  lodging: 'tourism:hotel',
+  health: 'amenity:doctors',
+  transit_station: 'public_transport:station',
+  store: 'shop:general',
+  grocery_or_supermarket: 'shop:supermarket',
+};
 
 export const getExternalPois =
   (deps: Neo4jdeps) =>
@@ -256,6 +258,11 @@ export const getExternalPois =
           R.filter(poi => isCreatePoiInput(poi)),
           R.uniqBy(poi => poi.externalId),
           R.reject((x: { type?: string }) => isBannedPoi(x)),
+          R.map(x => ({
+            ...x,
+            type: poiTypeConversion[x.type ?? 'foobar'] ?? x.type,
+          })),
+          x => x,
           R.tap(res =>
             console.warn('Number of correct unique external pois:', res.length),
           ),
