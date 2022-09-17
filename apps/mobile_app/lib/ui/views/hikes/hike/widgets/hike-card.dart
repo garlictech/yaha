@@ -36,22 +36,20 @@ class HikeCard extends ConsumerWidget {
                       },
                       child: Stack(
                         children: [
-                          if (hike.images.isNotEmpty)
+                          if (hike.mainImageUrl != null)
                             Align(
-                              alignment: Alignment.center,
-                              child: ColorFiltered(
-                                  colorFilter: ColorFilter.mode(
-                                      Colors.black.withOpacity(0.35),
-                                      BlendMode.darken),
-                                  child: AnimatedSwitcher(
+                                alignment: Alignment.center,
+                                child: ColorFiltered(
+                                    colorFilter: ColorFilter.mode(
+                                        Colors.black.withOpacity(0.35),
+                                        BlendMode.darken),
+                                    child: AnimatedSwitcher(
                                       duration:
                                           const Duration(milliseconds: 1500),
                                       child: YahaImage(
                                           key: UniqueKey(),
-                                          imageUrl: (hike.images..shuffle())
-                                              .first
-                                              .card))),
-                            ),
+                                          imageUrl: hike.mainImageUrl),
+                                    ))),
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Container(

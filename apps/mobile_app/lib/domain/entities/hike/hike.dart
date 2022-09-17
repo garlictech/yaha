@@ -30,6 +30,9 @@ class Hike {
   @JsonKey(ignore: true)
   int? score_;
 
+  @JsonKey(ignore: true)
+  String? _mainImageUrl;
+
   Hike({
     required this.id,
     required this.descriptions,
@@ -67,6 +70,11 @@ class Hike {
 
   List<String> get imageCardUrls {
     return route.images.map((image) => image.card).toList();
+  }
+
+  String? get mainImageUrl {
+    return _mainImageUrl ??=
+        images.isNotEmpty ? (images..shuffle).first.card : null;
   }
 
   factory Hike.fromJson(Map<String, dynamic> json) => _$HikeFromJson(json);

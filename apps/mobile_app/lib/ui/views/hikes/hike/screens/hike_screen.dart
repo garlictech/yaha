@@ -118,12 +118,11 @@ class HikeScreen extends ConsumerWidget {
               title: hike.descriptions.first.title ?? '',
               content: Stack(
                 children: [
-                  if (hike.images.isNotEmpty)
+                  if (hike.mainImageUrl != null)
                     AnimatedSwitcher(
                       duration: const Duration(milliseconds: 1000),
                       child: YahaImage(
-                          key: UniqueKey(),
-                          imageUrl: (hike.images..shuffle).first.card),
+                          key: UniqueKey(), imageUrl: hike.mainImageUrl),
                     ),
                   Container(
                     decoration: BoxDecoration(
