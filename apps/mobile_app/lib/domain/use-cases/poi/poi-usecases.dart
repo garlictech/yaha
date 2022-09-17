@@ -4,8 +4,6 @@ import 'package:yaha/domain/services/poi-utility-services.dart';
 import 'package:dartz/dartz.dart';
 import 'package:yaha/domain/domain.dart';
 
-import '../hike/hike_provider.dart';
-
 final poisAroundHikeProvider =
     FutureProvider.family<List<PoiOfHike>, String>((ref, hikeId) async {
   final defaults = ref.read(defaultsProvider);

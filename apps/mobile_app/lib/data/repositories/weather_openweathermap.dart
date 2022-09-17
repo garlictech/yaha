@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:yaha/domain/domain.dart';
 
 class WeatherRepositoryOpenWeatherMap implements WeatherRepository {
@@ -22,7 +21,6 @@ class WeatherRepositoryOpenWeatherMap implements WeatherRepository {
       final sunset = DateTime.fromMillisecondsSinceEpoch(
           result.data['city']['sunset'] * 1000);
 
-      debugPrint("*** WEATH $sunrise");
       return [
         Weather(when: sunset, type: "sunset"),
         Weather(when: sunrise, type: "sunrise")
