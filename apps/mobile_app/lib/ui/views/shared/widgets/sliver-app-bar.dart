@@ -4,7 +4,6 @@ import '../shared.dart';
 
 class YahaSliverAppBar extends StatelessWidget {
   final String title;
-  //final String imageUrl;
   final Widget content;
 
   const YahaSliverAppBar({required this.title, required this.content, Key? key})
@@ -49,7 +48,9 @@ class YahaSliverAppBar extends StatelessWidget {
                             BorderRadius.circular(YahaBorderRadius.xxSmall)),
                     padding: const EdgeInsets.all(YahaSpaceSizes.xxSmall),
                     child: YahaScreenHeadTitleText(
-                        text: title, color: textColor))),
+                        text: title.toUpperCase(),
+                        color: textColor,
+                        expanded: isExpanded))),
             background: content,
           );
         },

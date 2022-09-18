@@ -58,6 +58,7 @@ class HikeCard extends ConsumerWidget {
                                   : Colors.black87,
                               padding: const EdgeInsets.only(
                                 left: YahaSpaceSizes.small,
+                                right: YahaSpaceSizes.small,
                                 bottom: YahaSpaceSizes.small,
                               ),
                               child: Column(
@@ -65,9 +66,11 @@ class HikeCard extends ConsumerWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    hike.descriptions[0].title ?? 'A nice hike',
+                                    (hike.descriptions[0].title ??
+                                            'A nice hike')
+                                        .toUpperCase(),
                                     overflow: TextOverflow.ellipsis,
-                                    maxLines: 2,
+                                    maxLines: 3,
                                     style: const TextStyle(
                                       fontSize: YahaFontSizes.small,
                                       fontWeight: FontWeight.w700,
@@ -75,17 +78,29 @@ class HikeCard extends ConsumerWidget {
                                     ),
                                   ),
                                   if (hike.route.municipality != null)
-                                    Row(children: [
-                                      const Icon(Icons.hail_rounded),
-                                      Text(
-                                        hike.route.municipality!,
-                                        style: const TextStyle(
-                                          fontSize: YahaFontSizes.small,
-                                          fontWeight: FontWeight.w600,
-                                          color: YahaColors.background,
-                                        ),
-                                      )
-                                    ]),
+                                    Container(
+                                        color: YahaColors.lightGreen
+                                            .withOpacity(.4),
+                                        margin: const EdgeInsets.only(top: 4),
+                                        child: Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              const Icon(Icons.location_pin,
+                                                  size: YahaFontSizes.xSmall,
+                                                  color: YahaColors.background),
+                                              Text(
+                                                hike.route.municipality!
+                                                    .toUpperCase(),
+                                                style: const TextStyle(
+                                                  fontSize:
+                                                      YahaFontSizes.xSmall,
+                                                  fontWeight: FontWeight.w600,
+                                                  color: YahaColors.background,
+                                                ),
+                                              )
+                                            ])),
                                 ],
                               ),
                             ),

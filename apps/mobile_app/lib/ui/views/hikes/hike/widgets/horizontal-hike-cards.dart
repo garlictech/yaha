@@ -37,9 +37,10 @@ class HorizontalHikeCards extends ConsumerWidget {
                   scrollDirection: Axis.horizontal,
                   children: data
                       .map((hikeId) => Container(
-                          padding: const EdgeInsets.only(
+                          margin: const EdgeInsets.only(
                               right: YahaSpaceSizes.general),
                           width: YahaBoxSizes.widthMedium,
+                          height: YahaBoxSizes.widthMedium,
                           child: HikeCard(hikeId: hikeId)))
                       .toList()),
               loading: () => const Center(child: CircularProgressIndicator()),
