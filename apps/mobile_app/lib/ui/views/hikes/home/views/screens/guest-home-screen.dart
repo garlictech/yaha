@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:yaha/ui/presenters/home/guest-home-screen-presenter.dart';
-import 'package:yaha/domain/states/auth/auth-state.dart';
-import 'package:yaha/domain/states/user/user-state.dart';
+import 'package:yaha/ui/views/hikes/home/views/widgets/active_hikes_summary_line.dart';
+import 'package:yaha/ui/views/hikes/home/views/widgets/current_challenges_summary_line.dart';
+import 'package:yaha/ui/views/hikes/home/views/widgets/events_summary_line.dart';
+import 'package:yaha/ui/views/hikes/home/views/widgets/previous_activities_summary_line.dart';
 
 import '../../../../shared/shared.dart';
 import '../../../events/screens/event-detail-screen.dart';
@@ -12,10 +14,8 @@ import '../../../events/widgets/event-box.dart';
 import '../../../hike/widgets/horizontal-hike-cards.dart';
 import '../../../personal/screen/challenge-detail-screen.dart';
 import '../../../personal/screen/challenges.dart';
-import '../../../personal/screen/statistics-screen.dart';
 import '../../../personal/widgets/challenge-box.dart';
-import '../../../personal/widgets/statistics.dart';
-import '../widgets/explore-hike-box.dart';
+import '../widgets/statistics_summary_line.dart';
 
 class HomePageGuest extends ConsumerWidget {
   final PersistentTabController tabController;
@@ -25,9 +25,6 @@ class HomePageGuest extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    AsyncValue userState = ref.watch(userStateProvider);
-    final authState = ref.watch(authStateProvider);
-    final authStateNotifier = ref.watch(authStateProvider.notifier);
     final viewModel = ref.watch(guestHomeScreenMVPProvider);
 
     return Scaffold(
@@ -46,263 +43,7 @@ class HomePageGuest extends ConsumerWidget {
                     ),
                     child: Column(
                       children: [
-                        Stack(
-                          alignment: AlignmentDirectional.center,
-                          children: [
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Row(
-                                children: [
-                                  SizedBox(
-                                      height: 64,
-                                      width: 64,
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(
-                                            YahaBorderRadius.xSmall),
-                                        child: TextButton(
-                                            onPressed: () {
-                                              showAlertDialog(
-                                                  context, authStateNotifier);
-                                            },
-                                            child: userState.when(
-                                                loading: () =>
-                                                    const CircularProgressIndicator(),
-                                                error: (err, stack) =>
-                                                    const Text('😱'),
-                                                data: (state) => Image.asset(
-                                                      state.avatarImage,
-                                                      fit: BoxFit.cover,
-                                                    ))),
-                                      )),
-                                  Container(
-                                      padding: const EdgeInsets.only(
-                                          left: YahaSpaceSizes.medium),
-                                      child: userState.when(
-                                        loading: () =>
-                                            const CircularProgressIndicator(),
-                                        error: (err, stack) => const Text('😱'),
-                                        data: (state) => Text(
-                                          'Hi ${state.nick}!',
-                                          style: const TextStyle(
-                                              fontSize: YahaFontSizes.medium,
-                                              fontWeight: FontWeight.w600,
-                                              color: YahaColors.textColor),
-                                        ),
-                                      )),
-                                  ...(authState.loggedIn
-                                      ? [
-                                          TextButton(
-                                            child: const Text("Logout"),
-                                            onPressed: () =>
-                                                authStateNotifier.logout(),
-                                          )
-                                        ]
-                                      : [])
-                                ],
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.centerRight,
-                              child: IconButton(
-                                iconSize: YahaFontSizes.xxLarge,
-                                color: YahaColors.textColor,
-                                icon: const Icon(Icons.notifications_outlined),
-                                onPressed: () {},
-                              ),
-                            ),
-                          ],
-                        ),
-                        Container(
-                          padding: const EdgeInsets.only(
-                              top: YahaSpaceSizes.general),
-                          child: Column(
-                            children: [
-                              Container(
-                                alignment: Alignment.centerLeft,
-                                child: const Text(
-                                  'Statistics',
-                                  style: TextStyle(
-                                      fontSize: YahaFontSizes.medium,
-                                      fontWeight: FontWeight.w600,
-                                      color: YahaColors.textColor),
-                                ),
-                              ),
-                              Container(
-                                padding: const EdgeInsets.only(
-                                    top: YahaSpaceSizes.medium),
-                                height: YahaBoxSizes.heightXSmall,
-                                width: MediaQuery.of(context).size.width,
-                                child: const Statistics(
-                                  hikes: 0,
-                                  km: 0,
-                                  hours: 0,
-                                ),
-                              ),
-                              const ShowMoreButton(
-                                nextScreen: StatisticsScreen(),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          padding:
-                              const EdgeInsets.only(top: YahaSpaceSizes.small),
-                          child: Column(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.only(
-                                    bottom: YahaSpaceSizes.medium),
-                                alignment: Alignment.centerLeft,
-                                child: const Text(
-                                  'Previous activities',
-                                  style: TextStyle(
-                                      fontSize: YahaFontSizes.medium,
-                                      fontWeight: FontWeight.w600,
-                                      color: YahaColors.textColor),
-                                ),
-                              ),
-                              ExploreHikeBox(
-                                topTitle:
-                                    "You don’t have any activities yet. Once you complete a hike, you will see it here.",
-                                bottomTitle: "Isn’t it time you got outside?",
-                                tabController: tabController,
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          padding:
-                              const EdgeInsets.only(top: YahaSpaceSizes.large),
-                          child: Column(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.only(
-                                    bottom: YahaSpaceSizes.medium),
-                                alignment: Alignment.centerLeft,
-                                child: const Text(
-                                  'Continue hiking',
-                                  style: TextStyle(
-                                      fontSize: YahaFontSizes.medium,
-                                      fontWeight: FontWeight.w600,
-                                      color: YahaColors.textColor),
-                                ),
-                              ),
-                              ExploreHikeBox(
-                                topTitle:
-                                    "You haven’t started any hikes yet. If you pause a hike you can continue it here.",
-                                bottomTitle: "Isn’t it time you got outside?",
-                                tabController: tabController,
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          padding:
-                              const EdgeInsets.only(top: YahaSpaceSizes.large),
-                          child: Column(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.only(
-                                    bottom: YahaSpaceSizes.medium),
-                                alignment: Alignment.centerLeft,
-                                child: const Text(
-                                  'Current challenges',
-                                  style: TextStyle(
-                                      fontSize: YahaFontSizes.medium,
-                                      fontWeight: FontWeight.w600,
-                                      color: YahaColors.textColor),
-                                ),
-                              ),
-                              SizedBox(
-                                height: YahaBoxSizes.heightGeneral,
-                                child: ListView(
-                                  scrollDirection: Axis.horizontal,
-                                  children: [
-                                    Container(
-                                      padding: const EdgeInsets.only(
-                                          right: YahaSpaceSizes.general),
-                                      child: ChallengeBox(
-                                        title: 'Complete a hike at night',
-                                        icon: 'assets/images/half_moon.png',
-                                        nextScreen: ChallengeDetailScreen(),
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: const EdgeInsets.only(
-                                          right: YahaSpaceSizes.general),
-                                      child: ChallengeBox(
-                                        title: 'Take 10 pictures during a hike',
-                                        icon: 'assets/images/photo_camera.png',
-                                        nextScreen: ChallengeDetailScreen(),
-                                      ),
-                                    ),
-                                    ChallengeBox(
-                                      title: 'Complete a hike at night',
-                                      icon: 'assets/images/half_moon.png',
-                                      nextScreen: ChallengeDetailScreen(),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const ShowMoreButton(nextScreen: Challenges()),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          padding:
-                              const EdgeInsets.only(top: YahaSpaceSizes.small),
-                          child: Column(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.only(
-                                    bottom: YahaSpaceSizes.medium),
-                                alignment: Alignment.centerLeft,
-                                child: const Text(
-                                  'Events starting next month',
-                                  style: TextStyle(
-                                      fontSize: YahaFontSizes.medium,
-                                      fontWeight: FontWeight.w600,
-                                      color: YahaColors.textColor),
-                                ),
-                              ),
-                              SizedBox(
-                                height: YahaBoxSizes.heightGeneral,
-                                child: ListView(
-                                  scrollDirection: Axis.horizontal,
-                                  children: [
-                                    Container(
-                                      padding: const EdgeInsets.only(
-                                          right: YahaSpaceSizes.general),
-                                      child: const EventBox(
-                                          background:
-                                              'assets/images/nagy-egedi-itura.png',
-                                          height: YahaBoxSizes.heightGeneral,
-                                          width: YahaBoxSizes.widthGeneral,
-                                          nextScreen: EventDetailScreen()),
-                                    ),
-                                    Container(
-                                      padding: const EdgeInsets.only(
-                                          right: YahaSpaceSizes.general),
-                                      child: const EventBox(
-                                          background:
-                                              'assets/images/bukki-batyus-barangolas.png',
-                                          height: YahaBoxSizes.heightGeneral,
-                                          width: YahaBoxSizes.widthGeneral,
-                                          nextScreen: EventDetailScreen()),
-                                    ),
-                                    const EventBox(
-                                        background:
-                                            'assets/images/nagy-egedi-itura.png',
-                                        height: YahaBoxSizes.heightGeneral,
-                                        width: YahaBoxSizes.widthGeneral,
-                                        nextScreen: EventDetailScreen()),
-                                  ],
-                                ),
-                              ),
-                              const ShowMoreButton(nextScreen: Events()),
-                            ],
-                          ),
-                        ),
+                        const GlobalHeader(),
                         Container(
                             padding: const EdgeInsets.only(
                                 top: YahaSpaceSizes.small),
@@ -317,6 +58,33 @@ class HomePageGuest extends ConsumerWidget {
                                 title: 'Best hikes of the world',
                                 hikeListProvider:
                                     viewModel.bestHikesOfTheWorldProvider)),
+                        Container(
+                          padding: const EdgeInsets.only(
+                              top: YahaSpaceSizes.general),
+                          child: const StatisticsSummaryLine(),
+                        ),
+                        Container(
+                          padding:
+                              const EdgeInsets.only(top: YahaSpaceSizes.small),
+                          child: PreviousActivitesSummaryLine(
+                              tabController: tabController),
+                        ),
+                        Container(
+                          padding:
+                              const EdgeInsets.only(top: YahaSpaceSizes.large),
+                          child: ActiveHikesSummaryLine(
+                              tabController: tabController),
+                        ),
+                        Container(
+                          padding:
+                              const EdgeInsets.only(top: YahaSpaceSizes.large),
+                          child: const CurrentChallengesSummaryLine(),
+                        ),
+                        Container(
+                          padding:
+                              const EdgeInsets.only(top: YahaSpaceSizes.small),
+                          child: const EventsSummaryLine(),
+                        ),
                       ],
                     ),
                   ),
@@ -327,32 +95,6 @@ class HomePageGuest extends ConsumerWidget {
           ),
         ],
       ),
-    );
-  }
-
-  showAlertDialog(BuildContext context, authStateNotifier) {
-    Widget continueButton = TextButton(
-      child: const Text("OK, I'm logged in"),
-      onPressed: () {
-        Navigator.of(context).pop();
-        authStateNotifier.loggedIn();
-      },
-    );
-
-    AlertDialog alert = AlertDialog(
-      title: const Text("Login effect simulator"),
-      content: const Text(
-          "Ok, the login window was up, you logged in successfully.."),
-      actions: [
-        continueButton,
-      ],
-    );
-
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
     );
   }
 }

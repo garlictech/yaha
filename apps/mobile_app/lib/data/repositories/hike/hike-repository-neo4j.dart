@@ -58,62 +58,7 @@ class HikeRepositoryNeo4j extends RepositoryNeo4j<Hike>
               height
             }
           }
-          onroutePois {
-            id
-            type
-            tags
-            address
-            phone
-            infoUrl
-            openingHours
-            images {
-              thumbnail
-              card
-              original
-            }
-            location {
-              location {
-                longitude
-                latitude
-                height
-              }
-            }
-            descriptions {
-              languageKey
-              title
-              summary
-              fullDescription
-              type
-            }
-          }          
-          offroutePois {
-            id
-            type
-            tags
-            address
-            phone
-            infoUrl
-            openingHours
-            images {
-              thumbnail
-              card
-              original
-            }
-            location {
-              location {
-                longitude
-                latitude
-                height
-              }
-            }
-            descriptions {
-              languageKey
-              title
-              summary
-              fullDescription
-              type
-            }
-          }
+          municipality
           images {
             original
             card

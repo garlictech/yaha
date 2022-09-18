@@ -8,11 +8,16 @@ class Route {
   final String id;
   final List<Waypoint> coordinates;
   final List<Image> images;
+  final String? municipality;
 
   @JsonKey(ignore: true)
   LineStringData? _asLineString;
 
-  Route({required this.id, required this.coordinates, required this.images});
+  Route(
+      {required this.id,
+      required this.coordinates,
+      required this.images,
+      this.municipality});
 
   LineStringData get asLineString {
     return _asLineString ??= LineStringData(

@@ -66,20 +66,26 @@ class HikeCard extends ConsumerWidget {
                                 children: [
                                   Text(
                                     hike.descriptions[0].title ?? 'A nice hike',
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 2,
                                     style: const TextStyle(
-                                      fontSize: YahaFontSizes.medium,
+                                      fontSize: YahaFontSizes.small,
                                       fontWeight: FontWeight.w700,
                                       color: YahaColors.background,
                                     ),
                                   ),
-                                  const Text(
-                                    'Bivalybasznád',
-                                    style: TextStyle(
-                                      fontSize: YahaFontSizes.small,
-                                      fontWeight: FontWeight.w600,
-                                      color: YahaColors.background,
-                                    ),
-                                  ),
+                                  if (hike.route.municipality != null)
+                                    Row(children: [
+                                      const Icon(Icons.hail_rounded),
+                                      Text(
+                                        hike.route.municipality!,
+                                        style: const TextStyle(
+                                          fontSize: YahaFontSizes.small,
+                                          fontWeight: FontWeight.w600,
+                                          color: YahaColors.background,
+                                        ),
+                                      )
+                                    ]),
                                 ],
                               ),
                             ),
