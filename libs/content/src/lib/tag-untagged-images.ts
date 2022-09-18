@@ -26,7 +26,7 @@ return i limit 1
 `;
 
 const hikeQuery = `
-match (i:Image {banned: false})-[:TAKEN_AT]->(p:Hike) 
+match (i:Image {banned: false})-[:TAKEN_AT]->(p:Route) 
 with p, count(i) as cnt
 where cnt < 31
 match (i:Image)-[:TAKEN_AT]->(p) where i.processed is null

@@ -131,6 +131,7 @@ type Route {
       return distinct image
       """
     )
+  municipality: String
 }
 
 type Hike {

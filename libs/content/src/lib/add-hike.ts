@@ -56,7 +56,8 @@ const checkCoordinates = (coordinates: number[][]) =>
     }),
   );
 
-const sanitizeText = (text?: string) => text?.replace("'", "\\'");
+const sanitizeText = (text?: string) =>
+  text?.replace("'", "\\'").replace('"', '\\"');
 
 const createDescription = (title: string, summary?: string) =>
   `
@@ -104,6 +105,19 @@ set r.orderIndex = ${index}
       ),
       count(),
       tap(x => console.log(`Added ${x} points to the route`)),
+      map(
+        () => `
+match (r:Route {id: "${hikeData.externalId}"})-[c:CONTAINS]->(w:Waypoint) where c.orderIndex = 0
+CALL apoc.spatial.reverseGeocode(w.location.latitude, w.location.longitude) yield data
+unwind [data.village, data.town, data.city] as m 
+with r, m where m is not null
+set r.municipality = m
+        `,
+      ),
+      switchMap(query =>
+        defer(() => deps.session.writeTransaction(tx => tx.run(query))),
+      ),
+      tap(() => console.log(`Added municipality to the route`)),
     );
 
 type BufferType = Feature<Polygon, Properties>;
