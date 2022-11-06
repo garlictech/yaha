@@ -1387,11 +1387,9 @@
                       a > 1 && g(l),
                       a > 1 &&
                         h(
-                          e
-                            .slice(0, a - 1)
-                            .concat({
-                              value: ' ' === e[a - 2].type ? '*' : '',
-                            }),
+                          e.slice(0, a - 1).concat({
+                            value: ' ' === e[a - 2].type ? '*' : '',
+                          }),
                         ).replace(ae, '$1'),
                       n,
                       a < r && x(e.slice(a, r)),
