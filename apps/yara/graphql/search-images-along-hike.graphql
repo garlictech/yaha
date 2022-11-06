@@ -1,0 +1,7 @@
+query SearchAroundHike($query: SearchAroundHikeInput!) {
+  searchAroundHike(query: $query) {
+    items
+    nextToken
+    total
+  }
+}

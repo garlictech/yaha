@@ -24,7 +24,8 @@ class PsConfig {
   /// Change your backend url
   ///
   static const String ps_core_url =
-      'http://localhost:8080';
+//      'http://localhost:8080';
+  'http://192.168.68.108:8080';
 
   static const String ps_app_url = ps_core_url + '/index.php/';
 

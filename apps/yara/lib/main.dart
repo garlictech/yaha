@@ -168,9 +168,7 @@ class _PSAppState extends State<PSApp> {
 
     return MultiProvider(
         providers: <SingleChildWidget>[
-          if (step1) ...independentProviders,
-          if (step2) ...dependentProviders,
-          if (step3) ...valueProviders,
+          ...providers,
         ],
         child: ThemeManager(
             defaultBrightnessPreference: BrightnessPreference.light,

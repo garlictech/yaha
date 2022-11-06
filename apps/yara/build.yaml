@@ -1,0 +1,13 @@
+targets:
+  $default:
+    sources:
+      - graphql/**
+      - lib/**
+      - amplify/backend/api/yaha/build/schema.graphql
+      - $package$
+    builders:
+      json_serializable:
+        options:
+          include_if_null: false
+          explicit_to_json: true
+          checked: false
