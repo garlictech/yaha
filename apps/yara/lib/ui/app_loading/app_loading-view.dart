@@ -5,33 +5,36 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-import 'package:fluttermultirestaurant/api/common/ps_resource.dart';
-import 'package:fluttermultirestaurant/api/common/ps_status.dart';
-import 'package:fluttermultirestaurant/config/ps_colors.dart';
-import 'package:fluttermultirestaurant/config/ps_config.dart';
-import 'package:fluttermultirestaurant/constant/ps_constants.dart';
-import 'package:fluttermultirestaurant/constant/ps_dimens.dart';
-import 'package:fluttermultirestaurant/constant/route_paths.dart';
-import 'package:fluttermultirestaurant/provider/app_info/app_info_provider.dart';
-import 'package:fluttermultirestaurant/provider/clear_all/clear_all_data_provider.dart';
-import 'package:fluttermultirestaurant/provider/language/language_provider.dart';
-import 'package:fluttermultirestaurant/repository/app_info_repository.dart';
-import 'package:fluttermultirestaurant/repository/clear_all_data_repository.dart';
-import 'package:fluttermultirestaurant/repository/language_repository.dart';
-import 'package:fluttermultirestaurant/ui/common/dialog/version_update_dialog.dart';
-import 'package:fluttermultirestaurant/ui/common/dialog/warning_dialog_view.dart';
-import 'package:fluttermultirestaurant/utils/utils.dart';
-import 'package:fluttermultirestaurant/viewobject/common/language.dart';
-import 'package:fluttermultirestaurant/viewobject/common/ps_value_holder.dart';
-import 'package:fluttermultirestaurant/viewobject/holder/app_info_parameter_holder.dart';
-import 'package:fluttermultirestaurant/viewobject/ps_app_info.dart';
+import 'package:yara/api/common/ps_resource.dart';
+import 'package:yara/api/common/ps_status.dart';
+import 'package:yara/config/ps_colors.dart';
+import 'package:yara/config/ps_config.dart';
+import 'package:yara/constant/ps_constants.dart';
+import 'package:yara/constant/ps_dimens.dart';
+import 'package:yara/constant/route_paths.dart';
+import 'package:yara/provider/app_info/app_info_provider.dart';
+import 'package:yara/provider/clear_all/clear_all_data_provider.dart';
+import 'package:yara/provider/language/language_provider.dart';
+import 'package:yara/repository/app_info_repository.dart';
+import 'package:yara/repository/clear_all_data_repository.dart';
+import 'package:yara/repository/language_repository.dart';
+import 'package:yara/ui/common/dialog/version_update_dialog.dart';
+import 'package:yara/ui/common/dialog/warning_dialog_view.dart';
+import 'package:yara/utils/utils.dart';
+import 'package:yara/viewobject/common/language.dart';
+import 'package:yara/viewobject/common/ps_value_holder.dart';
+import 'package:yara/viewobject/holder/app_info_parameter_holder.dart';
+import 'package:yara/viewobject/ps_app_info.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
 class AppLoadingView extends StatelessWidget {
-  Future<dynamic> callDateFunction(AppInfoProvider provider, LanguageProvider languageProvider,
-      ClearAllDataProvider clearAllDataProvider, BuildContext context) async {
+  Future<dynamic> callDateFunction(
+      AppInfoProvider provider,
+      LanguageProvider languageProvider,
+      ClearAllDataProvider clearAllDataProvider,
+      BuildContext context) async {
     String realStartDate = '0';
     String realEndDate = '0';
     AppInfoParameterHolder appInfoParameterHolder;
@@ -58,56 +61,57 @@ class AppLoadingView extends StatelessWidget {
 
         if (_psAppInfo.data!.mobileSetting != null) {
           await provider.replaceMobileSettingData(
-              _psAppInfo.data!.mobileSetting!.lat!,
-              _psAppInfo.data!.mobileSetting!.lng!,
-              _psAppInfo.data!.mobileSetting!.googlePlayStoreUrl!, 
-              _psAppInfo.data!.mobileSetting!.appleAppStoreUrl!,
-              _psAppInfo.data!.mobileSetting!.defaultLanguage!.languageCode!,
-              _psAppInfo.data!.mobileSetting!.defaultLanguage!.countryCode!,
-              _psAppInfo.data!.mobileSetting!.defaultLanguage!.name!,
-              _psAppInfo.data!.mobileSetting!.priceFormat!,
-              _psAppInfo.data!.mobileSetting!.dateFormat!,
-              _psAppInfo.data!.mobileSetting!.defaultOrderTime!,
-              _psAppInfo.data!.mobileSetting!.iosAppStoreId!,
-              _psAppInfo.data!.mobileSetting!.isUseThumbnailAsPlaceholder!,
-              _psAppInfo.data!.mobileSetting!.isShowTokenId!,
-              _psAppInfo.data!.mobileSetting!.isShowSubCategory!,
-              _psAppInfo.data!.mobileSetting!.fbKey!,
-              _psAppInfo.data!.mobileSetting!.isShowAdmob!,
-              _psAppInfo.data!.mobileSetting!.defaultLoadingLimit!,
-              _psAppInfo.data!.mobileSetting!.categoryLoadingLimit!,
-              _psAppInfo.data!.mobileSetting!.collectionProductLoadingLimit!,
-              _psAppInfo.data!.mobileSetting!.discountProductLoadingLimit!,
-              _psAppInfo.data!.mobileSetting!.featureProductLoadingLimit!,
-              _psAppInfo.data!.mobileSetting!.latestProductLoadingLimit!,
-              _psAppInfo.data!.mobileSetting!.trendingProductLoadingLimit!,
-              _psAppInfo.data!.mobileSetting!.shopLoadingLimit!,
-              _psAppInfo.data!.mobileSetting!.showFacebookLogin!,
-              _psAppInfo.data!.mobileSetting!.showGoogleLogin!,
-              _psAppInfo.data!.mobileSetting!.showPhoneLogin!,
-              _psAppInfo.data!.mobileSetting!.showMainMenu!,
-              _psAppInfo.data!.mobileSetting!.showSpecialCollections!,
-              _psAppInfo.data!.mobileSetting!.showFeaturedItems!,
-              _psAppInfo.data!.mobileSetting!.showBestChoiceSlider!,
-              _psAppInfo.data!.mobileSetting!.isRazorSupportMultiCurrency!,
-              _psAppInfo.data!.mobileSetting!.defaultRazorCurrency!,
-              _psAppInfo.data!.mobileSetting!.defaultFlutterWaveCurrency!,
-              );
-          
-          final Language languageFromApi = _psAppInfo.data!.mobileSetting!.defaultLanguage!;
+            _psAppInfo.data!.mobileSetting!.lat!,
+            _psAppInfo.data!.mobileSetting!.lng!,
+            _psAppInfo.data!.mobileSetting!.googlePlayStoreUrl!,
+            _psAppInfo.data!.mobileSetting!.appleAppStoreUrl!,
+            _psAppInfo.data!.mobileSetting!.defaultLanguage!.languageCode!,
+            _psAppInfo.data!.mobileSetting!.defaultLanguage!.countryCode!,
+            _psAppInfo.data!.mobileSetting!.defaultLanguage!.name!,
+            _psAppInfo.data!.mobileSetting!.priceFormat!,
+            _psAppInfo.data!.mobileSetting!.dateFormat!,
+            _psAppInfo.data!.mobileSetting!.defaultOrderTime!,
+            _psAppInfo.data!.mobileSetting!.iosAppStoreId!,
+            _psAppInfo.data!.mobileSetting!.isUseThumbnailAsPlaceholder!,
+            _psAppInfo.data!.mobileSetting!.isShowTokenId!,
+            _psAppInfo.data!.mobileSetting!.isShowSubCategory!,
+            _psAppInfo.data!.mobileSetting!.fbKey!,
+            _psAppInfo.data!.mobileSetting!.isShowAdmob!,
+            _psAppInfo.data!.mobileSetting!.defaultLoadingLimit!,
+            _psAppInfo.data!.mobileSetting!.categoryLoadingLimit!,
+            _psAppInfo.data!.mobileSetting!.collectionProductLoadingLimit!,
+            _psAppInfo.data!.mobileSetting!.discountProductLoadingLimit!,
+            _psAppInfo.data!.mobileSetting!.featureProductLoadingLimit!,
+            _psAppInfo.data!.mobileSetting!.latestProductLoadingLimit!,
+            _psAppInfo.data!.mobileSetting!.trendingProductLoadingLimit!,
+            _psAppInfo.data!.mobileSetting!.shopLoadingLimit!,
+            _psAppInfo.data!.mobileSetting!.showFacebookLogin!,
+            _psAppInfo.data!.mobileSetting!.showGoogleLogin!,
+            _psAppInfo.data!.mobileSetting!.showPhoneLogin!,
+            _psAppInfo.data!.mobileSetting!.showMainMenu!,
+            _psAppInfo.data!.mobileSetting!.showSpecialCollections!,
+            _psAppInfo.data!.mobileSetting!.showFeaturedItems!,
+            _psAppInfo.data!.mobileSetting!.showBestChoiceSlider!,
+            _psAppInfo.data!.mobileSetting!.isRazorSupportMultiCurrency!,
+            _psAppInfo.data!.mobileSetting!.defaultRazorCurrency!,
+            _psAppInfo.data!.mobileSetting!.defaultFlutterWaveCurrency!,
+          );
+
+          final Language languageFromApi =
+              _psAppInfo.data!.mobileSetting!.defaultLanguage!;
           languageProvider.saveApiDefaultLanguage(languageFromApi);
 
-          if(provider.psValueHolder!.isUserAlradyChoose != true) { 
-            if (!languageProvider.isUserChangesLocalLanguage() && 
-                  _psAppInfo.data!.mobileSetting!.defaultLanguage != null) {
+          if (provider.psValueHolder!.isUserAlradyChoose != true) {
+            if (!languageProvider.isUserChangesLocalLanguage() &&
+                _psAppInfo.data!.mobileSetting!.defaultLanguage != null) {
               await languageProvider.addLanguage(languageFromApi);
-              EasyLocalization.of(context)?.setLocale(Locale(languageFromApi.languageCode!, languageFromApi.countryCode));
+              EasyLocalization.of(context)?.setLocale(Locale(
+                  languageFromApi.languageCode!, languageFromApi.countryCode));
             }
-          } 
+          }
           if (_psAppInfo.data!.mobileSetting!.excludeLanguage != null) {
-              await languageProvider.replaceExcludedLanguages(
-                _psAppInfo.data!.mobileSetting!.excludeLanguage!
-              );
+            await languageProvider.replaceExcludedLanguages(
+                _psAppInfo.data!.mobileSetting!.excludeLanguage!);
           }
         }
 
@@ -288,54 +292,52 @@ class AppLoadingView extends StatelessWidget {
         useRootNavigator: false,
         context: context,
         builder: (BuildContext context) {
-          return 
-          // WillPopScope(
-          //     onWillPop: () {
-          //       return;
-          //     },
-          //     child:
-               VersionUpdateDialog(
-                title: psAppInfo.psAppVersion!.versionTitle!,
-                description: psAppInfo.psAppVersion!.versionMessage!,
-                leftButtonText:
-                    Utils.getString(context, 'app_info__cancel_button_name'),
-                rightButtonText:
-                    Utils.getString(context, 'app_info__update_button_name'),
-                onCancelTap: () {
-                  final PsValueHolder valueHolder =
-                      Provider.of<PsValueHolder>(context, listen: false);
-                  if (valueHolder.isToShowIntroSlider == true) {
-                    Navigator.pushReplacementNamed(
-                        context, RoutePaths.introSlider,
-                        arguments: 0);
-                  } else {
-                    Navigator.pushReplacementNamed(
-                      context,
-                      RoutePaths.home,
-                    );
-                  }
-                },
-                onUpdateTap: () async {
-                  final PsValueHolder valueHolder =
-                      Provider.of<PsValueHolder>(context, listen: false);
-                  if (valueHolder.isToShowIntroSlider == true) {
-                    Navigator.pushReplacementNamed(
-                        context, RoutePaths.introSlider,
-                        arguments: 0);
-                  } else {
-                    Navigator.pushReplacementNamed(
-                      context,
-                      RoutePaths.home,
-                    );
-                  }
+          return
+              // WillPopScope(
+              //     onWillPop: () {
+              //       return;
+              //     },
+              //     child:
+              VersionUpdateDialog(
+            title: psAppInfo.psAppVersion!.versionTitle!,
+            description: psAppInfo.psAppVersion!.versionMessage!,
+            leftButtonText:
+                Utils.getString(context, 'app_info__cancel_button_name'),
+            rightButtonText:
+                Utils.getString(context, 'app_info__update_button_name'),
+            onCancelTap: () {
+              final PsValueHolder valueHolder =
+                  Provider.of<PsValueHolder>(context, listen: false);
+              if (valueHolder.isToShowIntroSlider == true) {
+                Navigator.pushReplacementNamed(context, RoutePaths.introSlider,
+                    arguments: 0);
+              } else {
+                Navigator.pushReplacementNamed(
+                  context,
+                  RoutePaths.home,
+                );
+              }
+            },
+            onUpdateTap: () async {
+              final PsValueHolder valueHolder =
+                  Provider.of<PsValueHolder>(context, listen: false);
+              if (valueHolder.isToShowIntroSlider == true) {
+                Navigator.pushReplacementNamed(context, RoutePaths.introSlider,
+                    arguments: 0);
+              } else {
+                Navigator.pushReplacementNamed(
+                  context,
+                  RoutePaths.home,
+                );
+              }
 
-                  if (Platform.isIOS) {
-                    Utils.launchAppStoreURL(iOSAppId: valueHolder.iOSAppStoreId);
-                  } else if (Platform.isAndroid) {
-                    Utils.launchURL();
-                  }
-                },
-              );
+              if (Platform.isIOS) {
+                Utils.launchAppStoreURL(iOSAppId: valueHolder.iOSAppStoreId);
+              } else if (Platform.isAndroid) {
+                Utils.launchURL();
+              }
+            },
+          );
         });
   }
 
@@ -374,19 +376,19 @@ class AppLoadingView extends StatelessWidget {
               return clearAllDataProvider!;
             }),
         ChangeNotifierProvider<LanguageProvider>(
-          lazy: false,
-          create: (BuildContext context) {
-            languageProvider = 
-                LanguageProvider(repo: repo2);
-            // languageProvider.getLanguageList();
-            return languageProvider!;
-          }),
+            lazy: false,
+            create: (BuildContext context) {
+              languageProvider = LanguageProvider(repo: repo2);
+              // languageProvider.getLanguageList();
+              return languageProvider!;
+            }),
         ChangeNotifierProvider<AppInfoProvider>(
             lazy: false,
             create: (BuildContext context) {
               provider =
                   AppInfoProvider(repo: repo1, psValueHolder: valueHolder);
-              callDateFunction(provider!, languageProvider!, clearAllDataProvider!, context);
+              callDateFunction(
+                  provider!, languageProvider!, clearAllDataProvider!, context);
               return provider!;
             }),
       ],
@@ -410,18 +412,24 @@ class AppLoadingView extends StatelessWidget {
                         ),
                         Text(
                           Utils.getString(context, 'app_name'),
-                          style: Theme.of(context).textTheme.headline6!.copyWith(
-                              fontWeight: FontWeight.bold,
-                              color: PsColors.white),
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline6!
+                              .copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: PsColors.white),
                         ),
                         const SizedBox(
                           height: PsDimens.space8,
                         ),
                         Text(
                           Utils.getString(context, 'app_info__splash_name'),
-                          style: Theme.of(context).textTheme.subtitle2!.copyWith(
-                              fontWeight: FontWeight.bold,
-                              color: PsColors.white),
+                          style: Theme.of(context)
+                              .textTheme
+                              .subtitle2!
+                              .copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: PsColors.white),
                         ),
                         Container(
                           padding: const EdgeInsets.all(PsDimens.space16),

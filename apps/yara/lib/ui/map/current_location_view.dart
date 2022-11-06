@@ -1,20 +1,20 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:fluttermultirestaurant/config/ps_colors.dart';
-import 'package:fluttermultirestaurant/constant/ps_constants.dart';
-import 'package:fluttermultirestaurant/constant/ps_dimens.dart';
-import 'package:fluttermultirestaurant/constant/route_paths.dart';
-import 'package:fluttermultirestaurant/provider/delivery_cost/delivery_cost_provider.dart';
-import 'package:fluttermultirestaurant/provider/shop_info/shop_info_provider.dart';
-import 'package:fluttermultirestaurant/provider/user/user_provider.dart';
-import 'package:fluttermultirestaurant/ui/common/dialog/warning_dialog_view.dart';
-import 'package:fluttermultirestaurant/utils/ps_progress_dialog.dart';
-import 'package:fluttermultirestaurant/utils/utils.dart';
-import 'package:fluttermultirestaurant/viewobject/basket.dart';
-import 'package:fluttermultirestaurant/viewobject/common/ps_value_holder.dart';
-import 'package:fluttermultirestaurant/viewobject/holder/map_pin_call_back_holder.dart';
-import 'package:fluttermultirestaurant/viewobject/holder/map_pin_intent_holder.dart';
+import 'package:yara/config/ps_colors.dart';
+import 'package:yara/constant/ps_constants.dart';
+import 'package:yara/constant/ps_dimens.dart';
+import 'package:yara/constant/route_paths.dart';
+import 'package:yara/provider/delivery_cost/delivery_cost_provider.dart';
+import 'package:yara/provider/shop_info/shop_info_provider.dart';
+import 'package:yara/provider/user/user_provider.dart';
+import 'package:yara/ui/common/dialog/warning_dialog_view.dart';
+import 'package:yara/utils/ps_progress_dialog.dart';
+import 'package:yara/utils/utils.dart';
+import 'package:yara/viewobject/basket.dart';
+import 'package:yara/viewobject/common/ps_value_holder.dart';
+import 'package:yara/viewobject/holder/map_pin_call_back_holder.dart';
+import 'package:yara/viewobject/holder/map_pin_intent_holder.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart' hide ServiceStatus;
 import 'package:latlong2/latlong.dart';
@@ -366,6 +366,7 @@ class _MapViewWidget extends StatelessWidget {
             //   FocusScope.of(context).requestFocus(FocusNode());
             //   handleTap(mapController, false);
             // }),
+            /* TODO: map layers
             layers: <LayerOptions>[
               TileLayerOptions(
                 urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -387,7 +388,7 @@ class _MapViewWidget extends StatelessWidget {
                   ),
                 )
               ])
-            ],
+            ],*/
           ),
         ));
   }

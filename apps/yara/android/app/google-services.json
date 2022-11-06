@@ -1,0 +1,118 @@
+{
+  "project_info": {
+    "project_number": "613858852311",
+    "project_id": "yet-another-projects",
+    "storage_bucket": "yet-another-projects.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:613858852311:android:3504ff00ad59392de49f92",
+        "android_client_info": {
+          "package_name": "com.garlictech.yara"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "613858852311-s4ccmhcmipgk7npvmjhku8oaii2jg2tp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2x93Mfvz8GfB9CkG1DWIYIq9EXLebEHw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "613858852311-s4ccmhcmipgk7npvmjhku8oaii2jg2tp.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "613858852311-en4tg0mf79hpl35fa4j8k2bif0ftuvc5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.panaceasoft.fluttermultirestaurant"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:613858852311:android:74513a6f9b6b7520e49f92",
+        "android_client_info": {
+          "package_name": "com.garlictech.yara.yara"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "613858852311-s4ccmhcmipgk7npvmjhku8oaii2jg2tp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2x93Mfvz8GfB9CkG1DWIYIq9EXLebEHw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "613858852311-s4ccmhcmipgk7npvmjhku8oaii2jg2tp.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "613858852311-en4tg0mf79hpl35fa4j8k2bif0ftuvc5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.panaceasoft.fluttermultirestaurant"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:613858852311:android:8920bbe9db270b43e49f92",
+        "android_client_info": {
+          "package_name": "com.panaceasoft.fluttermultirestaurant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "613858852311-s4ccmhcmipgk7npvmjhku8oaii2jg2tp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2x93Mfvz8GfB9CkG1DWIYIq9EXLebEHw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "613858852311-s4ccmhcmipgk7npvmjhku8oaii2jg2tp.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "613858852311-en4tg0mf79hpl35fa4j8k2bif0ftuvc5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.panaceasoft.fluttermultirestaurant"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

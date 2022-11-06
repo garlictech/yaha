@@ -2,24 +2,24 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
-import 'package:fluttermultirestaurant/api/common/ps_resource.dart';
-import 'package:fluttermultirestaurant/api/common/ps_status.dart';
-import 'package:fluttermultirestaurant/constant/ps_constants.dart';
-import 'package:fluttermultirestaurant/constant/ps_dimens.dart';
-import 'package:fluttermultirestaurant/constant/route_paths.dart';
-import 'package:fluttermultirestaurant/provider/basket/basket_provider.dart';
-import 'package:fluttermultirestaurant/provider/transaction/transaction_header_provider.dart';
-import 'package:fluttermultirestaurant/provider/user/user_provider.dart';
-import 'package:fluttermultirestaurant/ui/common/base/ps_widget_with_appbar_with_no_provider.dart';
-import 'package:fluttermultirestaurant/ui/common/dialog/error_dialog.dart';
-import 'package:fluttermultirestaurant/ui/common/dialog/warning_dialog_view.dart';
-import 'package:fluttermultirestaurant/ui/common/ps_button_widget.dart';
-import 'package:fluttermultirestaurant/utils/ps_progress_dialog.dart';
-import 'package:fluttermultirestaurant/utils/utils.dart';
-import 'package:fluttermultirestaurant/viewobject/basket.dart';
-import 'package:fluttermultirestaurant/viewobject/common/ps_value_holder.dart';
-import 'package:fluttermultirestaurant/viewobject/holder/intent_holder/checkout_status_intent_holder.dart';
-import 'package:fluttermultirestaurant/viewobject/transaction_header.dart';
+import 'package:yara/api/common/ps_resource.dart';
+import 'package:yara/api/common/ps_status.dart';
+import 'package:yara/constant/ps_constants.dart';
+import 'package:yara/constant/ps_dimens.dart';
+import 'package:yara/constant/route_paths.dart';
+import 'package:yara/provider/basket/basket_provider.dart';
+import 'package:yara/provider/transaction/transaction_header_provider.dart';
+import 'package:yara/provider/user/user_provider.dart';
+import 'package:yara/ui/common/base/ps_widget_with_appbar_with_no_provider.dart';
+import 'package:yara/ui/common/dialog/error_dialog.dart';
+import 'package:yara/ui/common/dialog/warning_dialog_view.dart';
+import 'package:yara/ui/common/ps_button_widget.dart';
+import 'package:yara/utils/ps_progress_dialog.dart';
+import 'package:yara/utils/utils.dart';
+import 'package:yara/viewobject/basket.dart';
+import 'package:yara/viewobject/common/ps_value_holder.dart';
+import 'package:yara/viewobject/holder/intent_holder/checkout_status_intent_holder.dart';
+import 'package:yara/viewobject/transaction_header.dart';
 import 'package:provider/provider.dart';
 
 class CreditCardView extends StatefulWidget {
@@ -69,9 +69,9 @@ dynamic callTransactionSubmitApi(
     String deliveryPickUpDate,
     String deliveryPickUpTime) async {
   if (await Utils.checkInternetConnectivity()) {
-    if ( userLoginProvider.user.data != null) {
+    if (userLoginProvider.user.data != null) {
       final PsValueHolder valueHolder =
-            Provider.of<PsValueHolder>(context, listen: false);
+          Provider.of<PsValueHolder>(context, listen: false);
       final PsResource<TransactionHeader> _apiStatus =
           await transactionSubmitProvider.postTransactionSubmit(
               userLoginProvider.user.data!,
@@ -111,7 +111,7 @@ dynamic callTransactionSubmitApi(
           await Navigator.pushNamed(context, RoutePaths.checkoutSuccess,
               arguments: CheckoutStatusIntentHolder(
                 transactionHeader: _apiStatus.data!,
-              ));          
+              ));
         } else {
           PsProgressDialog.dismissDialog();
 
@@ -230,11 +230,13 @@ class CreditCardViewState extends State<CreditCardView> {
               onPressed: () async {
                 if (cardData != null && cardData!.complete) {
                   await PsProgressDialog.showDialog(context);
-                  final PaymentMethod paymentMethod = await Stripe.instance
-                      .createPaymentMethod(const PaymentMethodParams.card(
-                        paymentMethodData: PaymentMethodData(
-                        billingDetails:BillingDetails()
-                     )));
+                  // TODO: fix stripe payment
+                  final x = const PaymentMethodParams.card(
+                      paymentMethodData:
+                          PaymentMethodData(billingDetails: BillingDetails()));
+                  final PaymentMethod paymentMethod =
+                      await Stripe.instance.createPaymentMethod(params: x);
+
                   Utils.psPrint(paymentMethod.id);
                   await stripeNow(paymentMethod.id);
                 } else {
@@ -243,7 +245,7 @@ class CreditCardViewState extends State<CreditCardView> {
                 }
               },
             ),
-          ),            
+          ),
         ],
       ),
     );

@@ -32,8 +32,8 @@
     "deleteAllTableData": "yarn ts-node --project ./tools/tsconfig.tools.json -r tsconfig-paths/register ./tools/delete-all-table-data.ts",
     "prepare": "husky install",
     "postinstall": "patch-package",
-    "build_geocalc": "yarn esbuild libs/shared/utils/src/lib/geometry/line-calculations.ts --bundle  --outfile=apps/mobile_app/assets/js/geocalc.js",
-    "build_neo4j": "yarn esbuild libs/flutter-js/src/lib/neo4j-api.ts --bundle  --outfile=apps/mobile_app/assets/js/neo4j-api.js"
+    "build_geocalc": "yarn esbuild libs/shared/utils/src/lib/geometry/line-calculations.ts --bundle  --outfile=apps/yaha/assets/js/geocalc.js",
+    "build_neo4j": "yarn esbuild libs/flutter-js/src/lib/neo4j-api.ts --bundle  --outfile=apps/yaha/assets/js/neo4j-api.js"
   },
   "private": true,
   "dependencies": {

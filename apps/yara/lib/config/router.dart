@@ -1,116 +1,117 @@
 import 'package:flutter/material.dart';
-import 'package:fluttermultirestaurant/constant/route_paths.dart';
-import 'package:fluttermultirestaurant/ui/app_info/app_info_view.dart';
-import 'package:fluttermultirestaurant/ui/app_loading/app_loading-view.dart';
-import 'package:fluttermultirestaurant/ui/basket/list/basket_list_container.dart';
-import 'package:fluttermultirestaurant/ui/best_choice/best_choice_list_by_collection_id_view.dart';
-import 'package:fluttermultirestaurant/ui/blog/detail/blog_view.dart';
-import 'package:fluttermultirestaurant/ui/blog/list/blog_list_container.dart';
-import 'package:fluttermultirestaurant/ui/category/filter_list/category_filter_list_view.dart';
-import 'package:fluttermultirestaurant/ui/category/list/category_list_view_container.dart';
-import 'package:fluttermultirestaurant/ui/checkout/checkout_container_view.dart';
-import 'package:fluttermultirestaurant/ui/checkout/checkout_status_view.dart';
-import 'package:fluttermultirestaurant/ui/checkout/credit_card_view.dart';
-import 'package:fluttermultirestaurant/ui/checkout/one_page_checkout/billing_to_view.dart';
-import 'package:fluttermultirestaurant/ui/checkout/one_page_checkout/delivery_location_view.dart';
-import 'package:fluttermultirestaurant/ui/checkout/one_page_checkout/one_one_checkout_container_view.dart';
-import 'package:fluttermultirestaurant/ui/checkout/one_page_checkout/order_time_view.dart';
-import 'package:fluttermultirestaurant/ui/checkout/one_page_checkout/payment_method.dart';
-// import 'package:fluttermultirestaurant/ui/checkout/pay_stack_view.dart';
-import 'package:fluttermultirestaurant/ui/checkout/schedule_checkout_status_view.dart';
-import 'package:fluttermultirestaurant/ui/checkout/whatsapp_checkout/whatsapp_checkout_container_view.dart';
-import 'package:fluttermultirestaurant/ui/collection/header_list/collection_header_list_container.dart';
-import 'package:fluttermultirestaurant/ui/comment/detail/comment_detail_list_view.dart';
-import 'package:fluttermultirestaurant/ui/comment/list/comment_list_view.dart';
-import 'package:fluttermultirestaurant/ui/contact/contact_us_container_view.dart';
-import 'package:fluttermultirestaurant/ui/dashboard/core/dashboard_view.dart';
-import 'package:fluttermultirestaurant/ui/dashboard/home/shop_dashboard_container_view.dart';
-import 'package:fluttermultirestaurant/ui/force_update/force_update_view.dart';
-import 'package:fluttermultirestaurant/ui/gallery/detail/gallery_view.dart';
-import 'package:fluttermultirestaurant/ui/gallery/grid/gallery_grid_view.dart';
-import 'package:fluttermultirestaurant/ui/gallery/grid/shop_gallery_grid_view.dart';
-import 'package:fluttermultirestaurant/ui/history/list/history_list_container.dart';
-import 'package:fluttermultirestaurant/ui/introslider/intro_slider_view.dart';
-import 'package:fluttermultirestaurant/ui/language/list/language_list_view.dart';
-import 'package:fluttermultirestaurant/ui/map/map_pin_view.dart';
-import 'package:fluttermultirestaurant/ui/map/nearest_shop_google_map_view.dart';
-import 'package:fluttermultirestaurant/ui/map/nearest_shop_map_view.dart';
-import 'package:fluttermultirestaurant/ui/noti/detail/noti_view.dart';
-import 'package:fluttermultirestaurant/ui/noti/list/noti_list_view.dart';
-import 'package:fluttermultirestaurant/ui/noti/notification_setting/notification_setting_view.dart';
-import 'package:fluttermultirestaurant/ui/product/attribute_detail/attribute_detail_list_view.dart';
-import 'package:fluttermultirestaurant/ui/product/collection_product/product_list_by_collection_id_view.dart';
-import 'package:fluttermultirestaurant/ui/product/detail/product_detail_view.dart';
-import 'package:fluttermultirestaurant/ui/product/favourite/favourite_product_list_container.dart';
-import 'package:fluttermultirestaurant/ui/product/list_with_filter/filter/category/filter_list_view.dart';
-import 'package:fluttermultirestaurant/ui/product/list_with_filter/filter/filter/item_search_view.dart';
-import 'package:fluttermultirestaurant/ui/product/list_with_filter/filter/sort/item_sorting_view.dart';
-import 'package:fluttermultirestaurant/ui/product/list_with_filter/product_list_with_filter_container.dart';
-import 'package:fluttermultirestaurant/ui/rating/list/rating_list_view.dart';
-import 'package:fluttermultirestaurant/ui/rating/list/shop_rating_list_view.dart';
-import 'package:fluttermultirestaurant/ui/reservation/entry/create_reservation_container_view.dart';
-import 'package:fluttermultirestaurant/ui/reservation/list/reservation_list_container.dart';
-import 'package:fluttermultirestaurant/ui/reservation/list/reservation_shop_list_view.dart';
-import 'package:fluttermultirestaurant/ui/schedule_order/list/schedule_order_list_view.dart';
-import 'package:fluttermultirestaurant/ui/schedule_transaction/detail/schedule_transaction_item_list_view.dart';
-import 'package:fluttermultirestaurant/ui/search/home_item_search_container_view.dart';
-import 'package:fluttermultirestaurant/ui/search/search_category_view_all/search_category_view_all_container.dart';
-import 'package:fluttermultirestaurant/ui/search/search_item_view_all/search_item_view_all_container.dart';
-import 'package:fluttermultirestaurant/ui/search/search_shop_view_all/search_shop_view_all_container.dart';
-import 'package:fluttermultirestaurant/ui/search/search_sub_category_view_all/search_sub_category_view_all_container.dart';
-import 'package:fluttermultirestaurant/ui/search_history/search_history_list_view.dart';
-import 'package:fluttermultirestaurant/ui/search_item/search_item_list_view.dart';
-import 'package:fluttermultirestaurant/ui/setting/setting_container_view.dart';
-import 'package:fluttermultirestaurant/ui/setting/setting_privacy_policy_view.dart';
-import 'package:fluttermultirestaurant/ui/shop/branch/shop_branch_container.dart';
-import 'package:fluttermultirestaurant/ui/shop/shop_info_container_view.dart';
-import 'package:fluttermultirestaurant/ui/shop_list/shop_list_view.dart';
-import 'package:fluttermultirestaurant/ui/subcategory/filter/sub_category_search_list_view.dart';
-import 'package:fluttermultirestaurant/ui/subcategory/list/sub_category_grid_view.dart';
-import 'package:fluttermultirestaurant/ui/transaction/detail/transaction_item_list_view.dart';
-import 'package:fluttermultirestaurant/ui/transaction/list/transaction_list_container.dart';
-import 'package:fluttermultirestaurant/ui/user/edit_profile/area_list_view.dart';
-import 'package:fluttermultirestaurant/ui/user/edit_profile/edit_profile_view.dart';
-import 'package:fluttermultirestaurant/ui/user/forgot_password/forgot_password_container_view.dart';
-import 'package:fluttermultirestaurant/ui/user/login/login_container_view.dart';
-import 'package:fluttermultirestaurant/ui/user/more/more_container_view.dart';
-import 'package:fluttermultirestaurant/ui/user/password_update/change_password_view.dart';
-import 'package:fluttermultirestaurant/ui/user/phone/sign_in/phone_sign_in_container_view.dart';
-import 'package:fluttermultirestaurant/ui/user/phone/verify_phone/verify_phone_container_view.dart';
-import 'package:fluttermultirestaurant/ui/user/register/register_container_view.dart';
-import 'package:fluttermultirestaurant/ui/user/verify/verify_email_container_view.dart';
-import 'package:fluttermultirestaurant/viewobject/blog.dart';
-import 'package:fluttermultirestaurant/viewobject/category.dart';
-import 'package:fluttermultirestaurant/viewobject/comment_header.dart';
-import 'package:fluttermultirestaurant/viewobject/default_photo.dart';
-import 'package:fluttermultirestaurant/viewobject/holder/intent_holder/attribute_detail_intent_holder.dart';
-import 'package:fluttermultirestaurant/viewobject/holder/intent_holder/billing_to_intent_holder.dart';
-import 'package:fluttermultirestaurant/viewobject/holder/intent_holder/blog_intent_holder.dart';
-import 'package:fluttermultirestaurant/viewobject/holder/intent_holder/checkout_intent_holder.dart';
-import 'package:fluttermultirestaurant/viewobject/holder/intent_holder/checkout_status_intent_holder.dart';
-import 'package:fluttermultirestaurant/viewobject/holder/intent_holder/checkout_status_schedule_intent_holder.dart';
-import 'package:fluttermultirestaurant/viewobject/holder/intent_holder/credit_card_intent_holder.dart';
-import 'package:fluttermultirestaurant/viewobject/holder/intent_holder/delivery_location_intent_holder.dart';
-import 'package:fluttermultirestaurant/viewobject/holder/intent_holder/order_time_intent_holder.dart';
-import 'package:fluttermultirestaurant/viewobject/holder/intent_holder/payment_intent_holder.dart';
-// import 'package:fluttermultirestaurant/viewobject/holder/intent_holder/paystack_intent_holder.dart';
-import 'package:fluttermultirestaurant/viewobject/holder/intent_holder/privacy_policy_intent_holder.dart';
-import 'package:fluttermultirestaurant/viewobject/holder/intent_holder/product_detail_intent_holder.dart';
-import 'package:fluttermultirestaurant/viewobject/holder/intent_holder/product_list_intent_holder.dart';
-import 'package:fluttermultirestaurant/viewobject/holder/intent_holder/shop_data_intent_holder.dart';
-import 'package:fluttermultirestaurant/viewobject/holder/intent_holder/shop_info_intent_holder.dart';
-import 'package:fluttermultirestaurant/viewobject/holder/intent_holder/shop_list_intent_holder.dart';
-import 'package:fluttermultirestaurant/viewobject/holder/intent_holder/verify_phone_internt_holder.dart';
-import 'package:fluttermultirestaurant/viewobject/holder/intent_holder/whatsApp_checkout_intent_holder.dart';
-import 'package:fluttermultirestaurant/viewobject/holder/map_pin_intent_holder.dart';
-import 'package:fluttermultirestaurant/viewobject/holder/product_parameter_holder.dart';
-import 'package:fluttermultirestaurant/viewobject/noti.dart';
-import 'package:fluttermultirestaurant/viewobject/product.dart';
-import 'package:fluttermultirestaurant/viewobject/ps_app_version.dart';
-import 'package:fluttermultirestaurant/viewobject/schedule_header.dart';
-import 'package:fluttermultirestaurant/viewobject/shop_info.dart';
-import 'package:fluttermultirestaurant/viewobject/transaction_header.dart';
-import 'package:fluttermultirestaurant/viewobject/user.dart';
+import 'package:yara/constant/route_paths.dart';
+import 'package:yara/ui/app_info/app_info_view.dart';
+import 'package:yara/ui/app_loading/app_loading-view.dart';
+import 'package:yara/ui/basket/list/basket_list_container.dart';
+import 'package:yara/ui/best_choice/best_choice_list_by_collection_id_view.dart';
+import 'package:yara/ui/blog/detail/blog_view.dart';
+import 'package:yara/ui/blog/list/blog_list_container.dart';
+import 'package:yara/ui/category/filter_list/category_filter_list_view.dart';
+import 'package:yara/ui/category/list/category_list_view_container.dart';
+import 'package:yara/ui/checkout/checkout_container_view.dart';
+import 'package:yara/ui/checkout/checkout_status_view.dart';
+import 'package:yara/ui/checkout/credit_card_view.dart';
+import 'package:yara/ui/checkout/one_page_checkout/billing_to_view.dart';
+import 'package:yara/ui/checkout/one_page_checkout/delivery_location_view.dart';
+import 'package:yara/ui/checkout/one_page_checkout/one_one_checkout_container_view.dart';
+import 'package:yara/ui/checkout/one_page_checkout/order_time_view.dart';
+import 'package:yara/ui/checkout/one_page_checkout/payment_method.dart';
+// import 'package:yara/ui/checkout/pay_stack_view.dart';
+import 'package:yara/ui/checkout/schedule_checkout_status_view.dart';
+import 'package:yara/ui/checkout/whatsapp_checkout/whatsapp_checkout_container_view.dart';
+import 'package:yara/ui/collection/header_list/collection_header_list_container.dart';
+import 'package:yara/ui/comment/detail/comment_detail_list_view.dart';
+import 'package:yara/ui/comment/list/comment_list_view.dart';
+import 'package:yara/ui/contact/contact_us_container_view.dart';
+import 'package:yara/ui/dashboard/core/dashboard_view.dart';
+import 'package:yara/ui/dashboard/home/shop_dashboard_container_view.dart';
+import 'package:yara/ui/force_update/force_update_view.dart';
+import 'package:yara/ui/gallery/detail/gallery_view.dart';
+import 'package:yara/ui/gallery/grid/gallery_grid_view.dart';
+import 'package:yara/ui/gallery/grid/shop_gallery_grid_view.dart';
+import 'package:yara/ui/history/list/history_list_container.dart';
+import 'package:yara/ui/introslider/intro_slider_view.dart';
+import 'package:yara/ui/language/list/language_list_view.dart';
+import 'package:yara/ui/map/map_pin_view.dart';
+import 'package:yara/ui/map/nearest_shop_google_map_view.dart';
+import 'package:yara/ui/map/nearest_shop_map_view.dart';
+import 'package:yara/ui/noti/detail/noti_view.dart';
+import 'package:yara/ui/noti/list/noti_list_view.dart';
+import 'package:yara/ui/noti/notification_setting/notification_setting_view.dart';
+import 'package:yara/ui/product/attribute_detail/attribute_detail_list_view.dart';
+import 'package:yara/ui/product/collection_product/product_list_by_collection_id_view.dart';
+import 'package:yara/ui/product/detail/product_detail_view.dart';
+import 'package:yara/ui/product/favourite/favourite_product_list_container.dart';
+import 'package:yara/ui/product/list_with_filter/filter/category/filter_list_view.dart';
+import 'package:yara/ui/product/list_with_filter/filter/filter/item_search_view.dart';
+import 'package:yara/ui/product/list_with_filter/filter/sort/item_sorting_view.dart';
+import 'package:yara/ui/product/list_with_filter/product_list_with_filter_container.dart';
+//import 'package:yara/ui/qr_code_scanner/qr_code_scanner.dart';
+import 'package:yara/ui/rating/list/rating_list_view.dart';
+import 'package:yara/ui/rating/list/shop_rating_list_view.dart';
+import 'package:yara/ui/reservation/entry/create_reservation_container_view.dart';
+import 'package:yara/ui/reservation/list/reservation_list_container.dart';
+import 'package:yara/ui/reservation/list/reservation_shop_list_view.dart';
+import 'package:yara/ui/schedule_order/list/schedule_order_list_view.dart';
+import 'package:yara/ui/schedule_transaction/detail/schedule_transaction_item_list_view.dart';
+import 'package:yara/ui/search/home_item_search_container_view.dart';
+import 'package:yara/ui/search/search_category_view_all/search_category_view_all_container.dart';
+import 'package:yara/ui/search/search_item_view_all/search_item_view_all_container.dart';
+import 'package:yara/ui/search/search_shop_view_all/search_shop_view_all_container.dart';
+import 'package:yara/ui/search/search_sub_category_view_all/search_sub_category_view_all_container.dart';
+import 'package:yara/ui/search_history/search_history_list_view.dart';
+import 'package:yara/ui/search_item/search_item_list_view.dart';
+import 'package:yara/ui/setting/setting_container_view.dart';
+import 'package:yara/ui/setting/setting_privacy_policy_view.dart';
+import 'package:yara/ui/shop/branch/shop_branch_container.dart';
+import 'package:yara/ui/shop/shop_info_container_view.dart';
+import 'package:yara/ui/shop_list/shop_list_view.dart';
+import 'package:yara/ui/subcategory/filter/sub_category_search_list_view.dart';
+import 'package:yara/ui/subcategory/list/sub_category_grid_view.dart';
+import 'package:yara/ui/transaction/detail/transaction_item_list_view.dart';
+import 'package:yara/ui/transaction/list/transaction_list_container.dart';
+import 'package:yara/ui/user/edit_profile/area_list_view.dart';
+import 'package:yara/ui/user/edit_profile/edit_profile_view.dart';
+import 'package:yara/ui/user/forgot_password/forgot_password_container_view.dart';
+import 'package:yara/ui/user/login/login_container_view.dart';
+import 'package:yara/ui/user/more/more_container_view.dart';
+import 'package:yara/ui/user/password_update/change_password_view.dart';
+import 'package:yara/ui/user/phone/sign_in/phone_sign_in_container_view.dart';
+import 'package:yara/ui/user/phone/verify_phone/verify_phone_container_view.dart';
+import 'package:yara/ui/user/register/register_container_view.dart';
+import 'package:yara/ui/user/verify/verify_email_container_view.dart';
+import 'package:yara/viewobject/blog.dart';
+import 'package:yara/viewobject/category.dart';
+import 'package:yara/viewobject/comment_header.dart';
+import 'package:yara/viewobject/default_photo.dart';
+import 'package:yara/viewobject/holder/intent_holder/attribute_detail_intent_holder.dart';
+import 'package:yara/viewobject/holder/intent_holder/billing_to_intent_holder.dart';
+import 'package:yara/viewobject/holder/intent_holder/blog_intent_holder.dart';
+import 'package:yara/viewobject/holder/intent_holder/checkout_intent_holder.dart';
+import 'package:yara/viewobject/holder/intent_holder/checkout_status_intent_holder.dart';
+import 'package:yara/viewobject/holder/intent_holder/checkout_status_schedule_intent_holder.dart';
+import 'package:yara/viewobject/holder/intent_holder/credit_card_intent_holder.dart';
+import 'package:yara/viewobject/holder/intent_holder/delivery_location_intent_holder.dart';
+import 'package:yara/viewobject/holder/intent_holder/order_time_intent_holder.dart';
+import 'package:yara/viewobject/holder/intent_holder/payment_intent_holder.dart';
+// import 'package:yara/viewobject/holder/intent_holder/paystack_intent_holder.dart';
+import 'package:yara/viewobject/holder/intent_holder/privacy_policy_intent_holder.dart';
+import 'package:yara/viewobject/holder/intent_holder/product_detail_intent_holder.dart';
+import 'package:yara/viewobject/holder/intent_holder/product_list_intent_holder.dart';
+import 'package:yara/viewobject/holder/intent_holder/shop_data_intent_holder.dart';
+import 'package:yara/viewobject/holder/intent_holder/shop_info_intent_holder.dart';
+import 'package:yara/viewobject/holder/intent_holder/shop_list_intent_holder.dart';
+import 'package:yara/viewobject/holder/intent_holder/verify_phone_internt_holder.dart';
+import 'package:yara/viewobject/holder/intent_holder/whatsApp_checkout_intent_holder.dart';
+import 'package:yara/viewobject/holder/map_pin_intent_holder.dart';
+import 'package:yara/viewobject/holder/product_parameter_holder.dart';
+import 'package:yara/viewobject/noti.dart';
+import 'package:yara/viewobject/product.dart';
+import 'package:yara/viewobject/ps_app_version.dart';
+import 'package:yara/viewobject/schedule_header.dart';
+import 'package:yara/viewobject/shop_info.dart';
+import 'package:yara/viewobject/transaction_header.dart';
+import 'package:yara/viewobject/user.dart';
 // ignore: library_prefixes
 import 'package:google_maps_flutter/google_maps_flutter.dart' as GoogleMap;
 import 'package:latlong2/latlong.dart';
@@ -131,7 +132,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
 
     case '${RoutePaths.shop_dashboard}':
       final Object? args = settings.arguments;
-      final ShopDataIntentHolder shopDataIntentHolder = args as ShopDataIntentHolder;
+      final ShopDataIntentHolder shopDataIntentHolder =
+          args as ShopDataIntentHolder;
       return PageRouteBuilder<dynamic>(
           pageBuilder: (_, Animation<double> a1, Animation<double> a2) =>
               ShopDashboardContainerView(
@@ -173,13 +175,15 @@ Route<dynamic> generateRoute(RouteSettings settings) {
           args as ProductParameterHolder;
       return PageRouteBuilder<dynamic>(
           pageBuilder: (_, Animation<double> a1, Animation<double> a2) =>
-              SearchItemListView(productParameterHolder: productParameterHolder));
+              SearchItemListView(
+                  productParameterHolder: productParameterHolder));
 
     case '${RoutePaths.shopbranchContainer}':
       final Object? args = settings.arguments;
       // final String shopId = args as String;
       // final ShopInfo shopInfo = args as ShopInfo;
-      final ShopInfoDataIntentHolder shopInfoDataIntentHolder = args as ShopInfoDataIntentHolder;
+      final ShopInfoDataIntentHolder shopInfoDataIntentHolder =
+          args as ShopInfoDataIntentHolder;
       return PageRouteBuilder<dynamic>(
           pageBuilder: (_, Animation<double> a1, Animation<double> a2) =>
               ShopBranchContainerView(
@@ -197,7 +201,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
 
     case '${RoutePaths.createreservationContainer}':
       final Object? args = settings.arguments;
-      final ShopDataIntentHolder shopDataIntentHolder = args as ShopDataIntentHolder;
+      final ShopDataIntentHolder shopDataIntentHolder =
+          args as ShopDataIntentHolder;
       return PageRouteBuilder<dynamic>(
           pageBuilder: (_, Animation<double> a1, Animation<double> a2) =>
               CreateReservationContainerView(
@@ -304,7 +309,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
           shopInfoProvider: orderTimeIntentHolder.shopInfoProvider!,
         );
       });
-    
+
     case '${RoutePaths.orderLocation}':
       return MaterialPageRoute<dynamic>(builder: (BuildContext context) {
         final Object? args = settings.arguments;
@@ -436,46 +441,44 @@ Route<dynamic> generateRoute(RouteSettings settings) {
                   appBarTitle: shopListIntentHolder.appBarTitle,
                   shopParameterHolder:
                       shopListIntentHolder.shopParameterHolder));
-    
+
     case '${RoutePaths.searchCategoryViewAll}':
-      final Map<String, dynamic>? args = settings.arguments as Map<String, dynamic>;
+      final Map<String, dynamic>? args =
+          settings.arguments as Map<String, dynamic>;
       final String title = args!['title'];
       final String keyword = args['keyword'];
       return PageRouteBuilder<dynamic>(
           pageBuilder: (_, Animation<double> a1, Animation<double> a2) =>
               SearchCategoryViewAllContainer(
-                  appBarTitle: title, 
-                  keyword: keyword));
+                  appBarTitle: title, keyword: keyword));
 
     case '${RoutePaths.searchSubCategoryViewAll}':
-      final Map<String, dynamic>? args = settings.arguments as Map<String, dynamic>;
+      final Map<String, dynamic>? args =
+          settings.arguments as Map<String, dynamic>;
       final String title = args!['title'];
       final String keyword = args['keyword'];
       return PageRouteBuilder<dynamic>(
           pageBuilder: (_, Animation<double> a1, Animation<double> a2) =>
               SearchSubCategoryViewAllContainer(
-                  appBarTitle: title, 
-                  keyword: keyword));
+                  appBarTitle: title, keyword: keyword));
 
     case '${RoutePaths.searchShopViewAll}':
-      final Map<String, dynamic>? args = settings.arguments as Map<String, dynamic>;
+      final Map<String, dynamic>? args =
+          settings.arguments as Map<String, dynamic>;
       final String title = args!['title'];
       final String keyword = args['keyword'];
       return PageRouteBuilder<dynamic>(
           pageBuilder: (_, Animation<double> a1, Animation<double> a2) =>
-              SearchShopViewAllContainer(
-                appBarTitle: title, 
-                keyword: keyword));
-              
+              SearchShopViewAllContainer(appBarTitle: title, keyword: keyword));
+
     case '${RoutePaths.searchItemViewAll}':
-      final Map<String, dynamic>? args = settings.arguments as Map<String, dynamic>;
+      final Map<String, dynamic>? args =
+          settings.arguments as Map<String, dynamic>;
       final String title = args!['title'];
       final String keyword = args['keyword'];
       return PageRouteBuilder<dynamic>(
           pageBuilder: (_, Animation<double> a1, Animation<double> a2) =>
-              SearchItemViewAllContainer(
-                appBarTitle: title, 
-                keyword: keyword));
+              SearchItemViewAllContainer(appBarTitle: title, keyword: keyword));
 
     case '${RoutePaths.checkoutSuccessSchedule}':
       final Object? args = settings.arguments;
@@ -489,7 +492,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
                 scheduleHeader:
                     checkoutStatusScheduleIntentHolder.scheduleHeader,
               ));
-    
+
     case '${RoutePaths.scheduleTransactionDetail}':
       final Object? args = settings.arguments;
       final ScheduleHeader scheduleHeader = args as ScheduleHeader;
@@ -517,7 +520,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
 
     case '${RoutePaths.privacyPolicy}':
       final Object? args = settings.arguments;
-      final PrivacyPolicyIntentHolder privacyPolicyIntentHolder = args as PrivacyPolicyIntentHolder;
+      final PrivacyPolicyIntentHolder privacyPolicyIntentHolder =
+          args as PrivacyPolicyIntentHolder;
       return PageRouteBuilder<dynamic>(
           pageBuilder: (_, Animation<double> a1, Animation<double> a2) =>
               SettingPrivacyPolicyView(
@@ -548,7 +552,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return PageRouteBuilder<dynamic>(
           pageBuilder: (_, Animation<double> a1, Animation<double> a2) =>
               TransactionListContainerView());
-    
+
     case '${RoutePaths.scheduleOrder}':
       final Object? args = settings.arguments;
       final User user = args as User;
@@ -652,7 +656,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
                     productCollectionIdView.productCollectionHeader,
                 appBarTitle: productCollectionIdView.appBarTitle,
               ));
-    
+
     case '${RoutePaths.bestChoiceListByCollectionId}':
       final Object? args = settings.arguments;
       final BestChoiceListByCollectionIdView bestChoiceListByCollectionIdView =
@@ -661,10 +665,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return PageRouteBuilder<dynamic>(
           pageBuilder: (_, Animation<double> a1, Animation<double> a2) =>
               BestChoiceListByCollectionIdView(
-                bestChoice:
-                    bestChoiceListByCollectionIdView.bestChoice,
+                bestChoice: bestChoiceListByCollectionIdView.bestChoice,
                 appBarTitle: bestChoiceListByCollectionIdView.appBarTitle,
-                backgroundColor: bestChoiceListByCollectionIdView.backgroundColor,
+                backgroundColor:
+                    bestChoiceListByCollectionIdView.backgroundColor,
                 titleTextColor: bestChoiceListByCollectionIdView.titleTextColor,
               ));
 
@@ -739,7 +743,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
               CheckoutContainerView(
                 basketList: checkoutIntentHolder.basketList!,
               ));
-    
+
     case '${RoutePaths.onepage_checkout_container}':
       final Object? args = settings.arguments;
 
@@ -751,8 +755,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
                 basketList: checkoutIntentHolder.basketList,
                 shopInfoProvider: checkoutIntentHolder.shopInfoProvider,
               ));
-    
-     case '${RoutePaths.whatsAppCheckout_container}':
+
+    case '${RoutePaths.whatsAppCheckout_container}':
       final Object? args = settings.arguments;
 
       final WhatsAppCheckoutIntentHolder whatsAppCheckoutIntentHolder =
@@ -774,7 +778,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
                     attributeDetailIntentHolder.attributeDetail,
                 product: attributeDetailIntentHolder.product,
               ));
-    
+
     case '${RoutePaths.nearestShopGoogleMap}':
       final Object? args = settings.arguments;
       final GoogleMap.LatLng latlng = args as GoogleMap.LatLng;
@@ -785,7 +789,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
                 latLng: latlng,
               ));
 
-     case '${RoutePaths.nearestShopMap}':
+    case '${RoutePaths.nearestShopMap}':
       final Object? args = settings.arguments;
       final LatLng latlng = args as LatLng;
 
@@ -795,6 +799,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
                 latLng: latlng,
               ));
 
+    case '${RoutePaths.qrScanner}':
+      return PageRouteBuilder<dynamic>(
+          pageBuilder: (_, Animation<double> a1, Animation<double> a2) =>
+              Text("lofasz"));
     default:
       return PageRouteBuilder<dynamic>(
           pageBuilder: (_, Animation<double> a1, Animation<double> a2) =>

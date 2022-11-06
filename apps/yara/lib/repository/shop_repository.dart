@@ -1,15 +1,17 @@
+// ignore_for_file: directives_ordering
+
 import 'dart:async';
-import 'package:fluttermultirestaurant/api/common/ps_resource.dart';
-import 'package:fluttermultirestaurant/api/common/ps_status.dart';
-import 'package:fluttermultirestaurant/api/ps_api_service.dart';
-import 'package:fluttermultirestaurant/constant/ps_constants.dart';
-import 'package:fluttermultirestaurant/db/shop_dao.dart';
-import 'package:fluttermultirestaurant/db/shop_map_dao.dart';
-import 'package:fluttermultirestaurant/repository/Common/ps_repository.dart';
-import 'package:fluttermultirestaurant/viewobject/api_status.dart';
-import 'package:fluttermultirestaurant/viewobject/holder/shop_parameter_holder.dart';
-import 'package:fluttermultirestaurant/viewobject/shop.dart';
-import 'package:fluttermultirestaurant/viewobject/shop_map.dart';
+import 'package:yara/api/common/ps_resource.dart';
+import 'package:yara/api/common/ps_status.dart';
+import 'package:yara/api/ps_api_service.dart';
+import 'package:yara/constant/ps_constants.dart';
+import 'package:yara/db/shop_dao.dart';
+import 'package:yara/db/shop_map_dao.dart';
+import 'package:yara/repository/Common/ps_repository.dart';
+import 'package:yara/viewobject/api_status.dart';
+import 'package:yara/viewobject/holder/shop_parameter_holder.dart';
+import 'package:yara/viewobject/shop.dart';
+import 'package:yara/viewobject/shop_map.dart';
 import 'package:sembast/sembast.dart';
 
 class ShopRepository extends PsRepository {
@@ -21,8 +23,8 @@ class ShopRepository extends PsRepository {
   String primaryKey = 'id';
   String mapKey = 'map_key';
   String tagIdKey = 'tag_id';
-late  PsApiService _psApiService;
-late  ShopDao _shopDao;
+  late PsApiService _psApiService;
+  late ShopDao _shopDao;
 
   void sinkShopListStream(
       StreamController<PsResource<List<Shop>>>? shopListStream,

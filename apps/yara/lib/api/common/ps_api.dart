@@ -1,11 +1,13 @@
+// ignore_for_file: directives_ordering
+
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:fluttermultirestaurant/api/common/ps_api_reponse.dart';
-import 'package:fluttermultirestaurant/api/common/ps_resource.dart';
-import 'package:fluttermultirestaurant/api/common/ps_status.dart';
-import 'package:fluttermultirestaurant/config/ps_config.dart';
-import 'package:fluttermultirestaurant/viewobject/common/ps_object.dart';
+import 'ps_api_reponse.dart';
+import 'ps_resource.dart';
+import 'ps_status.dart';
+import 'package:yara/config/ps_config.dart';
+import 'package:yara/viewobject/common/ps_object.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:path/path.dart';
@@ -25,9 +27,8 @@ abstract class PsApi {
          // response.body != null &&
           response.body != '') {
         // parse into List
-        final List<dynamic> parsed = json.decode(response.body);
 
-        return parsed;
+        return json.decode(response.body);
       } else {
         throw Exception('Error in loading...');
       }

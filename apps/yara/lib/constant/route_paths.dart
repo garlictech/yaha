@@ -100,4 +100,5 @@ class RoutePaths {
   static const String checkoutSuccessSchedule  = '/scheduleCheckoutSuccess';
   static const String scheduleTransactionDetail  = '/scheduleTransactionDetail';
   static const String scheduleOrder = '/scheduleOrder';
+  static const String qrScanner = '/qrScanner';
 }

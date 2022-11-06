@@ -2,7 +2,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // Panacea-Soft license that can be found in the LICENSE file.
 
-import 'package:fluttermultirestaurant/viewobject/common/language.dart';
+import 'package:yara/viewobject/common/language.dart';
 
 class PsConfig {
   PsConfig._();
@@ -24,7 +24,7 @@ class PsConfig {
   /// Change your backend url
   ///
   static const String ps_core_url =
-      'https://www.products.panacea-soft.co/flutter-multi-restaurant-admin-demo';
+      'http://localhost:8080';
 
   static const String ps_app_url = ps_core_url + '/index.php/';
 

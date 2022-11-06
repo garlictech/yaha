@@ -5,7 +5,7 @@ ENVNAME=$1
 BUCKET_NAME=$2
 
 tar -cvf ${CODEBUILD_RESOLVED_SOURCE_VERSION}.tgz \
-  apps/mobile_app/lib/amplifyconfiguration.dart
+  apps/yaha/lib/amplifyconfiguration.dart
 
 aws s3 cp ${CODEBUILD_RESOLVED_SOURCE_VERSION}.tgz s3://$BUCKET_NAME/
 

@@ -1,81 +1,89 @@
 import 'package:flutter/material.dart';
-import 'package:fluttermultirestaurant/api/ps_api_service.dart';
-import 'package:fluttermultirestaurant/db/about_app_dao.dart';
-import 'package:fluttermultirestaurant/db/basket_dao.dart';
-import 'package:fluttermultirestaurant/db/best_choice_dao.dart';
-import 'package:fluttermultirestaurant/db/blog_dao.dart';
-import 'package:fluttermultirestaurant/db/category_map_dao.dart';
-import 'package:fluttermultirestaurant/db/cateogry_dao.dart';
-import 'package:fluttermultirestaurant/db/comment_detail_dao.dart';
-import 'package:fluttermultirestaurant/db/comment_header_dao.dart';
-import 'package:fluttermultirestaurant/db/common/ps_shared_preferences.dart';
-import 'package:fluttermultirestaurant/db/delivery_boy_rating_dao.dart';
-import 'package:fluttermultirestaurant/db/favourite_product_dao.dart';
-import 'package:fluttermultirestaurant/db/gallery_dao.dart';
-import 'package:fluttermultirestaurant/db/history_dao.dart';
-import 'package:fluttermultirestaurant/db/noti_dao.dart';
-import 'package:fluttermultirestaurant/db/product_collection_header_dao.dart';
-import 'package:fluttermultirestaurant/db/product_dao.dart';
-import 'package:fluttermultirestaurant/db/product_map_dao.dart';
-import 'package:fluttermultirestaurant/db/rating_dao.dart';
-import 'package:fluttermultirestaurant/db/reservation_dao.dart';
-import 'package:fluttermultirestaurant/db/search_history_dao.dart';
-import 'package:fluttermultirestaurant/db/search_result_dao.dart';
-import 'package:fluttermultirestaurant/db/shipping_area_dao.dart';
-import 'package:fluttermultirestaurant/db/shop_dao.dart';
-import 'package:fluttermultirestaurant/db/shop_info_dao.dart';
-import 'package:fluttermultirestaurant/db/shop_map_dao.dart';
-import 'package:fluttermultirestaurant/db/shop_rating_dao.dart';
-import 'package:fluttermultirestaurant/db/sub_category_dao.dart';
-import 'package:fluttermultirestaurant/db/transaction_detail_dao.dart';
-import 'package:fluttermultirestaurant/db/transaction_header_dao.dart';
-import 'package:fluttermultirestaurant/db/transaction_status_dao.dart';
-import 'package:fluttermultirestaurant/db/user_dao.dart';
-import 'package:fluttermultirestaurant/db/user_login_dao.dart';
-import 'package:fluttermultirestaurant/repository/Common/notification_repository.dart';
-import 'package:fluttermultirestaurant/repository/about_app_repository.dart';
-import 'package:fluttermultirestaurant/repository/app_info_repository.dart';
-import 'package:fluttermultirestaurant/repository/basket_repository.dart';
-import 'package:fluttermultirestaurant/repository/best_choice_repository.dart';
-import 'package:fluttermultirestaurant/repository/blog_repository.dart';
-import 'package:fluttermultirestaurant/repository/category_repository.dart';
-import 'package:fluttermultirestaurant/repository/clear_all_data_repository.dart';
-import 'package:fluttermultirestaurant/repository/comment_detail_repository.dart';
-import 'package:fluttermultirestaurant/repository/comment_header_repository.dart';
-import 'package:fluttermultirestaurant/repository/contact_us_repository.dart';
-import 'package:fluttermultirestaurant/repository/coupon_discount_repository.dart';
-import 'package:fluttermultirestaurant/repository/create_reservation_repository.dart';
-import 'package:fluttermultirestaurant/repository/delete_task_repository.dart';
-import 'package:fluttermultirestaurant/repository/delivery_boy_rating_repository.dart';
-import 'package:fluttermultirestaurant/repository/delivery_cost_repository.dart';
-import 'package:fluttermultirestaurant/repository/gallery_repository.dart';
-import 'package:fluttermultirestaurant/repository/history_repsitory.dart';
-import 'package:fluttermultirestaurant/repository/language_repository.dart';
-import 'package:fluttermultirestaurant/repository/noti_repository.dart';
-import 'package:fluttermultirestaurant/repository/product_collection_repository.dart';
-import 'package:fluttermultirestaurant/repository/product_repository.dart';
-import 'package:fluttermultirestaurant/repository/ps_theme_repository.dart';
-import 'package:fluttermultirestaurant/repository/rating_repository.dart';
-import 'package:fluttermultirestaurant/repository/search_history_repository.dart';
-import 'package:fluttermultirestaurant/repository/search_result_repository.dart';
-import 'package:fluttermultirestaurant/repository/shipping_area_repository.dart';
-import 'package:fluttermultirestaurant/repository/shop_info_repository.dart';
-import 'package:fluttermultirestaurant/repository/shop_rating_repository.dart';
-import 'package:fluttermultirestaurant/repository/shop_repository.dart';
-import 'package:fluttermultirestaurant/repository/sub_category_repository.dart';
-import 'package:fluttermultirestaurant/repository/tansaction_detail_repository.dart';
-import 'package:fluttermultirestaurant/repository/token_repository.dart';
-import 'package:fluttermultirestaurant/repository/transaction_header_repository.dart';
-import 'package:fluttermultirestaurant/repository/transaction_status_repository.dart';
-import 'package:fluttermultirestaurant/repository/user_repository.dart';
-import 'package:fluttermultirestaurant/viewobject/common/ps_value_holder.dart';
+import 'package:yara/api/ps_api_service.dart';
+import 'package:yara/db/about_app_dao.dart';
+import 'package:yara/db/basket_dao.dart';
+import 'package:yara/db/best_choice_dao.dart';
+import 'package:yara/db/blog_dao.dart';
+import 'package:yara/db/category_map_dao.dart';
+import 'package:yara/db/cateogry_dao.dart';
+import 'package:yara/db/comment_detail_dao.dart';
+import 'package:yara/db/comment_header_dao.dart';
+import 'package:yara/db/common/ps_shared_preferences.dart';
+import 'package:yara/db/delivery_boy_rating_dao.dart';
+import 'package:yara/db/favourite_product_dao.dart';
+import 'package:yara/db/gallery_dao.dart';
+import 'package:yara/db/history_dao.dart';
+import 'package:yara/db/noti_dao.dart';
+import 'package:yara/db/product_collection_header_dao.dart';
+import 'package:yara/db/product_dao.dart';
+import 'package:yara/db/product_map_dao.dart';
+import 'package:yara/db/rating_dao.dart';
+import 'package:yara/db/reservation_dao.dart';
+import 'package:yara/db/search_history_dao.dart';
+import 'package:yara/db/search_result_dao.dart';
+import 'package:yara/db/shipping_area_dao.dart';
+import 'package:yara/db/shop_dao.dart';
+import 'package:yara/db/shop_info_dao.dart';
+import 'package:yara/db/shop_map_dao.dart';
+import 'package:yara/db/shop_rating_dao.dart';
+import 'package:yara/db/sub_category_dao.dart';
+import 'package:yara/db/transaction_detail_dao.dart';
+import 'package:yara/db/transaction_header_dao.dart';
+import 'package:yara/db/transaction_status_dao.dart';
+import 'package:yara/db/user_dao.dart';
+import 'package:yara/db/user_login_dao.dart';
+import 'package:yara/repository/Common/notification_repository.dart';
+import 'package:yara/repository/about_app_repository.dart';
+import 'package:yara/repository/app_info_repository.dart';
+import 'package:yara/repository/basket_repository.dart';
+import 'package:yara/repository/best_choice_repository.dart';
+import 'package:yara/repository/blog_repository.dart';
+import 'package:yara/repository/category_repository.dart';
+import 'package:yara/repository/clear_all_data_repository.dart';
+import 'package:yara/repository/comment_detail_repository.dart';
+import 'package:yara/repository/comment_header_repository.dart';
+import 'package:yara/repository/contact_us_repository.dart';
+import 'package:yara/repository/coupon_discount_repository.dart';
+import 'package:yara/repository/create_reservation_repository.dart';
+import 'package:yara/repository/delete_task_repository.dart';
+import 'package:yara/repository/delivery_boy_rating_repository.dart';
+import 'package:yara/repository/delivery_cost_repository.dart';
+import 'package:yara/repository/gallery_repository.dart';
+import 'package:yara/repository/history_repsitory.dart';
+import 'package:yara/repository/language_repository.dart';
+import 'package:yara/repository/noti_repository.dart';
+import 'package:yara/repository/product_collection_repository.dart';
+import 'package:yara/repository/product_repository.dart';
+import 'package:yara/repository/ps_theme_repository.dart';
+import 'package:yara/repository/rating_repository.dart';
+import 'package:yara/repository/search_history_repository.dart';
+import 'package:yara/repository/search_result_repository.dart';
+import 'package:yara/repository/shipping_area_repository.dart';
+import 'package:yara/repository/shop_info_repository.dart';
+import 'package:yara/repository/shop_rating_repository.dart';
+import 'package:yara/repository/shop_repository.dart';
+import 'package:yara/repository/sub_category_repository.dart';
+import 'package:yara/repository/tansaction_detail_repository.dart';
+import 'package:yara/repository/token_repository.dart';
+import 'package:yara/repository/transaction_header_repository.dart';
+import 'package:yara/repository/transaction_status_repository.dart';
+import 'package:yara/repository/user_repository.dart';
+import 'package:yara/viewobject/common/ps_value_holder.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
+List<SingleChildWidget> valueProviders = <SingleChildWidget>[
+  StreamProvider<PsValueHolder?>(
+    initialData: null,
+    create: (BuildContext context) =>
+        Provider.of<PsSharedPreferences>(context, listen: false).psValueHolder,
+  )
+];
+
 List<SingleChildWidget> providers = <SingleChildWidget>[
   ...independentProviders,
-  ..._dependentProviders,
-  ..._valueProviders,
+  ...dependentProviders,
+  ...valueProviders,
 ];
 
 List<SingleChildWidget> independentProviders = <SingleChildWidget>[
@@ -116,7 +124,7 @@ List<SingleChildWidget> independentProviders = <SingleChildWidget>[
   Provider<ReservationDao>.value(value: ReservationDao.instance),
 ];
 
-List<SingleChildWidget> _dependentProviders = <SingleChildWidget>[
+List<SingleChildWidget> dependentProviders = <SingleChildWidget>[
   ProxyProvider<PsSharedPreferences, PsThemeRepository>(
     update: (_, PsSharedPreferences ssSharedPreferences,
             PsThemeRepository? psThemeRepository) =>
@@ -338,10 +346,3 @@ List<SingleChildWidget> _dependentProviders = <SingleChildWidget>[
   ),
 ];
 
-List<SingleChildWidget> _valueProviders = <SingleChildWidget>[
-  StreamProvider<PsValueHolder?>(
-    initialData: null,
-    create: (BuildContext context) =>
-        Provider.of<PsSharedPreferences>(context, listen: false).psValueHolder,
-  )
-];

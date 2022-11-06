@@ -1,22 +1,22 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:fluttermultirestaurant/config/ps_colors.dart';
-import 'package:fluttermultirestaurant/constant/ps_constants.dart';
-import 'package:fluttermultirestaurant/constant/ps_dimens.dart';
-import 'package:fluttermultirestaurant/constant/route_paths.dart';
-import 'package:fluttermultirestaurant/provider/rating/shop_rating_provider.dart';
-import 'package:fluttermultirestaurant/provider/shop_info/shop_info_provider.dart';
-import 'package:fluttermultirestaurant/ui/common/ps_button_widget.dart';
-import 'package:fluttermultirestaurant/ui/common/ps_ui_widget.dart';
-import 'package:fluttermultirestaurant/ui/common/smooth_star_rating_widget.dart';
-import 'package:fluttermultirestaurant/ui/shop/address_tile_view.dart';
-import 'package:fluttermultirestaurant/ui/shop/contact_us_tile_view.dart';
-import 'package:fluttermultirestaurant/ui/shop/customer_review_list_item.dart';
-import 'package:fluttermultirestaurant/utils/utils.dart';
-import 'package:fluttermultirestaurant/viewobject/common/ps_value_holder.dart';
-import 'package:fluttermultirestaurant/viewobject/holder/intent_holder/shop_info_intent_holder.dart';
-import 'package:fluttermultirestaurant/viewobject/shop_info.dart';
+import 'package:yara/config/ps_colors.dart';
+import 'package:yara/constant/ps_constants.dart';
+import 'package:yara/constant/ps_dimens.dart';
+import 'package:yara/constant/route_paths.dart';
+import 'package:yara/provider/rating/shop_rating_provider.dart';
+import 'package:yara/provider/shop_info/shop_info_provider.dart';
+import 'package:yara/ui/common/ps_button_widget.dart';
+import 'package:yara/ui/common/ps_ui_widget.dart';
+import 'package:yara/ui/common/smooth_star_rating_widget.dart';
+import 'package:yara/ui/shop/address_tile_view.dart';
+import 'package:yara/ui/shop/contact_us_tile_view.dart';
+import 'package:yara/ui/shop/customer_review_list_item.dart';
+import 'package:yara/utils/utils.dart';
+import 'package:yara/viewobject/common/ps_value_holder.dart';
+import 'package:yara/viewobject/holder/intent_holder/shop_info_intent_holder.dart';
+import 'package:yara/viewobject/shop_info.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -154,6 +154,7 @@ class __ShopInfoViewWidgetState extends State<_ShopInfoViewWidget> {
                   //   FocusScope.of(context).requestFocus(FocusNode());
                   // }
                 ),
+                /* TODO map layers
                 layers: <LayerOptions>[
                   TileLayerOptions(
                     urlTemplate:
@@ -177,6 +178,7 @@ class __ShopInfoViewWidgetState extends State<_ShopInfoViewWidget> {
                     )
                   ])
                 ],
+                */
               ),
             ),
           ),

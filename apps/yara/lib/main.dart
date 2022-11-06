@@ -6,13 +6,13 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_statusbarcolor_ns/flutter_statusbarcolor_ns.dart';
-import 'package:fluttermultirestaurant/config/ps_theme_data.dart';
-import 'package:fluttermultirestaurant/config/router.dart' as router;
-import 'package:fluttermultirestaurant/provider/common/ps_theme_provider.dart';
-import 'package:fluttermultirestaurant/provider/ps_provider_dependencies.dart';
-import 'package:fluttermultirestaurant/repository/ps_theme_repository.dart';
-import 'package:fluttermultirestaurant/utils/utils.dart';
-import 'package:fluttermultirestaurant/viewobject/common/language.dart';
+import 'package:yara/config/ps_theme_data.dart';
+import 'package:yara/config/router.dart' as router;
+import 'package:yara/provider/common/ps_theme_provider.dart';
+import 'package:yara/provider/ps_provider_dependencies.dart';
+import 'package:yara/repository/ps_theme_repository.dart';
+import 'package:yara/utils/utils.dart';
+import 'package:yara/viewobject/common/language.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
@@ -38,12 +38,11 @@ Future<void> main() async {
     await prefs.setString('codeC', '');
     await prefs.setString('codeL', '');
   }
-
   await Firebase.initializeApp();
 
   MobileAds.instance.initialize();
 
-   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 
   if (Platform.isIOS) {
     FirebaseMessaging.instance.requestPermission(
@@ -66,7 +65,6 @@ Future<void> main() async {
 
   //check is apple signin is available
   await Utils.checkAppleSignInAvailable();
-
   await EasyLocalization.ensureInitialized();
   runApp(EasyLocalization(
       // data: data,
@@ -98,10 +96,22 @@ class PSApp extends StatefulWidget {
 class _PSAppState extends State<PSApp> {
   Completer<ThemeData>? themeDataCompleter;
   PsSharedPreferences? psSharedPreferences;
+  bool step1 = false;
+  bool step2 = false;
+  bool step3 = false;
 
   @override
   void initState() {
     super.initState();
+    Future(() {
+      setState(() => step1 = true);
+      Future(() {
+        setState(() => step2 = true);
+        Future(() {
+          setState(() => step3 = true);
+        });
+      });
+    });
   }
 
   Future<ThemeData> getSharePerference(
@@ -156,10 +166,11 @@ class _PSAppState extends State<PSApp> {
     FlutterStatusbarcolor.setStatusBarColor(PsColors.transparent,
         animate: true);
 
-
     return MultiProvider(
         providers: <SingleChildWidget>[
-          ...providers,
+          if (step1) ...independentProviders,
+          if (step2) ...dependentProviders,
+          if (step3) ...valueProviders,
         ],
         child: ThemeManager(
             defaultBrightnessPreference: BrightnessPreference.light,
@@ -186,7 +197,8 @@ class _PSAppState extends State<PSApp> {
                 //   DefaultCupertinoLocalizations.delegate
                 // ],
                 localizationsDelegates: context.localizationDelegates,
-                supportedLocales: EasyLocalization.of(context)!.supportedLocales,
+                supportedLocales:
+                    EasyLocalization.of(context)!.supportedLocales,
                 locale: EasyLocalization.of(context)!.locale,
               );
             }));

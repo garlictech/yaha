@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:fluttermultirestaurant/config/ps_colors.dart';
-import 'package:fluttermultirestaurant/constant/ps_constants.dart';
-import 'package:fluttermultirestaurant/constant/ps_dimens.dart';
-import 'package:fluttermultirestaurant/ui/common/base/ps_widget_with_appbar_with_no_provider.dart';
-import 'package:fluttermultirestaurant/utils/utils.dart';
-import 'package:fluttermultirestaurant/viewobject/holder/map_pin_call_back_holder.dart';
+import 'package:yara/config/ps_colors.dart';
+import 'package:yara/constant/ps_constants.dart';
+import 'package:yara/constant/ps_dimens.dart';
+import 'package:yara/ui/common/base/ps_widget_with_appbar_with_no_provider.dart';
+import 'package:yara/utils/utils.dart';
+import 'package:yara/viewobject/holder/map_pin_call_back_holder.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:positioned_tap_detector_2/positioned_tap_detector_2.dart';
@@ -119,7 +119,8 @@ class _MapPinViewState extends State<MapPinView> with TickerProviderStateMixin {
                           });
                         }
                       }),
-                  layers: <LayerOptions>[
+                  // TODO: enable layers
+                  /*layers: <LayerOptions>[
                     TileLayerOptions(
                       urlTemplate:
                           'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -141,7 +142,7 @@ class _MapPinViewState extends State<MapPinView> with TickerProviderStateMixin {
                         ),
                       )
                     ])
-                  ],
+                  ],*/
                 ),
               ),
             ],

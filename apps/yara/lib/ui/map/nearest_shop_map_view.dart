@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
-import 'package:fluttermultirestaurant/config/ps_colors.dart';
-import 'package:fluttermultirestaurant/provider/shop/new_shop_provider.dart';
-import 'package:fluttermultirestaurant/ui/common/base/ps_widget_with_appbar_with_no_provider.dart';
-import 'package:fluttermultirestaurant/ui/common/dialog/warning_dialog_view.dart';
-import 'package:fluttermultirestaurant/ui/shop_list/item/shop_verticle_list_item.dart';
-import 'package:fluttermultirestaurant/viewobject/common/ps_value_holder.dart';
-import 'package:fluttermultirestaurant/viewobject/holder/shop_parameter_holder.dart';
-import 'package:fluttermultirestaurant/viewobject/shop.dart';
+import 'package:yara/config/ps_colors.dart';
+import 'package:yara/provider/shop/new_shop_provider.dart';
+import 'package:yara/ui/common/base/ps_widget_with_appbar_with_no_provider.dart';
+import 'package:yara/ui/common/dialog/warning_dialog_view.dart';
+import 'package:yara/ui/shop_list/item/shop_verticle_list_item.dart';
+import 'package:yara/viewobject/common/ps_value_holder.dart';
+import 'package:yara/viewobject/holder/shop_parameter_holder.dart';
+import 'package:yara/viewobject/shop.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:positioned_tap_detector_2/positioned_tap_detector_2.dart';
 import 'package:provider/provider.dart';
@@ -186,11 +186,13 @@ class _NearestShopViewState extends State<NearestShopView> {
                       _bottomSheetController!.close();
                     },
                     maxZoom: 18,
-                    onMapCreated: _onMapCreated,
+                    //TODO
+                    //onMapCreated: _onMapCreated,
                     center: widget.latLng,
                     zoom: 17,
                     // onTap: _handleTap,
                   ),
+                  /* TODO: map layers
                   layers: <LayerOptions>[
                     ///
                     /// Map will not work perfectly if the Layer Order is wrong...
@@ -213,7 +215,7 @@ class _NearestShopViewState extends State<NearestShopView> {
                         ...nearestShopMarkerList(shopList),
                       ],
                     ),
-                  ],
+                  ],*/
                 ),
               ),
               Container(

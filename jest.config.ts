@@ -14,6 +14,7 @@ module.exports = {
     '<rootDir>/libs/backend/image-tagger',
     '<rootDir>/libs/content',
     '<rootDir>/libs/flutter-js',
+    '<rootDir>/apps/yara-backend',
   ],
   modulePaths: ['<rootDir>'],
 };

@@ -8,20 +8,20 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_image/flutter_native_image.dart';
-import 'package:fluttermultirestaurant/api/common/ps_resource.dart';
-import 'package:fluttermultirestaurant/config/ps_colors.dart';
-import 'package:fluttermultirestaurant/config/ps_config.dart';
-import 'package:fluttermultirestaurant/constant/ps_constants.dart';
-import 'package:fluttermultirestaurant/constant/route_paths.dart';
-import 'package:fluttermultirestaurant/db/common/ps_shared_preferences.dart';
-import 'package:fluttermultirestaurant/provider/common/notification_provider.dart';
-import 'package:fluttermultirestaurant/ui/common/dialog/chat_noti_dialog.dart';
-import 'package:fluttermultirestaurant/ui/common/dialog/noti_dialog.dart';
-import 'package:fluttermultirestaurant/viewobject/common/language.dart';
-import 'package:fluttermultirestaurant/viewobject/common/ps_object.dart';
-import 'package:fluttermultirestaurant/viewobject/common/ps_value_holder.dart';
-import 'package:fluttermultirestaurant/viewobject/holder/noti_register_holder.dart';
-import 'package:fluttermultirestaurant/viewobject/user.dart';
+import 'package:yara/api/common/ps_resource.dart';
+import 'package:yara/config/ps_colors.dart';
+import 'package:yara/config/ps_config.dart';
+import 'package:yara/constant/ps_constants.dart';
+import 'package:yara/constant/route_paths.dart';
+import 'package:yara/db/common/ps_shared_preferences.dart';
+import 'package:yara/provider/common/notification_provider.dart';
+import 'package:yara/ui/common/dialog/chat_noti_dialog.dart';
+import 'package:yara/ui/common/dialog/noti_dialog.dart';
+import 'package:yara/viewobject/common/language.dart';
+import 'package:yara/viewobject/common/ps_object.dart';
+import 'package:yara/viewobject/common/ps_value_holder.dart';
+import 'package:yara/viewobject/holder/noti_register_holder.dart';
+import 'package:yara/viewobject/user.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:launch_review/launch_review.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
@@ -37,7 +37,7 @@ mixin Utils {
 
   static String getString(BuildContext context, String key) {
     if (key != '') {
-      return tr(key) ;
+      return tr(key);
     } else {
       return '';
     }
@@ -67,7 +67,8 @@ mixin Utils {
     print('$now ($min)- $msg');
   }
 
-  static Future<File?> getImageFileFromAssets(Asset asset, int imageSize) async {
+  static Future<File?> getImageFileFromAssets(
+      Asset asset, int imageSize) async {
     final int imageWidth = imageSize;
     final ByteData byteData = await asset.getByteData(quality: 80);
 
@@ -144,18 +145,17 @@ mixin Utils {
   }
 
   static String getPriceFormat(String price, PsValueHolder psValueHolder) {
-      final NumberFormat psFormat = NumberFormat(psValueHolder.priceFormat);
+    final NumberFormat psFormat = NumberFormat(psValueHolder.priceFormat);
     return psFormat.format(double.parse(price));
   }
 
   static Language defaultLanguageFromServer(PsValueHolder psValueHolder) {
-    final Language defaultLanguage =
-      Language(languageCode: psValueHolder.defaultLanguageCode, 
-      countryCode: psValueHolder.defaultLanguageCountryCode, 
-      name: psValueHolder.defaultLanguageName);
-      return defaultLanguage;
+    final Language defaultLanguage = Language(
+        languageCode: psValueHolder.defaultLanguageCode,
+        countryCode: psValueHolder.defaultLanguageCountryCode,
+        name: psValueHolder.defaultLanguageName);
+    return defaultLanguage;
   }
-
 
   static String getPriceTwoDecimal(String price) {
     return PsConst.priceTwoDecimalFormat.format(double.parse(price));
@@ -276,7 +276,8 @@ mixin Utils {
     return DateFormat(psValueHolder.dateFormat).format(date);
   }
 
-  static String calculateShippingTax(String? shippingCost, String? shippingTax, PsValueHolder? psValueHolder) {
+  static String calculateShippingTax(
+      String? shippingCost, String? shippingTax, PsValueHolder? psValueHolder) {
     // Get Tax
     if (shippingTax == null || shippingTax == '') {
       shippingTax = '0.0';
@@ -439,19 +440,19 @@ mixin Utils {
     FirebaseMessaging.instance
         .getInitialMessage()
         .then((RemoteMessage? event) async {
-           if (event != null) {
-      final Map<String, dynamic> message = event.data;
-      print('onMessage: $message');
-      print(event);
+      if (event != null) {
+        final Map<String, dynamic> message = event.data;
+        print('onMessage: $message');
+        print(event);
 
-      final String notiMessage = _parseNotiMessage(message);
+        final String notiMessage = _parseNotiMessage(message);
 
-      Utils.takeDataFromNoti(context, message, loginUserId!);
+        Utils.takeDataFromNoti(context, message, loginUserId!);
 
-      await PsSharedPreferences.instance.replaceNotiMessage(
-        notiMessage,
-      );
-           }
+        await PsSharedPreferences.instance.replaceNotiMessage(
+          notiMessage,
+        );
+      }
     });
     // On Open
     FirebaseMessaging.onMessage.listen((RemoteMessage event) async {
@@ -494,7 +495,7 @@ mixin Utils {
 
       if (flag == 'transaction') {
         _onSelectTransaction(context, notiMessage);
-      } else if(flag == 'broadcast') {
+      } else if (flag == 'broadcast') {
         _onSelectNotification(context, notiMessage);
       } else {
         // ignore: unnecessary_null_comparison
@@ -515,7 +516,7 @@ mixin Utils {
 
       if (flag == 'transaction') {
         _onSelectTransaction(context, notiMessage);
-      } else if(flag == 'broadcast') {
+      } else if (flag == 'broadcast') {
         _onSelectNotification(context, notiMessage);
       } else {
         // ignore: unnecessary_null_comparison
@@ -552,7 +553,7 @@ mixin Utils {
     } else if (Platform.isIOS) {
       notiMessage = data['body'];
       notiMessage = data['message'];
-    //   notiMessage ??= '';
+      //   notiMessage ??= '';
     }
     return notiMessage;
   }
@@ -571,9 +572,9 @@ mixin Utils {
                 Utils.checkUserLoginId(notificationProvider.psValueHolder));
     print('Token Key $fcmToken');
     //if (fcmToken != null) {
-      await notificationProvider
-          .rawRegisterNotiToken(notiRegisterParameterHolder.toMap());
-   // }
-   // return true;
+    await notificationProvider
+        .rawRegisterNotiToken(notiRegisterParameterHolder.toMap());
+    // }
+    // return true;
   }
 }

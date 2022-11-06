@@ -11,6 +11,6 @@ CI=$2
 #fi
 
 yarn nx deploy backend --env=${ENVNAME}
-yarn nx buildAppbundle-ci mobile_app
+yarn nx buildAppbundle-ci yaha
 
 npx cowsay "PROJECT BUILD OK!!!"

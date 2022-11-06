@@ -1,0 +1,1533 @@
+key,valor
+site_name,Flutter Multi Restaurant
+setting_label,Ajuste
+lbl_search_shop,buscar tienda
+status_label,transacciones Estado
+trans_detail,Detalle de transacciones
+shops_unpublish_list_label,Lista inédito Shop
+btn_create_new_shop,Crear nueva tienda
+btn_shop_list,Lista Despublicar Shop
+btn_push_notification,Notificación de inserción
+btn_system_user,usuario del sistema
+btn_export_database,Base de datos de exportación
+btn_about_app,Acerca de Aplicación
+address_label,Habla a
+lbl_about_shop,sobre la tienda
+lbl_categories,categorías
+user_email,Email
+user_password,Contraseña
+sign_in,Registrarse
+total_users_count_label,Total de usuarias
+total_cat_count_label,Categorías totales
+total_wallpaper_count_label,Fondos de pantalla totales
+total_contact_label,Total de mensajes de contacto
+btn_search,Buscar
+back_shop_list,Volver Lista Shop
+err_image_missing,subido ningún archivo
+about_info,Acerca de Información
+allowed_modules,Módulo permitido
+shop_name,Nombre de tienda
+add_more_color,Añadir más color
+color_code,color del producto
+product_title,Título
+product_desc,Descripción
+add_more_spec,Añadir más Especificación
+prd_specification,Especificaciones del producto
+product_name_count,Conde Nombre del producto
+select_multiple_images,"Por favor, seleccione múltiples imágenes de los Alimentos."
+noti_add,Añadir Notis
+prd_unit,Unidad producto
+prd_measurement,La medición del producto
+noti_search,Buscar Noti
+error_login,Sus credenciales de inicio de sesión son incorrectas. Inténtalo de nuevo.
+profile_img,Imagen de perfil
+cat_add,añadir categorías
+wrn_no_data,No hay datos aún
+cat_name,nombre de la categoría
+cat_img,Categoría de fotos
+cat_info,Información de la Categoría
+cat_ordering,Ordenando
+cat_edit,Editar categoria
+success_cat_add,Categoría se ha añadido con éxito
+success_cat_edit,Categoría se ha actualizado correctamente
+success_upload,La imagen se ha actualizado correctamente
+delete_cat_label,Eliminar categoría?
+cat_yes_all_message,"Cuando eliminar esta categoría, se eliminarán todas las subcategorías relacionadas y Alimentos también. Así que, ¿todavía desea eliminarlo?"
+success_cat_delete,Categoría se ha eliminado correctamente
+cat_search,la búsqueda Categoría
+cat_icon,Icono Categoría
+btn_replace_icon,reemplazar Icono
+upload_icon,Subir Icono
+about_upload_icon,Subir Icono
+fav_upload_icon,Fav Icon
+sidebar_upload_icon,Logotipo de la barra lateral
+btn_upload,Subir
+err_cat_name,Por favor proporcione nombre de la categoría
+err_cat_len,La longitud del nombre de categoría debe ser mayor que 4
+err_cat_exist,Nombre de categoría ya está existía en el sistema
+subcat_info,Información Categoría Sub
+subcat_name,Subcategoría Nombre
+subcat_ordering,Orden de la categoría sub
+subcat_img,Categoría Sub fotos
+subcat_icon,Sub Icono
+subcat_search,Buscar categoría Sub
+subcat_add,Añadir categoría Sub
+subcat_edit,Editar categoría Sub
+success_subcat_edit,Sub se ha actualizado correctamente
+success_subcat_add,Sub se ha añadido con éxito
+success_subcat_delete,Sub se ha eliminado correctamente
+err_subcat_name,"Por favor, indique el nombre sub-categoría"
+err_subcat_len,La longitud del Subcategoría Nombre debe ser mayor que 4
+err_subcat_exist,Subcategoría Nombre ya existía en el sistema
+delete_subcat_label,Eliminar categoría Sub?
+subcat_delete_confirm_message,¿Estás segura de eliminar esta subcategoría?
+subcat_yes_all_message,"Cuando eliminar esta categoría sub, borrará todos los Alimentos relacionados también. Así que, ¿todavía desea eliminarlo?"
+subcat_no_only_message,<B> Sólo Sub </ b> - Sólo serán Sub eliminar de sistema.
+subcat_yes_all_label,Si todo
+subcat_no_only_label,Sólo Sub Categoría
+select_subcat,Seleccionar categoría Sub
+select_cat,selecciona una categoría
+subcat_panel_title,Lista de categoría sub
+Prd_search_cat,Elija un nombre de categoría
+btn_reset,Reiniciar
+btn_yes,si
+upload_photo,Subir foto
+upload_button,Subir
+replace_photo_button,Vuelva a colocar la foto de portada
+photo_desc_label,descripción de la foto
+del_cover_photo,Eliminar la foto de portada
+del_cover_photo_confirm,¿Está seguro de que quiere borrar la foto?
+del_icon_label,Icono de borrar
+del_icon_confirm,¿Está seguro de que quiere borrar el icono?
+status,Status (Is Publicar?)
+dis_name,Nombre de descuento
+dis_add,add Descuentos
+dis_percent,Porcentaje de descuento (%)
+choose_prd_label,Elija los Alimentos
+dis_info,Información acerca del descuento
+dis_photo,Foto de descuento
+prd_name,nombre del producto
+prd_code,Código
+product_price,Precio ($)
+dis_add,add Descuentos
+success_dis_add,Descuentos se ha añadido con éxito
+success_dis_edit,Descuentos se ha actualizado con éxito
+delete_dis_label,Descuentos eliminar?
+dis_delete_confirm_message,¿Está seguro que desea borrar esta Descuentos?
+dis_edit,Editar Descuentos
+err_dis_name,"Por favor, indique el nombre del descuento"
+err_dis_percent,Sírvanse proporcionar Porcentaje de descuento
+err_dis_len,La longitud del nombre del descuento debe ser mayor que 4
+err_dis_exist,Nombre de descuento ya está existía en el sistema
+success_dis_delete,Descuentos se ha eliminado correctamente
+discount_photo,Foto de descuento
+dis_search,Buscar Descuento
+feed_add,Añadir nuevo contenido
+feed_info,Informaciones nuevos feeds
+feed_name,nombre de la alimentación
+feed_desc,Descripción RSS
+feed_edit,Editar feeds
+success_feed_add,Nuevos feeds se ha añadido con éxito
+success_feed_edit,Nuevos feeds se ha actualizado con éxito
+err_dup_name,El nombre ya se existía en el sistema
+err_feed_exist,Nombre alimentación ya está existía en el sistema
+delete_feed_label,Eliminar Nueva RSS?
+feed_delete_confirm_message,¿Está seguro que desea borrar este nuevo contenido?
+success_feed_delete,Nuevos feeds se ha eliminado correctamente
+f_item_cat_required,"Por favor, seleccione Nombre de categoría"
+err_feed_len,La longitud de RSS Nombre debe ser mayor que 4
+err_feed_name,"Por favor, indique el nombre RSS"
+feed_search,RSS Buscar
+feed_gallery,Galería RSS
+list_product_nav,Producto
+prd_add,Agregar comida
+att_add,Añadir Nueva Cabecera personalizada
+add_att_detail,Añadir detalle Nueva personalizada
+list_attribute_header,Lista de cabeceras personalizadas
+wrn_no_data,No hay datos aún
+product_name,nombre del producto
+att_name,Nombre personalizado Encabezado
+Prd_search_subcat,Seleccione Subcategoría Nombre
+Prd_search_dis,Seleccionar el tipo de descuento
+product_gallery,Galería de Alimentos
+prd_info,Información del Producto
+rec_prd_info,Recientemente agregado Alimentos
+att_info,información personalizada
+prd_desc,Descripción del producto
+prd_high_info,Información culminante del producto
+prd_edit,Editar Producto
+prd_code,Código de producto
+success_prd_add,Producto ha sido agregado con éxito
+success_prd_edit,El producto ha sido actualizado correctamente
+success_upload,La imagen se ha actualizado correctamente
+delete_prd_label,Eliminar producto?
+prd_yes_all_message,"Cuando eliminar este producto, eliminará todas las categorías sub relacionados y categoría también. Así que, ¿todavía desea eliminarlo?"
+success_prd_delete,Producto se ha eliminado correctamente
+prd_search,búsqueda de Alimentos
+btn_save_prd_att,Guardar y Ir a la Alimentación personalizada
+btn_att_list,Lista personalizada
+btn_save_gallery,Guardar y Ir a la galería
+unit_price,Precio unitario
+search_tag,Búsqueda de etiquetas / palabra clave
+f_item_subcat_required,Por favor seleccione Subcategoría Nombre
+f_item_discount_required,"Por favor, seleccione Nombre de categoría"
+err_Prd_name,"Por favor, indique el nombre del producto"
+err_Prd_len,La longitud del nombre del producto debe ser superior a 4
+err_Prd_exist,Nombre del producto ya está existía en el sistema
+is_discount,Descuento es?
+is_featured,Se ofrece?
+is_available,¿Está disponible?
+order_by,Por fin
+select_order,Seleccione el orden
+from_price,desde Precio
+to_price,Poner precio
+shipping_cost,Costo de envío
+minimum_order,Pedido mínimo
+original_price,Precio original
+err_access,"Lo sentimos, usted no tiene acceso a tomar esta acción"
+err_model,Se ha producido error de base de datos
+err_sys,Se ha producido un error del sistema
+btn_edit,Editar
+btn_update,Actualizar
+btn_delete,Eliminar
+btn_publish,Publicar
+no,No
+btn_save,Salvar
+btn_cancel,Cancelar
+btn_replace_photo,Vuelva a colocar las fotos
+Remove,Eliminar
+success_img_delete,La imagen se ha eliminado correctamente
+trans_date_label,Fecha
+success_user_add,Usuario del sistema se ha añadido con éxito
+success_user_edit,Usuario del sistema se ha actualizado correctamente
+need_to_verify,"Su correo electrónico necesidad de verificar con el código de verificación. Por favor, eche un vistazo a su correo electrónico registrado."
+count_detail,Cargos de Detalle
+add_att_detail,Agregar información personalizada
+detail_label,Detalle
+att_edit,Editar personalizada
+success_att_add,Personalizado se ha añadido con éxito
+success_att_edit,Personalizado se ha actualizado correctamente
+delete_att_label,Eliminar personalizada?
+att_yes_all_message,"Cuando eliminar esta cabecera personalizada, borrará todos los datos personalizados relacionados también. Así que, ¿todavía desea eliminarlo?"
+success_att_delete,Personalizado se ha eliminado correctamente
+att_delete_confirm_message,¿Quieres eliminar todos los elementos menores de esa personalizados juntos?
+att_search,búsqueda personalizada
+att_detail_search,Buscar Detalle personalizada
+att_price,Precio personalizada
+list_attribute_detail,Lista de detalles personalizada
+selected_product_name,Nombre del producto seleccionado
+selected_attribute_header,Nombre de cabecera seleccionado personalizada
+att_detail_name,Detalle Nombre personalizado
+attribute_detail_extra_price,"(Si su cargo adicionales de precio personalizado, por favor proporcione sólo el precio adicional que se sumará a los precios de la comida, ya automatically.It no anular el precio del artículo Sólo tiene que añadir que el precio adicional, por ejemplo,... Price_total = Food_price + customized_additional_pirce)"
+success_attdetail_edit,Detalle personalizado se ha actualizado correctamente
+success_attdetail_add,Detalle personalizado se ha añadido con éxito
+attdetail_edit,Actualización de información personalizada Detalle
+success_attdetail_delete,Detalle personalizado se ha eliminado correctamente
+att_no_only_message,Sólo Personalizado - Sólo Detalle personalizada borrará del sistema.
+delete_attdetail_label,Eliminar detalles a medida?
+err_att_name,"Por favor, indique el nombre personalizada"
+err_att_len,La longitud del nombre modificado para requisitos debe ser mayor que 4
+err_att_exist,Nombre personalizado ya existía en el sistema
+att_detail_info,Información detallada personalizada
+err_detail_name,Sírvanse proporcionar atributo de nombre Detalle
+err_detail_len,La longitud del atributo Detalle El nombre debe ser mayor que 4
+err_detail_exist,Detalle atributo Nombre existía ya está en el sistema
+collect_search,Buscar
+collect_photo,colección de fotografías
+collect_name,Nombre de la colección
+collect_status,colección Estado
+collect_info,recopilación de Información
+collect_ordering,colección de pedido
+collect_img,colección de fotografías
+collect_search,Colección de búsqueda
+collect_add,Añadir Collection
+collect_edit,Editar colección
+success_collect_edit,Colección ha sido actualizado correctamente
+success_collect_add,Colección ha sido agregado con éxito
+success_collect_delete,Colección se ha eliminado correctamente
+err_collect_name,"Por favor, indique el nombre Colección"
+err_collect_len,La longitud del Nombre de la colección debe ser mayor que 4
+err_collect_exist,Nombre de la colección ya está existía en el sistema
+delete_collect_label,Eliminar colección?
+collect_delete_confirm_message,¿Seguro que quieres eliminar esta colección?
+collect_yes_all_message,Sí Todo - Recogida y artículos serán eliminar del sistema.
+collect_no_only_message,Sólo Colección - Colección Sólo se eliminará a partir del sistema.
+collect_yes_all_label,Si todo
+collect_no_only_label,Sólo Colección
+please_select_product,"Por favor, seleccione Producto"
+api_info,Ajuste api
+api_order_by,Por fin
+api_count,Conde api
+success_api_edit,Api ajuste se ha actualizado correctamente
+comm_user,usuarios
+comm_desc,comentario Descripción
+comm_date,Fecha
+write_reply,Escribir un comentario de respuesta
+btn_reply,Respuesta
+reply_cmt,comentario Responder
+comm_search,Buscar
+comment_header,comentarios
+date,Fecha
+reply,Respuesta
+like_product_name,nombre del producto
+like_user_name,Nombre de usuario
+fav_product_name,nombre del producto
+fav_user_name,Nombre de usuario
+trans_total_amount,Cantidad total
+trans_discount_amount,Importe de descuento
+trans_balance_amount,Balance total
+trans_billing_address,Dirección de Envio
+trans_delivery_address,Dirección de entrega
+btn_update,Actualizar
+trans_search,Las operaciones de búsqueda
+btn_update,Actualizar
+Prd_qty,Cantidad
+Prd_dis,Descuento(%)
+Prd_amt,Cantidad
+Prd_dis_price,Precio de descuento
+trans_status,Transacciones Estado:
+success_trans_edit,Las transacciones de estado se ha actualizado correctamente
+Prd_name,nombre del producto
+Prd_price,Precio del producto
+popular_cat_name,Categoría Nombre populares
+popular_cat_img,Categoría populares de fotos
+view,Ver
+popular_cat_search,Buscar populares Categoría
+popular_cat_view,Categoría más popular
+popular_cat_info,Información populares Categoría
+popular_cat_icon,Categoría icono popular
+popular_prd_name,Nombre Popular Producto
+popular_prd_code,Código de Producto populares
+popular_prd_price,Popular El precio del producto
+popular_prd_search,Buscar Popular Producto
+popular_prd_view,El más popular Producto
+popular_prd_info,Información Popular Producto
+popular_subcat_name,Sub populares Nombre de categoría
+popular_prd_desc,Descripción del Producto Popular
+popular_prd_keyword,Populares Palabras claves del producto
+popular_prd_highlight,Resalte Popular Producto
+purchased_cat_name,Comprar Nombre de categoría
+purchased_cat_img,Categoría comprar fotos
+purchased_cat_view,Más Categoría comprada
+purchased_cat_info,Información Categoría comprado
+purchased_cat_icon,Categoría comprado Icono
+purchased_cat_search,Search adquiridos Categoría
+purchased_prd_name,Nombre del producto comprado
+purchased_prd_code,Código del producto comprado
+purchased_prd_price,Precio del producto comprado
+purchased_prd_view,La mayor parte producto adquirido
+purchased_prd_search,Buscar producto adquirido
+purchased_subcat_name,Comprado Subcategoría Nombre
+purchased_prd_desc,Descripción del producto comprado
+purchased_prd_keyword,Palabras claves del producto comprado
+purchased_prd_info,Información del producto comprado
+purchased_prd_highlight,Punto culminante del producto comprado
+total_revenue,Las transacciones mensuales
+performance_label,Estadísticas
+comment_label,Comentario
+prd_label,Alimentos Count
+cat_label,Categorías Count
+subcat_label,Conde subcategoría
+dis_label,Descuento
+collect_label,Colección
+view_all_label,Ver todo
+transaction_table,Tabla transacción
+name_label,Nombre
+description_label,Descripción
+phone_label,Teléfono 1 (por defecto)
+contact_email_label,Email de contacto
+shop_cover_photo_label,Tienda de la foto de portada Subir
+shop_image_recommended_size,(Tamaño Recomendado: 600 × 400)
+find_location_label,Encuentra tipo y ubicación de Google API
+shop_lat_label,Latitud
+shop_lng_label,Longitud
+success_shop_add,Tienda ha sido agregado con éxito
+success_shop_edit,La tienda se ha actualizado correctamente
+delete_shop_label,Eliminar Shop?
+shop_info,Información de la tienda
+delete_shop_confirm_message,¿Está seguro de que quiere eliminar el taller porque va a eliminar de?
+phone_label2,teléfono 2
+phone_label3,teléfono 3
+address_label1,Dirección 1
+address_label2,Dirección 2
+address_label3,dirección 3
+shop_icon_photo_label,Tienda Icono Foto Subir
+shop_image_recommended_size_icon,(Tamaño Recomendado: 256 × 256)
+about_mess_label,Mensajero
+about_chart_section,Información de chat
+stripe_label,[Opción 1]: El pago con la raya
+stripe_publishable_key,publicable clave
+stripe_secret_key,Llave secreta
+stripe_enable_label,Se habilita la raya de pago?
+stripe_enable_label,Se habilita la raya de pago?
+paypal_label,[Opción 2]: El pago con Paypal Habilitado
+paypal_env_label,paypal Medio Ambiente
+paypal_merchant_label,PayPal ID del comerciante
+paypal_pub_label,Paypal clave pública
+paypal_pri_label,Paypal clave privada
+paypal_enabled_label,Está habilitado Paypal?
+bank_transfer_label,[Opción 3]: El pago mediante transferencia bancaria
+bank_account_label,Cuenta bancaria
+bank_name_label,Nombre del banco
+bank_code_label,Codigo bancario
+branch_code_label,Código de sucursal
+swift_code_label,código SWIFT
+bank_enable_label,Admite la transferencia bancaria?
+cod_label,[Opción 4]: El pago con pago contra reembolso
+cod_email_label,Correo electrónico de confirmación contra reembolso
+cod_enable_label,Se habilita Pago contra entrega?
+currency_symbol_label,"El símbolo de moneda (por ejemplo, $)"
+currency_form_label,"Moneda Short Form (por ejemplo, USD)"
+sender_email_label,Cuenta remitente de correo electrónico (SMTP)
+btn_add_new,Añadir nuevos usuarios
+user_name,Nombre de usuario
+user_edit,editar usuario
+user_info,informacion del usuario
+user_add,Agregar usuarios
+role_label,Rol del usuario
+conf_password,Confirmar contraseña
+select_shop_label,"Si el usuario es 'Comprar Admin', por favor seleccione 'Comprar' para asignar"
+contact_name,Nombre de contacto
+contact_email,Email de contacto
+success_contacts_delete,Contacto se ha eliminado correctamente
+delete_contact_label,Eliminar contactos?
+contact_delete_confirm_message,¿Está seguro que desea borrar esta Contactos?
+contact_info_label,Información de Contacto Detalle
+contact_phone,Persona de Contacto Teléfono
+about_contact_label,Acerca de contacto Mensaje
+lbl_view,Ver
+back_button,atrás
+contact_receive_message,Ha recibido un nuevo mensaje de nosotros contacto.
+rating_product_name,nombre del producto
+rating_user_name,Nombre de usuario
+rating_value,Valoración
+rating_title,Título
+pending_count,Orden pendiente
+delivery_count,Orden de entrega
+completed_count,Orden completada
+order_count,Orden total
+shipping_method_label,Seleccionar Predeterminado Método de envío
+shipping_method,Método de envío por defecto
+shop_tags,Comercio electrónico Etiquetas
+overall_tax_label,En general Tributaria (%)
+shipping_tax_label,Impuesto de envío (%)
+whapsapp_no_label,Número Whatsapp
+refund_policy_label,Politica de reembolso
+privacy_policy_label,Política de privacidad
+privacypolicy,Términos y condiciones
+app_info_lable,Acerca de Información
+about_title_label,sobre el Título
+description_label,Descripción acerca
+about_email_label,Acerca de correo electrónico
+about_phone_label,Teléfono sobre
+about_website_label,Acerca de Enlace al sitio Web
+about_seo_section,Información SEO
+about_seo_title_label,SEO Título
+about_seo_desc_label,Descripción SEO
+about_seo_keywords_label,SEO
+about_social_section,Información Social
+about_facebook_label,Facebook
+about_gplus_label,Google+
+about_instagram_label,Instagram
+about_youtube_label,Youtube
+about_pinterest_label,Pinterest
+about_twitter_label,Gorjeo
+about_color_section,Sobre el sitio tema de color
+about_theme,Temas disponibles
+success_about_edit,Sobre está actualizado correctamente
+about_ads_analyt,Google Analytic y Anuncios Ajuste
+about_ads_client,anuncios de cliente
+about_ads_slot,anuncios Slot
+about_analyt_track_id,Id Track Analytic
+about_ads_on,Habilitar Google Adsense
+about_analyt_on,Habilitar Google Analytic
+about_img,Sobre la foto de portada
+about_nav_icon,Icono de navegación
+about_fav_icon,Fav Icon
+about_backend_icon,para backend
+total_label,total:
+device_label,Dispositivo
+devices_label,dispositivos
+registered_label,se ha registrado para notificaciones push
+noti_info,Notificación de inserción
+noti_message_label,Mensaje
+noti_message_tooltips,Por favor proporcione la messsage para la notificación de inserción.
+noti_send_btn,Enviar notificaciones push
+sorry_no_device,"Lo sentimos, no hay ningún dispositivo registrado para la notificación Push."
+select_cat,selecciona una categoría
+success_noti_add,La notificación se ha añadido con éxito
+success_noti_delete,La notificación se ha eliminado correctamente
+delete_noti_label,Notificación de eliminación?
+noti_yes_message,Notificación sí- eliminará a partir del sistema.
+push_message,Mensaje push
+noti_des_label,Descripción
+noti_img,notificación de fotos
+coupon_code_message,Código promocional debe ser de al menos 4. Por ejemplo; ACE1
+coupon_amount_message,"El monto del descuento del cupón debe ser como 10, 20, 30 .. No es un porcentaje."
+coupon_add,Agregar Cupón
+coupon_info,información de la cupón
+coupon_name,Nombre cupón
+coupon_code,Código promocional
+coupon_amount,La cantidad de cupones
+coupon_edit,Editar Cupón
+coupon_search,Buscar Cupón
+success_coupon_add,Cupón ha sido agregado con éxito
+success_coupon_edit,Cupón ha sido actualizado correctamente
+success_coupon_delete,Cupón ha sido eliminado correctamente
+delete_coupon_label,Cupón de borrado?
+coupon_delete_confirm_message,Está seguro que desea eliminar este cupón?
+err_coupon_name,"Por favor, indique el nombre de cupón"
+err_coupon_len,La longitud del cupón nombre debe ser mayor que 4
+err_coupon_exist,Cupón Nombre existía ya está en el sistema
+shipping_name,Nombre de envío
+shipping_price,Precio
+shipping_days,Dias
+shipping_add,Agregar método de envío
+shipping_edit,Editar método de envío
+shipping_search,Método de búsqueda de envío
+shipping_info,Método de envío de información
+success_shipping_add,Método de envío se ha añadido con éxito
+success_shipping_edit,Método de envío se ha actualizado correctamente
+success_shipping_delete,Método de envío se ha eliminado correctamente
+err_shipping_name,"Por favor, proporcione el nombre del método de envío"
+err_shipping_len,La longitud de envío Nombre del método debe ser mayor que 4
+err_shipping_exist,Método de envío Nombre existía ya está en el sistema
+delete_shipping_label,Eliminar Método de envío?
+shipping_delete_confirm_message,Está seguro que desea eliminar este método de envío?
+tag_name,Nombre de etiqueta
+tag_img,Etiquetar foto
+tag_add,Añadir etiqueta
+tag_search,búsqueda de etiquetas
+tag_info,información de la etiqueta
+tag_icon,etiqueta Icono
+err_tag_name,"Por favor, indique el nombre de etiqueta"
+err_tag_len,La longitud del nombre de etiqueta debe ser superior a 4
+err_tag_exist,Nombre de la etiqueta ya está existía en el sistema
+success_tag_add,Tag se ha añadido con éxito
+success_tag_edit,Se ha actualizado con éxito
+success_tag_delete,Tag se ha eliminado correctamente
+delete_tag_label,Etiquetas Eliminar?
+tag_delete_confirm_message,Está seguro que desea eliminar esta etiqueta?
+btn_version,Versión
+ver_info,Información de versión
+ver_no_label,versión n
+ver_msg_label,versión Mensaje
+ver_title_label,versión Título
+ver_force_update,Actualización de la versión de la Fuerza?
+ver_need_data,Versión clara necesidad de datos?
+success_version_add,Versión se ha añadido con éxito
+success_version_edit,Versión se ha actualizado correctamente
+paypal_transaction_failed,"Lo sentimos, la transacción de PayPal se falla."
+stripe_transaction_failed,"Lo sentimos, raya transacción ha fallado."
+err_user_not_exist,"Lo sentimos, las credenciales de inicio de sesión del usuario son incorrectas"
+no_record,No más de Record
+delete_register_user_label,Eliminar usuario registrado?
+register_user_delete_confirm_message,¿Seguro borrar este usuario registrado?
+success_registered_user_delete,Usuario registrado se ha eliminado correctamente
+success_user_delete,El usuario ha sido eliminado correctamente
+user_ban,usuario Ban
+user_ban_label,Prohibición
+user_unban,eliminar la prohibición
+err_user_banned,"En este momento, no se puede iniciar sesión porque su cuenta está prohibida."
+no_record,No hay más registros
+invalid_api_key,Clave de API no es válido
+apikey_info,Información Clave API
+key_label,Llave
+success_apikey_edit,API Key se actualiza correctamente
+success_apikey_add,se agrega correctamente clave de API
+err_user_email_exist,El correo electrónico es el usuario ya existe
+trans_payment_method,Método de pago :
+trans_memo,memo:
+trans_item_sub_total,Artículo Sub Total:
+trans_coupon_discount_amount,Cupón de descuento Cantidad (-):
+trans_overall_tax,Fiscal general
+trans_shipping_cost,El coste de envío (Uso
+trans_shipping_tax,Impuesto de envío
+trans_total_balance_amount,Saldo total Monto:
+order_desc,Encomendar de Flutter Multi Restaurant:
+err_email_not_send_to_shop,"Lo sentimos, no un correo electrónico capaz de enviar el dueño de la tienda."
+err_email_not_send_to_user,"Lo sentimos, no un correo electrónico capaz de enviar al cliente."
+order_receive_subject,Nuevo orden ha sido recibida
+order_status_subject,estado del pedido pedido ha sido cambiado a
+country_name,Nombre del país
+country_add,Añadir País
+country_search,Buscar País
+country_edit,editar País
+country_info,Información del país
+success_country_add,País ha sido agregado con éxito
+success_country_edit,País se ha actualizado correctamente
+success_country_delete,País se ha eliminado correctamente
+delete_country_label,Eliminar País?
+country_yes_all_message,"Cuando eliminar este país, eliminará todas las ciudades y zonas relacionadas también. Así que, ¿todavía desea eliminarlo?"
+err_country_name,"Por favor, indique el nombre del país"
+err_country_len,La longitud del nombre del país debe ser mayor que 4
+err_country_exist,Nombre del país ya está existía en el sistema
+city_name,Nombre de la ciudad
+city_add,Añadir Ciudad
+select_country,Seleccione el nombre del país
+city_search,Buscar City
+city_edit,Editar City
+city_info,Información de la ciudad
+success_city_add,City ha sido agregado con éxito
+success_city_edit,La ciudad se ha actualizado correctamente
+success_city_delete,La ciudad se ha eliminado correctamente
+delete_city_label,Eliminar la ciudad?
+city_delete_confirm_message,Está seguro que desea eliminar esta ciudad?
+err_city_name,"Por favor, indique el nombre de la ciudad"
+err_city_len,La longitud del nombre de la ciudad debe ser mayor que 4
+err_city_exist,Nombre de la ciudad ya existía en el sistema
+f_item_country_required,"Por favor, seleccione Nombre del país"
+zone_name,Nombre de la zona
+zone_search,Zona de búsqueda
+zone_add,Añadir zona
+zone_edit,Editar Zona
+zone_info,Información de la zona
+select_city,Seleccionar Nombre de la ciudad (Selección múltiple)
+success_zone_add,Zona ha sido agregado con éxito
+success_zone_edit,Zona se ha actualizado correctamente
+success_zone_delete,Zona se ha eliminado correctamente
+delete_zone_label,Eliminar Zona?
+zone_delete_confirm_message,¿Está seguro que desea borrar esta zona?
+err_zone_name,"Por favor, indique el nombre de zona"
+err_zone_len,La longitud del nombre de zona debe ser mayor que 4
+err_zone_exist,Nombre de la zona ya está existía en el sistema
+f_item_city_required,"Por favor, seleccione Nombre de la ciudad"
+select_zone,Seleccionar las zonas
+shipping_zone_add,Añadir envío con Zona
+shipping_zone_edit,Editar envío Zona Con
+shipping_zone_search,Buscar envío con Zona
+shipping_zone_info,Con el envío de información Zona
+success_shipping_zone_add,Con el envío zona se ha añadido con éxito
+success_shipping_zone_edit,Con el envío zona se ha actualizado correctamente
+success_shipping_zone_delete,Con el envío zona se ha eliminado correctamente
+delete_shipping_zone_label,Eliminar del envío con la Zona?
+shipping_zone_delete_confirm_message,¿Seguro eliminar este con la zona de envío?
+f_item_zone_required,"Por favor, seleccione Nombre de la zona"
+shipping_package_name,Nombre del paquete de envío
+need_to_enable_zone_shipping,"Por favor, activa el envío a la zona de envío de configuración."
+dup_zone_name,Nombre de la zona ya está existió
+you_selected,Usted ha seleccionado
+per_order_based,Por orden basado
+cost,Costo
+per_item_based,Por artículo Basado
+delivery_increment_of_zone,Entrega Incremento de la Zona
+based_cost,Costo basado
+take_prd_shipping_cost,De tomar costes del producto envío
+free_shipping,Envío gratis
+zone_from_other_package,Zona ya se selecciona el otro paquete.
+increment_formula,FOURmula: (producto Gastos de envío) x (Increacement valor) x (CANT)
+increment_note,Nota: Es preciso conjunto predeterminado es 1.
+cat_module,categorías
+contact_module,Contacte con nosotros Mensaje
+system_user_module,Los usuarios del sistema
+export_database_module,Base de datos de exportación
+subcat_module,subcategorías
+discount_module,descuentos
+blog_module,blogs
+product_module,Alimentos
+collection_module,Colecciones
+noti_module,No es
+version_module,Versión
+comments_module,comentarios
+like_module,Gustos
+favourites_module,favoritos
+transaction_module,Actas
+popular_prd_module,Los Alimentos más populares
+purchase_prd_module,La mayoría de los Alimentos de compra
+popular_cat_module,Categorías más populares
+purchase_cat_module,La mayoría de las Categorías de Compras
+rate_prd_module,La mayoría de los mejores Alimentos
+coupon_dis_module,Descuentos promocionales
+shipping_module,Método de envío
+app_module,Acerca de Aplicación
+shop_module,sobre la tienda
+register_user_module,Usuarios Registrados
+api_key_module,claves de la aPI
+countries_module,Países
+cities_module,ciudades
+zone_module,Zona
+shipping_zone_module,Envío con zonas
+language_module,idiomas
+entry_group,Entrada
+user_feedback_group,Comentarios de los usuarios
+user_mang_groups,Gestión de usuarios
+reports_group,Informes
+miscellaneous_group,Diverso
+setting_group,Ajuste
+second_ago,segundo
+minute_ago,minuto
+hour_ago,hora
+day_ago,día
+week_ago,semana
+month_ago,mes
+year_ago,año
+decade_ago,década
+just_now_label,Justo ahora
+ago_label,hace
+btn_active,Activo
+lang_string,idioma cadena
+lang_name,Nombre del lenguaje
+lang_add,Agregar idioma
+lang_info,informaciones idioma
+lang_symbol,Símbolo
+lang_search,Buscar idioma
+lang_edit,Editar idioma
+success_lang_edit,El lenguaje ha sido actualizado correctamente
+success_lang_add,Se ha añadido con éxito
+success_lang_delete,El lenguaje ha sido eliminado correctamente
+err_lang_name,"Por favor, proporcione el nombre del idioma"
+err_lang_len,La longitud del nombre de idioma debe ser mayor que 4
+err_lang_exist,Idioma El nombre ya se existía en el sistema
+delete_lang_label,Eliminar Idioma?
+lang_delete_confirm_message,¿Quieres eliminar toda la cadena de bajo que juntos idioma?
+lang_yes_all_label,Si todo
+lang_no_only_label,Sólo idioma
+lang_yes_all_message,Sí Todo - Lengua y artículos serán eliminar del sistema.
+language_id,Idioma
+lang_string_key,Llave
+lang_string_value,Valor
+lang_string_info,Información de cadena de idioma
+select_language,idioma seleccionado
+btn_import,Importar
+csv_symbol_link,archivo CSV de ejemplo aquí
+lang_str_search,Búsqueda Idioma Cadena
+success_langstr_import,Idioma Cadena éxito archivo CSV subidos
+lang_str_add,Agregar idioma de cuerdas
+lang_str_edit,Editar cadena Idioma
+success_lang_str_edit,Idioma cadena se ha actualizado correctamente
+success_lang_str_add,Idioma cadena se ha añadido con éxito
+err_lang_str_name,Sírvanse proporcionar lengua nombre de cadena
+err_lang_str_len,La longitud de la cadena de lenguaje debe ser superior a 4
+err_lang_str_exist,Idioma cadena está ya existía en el sistema
+lang_title,Eliminado Idioma?
+lang_warning,No se puede eliminar el lenguaje activo.
+btn_ok,Okay
+list_lang_label,idiomas
+list_lang_str_label,series de idioma
+err_lang_symbol,Sírvanse proporcionar símbolo de idioma
+pls_att_name,"Por favor, nombre de atributo Detalle"
+remove_label,Eliminar
+btn_no,No
+pls_city_name,Por favor Nombre de la ciudad
+pls_collect_name,Por favor Nombre de la colección
+pls_dis_percent,"Por favor, Porcentaje de descuento"
+pls_prd_name,Por favor Nombre del producto
+pls_highlight_info,Por favor resaltar la información
+pls_code,Entre el código de
+pls_unit_price,"Por favor, precio unitario"
+pls_shipping_cost,Por favor coste de envío
+pls_minimum_order,Por favor Pedido mínimo
+pls_prd_measurement,Por favor Medición del producto
+pls_prd_unit,Por favor Unidad Producto
+pls_search_tag,Por favor Etiqueta de búsqueda
+pls_prd_desc,Por favor Descripción del producto
+pls_shipping_name,"Por favor, envío Nombre del paquete"
+per_order_post,Coste por pedido
+pls_sub_cat,Por favor Subcategoría Nombre
+pls_zone_name,Por favor Nombre de la zona
+success_reset_email_sent,Restablecer correo electrónico se envía con éxito
+err_touch_count,Problema In Touch cuenta!
+coupon_not_found,Su código de cupón es válido.
+require_user_id,Requerido ID de usuario
+require_platform,Plataforma requerida
+file_na,No disponible
+token_already_exist,"Lo sentimos, dispositivo de señal ya existe."
+err_noti_register,"Lo sentimos, no hay problema para el registro de notificaciones push."
+success_noti_register,El dispositivo registrado con éxito para notificaciones push.
+success_noti_unregister,El dispositivo no registrado con éxito para notificaciones push.
+err_noti_unregister,"Lo sentimos, existe el problema de la eliminación del registro de notificaciones push."
+err_in_noti_read,"Lo sentimos, la notificación no es capaz de leer."
+success_touch_count,Toque Recuento insertado correctamente.
+backend_setting_module,Ajuste backend
+backend_config_info_lable,Información de configuración de back-end
+sender_name_label,Nombre del remitente
+receive_email_label,Recibir correo
+sender_email_label,Correo electrónico del remitente
+img_section,Sección imagen
+fcm_api_key_label,clave de API FCM
+backend_login_img,Iniciar sesión Imagen de fondo backend
+backend_logo,backend Logo
+backend_fav_icon,Backend Fav Ico
+upload_backend_logo,Subir backend Logo
+upload_fav_icon,Subir Fav Icon
+upload_login_img,Subir sesión de fotos
+pwd_reset_label,Restablecimiento de contraseña
+pwd_reset_link,"Por favor, haga clic en el siguiente enlace para restablecer la contraseña"
+reset_link_label,Restablecer la contraseña
+best_regards_label,Atentamente
+hi_admin_label,Hola administración
+name_label,Nombre
+email_label,Email
+phone_label,Teléfono
+msg_label,Mensaje
+bank_acc_label,Cuenta bancaria :
+bank_name_label,Nombre del banco :
+bank_code_label,Codigo bancario :
+branch_code_label,Código de sucursal
+swift_code_label,código SWIFT
+pay_met_cod,Forma de pago: Pago contra entrega
+pay_met_paypal,Forma de pago: Paypal
+pay_met_stripe,Forma de pago: Raya
+pay_met_bank,Forma de pago: Transferencia bancaria <br>
+price_label,Precio:
+unit_label,Unidad
+shipping_cost_label,Costo de envío
+qty_label,CANT
+hi_label,Hola
+order_receive_info,Nuevo orden es recibida con la información siguiente.
+trans_code,Trans. Código
+trans_status_label,Trans. Estado
+billing_cus_name,Nombre del cliente de facturación
+billing_add1,Dirección de facturación 1
+billing_add2,Dirección de facturación 2
+billing_phone,Teléfono de facturación
+billing_email,Correo Electrónico de Facturas
+billing_shipping_name,Facturación Nombre de envío
+shipping_add1,Dirección de envío 1
+shipping_add2,Dirección de envío 2
+shipping_phone,Teléfono envío
+shipping_email,el envío de correo electrónico
+memo_label,Memorándum
+zone_shipping,zona de envío
+prd_detail_info,Datos del producto Información por debajo
+sub_total,Sub total
+coupon_dis_amount,Cupón de descuento Cantidad (-)
+overall_tax,En general Tributaria (+)
+shipping_cost,El coste de envío (+)
+shipping_tax,Impuesto de envío (+)
+total_bal_amt,Equilibrio Total Importe
+no_country_available,"En este momento, los países de envío no están disponibles."
+shop_label,tiendas
+user_label,Gestión de usuarios
+btn_contact,Contacte con nosotros Mensaje
+btn_api_keys,claves de la aPI
+btn_paypal_config,Configuración paypal
+trans_code_label,Codigo de transacción
+lang_active,Activo
+shop_approve_label,¡Felicidades! Su tienda ha sido aprobado. Por lo que puede iniciar sesión con el correo electrónico y la contraseña registradas.
+shop_reject_label,"¡Lo siento! Su tienda ha sido rechazada. Si tienes alguna pregunta, por favor dejar mensaje a contact@ps.com"
+success_register_edit,Registro Shop se ha actualizado correctamente
+success_register_add,Registro Shop se ha añadido con éxito
+btn_reject_shop,Rechazar listas de tienda
+shop_reg_label,"Nueva tienda ha sido registrada. Por favor, eche un vistazo a continuación más detalles"
+shop_phone_label,tienda de telefonía
+shop_add_label,Shop Dirección
+user_email_label,User Correo electrónico
+shop_reg_done,"Su tienda ha sido registrada. Después revisamos a continuación, que se pueden conseguir de nuevo a usted para el resultado del proceso de aprobación. Aquí alguna información para su tienda"
+new_user_register,Nuevo registro de cuentas de usuario
+user_register_success_but_email_not_send,"el éxito del registro del usuario, pero no enviar correo electrónico"
+verify_code_sent,Código de verificación ha sido enviado
+new_shop_register,Nueva tienda ha sido registrada.
+success_shop_register,Su tienda ha sido registrada.
+shop_approve,Su tienda ha sido aprobado.
+shop_reject,Su tienda ha sido rechazada.
+no_record_found,ningún record fue encontrado
+approval_shop_login,"Lo siento, la tienda todavía no se aprueba."
+pls_shop_tag,Por favor seleccione su tienda
+f_user_pass_required,"Por favor, introduzca la contraseña de usuario"
+write_reply_label,Escribe una respuesta...
+go_to_paypal_label,Ir a PayPal
+f_shop_create_success_title,Enhorabuena!
+f_shop_create_success_text,Su tienda ha sido registrado y nuestro equipo lo revisará aprobación. Se le notificará por correo electrónico si su tienda está aprobado registrada.
+go_to_shop_register,Ir a la tienda Registro
+f_user_pass_length,La longitud de la contraseña de usuario debe ser mayor que 4
+f_user_conf_required,"Por favor, introduzca la contraseña del usuario Confirmar"
+f_user_conf_length,La longitud de usuario Confirmar contraseña debe ser mayor que 4
+err_description_label,Por favor proporcionar la descripción
+err_shop_tag_label,Por favor proporcione la etiqueta tienda
+btn_approved_shop,aprobación Shop
+select_status,Seleccione aprobado o rechazado?
+paypal_success_label,PayPal éxito !!!
+btn_shop_tag,tienda Tag
+btn_register_user,Registro de usuario
+shop_name_label,Nombre de tienda
+multiple_upload_module,Múltiples Alimentos Subir
+analytics_module,Analítica
+success_rating_delete,Clasificación se ha eliminado correctamente
+no_country_available,Lo siento
+rating_yes_all_message,Está seguro que desea eliminar esta calificación?
+delete_rating_label,Clasificación de borrado?
+success_trans_delete,Transacción se ha eliminado correctamente
+trans_yes_all_message,Está seguro que desea eliminar esta transacción?
+delete_trans_label,Transacción de eliminación?
+err_user_pass_len,La longitud de la contraseña de usuario debe ser mayor que 4
+err_user_pass_conf_bank,La longitud de la contraseña Confirmar usuario debe ser mayor que 4
+new_user_acc,Su nueva cuenta de usuario ha sido creada. Bienvenido a Flutter Multi Restaurant. Verifique con el código a continuación para activar su cuenta.
+verify_code_label,código verificado
+smtp_section,Configuración SMTP
+smtp_host_label,Host SMTP
+smtp_host_placeholder,por ejemplo: ssl: //smtp.hostmail.com
+smtp_port_label,Número de puerto SMTP
+smtp_enable,Habilitar SMTP?
+smtp_user_label,usuario SMTP
+smtp_pass_label,Contraseña SMTP
+success_backend_edit,Backend ajuste se ha actualizado correctamente
+topics_label,temas
+dashboard_label,Tablero
+back_to_shop,Volver a la lista de la tienda
+lang_deactive,Desactivar
+cannot_deactive,"Lo sentimos, no se puede desactivar."
+err_symbol_exist,símbolo de idioma está ya existía en el sistema.
+paypal_info,Información paypal
+price,Precio
+currency_code,Código de moneda
+api_username,Api Nombre de Usuario
+api_password,api contraseña
+api_signature,Firma api
+application_id,ID de aplicación
+developer_email_account,Cuenta de correo electrónico desarrollador
+sandbox,Salvadera
+api_version,api versión
+delete_system_user_label,¿Eliminar usuario del sistema?
+system_user_delete_confirm_message,¿Está seguro de eliminar este usuario del sistema?
+entry_label,Entrada
+payment_status_module,Estado de pago
+trans_status_module,estado de la transacción
+deliboys_module,Delivery Boy Management
+deli_status_title,Título
+deli_status_add,Agregar estado de entrega
+err_deli_status_name,Proporcione el título del estado de entrega
+err_deli_status_len,La duración del título del estado de entrega debe ser mayor que 4
+err_deli_status_exist,Buscar estado de entrega
+deli_status_search,Buscar estado de entrega
+deli_status_edit,Editar estado de entrega
+success_deli_status_edit,El estado de entrega se ha editado correctamente.
+success_deli_status_add,El estado de entrega se ha agregado correctamente.
+success_deli_status_delete,El estado de entrega se ha eliminado con éxito.
+deli_status_yes_all_message,¿Estás segura de eliminar este estado de entrega?
+delete_deli_status_label,¿Eliminar estado de entrega?
+pay_status_info,Información de estado de pago
+err_pay_status_name,Proporcione el título del estado del pago.
+err_pay_status_len,La duración del estado de pago debe ser mayor que 4
+err_pay_status_exist,El estado de pago ya existe.
+pay_status_add,Agregar estado de pago
+pay_status_search,Buscar estado de pago
+pay_status_edit,Editar estado de pago
+success_pay_status_edit,El estado de pago se ha editado correctamente
+success_pay_status_add,Payment Status has been successfully added
+success_pay_status_delete,El estado de pago se ha eliminado correctamente.
+delete_pay_status_label,¿Eliminar estado de pago?
+pay_status_yes_all_message,¿Estás segura de eliminar este estado de pago?
+trans_status_info,Información del estado de la transacción
+err_trans_status_name,Proporcione el título del estado de la transacción.
+err_trans_status_len,La duración del estado de la transacción debe ser superior a 4
+err_trans_status_exist,El estado de la transacción ya existe
+trans_status_search,Buscar estado de transacción
+trans_status_add,Agregar estado de transacción
+delete_trans_status_label,¿Eliminar el estado de la transacción?
+trans_status_edit,Editar estado de transacción
+success_trans_status_edit,El estado de la transacción se ha editado correctamente.
+success_trans_status_add,La transacción se ha agregado con éxito.
+success_trans_status_delete,El estado de la transacción se ha eliminado con éxito.
+trans_status,Estado de transacciones:
+trans_status_yes_all_message,¿Estás segura de eliminar este estado de transacción?
+deli_status_ordering,Ordenar
+final_stage,Etapa final
+final_stage_delete,La etapa final no se puede eliminar.
+start_stage_delete,La etapa de inicio no se puede eliminar.
+add_on_module,Añadir
+shipping_areas_module,Zona de envío
+app_configs_module,Configuración de la aplicación
+food_add_img,Agregar imagen
+food_add_name,Agregar nombre
+food_add_description,Descripción
+food_add_price,Precio
+food_additional_info,Agregar información
+err_food_add_name,Proporcione Agregar nombre.
+err_food_add_len,La longitud de Add On Name debe ser mayor que 4
+err_food_add_exist,Add On Name ya existe
+food_additional_add,Agregar Agregar
+additional_search,Búsqueda Add On
+additional_edit,Editar Agregar
+success_additional_edit,Complemento ha sido actualizado con éxito.
+success_additional_add,Complemento ha sido agregado exitosamente.
+success_additional_delete,Complemento ha sido eliminado exitosamente.
+prd_addon_label,Seleccione Agregar
+prd_ordering,Ordenar
+prd_ingredient,Ingrediente
+prd_nutrient,Nutritiva
+shipping_areas_module,Zona de envío
+shp_area_price,Precio
+err_shp_area_name,Por favor nombre del área de envío
+shp_area_info,Información del área de envío
+shp_area_add,Agregar área de envío
+err_shp_area_exist,El área de envío ya existía
+success_shp_area_edit,El área de envío ha sido editada.
+shp_area_edit,Editar área de envío
+success_shp_area_add,El área de envío se ha agregado con éxito.
+success_shp_area_delete,El área de envío ha sido eliminada.
+shp_area_name,Nombre del área
+shp_area_search,Buscar área de envío
+err_shp_area_len,La longueur de la zone d'expédition doit être supérieure à 4
+delete_shp_area_label,¿Eliminar área de envío?
+shp_area_delete_confirm_message,¿Estás segura de eliminar esta Área de envío?
+fcm_api_key_deli_boy_label,Entrega clave FCM API Boy
+policy_info,Política de privacidad Información
+content_label,Contenido
+privacy_policy_module,Política de privacidad
+success_policy_edit,Política de privacidad se ha actualizado correctamente
+success_policy_add,Política de privacidad ha sido agregado con éxito
+not_yet_activate,Su cuenta aún no está activa.
+user_status,Estatus de usuario
+order_submit,orden enviada
+deliveried,deliveried
+price_level,Nivel de precios
+highlighted_info,La información destacada
+deli_status_module,Estado de entrega
+payment_status_module,Estado de pago
+delete_deliboy_label,Eliminar Entrega niño?
+deliboy_delete_confirm_message,¿Seguro eliminar este Delivery Boy?
+success_deliboy_delete,Muchacho de salida se ha eliminado correctamente
+restaurant_version,Versión
+deliboy_version,Delivery Boy Version
+razor_enabled_label,Se habilita la maquinilla de afeitar?
+razor_label,[Opción 6]: El pago Con Razor
+razor_key_label,clave de afeitar
+banktransfer_label,[Opción 3]: pago con transferencia bancaria
+module_group_lang,Grupo módulo
+group_name,Módulo Nombre del grupo
+group_icon,Módulo Icono de grupo
+group_lang_key,clave idioma
+group_info,Módulo de Información del Grupo
+group_search,Buscar Grupo de Módulo
+group_add,Añadir grupo de módulos
+success_group_edit,Grupo módulo ha sido editado correctamente
+success_group_add,Grupo módulo ha sido agregado con éxito
+group_edit,Editar grupo de módulos
+success_group_delete,Grupo módulo se ha eliminado correctamente
+err_group_name,"Por favor, proporcione grupo de módulos"
+err_group_len,La longitud del módulo Nombre del grupo debe ser mayor que 4
+err_group_exist,Módulo Nombre de grupo ya está existió
+module_lang,Módulo
+module_desc,Descripción
+module_ordering,Ordenando
+module_add,Agregar módulo
+module_info,Información del módulo
+module_name,Nombre del módulo
+is_show_on_menu,Es Show On menú?
+module_lang_key,Módulo de teclas Idioma
+module_select_group,Elija un grupo de módulos
+delete_module_label,Eliminar módulo?
+module_delete_confirm_message,¿Está seguro que desea borrar este módulo?
+delete_group_label,Eliminar grupo Módulo?
+group_delete_confirm_message,Está seguro que desea eliminar este grupo de módulos?
+err_module_name,"Por favor, indique el nombre del módulo"
+err_module_len,La longitud del nombre de módulo debe ser mayor que 4
+err_module_exist,Nombre del módulo ya está existió
+module_search,Buscar Nombre del módulo
+success_module_edit,Módulo se ha actualizado correctamente.
+success_module_add,Módulo ha sido agregado con éxito.
+module_edit,Editar módulo
+success_module_delete,Módulo se ha eliminado correctamente.
+about_location_section,Información sobre la ubicación
+opening_hour_label,Hora de apertura
+closing_hour_label,cerrando hora
+closed_date_label,Fecha de cierre
+closed_date_example,"Para, por ejemplo; Todos los domingos cerrado en"
+payment_not_select,"Por favor, seleccione el método de pago."
+rest_lat_label,Latitud
+rest_lng_label,Longitud
+user_phone_label,del usuario del teléfono
+about_me,Sobre mí
+deliboy_info,Entrega de información Boy
+user_phone,Teléfono
+product_price,Precio del producto
+product_title,Título
+product_desc,Descripción
+select_pay_status,Seleccione el estado del pedido
+select_deli_boy,Seleccione Delivery Boy
+trans_prd_checkout,"Lo sentimos, uno de los productos seleccionados no está disponible en nuestro sistema."
+err_user_name_blank,"Por favor, proporcione el nombre de usuario"
+err_user_pass_blank,"Por favor, proporcione la contraseña de usuario"
+err_user_pass_conf_blank,"Por favor, proporcione el usuario de confirmación de contraseña"
+err_user_pass_conf_not_match,Su contraseña y confirmación de contraseña no coinciden
+err_user_name_len,La longitud del nombre de usuario debe ser mayor que 4
+err_user_email_invalid,"Lo sentimos, el correo electrónico no es válido"
+user_mang_group,Gestión de usuarios
+img_configuration,Configuración de imagen
+land_width_label,Ancho del paisaje
+potrait_height_label,Altura vertical
+square_label,Altura Cuadrada
+err_shop_name,"Por favor, indique el nombre de la tienda."
+err_shop_len,La longitud del nombre de la tienda debe ser mayor que 4.
+err_shop_exist,nombre de la tienda ya está existía en el sistema.
+user_banned,"Lo sentimos, tu cuenta está prohibida."
+err_user_not_existed,Su cuenta no se existía en el sistema.
+err_lat_lng,La latitud y longitud no debe ser 0.0.
+record_not_found,"Lo sentimos, registro no encontrado."
+no_record_pagination,"Lo sentimos, no hay más registro en el sistema."
+email_verification_enabled,Verificación de correo electrónico habilitada?
+minimum_order_amount,Cantidad mínima de pedido
+approve_message_1,Enhorabuena! Entrega aprobado Boy (
+approve_message_2,)
+reject_message_1,¡Lo siento! Entrega rechazada Boy (
+reject_message_2,)
+trans_shop_checkout,"Lo sentimos, una de sus tiendas seleccionadas no están disponibles en nuestro sistema."
+banusers_module,Lista de Usuarios Ban
+btn_view,Ver
+btn_back,Espalda
+additional_delete_confirm_message,Está seguro que desea eliminar este adicionales de alimentos?
+delete_additional_label,Eliminar adicionales de alimentos?
+btn_shop_rating,tienda Valoración
+rating_shop_name,Calificación Nombre de la tienda
+rating_description,Descripción de la Evaluación
+shop_rate_info,Calificación Shop Información
+error_deli_boy,"Lo sentimos, usted no tiene acceso para iniciar sesión backend"
+user_auto_approved,Se ha creado su nueva cuenta de usuario. Bienvenido a Flutter Multi Restaurant.
+reservation_lang_module,Reservaciones
+restaurant_branches_module,Ramas de Restaurante
+success_res_edit,La reserva se ha actualizado correctamente
+success_res_add,La reserva se ha agregado correctamente
+resv_info,Informations de réserve
+resv_date_label,Date de réservation (JJ / MM / AAAA)
+resv_time_label,Temps de réserve (HH: MM) Format 24 heures
+reserved_by,Réservé par
+resv_note,Remarque additionnelle
+resv_status,État de la réservation
+trans_delivery_pickup_date,Fecha de recogida de entrega:
+trans_delivery_pickup_time,Hora de recogida de entrega:
+pickup_message,Mensaje de recogida
+pickup_label,[Opción 6]: Pago con recogida
+pickup_enabled,¿Está habilitado la recogida
+cus_pick_up_order,La cliente recogerá para este pedido.
+success_logout,El usuario ha sido exitosamente cierre de sesión.
+paystack_setting,Ajuste Paystack
+paystack_label,[Opción 7]: El pago con Paystack
+paystack_key_label,Paystack clave
+paystack_enabled_label,Está habilitado Paystack?
+btn_duplicate,Duplicada
+success_prd_duplicate_add,El artículo duplicado se ha agregado correctamente
+maximum_order,máxima Orden
+pls_maximum_order,Por favor pedido máximo
+deeplink_section,Configuración de enlace profundo
+dyn_link_key_label,Clave de enlace dinámico
+dyn_link_url_label,URL de enlace dinámico
+dyn_link_package_name_label,Nombre del paquete de vinculación dinámica
+dyn_link_domain_label,Dominio de enlace dinámico
+dyn_link_deep_url_label,URL de enlace profundo
+prd_dynamic_link_label,Enlace dinámico del producto
+dyn_link_package_name_ios,Dinámica que une el nombre del paquete IOS
+dyn_link_ios_appstore_id,Enlazado dinámico IOS AppStore Id
+prd_image,Imagen del producto
+key_and_user_not_match,Clave y el usuario no se corresponden.
+user_not_permission,Usted no tiene permiso para este módulo.
+user_not_action,Usted no tiene acceso a esta acción.
+not_login_access,Usted no tiene acceso a inicio de sesión.
+deliver_distance_label,Distancia de entrega
+deli_charges_label,Cargos de entrega por milla
+fixed_deli_fee_label,Tarifa de entrega fija
+deliver_unit_label,Unidad de entrega
+is_area_label,Zona
+not_calculate_deli_fee,No calculará la tarifa de entrega.
+deli_fee_by_distance_label,Tarifa de entrega por distancia
+deli_fee_formula,Fórmula: (distancia entre el cliente y la tienda) x (Cargos - por 1 milla)
+fixed_delivery_label,Entrega fija
+fixed_delivery_fee,Tarifa de entrega gratuita
+free_delivery_label,Entrega gratis
+monday_label,lunes
+tuesday_label,martes
+wednesday_label,miércoles
+thursday_label,jueves
+friday_label,viernes
+saturday_label,sábado
+sunday_label,domingo
+err_monday,Por favor proporcione la hora de lunes.
+err_tuesday,"Por favor, proporcione la hora del martes."
+err_wednesday,"Por favor, proporcione la hora del miércoles."
+err_thursday,"Por favor, proporcione el jueves horas."
+err_friday,Por favor proporcione el viernes hora.
+err_saturday,Por favor proporcione el sábado hora.
+err_sunday,Por favor proporcione el domingo de hora.
+invalid_monday,El lunes de cerca de la hora no es válida.
+invalid_tuesday,El martes de cerca la hora no es válida.
+invalid_wednesday,El miércoles de cerca la hora no es válida.
+invalid_thursday,El jueves de cerca de la hora no es válida.
+invalid_friday,El viernes de cerca de la hora no es válido.
+invalid_saturday,El sábado de cerca de la hora no es válido.
+invalid_sunday,El domingo de cerca la hora no es válida.
+cannot_order_food,Estás lejos de la tienda.
+shop_schedule_label,Horario de tiendas
+is_refundable_label,Es reembolsable en? (Si un pedido puede reembolsar al usuario en este estado de transacción).
+cannot_refund_stage,El pedido no puede reembolsar en este estado de transacción.
+cannot_refund_payment,No se puede reembolsar por este método de pago.
+order_refund_subject,Su pedido ha sido reembolsado.
+already_refunded,Su pedido ya ha reembolsado.
+refunded_orders_search,Búsqueda de pedidos reembolsados
+stripe_refund_failed,Falló el reembolso de la raya.
+order_refund_info,El pedido se reembolsa de la siguiente información.
+refunded_amount,Cantidad reembolsada
+refund_orders_module,Pedidos reembolsados
+paypal_refund_failed,Falló el reembolso de PayPal.
+paypal_client_id_label,ID de cliente de PayPal
+paypal_secret_key_label,Clave secreta de PayPal
+transaction_refresh_section,Página de transacción y configuración Noti Sound Actualizar configuración
+transaction_page_time_label,Página de transacción Auto Refrescando el tiempo
+transaction_sound_time_label,Transacción Noti Sound Actualizar tiempo
+buyer_name,Nombre del comprador
+payment_method,Método de pago
+payment_status,Estado de pago
+already_rating_deliboy,Ya has calificado a este repartidor.
+overall_rating,Calificación general
+deliboy_rating_log_module,Registros de calificación de chico de entrega
+deliboy_list_label,Todos los chicos de entrega
+not_final_stage,No se puede calificar ahora porque aún no se ha alcanzado su pedido.
+not_yet_assigned_deliboy,El chico de entrega no ha asignado el fot el pedido todavía.
+deli_boy_not_existed,El chico de entrega no ha existido en el sistema.
+deli_boy_banned,El chico de entrega ha sido prohibido por admin.
+rating_by_how_many_people,Calificación por cuántas personas
+review_label,Revisar
+joined_date,Fecha unida
+delete_trans_label,Eliminar transacción?
+trans_yes_all_message,¿Estás seguro de eliminar esta transacción?
+success_trans_delete,La transacción ha sido eliminada con éxito
+minimum_order_cannot_zero,El orden mínimo de alimentos no puede ser cero.
+maximum_order_cannot_zero,El orden máximo de alimentos no puede ser cero.
+err_user_email_blank,"Por favor, proporcione el correo electrónico de usuario."
+best_choice,Mejor elección
+best_choice_add,Añadir la mejor opción
+best_choice_name,Nombre de la mejor opción
+success_best_choice_delete,La mejor opción ha sido eliminada con éxito.
+success_best_choice_edit,La mejor opción se ha actualizado con éxito.
+success_best_choice_add,La mejor opción se ha agregado con éxito.
+delete_best_choice_label,Eliminar la mejor opción?
+best_choice_delete_confirm_message,¿Seguro que quieres eliminar esta mejor opción?
+err_best_choice_name,Por favor proporcione el mejor nombre de la elección
+err_best_choice_len,La longitud del nombre de la colección debe ser mayor que 4
+err_best_choice_exist,Este nombre de mejor opción ya existe.
+best_choice_photo,La mejor opción foto
+price_cannot_zero,El precio no puede ser cero.
+err_price_blank,Por favor proporcione el precio
+err_coupon_code_blank,Por favor proporcione el código de cupón
+err_coupon_code_len,La longitud del código de cupón debe ser mayor que 4
+err_coupon_amount_blank,Por favor proporcione la cantidad de cupón
+err_coupon_amount_len,La cantidad de la cantidad de cupón debe ser mayor que 2
+coupon_amount_cannot_zero,La cantidad de cupón no puede ser cero
+err_shp_price_blank,"Por favor, proporcione el área de envío Price"
+dis_cannot_zero,El porcentaje de descuento no puede ser cero
+err_price,Por favor proporcione el precio personalizado
+cus_price_cannot_zero,El precio personalizado no puede ser cero
+err_curr_sym,Por favor proporcione símbolo de moneda
+err_curr_short,Por favor proporcione FORMULARIO CORTE CORTE
+delete_branch_label,Eliminar sucursal del restaurante?
+branch_delete_confirm_message,¿Estás seguro de eliminar esta sucursal del restaurante?
+success_sys_user_delete,El usuario del sistema ha sido eliminado con éxito
+best_choice_info,Información de la mejor opción
+noti_sent_fail,Noti enviado falla
+select_csv_file,Seleccione el archivo CSV
+pls_upload_csv,Por favor proporcione el archivo CSV
+err_icon_missing,Ningún archivo está cargado
+csv_upload_instruction_1,"Por favor, siga los pasos a continuación: <br> 1. Sube imágenes para cargar la carpeta manualmente a través de FTP. <br> 2. Luego prepararse como formato CSV. Muestra aquí:"
+csv_file_sample_link,"<a href=""https://bit.ly/3G4MvHj"" target=""_blank"">https://bit.ly/3G4MvHj</a> "
+csv_upload_instruction_2,<br> 3. Puede usar la hoja de Google para crear y exportar como separador de comas.
+flutter_wave_label,[Opción 7]: Pago con onda de aleteo.
+flutter_wave_publishable_key,Llave pública de onda de aleteo
+flutter_wave_encryption_key,Llave de encriptación de onda de aleteo
+flutter_wave_enable_label,¿Se habilita el pago de onda de aleteo?
+search_keyword_section,Buscar por palabra clave
+search_in_shop,Buscar en la tienda
+search_in_category,Buscar en la categoría
+search_in_product,Buscar en producto
+search_in_shop_limit,Búsqueda en el límite de la tienda
+search_in_category_limit,Buscar en la categoría Límite
+search_in_product_limit,Buscar en el límite de producto
+success_user_sch_delete,El horario de usuario se ha eliminado con éxito.
+err_delete_sch_detail,Hay un error al eliminar el detalle del programa de usuario.
+err_delete_sch,Hay un error al eliminar el programa de usuario.
+schedule_orders_module,Programar pedidos
+search_in_subcategory,Búsqueda en subcategoría
+search_in_subcategory_limit,Búsqueda en el límite de subcategoría
+checkout_with_whatsapp,Checkout con WhatsApp
+checkout_with_email,Checkout con el flujo de transacción normal
+one_page_checkout,Una página de pago
+multi_page_checkout,Página de pago múltiple
+err_choice_one,"Por favor, la elección de una 'Página de pago' o 'Checkout múltiple'"
+checkout_with_whatsapp_des,El usuario hará la solicitud de pago de WhatsApp. Los datos de transacción no serán almacenados en backend.
+checkout_with_email_des,Flujo de transacción predeterminado.
+one_page_checkout_des,Se mostrará una simple visualización de la pantalla. Es para un fácil pago.
+multi_page_checkout_des,"Se mostrará el pago de la base de paso. Por lo tanto, el usuario verá varias pantallas al pagar."
+deliboy_cost_setting,Configuración del costo de entrega
+deliboy_ass_setting,Configuración de la asignación de entrega
+deli_auto_assign,Asignar automáticamente al repartidor
+deli_manual_assign,Asignación manual al chico de entrega
+how_many_deli_to_broadcast,¿Cuántos chicos de entrega se transmiten?
+mobile_setting_module,Configuración móvil
+price_format,Formato de precio
+price_format_desc,"Debe cambiar según el formato que necesite (p. ej., "",##0,00"" => 2555,00, ""##0,00"" => 2555,00,"".00"" => 2555,00, "",##0"" => 2555, "",##0.0"" => 2,555.0)"
+date_format,Formato de fecha
+google_playstore_url,URL de la tienda Google Play
+apple_appstore_url,URL de la tienda de aplicaciones de Apple
+ios_appstore_id,Identificación de la tienda de aplicaciones IOS
+default_order_time,Tiempo de pedido predeterminado (minutos)
+fb_key,Clave de Facebook
+is_show_token_id,"¿Identificación de token activada? (Si esta configuración está ""activada"", el usuario puede ver la identificación del token en la configuración de notificación)."
+is_show_subcategory,"¿Subcategoría activada? (Si esta configuración está ""Activada"", la subcategoría se puede usar en la aplicación)."
+is_use_thumbnail_as_placeholder,"Usar miniatura como ajuste de marcador de posición ¿Activado? (Si esta configuración está ""Activada"", cargará primero la imagen en miniatura y luego cargará la imagen completa. O si esta configuración está ""Desactivada"", cargará la imagen completa directamente y para la imagen de marcador de posición utilizará la imagen de marcador de posición predeterminada)."
+admob_section,Configuración de AdMob
+is_show_admob,"AdMob Setting On? (If this setting is ""On"", the application will display ads.)"
+lang_section,Configuración de idioma
+default_language,Idioma predeterminado
+exclude_language,Idiomas Disponibles
+exclude_lang_desc,"(Si el idioma está ""Activado"", el usuario puede usar este idioma en la aplicación)."
+default_currency_section,Configuración de moneda predeterminada
+default_razor_currency,Moneda Razor predeterminada
+is_razor_support_multi_currency,"Razor ¿Soporte multidivisa activado? (Si esta configuración está ""activada"", puede aceptar el pago de la maquinilla de afeitar en varias monedas en la aplicación)."
+default_flutter_wave_currency,Moneda predeterminada de Flutterwave
+login_section,Configuración de inicio de sesión
+show_facebook_login,"Inicio de sesión de Facebook ¿Encendido? (Si esta configuración está ""Activada"", los usuarios pueden iniciar sesión con Facebook)."
+show_google_login,"Inicio de sesión de Google activado? (Si esta configuración está ""activada"", los usuarios pueden iniciar sesión con Google)."
+show_phone_login,"¿Iniciar sesión en el teléfono? (Si esta configuración está ""activada"", los usuarios pueden iniciar sesión con un número de teléfono)."
+show_main_menu,"¿Menú principal activado? (Si esta configuración está ""Activada"", el usuario puede ver la pestaña ""Menú principal"" en cada tienda)."
+show_special_collections,"¿Colecciones especiales activadas? (Si esta configuración está ""activada"", el usuario puede ver la pestaña ""Ofertas especiales"" en cada tienda)."
+show_featured_items,"¿Artículos destacados activados? (Si esta configuración está ""Activada"", el usuario puede ver los ""Artículos destacados"" en cada tienda)."
+show_best_choice_slider,"Control deslizante Mejor elección activado? (Si esta configuración está ""activada"" cuando el usuario abre la aplicación, el usuario puede ver las mejores colecciones de opciones con la vista deslizante)."
+default_loading_limit,Límite de carga predeterminado
+category_loading_limit,Límite de carga de categoría
+collection_product_loading_limit,Límite de carga del producto de la colección
+discount_product_loading_limit,Límite de carga del producto con descuento
+feature_product_loading_limie,Límite de carga del producto destacado
+latest_product_loading_limit,Límite de carga del último producto
+shop_loading_limit,Límite de carga de la tienda
+trending_product_loading_limit,Límite de carga de productos de tendencia
+default_limit_section,Configuración de límite predeterminado
+dasboard_section,Configuración del panel
+date_format_desc,"dd para el día, MM para el mes, aaaa para el año, hh para la hora, mm para el minuto, ss para el segundo (por ejemplo, dd-MM-yyyy hh:mm:ss)"
+app_config_info_lable,Información de configuración móvil
+loc_section,Configuración de ubicación
+success_mobile_edit,La configuración móvil se ha actualizado correctamente.
+success_mobile_add,La configuración móvil se ha agregado con éxito.
+err_default_lang,Proporcione el idioma predeterminado.
+err_default_loading_limit_zero,El límite de carga predeterminado no puede ser cero.
+err_default_loading_limit,Proporcione el límite de carga predeterminado.
+err_category_loading_limit,Proporcione el límite de carga de la categoría
+err_category_loading_limit_zero,El límite de carga de la categoría no puede ser cero.
+err_collection_product_loading_limit,Please provide collection product loading limit.
+err_collection_product_loading_limit_zero,El límite de carga del producto de la colección no puede ser cero.
+err_discount_product_loading_limit,Proporcione el límite de carga del producto con descuento.
+err_discount_product_loading_limit_zero,El límite de carga del producto con descuento no puede ser cero.
+err_feature_product_loading_limit,Proporcione el límite de carga del producto destacado.
+err_feature_product_loading_limit_zero,El límite de carga del producto destacado no puede ser cero.
+err_latest_product_loading_limit,Proporcione el último límite de carga del producto.
+err_latest_product_loading_limit_zero,El límite de carga del último producto no puede ser cero.
+err_shop_loading_limit,Proporcione el límite de carga de la tienda.
+err_shop_loading_limit_zero,El límite de carga de la tienda no puede ser cero.
+err_trending_product_loading_limit,Proporcione el límite de carga de productos de tendencia.
+err_trending_product_loading_limit_zero,El límite de carga de productos de tendencia no puede ser cero.
+err_default_order_time,Proporcione el tiempo de pedido predeterminado.
+err_default_order_time_zero,El tiempo de pedido predeterminado (minutos) no puede ser cero.
+err_google_playstore_url,Proporcione la URL de la tienda de Google Play.
+err_apple_appstore_url,Proporcione la URL de la tienda de aplicaciones de Apple.
+err_ios_appstore_id,Proporcione la identificación de la tienda de aplicaciones iOS.
+err_price_format,Please provide price format.
+err_date_format,Proporcione el formato de fecha.
+err_fb_key,Proporcione la clave de Facebook.
+default_lang_select,Seleccione el idioma predeterminado
+route_name_label,Nombre de ruta
+deliboy_label,Chico de entrega
+total_amount_label,Cantidad total
+added_date_label,Fecha añadida
+send_with_this_route,Enviar con esta ruta
+add_route_label,Añadir ruta de pedido
+btn_send,Enviar
+note_label,Nota
+order_route_info_label,Información de la ruta del pedido
+order_route_add,Añadir ruta de pedido
+btn_proceed,Continuar
+btn_paused,en pausa
+sch_detail,Programar detalle de pedidos
+go_route_to_deliver_order_label,Ir Rutas para entregar
+btn_deliver,Entregar
+schedule_payment_method,Método de pago
+schedule_memo,Memorándum
+schedule_delivery_pickup_date,Fecha de recogida de entrega
+schedule_delivery_pickup_time,Hora de recogida de entrega
+schedule_day,Programar día
+schedule_time,Tiempo programado
+shcedule_detail,Programar detalle de pedido
+schedule_orders_search,Programar búsqueda de pedidos
+about_location_section,Acerca de la sección de ubicación
+success_route_edit,El orden de las rutas se ha actualizado correctamente.
+success_route_add,El orden de ruta se ha creado correctamente.
+please_select_order,Por favor seleccione la orden
+proceed_label,Continuar
+paused_label,en pausa
+route_order_search,Búsqueda de rutas de pedido
+order_route_add,Añadir ruta de pedido
+route_edit,Editar ruta de pedido
+success_qty_edit,La cantidad se ha actualizado correctamente.
+err_qty_edit,La actualización de cantidad tiene algunos errores.
+order_route_sch_detail,Ordenar detalle de rutas
+success_route_delete,El orden de la ruta se ha eliminado correctamente.
+success_route_order_send,El pedido de ruta se ha enviado con éxito con esta ruta.
+paused_all_route,Todos los pedidos programados están en pausa o no hay pedidos en esta ruta.
+delete_order_route_label,¿Eliminar orden de ruta?
+order_route_yes_all_message,"Al eliminar esta ruta, también se eliminarán todos los datos relacionados. Entonces, ¿todavía quieres eliminarlo?"
+send_order_route_label,¿Enviar orden de ruta?
+send_order_route_message,"Al enviar esta ruta, todos los pedidos programados en esta ruta se guardarán como transacciones con estado de recolección para entrega."
+delete_schedule_order_label,¿Eliminar orden de programación?
+schedule_order_yes_all_message,"Al eliminar este pedido programado, también se eliminarán los detalles del pedido relacionado. Entonces, ¿quieres eliminarlo?"
+delivery_boy_label,Chico de entrega
+schedule_status_label,Estado
+deliver_to_user,Entregar al usuario
+btn_delivered,Entregado
+delivered_to_user,Entregado
+go_back_sch_order,Volver a programar pedidos
+prd_not_available,El producto no está disponible.
+success_location_update,La ubicación se ha actualizado correctamente.
+not_deliboy,No eres un repartidor.
+success_accept_order,Este pedido ha sido aceptado.
+already_deliboy_assigned,Este pedido ya ha sido aceptado por otros repartidores.
+btn_accept,Aceptar
+btn_reject,Rechazar
+btn_detail,Detalle
+accept_order_label,Aceptar pedido
+reject_order_label,Orden de rechazo
+order_detail_label,Detalle de la orden
+delivery_boy_name_label,Nombre de entrega
+delivery_phone_label,Teléfono de entrega
+new_orders,Nuevos pedidos
+ongoing_orders,Pedidos en curso
+order_status_label,Estado del pedido
+btn_retrigger,reactivar
+retrigger_label,reactivar
+assign_to_delivery_boy_label,Asignar al repartidor
+btn_assign_to_deliboy,Asignar al repartidor
+new_order_detail,Detalle del nuevo pedido
+ongoing_order_detail,Detalle del pedido en curso
+assign_deliboy,Asignar repartidor
+new_order_to_detail,Nuevo pedido para entregar
+err_title,Por favor complete el título.
+err_len_title,La longitud del título debe ser mayor a 4.
+enter_shop_name,Ingrese el nombre de la tienda
+pls_prd_desc,Por favor descripción del producto
+from,Desde
+to,Para
+about_app,Acerca de la aplicación
+api_setting,Configuración de la API
+push_noti,Notificación de inserción
+have_order_deliver,Tienes el pedido para entregar.
+reservation_status_change,El estado de la reserva se ha cambiado a
+payment_cur_status,El estado de pago de su pedido es
+order_status_changed_to,El estado del pedido ha cambiado a
+delivery_cur_status,El estado de entrega de su pedido es
+fail_push_noti,No se pudo enviar la notificación.
+fail_push_all_android,No se pueden enviar todos los dispositivos Android.
+because_db_err,por un error en la base de datos.
+because_miss_cat,debido a la categoría que falta.
+because_miss_cat_thumb_upload,debido a que falta la imagen de la categoría en la carpeta 'uploads/thumbnail'.
+because_miss_cat_upload,debido a la imagen de categoría que falta en la carpeta 'cargas'.
+because_miss_cat_name,debido al nombre de la categoría que falta.
+total_cat,Categoría total:
+success_cat,Categoría de éxito:
+fail_cat,Categoría fallida:
+required_platform,Plataforma requerida
+required_user_id,Identificación de usuario requerida
+res_send_email_to_user_shop,La reserva se ha enviado correctamente. Correo electrónico enviado con éxito a Usuario y Tienda.
+res_not_send_email_to_shop,La reserva se ha enviado correctamente. El correo electrónico no se puede enviar a la tienda.
+res_not_send_email_to_user,La reserva se ha enviado correctamente. El correo electrónico no se puede enviar al usuario.
+res_not_send_email_to_user_shop,La reserva se ha enviado correctamente. El correo electrónico no se puede enviar tanto al usuario como a la tienda
+reservation_submit_error,El envío de la reserva tiene errores.
+cust_info,Información al cliente
+cust_loc,Ubicación del cliente
+invoice_label,Factura
+account_label,Cuenta
+id_label,IDENTIFICACIÓN
+color_label,Color
+err_key,Por favor complete la clave.
+err_len_key,La longitud de la clave debe ser superior a 4.
+remove_label,Eliminar
+org_img_size,Tamaño de imagen original
+thumb_img_size,Tamaño de la imagen en miniatura
+demo_dummy_refresh_hour,"Tenga en cuenta que el backend es un modo de demostración, por lo que todos esos datos ficticios se actualizarán cada hora."
+sys_err_occur_admin,"Se produjo un error del sistema. Por favor, póngase en contacto con el administrador del sistema."
+form_data_submit_server,Los datos del formulario se envían al servidor.
+selected_row_data,Datos de las filas seleccionadas
+err_push_msg,"Por favor, complete el mensaje de inserción."
+err_len_push_msg,La longitud del mensaje debe ser mayor que 1.
+start_upload,Iniciar la subida
+cancel_upload,Cancelar carga
+add_files,Agregar archivos
+btn_start,Comienzo
+processing_label,Procesando
+btn_default,Por defecto
+approved_label,Aprobado
+rejected_label,Rechazado
+select_label,Seleccione
+reject_label,Rechazar
+pending_label,Pendiente
+all_label,Todos
+err_image,"Por favor, rellene subir foto."
+f_err_paypal_trans,La transacción de Paypal falló.
+active_orders_label,Órdenes activas
+back_to_shop_list,Volver a la lista de compras
+err_reservation_date,Por favor complete la fecha de reserva.
+payment_setting,Configuración de pago
+order_setting,Configuración de pedidos
+delivery_setting,Configuración de entrega
+checkout_setting,Configuración de pago
+policy_and_terms,Política y Términos
+sending_email_setting,Configuración de envío de correo electrónico (para SMTP)
+tax_label,Impuesto
+currency_setting,Configuración de moneda
+low_label,Bajo
+medium_label,Medio
+high_label,Elevado
+coupon_module,Cupón
+usr_shop_module,Tienda de usuario
+news_feed_module,Noticias
+prd_dis_module,Productos y Descuentos
+prd_collect_module,Productos y Colecciones
+shipping_method_module,Métodos de envío
+watch_list,Lista de observación
+go_to_dashboard,Ir al panel de control
+frontend_config_label,Información de configuración frontend
+map_key,Llave del mapa
+enable_notification,¿Es la notificación de habilitación?
+fcm_server_key,Tecla del servidor FCM
+firebase_web_push_key_pair,Firebase Web Push Tecle par
+ad_client,Cliente publicitario
+ad_slot,Ranura ad
+copy_right,Copiar a la derecha
+google_play_url,URL de Google Play
+app_store_url,URL de la tienda de aplicaciones
+google_setting,Configuración de Google
+app_store_setting,Configuración de la tienda de aplicaciones
+banner_src,Banner SRC
+google_map,Mapa de Google
+open_street_map,Mapa de calle abierto
+image_limit,Límite de imagen
+success_frontend_edit,La configuración de Frontend se ha actualizado con éxito.
+success_frontend_add,La configuración de Frontend se ha agregado correctamente.
+show_user_profile,Mostrar perfil de usuario?
+is_enable_video_setting,¿Habilitar la configuración de video?
+err_map,Por favor proporcione la clave de mapa
+err_price_format,Por favor proporcione formato de precio
+err_fcm_server_key,"Por favor, proporcione la clave del servidor FCM"
+err_firebase_web_push_key_pair,"Por favor, proporcione FIRBASE WEB PUSH PUSH CHEQUES"
+err_ad_client,Por favor proporcione el cliente AD
+err_copy_right,Por favor proporcione copia a la derecha
+err_google_play_url,Por favor proporcione la URL de Google Play
+err_ad_slot,Por favor proporcione la ranura AD
+err_app_store_url,"Por favor, proporcione la URL de la tienda de aplicaciones"
+err_banner_src,Por favor proporcione Banner SRC
+frontend_setting_module,Ajuste de frontend
+gps_enable,¿Habilitar GPS?
+noti_sent_success,Noti ha sido enviada con éxito a
+btn_create_thumbnail,Generador de miniaturas (1x2x3x)
+generate_thumbnail_label,Generará las imágenes en miniatura para cada elemento. Tenga en cuenta que este proceso llevará algún tiempo en función de sus datos.
+thumbnail_generators_lng,Generador de miniaturas
+thumbnail_generators_module,Generadores de miniaturas
+success_img_create,La imagen en miniatura se generó con éxito.
+create_thumb3x_folder,"Cree la carpeta ""thumbnail3x"" debajo de la carpeta de carga."
+create_thumb2x_folder,"Cree la carpeta ""thumbnail2x"" debajo de la carpeta de carga."
+thumb_2x_label,Tamaño de imagen en miniatura 2x
+thumb_3x_label,Tamaño de imagen en miniatura 3x
+success_deliboy_delete,El repartidor ha sido eliminado con éxito.
+not_deli_boy,No es una cuenta de repartidor.
+invalid_user_id,Usuario invalido.
+success_user_delete,El usuario ha sido eliminado con éxito.
+not_user,Este usuario no es un usuario registrado.
+deleted_user,(Este usuario se elimina.)
+deleted_deliboy,(Este repartidor se elimina).
+deliboy_trans_deleted,(El repartidor de esta transacción ha sido eliminado).
+shop_deliver_around,Esta tienda entrega
+of_label,de
