@@ -1,7 +1,7 @@
 services:
   nginx:
     build: ./nginx/
-    container_name: nginx-container
+    container_name: crm-nginx-container
     ports:
       - 8081:80
     links:
@@ -11,7 +11,7 @@ services:
 
   php:
     build: ./php
-    container_name: php-container
+    container_name: crm-php-container
     expose:
       - 9000
     links:
@@ -21,14 +21,14 @@ services:
 
   app-data:
     image: php:7.0-fpm
-    container_name: app-data-container
+    container_name: crm-app-data-container
     volumes:
       - ./:/var/www/html/
     command: 'true'
 
   mysql:
     image: mariadb:10.5.8
-    container_name: mysql-container
+    container_name: crm-mysql-container
     volumes_from:
       - mysql-data
     environment:
@@ -40,7 +40,7 @@ services:
   mysql-data:
     image: mariadb:10.5.8
     platform: linux/x86_64
-    container_name: mysql-data-container
+    container_name: crm-mysql-data-container
     volumes:
       - /var/lib/mysql
       - ./install/database.sql:/docker-entrypoint-initdb.d/schema.sql:ro
