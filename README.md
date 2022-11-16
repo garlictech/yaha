@@ -1,4 +1,4 @@
-# Yaha
+# Yaha - Yet Another Hiking App
 
 [![iOS DEV app](https://build.appcenter.ms/v0.1/apps/632fc135-5359-468f-98e0-d29445363745/branches/dev/badge)](https://appcenter.ms)
 
