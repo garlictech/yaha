@@ -36,7 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   dart_ipify: ^1.1.1
   flutter_speed_dial: ^6.0.0
-  persistent_bottom_nav_bar: ^4.0.2
+  persistent_bottom_nav_bar: ^5.0.0
   flutter_native_splash: ^2.0.0
   amazon_cognito_identity_dart_2: ^3.0.0
   shared_preferences: ^2.0.6
