@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:graphql/client.dart';
 
-final graphqlApiDomainNameProvider =
-    Provider<String>((_) => 'dev.api.yaha.app');
+final graphqlApiDomainNameProvider = Provider<String>(
+    (_) => '38uhprq7de.execute-api.us-east-1.amazonaws.com/prod/');
 
 final graphqlClientProvider = Provider<GraphQLClient>((ref) {
   final graphqlApiDomainName = ref.read(graphqlApiDomainNameProvider);
