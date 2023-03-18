@@ -92,6 +92,16 @@ class HikeRepositoryNeo4j extends RepositoryNeo4j<Hike>
     return _getRoutePois(id, 'offroutePois');
   }
 
+  @override
+  Future<List<String>> getRandomHikes(int limit) async {
+    const String query = r'''
+       query Query($limit: Int!) {
+          getRandomHikes(limit: $limit) 
+       }
+    ''';
+    return executeEntityIdQuery(query, 'getRandomHikes', {'limit': limit});
+  }
+
   Future<List<Poi>> _getRoutePois(String id, String routeLabel) async {
     String query = '''
     query Hikes(\$where: HikeWhere) {

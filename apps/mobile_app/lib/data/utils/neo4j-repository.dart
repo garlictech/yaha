@@ -37,13 +37,13 @@ class RepositoryNeo4j<T> {
   Future<List<String>> searchEntityByRadius(
       SearchByRadiusInput input, String query, String gqlLabel) async {
     final params = {"params": input.toJson()};
-    return _executeEntityIdQuery(query, gqlLabel, params);
+    return executeEntityIdQuery(query, gqlLabel, params);
   }
 
   Future<List<String>> searchEntityByContent(
       String input, String query, String gqlLabel) async {
     final params = {"params": input};
-    return _executeEntityIdQuery(query, gqlLabel, params);
+    return executeEntityIdQuery(query, gqlLabel, params);
   }
 
   Future<T> getEntity(String query, String id, String gqlLabel) async {
@@ -73,8 +73,8 @@ class RepositoryNeo4j<T> {
     }
   }
 
-  Future<List<String>> _executeEntityIdQuery(String query,
-      String resultPropName, Map<String, dynamic>? variables) async {
+  Future<List<String>> executeEntityIdQuery(String query, String resultPropName,
+      Map<String, dynamic>? variables) async {
     final QueryOptions options =
         QueryOptions(document: gql(query), variables: variables ?? {});
     final QueryResult result = await client.query(options);

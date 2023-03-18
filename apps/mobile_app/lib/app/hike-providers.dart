@@ -13,5 +13,5 @@ final bestHikesNearbyProvider = FutureProvider<List<String>>((ref) async {
 });
 
 final bestHikesOfTheWorldProvider = FutureProvider<List<String>>((ref) async {
-  return ref.read(hikeRepositoryProvider).getHikeList();
+  return ref.read(hikeRepositoryProvider).getRandomHikes(10);
 });

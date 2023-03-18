@@ -7,6 +7,7 @@ import 'package:yaha/ui/views/hikes/home/views/widgets/active_hikes_summary_line
 //import 'package:yaha/ui/views/hikes/home/views/widgets/events_summary_line.dart';
 import 'package:yaha/ui/views/hikes/home/views/widgets/previous_activities_summary_line.dart';
 import 'package:yaha/ui/views/hikes/home/views/widgets/statistics_summary_line.dart';
+import 'package:yaha/ui/views/hikes/widgets/random_hikes_worldwide.dart';
 import 'package:yaha/ui/views/shared/shared.dart';
 
 class OverviewScreen extends ConsumerWidget {
@@ -37,16 +38,13 @@ class OverviewScreen extends ConsumerWidget {
                             padding: const EdgeInsets.only(
                                 top: YahaSpaceSizes.small),
                             child: HorizontalHikeCards(
-                                title: 'Best hikes near you',
+                                title: 'Some hikes near you',
                                 hikeListProvider:
                                     viewModel.bestHikesNearbyProvider)),
                         Container(
                             padding: const EdgeInsets.only(
                                 top: YahaSpaceSizes.small),
-                            child: HorizontalHikeCards(
-                                title: 'Best hikes of the world',
-                                hikeListProvider:
-                                    viewModel.bestHikesOfTheWorldProvider)),
+                            child: const RandomHikesWorldwide()),
                         Container(
                           padding: const EdgeInsets.only(
                               top: YahaSpaceSizes.general),
