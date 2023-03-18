@@ -61,19 +61,19 @@ class SuccessPopup extends StatelessWidget {
             width: YahaBoxSizes.buttonWidthSmall,
             height: YahaBoxSizes.buttonHeight,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () => Navigator.pop(context, 'OK'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: YahaColors.primary,
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(
+                        Radius.circular(YahaBorderRadius.general))),
+              ),
               child: Text(
                 buttonTitle,
                 style: const TextStyle(
                     fontSize: YahaFontSizes.small,
                     fontWeight: FontWeight.w500,
                     color: YahaColors.background),
-              ),
-              style: ElevatedButton.styleFrom(
-                primary: YahaColors.primary,
-                shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(
-                        Radius.circular(YahaBorderRadius.general))),
               ),
             ),
           ),

@@ -4,10 +4,7 @@ import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:yaha/data/auth/user_name.dart';
 import 'package:yaha/ui/views/auth/widgets/avatar_image.dart';
 import 'package:yaha/ui/views/personal/screen/account-screen.dart';
-
-import 'yaha-colors.dart';
-import 'yaha-font-sizes.dart';
-import 'yaha-space-sizes.dart';
+import 'package:yaha/ui/views/shared/shared.dart';
 
 class MessagingHeader extends ConsumerWidget {
   const MessagingHeader({super.key});
@@ -47,7 +44,14 @@ class MessagingHeader extends ConsumerWidget {
             iconSize: YahaFontSizes.xxLarge,
             color: YahaColors.textColor,
             icon: const Icon(Icons.notifications_outlined),
-            onPressed: () {},
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: (context) => const SuccessPopup(
+                      title: "Messages",
+                      content: "You have 0 messages.",
+                      buttonTitle: "Close"));
+            },
           ),
         ),
       ],
