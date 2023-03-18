@@ -1,5 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:yaha/data/auth/auth_controller.dart';
 
 part 'logged_in_state.g.dart';
 
@@ -7,8 +8,11 @@ part 'logged_in_state.g.dart';
 class LoggedInState extends _$LoggedInState {
   @override
   bool build() {
-    final user = ref.watch(authControllerProvider);
-    state = user != null;
-    return state;
+    FirebaseAuth.instance.authStateChanges().listen((user) {
+      state = user != null;
+      debugPrint("****1 $state");
+    });
+
+    return false;
   }
 }
