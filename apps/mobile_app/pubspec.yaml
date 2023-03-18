@@ -84,6 +84,7 @@ dependencies:
   riverpod_annotation: ^2.0.2
   flutter_background_geolocation: ^4.9.0
   firebase_ui_oauth_google: ^1.0.24
+  google_sign_in: ^6.0.2
 
 flutter_icons:
   android: true

@@ -38,10 +38,19 @@ class MyAppState extends ConsumerState<MyApp> {
       title: 'Yaha',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          primaryColor: YahaColors.primary,
-          focusColor: YahaColors.primary,
-          scaffoldBackgroundColor: YahaColors.background,
-          fontFamily: 'Inter'),
+        primaryColor: YahaColors.primary,
+        focusColor: YahaColors.primary,
+        scaffoldBackgroundColor: YahaColors.background,
+        fontFamily: 'Inter',
+        brightness: Brightness.light,
+        visualDensity: VisualDensity.standard,
+        useMaterial3: true,
+        inputDecorationTheme: InputDecorationTheme(
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+        ),
+      ),
       home: MainScreen(),
       initialRoute: isLoggedIn ? "/" : "/login",
       routes: {'/login': (context) => const LoginScreen()},

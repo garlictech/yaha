@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
-import 'package:yaha/ui/views/auth/screens/login_screen.dart';
 import 'package:yaha/ui/views/hikes/track/screens/tracking.dart';
 import 'package:yaha/ui/views/personal/screen/settings-screen.dart';
 import 'package:yaha/ui/views/search/search_hike_screen.dart';

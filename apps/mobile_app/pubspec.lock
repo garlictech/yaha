@@ -885,7 +885,7 @@ packages:
     source: hosted
     version: "0.0.20-nullsafety.5"
   google_sign_in:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: google_sign_in
       sha256: "750d08ffb4cd469f13068d15844ffd1d60c7ac1ca3c815918ba4ce4af22a2ddb"

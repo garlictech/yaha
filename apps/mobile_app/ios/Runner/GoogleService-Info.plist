@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>613858852311-s502vgo12lg8c3jels5lsdi8d2117lit.apps.googleusercontent.com</string>
+	<string>613858852311-vdvpc1grs3iru6p9gak52rqs8qk6oo9a.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.613858852311-s502vgo12lg8c3jels5lsdi8d2117lit</string>
+	<string>com.googleusercontent.apps.613858852311-vdvpc1grs3iru6p9gak52rqs8qk6oo9a</string>
 	<key>API_KEY</key>
 	<string>AIzaSyCZB1HYkbFErOcXAOiQ59YSlbSi9F_2v0s</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.garlictech.yaha.mobileApp</string>
+	<string>com.garlictech.yaha</string>
 	<key>PROJECT_ID</key>
 	<string>yet-another-projects</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:613858852311:ios:90640932480286efe49f92</string>
+	<string>1:613858852311:ios:880fd32cdd168864e49f92</string>
 </dict>
 </plist>
