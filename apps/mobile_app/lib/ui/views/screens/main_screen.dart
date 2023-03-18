@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:yaha/ui/providers/main_tab_controller.dart';
 import 'package:yaha/ui/views/hikes/track/screens/tracking.dart';
 import 'package:yaha/ui/views/personal/screen/settings-screen.dart';
 import 'package:yaha/ui/views/search/search_hike_screen.dart';
@@ -7,20 +9,18 @@ import 'package:yaha/ui/views/shared/shared.dart';
 
 import 'overview_screen.dart';
 
-class MainScreen extends StatelessWidget {
-  late final PersistentTabController controller;
-
-  MainScreen({Key? key}) : super(key: key) {
-    controller = PersistentTabController(initialIndex: 0);
-  }
+class MainScreen extends ConsumerWidget {
+  const MainScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final controller = ref.read(mainTabControllerProvider);
+
     return PersistentTabView(
       context,
       controller: controller,
-      screens: _buildScreens(),
-      items: _navBarsItems(),
+      screens: buildScreens(),
+      items: navBarsItems(),
       confineInSafeArea: true,
       backgroundColor: YahaColors.background, // Default is Colors.white.
       handleAndroidBackButtonPress: true, // Default is true.
@@ -50,16 +50,16 @@ class MainScreen extends StatelessWidget {
     );
   }
 
-  List<Widget> _buildScreens() {
+  List<Widget> buildScreens() {
     return [
-      OverviewScreen(tabController: controller),
+      const OverviewScreen(),
       const SearchHikeScreen(),
       const TrackingScreen(),
       const SettingsScreen()
     ];
   }
 
-  List<PersistentBottomNavBarItem> _navBarsItems() {
+  List<PersistentBottomNavBarItem> navBarsItems() {
     return [
       PersistentBottomNavBarItem(
           icon: const Icon(Icons.home_rounded),

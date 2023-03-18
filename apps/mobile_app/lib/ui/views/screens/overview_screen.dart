@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:yaha/ui/presenters/home/guest-home-screen-presenter.dart';
 import 'package:yaha/ui/views/hikes/hike/widgets/horizontal-hike-cards.dart';
 import 'package:yaha/ui/views/hikes/home/views/widgets/active_hikes_summary_line.dart';
-import 'package:yaha/ui/views/hikes/home/views/widgets/current_challenges_summary_line.dart';
-import 'package:yaha/ui/views/hikes/home/views/widgets/events_summary_line.dart';
+//import 'package:yaha/ui/views/hikes/home/views/widgets/current_challenges_summary_line.dart';
+//import 'package:yaha/ui/views/hikes/home/views/widgets/events_summary_line.dart';
 import 'package:yaha/ui/views/hikes/home/views/widgets/previous_activities_summary_line.dart';
 import 'package:yaha/ui/views/hikes/home/views/widgets/statistics_summary_line.dart';
 import 'package:yaha/ui/views/shared/shared.dart';
 
 class OverviewScreen extends ConsumerWidget {
-  final PersistentTabController tabController;
-
-  const OverviewScreen({Key? key, required this.tabController})
-      : super(key: key);
+  const OverviewScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -36,7 +32,7 @@ class OverviewScreen extends ConsumerWidget {
                     ),
                     child: Column(
                       children: [
-                        const GlobalHeader(),
+                        const MessagingHeader(),
                         Container(
                             padding: const EdgeInsets.only(
                                 top: YahaSpaceSizes.small),
@@ -59,16 +55,14 @@ class OverviewScreen extends ConsumerWidget {
                         Container(
                           padding:
                               const EdgeInsets.only(top: YahaSpaceSizes.small),
-                          child: PreviousActivitesSummaryLine(
-                              tabController: tabController),
+                          child: const PreviousActivitesSummaryLine(),
                         ),
                         Container(
                           padding:
                               const EdgeInsets.only(top: YahaSpaceSizes.large),
-                          child: ActiveHikesSummaryLine(
-                              tabController: tabController),
+                          child: const ActiveHikesSummaryLine(),
                         ),
-                        Container(
+                        /*Container(
                           padding:
                               const EdgeInsets.only(top: YahaSpaceSizes.large),
                           child: const CurrentChallengesSummaryLine(),
@@ -77,7 +71,7 @@ class OverviewScreen extends ConsumerWidget {
                           padding:
                               const EdgeInsets.only(top: YahaSpaceSizes.small),
                           child: const EventsSummaryLine(),
-                        ),
+                        ),*/
                       ],
                     ),
                   ),

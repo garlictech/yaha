@@ -1,4 +1,4 @@
-export 'widgets/global_header.dart';
+export 'widgets/messaging_header.dart';
 export 'widgets/buttons/back-button.dart';
 export 'widgets/buttons/filter-button.dart';
 export 'widgets/buttons/settings-button.dart';

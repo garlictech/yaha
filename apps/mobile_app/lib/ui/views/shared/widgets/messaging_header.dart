@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:yaha/data/auth/user_name.dart';
 import 'package:yaha/ui/views/auth/widgets/avatar_image.dart';
+import 'package:yaha/ui/views/personal/screen/account-screen.dart';
 
-import 'yaha-border-radius.dart';
 import 'yaha-colors.dart';
 import 'yaha-font-sizes.dart';
 import 'yaha-space-sizes.dart';
 
-class GlobalHeader extends ConsumerWidget {
-  const GlobalHeader({super.key});
+class MessagingHeader extends ConsumerWidget {
+  const MessagingHeader({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -22,14 +23,13 @@ class GlobalHeader extends ConsumerWidget {
             alignment: Alignment.centerLeft,
             child: Row(
               children: [
-                SizedBox(
-                    height: 64,
-                    width: 64,
-                    child: ClipRRect(
-                        borderRadius:
-                            BorderRadius.circular(YahaBorderRadius.xSmall),
-                        child: TextButton(
-                            onPressed: () {}, child: const AvatarImage()))),
+                InkWell(
+                    onTap: () {
+                      PersistentNavBarNavigator.pushNewScreen(context,
+                          screen: const AccountScreen(), withNavBar: false);
+                    },
+                    child: const SizedBox(
+                        height: 50, width: 50, child: AvatarImage())),
                 Container(
                     padding: const EdgeInsets.only(left: YahaSpaceSizes.medium),
                     child: Text(

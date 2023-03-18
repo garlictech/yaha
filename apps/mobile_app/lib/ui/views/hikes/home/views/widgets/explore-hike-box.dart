@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:yaha/ui/providers/main_tab_controller.dart';
 
 import '../../../../shared/shared.dart';
 
-class ExploreHikeBox extends StatelessWidget {
+class ExploreHikeBox extends ConsumerWidget {
   final String topTitle;
   final String bottomTitle;
-  final PersistentTabController tabController;
 
-  const ExploreHikeBox(
-      {Key? key,
-      required this.topTitle,
-      required this.bottomTitle,
-      required this.tabController})
-      : super(key: key);
+  const ExploreHikeBox({
+    Key? key,
+    required this.topTitle,
+    required this.bottomTitle,
+  }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final tabController = ref.read(mainTabControllerProvider);
+
     return Column(
       children: [
         Container(

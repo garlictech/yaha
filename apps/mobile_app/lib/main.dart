@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/config.dart';
 import 'package:yaha/data/auth/logged_in_state.dart';
+import 'package:yaha/ui/views/personal/screen/account-screen.dart';
 import 'package:yaha/ui/views/screens/main_screen.dart';
 import 'package:yaha/ui/views/shared/widgets/yaha-colors.dart';
 
@@ -34,6 +35,7 @@ class MyAppState extends ConsumerState<MyApp> {
   @override
   Widget build(BuildContext context) {
     final isLoggedIn = ref.watch(loggedInStateProvider);
+
     return MaterialApp(
       title: 'Yaha',
       debugShowCheckedModeBanner: false,
@@ -51,9 +53,11 @@ class MyAppState extends ConsumerState<MyApp> {
           ),
         ),
       ),
-      home: MainScreen(),
-      initialRoute: isLoggedIn ? "/" : "/login",
-      routes: {'/login': (context) => const LoginScreen()},
+      home: isLoggedIn ? const MainScreen() : const LoginScreen(),
+      routes: {
+        '/login': (context) => const LoginScreen(),
+        '/account': (context) => const AccountScreen()
+      },
     );
   }
 }

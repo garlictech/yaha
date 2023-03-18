@@ -60,6 +60,9 @@ class LoginScreen extends StatelessWidget {
           Navigator.pushReplacementNamed(context, '/');
         }),
       ],
+      styles: const {
+        EmailFormStyle(signInButtonVariant: ButtonVariant.filled),
+      },
       headerBuilder: header('assets/images/yaha-logo-01-green@2x.png'),
       sideBuilder: sideImage('assets/images/yaha-logo-01-green@2x.png'),
       subtitleBuilder: (context, action) {
@@ -67,8 +70,8 @@ class LoginScreen extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: 8),
           child: Text(
             action == AuthAction.signIn
-                ? "Isn't it time to go outside? Please sign in to continue."
-                : "Isn't it time to go outside? Please create an account to continue.",
+                ? "Isn't it time you got outside? Please sign in to continue."
+                : "Isn't it time you got outside? Please create an account to continue.",
           ),
         );
       },

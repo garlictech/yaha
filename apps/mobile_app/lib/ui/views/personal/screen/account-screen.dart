@@ -13,14 +13,16 @@ class AccountScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final providers = [EmailAuthProvider()];
 
-    return fb.ProfileScreen(
-      providers: providers,
-      actions: [
-        SignedOutAction((context) {
-          PersistentNavBarNavigator.pushNewScreen(context,
-              screen: const LoginScreen(), withNavBar: false);
-        }),
-      ],
-    );
+    return Scaffold(
+        appBar: AppBar(title: const Text("Account profile")),
+        body: fb.ProfileScreen(
+          providers: providers,
+          actions: [
+            SignedOutAction((context) {
+              PersistentNavBarNavigator.pushNewScreen(context,
+                  screen: const LoginScreen(), withNavBar: false);
+            }),
+          ],
+        ));
   }
 }

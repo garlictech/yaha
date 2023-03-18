@@ -63,7 +63,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '613858852311',
     projectId: 'yet-another-projects',
     storageBucket: 'yet-another-projects.appspot.com',
-    iosClientId: '613858852311-s502vgo12lg8c3jels5lsdi8d2117lit.apps.googleusercontent.com',
-    iosBundleId: 'com.garlictech.yaha.mobileApp',
+    iosClientId:
+        '613858852311-s502vgo12lg8c3jels5lsdi8d2117lit.apps.googleusercontent.com',
+    iosBundleId: 'com.garlictech.yaha',
   );
 }
