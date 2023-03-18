@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:yaha/ui/views/personal/screen/statistics-screen.dart';
+import 'package:yaha/ui/views/personal/widgets/statistics.dart';
 import 'package:yaha/ui/views/shared/shared.dart';
-
-import '../../../personal/screen/statistics-screen.dart';
-import '../../../personal/widgets/statistics.dart';
 
 class StatisticsSummaryLine extends StatelessWidget {
   const StatisticsSummaryLine({super.key});

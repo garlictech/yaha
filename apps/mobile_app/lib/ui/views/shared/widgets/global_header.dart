@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yaha/domain/states/auth/auth-state.dart';
-import 'package:yaha/domain/states/user/user-state.dart';
+import 'package:yaha/data/auth/user_name.dart';
+import 'package:yaha/ui/views/auth/widgets/avatar_image.dart';
 
 import 'yaha-border-radius.dart';
 import 'yaha-colors.dart';
@@ -13,9 +13,7 @@ class GlobalHeader extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    AsyncValue userState = ref.watch(userStateProvider);
-    final authState = ref.watch(authStateProvider);
-    final authStateNotifier = ref.watch(authStateProvider.notifier);
+    final userName = ref.watch(userNameProvider);
 
     return Stack(
       alignment: AlignmentDirectional.center,
@@ -28,41 +26,19 @@ class GlobalHeader extends ConsumerWidget {
                     height: 64,
                     width: 64,
                     child: ClipRRect(
-                      borderRadius:
-                          BorderRadius.circular(YahaBorderRadius.xSmall),
-                      child: TextButton(
-                          onPressed: () {
-                            showAlertDialog(context, authStateNotifier);
-                          },
-                          child: userState.when(
-                              loading: () => const CircularProgressIndicator(),
-                              error: (err, stack) => const Text('😱'),
-                              data: (state) => Image.asset(
-                                    state.avatarImage,
-                                    fit: BoxFit.cover,
-                                  ))),
-                    )),
+                        borderRadius:
+                            BorderRadius.circular(YahaBorderRadius.xSmall),
+                        child: TextButton(
+                            onPressed: () {}, child: const AvatarImage()))),
                 Container(
                     padding: const EdgeInsets.only(left: YahaSpaceSizes.medium),
-                    child: userState.when(
-                      loading: () => const CircularProgressIndicator(),
-                      error: (err, stack) => const Text('😱'),
-                      data: (state) => Text(
-                        'Hi ${state.nick}!',
-                        style: const TextStyle(
-                            fontSize: YahaFontSizes.medium,
-                            fontWeight: FontWeight.w600,
-                            color: YahaColors.textColor),
-                      ),
+                    child: Text(
+                      'Hi $userName!',
+                      style: const TextStyle(
+                          fontSize: YahaFontSizes.medium,
+                          fontWeight: FontWeight.w600,
+                          color: YahaColors.textColor),
                     )),
-                ...(authState.loggedIn
-                    ? [
-                        TextButton(
-                          child: const Text("Logout"),
-                          onPressed: () => authStateNotifier.logout(),
-                        )
-                      ]
-                    : [])
               ],
             )),
         Align(
@@ -75,32 +51,6 @@ class GlobalHeader extends ConsumerWidget {
           ),
         ),
       ],
-    );
-  }
-
-  showAlertDialog(BuildContext context, authStateNotifier) {
-    Widget continueButton = TextButton(
-      child: const Text("OK, I'm logged in"),
-      onPressed: () {
-        Navigator.of(context).pop();
-        authStateNotifier.loggedIn();
-      },
-    );
-
-    AlertDialog alert = AlertDialog(
-      title: const Text("Login effect simulator"),
-      content: const Text(
-          "Ok, the login window was up, you logged in successfully.."),
-      actions: [
-        continueButton,
-      ],
-    );
-
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
     );
   }
 }

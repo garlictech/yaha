@@ -9,7 +9,7 @@ mixin SocialLogin {
   BuildContext get buildContext => _context;
   set buildContext(BuildContext c) => _context = c;
 
-  late final ProviderReference _ref;
+  late final Ref _ref;
   get ref => _ref;
   set ref(r) => _ref = r;
 

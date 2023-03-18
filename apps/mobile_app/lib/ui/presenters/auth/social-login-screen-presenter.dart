@@ -11,7 +11,7 @@ import '../../viewmodels/auth/social-login-screen-viewmodel.dart';
 class SocialLoginScreenPresenter
     extends StateNotifier<SocialLoginScreenViewModel> {
   final BuildContext context;
-  final ProviderReference ref;
+  final Ref ref;
 
   SocialLoginScreenPresenter(
       {required this.context, required this.ref, required bool loggedIn})

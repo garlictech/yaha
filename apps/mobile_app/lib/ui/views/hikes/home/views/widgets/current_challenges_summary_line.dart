@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:yaha/ui/views/personal/screen/challenge-detail-screen.dart';
+import 'package:yaha/ui/views/personal/screen/challenges.dart';
+import 'package:yaha/ui/views/personal/widgets/challenge-box.dart';
 
 import '../../../../shared/shared.dart';
-import '../../../personal/screen/challenge-detail-screen.dart';
-import '../../../personal/screen/challenges.dart';
-import '../../../personal/widgets/challenge-box.dart';
 
 class CurrentChallengesSummaryLine extends StatelessWidget {
   const CurrentChallengesSummaryLine({super.key});

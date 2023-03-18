@@ -46,8 +46,8 @@ class HikeSearchState extends $HikeSearchState {
 }
 
 class HikeSearchStateNotifier extends StateNotifier<HikeSearchState> {
-  final Reader read;
-  HikeSearchStateNotifier({required this.read}) : super(HikeSearchState());
+  final Ref ref;
+  HikeSearchStateNotifier({required this.ref}) : super(HikeSearchState());
 
   updateLength(double newLenghtMinState, double newLengthMaxState) =>
       state = state.copyWith(
@@ -68,7 +68,7 @@ class HikeSearchStateNotifier extends StateNotifier<HikeSearchState> {
   updateHits(List<String> newHits) => state = state.copyWith(hits: newHits);
 
   searchAroundLocation(Point origin) {
-    final hikeRepository = read(hikeRepositoryProvider);
+    final hikeRepository = ref.read(hikeRepositoryProvider);
     state = state.copyWith(searching: true, noHits: false);
     hikeRepository
         .searchHikeByRadius(SearchByRadiusInput(
@@ -80,7 +80,7 @@ class HikeSearchStateNotifier extends StateNotifier<HikeSearchState> {
   }
 
   searchInContent(String text) {
-    final hikeRepository = read(hikeRepositoryProvider);
+    final hikeRepository = ref.read(hikeRepositoryProvider);
     state = state.copyWith(searching: true, noHits: false);
     hikeRepository
         .searchHikeByContent(SearchByContentInput(content: text))
@@ -93,4 +93,4 @@ class HikeSearchStateNotifier extends StateNotifier<HikeSearchState> {
 
 final hikeSearchStateProvider =
     StateNotifierProvider<HikeSearchStateNotifier, HikeSearchState>(
-        (ref) => HikeSearchStateNotifier(read: ref.read));
+        (ref) => HikeSearchStateNotifier(ref: ref));

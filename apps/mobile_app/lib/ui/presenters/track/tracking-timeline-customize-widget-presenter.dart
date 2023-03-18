@@ -4,7 +4,7 @@ import '../../viewmodels/track/tracking-timeline-customize-widget-viewmodel.dart
 
 class TrackingTimelineCustomizeWidgetPresenter
     extends StateNotifier<TrackingTimelineCustomizeWidgetViewModel> {
-  final ProviderReference ref;
+  final Ref ref;
 
   TrackingTimelineCustomizeWidgetPresenter({required this.ref})
       : super(TrackingTimelineCustomizeWidgetViewModel());

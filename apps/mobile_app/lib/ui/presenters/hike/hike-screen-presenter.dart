@@ -4,7 +4,7 @@ import 'package:yaha/domain/domain.dart';
 import '../../viewmodels/hikes/hike-screen-viewmodel.dart';
 
 class HikeScreenPresenter extends StateNotifier<HikeScreenViewModel> {
-  final ProviderReference ref;
+  final Ref ref;
   final Hike hike;
 
   HikeScreenPresenter({required this.ref, required this.hike})

@@ -9,7 +9,7 @@ import 'terms-accepted-mixin.dart';
 class SignupScreenPresenter extends StateNotifier<SignupScreenViewModel>
     with SocialLogin, TermsAccepted {
   SignupScreenPresenter(
-      {required BuildContext newContext, required ProviderReference newRef})
+      {required BuildContext newContext, required Ref newRef})
       : super(SignupScreenViewModel()) {
     buildContext = newContext;
     ref = newRef;

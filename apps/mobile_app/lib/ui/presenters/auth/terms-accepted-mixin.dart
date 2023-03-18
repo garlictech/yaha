@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/domain/states/auth/auth-state.dart';
 
 mixin TermsAccepted {
-  late final ProviderReference _ref;
+  late final Ref _ref;
   get ref => _ref;
   set ref(r) => _ref = r;
 

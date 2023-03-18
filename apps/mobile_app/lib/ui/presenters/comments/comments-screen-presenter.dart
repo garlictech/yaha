@@ -4,7 +4,7 @@ import 'package:yaha/domain/domain.dart';
 import 'package:yaha/domain/states/comments/comments-state.dart';
 
 class CommentsScreenPresenter extends StateNotifier<CommentsScreenViewModel> {
-  final ProviderReference ref;
+  final Ref ref;
 
   CommentsScreenPresenter({required this.ref, required List<Comment> comments})
       : super(CommentsScreenViewModel(comments: comments));

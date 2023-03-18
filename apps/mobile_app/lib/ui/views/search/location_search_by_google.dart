@@ -16,9 +16,9 @@ class LocationSearchByGoogleFieldViewModel {
 
 class LocationSearchByGoogleFieldPresenter
     extends StateNotifier<LocationSearchByGoogleFieldViewModel> {
-  final Reader read;
+  final Ref ref;
 
-  LocationSearchByGoogleFieldPresenter({required this.read})
+  LocationSearchByGoogleFieldPresenter({required this.ref})
       : super(LocationSearchByGoogleFieldViewModel(hits: []));
 
   getSuggestions(String pattern) {
@@ -35,7 +35,7 @@ class LocationSearchByGoogleFieldPresenter
   }
 
   onTapCurrentLocation() async {
-    final geoLoc = read(geoLocationRepositoryProvider);
+    final geoLoc = ref.read(geoLocationRepositoryProvider);
     await geoLoc.getCurrentLocation().then((currentLocation) => _getHikes(
         domain.Point(
             latitude: currentLocation.latitude,
@@ -44,14 +44,16 @@ class LocationSearchByGoogleFieldPresenter
   }
 
   _getHikes(domain.Point origin) {
-    read(domain.hikeSearchStateProvider.notifier).searchAroundLocation(origin);
+    ref
+        .read(domain.hikeSearchStateProvider.notifier)
+        .searchAroundLocation(origin);
   }
 }
 
 final presenterInstance = StateNotifierProvider.autoDispose<
         LocationSearchByGoogleFieldPresenter,
         LocationSearchByGoogleFieldViewModel>(
-    (ref) => LocationSearchByGoogleFieldPresenter(read: ref.read));
+    (ref) => LocationSearchByGoogleFieldPresenter(ref: ref));
 
 class LocationSearchByGoogleField extends ConsumerWidget {
   const LocationSearchByGoogleField({Key? key}) : super(key: key);

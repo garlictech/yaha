@@ -3,7 +3,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:yaha/app/providers.dart';
 
 class GeolocationUsecases {
-  final ProviderReference ref;
+  final Ref ref;
 
   GeolocationUsecases({required this.ref});
 

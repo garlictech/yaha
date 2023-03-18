@@ -6,11 +6,14 @@
 
 #include "generated_plugin_registrant.h"
 
+#include <desktop_webview_auth/desktop_webview_auth_plugin.h>
 #include <flutter_js/flutter_js_plugin.h>
 #include <geolocator_windows/geolocator_windows.h>
 #include <url_launcher_windows/url_launcher_windows.h>
 
 void RegisterPlugins(flutter::PluginRegistry* registry) {
+  DesktopWebviewAuthPluginRegisterWithRegistrar(
+      registry->GetRegistrarForPlugin("DesktopWebviewAuthPlugin"));
   FlutterJsPluginRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("FlutterJsPlugin"));
   GeolocatorWindowsRegisterWithRegistrar(

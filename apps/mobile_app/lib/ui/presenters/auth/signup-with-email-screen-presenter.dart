@@ -8,7 +8,7 @@ import 'terms-accepted-mixin.dart';
 class SignupWithEmailPresenter extends StateNotifier<SignupWithEmailViewmodel>
     with TermsAccepted, SocialLogin {
   SignupWithEmailPresenter(
-      {required BuildContext newContext, required ProviderReference newRef})
+      {required BuildContext newContext, required Ref newRef})
       : super(SignupWithEmailViewmodel()) {
     ref = newRef;
     buildContext = newContext;

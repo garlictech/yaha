@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:auto_size_text/auto_size_text.dart';
 import 'yaha-colors.dart';
 import 'yaha-font-sizes.dart';
 
@@ -17,7 +17,7 @@ class YahaScreenHeadTitleText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
+    return AutoSizeText(
       text,
       overflow: TextOverflow.ellipsis,
       maxLines: expanded ? 2 : 1,

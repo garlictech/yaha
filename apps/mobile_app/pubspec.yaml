@@ -35,7 +35,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   flutter_speed_dial: ^6.0.0
-  persistent_bottom_nav_bar: ^4.0.2
+  persistent_bottom_nav_bar: ^5.0.0
   flutter_native_splash: ^2.0.0
   amazon_cognito_identity_dart_2: ^3.0.0
   shared_preferences: ^2.0.6
@@ -51,7 +51,7 @@ dependencies:
   json_annotation: ^4.0.1
   dotted_line: ^3.0.0
   flutter_web_auth: ^0.4.0
-  flutter_riverpod: ^1.0.3
+  flutter_riverpod: ^2.3.0
   dio: ^4.0.0
   equatable: ^2.0.3
   flutter_verification_code: ^1.1.0
@@ -76,6 +76,14 @@ dependencies:
   google_maps_webservice: ^0.0.20-nullsafety.5
   flutter_typeahead: ^4.0.0
   graphql: ^5.1.1
+  auto_size_text: ^3.0.0
+  firebase_auth: ^4.3.0
+  firebase_ui_auth: ^1.1.17
+  firebase_core: ^2.8.0
+  firebase_ui_oauth_apple: ^1.0.24
+  riverpod_annotation: ^2.0.2
+  flutter_background_geolocation: ^4.9.0
+  firebase_ui_oauth_google: ^1.0.24
 
 flutter_icons:
   android: true
@@ -95,11 +103,13 @@ dev_dependencies:
   build_runner: ^2.0.6
   flutter_test:
     sdk: flutter
-  functional_data_generator: ^1.0.0
+  functional_data_generator:
+    path: ../../libs/dart_functional_data/functional_data_generator/
   json_serializable: ^6.0.0
   flutter_lints: ^2.0.1
   flutter_launcher_icons: ^0.10.0
   test: ^1.19.5
+  riverpod_generator: ^2.1.4
 
 dependency_overrides:
   web_socket_channel: 2.2.0

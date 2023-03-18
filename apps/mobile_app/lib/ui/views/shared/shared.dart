@@ -6,7 +6,6 @@ export 'widgets/buttons/show-more-button.dart';
 export 'widgets/buttons/yaha-cta-big.dart';
 export 'widgets/pop-ups/failure-popup.dart';
 export 'widgets/pop-ups/success-popup.dart';
-export 'widgets/bottom-nav-bar-widget.dart';
 export 'widgets/gallery-widget.dart';
 export 'widgets/yaha-border-radius.dart';
 export 'widgets/yaha-box-sizes.dart';

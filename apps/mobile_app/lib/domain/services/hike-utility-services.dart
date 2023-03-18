@@ -5,7 +5,7 @@ import 'package:yaha/domain/use-cases/hike/hike_provider.dart';
 import '../entities/entities.dart';
 
 class HikeUtilityServices {
-  final ProviderReference ref;
+  final Ref ref;
 
   HikeUtilityServices({required this.ref});
 

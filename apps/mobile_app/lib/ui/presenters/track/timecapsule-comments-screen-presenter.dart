@@ -7,7 +7,7 @@ import '../../../domain/entities/comments/comment.dart';
 
 class TimeCapsuleCommentsScreenPresenter
     extends StateNotifier<TimeCapsuleCommentsScreenViewModel> {
-  final ProviderReference ref;
+  final Ref ref;
 
   TimeCapsuleCommentsScreenPresenter(
       {required this.ref, required List<Comment> comments})
