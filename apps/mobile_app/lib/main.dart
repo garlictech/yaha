@@ -4,6 +4,7 @@ import 'package:firebase_ui_oauth_apple/firebase_ui_oauth_apple.dart';
 import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:yaha/config.dart';
 import 'package:yaha/data/auth/logged_in_state.dart';
 import 'package:yaha/ui/views/personal/screen/account-screen.dart';
@@ -36,28 +37,40 @@ class MyAppState extends ConsumerState<MyApp> {
   Widget build(BuildContext context) {
     final isLoggedIn = ref.watch(loggedInStateProvider);
 
-    return MaterialApp(
-      title: 'Yaha',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primaryColor: YahaColors.primary,
-        focusColor: YahaColors.primary,
-        scaffoldBackgroundColor: YahaColors.background,
-        fontFamily: 'Inter',
-        brightness: Brightness.light,
-        visualDensity: VisualDensity.standard,
-        useMaterial3: true,
-        inputDecorationTheme: InputDecorationTheme(
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
+    return RefreshConfiguration(
+        footerTriggerDistance: 15,
+        dragSpeedRatio: 0.91,
+        headerBuilder: () => const MaterialClassicHeader(),
+        footerBuilder: () => const ClassicFooter(),
+        enableLoadingWhenNoData: false,
+        enableRefreshVibrate: false,
+        enableLoadMoreVibrate: false,
+        shouldFooterFollowWhenNotFull: (state) {
+          // If you want load more with noMoreData state ,may be you should return false
+          return false;
+        },
+        child: MaterialApp(
+          title: 'Yaha',
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            primaryColor: YahaColors.primary,
+            focusColor: YahaColors.primary,
+            scaffoldBackgroundColor: YahaColors.background,
+            fontFamily: 'Inter',
+            brightness: Brightness.light,
+            visualDensity: VisualDensity.standard,
+            useMaterial3: true,
+            inputDecorationTheme: InputDecorationTheme(
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
           ),
-        ),
-      ),
-      home: isLoggedIn ? const MainScreen() : const LoginScreen(),
-      routes: {
-        '/login': (context) => const LoginScreen(),
-        '/account': (context) => const AccountScreen()
-      },
-    );
+          home: isLoggedIn ? const MainScreen() : const LoginScreen(),
+          routes: {
+            '/login': (context) => const LoginScreen(),
+            '/account': (context) => const AccountScreen()
+          },
+        ));
   }
 }

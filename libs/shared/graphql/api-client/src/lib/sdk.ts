@@ -1,5 +1,6 @@
 import {
   MutationOptions,
+  OperationVariables,
   QueryOptions,
   SubscriptionOptions,
 } from 'apollo-client';
@@ -43,7 +44,7 @@ type ApolloRequesterOptions<V, R> =
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getSdkRequester =
   (client: AWSAppSyncClient<any>) =>
-  <R, V>(
+  <R, V extends OperationVariables>(
     doc: DocumentNode,
     variables: V,
     options?: ApolloRequesterOptions<V, R>,

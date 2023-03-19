@@ -1,5 +1,5 @@
 overwrite: true
-schema: https://dev.api.yaha.app/GraphQL
+schema: https://38uhprq7de.execute-api.us-east-1.amazonaws.com/prod/GraphQL
 generates:
   libs/gql-api/src/lib/generated/yaha-api.ts:
     hooks:

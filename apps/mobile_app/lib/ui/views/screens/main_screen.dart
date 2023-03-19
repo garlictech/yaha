@@ -52,7 +52,7 @@ class MainScreen extends ConsumerWidget {
 
   List<Widget> buildScreens() {
     return [
-      const OverviewScreen(),
+      OverviewScreen(),
       const SearchHikeScreen(),
       const TrackingScreen(),
       const SettingsScreen()

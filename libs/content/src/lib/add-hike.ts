@@ -475,6 +475,8 @@ export const addHike =
       ...bounds,
     };
 
+    console.log('Processing hike ', hikeData.title);
+
     return pipe(
       path?.features?.[0]?.geometry.coordinates,
       addRouteToNeo4j(deps)(hikeData),

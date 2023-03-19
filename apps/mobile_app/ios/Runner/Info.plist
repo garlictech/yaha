@@ -66,6 +66,8 @@
 	<string>You should never see this, please contact us.</string>
 	<key>NSMotionUsageDescription</key>
 	<string>You should never see this, please contact us.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app requires access to the photo library.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>You should never see this, please contact us.</string>
 	<key>NSUserTrackingUsageDescription</key>
@@ -75,10 +77,7 @@
 	<true/>
 	<key>UIBackgroundModes</key>
 	<array>
-		<string>fetch</string>
 		<string>location</string>
-		<string>processing</string>
-		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

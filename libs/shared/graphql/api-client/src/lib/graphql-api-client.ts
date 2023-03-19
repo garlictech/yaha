@@ -1,4 +1,8 @@
-import { ApolloQueryResult, QueryOptions } from 'apollo-client';
+import {
+  ApolloQueryResult,
+  OperationVariables,
+  QueryOptions,
+} from 'apollo-client';
 import AWSAppSyncClient, { AWSAppSyncClientOptions } from 'aws-appsync/lib';
 import { DocumentNode } from 'graphql';
 import { from, Observable } from 'rxjs';
@@ -20,7 +24,7 @@ export class GraphqlApiClient {
     } as AWSAppSyncClientOptions);
   }
 
-  query<INPUT, OUTPUT>(
+  query<INPUT extends OperationVariables, OUTPUT>(
     document: DocumentNode,
     variables?: INPUT,
     options?: Partial<QueryOptions>,
@@ -34,7 +38,7 @@ export class GraphqlApiClient {
     );
   }
 
-  mutate<INPUT, OUTPUT>(
+  mutate<INPUT extends OperationVariables, OUTPUT>(
     document: DocumentNode,
     variables?: INPUT,
   ): Observable<FetchResult<OUTPUT>> {

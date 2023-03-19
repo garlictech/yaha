@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:yaha/ui/presenters/home/guest-home-screen-presenter.dart';
 import 'package:yaha/ui/views/hikes/hike/widgets/horizontal-hike-cards.dart';
 import 'package:yaha/ui/views/hikes/home/views/widgets/active_hikes_summary_line.dart';
@@ -11,14 +12,23 @@ import 'package:yaha/ui/views/hikes/widgets/random_hikes_worldwide.dart';
 import 'package:yaha/ui/views/shared/shared.dart';
 
 class OverviewScreen extends ConsumerWidget {
-  const OverviewScreen({Key? key}) : super(key: key);
+  OverviewScreen({Key? key}) : super(key: key);
+
+  final RefreshController refreshController =
+      RefreshController(initialRefresh: false);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final viewModel = ref.watch(guestHomeScreenMVPProvider);
 
     return Scaffold(
-      body: CustomScrollView(
+        body: SmartRefresher(
+      controller: refreshController,
+      enablePullDown: true,
+      onRefresh: () {
+        refreshController.refreshCompleted();
+      },
+      child: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: <Widget>[
           SliverList(
@@ -80,6 +90,6 @@ class OverviewScreen extends ConsumerWidget {
           ),
         ],
       ),
-    );
+    ));
   }
 }
