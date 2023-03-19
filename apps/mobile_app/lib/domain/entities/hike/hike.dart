@@ -77,6 +77,10 @@ class Hike {
         images.isNotEmpty ? (images..shuffle).first.card : null;
   }
 
+  removeImage(String imageUrl) {
+    route.images.removeWhere((element) => element.card == imageUrl);
+  }
+
   factory Hike.fromJson(Map<String, dynamic> json) => _$HikeFromJson(json);
 
   Map<String, dynamic> toJson() => _$HikeToJson(this);

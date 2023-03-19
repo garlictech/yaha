@@ -6,8 +6,13 @@ import 'package:yaha/domain/use-cases/hike/active_hike_provider.dart';
 
 final weatherPoisOfHikeProvider =
     FutureProvider.family<List<PoiOfHike>, String>((ref, hikeId) async {
-  final hike = await ref.watch(hikeProvider(hikeId).future);
+  final hike = ref.read(cachedHikeProvider(hikeId)).value;
   final activeHike = await ref.watch(activeHikeProvider(hikeId).future);
+
+  if (hike == null || activeHike == null) {
+    return [];
+  }
+
   final weatherApi = ref.read(weatherApiProvider);
   final weather = await weatherApi.getWeatherAround(
       Location(lat: hike.startPoint.latitude, lon: hike.startPoint.longitude));
@@ -25,7 +30,7 @@ final weatherPoisOfHikeProvider =
       .map((weatherItem) {
     debugPrint(
         "WEATHER LOC ${Waypoint(location: getLocationOfEvent(weatherItem))}");
-    debugPrint("WEATHER  ${weatherItem}");
+    debugPrint("WEATHER  weatherItem");
     return PoiOfHike(
         poi: Poi(
             id: "${hikeId}_WEATHER",

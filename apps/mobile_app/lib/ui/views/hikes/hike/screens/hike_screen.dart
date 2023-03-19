@@ -122,7 +122,7 @@ class HikeScreen extends ConsumerWidget {
                     AnimatedSwitcher(
                       duration: const Duration(milliseconds: 1000),
                       child: YahaImage(
-                          key: UniqueKey(), imageUrl: hike.mainImageUrl),
+                          key: UniqueKey(), imageUrl: hike.mainImageUrl!),
                     ),
                   Container(
                     decoration: BoxDecoration(

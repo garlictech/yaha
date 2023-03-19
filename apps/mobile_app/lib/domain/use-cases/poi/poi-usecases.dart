@@ -8,24 +8,33 @@ final poisAroundHikeProvider =
     FutureProvider.family<List<Poi>, String>((ref, hikeId) async {
   final defaults = ref.read(defaultsProvider);
   final poiUtilities = ref.read(poiUtilityServicesProvider);
-  final hike = await ref.watch(hikeProvider(hikeId).future);
-  return poiUtilities.getOffroutePoisOfHike(
-      hike, HikingSettings(speed: defaults.averageSpeedKmh));
+  final hike = await ref.read(cachedHikeProvider(hikeId).future);
+  return hike == null
+      ? Future.value([])
+      : poiUtilities.getOffroutePoisOfHike(
+          hike, HikingSettings(speed: defaults.averageSpeedKmh));
 });
 
 final poisAlongHikeProvider =
     FutureProvider.family<List<PoiOfHike>, String>((ref, hikeId) async {
   final defaults = ref.read(defaultsProvider);
   final poiUtilities = ref.read(poiUtilityServicesProvider);
-  final hike = await ref.watch(hikeProvider(hikeId).future);
-  return poiUtilities.getOnroutePoisOfHike(
-      hike, HikingSettings(speed: defaults.averageSpeedKmh));
+  final hike = await ref.read(cachedHikeProvider(hikeId).future);
+  return hike == null
+      ? Future.value([])
+      : poiUtilities.getOnroutePoisOfHike(
+          hike, HikingSettings(speed: defaults.averageSpeedKmh));
 });
 
 final endPointsOfHikeProvider =
-    FutureProvider.family<Tuple2<PoiOfHike, PoiOfHike>, String>(
+    FutureProvider.family<Tuple2<PoiOfHike, PoiOfHike>?, String>(
         (ref, hikeId) async {
-  final hike = await ref.watch(hikeProvider(hikeId).future);
+  final hike = await ref.read(cachedHikeProvider(hikeId).future);
+
+  if (hike == null) {
+    return null;
+  }
+
   final defaults = ref.read(defaultsProvider);
 
   final start = PoiOfHike(
@@ -61,6 +70,11 @@ final importantPoisAlongHikeWithYahaPoisProvider =
   final poisAlongHike = await ref
       .watch(touristicPoisAlongHikeSortedByDistanceProvider(hikeId).future);
   final endPoints = await ref.watch(endPointsOfHikeProvider(hikeId).future);
+
+  if (endPoints == null) {
+    return [];
+  }
+
   final weatherPois = await ref.watch(weatherPoisOfHikeProvider(hikeId).future);
   final sortedPois = await PoiUtils.sortByDistanceFromHikeStart(
       PoiUtils.selectTouristicPois<PoiOfHike>(poisAlongHike) + weatherPois);

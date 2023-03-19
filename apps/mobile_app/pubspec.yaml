@@ -85,6 +85,7 @@ dependencies:
   flutter_background_geolocation: ^4.9.0
   firebase_ui_oauth_google: ^1.0.24
   google_sign_in: ^6.0.2
+  cached_network_image: ^3.2.3
 
 flutter_icons:
   android: true
