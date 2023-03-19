@@ -3,11 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:graphql/client.dart';
 import 'package:yaha/data/utils/neo4j-repository.dart';
 import 'package:yaha/domain/domain.dart';
+import 'package:yaha/domain/entities/hike/hike_entity.dart';
 
-class HikeRepositoryNeo4j extends RepositoryNeo4j<Hike>
+class HikeRepositoryNeo4j extends RepositoryNeo4j<HikeEntity>
     implements HikeRepository {
   HikeRepositoryNeo4j({required Ref ref})
-      : super(ref: ref, fromJson: Hike.fromJson);
+      : super(ref: ref, fromJson: HikeEntity.fromJson);
 
   @override
   getHikeList() async {

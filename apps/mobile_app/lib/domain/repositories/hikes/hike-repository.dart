@@ -1,8 +1,10 @@
+import 'package:yaha/domain/entities/hike/hike_entity.dart';
+
 import '../../entities/entities.dart';
 
 abstract class HikeRepository {
   Future<List<String>> getHikeList();
-  Future<Hike> getHike(String id);
+  Future<HikeEntity> getHike(String id);
   Future<List<String>> searchHikeByRadius(SearchByRadiusInput input);
   Future<List<String>> searchHikeByContent(SearchByContentInput content);
   Future<List<String>> getRandomHikes(int limit);

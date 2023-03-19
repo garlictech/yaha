@@ -1,46 +1,45 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:yaha/domain/entities/shared/description.dart';
+import 'package:yaha/domain/entities/shared/route.dart';
 import 'package:yaha/utils/geometry/geocalc.dart';
 
 import '../../game-rules.dart';
 import '../image/image.dart';
-import '../shared/description.dart';
 import '../shared/point.dart';
-import '../shared/route.dart';
+import 'hike_entity.dart';
 
-part 'hike.g.dart';
-
-@JsonSerializable(explicitToJson: true)
 class Hike {
-  final String id;
-  final List<Description> descriptions;
-  final Route route;
+  double? _trailLength;
 
-  @JsonKey(ignore: true)
-  double? trailLength_;
-
-  @JsonKey(ignore: true)
   double? uphill_;
 
-  @JsonKey(ignore: true)
   double? downhill_;
 
-  @JsonKey(ignore: true)
   int? difficulty_;
 
-  @JsonKey(ignore: true)
   int? score_;
 
-  @JsonKey(ignore: true)
-  String? _mainImageUrl;
+  String? mainImageUrl_;
+
+  Route? route_;
+
+  final HikeEntity hike;
 
   Hike({
-    required this.id,
-    required this.descriptions,
-    required this.route,
+    required this.hike,
   });
 
+  String get id {
+    return hike.id;
+  }
+
+  List<Description> get descriptions {
+    return hike.descriptions;
+  }
+
+  Route get route => route_ ??= Route(route: hike.route);
+
   double get trailLength =>
-      trailLength_ ??= GeoCalc.lineLength(route.coordinatesAsPoints);
+      _trailLength ??= GeoCalc.lineLength(route.coordinatesAsPoints);
 
   double get uphill =>
       uphill_ ??= GeoCalc.calculateUphill(route.coordinatesAsPoints);
@@ -73,15 +72,11 @@ class Hike {
   }
 
   String? get mainImageUrl {
-    return _mainImageUrl ??=
+    return mainImageUrl_ ??=
         images.isNotEmpty ? (images..shuffle).first.card : null;
   }
 
   removeImage(String imageUrl) {
     route.images.removeWhere((element) => element.card == imageUrl);
   }
-
-  factory Hike.fromJson(Map<String, dynamic> json) => _$HikeFromJson(json);
-
-  Map<String, dynamic> toJson() => _$HikeToJson(this);
 }

@@ -1,26 +1,19 @@
-import 'package:json_annotation/json_annotation.dart';
 import 'package:yaha/domain/domain.dart';
 
-part 'route.g.dart';
+import 'route_entity.dart';
 
-@JsonSerializable(explicitToJson: true)
-class Route {
-  final String id;
-  final List<Waypoint> coordinates;
-  final List<Image> images;
-  final String? municipality;
+class Route extends RouteEntity {
+  LineStringData? asLineString_;
 
-  @JsonKey(ignore: true)
-  LineStringData? _asLineString;
-
-  Route(
-      {required this.id,
-      required this.coordinates,
-      required this.images,
-      this.municipality});
+  Route({required RouteEntity route})
+      : super(
+            id: route.id,
+            coordinates: route.coordinates,
+            images: route.images,
+            municipality: route.municipality);
 
   LineStringData get asLineString {
-    return _asLineString ??= LineStringData(
+    return asLineString_ ??= LineStringData(
         type: "LineString",
         coordinates: coordinates
             .map((coord) => [
@@ -36,8 +29,4 @@ class Route {
 
   List<Point> get coordinatesAsPoints =>
       coordinates.map((coord) => coord.location).toList();
-
-  factory Route.fromJson(Map<String, dynamic> json) => _$RouteFromJson(json);
-
-  Map<String, dynamic> toJson() => _$RouteToJson(this);
 }
