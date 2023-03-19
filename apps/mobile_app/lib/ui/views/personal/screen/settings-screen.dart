@@ -83,7 +83,6 @@ class SettingsScreen extends ConsumerWidget {
                                             color: YahaColors.textColor)),
                                     Icon(
                                       Icons.chevron_right_rounded,
-                                      color: YahaColors.primary,
                                       size: YahaFontSizes.xxLarge,
                                     )
                                   ],
@@ -107,7 +106,6 @@ class SettingsScreen extends ConsumerWidget {
                                         color: YahaColors.textColor)),
                                 Icon(
                                   Icons.chevron_right_rounded,
-                                  color: YahaColors.primary,
                                   size: YahaFontSizes.xxLarge,
                                 )
                               ],
@@ -140,7 +138,6 @@ class SettingsScreen extends ConsumerWidget {
                                           color: YahaColors.textColor)),
                                   Icon(
                                     Icons.chevron_right_rounded,
-                                    color: YahaColors.primary,
                                     size: YahaFontSizes.xxLarge,
                                   )
                                 ],
@@ -165,7 +162,6 @@ class SettingsScreen extends ConsumerWidget {
                                         color: YahaColors.textColor)),
                                 Icon(
                                   Icons.chevron_right_rounded,
-                                  color: YahaColors.primary,
                                   size: YahaFontSizes.xxLarge,
                                 )
                               ],
@@ -197,7 +193,6 @@ class SettingsScreen extends ConsumerWidget {
                                         color: YahaColors.textColor)),
                                 Icon(
                                   Icons.chevron_right_rounded,
-                                  color: YahaColors.primary,
                                   size: YahaFontSizes.xxLarge,
                                 )
                               ],
@@ -221,7 +216,6 @@ class SettingsScreen extends ConsumerWidget {
                                         color: YahaColors.textColor)),
                                 Icon(
                                   Icons.chevron_right_rounded,
-                                  color: YahaColors.primary,
                                   size: YahaFontSizes.xxLarge,
                                 )
                               ],
@@ -245,7 +239,6 @@ class SettingsScreen extends ConsumerWidget {
                                         color: YahaColors.textColor)),
                                 Icon(
                                   Icons.chevron_right_rounded,
-                                  color: YahaColors.primary,
                                   size: YahaFontSizes.xxLarge,
                                 )
                               ],

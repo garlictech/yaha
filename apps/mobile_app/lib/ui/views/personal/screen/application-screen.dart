@@ -50,9 +50,9 @@ class ApplicationScreen extends ConsumerWidget {
                             bottom: YahaSpaceSizes.medium),
                         child: const Text('Language',
                             style: TextStyle(
-                                fontSize: YahaFontSizes.medium,
-                                fontWeight: FontWeight.w600,
-                                color: YahaColors.textColor)),
+                              fontSize: YahaFontSizes.medium,
+                              fontWeight: FontWeight.w600,
+                            )),
                         decoration:
                             const BoxDecoration(color: YahaColors.accentColor),
                       ),
@@ -113,9 +113,9 @@ class ApplicationScreen extends ConsumerWidget {
                             bottom: YahaSpaceSizes.medium),
                         child: const Text('Metrics',
                             style: TextStyle(
-                                fontSize: YahaFontSizes.medium,
-                                fontWeight: FontWeight.w600,
-                                color: YahaColors.textColor)),
+                              fontSize: YahaFontSizes.medium,
+                              fontWeight: FontWeight.w600,
+                            )),
                         decoration:
                             const BoxDecoration(color: YahaColors.accentColor),
                         height: 56.0,
@@ -146,7 +146,6 @@ class ApplicationScreen extends ConsumerWidget {
                                 ),
                                 child: ToggleSwitch(
                                   minWidth: YahaBoxSizes.toggleWidth,
-                                  activeBgColor: const [YahaColors.primary],
                                   inactiveBgColor: YahaColors.accentColor,
                                   initialLabelIndex:
                                       appSettingsState.distanceInitialIndex,
@@ -187,7 +186,6 @@ class ApplicationScreen extends ConsumerWidget {
                                     right: YahaSpaceSizes.medium),
                                 child: ToggleSwitch(
                                   minWidth: YahaBoxSizes.toggleWidth,
-                                  activeBgColor: const [YahaColors.primary],
                                   inactiveBgColor: YahaColors.accentColor,
                                   initialLabelIndex:
                                       appSettingsState.temperatureInitialIndex,
@@ -229,7 +227,6 @@ class ApplicationScreen extends ConsumerWidget {
                                     bottom: YahaSpaceSizes.general),
                                 child: ToggleSwitch(
                                   minWidth: YahaBoxSizes.toggleWidth,
-                                  activeBgColor: const [YahaColors.primary],
                                   inactiveBgColor: YahaColors.accentColor,
                                   initialLabelIndex:
                                       appSettingsState.timeFormatInitialIndex,

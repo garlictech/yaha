@@ -63,38 +63,23 @@ SpeedDial buildSpeedDial() {
       SpeedDialChild(
         child:
             const Icon(Icons.settings_rounded, color: YahaColors.accentColor),
-        backgroundColor: YahaColors.primary,
-        /*label: 'Settings',
-        labelStyle: TextStyle(
-            fontSize: YahaFontSizes.small, color: YahaColors.textColor),*/
         onTap: () => debugPrint('FIRST CHILD'),
         onLongPress: () => debugPrint('FIRST CHILD LONG PRESS'),
       ),
       SpeedDialChild(
         child: const Icon(Icons.comment_rounded, color: YahaColors.accentColor),
-        backgroundColor: YahaColors.primary,
-        /*label: 'Comment',
-        labelStyle: TextStyle(
-            fontSize: YahaFontSizes.small, color: YahaColors.textColor),*/
         onTap: () => debugPrint('SECOND CHILD'),
         onLongPress: () => debugPrint('SECOND CHILD LONG PRESS'),
       ),
       SpeedDialChild(
         child:
             const Icon(Icons.bookmark_rounded, color: YahaColors.accentColor),
-        backgroundColor: YahaColors.primary,
-        /*label: 'Bookmark',
-        labelStyle: TextStyle(fontSize: YahaFontSizes.small),*/
         onTap: () => debugPrint('THIRD CHILD'),
         onLongPress: () => debugPrint('THIRD CHILD LONG PRESS'),
       ),
       SpeedDialChild(
         child:
             const Icon(Icons.download_rounded, color: YahaColors.accentColor),
-        backgroundColor: YahaColors.primary,
-        /*label: 'Download',
-        labelStyle: TextStyle(
-            fontSize: YahaFontSizes.small, color: YahaColors.textColor),*/
         onTap: () => debugPrint('THIRD CHILD'),
         onLongPress: () => debugPrint('THIRD CHILD LONG PRESS'),
       ),
@@ -410,7 +395,6 @@ class HikeScreenShowOutlineButton extends StatelessWidget {
             fontWeight: FontWeight.w600,
           )),
       style: ElevatedButton.styleFrom(
-        primary: YahaColors.primary,
         shape: const RoundedRectangleBorder(
             borderRadius:
                 BorderRadius.all(Radius.circular(YahaBorderRadius.general))),
@@ -437,7 +421,6 @@ class HikeScreenStartHikeButton extends StatelessWidget {
             fontWeight: FontWeight.w600,
           )),
       style: ElevatedButton.styleFrom(
-        primary: YahaColors.primary,
         shape: const RoundedRectangleBorder(
             borderRadius:
                 BorderRadius.all(Radius.circular(YahaBorderRadius.general))),

@@ -22,7 +22,6 @@ class SuccessPopup extends StatelessWidget {
           borderRadius: BorderRadius.circular(YahaBorderRadius.general)),
       title: const Icon(
         Icons.task_alt_rounded,
-        color: YahaColors.primary,
         size: YahaIconSizes.xxxLarge,
       ),
       content: Column(
@@ -63,7 +62,6 @@ class SuccessPopup extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () => Navigator.pop(context, 'OK'),
               style: ElevatedButton.styleFrom(
-                backgroundColor: YahaColors.primary,
                 shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(
                         Radius.circular(YahaBorderRadius.general))),

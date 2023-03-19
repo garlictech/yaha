@@ -74,11 +74,9 @@ class LocationSearchByGoogleField extends ConsumerWidget {
                 fontWeight: FontWeight.w500,
                 color: YahaColors.textColor,
                 fontSize: YahaFontSizes.small),
-            cursorColor: YahaColors.primary,
             decoration: InputDecoration(
                 focusColor: YahaColors.military,
                 labelText: "Search hike",
-                labelStyle: TextStyle(color: YahaColors.primary),
                 contentPadding: EdgeInsets.only(
                     left: YahaSpaceSizes.medium, bottom: YahaSpaceSizes.small),
                 errorStyle: TextStyle(

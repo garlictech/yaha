@@ -16,24 +16,28 @@ import { tagImage } from '@yaha/backend/image-tagger';
 import * as OE from 'fp-ts-rxjs/lib/ObservableEither';
 
 const poiQuery = `
-match (i:Image {banned: false})-[:TAKEN_AT]->(p:Poi) 
-with p, count(i) as cnt
-where cnt < 11
+match (p:Poi) 
+optional match (i:Image {banned: false})-[:TAKEN_AT]->(p:Poi) 
+with p, count(i) as cnt_i
+where cnt_i < 11
 match (i:Image)-[:TAKEN_AT]->(p) where i.processed is null
-with p, cnt, count(i) as pcnt, i
+with p, count(i) as pcnt, i
 where pcnt > 0
-return i limit 1
+return i limit 10
 `;
 
 const hikeQuery = `
-match (i:Image {banned: false})-[:TAKEN_AT]->(p:Route) 
-with p, count(i) as cnt
-where cnt < 31
-match (i:Image)-[:TAKEN_AT]->(p) where i.processed is null
-with p, cnt, count(i) as pcnt, i
+match (r:Route) 
+optional match (i:Image {banned: false})-[:TAKEN_AT]->(r)
+with r, count(i) as cnt_i
+where cnt_i < 31
+match (i:Image)-[:TAKEN_AT]->(r) where i.processed is null
+with r, count(i) as pcnt, i
 where pcnt > 0
-return i limit 1
+return i limit 31
 `;
+
+let cnt = 0;
 
 export const tagUntaggedImagesOfEntity = (deps: Neo4jdeps) => (query: string) =>
   pipe(
@@ -48,8 +52,10 @@ export const tagUntaggedImagesOfEntity = (deps: Neo4jdeps) => (query: string) =>
         })),
       ),
     ),
+    tap(x => console.log(`PROCESSING ${x.length} images...`)),
     switchMap(x => from(x)),
     concatMap(image => {
+      console.log(`HANDLED ${cnt++} IMAGES`);
       return tagImage(image.url).pipe(
         OE.fold(
           () =>

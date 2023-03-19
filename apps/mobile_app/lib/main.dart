@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:yaha/config.dart';
 import 'package:yaha/data/auth/logged_in_state.dart';
+import 'package:yaha/ui/theme.dart';
 import 'package:yaha/ui/views/personal/screen/account-screen.dart';
 import 'package:yaha/ui/views/screens/main_screen.dart';
 import 'package:yaha/ui/views/shared/widgets/yaha-colors.dart';
@@ -52,20 +53,7 @@ class MyAppState extends ConsumerState<MyApp> {
         child: MaterialApp(
           title: 'Yaha',
           debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            primaryColor: YahaColors.primary,
-            focusColor: YahaColors.primary,
-            scaffoldBackgroundColor: YahaColors.background,
-            fontFamily: 'Inter',
-            brightness: Brightness.light,
-            visualDensity: VisualDensity.standard,
-            useMaterial3: true,
-            inputDecorationTheme: InputDecorationTheme(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
-            ),
-          ),
+          theme: yahaTheme,
           home: isLoggedIn ? const MainScreen() : const LoginScreen(),
           routes: {
             '/login': (context) => const LoginScreen(),

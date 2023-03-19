@@ -59,7 +59,6 @@ class ExploreHikeBox extends ConsumerWidget {
                     tabController.jumpToTab(1);
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: YahaColors.primary,
                     shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(
                             Radius.circular(YahaBorderRadius.general))),

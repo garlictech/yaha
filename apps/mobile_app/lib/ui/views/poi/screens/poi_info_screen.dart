@@ -162,9 +162,9 @@ class PoiInfoScreen extends ConsumerWidget {
                                 child: const Icon(Icons.schedule_outlined)),
                             const Text('Open',
                                 style: TextStyle(
-                                    fontSize: YahaFontSizes.small,
-                                    fontWeight: FontWeight.w500,
-                                    color: YahaColors.primary)),
+                                  fontSize: YahaFontSizes.small,
+                                  fontWeight: FontWeight.w500,
+                                )),
                             const Text(' - closing: 18:00',
                                 style: TextStyle(
                                     fontSize: YahaFontSizes.small,
@@ -242,7 +242,6 @@ class PoiInfoScreen extends ConsumerWidget {
                                   fontWeight: FontWeight.w600,
                                 )),
                             style: ElevatedButton.styleFrom(
-                              primary: YahaColors.primary,
                               shape: const RoundedRectangleBorder(
                                   borderRadius: BorderRadius.all(
                                       Radius.circular(

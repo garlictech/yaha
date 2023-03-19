@@ -149,9 +149,7 @@ class HikeFilters extends ConsumerWidget {
               bottom: YahaSpaceSizes.xLarge),
           child: ToggleSwitch(
             minWidth: 100,
-            activeBgColor: const [YahaColors.primary],
             inactiveBgColor: YahaColors.accentColor,
-            dividerColor: YahaColors.primary,
             initialLabelIndex: filterSettingsState.difficultyIndex,
             totalSwitches: 3,
             labels: const ['1', '2', '3'],

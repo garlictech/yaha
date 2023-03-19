@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:yaha/ui/providers/main_tab_controller.dart';
-import 'package:yaha/ui/views/hikes/track/screens/tracking.dart';
 import 'package:yaha/ui/views/personal/screen/settings-screen.dart';
 import 'package:yaha/ui/views/search/search_hike_screen.dart';
 import 'package:yaha/ui/views/shared/shared.dart';
 
 import 'overview_screen.dart';
+import 'tracking.dart';
 
 class MainScreen extends ConsumerWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -62,29 +62,13 @@ class MainScreen extends ConsumerWidget {
   List<PersistentBottomNavBarItem> navBarsItems() {
     return [
       PersistentBottomNavBarItem(
-          icon: const Icon(Icons.home_rounded),
-          title: ("Home"),
-          activeColorPrimary: YahaColors.accentColorDark,
-          activeColorSecondary: YahaColors.primary,
-          inactiveColorPrimary: YahaColors.textColor),
+          icon: const Icon(Icons.home_rounded), title: ("Home")),
       PersistentBottomNavBarItem(
-          icon: const Icon(Icons.travel_explore),
-          title: ("Explore"),
-          activeColorPrimary: YahaColors.accentColorDark,
-          activeColorSecondary: YahaColors.primary,
-          inactiveColorPrimary: YahaColors.textColor),
+          icon: const Icon(Icons.travel_explore), title: ("Explore")),
       PersistentBottomNavBarItem(
-          icon: const Icon(Icons.play_circle_fill),
-          title: ("Track"),
-          activeColorPrimary: YahaColors.accentColorDark,
-          activeColorSecondary: YahaColors.primary,
-          inactiveColorPrimary: YahaColors.textColor),
+          icon: const Icon(Icons.play_circle_fill), title: ("Track")),
       PersistentBottomNavBarItem(
-          icon: const Icon(Icons.face_rounded),
-          title: ("Profile"),
-          activeColorPrimary: YahaColors.accentColorDark,
-          activeColorSecondary: YahaColors.primary,
-          inactiveColorPrimary: YahaColors.textColor)
+          icon: const Icon(Icons.face_rounded), title: ("Profile")),
     ];
   }
 }

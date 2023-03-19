@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 class YahaColors {
   // YAHA THEME COLORS
-  static const Color primary = const Color(0xFF007D46); // DIFFICULTY - EASY
   static const Color lightGreen = const Color(0xFF6EC341);
   static const Color secondary = const Color(0xFF0091FC); // DIFFICULTY - MEDIUM
   static const Color warning = const Color(0xFFF5B800);
@@ -35,11 +34,6 @@ class YahaColors {
   static const Color publicTransport = const Color(0XFF5A5AA3);
   static const Color timeCapsule = const Color(0xFFF7A414);
   static const Color timeCapsuleBackground = const Color(0XFFFDEDD0);
-
-  // AUTH BUTTON COLORS
-  static const Color facebook = const Color(0xFF3B5998);
-  static const Color google = const Color(0xFF4285F4);
-  static const Color apple = const Color(0xFF000000);
 
   const YahaColors();
 }
