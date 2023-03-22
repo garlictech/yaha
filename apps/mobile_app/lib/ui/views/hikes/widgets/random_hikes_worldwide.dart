@@ -9,8 +9,6 @@ class RandomHikesWorldwide extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final hikes = ref.watch(bestHikesNearbyProvider);
-
     return HorizontalHikeCards(
         title: 'Some hikes around the world',
         hikeListProvider: bestHikesOfTheWorldProvider);

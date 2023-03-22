@@ -13,12 +13,9 @@ class PreviousActivitesSummaryLine extends StatelessWidget {
         Container(
           padding: const EdgeInsets.only(bottom: YahaSpaceSizes.medium),
           alignment: Alignment.centerLeft,
-          child: const Text(
+          child: Text(
             'Previous activities',
-            style: TextStyle(
-                fontSize: YahaFontSizes.medium,
-                fontWeight: FontWeight.w600,
-                color: YahaColors.textColor),
+            style: Theme.of(context).textTheme.titleMedium,
           ),
         ),
         const ExploreHikeBox(

@@ -31,10 +31,7 @@ class MessagingHeader extends ConsumerWidget {
                     padding: const EdgeInsets.only(left: YahaSpaceSizes.medium),
                     child: Text(
                       'Hi $userName!',
-                      style: const TextStyle(
-                          fontSize: YahaFontSizes.medium,
-                          fontWeight: FontWeight.w600,
-                          color: YahaColors.textColor),
+                      style: Theme.of(context).textTheme.titleMedium,
                     )),
               ],
             )),

@@ -22,7 +22,6 @@ class MainScreen extends ConsumerWidget {
       screens: buildScreens(),
       items: navBarsItems(),
       confineInSafeArea: true,
-      backgroundColor: YahaColors.background, // Default is Colors.white.
       handleAndroidBackButtonPress: true, // Default is true.
       resizeToAvoidBottomInset:
           true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
@@ -60,15 +59,24 @@ class MainScreen extends ConsumerWidget {
   }
 
   List<PersistentBottomNavBarItem> navBarsItems() {
+    const activeColorPrimary = YahaColors.darkGreen;
     return [
       PersistentBottomNavBarItem(
-          icon: const Icon(Icons.home_rounded), title: ("Home")),
+          icon: const Icon(Icons.home_rounded),
+          title: ("Home"),
+          activeColorPrimary: activeColorPrimary),
       PersistentBottomNavBarItem(
-          icon: const Icon(Icons.travel_explore), title: ("Explore")),
+          icon: const Icon(Icons.travel_explore),
+          title: ("Explore"),
+          activeColorPrimary: activeColorPrimary),
       PersistentBottomNavBarItem(
-          icon: const Icon(Icons.play_circle_fill), title: ("Track")),
+          icon: const Icon(Icons.play_circle_fill),
+          title: ("Track"),
+          activeColorPrimary: activeColorPrimary),
       PersistentBottomNavBarItem(
-          icon: const Icon(Icons.face_rounded), title: ("Profile")),
+          icon: const Icon(Icons.face_rounded),
+          title: ("Profile"),
+          activeColorPrimary: activeColorPrimary),
     ];
   }
 }

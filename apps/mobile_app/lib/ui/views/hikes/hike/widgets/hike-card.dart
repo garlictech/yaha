@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/domain/use-cases/hike/cached_hike.dart';
@@ -21,7 +22,7 @@ class HikeCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
         body: ClipRRect(
-            borderRadius: BorderRadius.circular(YahaBorderRadius.xSmall),
+            borderRadius: BorderRadius.circular(YahaBorderRadius.general),
             child: Consumer(builder: (c, ref, child) {
               return ref.watch(cachedHikeProvider(hikeId)).when(
                     loading: () => const Center(
@@ -69,17 +70,15 @@ class HikeCard extends ConsumerWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text(
+                                        AutoSizeText(
                                           (hike.descriptions[0].title ??
-                                                  'A nice hike')
-                                              .toUpperCase(),
+                                              'A nice hike'),
                                           overflow: TextOverflow.ellipsis,
                                           maxLines: 3,
-                                          style: const TextStyle(
-                                            fontSize: YahaFontSizes.small,
-                                            fontWeight: FontWeight.w700,
-                                            color: YahaColors.background,
-                                          ),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .labelLarge
+                                              ?.copyWith(color: Colors.white),
                                         ),
                                         if (hike.route.municipality != null)
                                           Container(

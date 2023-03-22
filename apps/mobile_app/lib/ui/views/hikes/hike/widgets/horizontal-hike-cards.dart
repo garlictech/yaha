@@ -24,10 +24,7 @@ class HorizontalHikeCards extends ConsumerWidget {
         alignment: Alignment.centerLeft,
         child: Text(
           title,
-          style: const TextStyle(
-              fontSize: YahaFontSizes.medium,
-              fontWeight: FontWeight.w600,
-              color: YahaColors.textColor),
+          style: Theme.of(context).textTheme.titleMedium,
         ),
       ),
       SizedBox(

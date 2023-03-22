@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:yaha/ui/views/personal/screen/statistics-screen.dart';
 import 'package:yaha/ui/views/personal/widgets/statistics.dart';
 import 'package:yaha/ui/views/shared/shared.dart';
 
@@ -12,12 +11,9 @@ class StatisticsSummaryLine extends StatelessWidget {
       children: [
         Container(
           alignment: Alignment.centerLeft,
-          child: const Text(
+          child: Text(
             'Statistics',
-            style: TextStyle(
-                fontSize: YahaFontSizes.medium,
-                fontWeight: FontWeight.w600,
-                color: YahaColors.textColor),
+            style: Theme.of(context).textTheme.titleMedium,
           ),
         ),
         Container(
@@ -28,9 +24,9 @@ class StatisticsSummaryLine extends StatelessWidget {
             hours: 0,
           ),
         ),
-        const ShowMoreButton(
+        /*const ShowMoreButton(
           nextScreen: StatisticsScreen(),
-        ),
+        ),*/
       ],
     );
   }

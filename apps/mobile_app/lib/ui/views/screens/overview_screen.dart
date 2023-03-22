@@ -46,23 +46,23 @@ class OverviewScreen extends ConsumerWidget {
                         const MessagingHeader(),
                         Container(
                             padding: const EdgeInsets.only(
-                                top: YahaSpaceSizes.small),
+                                top: YahaSpaceSizes.large),
                             child: HorizontalHikeCards(
                                 title: 'Some hikes near you',
                                 hikeListProvider:
                                     viewModel.bestHikesNearbyProvider)),
                         Container(
                             padding: const EdgeInsets.only(
-                                top: YahaSpaceSizes.small),
+                                top: YahaSpaceSizes.large),
                             child: const RandomHikesWorldwide()),
                         Container(
-                          padding: const EdgeInsets.only(
-                              top: YahaSpaceSizes.general),
+                          padding:
+                              const EdgeInsets.only(top: YahaSpaceSizes.large),
                           child: const StatisticsSummaryLine(),
                         ),
                         Container(
                           padding:
-                              const EdgeInsets.only(top: YahaSpaceSizes.small),
+                              const EdgeInsets.only(top: YahaSpaceSizes.large),
                           child: const PreviousActivitesSummaryLine(),
                         ),
                         Container(

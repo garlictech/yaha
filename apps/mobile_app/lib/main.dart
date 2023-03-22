@@ -10,7 +10,6 @@ import 'package:yaha/data/auth/logged_in_state.dart';
 import 'package:yaha/ui/theme.dart';
 import 'package:yaha/ui/views/personal/screen/account-screen.dart';
 import 'package:yaha/ui/views/screens/main_screen.dart';
-import 'package:yaha/ui/views/shared/widgets/yaha-colors.dart';
 
 import 'firebase_options.dart';
 import 'ui/views/auth/screens/login_screen.dart';

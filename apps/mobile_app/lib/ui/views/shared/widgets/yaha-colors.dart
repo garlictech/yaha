@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
 class YahaColors {
+  static const Color darkGreen = Color(0xFF386a20);
+  static const Color olive = Color(0xFF858137);
+  static const Color blueGray = Color(0xFF8797A6);
+  static const Color gunmetalGray = Color(0xFFACAFAC);
+
   // YAHA THEME COLORS
   static const Color lightGreen = const Color(0xFF6EC341);
   static const Color secondary = const Color(0xFF0091FC); // DIFFICULTY - MEDIUM
