@@ -1,1 +1,1 @@
-export './widgets/weather_list_item.dart';
+export 'weather_list_item.dart';

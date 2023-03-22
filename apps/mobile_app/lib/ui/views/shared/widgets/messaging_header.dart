@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:yaha/data/auth/user_name.dart';
-import 'package:yaha/ui/views/auth/widgets/avatar_image.dart';
-import 'package:yaha/ui/views/personal/screen/account-screen.dart';
+import 'package:yaha/ui/views/auth/avatar_image.dart';
+import 'package:yaha/ui/views/screens/account-screen.dart';
 import 'package:yaha/ui/views/shared/shared.dart';
 
 class MessagingHeader extends ConsumerWidget {

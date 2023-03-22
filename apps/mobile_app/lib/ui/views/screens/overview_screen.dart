@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:yaha/ui/presenters/home/guest-home-screen-presenter.dart';
-import 'package:yaha/ui/views/hikes/hike/widgets/horizontal-hike-cards.dart';
-import 'package:yaha/ui/views/hikes/home/views/widgets/active_hikes_summary_line.dart';
+import 'package:yaha/ui/views/hikes/horizontal-hike-cards.dart';
+import 'package:yaha/ui/views/hikes/active_hikes_summary_line.dart';
 //import 'package:yaha/ui/views/hikes/home/views/widgets/current_challenges_summary_line.dart';
 //import 'package:yaha/ui/views/hikes/home/views/widgets/events_summary_line.dart';
-import 'package:yaha/ui/views/hikes/home/views/widgets/previous_activities_summary_line.dart';
-import 'package:yaha/ui/views/hikes/home/views/widgets/statistics_summary_line.dart';
-import 'package:yaha/ui/views/hikes/widgets/random_hikes_worldwide.dart';
+import 'package:yaha/ui/views/hikes/previous_activities_summary_line.dart';
+import 'package:yaha/ui/views/hikes/statistics_summary_line.dart';
+import 'package:yaha/ui/views/hikes/random_hikes_worldwide.dart';
 import 'package:yaha/ui/views/shared/shared.dart';
 
 class OverviewScreen extends ConsumerWidget {

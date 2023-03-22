@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:yaha/ui/providers/main_tab_controller.dart';
-import 'package:yaha/ui/views/personal/screen/settings-screen.dart';
-import 'package:yaha/ui/views/search/search_hike_screen.dart';
+import 'package:yaha/ui/views/screens/settings-screen.dart';
+import 'package:yaha/ui/views/screens/search_hike_screen.dart';
 import 'package:yaha/ui/views/shared/shared.dart';
 
 import 'overview_screen.dart';
