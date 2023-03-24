@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -26,6 +28,41 @@ class HikeSearchSesultsOnMapState
     extends ConsumerState<HikeSearchSesultsOnMap> {
   MapController? _mapController;
 
+  final popup = Consumer(builder: (c, ref, child) {
+    final currentlyShownHikeId = ref.watch(hikeCardPopupStateProvider);
+    const popupSize = 200.0;
+
+    return currentlyShownHikeId != null
+        ? Container(
+            margin: const EdgeInsets.all(20),
+            height: popupSize,
+            width: popupSize,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 30,
+                  blurRadius: 32,
+                  offset: const Offset(0, 3), // changes position of shadow
+                )
+              ],
+            ),
+            child: Stack(children: [
+              HikeCard(hikeId: currentlyShownHikeId),
+              Align(
+                  alignment: Alignment.topRight,
+                  child: IconButton(
+                      iconSize: 30,
+                      icon: const Icon(Icons.close_rounded),
+                      color: Colors.red,
+                      onPressed: () => ref
+                          .read(hikeCardPopupStateProvider.notifier)
+                          .hideHike())),
+            ]))
+        : Container();
+  });
+
   @override
   void initState() {
     super.initState();
@@ -44,33 +81,6 @@ class HikeSearchSesultsOnMapState
         .then((currentLocation) {
       presenter.mapCenter = Location(
           lat: currentLocation.latitude, lon: currentLocation.longitude);
-    });
-
-    final popup = Consumer(builder: (c, ref, child) {
-      final currentlyShownHikeId = ref.watch(hikeCardPopupStateProvider);
-      const popupSize = 200.0;
-
-      return currentlyShownHikeId != null
-          ? Stack(children: [
-              Container(
-                  margin: const EdgeInsets.all(20),
-                  height: popupSize,
-                  width: popupSize,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 3,
-                        blurRadius: 5,
-                        offset:
-                            const Offset(0, 3), // changes position of shadow
-                      )
-                    ],
-                  ),
-                  child: HikeCard(hikeId: currentlyShownHikeId))
-            ])
-          : Container();
     });
 
     return StreamBuilder(
@@ -107,12 +117,15 @@ class HikeSearchSesultsOnMapState
   }
 
   _getHikeLayerWidget(List<Hike> hikes) {
+    final currentlyShownHikeId = ref.watch(hikeCardPopupStateProvider);
     final lines = hikes.map((hike) {
+      final widthMultiplier = currentlyShownHikeId == hike.id ? 2.0 : 1.0;
+
       return Polyline(
-          color: const Color(0xAAFF0000),
-          strokeWidth: 4,
+          color: Color.fromRGBO(Random().nextInt(100) + 150, 0, 0, 1),
+          strokeWidth: 4 * widthMultiplier,
           borderColor: Colors.blue,
-          borderStrokeWidth: 1,
+          borderStrokeWidth: 1 * widthMultiplier,
           points: hike.route.coordinates
               .map<LatLng>((coord) =>
                   LatLng(coord.location.latitude, coord.location.longitude))

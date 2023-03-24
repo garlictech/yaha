@@ -22,7 +22,6 @@ class HikeCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ClipRRect(
         borderRadius: BorderRadius.circular(YahaBorderRadius.general),
-        clipBehavior: Clip.antiAlias,
         child: Consumer(builder: (c, ref, child) {
           return ref.watch(cachedHikeProvider(hikeId)).when(
                 loading: () => const Center(
@@ -93,9 +92,13 @@ class HikeCard extends ConsumerWidget {
                                                     size: YahaFontSizes.xSmall,
                                                     color:
                                                         YahaColors.background),
-                                                Text(
+                                                Expanded(
+                                                    child: AutoSizeText(
                                                   hike.route.municipality!
                                                       .toUpperCase(),
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  maxLines: 1,
                                                   style: const TextStyle(
                                                     fontSize:
                                                         YahaFontSizes.xSmall,
@@ -103,7 +106,7 @@ class HikeCard extends ConsumerWidget {
                                                     color:
                                                         YahaColors.background,
                                                   ),
-                                                )
+                                                ))
                                               ])),
                                   ],
                                 ),

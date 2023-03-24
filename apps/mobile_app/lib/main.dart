@@ -49,15 +49,23 @@ class MyAppState extends ConsumerState<MyApp> {
           // If you want load more with noMoreData state ,may be you should return false
           return false;
         },
-        child: MaterialApp(
-          title: 'Yaha',
-          debugShowCheckedModeBanner: false,
-          theme: yahaTheme,
-          home: isLoggedIn ? const MainScreen() : const LoginScreen(),
-          routes: {
-            '/login': (context) => const LoginScreen(),
-            '/account': (context) => const AccountScreen()
-          },
-        ));
+        child: GestureDetector(
+            onTap: () {
+              FocusScopeNode currentFocus = FocusScope.of(context);
+
+              if (!currentFocus.hasPrimaryFocus) {
+                currentFocus.unfocus();
+              }
+            },
+            child: MaterialApp(
+              title: 'Yaha',
+              debugShowCheckedModeBanner: false,
+              theme: yahaTheme,
+              home: isLoggedIn ? const MainScreen() : const LoginScreen(),
+              routes: {
+                '/login': (context) => const LoginScreen(),
+                '/account': (context) => const AccountScreen()
+              },
+            )));
   }
 }
