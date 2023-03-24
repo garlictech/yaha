@@ -70,22 +70,15 @@ class LeafletMapState extends ConsumerState<LeafletMap> {
 
           return FlutterMap(
             options: MapOptions(
-                onMapCreated: (ctr) {
-                  _mapController = ctr;
-                  presenter.mapController = ctr;
-                  if (snapshot.data != null) {
-                    ctr.fitBounds(snapshot.data! as LatLngBounds);
-                  }
-                },
+                bounds: snapshot.data! as LatLngBounds,
                 center:
                     LatLng(mapCenter?.latitude ?? 0, mapCenter?.longitude ?? 0),
                 zoom: _mapController?.zoom ?? 12),
             children: <Widget>[
-              TileLayerWidget(
-                  options: TileLayerOptions(
-                      urlTemplate:
-                          "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                      subdomains: ['a', 'b', 'c'])),
+              TileLayer(
+                  urlTemplate:
+                      "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                  subdomains: ['a', 'b', 'c']),
               _getHikeLayerWidget(),
               _getMarkerLayerWidget(),
             ],
@@ -107,8 +100,7 @@ class LeafletMapState extends ConsumerState<LeafletMap> {
                   .toList()))
           .toList();
 
-      return PolylineLayerWidget(
-          options: PolylineLayerOptions(polylines: polylines));
+      return PolylineLayer(polylines: polylines);
     });
   }
 
@@ -121,7 +113,7 @@ class LeafletMapState extends ConsumerState<LeafletMap> {
                   (index, poi) => widget.poiMarkerBuilder!(context, poi, index))
               .toList();
 
-      return MarkerLayerWidget(options: MarkerLayerOptions(markers: markers));
+      return MarkerLayer(markers: markers);
     });
   }
 }

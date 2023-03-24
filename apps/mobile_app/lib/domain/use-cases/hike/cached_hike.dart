@@ -35,6 +35,3 @@ class CachedHike extends _$CachedHike {
     return hike;
   }
 }
-/*final hikeProvider = FutureProvider.family<Hike, String>((ref, hikeId) async {
-  return ref.read(hikeRepositoryProvider).getHike(hikeId);
-});*/

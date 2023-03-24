@@ -3,10 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:yaha/app/providers.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:yaha/config.dart';
 import '../shared/shared.dart';
 import '/domain/domain.dart' as domain;
 
-const kGoogleApiKey = "AIzaSyDZjCPlj3vAGrVYfimxRlcKk72F1aoAPxo";
 final places = GoogleMapsPlaces(apiKey: kGoogleApiKey);
 
 class LocationSearchByGoogleFieldViewModel {
@@ -22,7 +22,9 @@ class LocationSearchByGoogleFieldPresenter
       : super(LocationSearchByGoogleFieldViewModel(hits: []));
 
   getSuggestions(String pattern) {
-    return places.searchByText(pattern).then((response) => response.results);
+    return places.searchByText(pattern).then((response) {
+      return response.results;
+    });
   }
 
   suggestionSelected(PlacesSearchResult result) async {
@@ -63,25 +65,18 @@ class LocationSearchByGoogleField extends ConsumerWidget {
     final presenter = ref.watch(presenterInstance.notifier);
 
     return Row(children: [
-      InkWell(
-          onTap: presenter.onTapCurrentLocation,
-          child: const Icon(Icons.gps_not_fixed)),
       Expanded(
           child: TypeAheadField(
+        minCharsForSuggestions: 3,
+        debounceDuration: const Duration(seconds: 1),
         textFieldConfiguration: const TextFieldConfiguration(
             autocorrect: false,
-            style: TextStyle(
-                fontWeight: FontWeight.w500,
-                color: YahaColors.textColor,
-                fontSize: YahaFontSizes.small),
             decoration: InputDecoration(
-                focusColor: YahaColors.military,
-                labelText: "Search hike",
-                contentPadding: EdgeInsets.only(
-                    left: YahaSpaceSizes.medium, bottom: YahaSpaceSizes.small),
-                errorStyle: TextStyle(
-                    fontSize: YahaFontSizes.xSmall,
-                    fontWeight: FontWeight.w500))),
+              focusColor: YahaColors.military,
+              labelText: "Search hike",
+              contentPadding: EdgeInsets.only(
+                  left: YahaSpaceSizes.medium, bottom: YahaSpaceSizes.small),
+            )),
         suggestionsCallback: (pattern) async {
           return await presenter.getSuggestions(pattern);
         },
@@ -93,7 +88,12 @@ class LocationSearchByGoogleField extends ConsumerWidget {
         onSuggestionSelected: (suggestion) {
           presenter.suggestionSelected(suggestion as PlacesSearchResult);
         },
-      ))
+      )),
+      InkWell(
+          onTap: presenter.onTapCurrentLocation,
+          child: const Padding(
+              padding: EdgeInsets.only(left: YahaSpaceSizes.small),
+              child: Icon(Icons.gps_not_fixed))),
     ]);
   }
 }

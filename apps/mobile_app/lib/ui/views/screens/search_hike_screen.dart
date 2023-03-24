@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/domain/services/services.dart';
-import '../../../domain/entities/hike/hike.dart';
+import '../map/hike_search_results_on_map.dart';
 import 'hike-filter-screen.dart';
 import '../map/leaflet-map.dart';
 import '/domain/domain.dart' as domain;
@@ -82,14 +82,16 @@ class SearchHikeScreenState extends ConsumerState<SearchHikeScreen>
                 right: YahaSpaceSizes.small,
                 top: YahaSpaceSizes.small,
               ),
-              child: Row(children: [
+              child:
+                  Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
                 Expanded(
-                    child: TabBarView(
-                        controller: _tabController,
-                        children: const [
-                      LocationSearchByGoogleField(),
-                      HikeSearchByContentField()
-                    ])),
+                    child:
+                        TabBarView(controller: _tabController, children: const [
+                  LocationSearchByGoogleField(),
+                  Align(
+                      alignment: Alignment.center,
+                      child: HikeSearchByContentField())
+                ])),
                 IconButton(
                     onPressed: presenter.onMapToggle,
                     icon: Icon(model.mapShown ? Icons.list : Icons.map)),
@@ -112,11 +114,7 @@ class SearchHikeScreenState extends ConsumerState<SearchHikeScreen>
                   : searchState.noHits
                       ? const Center(child: Text("No hikes"))
                       : model.mapShown
-                          ? FutureBuilder<List<Hike>>(
-                              future: hikeUtilityServices
-                                  .getHikes(searchState.hits),
-                              builder: (context, data) =>
-                                  LeafletMap(hikes: data.data ?? const []))
+                          ? HikeSearchSesultsOnMap(hikeIds: searchState.hits)
                           : ListView(
                               itemExtent: 230,
                               children: searchState.hits

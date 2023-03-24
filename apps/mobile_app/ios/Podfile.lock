@@ -48,8 +48,6 @@ PODS:
   - flutter_background_geolocation (4.9.0):
     - CocoaLumberjack (~> 3.7.2)
     - Flutter
-  - flutter_compass (0.0.1):
-    - Flutter
   - flutter_js (0.1.0):
     - Flutter
   - flutter_keyboard_visibility (0.0.1):
@@ -116,7 +114,6 @@ DEPENDENCIES:
   - firebase_dynamic_links (from `.symlinks/plugins/firebase_dynamic_links/ios`)
   - Flutter (from `Flutter`)
   - flutter_background_geolocation (from `.symlinks/plugins/flutter_background_geolocation/ios`)
-  - flutter_compass (from `.symlinks/plugins/flutter_compass/ios`)
   - flutter_js (from `.symlinks/plugins/flutter_js/ios`)
   - flutter_keyboard_visibility (from `.symlinks/plugins/flutter_keyboard_visibility/ios`)
   - flutter_native_splash (from `.symlinks/plugins/flutter_native_splash/ios`)
@@ -162,8 +159,6 @@ EXTERNAL SOURCES:
     :path: Flutter
   flutter_background_geolocation:
     :path: ".symlinks/plugins/flutter_background_geolocation/ios"
-  flutter_compass:
-    :path: ".symlinks/plugins/flutter_compass/ios"
   flutter_js:
     :path: ".symlinks/plugins/flutter_js/ios"
   flutter_keyboard_visibility:
@@ -206,7 +201,6 @@ SPEC CHECKSUMS:
   FirebaseDynamicLinks: 99c501143953e925681a37aade96bb2db34b30ca
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   flutter_background_geolocation: 8e8eab886074f1751f10c8212e47a04a889316f9
-  flutter_compass: cbbd285cea1584c7ac9c4e0c3e1f17cbea55e855
   flutter_js: 95929d4e146e8ceb1c8e1889d8c2065c5d840076
   flutter_keyboard_visibility: 0339d06371254c3eb25eeb90ba8d17dca8f9c069
   flutter_native_splash: 52501b97d1c0a5f898d687f1646226c1f93c56ef

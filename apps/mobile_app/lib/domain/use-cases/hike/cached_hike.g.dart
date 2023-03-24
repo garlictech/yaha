@@ -6,7 +6,7 @@ part of 'cached_hike.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$cachedHikeHash() => r'157c47a197da582823d3422000430f66439b583a';
+String _$cachedHikeHash() => r'df0419b2f3f5b881f61d34e6a7d6abe38bcc061b';
 
 /// Copied from Dart SDK
 class _SystemHash {
