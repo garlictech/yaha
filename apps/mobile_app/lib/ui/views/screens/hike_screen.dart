@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:yaha/domain/domain.dart' as domain;
+import 'package:yaha/ui/views/map/hike_overview_map.dart';
 import 'package:yaha/ui/views/shared/section_title.dart';
 
 import '../../../app/providers.dart';
@@ -12,7 +13,6 @@ import '../poi/poi_icon_list.dart';
 import '../shared/shared.dart';
 import '../shared/widgets/yaha-image.dart';
 import '../utils/error-utils.dart';
-import '../map/leaflet-map.dart';
 import '../hikes/hike_properties.dart';
 import 'weather-screen.dart';
 
@@ -212,7 +212,7 @@ class HikeScreen extends ConsumerWidget {
                         /*child: ClipRRect(
                             borderRadius:
                                 BorderRadius.circular(YahaBorderRadius.general),*/
-                        child: LeafletMap(hikes: [hike], pois: const []),
+                        child: HikeOverviewMap(hikeId: hike.id),
                         //),
                       ),
                       const SectionTitle(title: 'Weather'),

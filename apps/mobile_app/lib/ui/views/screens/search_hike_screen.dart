@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/domain/services/services.dart';
 import '../map/hike_search_results_on_map.dart';
 import 'hike-filter-screen.dart';
-import '../map/leaflet-map.dart';
 import '/domain/domain.dart' as domain;
 import '../hikes/hike-card.dart';
 import '../search/location_search_by_google.dart';

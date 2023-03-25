@@ -11,7 +11,7 @@ import 'package:yaha/ui/views/shared/shared.dart';
 
 import '../../presenters/map/map.dart';
 import '../utils/error-utils.dart';
-import 'leaflet-map.dart';
+import 'places_on_route_map.dart';
 
 /// Renders the map widget with OSM map.
 class PoisOfHikeMap extends ConsumerStatefulWidget {
@@ -128,9 +128,9 @@ class PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
                   repeat: ImageRepeat.repeat,
                 ),
               ),
-              LeafletMap(
+              PlacesOnRouteMap(
                   poiMarkerBuilder: markerBuilder,
-                  hikes: [widget.hike],
+                  hikeId: widget.hike.id,
                   pois: pois),
               Align(
                 alignment: Alignment.bottomCenter,

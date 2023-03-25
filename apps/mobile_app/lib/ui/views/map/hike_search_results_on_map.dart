@@ -8,6 +8,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:collection/collection.dart';
 import 'package:yaha/domain/services/services.dart';
 import 'package:yaha/ui/views/hikes/hike-card.dart';
+import 'package:yaha/ui/views/map/leaflet_map_widgets.dart';
 import '../../../app/providers.dart';
 
 import '../../../domain/entities/entities.dart';
@@ -103,10 +104,7 @@ class HikeSearchSesultsOnMapState
                   bounds: bounds,
                   zoom: _mapController?.zoom ?? 12),
               children: <Widget>[
-                TileLayer(
-                    urlTemplate:
-                        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                    subdomains: ['a', 'b', 'c']),
+                yahaTileLayer,
                 _getHikeLayerWidget(hikes),
                 _getMarkerLayerWidget(hikes),
               ],

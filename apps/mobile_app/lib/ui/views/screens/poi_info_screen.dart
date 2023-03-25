@@ -4,7 +4,6 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:yaha/ui/views/map/leaflet-map.dart';
 import 'package:yaha/domain/domain.dart' as domain;
 
 import '../shared/shared.dart';
@@ -146,10 +145,11 @@ class PoiInfoScreen extends ConsumerWidget {
                         child: ClipRRect(
                             borderRadius:
                                 BorderRadius.circular(YahaBorderRadius.general),
-                            child: LeafletMap(
+                            child: /*LeafletMap(
                               poiMarkerBuilder: _markerBuilder,
                               pois: [poi],
-                            )),
+                            )*/
+                                Container()),
                       ),
                       Container(
                         padding: const EdgeInsets.only(
