@@ -17,22 +17,10 @@ class SettingsScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-          elevation: 0,
-          backgroundColor: YahaColors.background,
-          title: const Text('Settings',
-              style: TextStyle(
-                  fontSize: YahaFontSizes.medium,
-                  fontWeight: FontWeight.w600,
-                  color: YahaColors.textColor)),
-          leading: IconButton(
-            iconSize: YahaFontSizes.xxLarge,
-            icon: const Icon(
-              Icons.arrow_back_ios_rounded,
-              color: YahaColors.textColor,
-              size: YahaIconSizes.medium,
-            ),
-            onPressed: () => Navigator.of(context).pop(),
-          )),
+          //leading: YahaBackButton(),
+          title: const Text(
+        'Settings',
+      )),
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: <Widget>[
@@ -90,7 +78,7 @@ class SettingsScreen extends ConsumerWidget {
                               )),
                           const Divider(
                               color: YahaColors.divider, thickness: 0.5),
-                          Container(
+                          /*    Container(
                             padding: const EdgeInsets.only(
                                 left: YahaSpaceSizes.general,
                                 top: YahaSpaceSizes.small,
@@ -167,9 +155,10 @@ class SettingsScreen extends ConsumerWidget {
                               ],
                             ),
                           ),
+                          */
                         ],
                       ),
-                      const ListSectionTitleBox(
+                      /* const ListSectionTitleBox(
                         title: 'Support',
                         backgroundColor: YahaColors.accentColor,
                         titleColor: YahaColors.textColor,
@@ -274,7 +263,7 @@ class SettingsScreen extends ConsumerWidget {
                             ),
                           ),
                         ],
-                      ),
+                      ),*/
                     ],
                   ),
                 );

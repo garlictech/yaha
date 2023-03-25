@@ -19,13 +19,13 @@ class PlacesOnRouteScreen extends ConsumerWidget {
     return Scaffold(
         appBar: AppBar(
             leading: const YahaBackButton(),
-            backgroundColor: Colors.black.withOpacity(0.2),
+            backgroundColor: Colors.black.withOpacity(0.3),
             elevation: 0,
             centerTitle: true,
             title: Padding(
                 padding: const EdgeInsets.only(right: 45.0),
                 child: YahaScreenHeadTitleText(
-                    text: hike.title, color: textColor))),
+                    text: hike.title, color: Colors.white))),
         extendBodyBehindAppBar: true,
         body: PoisOfHikeMap(
             key: UniqueKey(), hike: hike, filteredPoiTypes: filteredPoiTypes));

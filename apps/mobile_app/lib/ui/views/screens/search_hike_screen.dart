@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yaha/domain/services/services.dart';
 import '../map/hike_search_results_on_map.dart';
 import 'hike-filter-screen.dart';
 import '/domain/domain.dart' as domain;
@@ -68,7 +67,6 @@ class SearchHikeScreenState extends ConsumerState<SearchHikeScreen>
     final searchState = ref.watch(domain.hikeSearchStateProvider);
     final model = ref.watch(presenterInstance);
     final presenter = ref.watch(presenterInstance.notifier);
-    final hikeUtilityServices = ref.read(hikeUtilityServicesProvider);
 
     return Scaffold(
         appBar: AppBar(title: TabBar(controller: _tabController, tabs: myTabs)),
@@ -96,10 +94,18 @@ class SearchHikeScreenState extends ConsumerState<SearchHikeScreen>
                     icon: Icon(model.mapShown ? Icons.list : Icons.map)),
                 IconButton(
                     onPressed: () {
-                      showMaterialModalBottomSheet(
+                      /* showMaterialModalBottomSheet(
                         context: context,
                         builder: (context) => const HikeFilters(),
-                      );
+                      );*/
+
+                      showDialog(
+                          context: context,
+                          builder: (context) => const SuccessPopup(
+                              title: "Future feature",
+                              content:
+                                  "You will be able to select hikes by duration, difficulty, etc. Stay tuned!",
+                              buttonTitle: "Cool"));
                     },
                     icon: Image.asset(
                       'assets/images/filter-icon.png',
@@ -107,7 +113,6 @@ class SearchHikeScreenState extends ConsumerState<SearchHikeScreen>
                     )),
               ])),
           Expanded(
-              //padding: const EdgeInsets.all(20),
               child: searchState.searching
                   ? const Center(child: CircularProgressIndicator())
                   : searchState.noHits

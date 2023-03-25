@@ -3,10 +3,66 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/domain/domain.dart' as domain;
+import 'package:yaha/domain/entities/poi/poi_entity.dart';
 import 'package:yaha/ui/views/map/poi_info_map.dart';
 
 import '../shared/shared.dart';
-import '../poi/poi-icon.dart';
+
+class LocationLine extends StatelessWidget {
+  final String label;
+  final num value;
+
+  const LocationLine({super.key, required this.label, required this.value});
+
+  @override
+  Widget build(BuildContext context) {
+    return RichText(
+      text: TextSpan(
+        style: const TextStyle(
+            fontSize: YahaFontSizes.small, color: YahaColors.textColor),
+        children: [
+          TextSpan(
+            text: '$label: ',
+            style: const TextStyle(fontWeight: FontWeight.w600),
+          ),
+          TextSpan(
+            text: '${(value * 100000).round() / 100000}',
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class LocationInfo extends StatelessWidget {
+  final Poi poi;
+
+  const LocationInfo({super.key, required this.poi});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(children: [
+      const Padding(
+          padding: EdgeInsets.only(right: YahaSpaceSizes.small),
+          child: Icon(Icons.location_on_outlined)),
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          LocationLine(label: "Latitude", value: poi.geoPoint.latitude),
+          Padding(
+            padding: const EdgeInsets.only(
+                top: YahaSpaceSizes.small, bottom: YahaSpaceSizes.small),
+            child:
+                LocationLine(label: "Longitude", value: poi.geoPoint.longitude),
+          ),
+          poi.geoPoint.height != null
+              ? LocationLine(label: "Elevation", value: poi.geoPoint.height)
+              : Container(),
+        ],
+      )
+    ]);
+  }
+}
 
 class PoiInfoScreen extends ConsumerWidget {
   final domain.Poi poi;
@@ -43,210 +99,117 @@ class PoiInfoScreen extends ConsumerWidget {
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
-                return Container(
-                  padding: const EdgeInsets.only(
-                      left: YahaSpaceSizes.general,
-                      right: YahaSpaceSizes.general),
-                  child: Column(
-                    children: [
-                      Visibility(
-                        visible: false,
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              top: YahaSpaceSizes.general),
-                          child: SizedBox(
-                            height: 80,
-                            width: 80,
-                            child: PoiIcon(poiType: poi.poiType),
-                          ),
-                        ),
-                      ),
-                      Container(
-                          padding: const EdgeInsets.only(
-                              top: YahaSpaceSizes.general,
-                              bottom: YahaSpaceSizes.general),
-                          child: summary),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            RichText(
-                              text: TextSpan(
-                                style: const TextStyle(
-                                    fontSize: YahaFontSizes.small,
-                                    color: YahaColors.textColor),
-                                children: [
-                                  const TextSpan(
-                                    text: 'Latitude: ',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.w600),
-                                  ),
-                                  TextSpan(
-                                    text:
-                                        '${(poi.geoPoint.latitude * 100000).round() / 100000}',
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  top: YahaSpaceSizes.small,
-                                  bottom: YahaSpaceSizes.small),
-                              child: RichText(
-                                text: TextSpan(
-                                  style: const TextStyle(
-                                      fontSize: YahaFontSizes.small,
-                                      color: YahaColors.textColor),
-                                  children: [
-                                    const TextSpan(
-                                      text: 'Longitude: ',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                    TextSpan(
-                                      text:
-                                          '${(poi.geoPoint.longitude * 100000).round() / 100000}',
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            poi.geoPoint.height != null
-                                ? RichText(
-                                    text: TextSpan(
-                                      style: const TextStyle(
-                                          fontSize: YahaFontSizes.small,
-                                          color: YahaColors.textColor),
-                                      children: [
-                                        const TextSpan(
-                                          text: 'Elevation: ',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w600),
-                                        ),
-                                        TextSpan(
-                                          text:
-                                              '${poi.geoPoint.height!.round()} m',
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                : Container(),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        height: 340,
-                        width: MediaQuery.of(context).size.width,
+                return Column(
+                  children: [
+                    Padding(
                         padding: const EdgeInsets.only(
+                            top: YahaSpaceSizes.general,
                             bottom: YahaSpaceSizes.general,
-                            top: YahaSpaceSizes.general),
-                        child: ClipRRect(
-                            borderRadius:
-                                BorderRadius.circular(YahaBorderRadius.general),
-                            child: PoiInfoMap(poi: poi, hikeId: hike.id)),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.only(
-                            bottom: YahaSpaceSizes.medium),
-                        child: Row(
-                          children: [
-                            Container(
-                                padding: const EdgeInsets.only(
-                                    right: YahaSpaceSizes.small),
-                                child: const Icon(Icons.schedule_outlined)),
-                            const Text('Open',
-                                style: TextStyle(
+                            left: YahaSpaceSizes.small,
+                            right: YahaSpaceSizes.small),
+                        child: summary),
+                    Align(
+                        alignment: Alignment.centerLeft,
+                        child: LocationInfo(poi: poi)),
+                    Container(
+                      height: 340,
+                      width: MediaQuery.of(context).size.width,
+                      padding: const EdgeInsets.only(
+                          bottom: YahaSpaceSizes.general,
+                          top: YahaSpaceSizes.general),
+                      child: ClipRRect(
+                          borderRadius:
+                              BorderRadius.circular(YahaBorderRadius.general),
+                          child: PoiInfoMap(poi: poi, hikeId: hike.id)),
+                    ),
+                    /*Container(
+                      padding:
+                          const EdgeInsets.only(bottom: YahaSpaceSizes.medium),
+                      child: Row(
+                        children: [
+                          Container(
+                              padding: const EdgeInsets.only(
+                                  right: YahaSpaceSizes.small),
+                              child: const Icon(Icons.schedule_outlined)),
+                          const Text('Open',
+                              style: TextStyle(
+                                fontSize: YahaFontSizes.small,
+                                fontWeight: FontWeight.w500,
+                              )),
+                          const Text(' - closing: 18:00',
+                              style: TextStyle(
                                   fontSize: YahaFontSizes.small,
-                                  fontWeight: FontWeight.w500,
-                                )),
-                            const Text(' - closing: 18:00',
-                                style: TextStyle(
-                                    fontSize: YahaFontSizes.small,
-                                    fontWeight: FontWeight.w400,
-                                    color: YahaColors.textColor)),
-                            RotatedBox(
-                              quarterTurns: 0,
-                              child: GestureDetector(
-                                  onTap: () {},
-                                  child: const Icon(Icons.expand_more)),
-                            ),
-                          ],
-                        ),
+                                  fontWeight: FontWeight.w400,
+                                  color: YahaColors.textColor)),
+                          RotatedBox(
+                            quarterTurns: 0,
+                            child: GestureDetector(
+                                onTap: () {},
+                                child: const Icon(Icons.expand_more)),
+                          ),
+                        ],
                       ),
-                      Container(
-                        padding: const EdgeInsets.only(
-                            bottom: YahaSpaceSizes.medium),
-                        child: Row(
-                          children: [
-                            Container(
-                                padding: const EdgeInsets.only(
-                                    right: YahaSpaceSizes.small),
-                                child: const Icon(Icons.location_on_outlined)),
-                            const Text('Location',
-                                style: TextStyle(
-                                    fontSize: YahaFontSizes.small,
-                                    fontWeight: FontWeight.w400,
-                                    color: YahaColors.textColor)),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.only(
-                            bottom: YahaSpaceSizes.general),
-                        child: Row(
-                          children: [
-                            Container(
-                                padding: const EdgeInsets.only(
-                                    right: YahaSpaceSizes.small),
-                                child: const Icon(Icons.call)),
-                            const Text('(06 1) 338 2122',
-                                style: TextStyle(
-                                    fontSize: YahaFontSizes.small,
-                                    fontWeight: FontWeight.w400,
-                                    color: YahaColors.textColor)),
-                          ],
-                        ),
-                      ),
-                      poi.imageCardUrls.isEmpty
-                          ? Container()
-                          : Container(
-                              margin: const EdgeInsets.only(
-                                  bottom: YahaSpaceSizes.large),
-                              height: YahaBoxSizes.heightMedium,
-                              width: MediaQuery.of(context).size.width,
-                              child:
-                                  GalleryWidget(imageUrls: poi.imageCardUrls)),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            top: YahaSpaceSizes.xLarge,
-                            bottom: YahaSpaceSizes.general),
-                        child: SizedBox(
-                          height: YahaBoxSizes.buttonHeight,
-                          width: YahaBoxSizes.buttonWidthBig,
-                          child: ElevatedButton.icon(
-                            icon: const Icon(
-                              Icons.add,
-                              color: YahaColors.accentColor,
-                              size: YahaFontSizes.large,
-                            ),
-                            onPressed: () {},
-                            label: const Text('Add to hike',
-                                style: TextStyle(
+                    ),
+                    Container(
+                      padding:
+                          const EdgeInsets.only(bottom: YahaSpaceSizes.general),
+                      child: Row(
+                        children: [
+                          Container(
+                              padding: const EdgeInsets.only(
+                                  right: YahaSpaceSizes.small),
+                              child: const Icon(Icons.call)),
+                          const Text('(06 1) 338 2122',
+                              style: TextStyle(
                                   fontSize: YahaFontSizes.small,
-                                  fontWeight: FontWeight.w600,
-                                )),
-                            style: ElevatedButton.styleFrom(
-                              shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(
-                                      Radius.circular(
-                                          YahaBorderRadius.general))),
-                            ),
+                                  fontWeight: FontWeight.w400,
+                                  color: YahaColors.textColor)),
+                        ],
+                      ),
+                    ),*/
+                    poi.imageCardUrls.isEmpty
+                        ? Container()
+                        : Container(
+                            margin: const EdgeInsets.only(
+                                bottom: YahaSpaceSizes.large),
+                            height: YahaBoxSizes.heightMedium,
+                            width: MediaQuery.of(context).size.width,
+                            child: GalleryWidget(imageUrls: poi.imageCardUrls)),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          top: YahaSpaceSizes.xLarge,
+                          bottom: YahaSpaceSizes.general),
+                      child: SizedBox(
+                        height: YahaBoxSizes.buttonHeight,
+                        width: YahaBoxSizes.buttonWidthBig,
+                        child: ElevatedButton.icon(
+                          icon: const Icon(
+                            Icons.add,
+                            size: YahaFontSizes.large,
+                          ),
+                          onPressed: () {
+                            showDialog(
+                                context: context,
+                                builder: (context) => const SuccessPopup(
+                                    title: "Future feature",
+                                    content:
+                                        "You will be able to add the POI to the alert list of the hike. Stay tuned.",
+                                    buttonTitle: "Cool"));
+                          },
+                          label: const Text('Add to hike',
+                              style: TextStyle(
+                                fontSize: YahaFontSizes.small,
+                                fontWeight: FontWeight.w600,
+                              )),
+                          style: ElevatedButton.styleFrom(
+                            shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(
+                                    Radius.circular(YahaBorderRadius.general))),
                           ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 );
               },
               childCount: 1,
