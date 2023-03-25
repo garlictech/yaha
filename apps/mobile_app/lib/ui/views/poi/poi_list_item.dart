@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/ui/views/poi/poi-icon.dart';
@@ -41,7 +42,8 @@ class PoiListItem extends ConsumerWidget {
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(children: [
+                    Expanded(
+                        child: Row(children: [
                       SizedBox(
                           height: 30,
                           width: 30,
@@ -53,13 +55,13 @@ class PoiListItem extends ConsumerWidget {
                               child: Padding(
                                   padding: const EdgeInsets.only(
                                       left: spacing, right: spacing),
-                                  child: Text(poi.title.toUpperCase(),
+                                  child: AutoSizeText(poi.title,
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: 3,
                                       style: const TextStyle(
                                           fontSize: YahaFontSizes.xSmall),
                                       textAlign: TextAlign.start))))
-                    ]),
+                    ])),
                     if (poi.hasOwnTitle)
                       Align(
                           alignment: Alignment.centerLeft,

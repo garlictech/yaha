@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:latlong2/latlong.dart';
 import 'package:yaha/domain/domain.dart' as domain;
+import 'package:yaha/ui/views/map/poi_info_map.dart';
 
 import '../shared/shared.dart';
 import '../poi/poi-icon.dart';
 
 class PoiInfoScreen extends ConsumerWidget {
   final domain.Poi poi;
-  final domain.Hike? hike;
-  const PoiInfoScreen({Key? key, required this.poi, this.hike})
+  final domain.Hike hike;
+  const PoiInfoScreen({Key? key, required this.poi, required this.hike})
       : super(key: key);
 
   @override
@@ -145,11 +144,7 @@ class PoiInfoScreen extends ConsumerWidget {
                         child: ClipRRect(
                             borderRadius:
                                 BorderRadius.circular(YahaBorderRadius.general),
-                            child: /*LeafletMap(
-                              poiMarkerBuilder: _markerBuilder,
-                              pois: [poi],
-                            )*/
-                                Container()),
+                            child: PoiInfoMap(poi: poi, hikeId: hike.id)),
                       ),
                       Container(
                         padding: const EdgeInsets.only(
@@ -260,24 +255,5 @@ class PoiInfoScreen extends ConsumerWidget {
         ],
       ),
     );
-  }
-
-  get _markerBuilder {
-    return (BuildContext context, domain.Poi poi, int index) {
-      const double markerSize = 40;
-      return Marker(
-          point: LatLng(poi.geoPoint.latitude, poi.geoPoint.longitude),
-          builder: (BuildContext c) {
-            return SizedBox(
-                height: markerSize,
-                width: markerSize,
-                child: PhysicalModel(
-                    color: Colors.black,
-                    shadowColor: Colors.black,
-                    elevation: 8.0,
-                    shape: BoxShape.circle,
-                    child: PoiIcon(poiType: poi.poiType)));
-          });
-    };
   }
 }

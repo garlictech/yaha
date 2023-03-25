@@ -185,8 +185,8 @@ class PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) =>
-                                                PoiInfoScreen(poi: item)));
+                                            builder: (context) => PoiInfoScreen(
+                                                poi: item, hike: widget.hike)));
                                   }
                                 },
                               ),
