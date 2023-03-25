@@ -20,7 +20,7 @@ class YahaScreenHeadTitleText extends StatelessWidget {
     return AutoSizeText(
       text,
       overflow: TextOverflow.ellipsis,
-      maxLines: expanded ? 2 : 1,
+      maxLines: 2,
       textAlign: TextAlign.center,
       style: TextStyle(
         fontSize: expanded ? YahaFontSizes.medium : YahaFontSizes.small,

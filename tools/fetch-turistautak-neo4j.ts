@@ -1,5 +1,5 @@
 //
-// EXECUTE: yarn ts-node --project ./tools/tsconfig.tools.json -r tsconfig-paths/register ./tools/fetch-turistautak.ts
+// EXECUTE: yarn ts-node --project ./tools/tsconfig.tools.json -r tsconfig-paths/register ./tools/fetch-turistautak-neo4j.ts
 //
 /* eslint no-console: "off" */
 import axios from 'axios';
@@ -25,13 +25,13 @@ const driver = neo4j.driver(
 
 const session = driver.session({ database: 'neo4j' });
 
-const hikeIds = [
+const hikeIds: number[] = [
   //113261124,
   //118158194, 20239810, 22601701, 22605620, 22668771, 22680751, 22684373,
   //22690585, 22690716, 22691299,
-  //22695956, 22696121, 22711259,
+  //22695956, 22696121, 22711259, 22711874 22720132
 
-  22711874 /*22720132, 22721173, 22721221, 22725792, 22727140, 22727146,
+  22721173 /*22721221, 22725792, 22727140, 22727146,
   22731288, 22760729, 22829303, 22831221, 22852839, 22860187, 22860908,
   22863023, 22864467, 22893358, 22905416, 22906071, 22970503, 22975238,
   22979172, 22983187, 22983332, 22983401, 22984554, 23012848, 23014223,

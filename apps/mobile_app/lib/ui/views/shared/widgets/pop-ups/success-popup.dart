@@ -68,10 +68,6 @@ class SuccessPopup extends StatelessWidget {
               ),
               child: Text(
                 buttonTitle,
-                style: const TextStyle(
-                    fontSize: YahaFontSizes.small,
-                    fontWeight: FontWeight.w500,
-                    color: YahaColors.background),
               ),
             ),
           ),

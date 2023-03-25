@@ -19,13 +19,12 @@ class PoiTitleList extends StatelessWidget {
           children: [
             SizedBox(
                 height: 40, width: 40, child: PoiIcon(poiType: poi.poiType)),
-            Container(
+            Expanded(
+                child: Container(
               padding: const EdgeInsets.only(left: YahaSpaceSizes.small),
-              child: Text(poi.title,
-                  style: const TextStyle(
-                      fontSize: YahaFontSizes.small,
-                      color: YahaColors.textColor)),
-            ),
+              child:
+                  Text(poi.title, overflow: TextOverflow.ellipsis, maxLines: 2),
+            )),
           ],
         ),
       );

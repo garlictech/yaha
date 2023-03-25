@@ -18,7 +18,7 @@ class PlacesOnRouteScreen extends ConsumerWidget {
 
     return Scaffold(
         appBar: AppBar(
-            leading: const YahaBackButton(color: textColor),
+            leading: const YahaBackButton(),
             backgroundColor: Colors.black.withOpacity(0.2),
             elevation: 0,
             centerTitle: true,

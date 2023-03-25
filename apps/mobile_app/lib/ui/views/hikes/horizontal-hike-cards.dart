@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:yaha/ui/views/shared/section_title.dart';
 //import 'package:yaha/utility/buttons/show-more-button.dart';
 
 import '../shared/shared.dart';
@@ -19,14 +20,7 @@ class HorizontalHikeCards extends ConsumerWidget {
     final hikes = ref.watch(hikeListProvider);
 
     return Column(children: [
-      Container(
-        padding: const EdgeInsets.only(bottom: YahaSpaceSizes.medium),
-        alignment: Alignment.centerLeft,
-        child: Text(
-          title,
-          style: Theme.of(context).textTheme.titleMedium,
-        ),
-      ),
+      SectionTitle(title: title),
       SizedBox(
           height: YahaBoxSizes.heightMedium,
           child: hikes.when(

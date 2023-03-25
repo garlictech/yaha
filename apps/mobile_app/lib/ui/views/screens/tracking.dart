@@ -11,9 +11,11 @@ class TrackingScreen extends StatelessWidget {
           appBar: AppBar(
               //leading: YahaBackButton(),
               title: const Text(
-            'Track',
+            'Walking',
           )),
-          body: const Text("Wonderful activities")),
+          body: const Align(
+              alignment: Alignment.center,
+              child: Text("Live activities will happen here. Coming soon!"))),
     );
   }
 }

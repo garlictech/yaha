@@ -44,32 +44,14 @@ class OverviewScreen extends ConsumerWidget {
                     child: Column(
                       children: [
                         const MessagingHeader(),
-                        Container(
-                            padding: const EdgeInsets.only(
-                                top: YahaSpaceSizes.large),
-                            child: HorizontalHikeCards(
-                                title: 'Some hikes near you',
-                                hikeListProvider:
-                                    viewModel.bestHikesNearbyProvider)),
-                        Container(
-                            padding: const EdgeInsets.only(
-                                top: YahaSpaceSizes.large),
-                            child: const RandomHikesWorldwide()),
-                        Container(
-                          padding:
-                              const EdgeInsets.only(top: YahaSpaceSizes.large),
-                          child: const StatisticsSummaryLine(),
-                        ),
-                        Container(
-                          padding:
-                              const EdgeInsets.only(top: YahaSpaceSizes.large),
-                          child: const PreviousActivitesSummaryLine(),
-                        ),
-                        Container(
-                          padding:
-                              const EdgeInsets.only(top: YahaSpaceSizes.large),
-                          child: const ActiveHikesSummaryLine(),
-                        ),
+                        HorizontalHikeCards(
+                            title: 'Some hikes near you',
+                            hikeListProvider:
+                                viewModel.bestHikesNearbyProvider),
+                        const RandomHikesWorldwide(),
+                        const StatisticsSummaryLine(),
+                        const PreviousActivitesSummaryLine(),
+                        const ActiveHikesSummaryLine(),
                         /*Container(
                           padding:
                               const EdgeInsets.only(top: YahaSpaceSizes.large),

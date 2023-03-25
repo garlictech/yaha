@@ -71,7 +71,7 @@ class MainScreen extends ConsumerWidget {
           activeColorPrimary: activeColorPrimary),
       PersistentBottomNavBarItem(
           icon: const Icon(Icons.play_circle_fill),
-          title: ("Track"),
+          title: ("Walking"),
           activeColorPrimary: activeColorPrimary),
       PersistentBottomNavBarItem(
           icon: const Icon(Icons.face_rounded),

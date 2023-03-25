@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:yaha/domain/domain.dart' as domain;
+import 'package:yaha/ui/views/shared/section_title.dart';
 
 import '../../../app/providers.dart';
 import '../../../domain/domain.dart';
@@ -165,7 +166,7 @@ class HikeScreen extends ConsumerWidget {
                           child: HikeProperties(
                               hike: hike,
                               averageSpeedKmh: defaults.averageSpeedKmh)),
-                      const HikeScreenSectionTitle(title: 'Things on route'),
+                      const SectionTitle(title: 'Things on route'),
                       Consumer(builder: (c, ref, child) {
                         return ref.watch(poisAlongHikeProvider(hike.id)).when(
                             loading: () => const Center(
@@ -175,7 +176,7 @@ class HikeScreen extends ConsumerWidget {
                             data: (pois) => PoiIconList(
                                 types: PoiUtils.uniqueTypes(pois), hike: hike));
                       }),
-                      const HikeScreenSectionTitle(
+                      const SectionTitle(
                           title: 'Some interesting places on route'),
                       Container(
                         padding: const EdgeInsets.all(YahaSpaceSizes.general),
@@ -214,7 +215,7 @@ class HikeScreen extends ConsumerWidget {
                         child: LeafletMap(hikes: [hike], pois: const []),
                         //),
                       ),
-                      const HikeScreenSectionTitle(title: 'Weather'),
+                      const SectionTitle(title: 'Weather'),
                       GridView.count(
                         shrinkWrap: true,
                         primary: false,
@@ -380,7 +381,6 @@ class HikeScreenShowOutlineButton extends StatelessWidget {
     return ElevatedButton.icon(
       icon: const Icon(
         Icons.timeline,
-        color: YahaColors.accentColor,
         size: YahaFontSizes.large,
       ),
       onPressed: () {
@@ -403,18 +403,25 @@ class HikeScreenShowOutlineButton extends StatelessWidget {
   }
 }
 
-class HikeScreenStartHikeButton extends StatelessWidget {
+class HikeScreenStartHikeButton extends ConsumerWidget {
   const HikeScreenStartHikeButton({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return ElevatedButton.icon(
       icon: const Icon(
         Icons.play_circle_rounded,
-        color: YahaColors.accentColor,
         size: YahaFontSizes.large,
       ),
-      onPressed: () {},
+      onPressed: () {
+        showDialog(
+            context: context,
+            builder: (context) => const SuccessPopup(
+                title: "Start hike",
+                content:
+                    "You could start your activity now. This feature is coming soon, stay tuned!",
+                buttonTitle: "I see"));
+      },
       label: const Text('Start hike',
           style: TextStyle(
             fontSize: YahaFontSizes.small,
@@ -425,30 +432,6 @@ class HikeScreenStartHikeButton extends StatelessWidget {
             borderRadius:
                 BorderRadius.all(Radius.circular(YahaBorderRadius.general))),
       ),
-    );
-  }
-}
-
-class HikeScreenSectionTitle extends StatelessWidget {
-  final String title;
-  const HikeScreenSectionTitle({Key? key, required this.title})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.only(
-          left: YahaSpaceSizes.small,
-          right: YahaSpaceSizes.small,
-          top: YahaSpaceSizes.large,
-          bottom: YahaSpaceSizes.small),
-      child: Text(title,
-          textAlign: TextAlign.left,
-          style: const TextStyle(
-              fontSize: YahaFontSizes.medium,
-              fontWeight: FontWeight.w600,
-              color: YahaColors.textColor)),
     );
   }
 }

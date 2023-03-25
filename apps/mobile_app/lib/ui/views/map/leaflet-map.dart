@@ -64,10 +64,6 @@ class LeafletMapState extends ConsumerState<LeafletMap> {
     return FutureBuilder(
         future: bounds,
         builder: (context, snapshot) {
-          if (_mapController != null && snapshot.data != null) {
-            _mapController!.fitBounds(snapshot.data! as LatLngBounds);
-          }
-
           return FlutterMap(
             options: MapOptions(
                 bounds: snapshot.data! as LatLngBounds,
@@ -78,7 +74,7 @@ class LeafletMapState extends ConsumerState<LeafletMap> {
               TileLayer(
                   urlTemplate:
                       "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                  subdomains: ['a', 'b', 'c']),
+                  subdomains: const ['a', 'b', 'c']),
               _getHikeLayerWidget(),
               _getMarkerLayerWidget(),
             ],

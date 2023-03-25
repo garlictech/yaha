@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../shared/shared.dart';
-import '../hike/widgets/hike-card-list.dart';
+import '../ui/shared/shared.dart';
+import '../ui/views/hike/widgets/hike-card-list.dart';
 
 class PreviousActivitiesScreen extends StatefulWidget {
   const PreviousActivitiesScreen({Key? key}) : super(key: key);

@@ -20,7 +20,7 @@ class YahaSliverAppBar extends StatelessWidget {
       floating: false,
       expandedHeight: 240.0,
       backgroundColor: YahaColors.background,
-      leading: const YahaBackButton(color: Colors.black),
+      leading: const YahaBackButton(),
       flexibleSpace: LayoutBuilder(
         builder: (context, constraints) {
           double appBarHeight = constraints.biggest.height;
@@ -39,18 +39,16 @@ class YahaSliverAppBar extends StatelessWidget {
             centerTitle: isExpanded ? false : true,
             title: ConstrainedBox(
                 constraints: BoxConstraints(
-                    maxWidth: MediaQuery.of(context).size.width / 1.6),
+                    maxWidth: MediaQuery.of(context).size.width / 1.4),
                 child: Container(
                     width: double.infinity,
                     decoration: BoxDecoration(
                         color: Colors.black.withOpacity(opacity),
                         borderRadius:
                             BorderRadius.circular(YahaBorderRadius.xxSmall)),
-                    padding: const EdgeInsets.all(YahaSpaceSizes.xxSmall),
+                    //padding: const EdgeInsets.all(YahaSpaceSizes.xxSmall),
                     child: YahaScreenHeadTitleText(
-                        text: title.toUpperCase(),
-                        color: textColor,
-                        expanded: isExpanded))),
+                        text: title, color: textColor, expanded: isExpanded))),
             background: content,
           );
         },
