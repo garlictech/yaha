@@ -1,5 +1,7 @@
 // ignore: file_names
+import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:yaha/domain/domain.dart' as domain;
@@ -14,7 +16,7 @@ import '../shared/shared.dart';
 import '../shared/widgets/yaha-image.dart';
 import '../utils/error-utils.dart';
 import '../hikes/hike_properties.dart';
-import 'weather-screen.dart';
+//import 'weather-screen.dart';
 
 SpeedDial buildSpeedDial() {
   return SpeedDial(
@@ -95,6 +97,9 @@ class HikeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final defaults = ref.watch(defaultsProvider);
+    final hikeSettings = ref.watch(hikingSettingsProvider);
+    final timeText =
+        "Start time: ${hikeSettings.startTime.day}/${hikeSettings.startTime.month}, ${hikeSettings.startTime.hour}:${hikeSettings.startTime.minute.toString().padLeft(2, '0')}";
 
     return Scaffold(
       body: CustomScrollView(
@@ -146,13 +151,25 @@ class HikeScreen extends ConsumerWidget {
                       Padding(
                           padding: const EdgeInsets.only(
                               bottom: YahaSpaceSizes.large),
-                          child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: const [
-                                Text("Start time: 9:00"),
-                                Text("Start date: today")
-                              ])),
+                          child: ElevatedButton.icon(
+                              icon: const Icon(
+                                Icons.watch_rounded,
+                                size: YahaFontSizes.large,
+                              ),
+                              onPressed: () {
+                                DatePicker.showDateTimePicker(
+                                  context,
+                                  showTitleActions: true,
+                                  minTime: DateTime.now(),
+                                  onConfirm: (date) {
+                                    ref
+                                        .read(hikingSettingsProvider.notifier)
+                                        .setStartTime(date);
+                                  },
+                                  currentTime: DateTime.now(),
+                                );
+                              },
+                              label: Text(timeText))),
                       Container(
                           margin: const EdgeInsets.only(
                               bottom: YahaSpaceSizes.large),
@@ -215,7 +232,7 @@ class HikeScreen extends ConsumerWidget {
                         child: HikeOverviewMap(hikeId: hike.id),
                         //),
                       ),
-                      const SectionTitle(title: 'Weather'),
+                      /*const SectionTitle(title: 'Weather'),
                       GridView.count(
                         shrinkWrap: true,
                         primary: false,
@@ -338,6 +355,7 @@ class HikeScreen extends ConsumerWidget {
                         ],
                       ),
                       const ShowMoreButton(nextScreen: WeatherScreen()),
+                      */
                     ],
                   ),
                 );
@@ -347,7 +365,7 @@ class HikeScreen extends ConsumerWidget {
           ),
         ],
       ),
-      floatingActionButton: buildSpeedDial(),
+      //floatingActionButton: buildSpeedDial(),
     );
   }
 }

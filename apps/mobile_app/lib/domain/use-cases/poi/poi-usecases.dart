@@ -6,24 +6,24 @@ import 'package:yaha/domain/domain.dart';
 
 final poisAroundHikeProvider =
     FutureProvider.family<List<Poi>, String>((ref, hikeId) async {
-  final defaults = ref.read(defaultsProvider);
   final poiUtilities = ref.read(poiUtilityServicesProvider);
   final hike = await ref.read(cachedHikeProvider(hikeId).future);
+  final hikeSettings = ref.watch(hikingSettingsProvider);
+
   return hike == null
       ? Future.value([])
-      : poiUtilities.getOffroutePoisOfHike(
-          hike, HikingSettings(speed: defaults.averageSpeedKmh));
+      : poiUtilities.getOffroutePoisOfHike(hike, hikeSettings);
 });
 
 final poisAlongHikeProvider =
     FutureProvider.family<List<PoiOfHike>, String>((ref, hikeId) async {
-  final defaults = ref.read(defaultsProvider);
   final poiUtilities = ref.read(poiUtilityServicesProvider);
   final hike = await ref.read(cachedHikeProvider(hikeId).future);
+  final hikeSettings = ref.watch(hikingSettingsProvider);
+
   return hike == null
       ? Future.value([])
-      : poiUtilities.getOnroutePoisOfHike(
-          hike, HikingSettings(speed: defaults.averageSpeedKmh));
+      : poiUtilities.getOnroutePoisOfHike(hike, hikeSettings);
 });
 
 final endPointsOfHikeProvider =
@@ -36,6 +36,7 @@ final endPointsOfHikeProvider =
   }
 
   final defaults = ref.read(defaultsProvider);
+  final hikeSettings = ref.watch(hikingSettingsProvider);
 
   final start = PoiOfHike(
       poi: Poi(
@@ -44,7 +45,7 @@ final endPointsOfHikeProvider =
           type: "yaha:start_hike",
           descriptions: [Description(languageKey: "en_US", type: "markdown")]),
       hike: hike,
-      settings: HikingSettings(speed: defaults.averageSpeedKmh),
+      settings: hikeSettings,
       ref: ref);
 
   final end = PoiOfHike(
@@ -54,7 +55,7 @@ final endPointsOfHikeProvider =
           type: "yaha:finish_hike",
           descriptions: [Description(languageKey: "en_US", type: "markdown")]),
       hike: hike,
-      settings: HikingSettings(speed: defaults.averageSpeedKmh),
+      settings: hikeSettings,
       ref: ref);
   return Tuple2(start, end);
 });

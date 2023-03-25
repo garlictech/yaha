@@ -16,7 +16,7 @@ final weatherPoisOfHikeProvider =
   final weatherApi = ref.read(weatherApiProvider);
   final weather = await weatherApi.getWeatherAround(
       Location(lat: hike.startPoint.latitude, lon: hike.startPoint.longitude));
-  final settings = ref.watch(hikingSettingsProvider(hikeId));
+  final settings = ref.watch(hikingSettingsProvider);
 
   getLocationOfEvent(Weather weatherItem) {
     return activeHike.activePoints

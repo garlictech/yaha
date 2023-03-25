@@ -30,7 +30,7 @@ final activeHikeProvider =
     return null;
   }
 
-  final settings = ref.watch(hikingSettingsProvider(hikeId));
+  final settings = ref.watch(hikingSettingsProvider);
 
   final List<Point> coordinates =
       hike.route.coordinates.map((coords) => coords.location).toList();
