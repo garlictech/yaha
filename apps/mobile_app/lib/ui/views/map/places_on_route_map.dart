@@ -6,6 +6,7 @@ import 'package:collection/collection.dart';
 import 'package:yaha/domain/services/hike-utility-services.dart';
 import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 import '../../../domain/entities/entities.dart';
+import 'distance_markers.dart';
 import 'global_map_control.dart';
 import 'global_markers.dart';
 import 'leaflet_map_widgets.dart';
@@ -46,6 +47,7 @@ class PlacesOnRouteMapState extends ConsumerState<PlacesOnRouteMap> {
     final hikeWithBounds =
         hikeUtilityServices.getHikeListStreamWithBounds([widget.hikeId]);
     final globalMarkers = ref.watch(globalMarkersProvider);
+    final distanceMarkers = ref.watch(distanceMarkersProvider(widget.hikeId));
 
     return StreamBuilder(
         stream: hikeWithBounds,
@@ -64,7 +66,8 @@ class PlacesOnRouteMapState extends ConsumerState<PlacesOnRouteMap> {
               children: <Widget>[
                 yahaTileLayer,
                 _getHikeLayerWidget(hike),
-                _getMarkerLayerWidget(globalMarkers),
+                _getMarkerLayerWidget([...globalMarkers, ...distanceMarkers]),
+                _getMarkerClusterLayerWidget(),
               ],
             ),
             Align(
@@ -84,6 +87,12 @@ class PlacesOnRouteMapState extends ConsumerState<PlacesOnRouteMap> {
   }
 
   _getMarkerLayerWidget(List<Marker> globalMarkers) {
+    return MarkerLayer(
+      markers: globalMarkers,
+    );
+  }
+
+  _getMarkerClusterLayerWidget() {
     return Consumer(builder: (c, ref, child) {
       final markers = widget.poiMarkerBuilder == null
           ? const <Marker>[]
@@ -94,7 +103,7 @@ class PlacesOnRouteMapState extends ConsumerState<PlacesOnRouteMap> {
 
       return MarkerClusterLayerWidget(
         options: MarkerClusterLayerOptions(
-          markers: [...markers, ...globalMarkers],
+          markers: markers,
           maxClusterRadius: 45,
           size: const Size(40, 40),
           anchor: AnchorPos.align(AnchorAlign.center),

@@ -1560,7 +1560,7 @@
         };
       }
       exports.untupled = untupled;
-      function pipe3(a, ab, bc, cd, de, ef, fg, gh, hi) {
+      function pipe4(a, ab, bc, cd, de, ef, fg, gh, hi) {
         switch (arguments.length) {
           case 1:
             return a;
@@ -1588,7 +1588,7 @@
             return ret;
         }
       }
-      exports.pipe = pipe3;
+      exports.pipe = pipe4;
       exports.hole = absurd;
       var SK = function(_, b) {
         return b;
@@ -1751,19 +1751,19 @@
         };
       }
       exports.sequenceT = sequenceT;
-      function getRecordConstructor(keys) {
-        var len = keys.length;
+      function getRecordConstructor(keys4) {
+        var len = keys4.length;
         switch (len) {
           case 1:
             return function(a) {
               var _a;
-              return _a = {}, _a[keys[0]] = a, _a;
+              return _a = {}, _a[keys4[0]] = a, _a;
             };
           case 2:
             return function(a) {
               return function(b) {
                 var _a;
-                return _a = {}, _a[keys[0]] = a, _a[keys[1]] = b, _a;
+                return _a = {}, _a[keys4[0]] = a, _a[keys4[1]] = b, _a;
               };
             };
           case 3:
@@ -1771,7 +1771,7 @@
               return function(b) {
                 return function(c) {
                   var _a;
-                  return _a = {}, _a[keys[0]] = a, _a[keys[1]] = b, _a[keys[2]] = c, _a;
+                  return _a = {}, _a[keys4[0]] = a, _a[keys4[1]] = b, _a[keys4[2]] = c, _a;
                 };
               };
             };
@@ -1781,7 +1781,7 @@
                 return function(c) {
                   return function(d) {
                     var _a;
-                    return _a = {}, _a[keys[0]] = a, _a[keys[1]] = b, _a[keys[2]] = c, _a[keys[3]] = d, _a;
+                    return _a = {}, _a[keys4[0]] = a, _a[keys4[1]] = b, _a[keys4[2]] = c, _a[keys4[3]] = d, _a;
                   };
                 };
               };
@@ -1793,7 +1793,7 @@
                   return function(d) {
                     return function(e) {
                       var _a;
-                      return _a = {}, _a[keys[0]] = a, _a[keys[1]] = b, _a[keys[2]] = c, _a[keys[3]] = d, _a[keys[4]] = e, _a;
+                      return _a = {}, _a[keys4[0]] = a, _a[keys4[1]] = b, _a[keys4[2]] = c, _a[keys4[3]] = d, _a[keys4[4]] = e, _a;
                     };
                   };
                 };
@@ -1807,7 +1807,7 @@
               }
               var r = {};
               for (var i = 0; i < len; i++) {
-                r[keys[i]] = args[i];
+                r[keys4[i]] = args[i];
               }
               return r;
             }, len - 1, []);
@@ -1815,12 +1815,12 @@
       }
       function sequenceS(F) {
         return function(r) {
-          var keys = Object.keys(r);
-          var len = keys.length;
-          var f = getRecordConstructor(keys);
-          var fr = F.map(r[keys[0]], f);
+          var keys4 = Object.keys(r);
+          var len = keys4.length;
+          var f = getRecordConstructor(keys4);
+          var fr = F.map(r[keys4[0]], f);
           for (var i = 1; i < len; i++) {
-            fr = F.ap(fr, r[keys[i]]);
+            fr = F.ap(fr, r[keys4[i]]);
           }
           return fr;
         };
@@ -1836,7 +1836,7 @@
       Object.defineProperty(exports, "__esModule", { value: true });
       exports.getFunctorComposition = exports.bindTo = exports.flap = exports.map = void 0;
       var function_1 = require_function();
-      function map5(F, G) {
+      function map7(F, G) {
         return function(f) {
           return function(fa) {
             return F.map(fa, function(ga) {
@@ -1845,7 +1845,7 @@
           };
         };
       }
-      exports.map = map5;
+      exports.map = map7;
       function flap(F) {
         return function(a) {
           return function(fab) {
@@ -1868,10 +1868,10 @@
       }
       exports.bindTo = bindTo;
       function getFunctorComposition(F, G) {
-        var _map = map5(F, G);
+        var _map2 = map7(F, G);
         return {
           map: function(fga, f) {
-            return function_1.pipe(fga, _map(f));
+            return function_1.pipe(fga, _map2(f));
           }
         };
       }
@@ -1899,10 +1899,10 @@
       }
       exports.getApplicativeMonoid = getApplicativeMonoid;
       function getApplicativeComposition(F, G) {
-        var map5 = Functor_1.getFunctorComposition(F, G).map;
+        var map7 = Functor_1.getFunctorComposition(F, G).map;
         var _ap = Apply_1.ap(F, G);
         return {
-          map: map5,
+          map: map7,
           of: function(a) {
             return F.of(G.of(a));
           },
@@ -1933,7 +1933,7 @@
         };
       }
       exports.chainFirst = chainFirst;
-      function bind(M) {
+      function bind3(M) {
         return function(name, f) {
           return function(ma) {
             return M.chain(ma, function(a) {
@@ -1945,7 +1945,7 @@
           };
         };
       }
-      exports.bind = bind;
+      exports.bind = bind3;
     }
   });
 
@@ -2624,12 +2624,12 @@
         return { concat: function_1.identity };
       };
       exports.first = first;
-      var last = function() {
+      var last2 = function() {
         return { concat: function(_2, y2) {
           return y2;
         } };
       };
-      exports.last = last;
+      exports.last = last2;
       exports.concatAll = M.concatAll;
       exports.semigroupVoid = exports.constant(void 0);
       var getObjectSemigroup = function() {
@@ -2696,7 +2696,7 @@
         return { left: left2, right: right2 };
       };
       exports.separated = separated;
-      var _map = function(fa, f) {
+      var _map2 = function(fa, f) {
         return function_1.pipe(fa, exports.map(f));
       };
       var _mapLeft = function(fa, f) {
@@ -2705,12 +2705,12 @@
       var _bimap = function(fa, g, f) {
         return function_1.pipe(fa, exports.bimap(g, f));
       };
-      var map5 = function(f) {
+      var map7 = function(f) {
         return function(fa) {
           return exports.separated(exports.left(fa), f(exports.right(fa)));
         };
       };
-      exports.map = map5;
+      exports.map = map7;
       var mapLeft = function(f) {
         return function(fa) {
           return exports.separated(f(exports.left(fa)), exports.right(fa));
@@ -2731,7 +2731,7 @@
       };
       exports.Functor = {
         URI: exports.URI,
-        map: _map
+        map: _map2
       };
       exports.flap = /* @__PURE__ */ Functor_1.flap(exports.Functor);
       var left = function(s) {
@@ -2894,7 +2894,7 @@
         return ma._tag === "Left" ? exports.none : exports.some(ma.right);
       };
       exports.getRight = getRight;
-      var _map = function(fa, f) {
+      var _map2 = function(fa, f) {
         return function_1.pipe(fa, exports.map(f));
       };
       var _ap = function(fab, fa) {
@@ -2903,7 +2903,7 @@
       var _chain = function(ma, f) {
         return function_1.pipe(ma, exports.chain(f));
       };
-      var _reduce = function(fa, b, f) {
+      var _reduce2 = function(fa, b, f) {
         return function_1.pipe(fa, exports.reduce(b, f));
       };
       var _foldMap = function(M) {
@@ -2924,7 +2924,7 @@
       var _alt = function(fa, that) {
         return function_1.pipe(fa, exports.alt(that));
       };
-      var _filter = function(fa, predicate) {
+      var _filter2 = function(fa, predicate) {
         return function_1.pipe(fa, exports.filter(predicate));
       };
       var _filterMap = function(fa, f) {
@@ -2974,15 +2974,15 @@
         };
       };
       exports.getMonoid = getMonoid;
-      var map5 = function(f) {
+      var map7 = function(f) {
         return function(fa) {
           return exports.isNone(fa) ? exports.none : exports.some(f(fa.value));
         };
       };
-      exports.map = map5;
+      exports.map = map7;
       exports.Functor = {
         URI: exports.URI,
-        map: _map
+        map: _map2
       };
       exports.of = exports.some;
       exports.Pointed = {
@@ -2997,12 +2997,12 @@
       exports.ap = ap;
       exports.Apply = {
         URI: exports.URI,
-        map: _map,
+        map: _map2,
         ap: _ap
       };
       exports.Applicative = {
         URI: exports.URI,
-        map: _map,
+        map: _map2,
         ap: _ap,
         of: exports.of
       };
@@ -3014,13 +3014,13 @@
       exports.chain = chain3;
       exports.Chain = {
         URI: exports.URI,
-        map: _map,
+        map: _map2,
         ap: _ap,
         chain: _chain
       };
       exports.Monad = {
         URI: exports.URI,
-        map: _map,
+        map: _map2,
         ap: _ap,
         of: exports.of,
         chain: _chain
@@ -3047,7 +3047,7 @@
       exports.reduceRight = reduceRight;
       exports.Foldable = {
         URI: exports.URI,
-        reduce: _reduce,
+        reduce: _reduce2,
         foldMap: _foldMap,
         reduceRight: _reduceRight
       };
@@ -3060,7 +3060,7 @@
       exports.alt = exports.altW;
       exports.Alt = {
         URI: exports.URI,
-        map: _map,
+        map: _map2,
         alt: _alt
       };
       var zero = function() {
@@ -3074,7 +3074,7 @@
       exports.guard = /* @__PURE__ */ Zero_1.guard(exports.Zero, exports.Pointed);
       exports.Alternative = {
         URI: exports.URI,
-        map: _map,
+        map: _map2,
         ap: _ap,
         of: exports.of,
         alt: _alt,
@@ -3088,7 +3088,7 @@
       exports.extend = extend;
       exports.Extend = {
         URI: exports.URI,
-        map: _map,
+        map: _map2,
         extend: _extend
       };
       exports.compact = /* @__PURE__ */ exports.chain(function_1.identity);
@@ -3102,12 +3102,12 @@
         compact: exports.compact,
         separate: exports.separate
       };
-      var filter = function(predicate) {
+      var filter2 = function(predicate) {
         return function(fa) {
           return exports.isNone(fa) ? exports.none : predicate(fa.value) ? fa : exports.none;
         };
       };
-      exports.filter = filter;
+      exports.filter = filter2;
       var filterMap = function(f) {
         return function(fa) {
           return exports.isNone(fa) ? exports.none : f(fa.value);
@@ -3116,7 +3116,7 @@
       exports.filterMap = filterMap;
       var partition = function(predicate) {
         return function(fa) {
-          return Separated_1.separated(_filter(fa, Predicate_1.not(predicate)), _filter(fa, predicate));
+          return Separated_1.separated(_filter2(fa, Predicate_1.not(predicate)), _filter2(fa, predicate));
         };
       };
       exports.partition = partition;
@@ -3126,10 +3126,10 @@
       exports.partitionMap = partitionMap;
       exports.Filterable = {
         URI: exports.URI,
-        map: _map,
+        map: _map2,
         compact: exports.compact,
         separate: exports.separate,
-        filter: _filter,
+        filter: _filter2,
         filterMap: _filterMap,
         partition: _partition,
         partitionMap: _partitionMap
@@ -3150,8 +3150,8 @@
       exports.sequence = sequence;
       exports.Traversable = {
         URI: exports.URI,
-        map: _map,
-        reduce: _reduce,
+        map: _map2,
+        reduce: _reduce2,
         foldMap: _foldMap,
         reduceRight: _reduceRight,
         traverse: _traverse,
@@ -3179,15 +3179,15 @@
       exports.wilt = wilt;
       exports.Witherable = {
         URI: exports.URI,
-        map: _map,
-        reduce: _reduce,
+        map: _map2,
+        reduce: _reduce2,
         foldMap: _foldMap,
         reduceRight: _reduceRight,
         traverse: _traverse,
         sequence: exports.sequence,
         compact: exports.compact,
         separate: exports.separate,
-        filter: _filter,
+        filter: _filter2,
         filterMap: _filterMap,
         partition: _partition,
         partitionMap: _partitionMap,
@@ -3200,7 +3200,7 @@
       exports.throwError = throwError;
       exports.MonadThrow = {
         URI: exports.URI,
-        map: _map,
+        map: _map2,
         ap: _ap,
         of: exports.of,
         chain: _chain,
@@ -3342,11 +3342,11 @@
       exports.mapNullable = exports.chainNullableK;
       exports.option = {
         URI: exports.URI,
-        map: _map,
+        map: _map2,
         of: exports.of,
         ap: _ap,
         chain: _chain,
-        reduce: _reduce,
+        reduce: _reduce2,
         foldMap: _foldMap,
         reduceRight: _reduceRight,
         traverse: _traverse,
@@ -3356,7 +3356,7 @@
         extend: _extend,
         compact: exports.compact,
         separate: exports.separate,
-        filter: _filter,
+        filter: _filter2,
         filterMap: _filterMap,
         partition: _partition,
         partitionMap: _partitionMap,
@@ -3929,11 +3929,11 @@
         };
         tree.load(points);
         var queue = [];
-        for (var i = 0, last; i < hull.length; i++) {
+        for (var i = 0, last2; i < hull.length; i++) {
           var p = hull[i];
           tree.remove(p);
-          last = insertNode(p, last);
-          queue.push(last);
+          last2 = insertNode(p, last2);
+          queue.push(last2);
         }
         var segTree = new RBush(16);
         for (i = 0; i < queue.length; i++)
@@ -3958,12 +3958,12 @@
             segTree.insert(updateBBox(node.next));
           }
         }
-        node = last;
+        node = last2;
         var concave = [];
         do {
           concave.push(node.p);
           node = node.next;
-        } while (node !== last);
+        } while (node !== last2);
         concave.push(node.p);
         return concave;
       }
@@ -4296,7 +4296,7 @@
               if (intersects2(bbox3, childBBox)) {
                 if (node.leaf)
                   result.push(child);
-                else if (contains(bbox3, childBBox))
+                else if (contains3(bbox3, childBBox))
                   this._all(child, result);
                 else
                   nodesToSearch.push(child);
@@ -4316,7 +4316,7 @@
               child = node.children[i];
               childBBox = node.leaf ? toBBox(child) : child;
               if (intersects2(bbox3, childBBox)) {
-                if (node.leaf || contains(bbox3, childBBox))
+                if (node.leaf || contains3(bbox3, childBBox))
                   return true;
                 nodesToSearch.push(child);
               }
@@ -4378,7 +4378,7 @@
                 return this;
               }
             }
-            if (!goingUp && !node.leaf && contains(node, bbox3)) {
+            if (!goingUp && !node.leaf && contains3(node, bbox3)) {
               path.push(node);
               indexes.push(i);
               i = 0;
@@ -4622,7 +4622,7 @@
         var minX = Math.max(a.minX, b.minX), minY = Math.max(a.minY, b.minY), maxX = Math.min(a.maxX, b.maxX), maxY = Math.min(a.maxY, b.maxY);
         return Math.max(0, maxX - minX) * Math.max(0, maxY - minY);
       }
-      function contains(a, b) {
+      function contains3(a, b) {
         return a.minX <= b.minX && a.minY <= b.minY && b.maxX <= a.maxX && b.maxY <= a.maxY;
       }
       function intersects2(a, b) {
@@ -4684,25 +4684,25 @@
               maxY = y2;
           }
           invSize = Math.max(maxX - minX, maxY - minY);
-          invSize = invSize !== 0 ? 1 / invSize : 0;
+          invSize = invSize !== 0 ? 32767 / invSize : 0;
         }
-        earcutLinked(outerNode, triangles, dim, minX, minY, invSize);
+        earcutLinked(outerNode, triangles, dim, minX, minY, invSize, 0);
         return triangles;
       }
       function linkedList(data, start, end, dim, clockwise) {
-        var i, last;
+        var i, last2;
         if (clockwise === signedArea(data, start, end, dim) > 0) {
           for (i = start; i < end; i += dim)
-            last = insertNode(i, data[i], data[i + 1], last);
+            last2 = insertNode(i, data[i], data[i + 1], last2);
         } else {
           for (i = end - dim; i >= start; i -= dim)
-            last = insertNode(i, data[i], data[i + 1], last);
+            last2 = insertNode(i, data[i], data[i + 1], last2);
         }
-        if (last && equals(last, last.next)) {
-          removeNode(last);
-          last = last.next;
+        if (last2 && equals(last2, last2.next)) {
+          removeNode(last2);
+          last2 = last2.next;
         }
-        return last;
+        return last2;
       }
       function filterPoints(start, end) {
         if (!start)
@@ -4734,9 +4734,9 @@
           prev = ear.prev;
           next = ear.next;
           if (invSize ? isEarHashed(ear, minX, minY, invSize) : isEar(ear)) {
-            triangles.push(prev.i / dim);
-            triangles.push(ear.i / dim);
-            triangles.push(next.i / dim);
+            triangles.push(prev.i / dim | 0);
+            triangles.push(ear.i / dim | 0);
+            triangles.push(next.i / dim | 0);
             removeNode(ear);
             ear = next.next;
             stop = next.next;
@@ -4760,9 +4760,11 @@
         var a = ear.prev, b = ear, c = ear.next;
         if (area2(a, b, c) >= 0)
           return false;
-        var p = ear.next.next;
-        while (p !== ear.prev) {
-          if (pointInTriangle(a.x, a.y, b.x, b.y, c.x, c.y, p.x, p.y) && area2(p.prev, p, p.next) >= 0)
+        var ax = a.x, bx = b.x, cx = c.x, ay = a.y, by = b.y, cy = c.y;
+        var x02 = ax < bx ? ax < cx ? ax : cx : bx < cx ? bx : cx, y0 = ay < by ? ay < cy ? ay : cy : by < cy ? by : cy, x12 = ax > bx ? ax > cx ? ax : cx : bx > cx ? bx : cx, y1 = ay > by ? ay > cy ? ay : cy : by > cy ? by : cy;
+        var p = c.next;
+        while (p !== a) {
+          if (p.x >= x02 && p.x <= x12 && p.y >= y0 && p.y <= y1 && pointInTriangle(ax, ay, bx, by, cx, cy, p.x, p.y) && area2(p.prev, p, p.next) >= 0)
             return false;
           p = p.next;
         }
@@ -4772,24 +4774,25 @@
         var a = ear.prev, b = ear, c = ear.next;
         if (area2(a, b, c) >= 0)
           return false;
-        var minTX = a.x < b.x ? a.x < c.x ? a.x : c.x : b.x < c.x ? b.x : c.x, minTY = a.y < b.y ? a.y < c.y ? a.y : c.y : b.y < c.y ? b.y : c.y, maxTX = a.x > b.x ? a.x > c.x ? a.x : c.x : b.x > c.x ? b.x : c.x, maxTY = a.y > b.y ? a.y > c.y ? a.y : c.y : b.y > c.y ? b.y : c.y;
-        var minZ = zOrder(minTX, minTY, minX, minY, invSize), maxZ = zOrder(maxTX, maxTY, minX, minY, invSize);
+        var ax = a.x, bx = b.x, cx = c.x, ay = a.y, by = b.y, cy = c.y;
+        var x02 = ax < bx ? ax < cx ? ax : cx : bx < cx ? bx : cx, y0 = ay < by ? ay < cy ? ay : cy : by < cy ? by : cy, x12 = ax > bx ? ax > cx ? ax : cx : bx > cx ? bx : cx, y1 = ay > by ? ay > cy ? ay : cy : by > cy ? by : cy;
+        var minZ = zOrder(x02, y0, minX, minY, invSize), maxZ = zOrder(x12, y1, minX, minY, invSize);
         var p = ear.prevZ, n = ear.nextZ;
         while (p && p.z >= minZ && n && n.z <= maxZ) {
-          if (p !== ear.prev && p !== ear.next && pointInTriangle(a.x, a.y, b.x, b.y, c.x, c.y, p.x, p.y) && area2(p.prev, p, p.next) >= 0)
+          if (p.x >= x02 && p.x <= x12 && p.y >= y0 && p.y <= y1 && p !== a && p !== c && pointInTriangle(ax, ay, bx, by, cx, cy, p.x, p.y) && area2(p.prev, p, p.next) >= 0)
             return false;
           p = p.prevZ;
-          if (n !== ear.prev && n !== ear.next && pointInTriangle(a.x, a.y, b.x, b.y, c.x, c.y, n.x, n.y) && area2(n.prev, n, n.next) >= 0)
+          if (n.x >= x02 && n.x <= x12 && n.y >= y0 && n.y <= y1 && n !== a && n !== c && pointInTriangle(ax, ay, bx, by, cx, cy, n.x, n.y) && area2(n.prev, n, n.next) >= 0)
             return false;
           n = n.nextZ;
         }
         while (p && p.z >= minZ) {
-          if (p !== ear.prev && p !== ear.next && pointInTriangle(a.x, a.y, b.x, b.y, c.x, c.y, p.x, p.y) && area2(p.prev, p, p.next) >= 0)
+          if (p.x >= x02 && p.x <= x12 && p.y >= y0 && p.y <= y1 && p !== a && p !== c && pointInTriangle(ax, ay, bx, by, cx, cy, p.x, p.y) && area2(p.prev, p, p.next) >= 0)
             return false;
           p = p.prevZ;
         }
         while (n && n.z <= maxZ) {
-          if (n !== ear.prev && n !== ear.next && pointInTriangle(a.x, a.y, b.x, b.y, c.x, c.y, n.x, n.y) && area2(n.prev, n, n.next) >= 0)
+          if (n.x >= x02 && n.x <= x12 && n.y >= y0 && n.y <= y1 && n !== a && n !== c && pointInTriangle(ax, ay, bx, by, cx, cy, n.x, n.y) && area2(n.prev, n, n.next) >= 0)
             return false;
           n = n.nextZ;
         }
@@ -4800,9 +4803,9 @@
         do {
           var a = p.prev, b = p.next.next;
           if (!equals(a, b) && intersects2(a, p, p.next, b) && locallyInside(a, b) && locallyInside(b, a)) {
-            triangles.push(a.i / dim);
-            triangles.push(p.i / dim);
-            triangles.push(b.i / dim);
+            triangles.push(a.i / dim | 0);
+            triangles.push(p.i / dim | 0);
+            triangles.push(b.i / dim | 0);
             removeNode(p);
             removeNode(p.next);
             p = start = b;
@@ -4820,8 +4823,8 @@
               var c = splitPolygon(a, b);
               a = filterPoints(a, a.next);
               c = filterPoints(c, c.next);
-              earcutLinked(a, triangles, dim, minX, minY, invSize);
-              earcutLinked(c, triangles, dim, minX, minY, invSize);
+              earcutLinked(a, triangles, dim, minX, minY, invSize, 0);
+              earcutLinked(c, triangles, dim, minX, minY, invSize, 0);
               return;
             }
             b = b.next;
@@ -4842,7 +4845,6 @@
         queue.sort(compareX);
         for (i = 0; i < queue.length; i++) {
           outerNode = eliminateHole(queue[i], outerNode);
-          outerNode = filterPoints(outerNode, outerNode.next);
         }
         return outerNode;
       }
@@ -4855,9 +4857,8 @@
           return outerNode;
         }
         var bridgeReverse = splitPolygon(bridge, hole);
-        var filteredBridge = filterPoints(bridge, bridge.next);
         filterPoints(bridgeReverse, bridgeReverse.next);
-        return outerNode === bridge ? filteredBridge : outerNode;
+        return filterPoints(bridge, bridge.next);
       }
       function findHoleBridge(hole, outerNode) {
         var p = outerNode, hx = hole.x, hy = hole.y, qx = -Infinity, m;
@@ -4866,21 +4867,15 @@
             var x2 = p.x + (hy - p.y) * (p.next.x - p.x) / (p.next.y - p.y);
             if (x2 <= hx && x2 > qx) {
               qx = x2;
-              if (x2 === hx) {
-                if (hy === p.y)
-                  return p;
-                if (hy === p.next.y)
-                  return p.next;
-              }
               m = p.x < p.next.x ? p : p.next;
+              if (x2 === hx)
+                return m;
             }
           }
           p = p.next;
         } while (p !== outerNode);
         if (!m)
           return null;
-        if (hx === qx)
-          return m;
         var stop = m, mx = m.x, my = m.y, tanMin = Infinity, tan2;
         p = m;
         do {
@@ -4901,7 +4896,7 @@
       function indexCurve(start, minX, minY, invSize) {
         var p = start;
         do {
-          if (p.z === null)
+          if (p.z === 0)
             p.z = zOrder(p.x, p.y, minX, minY, invSize);
           p.prevZ = p.prev;
           p.nextZ = p.next;
@@ -4954,8 +4949,8 @@
         return list;
       }
       function zOrder(x2, y2, minX, minY, invSize) {
-        x2 = 32767 * (x2 - minX) * invSize;
-        y2 = 32767 * (y2 - minY) * invSize;
+        x2 = (x2 - minX) * invSize | 0;
+        y2 = (y2 - minY) * invSize | 0;
         x2 = (x2 | x2 << 8) & 16711935;
         x2 = (x2 | x2 << 4) & 252645135;
         x2 = (x2 | x2 << 2) & 858993459;
@@ -4976,7 +4971,7 @@
         return leftmost;
       }
       function pointInTriangle(ax, ay, bx, by, cx, cy, px, py) {
-        return (cx - px) * (ay - py) - (ax - px) * (cy - py) >= 0 && (ax - px) * (by - py) - (bx - px) * (ay - py) >= 0 && (bx - px) * (cy - py) - (cx - px) * (by - py) >= 0;
+        return (cx - px) * (ay - py) >= (ax - px) * (cy - py) && (ax - px) * (by - py) >= (bx - px) * (ay - py) && (bx - px) * (cy - py) >= (cx - px) * (by - py);
       }
       function isValidDiagonal(a, b) {
         return a.next.i !== b.i && a.prev.i !== b.i && !intersectsPolygon(a, b) && (locallyInside(a, b) && locallyInside(b, a) && middleInside(a, b) && (area2(a.prev, a, b.prev) || area2(a, b.prev, b)) || equals(a, b) && area2(a.prev, a, a.next) > 0 && area2(b.prev, b, b.next) > 0);
@@ -5043,16 +5038,16 @@
         b2.prev = bp;
         return b2;
       }
-      function insertNode(i, x2, y2, last) {
+      function insertNode(i, x2, y2, last2) {
         var p = new Node2(i, x2, y2);
-        if (!last) {
+        if (!last2) {
           p.prev = p;
           p.next = p;
         } else {
-          p.next = last.next;
-          p.prev = last;
-          last.next.prev = p;
-          last.next = p;
+          p.next = last2.next;
+          p.prev = last2;
+          last2.next.prev = p;
+          last2.next = p;
         }
         return p;
       }
@@ -5070,7 +5065,7 @@
         this.y = y2;
         this.prev = null;
         this.next = null;
-        this.z = null;
+        this.z = 0;
         this.prevZ = null;
         this.nextZ = null;
         this.steiner = false;
@@ -5218,7 +5213,7 @@
             return false;
           }
         };
-        keysShim = function keys(object2) {
+        keysShim = function keys4(object2) {
           var isObject2 = object2 !== null && typeof object2 === "object";
           var isFunction = toStr.call(object2) === "[object Function]";
           var isArguments = isArgs(object2);
@@ -5277,7 +5272,7 @@
       var slice2 = Array.prototype.slice;
       var isArgs = require_isArguments();
       var origKeys = Object.keys;
-      var keysShim = origKeys ? function keys(o) {
+      var keysShim = origKeys ? function keys4(o) {
         return origKeys(o);
       } : require_implementation();
       var originalKeys = Object.keys;
@@ -5288,7 +5283,7 @@
             return args && args.length === arguments.length;
           }(1, 2);
           if (!keysWorksWithArguments) {
-            Object.keys = function keys(object2) {
+            Object.keys = function keys4(object2) {
               if (isArgs(object2)) {
                 return originalKeys(slice2.call(object2));
               }
@@ -5399,7 +5394,7 @@
       var slice2 = Array.prototype.slice;
       var toStr = Object.prototype.toString;
       var funcType = "[object Function]";
-      module.exports = function bind(that) {
+      module.exports = function bind3(that) {
         var target = this;
         if (typeof target !== "function" || toStr.call(target) !== funcType) {
           throw new TypeError(ERROR_MESSAGE + target);
@@ -5454,8 +5449,8 @@
   var require_src = __commonJS({
     "node_modules/has/src/index.js"(exports, module) {
       "use strict";
-      var bind = require_function_bind();
-      module.exports = bind.call(Function.call, Object.prototype.hasOwnProperty);
+      var bind3 = require_function_bind();
+      module.exports = bind3.call(Function.call, Object.prototype.hasOwnProperty);
     }
   });
 
@@ -5643,21 +5638,21 @@
         "%WeakMapPrototype%": ["WeakMap", "prototype"],
         "%WeakSetPrototype%": ["WeakSet", "prototype"]
       };
-      var bind = require_function_bind();
+      var bind3 = require_function_bind();
       var hasOwn = require_src();
-      var $concat = bind.call(Function.call, Array.prototype.concat);
-      var $spliceApply = bind.call(Function.apply, Array.prototype.splice);
-      var $replace = bind.call(Function.call, String.prototype.replace);
-      var $strSlice = bind.call(Function.call, String.prototype.slice);
-      var $exec = bind.call(Function.call, RegExp.prototype.exec);
+      var $concat = bind3.call(Function.call, Array.prototype.concat);
+      var $spliceApply = bind3.call(Function.apply, Array.prototype.splice);
+      var $replace = bind3.call(Function.call, String.prototype.replace);
+      var $strSlice = bind3.call(Function.call, String.prototype.slice);
+      var $exec = bind3.call(Function.call, RegExp.prototype.exec);
       var rePropName = /[^%.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|%$))/g;
       var reEscapeChar = /\\(\\)?/g;
       var stringToPath = function stringToPath2(string) {
         var first = $strSlice(string, 0, 1);
-        var last = $strSlice(string, -1);
-        if (first === "%" && last !== "%") {
+        var last2 = $strSlice(string, -1);
+        if (first === "%" && last2 !== "%") {
           throw new $SyntaxError("invalid intrinsic syntax, expected closing `%`");
-        } else if (last === "%" && first !== "%") {
+        } else if (last2 === "%" && first !== "%") {
           throw new $SyntaxError("invalid intrinsic syntax, expected opening `%`");
         }
         var result = [];
@@ -5696,7 +5691,7 @@
         if (arguments.length > 1 && typeof allowMissing !== "boolean") {
           throw new $TypeError('"allowMissing" argument must be a boolean');
         }
-        if ($exec(/^%?[^%]*%?$/g, name) === null) {
+        if ($exec(/^%?[^%]*%?$/, name) === null) {
           throw new $SyntaxError("`%` may not be present anywhere but at the beginning and end of the intrinsic name");
         }
         var parts = stringToPath(name);
@@ -5713,8 +5708,8 @@
         for (var i = 1, isOwn = true; i < parts.length; i += 1) {
           var part = parts[i];
           var first = $strSlice(part, 0, 1);
-          var last = $strSlice(part, -1);
-          if ((first === '"' || first === "'" || first === "`" || (last === '"' || last === "'" || last === "`")) && first !== last) {
+          var last2 = $strSlice(part, -1);
+          if ((first === '"' || first === "'" || first === "`" || (last2 === '"' || last2 === "'" || last2 === "`")) && first !== last2) {
             throw new $SyntaxError("property names with quotes must have matching quotes");
           }
           if (part === "constructor" || !isOwn) {
@@ -5757,11 +5752,11 @@
   var require_call_bind = __commonJS({
     "node_modules/call-bind/index.js"(exports, module) {
       "use strict";
-      var bind = require_function_bind();
+      var bind3 = require_function_bind();
       var GetIntrinsic = require_get_intrinsic();
       var $apply = GetIntrinsic("%Function.prototype.apply%");
       var $call = GetIntrinsic("%Function.prototype.call%");
-      var $reflectApply = GetIntrinsic("%Reflect.apply%", true) || bind.call($call, $apply);
+      var $reflectApply = GetIntrinsic("%Reflect.apply%", true) || bind3.call($call, $apply);
       var $gOPD = GetIntrinsic("%Object.getOwnPropertyDescriptor%", true);
       var $defineProperty = GetIntrinsic("%Object.defineProperty%", true);
       var $max = GetIntrinsic("%Math.max%");
@@ -5773,7 +5768,7 @@
         }
       }
       module.exports = function callBind(originalFunction) {
-        var func = $reflectApply(bind, $call, arguments);
+        var func = $reflectApply(bind3, $call, arguments);
         if ($gOPD && $defineProperty) {
           var desc = $gOPD(func, "length");
           if (desc.configurable) {
@@ -5787,7 +5782,7 @@
         return func;
       };
       var applyBind = function applyBind2() {
-        return $reflectApply(bind, $apply, arguments);
+        return $reflectApply(bind3, $apply, arguments);
       };
       if ($defineProperty) {
         $defineProperty(module.exports, "apply", { value: applyBind });
@@ -5876,7 +5871,7 @@
   var require_define_properties = __commonJS({
     "node_modules/define-properties/index.js"(exports, module) {
       "use strict";
-      var keys = require_object_keys();
+      var keys4 = require_object_keys();
       var hasSymbols = typeof Symbol === "function" && typeof Symbol("foo") === "symbol";
       var toStr = Object.prototype.toString;
       var concat = Array.prototype.concat;
@@ -5901,14 +5896,14 @@
           object2[name] = value;
         }
       };
-      var defineProperties = function(object2, map5) {
+      var defineProperties = function(object2, map7) {
         var predicates = arguments.length > 2 ? arguments[2] : {};
-        var props = keys(map5);
+        var props = keys4(map7);
         if (hasSymbols) {
-          props = concat.call(props, Object.getOwnPropertySymbols(map5));
+          props = concat.call(props, Object.getOwnPropertySymbols(map7));
         }
         for (var i = 0; i < props.length; i += 1) {
-          defineProperty(object2, props[i], map5[props[i]], predicates[props[i]]);
+          defineProperty(object2, props[i], map7[props[i]], predicates[props[i]]);
         }
       };
       defineProperties.supportsDescriptors = !!supportsDescriptors;
@@ -6219,9 +6214,116 @@
     }
   });
 
-  // node_modules/deep-equal/index.js
+  // node_modules/@turf/line-overlap/node_modules/deep-equal/index.js
   var require_deep_equal = __commonJS({
-    "node_modules/deep-equal/index.js"(exports, module) {
+    "node_modules/@turf/line-overlap/node_modules/deep-equal/index.js"(exports, module) {
+      var objectKeys = require_object_keys();
+      var isArguments = require_is_arguments();
+      var is = require_object_is();
+      var isRegex = require_is_regex();
+      var flags = require_regexp_prototype();
+      var isDate = require_is_date_object();
+      var getTime = Date.prototype.getTime;
+      function deepEqual(actual, expected, options) {
+        var opts = options || {};
+        if (opts.strict ? is(actual, expected) : actual === expected) {
+          return true;
+        }
+        if (!actual || !expected || typeof actual !== "object" && typeof expected !== "object") {
+          return opts.strict ? is(actual, expected) : actual == expected;
+        }
+        return objEquiv(actual, expected, opts);
+      }
+      function isUndefinedOrNull(value) {
+        return value === null || value === void 0;
+      }
+      function isBuffer(x2) {
+        if (!x2 || typeof x2 !== "object" || typeof x2.length !== "number") {
+          return false;
+        }
+        if (typeof x2.copy !== "function" || typeof x2.slice !== "function") {
+          return false;
+        }
+        if (x2.length > 0 && typeof x2[0] !== "number") {
+          return false;
+        }
+        return true;
+      }
+      function objEquiv(a, b, opts) {
+        var i, key;
+        if (typeof a !== typeof b) {
+          return false;
+        }
+        if (isUndefinedOrNull(a) || isUndefinedOrNull(b)) {
+          return false;
+        }
+        if (a.prototype !== b.prototype) {
+          return false;
+        }
+        if (isArguments(a) !== isArguments(b)) {
+          return false;
+        }
+        var aIsRegex = isRegex(a);
+        var bIsRegex = isRegex(b);
+        if (aIsRegex !== bIsRegex) {
+          return false;
+        }
+        if (aIsRegex || bIsRegex) {
+          return a.source === b.source && flags(a) === flags(b);
+        }
+        if (isDate(a) && isDate(b)) {
+          return getTime.call(a) === getTime.call(b);
+        }
+        var aIsBuffer = isBuffer(a);
+        var bIsBuffer = isBuffer(b);
+        if (aIsBuffer !== bIsBuffer) {
+          return false;
+        }
+        if (aIsBuffer || bIsBuffer) {
+          if (a.length !== b.length) {
+            return false;
+          }
+          for (i = 0; i < a.length; i++) {
+            if (a[i] !== b[i]) {
+              return false;
+            }
+          }
+          return true;
+        }
+        if (typeof a !== typeof b) {
+          return false;
+        }
+        try {
+          var ka = objectKeys(a);
+          var kb = objectKeys(b);
+        } catch (e) {
+          return false;
+        }
+        if (ka.length !== kb.length) {
+          return false;
+        }
+        ka.sort();
+        kb.sort();
+        for (i = ka.length - 1; i >= 0; i--) {
+          if (ka[i] != kb[i]) {
+            return false;
+          }
+        }
+        for (i = ka.length - 1; i >= 0; i--) {
+          key = ka[i];
+          if (!deepEqual(a[key], b[key], opts)) {
+            return false;
+          }
+        }
+        return true;
+      }
+      module.exports = deepEqual;
+    }
+  });
+
+  // node_modules/geojson-equality/node_modules/deep-equal/index.js
+  var require_deep_equal2 = __commonJS({
+    "node_modules/geojson-equality/node_modules/deep-equal/index.js"(exports, module) {
       var objectKeys = require_object_keys();
       var isArguments = require_is_arguments();
       var is = require_object_is();
@@ -6329,7 +6431,7 @@
   // node_modules/geojson-equality/index.js
   var require_geojson_equality = __commonJS({
     "node_modules/geojson-equality/index.js"(exports, module) {
-      var deepEqual = require_deep_equal();
+      var deepEqual = require_deep_equal2();
       var Equality = function(opt) {
         this.precision = opt && opt.precision ? opt.precision : 17;
         this.direction = opt && opt.direction ? opt.direction : false;
@@ -6972,14 +7074,14 @@
       var dist = Distance.dist;
       module.exports = {
         kmrand: function kmrand(data, k) {
-          var map5 = {}, ks = [], t = k << 2;
+          var map7 = {}, ks = [], t = k << 2;
           var len = data.length;
           var multi = data[0].length > 0;
           while (ks.length < k && t-- > 0) {
             var d = data[Math.floor(Math.random() * len)];
             var key = multi ? d.join("_") : "" + d;
-            if (!map5[key]) {
-              map5[key] = true;
+            if (!map7[key]) {
+              map7[key] = true;
               ks.push(d);
             }
           }
@@ -6992,11 +7094,11 @@
           var distance2 = data[0].length ? eudist : dist;
           var ks = [], len = data.length;
           var multi = data[0].length > 0;
-          var map5 = {};
+          var map7 = {};
           var c = data[Math.floor(Math.random() * len)];
           var key = multi ? c.join("_") : "" + c;
           ks.push(c);
-          map5[key] = true;
+          map7[key] = true;
           while (ks.length < k) {
             var dists = [], lk = ks.length;
             var dsum = 0, prs = [];
@@ -7449,12 +7551,12 @@
             return this;
           };
           Tree2.prototype.keys = function() {
-            var keys = [];
+            var keys4 = [];
             this.forEach(function(_a) {
               var key = _a.key;
-              return keys.push(key);
+              return keys4.push(key);
             });
-            return keys;
+            return keys4;
           };
           Tree2.prototype.values = function() {
             var values = [];
@@ -7571,22 +7673,22 @@
           Tree2.prototype.toList = function() {
             return toList(this._root);
           };
-          Tree2.prototype.load = function(keys, values, presort) {
+          Tree2.prototype.load = function(keys4, values, presort) {
             if (values === void 0) {
               values = [];
             }
             if (presort === void 0) {
               presort = false;
             }
-            var size = keys.length;
+            var size = keys4.length;
             var comparator = this._comparator;
             if (presort)
-              sort(keys, values, 0, size - 1, comparator);
+              sort(keys4, values, 0, size - 1, comparator);
             if (this._root === null) {
-              this._root = loadRecursive(keys, values, 0, size);
+              this._root = loadRecursive(keys4, values, 0, size);
               this._size = size;
             } else {
-              var mergedList = mergeLists(this.toList(), createList(keys, values), comparator);
+              var mergedList = mergeLists(this.toList(), createList(keys4, values), comparator);
               size = this._size + size;
               this._root = sortedListToBST({
                 head: mergedList
@@ -7638,24 +7740,24 @@
           };
           return Tree2;
         }();
-        function loadRecursive(keys, values, start, end) {
+        function loadRecursive(keys4, values, start, end) {
           var size = end - start;
           if (size > 0) {
             var middle = start + Math.floor(size / 2);
-            var key = keys[middle];
+            var key = keys4[middle];
             var data = values[middle];
             var node = new Node2(key, data);
-            node.left = loadRecursive(keys, values, start, middle);
-            node.right = loadRecursive(keys, values, middle + 1, end);
+            node.left = loadRecursive(keys4, values, start, middle);
+            node.right = loadRecursive(keys4, values, middle + 1, end);
             return node;
           }
           return null;
         }
-        function createList(keys, values) {
+        function createList(keys4, values) {
           var head = new Node2(null, null);
           var p = head;
-          for (var i = 0; i < keys.length; i++) {
-            p = p.next = new Node2(keys[i], values[i]);
+          for (var i = 0; i < keys4.length; i++) {
+            p = p.next = new Node2(keys4[i], values[i]);
           }
           p.next = null;
           return head.next;
@@ -7716,30 +7818,30 @@
           }
           return head.next;
         }
-        function sort(keys, values, left, right, compare) {
+        function sort(keys4, values, left, right, compare) {
           if (left >= right)
             return;
-          var pivot = keys[left + right >> 1];
+          var pivot = keys4[left + right >> 1];
           var i = left - 1;
           var j = right + 1;
           while (true) {
             do {
               i++;
-            } while (compare(keys[i], pivot) < 0);
+            } while (compare(keys4[i], pivot) < 0);
             do {
               j--;
-            } while (compare(keys[j], pivot) > 0);
+            } while (compare(keys4[j], pivot) > 0);
             if (i >= j)
               break;
-            var tmp = keys[i];
-            keys[i] = keys[j];
-            keys[j] = tmp;
+            var tmp = keys4[i];
+            keys4[i] = keys4[j];
+            keys4[j] = tmp;
             tmp = values[i];
             values[i] = values[j];
             values[j] = tmp;
           }
-          sort(keys, values, left, j, compare);
-          sort(keys, values, j + 1, right, compare);
+          sort(keys4, values, left, j, compare);
+          sort(keys4, values, j + 1, right, compare);
         }
         var isInBbox = function isInBbox2(bbox3, point2) {
           return bbox3.ll.x <= point2.x && point2.x <= bbox3.ur.x && bbox3.ll.y <= point2.y && point2.y <= bbox3.ur.y;
@@ -23282,8 +23384,8 @@
           "toInteger": util.toInteger,
           "toPath": util.toPath
         };
-        var ary = helpers.ary, assign = helpers.assign, clone = helpers.clone, curry = helpers.curry, each = helpers.forEach, isArray = helpers.isArray, isError = helpers.isError, isFunction = helpers.isFunction, isWeakMap = helpers.isWeakMap, keys = helpers.keys, rearg = helpers.rearg, toInteger = helpers.toInteger, toPath = helpers.toPath;
-        var aryMethodKeys = keys(mapping.aryMethod);
+        var ary = helpers.ary, assign = helpers.assign, clone = helpers.clone, curry = helpers.curry, each = helpers.forEach, isArray = helpers.isArray, isError = helpers.isError, isFunction = helpers.isFunction, isWeakMap = helpers.isWeakMap, keys4 = helpers.keys, rearg = helpers.rearg, toInteger = helpers.toInteger, toPath = helpers.toPath;
+        var aryMethodKeys = keys4(mapping.aryMethod);
         var wrappers = {
           "castArray": function(castArray) {
             return function() {
@@ -23308,7 +23410,7 @@
                 return mixin(func2, Object(source));
               }
               var pairs2 = [];
-              each(keys(source), function(key) {
+              each(keys4(source), function(key) {
                 if (isFunction(source[key])) {
                   pairs2.push([key, func2.prototype[key]]);
                 }
@@ -23465,7 +23567,7 @@
             }
           });
         });
-        each(keys(_), function(key) {
+        each(keys4(_), function(key) {
           var func2 = _[key];
           if (typeof func2 == "function") {
             var length2 = pairs.length;
@@ -23483,7 +23585,7 @@
         });
         _.convert = convertLib;
         _.placeholder = _;
-        each(keys(_), function(key) {
+        each(keys4(_), function(key) {
           each(mapping.realToAlias[key] || [], function(alias) {
             _[alias] = _[key];
           });
@@ -23663,6 +23765,9 @@
   }
   function isNumber(num) {
     return !isNaN(num) && num !== null && !Array.isArray(num);
+  }
+  function isObject(input) {
+    return !!input && input.constructor === Object;
   }
 
   // node_modules/@turf/invariant/dist/es/index.js
@@ -24300,6 +24405,492 @@
   var O = __toESM(require_Option());
   var import_function2 = __toESM(require_function());
 
+  // node_modules/ramda/es/internal/_isPlaceholder.js
+  function _isPlaceholder(a) {
+    return a != null && typeof a === "object" && a["@@functional/placeholder"] === true;
+  }
+
+  // node_modules/ramda/es/internal/_curry1.js
+  function _curry1(fn) {
+    return function f1(a) {
+      if (arguments.length === 0 || _isPlaceholder(a)) {
+        return f1;
+      } else {
+        return fn.apply(this, arguments);
+      }
+    };
+  }
+
+  // node_modules/ramda/es/internal/_curry2.js
+  function _curry2(fn) {
+    return function f2(a, b) {
+      switch (arguments.length) {
+        case 0:
+          return f2;
+        case 1:
+          return _isPlaceholder(a) ? f2 : _curry1(function(_b) {
+            return fn(a, _b);
+          });
+        default:
+          return _isPlaceholder(a) && _isPlaceholder(b) ? f2 : _isPlaceholder(a) ? _curry1(function(_a) {
+            return fn(_a, b);
+          }) : _isPlaceholder(b) ? _curry1(function(_b) {
+            return fn(a, _b);
+          }) : fn(a, b);
+      }
+    };
+  }
+
+  // node_modules/ramda/es/internal/_arity.js
+  function _arity(n, fn) {
+    switch (n) {
+      case 0:
+        return function() {
+          return fn.apply(this, arguments);
+        };
+      case 1:
+        return function(a0) {
+          return fn.apply(this, arguments);
+        };
+      case 2:
+        return function(a0, a1) {
+          return fn.apply(this, arguments);
+        };
+      case 3:
+        return function(a0, a1, a2) {
+          return fn.apply(this, arguments);
+        };
+      case 4:
+        return function(a0, a1, a2, a3) {
+          return fn.apply(this, arguments);
+        };
+      case 5:
+        return function(a0, a1, a2, a3, a4) {
+          return fn.apply(this, arguments);
+        };
+      case 6:
+        return function(a0, a1, a2, a3, a4, a5) {
+          return fn.apply(this, arguments);
+        };
+      case 7:
+        return function(a0, a1, a2, a3, a4, a5, a6) {
+          return fn.apply(this, arguments);
+        };
+      case 8:
+        return function(a0, a1, a2, a3, a4, a5, a6, a7) {
+          return fn.apply(this, arguments);
+        };
+      case 9:
+        return function(a0, a1, a2, a3, a4, a5, a6, a7, a8) {
+          return fn.apply(this, arguments);
+        };
+      case 10:
+        return function(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9) {
+          return fn.apply(this, arguments);
+        };
+      default:
+        throw new Error("First argument to _arity must be a non-negative integer no greater than ten");
+    }
+  }
+
+  // node_modules/ramda/es/internal/_curryN.js
+  function _curryN(length2, received, fn) {
+    return function() {
+      var combined = [];
+      var argsIdx = 0;
+      var left = length2;
+      var combinedIdx = 0;
+      while (combinedIdx < received.length || argsIdx < arguments.length) {
+        var result;
+        if (combinedIdx < received.length && (!_isPlaceholder(received[combinedIdx]) || argsIdx >= arguments.length)) {
+          result = received[combinedIdx];
+        } else {
+          result = arguments[argsIdx];
+          argsIdx += 1;
+        }
+        combined[combinedIdx] = result;
+        if (!_isPlaceholder(result)) {
+          left -= 1;
+        }
+        combinedIdx += 1;
+      }
+      return left <= 0 ? fn.apply(this, combined) : _arity(left, _curryN(length2, combined, fn));
+    };
+  }
+
+  // node_modules/ramda/es/curryN.js
+  var curryN = /* @__PURE__ */ _curry2(function curryN2(length2, fn) {
+    if (length2 === 1) {
+      return _curry1(fn);
+    }
+    return _arity(length2, _curryN(length2, [], fn));
+  });
+  var curryN_default = curryN;
+
+  // node_modules/ramda/es/internal/_isArray.js
+  var isArray_default = Array.isArray || function _isArray(val) {
+    return val != null && val.length >= 0 && Object.prototype.toString.call(val) === "[object Array]";
+  };
+
+  // node_modules/ramda/es/internal/_isTransformer.js
+  function _isTransformer(obj) {
+    return obj != null && typeof obj["@@transducer/step"] === "function";
+  }
+
+  // node_modules/ramda/es/internal/_dispatchable.js
+  function _dispatchable(methodNames, transducerCreator, fn) {
+    return function() {
+      if (arguments.length === 0) {
+        return fn();
+      }
+      var obj = arguments[arguments.length - 1];
+      if (!isArray_default(obj)) {
+        var idx = 0;
+        while (idx < methodNames.length) {
+          if (typeof obj[methodNames[idx]] === "function") {
+            return obj[methodNames[idx]].apply(obj, Array.prototype.slice.call(arguments, 0, -1));
+          }
+          idx += 1;
+        }
+        if (_isTransformer(obj)) {
+          var transducer = transducerCreator.apply(null, Array.prototype.slice.call(arguments, 0, -1));
+          return transducer(obj);
+        }
+      }
+      return fn.apply(this, arguments);
+    };
+  }
+
+  // node_modules/ramda/es/internal/_xfBase.js
+  var xfBase_default = {
+    init: function() {
+      return this.xf["@@transducer/init"]();
+    },
+    result: function(result) {
+      return this.xf["@@transducer/result"](result);
+    }
+  };
+
+  // node_modules/ramda/es/internal/_map.js
+  function _map(fn, functor) {
+    var idx = 0;
+    var len = functor.length;
+    var result = Array(len);
+    while (idx < len) {
+      result[idx] = fn(functor[idx]);
+      idx += 1;
+    }
+    return result;
+  }
+
+  // node_modules/ramda/es/internal/_isString.js
+  function _isString(x2) {
+    return Object.prototype.toString.call(x2) === "[object String]";
+  }
+
+  // node_modules/ramda/es/internal/_isArrayLike.js
+  var _isArrayLike = /* @__PURE__ */ _curry1(function isArrayLike(x2) {
+    if (isArray_default(x2)) {
+      return true;
+    }
+    if (!x2) {
+      return false;
+    }
+    if (typeof x2 !== "object") {
+      return false;
+    }
+    if (_isString(x2)) {
+      return false;
+    }
+    if (x2.length === 0) {
+      return true;
+    }
+    if (x2.length > 0) {
+      return x2.hasOwnProperty(0) && x2.hasOwnProperty(x2.length - 1);
+    }
+    return false;
+  });
+  var isArrayLike_default = _isArrayLike;
+
+  // node_modules/ramda/es/internal/_xwrap.js
+  var XWrap = /* @__PURE__ */ function() {
+    function XWrap2(fn) {
+      this.f = fn;
+    }
+    XWrap2.prototype["@@transducer/init"] = function() {
+      throw new Error("init not implemented on XWrap");
+    };
+    XWrap2.prototype["@@transducer/result"] = function(acc) {
+      return acc;
+    };
+    XWrap2.prototype["@@transducer/step"] = function(acc, x2) {
+      return this.f(acc, x2);
+    };
+    return XWrap2;
+  }();
+  function _xwrap(fn) {
+    return new XWrap(fn);
+  }
+
+  // node_modules/ramda/es/bind.js
+  var bind = /* @__PURE__ */ _curry2(function bind2(fn, thisObj) {
+    return _arity(fn.length, function() {
+      return fn.apply(thisObj, arguments);
+    });
+  });
+  var bind_default = bind;
+
+  // node_modules/ramda/es/internal/_reduce.js
+  function _arrayReduce(xf, acc, list) {
+    var idx = 0;
+    var len = list.length;
+    while (idx < len) {
+      acc = xf["@@transducer/step"](acc, list[idx]);
+      if (acc && acc["@@transducer/reduced"]) {
+        acc = acc["@@transducer/value"];
+        break;
+      }
+      idx += 1;
+    }
+    return xf["@@transducer/result"](acc);
+  }
+  function _iterableReduce(xf, acc, iter) {
+    var step = iter.next();
+    while (!step.done) {
+      acc = xf["@@transducer/step"](acc, step.value);
+      if (acc && acc["@@transducer/reduced"]) {
+        acc = acc["@@transducer/value"];
+        break;
+      }
+      step = iter.next();
+    }
+    return xf["@@transducer/result"](acc);
+  }
+  function _methodReduce(xf, acc, obj, methodName) {
+    return xf["@@transducer/result"](obj[methodName](bind_default(xf["@@transducer/step"], xf), acc));
+  }
+  var symIterator = typeof Symbol !== "undefined" ? Symbol.iterator : "@@iterator";
+  function _reduce(fn, acc, list) {
+    if (typeof fn === "function") {
+      fn = _xwrap(fn);
+    }
+    if (isArrayLike_default(list)) {
+      return _arrayReduce(fn, acc, list);
+    }
+    if (typeof list["fantasy-land/reduce"] === "function") {
+      return _methodReduce(fn, acc, list, "fantasy-land/reduce");
+    }
+    if (list[symIterator] != null) {
+      return _iterableReduce(fn, acc, list[symIterator]());
+    }
+    if (typeof list.next === "function") {
+      return _iterableReduce(fn, acc, list);
+    }
+    if (typeof list.reduce === "function") {
+      return _methodReduce(fn, acc, list, "reduce");
+    }
+    throw new TypeError("reduce: list must be array or iterable");
+  }
+
+  // node_modules/ramda/es/internal/_xmap.js
+  var XMap = /* @__PURE__ */ function() {
+    function XMap2(f, xf) {
+      this.xf = xf;
+      this.f = f;
+    }
+    XMap2.prototype["@@transducer/init"] = xfBase_default.init;
+    XMap2.prototype["@@transducer/result"] = xfBase_default.result;
+    XMap2.prototype["@@transducer/step"] = function(result, input) {
+      return this.xf["@@transducer/step"](result, this.f(input));
+    };
+    return XMap2;
+  }();
+  var _xmap = /* @__PURE__ */ _curry2(function _xmap2(f, xf) {
+    return new XMap(f, xf);
+  });
+  var xmap_default = _xmap;
+
+  // node_modules/ramda/es/internal/_has.js
+  function _has(prop, obj) {
+    return Object.prototype.hasOwnProperty.call(obj, prop);
+  }
+
+  // node_modules/ramda/es/internal/_isArguments.js
+  var toString = Object.prototype.toString;
+  var _isArguments = /* @__PURE__ */ function() {
+    return toString.call(arguments) === "[object Arguments]" ? function _isArguments2(x2) {
+      return toString.call(x2) === "[object Arguments]";
+    } : function _isArguments2(x2) {
+      return _has("callee", x2);
+    };
+  }();
+  var isArguments_default = _isArguments;
+
+  // node_modules/ramda/es/keys.js
+  var hasEnumBug = !/* @__PURE__ */ {
+    toString: null
+  }.propertyIsEnumerable("toString");
+  var nonEnumerableProps = ["constructor", "valueOf", "isPrototypeOf", "toString", "propertyIsEnumerable", "hasOwnProperty", "toLocaleString"];
+  var hasArgsEnumBug = /* @__PURE__ */ function() {
+    "use strict";
+    return arguments.propertyIsEnumerable("length");
+  }();
+  var contains = function contains2(list, item) {
+    var idx = 0;
+    while (idx < list.length) {
+      if (list[idx] === item) {
+        return true;
+      }
+      idx += 1;
+    }
+    return false;
+  };
+  var keys = typeof Object.keys === "function" && !hasArgsEnumBug ? /* @__PURE__ */ _curry1(function keys2(obj) {
+    return Object(obj) !== obj ? [] : Object.keys(obj);
+  }) : /* @__PURE__ */ _curry1(function keys3(obj) {
+    if (Object(obj) !== obj) {
+      return [];
+    }
+    var prop, nIdx;
+    var ks = [];
+    var checkArgsLength = hasArgsEnumBug && isArguments_default(obj);
+    for (prop in obj) {
+      if (_has(prop, obj) && (!checkArgsLength || prop !== "length")) {
+        ks[ks.length] = prop;
+      }
+    }
+    if (hasEnumBug) {
+      nIdx = nonEnumerableProps.length - 1;
+      while (nIdx >= 0) {
+        prop = nonEnumerableProps[nIdx];
+        if (_has(prop, obj) && !contains(ks, prop)) {
+          ks[ks.length] = prop;
+        }
+        nIdx -= 1;
+      }
+    }
+    return ks;
+  });
+  var keys_default = keys;
+
+  // node_modules/ramda/es/map.js
+  var map = /* @__PURE__ */ _curry2(
+    /* @__PURE__ */ _dispatchable(["fantasy-land/map", "map"], xmap_default, function map2(fn, functor) {
+      switch (Object.prototype.toString.call(functor)) {
+        case "[object Function]":
+          return curryN_default(functor.length, function() {
+            return fn.call(this, functor.apply(this, arguments));
+          });
+        case "[object Object]":
+          return _reduce(function(acc, key) {
+            acc[key] = fn(functor[key]);
+            return acc;
+          }, {}, keys_default(functor));
+        default:
+          return _map(fn, functor);
+      }
+    })
+  );
+  var map_default = map;
+
+  // node_modules/ramda/es/internal/_isInteger.js
+  var isInteger_default = Number.isInteger || function _isInteger(n) {
+    return n << 0 === n;
+  };
+
+  // node_modules/ramda/es/nth.js
+  var nth = /* @__PURE__ */ _curry2(function nth2(offset, list) {
+    var idx = offset < 0 ? list.length + offset : offset;
+    return _isString(list) ? list.charAt(idx) : list[idx];
+  });
+  var nth_default = nth;
+
+  // node_modules/ramda/es/isNil.js
+  var isNil = /* @__PURE__ */ _curry1(function isNil2(x2) {
+    return x2 == null;
+  });
+  var isNil_default = isNil;
+
+  // node_modules/ramda/es/internal/_toISOString.js
+  var pad = function pad2(n) {
+    return (n < 10 ? "0" : "") + n;
+  };
+  var _toISOString = typeof Date.prototype.toISOString === "function" ? function _toISOString2(d) {
+    return d.toISOString();
+  } : function _toISOString3(d) {
+    return d.getUTCFullYear() + "-" + pad(d.getUTCMonth() + 1) + "-" + pad(d.getUTCDate()) + "T" + pad(d.getUTCHours()) + ":" + pad(d.getUTCMinutes()) + ":" + pad(d.getUTCSeconds()) + "." + (d.getUTCMilliseconds() / 1e3).toFixed(3).slice(2, 5) + "Z";
+  };
+
+  // node_modules/ramda/es/internal/_complement.js
+  function _complement(f) {
+    return function() {
+      return !f.apply(this, arguments);
+    };
+  }
+
+  // node_modules/ramda/es/internal/_filter.js
+  function _filter(fn, list) {
+    var idx = 0;
+    var len = list.length;
+    var result = [];
+    while (idx < len) {
+      if (fn(list[idx])) {
+        result[result.length] = list[idx];
+      }
+      idx += 1;
+    }
+    return result;
+  }
+
+  // node_modules/ramda/es/internal/_isObject.js
+  function _isObject(x2) {
+    return Object.prototype.toString.call(x2) === "[object Object]";
+  }
+
+  // node_modules/ramda/es/internal/_xfilter.js
+  var XFilter = /* @__PURE__ */ function() {
+    function XFilter2(f, xf) {
+      this.xf = xf;
+      this.f = f;
+    }
+    XFilter2.prototype["@@transducer/init"] = xfBase_default.init;
+    XFilter2.prototype["@@transducer/result"] = xfBase_default.result;
+    XFilter2.prototype["@@transducer/step"] = function(result, input) {
+      return this.f(input) ? this.xf["@@transducer/step"](result, input) : result;
+    };
+    return XFilter2;
+  }();
+  var _xfilter = /* @__PURE__ */ _curry2(function _xfilter2(f, xf) {
+    return new XFilter(f, xf);
+  });
+  var xfilter_default = _xfilter;
+
+  // node_modules/ramda/es/filter.js
+  var filter = /* @__PURE__ */ _curry2(
+    /* @__PURE__ */ _dispatchable(["fantasy-land/filter", "filter"], xfilter_default, function(pred, filterable) {
+      return _isObject(filterable) ? _reduce(function(acc, key) {
+        if (pred(filterable[key])) {
+          acc[key] = filterable[key];
+        }
+        return acc;
+      }, {}, keys_default(filterable)) : _filter(pred, filterable);
+    })
+  );
+  var filter_default = filter;
+
+  // node_modules/ramda/es/reject.js
+  var reject = /* @__PURE__ */ _curry2(function reject2(pred, filterable) {
+    return filter_default(_complement(pred), filterable);
+  });
+  var reject_default = reject;
+
+  // node_modules/ramda/es/last.js
+  var last = /* @__PURE__ */ nth_default(-1);
+  var last_default = last;
+
+  // node_modules/ramda/es/trim.js
+  var hasProtoTrim = typeof String.prototype.trim === "function";
+
   // node_modules/@turf/bbox/dist/es/index.js
   function bbox2(geojson) {
     var result = [Infinity, Infinity, -Infinity, -Infinity];
@@ -24588,6 +25179,102 @@
 
   // node_modules/@turf/nearest-point-to-line/dist/es/index.js
   var import_object_assign2 = __toESM(require_object_assign(), 1);
+
+  // node_modules/@turf/line-slice-along/dist/es/index.js
+  function lineSliceAlong(line, startDist, stopDist, options) {
+    options = options || {};
+    if (!isObject(options))
+      throw new Error("options is invalid");
+    var coords;
+    var slice2 = [];
+    if (line.type === "Feature")
+      coords = line.geometry.coordinates;
+    else if (line.type === "LineString")
+      coords = line.coordinates;
+    else
+      throw new Error("input must be a LineString Feature or Geometry");
+    var origCoordsLength = coords.length;
+    var travelled = 0;
+    var overshot, direction, interpolated;
+    for (var i = 0; i < coords.length; i++) {
+      if (startDist >= travelled && i === coords.length - 1)
+        break;
+      else if (travelled > startDist && slice2.length === 0) {
+        overshot = startDist - travelled;
+        if (!overshot) {
+          slice2.push(coords[i]);
+          return lineString(slice2);
+        }
+        direction = bearing(coords[i], coords[i - 1]) - 180;
+        interpolated = destination(coords[i], overshot, direction, options);
+        slice2.push(interpolated.geometry.coordinates);
+      }
+      if (travelled >= stopDist) {
+        overshot = stopDist - travelled;
+        if (!overshot) {
+          slice2.push(coords[i]);
+          return lineString(slice2);
+        }
+        direction = bearing(coords[i], coords[i - 1]) - 180;
+        interpolated = destination(coords[i], overshot, direction, options);
+        slice2.push(interpolated.geometry.coordinates);
+        return lineString(slice2);
+      }
+      if (travelled >= startDist) {
+        slice2.push(coords[i]);
+      }
+      if (i === coords.length - 1) {
+        return lineString(slice2);
+      }
+      travelled += es_default(coords[i], coords[i + 1], options);
+    }
+    if (travelled < startDist && coords.length === origCoordsLength)
+      throw new Error("Start position is beyond line");
+    var last2 = coords[coords.length - 1];
+    return lineString([last2, last2]);
+  }
+  var es_default18 = lineSliceAlong;
+
+  // node_modules/@turf/line-chunk/dist/es/index.js
+  function lineChunk(geojson, segmentLength, options) {
+    options = options || {};
+    if (!isObject(options))
+      throw new Error("options is invalid");
+    var units = options.units;
+    var reverse = options.reverse;
+    if (!geojson)
+      throw new Error("geojson is required");
+    if (segmentLength <= 0)
+      throw new Error("segmentLength must be greater than 0");
+    var results = [];
+    flattenEach(geojson, function(feature2) {
+      if (reverse)
+        feature2.geometry.coordinates = feature2.geometry.coordinates.reverse();
+      sliceLineSegments(feature2, segmentLength, units, function(segment) {
+        results.push(segment);
+      });
+    });
+    return featureCollection(results);
+  }
+  function sliceLineSegments(line, segmentLength, units, callback) {
+    var lineLength = length(line, { units });
+    if (lineLength <= segmentLength)
+      return callback(line);
+    var numberOfSegments = lineLength / segmentLength;
+    if (!Number.isInteger(numberOfSegments)) {
+      numberOfSegments = Math.floor(numberOfSegments) + 1;
+    }
+    for (var i = 0; i < numberOfSegments; i++) {
+      var outline = es_default18(
+        line,
+        segmentLength * i,
+        segmentLength * (i + 1),
+        { units }
+      );
+      callback(outline, i);
+    }
+  }
+  var es_default21 = lineChunk;
 
   // node_modules/@turf/unkink-polygon/dist/es/index.js
   var import_rbush2 = __toESM(require_rbush(), 1);
@@ -27735,7 +28422,7 @@
   // node_modules/@turf/buffer/node_modules/d3-array/src/array.js
   var array = Array.prototype;
   var slice = array.slice;
-  var map = array.map;
+  var map3 = array.map;
 
   // node_modules/@turf/buffer/node_modules/d3-array/src/ticks.js
   var e10 = Math.sqrt(50);
@@ -28795,11 +29482,23 @@
       }
     }
   };
+  var getFixedDistanceCoordinates = (path, chunkLengthInKm) => (0, import_function2.pipe)(
+    es_default21(path, chunkLengthInKm, {
+      units: "kilometers"
+    }),
+    (x2) => x2.features,
+    map_default((x2) => last_default(x2.geometry.coordinates)),
+    reject_default(isNil_default),
+    map_default((x2) => ({ lon: x2[0], lat: x2[1] }))
+  );
   global.distanceOnLineForFlutter = distanceOnLineForFlutter;
   global.boundingBoxOfPaths = (paths) => {
     return JSON.stringify(boundingBoxOfPaths(paths));
   };
   global.snappedLineSlice = (start, end, path) => (0, import_function2.pipe)(snappedLineSlice(start, end, path), JSON.stringify);
+  global.getFixedDistanceCoordinates = (path, chunkLengthInKm) => {
+    return JSON.stringify(getFixedDistanceCoordinates(path, chunkLengthInKm));
+  };
 })();
 /*
 object-assign

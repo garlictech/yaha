@@ -7,7 +7,7 @@ part of 'current_location_state.dart';
 // **************************************************************************
 
 String _$currentLocationStateHash() =>
-    r'83cae2e4940465a60f8c9a54582cff779b59e6d5';
+    r'042a340c3d163bf1d7ca213c90fe591c4b5829f6';
 
 /// See also [CurrentLocationState].
 @ProviderFor(CurrentLocationState)

@@ -1,3 +1,4 @@
+import 'package:latlong2/latlong.dart';
 import 'package:yaha/domain/entities/shared/description.dart';
 import 'package:yaha/domain/entities/shared/route.dart';
 import 'package:yaha/utils/geometry/geocalc.dart';
@@ -24,9 +25,9 @@ class Hike {
 
   final HikeEntity hike;
 
-  Hike({
-    required this.hike,
-  });
+  final List<LatLng> distanceMarkers;
+
+  Hike({required this.hike, required this.distanceMarkers});
 
   String get id {
     return hike.id;

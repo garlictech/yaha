@@ -6,7 +6,7 @@ part of 'global_markers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$globalMarkersHash() => r'e81038f79aa4d456a082e3f9302bcb2ca457199c';
+String _$globalMarkersHash() => r'c2b11dc1e0b3e57af2f7aa22b23723ff14b23ce5';
 
 /// See also [GlobalMarkers].
 @ProviderFor(GlobalMarkers)

@@ -5,6 +5,7 @@ import nearestPointOnLine from '@turf/nearest-point-on-line';
 import { PathType } from './interfaces';
 import * as O from 'fp-ts/lib/Option';
 import { pipe } from 'fp-ts/lib/function';
+import * as R from 'ramda';
 import {
   circle,
   distance,
@@ -29,6 +30,7 @@ import {
   convertPointToTurfPoint,
 } from './point-transformations';
 import { Option, chain, some, isSome } from 'fp-ts/lib/Option';
+import lineChunk from '@turf/line-chunk';
 
 export interface LatLon {
   lat: number;
@@ -278,6 +280,20 @@ export const splitBoundingBox = (
   }
 };
 
+export const getFixedDistanceCoordinates = (
+  path: LineString,
+  chunkLengthInKm: number,
+) =>
+  pipe(
+    lineChunk(path, chunkLengthInKm, {
+      units: 'kilometers',
+    }),
+    x => x.features,
+    R.map(x => R.last(x.geometry.coordinates)),
+    R.reject(R.isNil),
+    R.map(x => ({ lon: x[0], lat: x[1] })),
+  );
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 (global as any).distanceOnLineForFlutter = distanceOnLineForFlutter;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -287,3 +303,10 @@ export const splitBoundingBox = (
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 (global as any).snappedLineSlice = (start: any, end: any, path: any): string =>
   pipe(snappedLineSlice(start, end, path), JSON.stringify);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+(global as any).getFixedDistanceCoordinates = (
+  path: LineString,
+  chunkLengthInKm: number,
+) => {
+  return JSON.stringify(getFixedDistanceCoordinates(path, chunkLengthInKm));
+};

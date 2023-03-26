@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_js/flutter_js.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:turf/turf.dart' as turf;
 
 import '../../domain/entities/entities.dart';
@@ -15,6 +16,8 @@ abstract class GeocalcService {
   Future<turf.LineString> snappedLineSlice(
       Point start, Point end, LineStringData path);
   Future<num> approximateAltitude(Point pointOnLinee, LineStringData path);
+  Future<List<LatLng>> getFixedDistanceCoordinates(
+      LineStringData path, double chunkLengthInKm);
 }
 
 class GeocalcJs implements GeocalcService {
@@ -93,5 +96,20 @@ class GeocalcJs implements GeocalcService {
     }
 
     return (firstPoint[2]! + lastPoint[2]!) / 2;
+  }
+
+  @override
+  getFixedDistanceCoordinates(LineStringData path, double chunkLengthInKm) {
+    final pathStr = path.toLinestringFeatureString();
+
+    return _isLoaded
+        .then((x) => _jsRuntime.evaluateAsync("""
+            global.getFixedDistanceCoordinates($pathStr, $chunkLengthInKm);"""))
+        .then((res) {
+      final decoded = jsonDecode(res.stringResult);
+      return decoded
+          .map<LatLng>((point) => LatLng(point["lat"], point["lon"]))
+          .toList();
+    });
   }
 }
