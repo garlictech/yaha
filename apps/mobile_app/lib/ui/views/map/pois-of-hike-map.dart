@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:yaha/ui/views/map/leaflet_map_widgets.dart';
 import 'package:yaha/ui/views/screens/poi_info_screen.dart';
 
 import 'package:yaha/ui/views/poi/poi-icon.dart';
@@ -37,7 +38,6 @@ class PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
 
   late double _cardHeight;
   late bool _canUpdateFocalLatLng;
-  late LeafletMapPresenter presenter;
 
   @override
   void initState() {
@@ -87,7 +87,8 @@ class PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
                       : 0.8);
 
           markerBuilder(BuildContext context, domain.Poi poi, int index) {
-            final double markerSize = _currentSelectedIndex == index ? 40 : 25;
+            final double markerSize =
+                _currentSelectedIndex == index ? roundMarkerSize : 25;
 
             return Marker(
                 height: markerSize,
@@ -131,7 +132,8 @@ class PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
               PlacesOnRouteMap(
                   poiMarkerBuilder: markerBuilder,
                   hikeId: widget.hike.id,
-                  pois: pois),
+                  pois: pois,
+                  cardHeight: _cardHeight),
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Container(

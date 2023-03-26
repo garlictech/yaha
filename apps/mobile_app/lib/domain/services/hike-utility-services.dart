@@ -48,28 +48,15 @@ class HikeUtilityServices {
   }
 
   Stream<Tuple2<List<Hike>, LatLngBounds>> getHikeListStreamWithBounds(
-      List<String> hikeIds,
-      {num boundingRation = 0.1}) {
-    final geocalc = ref.read(geoCalcProvider);
-
-    return getHikesListAsStream(hikeIds).flatMap((event) => Stream.fromFuture(
-            geocalc
-                .boundingBoxOfPaths(
-                    event.map((hike) => hike.route.asLineString).toList())
-                .then((boundingBox) {
-          final xPad =
-              (boundingBox.NorthEast.lat - boundingBox.SouthWest.lat).abs() *
-                  boundingRation;
-          final yPad =
-              (boundingBox.NorthEast.lon - boundingBox.SouthWest.lon).abs() *
-                  boundingRation;
-
-          return LatLngBounds(
-              LatLng(boundingBox.SouthWest.lat - xPad,
-                  boundingBox.SouthWest.lon + yPad),
-              LatLng(boundingBox.NorthEast.lat + xPad,
-                  boundingBox.NorthEast.lon - yPad));
-        })).map((bounds) => Tuple2(event, bounds)));
+      List<String> hikeIds) {
+    return getHikesListAsStream(hikeIds).map((hikes) {
+      final bounds = LatLngBounds();
+      hikes.map((hike) => hike.route.coordinates).expand((i) => i).forEach(
+          (point) => bounds.extend(
+              LatLng(point.location.latitude, point.location.longitude)));
+      bounds.pad(0.2);
+      return Tuple2(hikes, bounds);
+    });
   }
 }
 

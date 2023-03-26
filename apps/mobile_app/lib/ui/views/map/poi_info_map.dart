@@ -7,6 +7,8 @@ import 'package:yaha/domain/services/services.dart';
 import 'package:yaha/ui/views/poi/poi-icon.dart';
 
 import '../../../domain/entities/entities.dart';
+import 'global_map_control.dart';
+import 'global_markers.dart';
 import 'leaflet_map_widgets.dart';
 
 class PoiInfoMap extends ConsumerStatefulWidget {
@@ -21,7 +23,7 @@ class PoiInfoMap extends ConsumerStatefulWidget {
 }
 
 class PoiInfoMapState extends ConsumerState<PoiInfoMap> {
-  MapController? _mapController;
+  final MapController _mapController = MapController();
 
   @override
   void initState() {
@@ -33,6 +35,7 @@ class PoiInfoMapState extends ConsumerState<PoiInfoMap> {
     final hikeUtilityServices = ref.read(hikeUtilityServicesProvider);
     final hikeWithBounds =
         hikeUtilityServices.getHikeListStreamWithBounds([widget.hikeId]);
+    final globalMarkers = ref.watch(globalMarkersProvider);
 
     return StreamBuilder(
         stream: hikeWithBounds,
@@ -47,14 +50,18 @@ class PoiInfoMapState extends ConsumerState<PoiInfoMap> {
 
           return Stack(children: [
             FlutterMap(
-              options:
-                  MapOptions(bounds: bounds, zoom: _mapController?.zoom ?? 12),
+              mapController: _mapController,
+              options: MapOptions(bounds: bounds),
               children: <Widget>[
                 yahaTileLayer,
                 _getHikeLayerWidget(hike),
-                _getMarkerLayerWidget(hike),
+                _getMarkerLayerWidget(hike, globalMarkers),
               ],
             ),
+            Align(
+                alignment: Alignment.bottomRight,
+                child: GlobalMapControl(
+                    mapcontroller: _mapController, originalBounds: bounds)),
           ]);
         });
   }
@@ -64,8 +71,8 @@ class PoiInfoMapState extends ConsumerState<PoiInfoMap> {
     return PolylineLayer(polylines: [line]);
   }
 
-  _getMarkerLayerWidget(Hike hike) {
-    const markerSize = 40.0;
+  _getMarkerLayerWidget(Hike hike, List<Marker> globalMarkers) {
+    const markerSize = roundMarkerSize;
 
     final marker = Marker(
         point:
@@ -81,6 +88,6 @@ class PoiInfoMapState extends ConsumerState<PoiInfoMap> {
                   shape: BoxShape.circle,
                   child: PoiIcon(poiType: widget.poi.poiType)));
         });
-    return MarkerLayer(markers: [marker]);
+    return MarkerLayer(markers: [marker, ...globalMarkers]);
   }
 }

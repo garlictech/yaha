@@ -4,9 +4,11 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:yaha/domain/services/services.dart';
+import 'package:yaha/ui/views/map/global_markers.dart';
 import 'package:yaha/ui/views/poi/poi-icon.dart';
 
 import '../../../domain/entities/entities.dart';
+import 'global_map_control.dart';
 import 'leaflet_map_widgets.dart';
 
 class HikeOverviewMap extends ConsumerStatefulWidget {
@@ -19,7 +21,7 @@ class HikeOverviewMap extends ConsumerStatefulWidget {
 }
 
 class HikeOverviewMapState extends ConsumerState<HikeOverviewMap> {
-  MapController? _mapController;
+  final MapController _mapController = MapController();
 
   @override
   void initState() {
@@ -31,6 +33,7 @@ class HikeOverviewMapState extends ConsumerState<HikeOverviewMap> {
     final hikeUtilityServices = ref.read(hikeUtilityServicesProvider);
     final hikeWithBounds =
         hikeUtilityServices.getHikeListStreamWithBounds([widget.hikeId]);
+    final globalMarkers = ref.watch(globalMarkersProvider);
 
     return StreamBuilder(
         stream: hikeWithBounds,
@@ -45,14 +48,18 @@ class HikeOverviewMapState extends ConsumerState<HikeOverviewMap> {
 
           return Stack(children: [
             FlutterMap(
-              options:
-                  MapOptions(bounds: bounds, zoom: _mapController?.zoom ?? 12),
+              mapController: _mapController,
+              options: MapOptions(bounds: bounds),
               children: <Widget>[
                 yahaTileLayer,
                 _getHikeLayerWidget(hike),
-                _getMarkerLayerWidget(hike),
+                _getMarkerLayerWidget(hike, globalMarkers),
               ],
             ),
+            Align(
+                alignment: Alignment.bottomRight,
+                child: GlobalMapControl(
+                    mapcontroller: _mapController, originalBounds: bounds)),
           ]);
         });
   }
@@ -62,8 +69,8 @@ class HikeOverviewMapState extends ConsumerState<HikeOverviewMap> {
     return PolylineLayer(polylines: [line]);
   }
 
-  _getMarkerLayerWidget(Hike hike) {
-    const markerSize = 40.0;
+  _getMarkerLayerWidget(Hike hike, List<Marker> globalMarkers) {
+    const markerSize = roundMarkerSize;
 
     markerShape(PoiIcon icon, ref) => Container(
         decoration: BoxDecoration(
@@ -99,6 +106,7 @@ class HikeOverviewMapState extends ConsumerState<HikeOverviewMap> {
                   poiType: PoiType(category: "yaha", kind: "finish_hike")),
               ref);
         });
-    return MarkerLayer(markers: [startMarker, endMarker]);
+
+    return MarkerLayer(markers: [startMarker, endMarker, ...globalMarkers]);
   }
 }

@@ -13,6 +13,8 @@ import '../../../app/providers.dart';
 
 import '../../../domain/entities/entities.dart';
 import '../../presenters/map/map.dart';
+import 'global_map_control.dart';
+import 'global_markers.dart';
 import 'hike_card_popup_state.dart';
 
 class HikeSearchSesultsOnMap extends ConsumerStatefulWidget {
@@ -27,7 +29,7 @@ class HikeSearchSesultsOnMap extends ConsumerStatefulWidget {
 
 class HikeSearchSesultsOnMapState
     extends ConsumerState<HikeSearchSesultsOnMap> {
-  MapController? _mapController;
+  final MapController _mapController = MapController();
 
   final popup = Consumer(builder: (c, ref, child) {
     final currentlyShownHikeId = ref.watch(hikeCardPopupStateProvider);
@@ -75,6 +77,7 @@ class HikeSearchSesultsOnMapState
     final hikeUtilityServices = ref.read(hikeUtilityServicesProvider);
     final hikesWithBounds =
         hikeUtilityServices.getHikeListStreamWithBounds(widget.hikeIds);
+    final globalMarkers = ref.watch(globalMarkersProvider);
 
     ref
         .read(geoLocationRepositoryProvider)
@@ -97,18 +100,18 @@ class HikeSearchSesultsOnMapState
 
           return Stack(children: [
             FlutterMap(
-              options: MapOptions(
-                  /*center: LatLng(
-                      mapCenter?.latitude ?? 0, mapCenter?.longitude ?? 0),
-                      */
-                  bounds: bounds,
-                  zoom: _mapController?.zoom ?? 12),
+              mapController: _mapController,
+              options: MapOptions(bounds: bounds),
               children: <Widget>[
                 yahaTileLayer,
                 _getHikeLayerWidget(hikes),
-                _getMarkerLayerWidget(hikes),
+                _getMarkerLayerWidget(hikes, globalMarkers),
               ],
             ),
+            Align(
+                alignment: Alignment.bottomRight,
+                child: GlobalMapControl(
+                    mapcontroller: _mapController, originalBounds: bounds)),
             popup
           ]);
         });
@@ -133,7 +136,7 @@ class HikeSearchSesultsOnMapState
     return PolylineLayer(polylines: lines);
   }
 
-  _getMarkerLayerWidget(List<Hike> hikes) {
+  _getMarkerLayerWidget(List<Hike> hikes, List<Marker> globalMarkers) {
     const markerSize = 20.0;
 
     final markers = hikes
@@ -175,6 +178,6 @@ class HikeSearchSesultsOnMapState
         })
         .expand((i) => i)
         .toList();
-    return MarkerLayer(markers: markers);
+    return MarkerLayer(markers: [...markers, ...globalMarkers]);
   }
 }
