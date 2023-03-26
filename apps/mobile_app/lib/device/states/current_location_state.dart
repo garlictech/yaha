@@ -6,16 +6,19 @@ part 'current_location_state.g.dart';
 
 @riverpod
 class CurrentLocationState extends _$CurrentLocationState {
-  final LocationSettings locationSettings = const LocationSettings(
+  static const LocationSettings locationSettings = LocationSettings(
     accuracy: LocationAccuracy.high,
     distanceFilter: 10,
   );
 
+  static final locStream =
+      Geolocator.getPositionStream(locationSettings: locationSettings)
+          .debounceTime(const Duration(seconds: 3))
+          .shareReplay(maxSize: 1);
+
   @override
   Position? build() {
-    Geolocator.getPositionStream(locationSettings: locationSettings)
-        .debounceTime(const Duration(seconds: 3))
-        .listen((Position? position) {
+    locStream.listen((Position? position) {
       state = position;
     });
 
