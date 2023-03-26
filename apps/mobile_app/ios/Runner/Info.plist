@@ -70,9 +70,6 @@
 	<string>This app requires access to the photo library.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>You should never see this, please contact us.</string>
-	<key>NSUserTrackingUsageDescription</key>
-	<string>This app uses tracking data to show you personalized
-    ads.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>
