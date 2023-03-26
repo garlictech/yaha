@@ -87,10 +87,12 @@ class PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
                       : 0.8);
 
           markerBuilder(BuildContext context, domain.Poi poi, int index) {
-            final double markerSize =
-                _currentSelectedIndex == index ? roundMarkerSize : 25;
+            final double markerSize = _currentSelectedIndex == index ? 50 : 25;
+            final key =
+                _currentSelectedIndex == index ? "CURRENT" : index.toString();
 
             return Marker(
+                key: Key(key),
                 height: markerSize,
                 width: markerSize,
                 point: LatLng(poi.location.location.latitude,

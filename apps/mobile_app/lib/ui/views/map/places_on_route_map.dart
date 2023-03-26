@@ -4,7 +4,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:collection/collection.dart';
 import 'package:yaha/domain/services/hike-utility-services.dart';
-
+import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 import '../../../domain/entities/entities.dart';
 import 'global_map_control.dart';
 import 'global_markers.dart';
@@ -92,7 +92,37 @@ class PlacesOnRouteMapState extends ConsumerState<PlacesOnRouteMap> {
                   (index, poi) => widget.poiMarkerBuilder!(context, poi, index))
               .toList();
 
-      return MarkerLayer(markers: [...markers, ...globalMarkers]);
+      return MarkerClusterLayerWidget(
+        options: MarkerClusterLayerOptions(
+          markers: [...markers, ...globalMarkers],
+          maxClusterRadius: 45,
+          size: const Size(40, 40),
+          anchor: AnchorPos.align(AnchorAlign.center),
+          fitBoundsOptions: const FitBoundsOptions(
+            padding: EdgeInsets.all(50),
+            maxZoom: 15,
+          ),
+          builder: (context, markers) {
+            final bool isCurrentInCluster = markers.where((marker) {
+              return marker.key.toString() == const Key("CURRENT").toString();
+            }).isNotEmpty;
+
+            return Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: isCurrentInCluster
+                      ? Colors.red
+                      : Theme.of(context).primaryColor),
+              child: Center(
+                child: Text(
+                  markers.length.toString(),
+                  style: const TextStyle(color: Colors.white),
+                ),
+              ),
+            );
+          },
+        ),
+      );
     });
   }
 }
