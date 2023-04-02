@@ -7,7 +7,7 @@ import 'package:yaha/utils/geometry/geocalc.dart';
 import '../../../app/calculation-providers.dart';
 import '../../../utils/geometry/geocalc_js.dart';
 import '../hike/hike.dart';
-import '../hike/hiking-settings.dart';
+import '../hike/hiking_settings.dart';
 import 'poi_entity.dart';
 
 class PoiOfHike extends Poi {

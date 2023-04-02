@@ -1,10 +1,11 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:yaha/domain/services/services.dart';
+import 'package:yaha/domain/domain.dart';
+import 'package:yaha/domain/services/hike_list_stream_with_bounds.dart';
 import 'package:yaha/ui/views/map/global_markers.dart';
+import 'package:yaha/ui/views/map/hike_map_control.dart';
 import 'package:yaha/ui/views/poi/poi-icon.dart';
 
 import '../../../domain/entities/entities.dart';
@@ -30,21 +31,17 @@ class HikeOverviewMapState extends ConsumerState<HikeOverviewMap> {
 
   @override
   Widget build(BuildContext context) {
-    final hikeUtilityServices = ref.read(hikeUtilityServicesProvider);
     final hikeWithBounds =
-        hikeUtilityServices.getHikeListStreamWithBounds([widget.hikeId]);
+        ref.watch(hikeListStreamWithBoundsProvider(widget.hikeId));
     final globalMarkers = ref.watch(globalMarkersProvider);
 
-    return StreamBuilder(
-        stream: hikeWithBounds,
-        builder: (context,
-            AsyncSnapshot<Tuple2<List<Hike>, LatLngBounds>> snapshot) {
-          if (snapshot.data == null) {
-            return const CircularProgressIndicator();
-          }
-
-          final hike = snapshot.data!.value1[0];
-          final bounds = snapshot.data!.value2;
+    return hikeWithBounds.when(
+        loading: () => const CircularProgressIndicator(),
+        error: (error, stack) =>
+            const Text('Oops, something unexpected happened'),
+        data: (data) {
+          final hike = data.value1[0];
+          final bounds = data.value2;
 
           return Stack(children: [
             FlutterMap(
@@ -60,6 +57,9 @@ class HikeOverviewMapState extends ConsumerState<HikeOverviewMap> {
                 alignment: Alignment.bottomRight,
                 child: GlobalMapControl(
                     mapcontroller: _mapController, originalBounds: bounds)),
+            Align(
+                alignment: Alignment.bottomLeft,
+                child: HikeMapControl(hikeId: widget.hikeId)),
           ]);
         });
   }

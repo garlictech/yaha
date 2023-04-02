@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:functional_data/functional_data.dart';
 
-part 'hiking-settings.g.dart';
+part 'hiking_settings.g.dart';
 
 @FunctionalData()
 @JsonSerializable(explicitToJson: true)
@@ -10,8 +10,13 @@ class HikingSettings extends $HikingSettings {
   final double speed;
   @override
   final DateTime startTime;
+  @override
+  final bool reversedHike;
 
-  HikingSettings({required this.speed, required this.startTime});
+  HikingSettings(
+      {required this.speed,
+      required this.startTime,
+      required this.reversedHike});
 
   factory HikingSettings.fromJson(Map<String, dynamic> json) =>
       _$HikingSettingsFromJson(json);

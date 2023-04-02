@@ -9,7 +9,7 @@ export 'shared/linestring.dart';
 export 'shared/description.dart';
 export 'shared/geolocation.dart';
 export 'comments/comment.dart';
-export 'hike/hiking-settings.dart';
+export 'hike/hiking_settings.dart';
 export 'shared/bounding_box.dart';
 export 'weather/weather.dart';
 export 'shared/point.dart';

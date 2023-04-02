@@ -1,12 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'cached_hike.dart';
+part of 'hike_list_stream_with_bounds.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$cachedHikeHash() => r'4a8878242f2b714385644a8f7df334fe8f4fba4a';
+String _$hikeListStreamWithBoundsHash() =>
+    r'af8133b9260b027bd791be29c188ab0d49e16e38';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,35 +30,38 @@ class _SystemHash {
   }
 }
 
-abstract class _$CachedHike extends BuildlessAutoDisposeAsyncNotifier<Hike?> {
+abstract class _$HikeListStreamWithBounds
+    extends BuildlessAutoDisposeStreamNotifier<
+        Tuple2<List<Hike>, LatLngBounds>> {
   late final String hikeId;
 
-  Future<Hike?> build(
+  Stream<Tuple2<List<Hike>, LatLngBounds>> build(
     String hikeId,
   );
 }
 
-/// See also [CachedHike].
-@ProviderFor(CachedHike)
-const cachedHikeProvider = CachedHikeFamily();
+/// See also [HikeListStreamWithBounds].
+@ProviderFor(HikeListStreamWithBounds)
+const hikeListStreamWithBoundsProvider = HikeListStreamWithBoundsFamily();
 
-/// See also [CachedHike].
-class CachedHikeFamily extends Family<AsyncValue<Hike?>> {
-  /// See also [CachedHike].
-  const CachedHikeFamily();
+/// See also [HikeListStreamWithBounds].
+class HikeListStreamWithBoundsFamily
+    extends Family<AsyncValue<Tuple2<List<Hike>, LatLngBounds>>> {
+  /// See also [HikeListStreamWithBounds].
+  const HikeListStreamWithBoundsFamily();
 
-  /// See also [CachedHike].
-  CachedHikeProvider call(
+  /// See also [HikeListStreamWithBounds].
+  HikeListStreamWithBoundsProvider call(
     String hikeId,
   ) {
-    return CachedHikeProvider(
+    return HikeListStreamWithBoundsProvider(
       hikeId,
     );
   }
 
   @override
-  CachedHikeProvider getProviderOverride(
-    covariant CachedHikeProvider provider,
+  HikeListStreamWithBoundsProvider getProviderOverride(
+    covariant HikeListStreamWithBoundsProvider provider,
   ) {
     return call(
       provider.hikeId,
@@ -76,33 +80,34 @@ class CachedHikeFamily extends Family<AsyncValue<Hike?>> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'cachedHikeProvider';
+  String? get name => r'hikeListStreamWithBoundsProvider';
 }
 
-/// See also [CachedHike].
-class CachedHikeProvider
-    extends AutoDisposeAsyncNotifierProviderImpl<CachedHike, Hike?> {
-  /// See also [CachedHike].
-  CachedHikeProvider(
+/// See also [HikeListStreamWithBounds].
+class HikeListStreamWithBoundsProvider
+    extends AutoDisposeStreamNotifierProviderImpl<HikeListStreamWithBounds,
+        Tuple2<List<Hike>, LatLngBounds>> {
+  /// See also [HikeListStreamWithBounds].
+  HikeListStreamWithBoundsProvider(
     this.hikeId,
   ) : super.internal(
-          () => CachedHike()..hikeId = hikeId,
-          from: cachedHikeProvider,
-          name: r'cachedHikeProvider',
+          () => HikeListStreamWithBounds()..hikeId = hikeId,
+          from: hikeListStreamWithBoundsProvider,
+          name: r'hikeListStreamWithBoundsProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$cachedHikeHash,
-          dependencies: CachedHikeFamily._dependencies,
+                  : _$hikeListStreamWithBoundsHash,
+          dependencies: HikeListStreamWithBoundsFamily._dependencies,
           allTransitiveDependencies:
-              CachedHikeFamily._allTransitiveDependencies,
+              HikeListStreamWithBoundsFamily._allTransitiveDependencies,
         );
 
   final String hikeId;
 
   @override
   bool operator ==(Object other) {
-    return other is CachedHikeProvider && other.hikeId == hikeId;
+    return other is HikeListStreamWithBoundsProvider && other.hikeId == hikeId;
   }
 
   @override
@@ -114,8 +119,8 @@ class CachedHikeProvider
   }
 
   @override
-  Future<Hike?> runNotifierBuild(
-    covariant CachedHike notifier,
+  Stream<Tuple2<List<Hike>, LatLngBounds>> runNotifierBuild(
+    covariant HikeListStreamWithBounds notifier,
   ) {
     return notifier.build(
       hikeId,

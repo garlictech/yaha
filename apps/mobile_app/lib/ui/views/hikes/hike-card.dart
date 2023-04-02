@@ -35,7 +35,7 @@ class HikeCard extends ConsumerWidget {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      HikeScreen(hike: hike)));
+                                      HikeScreen(hikeId: hike.id)));
                         },
                         child: Stack(
                           children: [

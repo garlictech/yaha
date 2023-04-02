@@ -23,14 +23,14 @@ sumSegments(List<num> segmentVals) {
 }
 
 final activeHikeProvider =
-    FutureProvider.family<ActiveHike?, String>((ref, hikeId) async {
-  final hike = await ref.read(cachedHikeProvider(hikeId).future);
+    FutureProvider.autoDispose.family<ActiveHike?, String>((ref, hikeId) async {
+  final hike = await ref.watch(cachedHikeProvider(hikeId).future);
 
   if (hike == null) {
     return null;
   }
 
-  final settings = ref.watch(hikingSettingsProvider);
+  final settings = ref.watch(hikingSettingsServiceProvider(hikeId));
 
   final List<Point> coordinates =
       hike.route.coordinates.map((coords) => coords.location).toList();

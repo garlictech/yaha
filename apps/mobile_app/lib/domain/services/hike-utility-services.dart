@@ -4,7 +4,6 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:yaha/app/calculation-providers.dart';
 import 'package:yaha/domain/use-cases/hike/cached_hike.dart';
 
 import '../entities/entities.dart';

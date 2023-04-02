@@ -4,9 +4,9 @@ import 'package:yaha/app/providers.dart';
 import 'package:yaha/domain/domain.dart';
 import 'package:yaha/domain/use-cases/hike/active_hike_provider.dart';
 
-final weatherPoisOfHikeProvider =
-    FutureProvider.family<List<PoiOfHike>, String>((ref, hikeId) async {
-  final hike = ref.read(cachedHikeProvider(hikeId)).value;
+final weatherPoisOfHikeProvider = FutureProvider.autoDispose
+    .family<List<PoiOfHike>, String>((ref, hikeId) async {
+  final hike = ref.watch(cachedHikeProvider(hikeId)).value;
   final activeHike = await ref.watch(activeHikeProvider(hikeId).future);
 
   if (hike == null || activeHike == null) {
@@ -16,7 +16,7 @@ final weatherPoisOfHikeProvider =
   final weatherApi = ref.read(weatherApiProvider);
   final weather = await weatherApi.getWeatherAround(
       Location(lat: hike.startPoint.latitude, lon: hike.startPoint.longitude));
-  final settings = ref.watch(hikingSettingsProvider);
+  final settings = ref.watch(hikingSettingsServiceProvider(hikeId));
 
   getLocationOfEvent(Weather weatherItem) {
     return activeHike.activePoints

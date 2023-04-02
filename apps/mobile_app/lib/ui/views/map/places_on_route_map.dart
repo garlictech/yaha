@@ -9,6 +9,7 @@ import '../../../domain/entities/entities.dart';
 import 'distance_markers.dart';
 import 'global_map_control.dart';
 import 'global_markers.dart';
+import 'hike_map_control.dart';
 import 'leaflet_map_widgets.dart';
 
 typedef PoiMarkerBuilder = Marker Function(
@@ -77,6 +78,11 @@ class PlacesOnRouteMapState extends ConsumerState<PlacesOnRouteMap> {
                     child: GlobalMapControl(
                         mapcontroller: _mapController,
                         originalBounds: bounds))),
+            Align(
+                alignment: Alignment.bottomLeft,
+                child: Container(
+                    margin: EdgeInsets.only(bottom: widget.cardHeight),
+                    child: HikeMapControl(hikeId: widget.hikeId))),
           ]);
         });
   }

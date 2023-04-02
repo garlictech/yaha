@@ -1,12 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'cached_hike.dart';
+part of 'hiking_settings_service.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$cachedHikeHash() => r'4a8878242f2b714385644a8f7df334fe8f4fba4a';
+String _$hikingSettingsServiceHash() =>
+    r'5c5237f8c8175387310f7fb26897f55adcdbcf04';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,35 +30,36 @@ class _SystemHash {
   }
 }
 
-abstract class _$CachedHike extends BuildlessAutoDisposeAsyncNotifier<Hike?> {
+abstract class _$HikingSettingsService
+    extends BuildlessAutoDisposeNotifier<HikingSettings> {
   late final String hikeId;
 
-  Future<Hike?> build(
+  HikingSettings build(
     String hikeId,
   );
 }
 
-/// See also [CachedHike].
-@ProviderFor(CachedHike)
-const cachedHikeProvider = CachedHikeFamily();
+/// See also [HikingSettingsService].
+@ProviderFor(HikingSettingsService)
+const hikingSettingsServiceProvider = HikingSettingsServiceFamily();
 
-/// See also [CachedHike].
-class CachedHikeFamily extends Family<AsyncValue<Hike?>> {
-  /// See also [CachedHike].
-  const CachedHikeFamily();
+/// See also [HikingSettingsService].
+class HikingSettingsServiceFamily extends Family<HikingSettings> {
+  /// See also [HikingSettingsService].
+  const HikingSettingsServiceFamily();
 
-  /// See also [CachedHike].
-  CachedHikeProvider call(
+  /// See also [HikingSettingsService].
+  HikingSettingsServiceProvider call(
     String hikeId,
   ) {
-    return CachedHikeProvider(
+    return HikingSettingsServiceProvider(
       hikeId,
     );
   }
 
   @override
-  CachedHikeProvider getProviderOverride(
-    covariant CachedHikeProvider provider,
+  HikingSettingsServiceProvider getProviderOverride(
+    covariant HikingSettingsServiceProvider provider,
   ) {
     return call(
       provider.hikeId,
@@ -76,33 +78,33 @@ class CachedHikeFamily extends Family<AsyncValue<Hike?>> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'cachedHikeProvider';
+  String? get name => r'hikingSettingsServiceProvider';
 }
 
-/// See also [CachedHike].
-class CachedHikeProvider
-    extends AutoDisposeAsyncNotifierProviderImpl<CachedHike, Hike?> {
-  /// See also [CachedHike].
-  CachedHikeProvider(
+/// See also [HikingSettingsService].
+class HikingSettingsServiceProvider extends AutoDisposeNotifierProviderImpl<
+    HikingSettingsService, HikingSettings> {
+  /// See also [HikingSettingsService].
+  HikingSettingsServiceProvider(
     this.hikeId,
   ) : super.internal(
-          () => CachedHike()..hikeId = hikeId,
-          from: cachedHikeProvider,
-          name: r'cachedHikeProvider',
+          () => HikingSettingsService()..hikeId = hikeId,
+          from: hikingSettingsServiceProvider,
+          name: r'hikingSettingsServiceProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$cachedHikeHash,
-          dependencies: CachedHikeFamily._dependencies,
+                  : _$hikingSettingsServiceHash,
+          dependencies: HikingSettingsServiceFamily._dependencies,
           allTransitiveDependencies:
-              CachedHikeFamily._allTransitiveDependencies,
+              HikingSettingsServiceFamily._allTransitiveDependencies,
         );
 
   final String hikeId;
 
   @override
   bool operator ==(Object other) {
-    return other is CachedHikeProvider && other.hikeId == hikeId;
+    return other is HikingSettingsServiceProvider && other.hikeId == hikeId;
   }
 
   @override
@@ -114,8 +116,8 @@ class CachedHikeProvider
   }
 
   @override
-  Future<Hike?> runNotifierBuild(
-    covariant CachedHike notifier,
+  HikingSettings runNotifierBuild(
+    covariant HikingSettingsService notifier,
   ) {
     return notifier.build(
       hikeId,

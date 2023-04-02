@@ -26,4 +26,8 @@ class RouteEntity extends $RouteEntity {
       _$RouteEntityFromJson(json);
 
   Map<String, dynamic> toJson() => _$RouteEntityToJson(this);
+
+  RouteEntity reversed() {
+    return copyWith(coordinates: coordinates.reversed.toList());
+  }
 }
