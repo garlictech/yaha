@@ -14,8 +14,6 @@ class PlacesOnRouteScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    const textColor = YahaColors.textColor;
-
     return Scaffold(
         appBar: AppBar(
             leading: const YahaBackButton(),

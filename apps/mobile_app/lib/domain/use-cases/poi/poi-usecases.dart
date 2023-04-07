@@ -1,6 +1,4 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yaha/app/providers.dart';
 import 'package:yaha/domain/services/poi-utility-services.dart';
 import 'package:dartz/dartz.dart';
 import 'package:yaha/domain/domain.dart';
