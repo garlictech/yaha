@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yaha/ui/views/map/reverse_hike_button.dart';
+import 'package:yaha/ui/views/map/buttons/reverse_hike_button.dart';
 
 class HikeMapControl extends ConsumerWidget {
   static const size = 35.0;
@@ -10,11 +10,13 @@ class HikeMapControl extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Row(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          ReverseHikeButton(hikeId: hikeId, size: size),
-        ]);
+    return Padding(
+        padding: const EdgeInsets.all(3),
+        child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              ReverseHikeButton(hikeId: hikeId),
+            ]));
   }
 }

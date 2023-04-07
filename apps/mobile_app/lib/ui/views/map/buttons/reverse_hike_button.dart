@@ -3,23 +3,21 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/domain/domain.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'map_icon_button.dart';
+
 class ReverseHikeButton extends ConsumerWidget {
   final String hikeId;
-  final double size;
 
-  const ReverseHikeButton(
-      {super.key, required this.hikeId, required this.size});
+  const ReverseHikeButton({super.key, required this.hikeId});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return IconButton(
-        iconSize: size,
+    return MapIconButton(
         onPressed: () {
           ref
               .read(hikingSettingsServiceProvider(hikeId).notifier)
               .reverseHike();
         },
-        icon: FaIcon(FontAwesomeIcons.arrowsUpDown,
-            color: Theme.of(context).primaryColor));
+        icon: FontAwesomeIcons.arrowsUpDown);
   }
 }
