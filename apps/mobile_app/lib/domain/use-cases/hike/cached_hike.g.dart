@@ -6,7 +6,7 @@ part of 'cached_hike.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$cachedHikeHash() => r'4a8878242f2b714385644a8f7df334fe8f4fba4a';
+String _$cachedHikeHash() => r'245fe268c76233360b93667c1fe410b070fb74e5';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,10 +29,10 @@ class _SystemHash {
   }
 }
 
-abstract class _$CachedHike extends BuildlessAutoDisposeAsyncNotifier<Hike?> {
+abstract class _$CachedHike extends BuildlessAutoDisposeAsyncNotifier<Hike> {
   late final String hikeId;
 
-  Future<Hike?> build(
+  Future<Hike> build(
     String hikeId,
   );
 }
@@ -42,7 +42,7 @@ abstract class _$CachedHike extends BuildlessAutoDisposeAsyncNotifier<Hike?> {
 const cachedHikeProvider = CachedHikeFamily();
 
 /// See also [CachedHike].
-class CachedHikeFamily extends Family<AsyncValue<Hike?>> {
+class CachedHikeFamily extends Family<AsyncValue<Hike>> {
   /// See also [CachedHike].
   const CachedHikeFamily();
 
@@ -81,7 +81,7 @@ class CachedHikeFamily extends Family<AsyncValue<Hike?>> {
 
 /// See also [CachedHike].
 class CachedHikeProvider
-    extends AutoDisposeAsyncNotifierProviderImpl<CachedHike, Hike?> {
+    extends AutoDisposeAsyncNotifierProviderImpl<CachedHike, Hike> {
   /// See also [CachedHike].
   CachedHikeProvider(
     this.hikeId,
@@ -114,7 +114,7 @@ class CachedHikeProvider
   }
 
   @override
-  Future<Hike?> runNotifierBuild(
+  Future<Hike> runNotifierBuild(
     covariant CachedHike notifier,
   ) {
     return notifier.build(

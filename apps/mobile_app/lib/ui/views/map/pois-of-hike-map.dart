@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:yaha/ui/views/map/leaflet_map_widgets.dart';
 import 'package:yaha/ui/views/screens/poi_info_screen.dart';
 
 import 'package:yaha/ui/views/poi/poi-icon.dart';
@@ -57,7 +56,8 @@ class PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
   @override
   Widget build(BuildContext context) {
     final poisFuture = ref.watch(widget.filteredPoiTypes == null
-        ? domain.importantPoisAlongHikeWithYahaPoisProvider(widget.hike.id)
+        ? domain
+            .importantPoisAlongHikeWithYahaPoisProviderProvider(widget.hike.id)
         : domain.poisAlongHikeProvider(widget.hike.id));
 
     final mapPresenter = ref.watch(leafletMapMVPProvider.notifier);

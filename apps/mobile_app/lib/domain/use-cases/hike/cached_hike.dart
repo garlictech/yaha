@@ -13,7 +13,7 @@ part 'cached_hike.g.dart';
 @riverpod
 class CachedHike extends _$CachedHike {
   @override
-  Future<Hike?> build(String hikeId) async {
+  Future<Hike> build(String hikeId) async {
     final badImages = ref.watch(badImagesProvider);
     final geoCalc = ref.read(geoCalcProvider);
     final settings = ref.watch(hikingSettingsServiceProvider(hikeId));

@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'hike_list_stream_with_bounds.dart';
+part of 'random_touristic_pois_along_hike.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$hikeListStreamWithBoundsHash() =>
-    r'cc81935f7bf48bd672a38f9a96b418fee2654754';
+String _$randomTouristicPoisAlongHikeHash() =>
+    r'7cbe5b29c09263a95d1e6ba4b5a47d57bade9f4d';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -30,38 +30,38 @@ class _SystemHash {
   }
 }
 
-abstract class _$HikeListStreamWithBounds
-    extends BuildlessAutoDisposeStreamNotifier<
-        Tuple2<List<Hike>, LatLngBounds>> {
+abstract class _$RandomTouristicPoisAlongHike
+    extends BuildlessAutoDisposeAsyncNotifier<List<PoiOfHike>> {
   late final String hikeId;
 
-  Stream<Tuple2<List<Hike>, LatLngBounds>> build(
+  Future<List<PoiOfHike>> build(
     String hikeId,
   );
 }
 
-/// See also [HikeListStreamWithBounds].
-@ProviderFor(HikeListStreamWithBounds)
-const hikeListStreamWithBoundsProvider = HikeListStreamWithBoundsFamily();
+/// See also [RandomTouristicPoisAlongHike].
+@ProviderFor(RandomTouristicPoisAlongHike)
+const randomTouristicPoisAlongHikeProvider =
+    RandomTouristicPoisAlongHikeFamily();
 
-/// See also [HikeListStreamWithBounds].
-class HikeListStreamWithBoundsFamily
-    extends Family<AsyncValue<Tuple2<List<Hike>, LatLngBounds>>> {
-  /// See also [HikeListStreamWithBounds].
-  const HikeListStreamWithBoundsFamily();
+/// See also [RandomTouristicPoisAlongHike].
+class RandomTouristicPoisAlongHikeFamily
+    extends Family<AsyncValue<List<PoiOfHike>>> {
+  /// See also [RandomTouristicPoisAlongHike].
+  const RandomTouristicPoisAlongHikeFamily();
 
-  /// See also [HikeListStreamWithBounds].
-  HikeListStreamWithBoundsProvider call(
+  /// See also [RandomTouristicPoisAlongHike].
+  RandomTouristicPoisAlongHikeProvider call(
     String hikeId,
   ) {
-    return HikeListStreamWithBoundsProvider(
+    return RandomTouristicPoisAlongHikeProvider(
       hikeId,
     );
   }
 
   @override
-  HikeListStreamWithBoundsProvider getProviderOverride(
-    covariant HikeListStreamWithBoundsProvider provider,
+  RandomTouristicPoisAlongHikeProvider getProviderOverride(
+    covariant RandomTouristicPoisAlongHikeProvider provider,
   ) {
     return call(
       provider.hikeId,
@@ -80,34 +80,35 @@ class HikeListStreamWithBoundsFamily
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'hikeListStreamWithBoundsProvider';
+  String? get name => r'randomTouristicPoisAlongHikeProvider';
 }
 
-/// See also [HikeListStreamWithBounds].
-class HikeListStreamWithBoundsProvider
-    extends AutoDisposeStreamNotifierProviderImpl<HikeListStreamWithBounds,
-        Tuple2<List<Hike>, LatLngBounds>> {
-  /// See also [HikeListStreamWithBounds].
-  HikeListStreamWithBoundsProvider(
+/// See also [RandomTouristicPoisAlongHike].
+class RandomTouristicPoisAlongHikeProvider
+    extends AutoDisposeAsyncNotifierProviderImpl<RandomTouristicPoisAlongHike,
+        List<PoiOfHike>> {
+  /// See also [RandomTouristicPoisAlongHike].
+  RandomTouristicPoisAlongHikeProvider(
     this.hikeId,
   ) : super.internal(
-          () => HikeListStreamWithBounds()..hikeId = hikeId,
-          from: hikeListStreamWithBoundsProvider,
-          name: r'hikeListStreamWithBoundsProvider',
+          () => RandomTouristicPoisAlongHike()..hikeId = hikeId,
+          from: randomTouristicPoisAlongHikeProvider,
+          name: r'randomTouristicPoisAlongHikeProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$hikeListStreamWithBoundsHash,
-          dependencies: HikeListStreamWithBoundsFamily._dependencies,
+                  : _$randomTouristicPoisAlongHikeHash,
+          dependencies: RandomTouristicPoisAlongHikeFamily._dependencies,
           allTransitiveDependencies:
-              HikeListStreamWithBoundsFamily._allTransitiveDependencies,
+              RandomTouristicPoisAlongHikeFamily._allTransitiveDependencies,
         );
 
   final String hikeId;
 
   @override
   bool operator ==(Object other) {
-    return other is HikeListStreamWithBoundsProvider && other.hikeId == hikeId;
+    return other is RandomTouristicPoisAlongHikeProvider &&
+        other.hikeId == hikeId;
   }
 
   @override
@@ -119,8 +120,8 @@ class HikeListStreamWithBoundsProvider
   }
 
   @override
-  Stream<Tuple2<List<Hike>, LatLngBounds>> runNotifierBuild(
-    covariant HikeListStreamWithBounds notifier,
+  Future<List<PoiOfHike>> runNotifierBuild(
+    covariant RandomTouristicPoisAlongHike notifier,
   ) {
     return notifier.build(
       hikeId,
