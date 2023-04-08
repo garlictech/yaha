@@ -1,7 +1,7 @@
 import '../shared/active_point.dart';
 
-class ActiveHike {
+class ActiveHikeEntity {
   final List<ActivePoint> activePoints;
 
-  ActiveHike({required this.activePoints});
+  ActiveHikeEntity({required this.activePoints});
 }

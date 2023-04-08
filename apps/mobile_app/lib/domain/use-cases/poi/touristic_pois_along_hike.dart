@@ -9,9 +9,8 @@ part "touristic_pois_along_hike.g.dart";
 @riverpod
 class TouristicPoisAlongHike extends _$TouristicPoisAlongHike {
   @override
-  Future<List<PoiOfHike>> build(String hikeId) {
-    return ref
-        .watch(poisAlongHikeProvider(hikeId).future)
-        .then((pois) => PoiUtils.selectTouristicPois(pois));
+  List<PoiOfHike> build(String hikeId) {
+    final pois = ref.watch(poisAlongHikeProvider(hikeId));
+    return PoiUtils.selectTouristicPois(pois);
   }
 }

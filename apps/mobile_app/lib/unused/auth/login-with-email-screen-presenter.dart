@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../viewmodels/auth/login-with-email-screen-viewmodel.dart';
-import '../../views/auth/screens/signup-screen.dart';
+import '../../ui/viewmodels/auth/login-with-email-screen-viewmodel.dart';
+import '../../ui/views/auth/screens/signup-screen.dart';
 import 'social-login-mixin.dart';
 import 'terms-accepted-mixin.dart';
 

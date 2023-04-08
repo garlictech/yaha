@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/ui/views/shared/shared.dart';
 
-import 'personal/screen/app-settings-state.dart';
+import '../ui/views/hikes/personal/screen/app-settings-state.dart';
 
 class HikeOutlineSettings extends ConsumerWidget {
   final startTimeController = TextEditingController();

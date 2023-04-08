@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../viewmodels/track/tracking-timeline-customize-widget-viewmodel.dart';
+import '../../../ui/viewmodels/track/tracking-timeline-customize-widget-viewmodel.dart';
 
 class TrackingTimelineCustomizeWidgetPresenter
     extends StateNotifier<TrackingTimelineCustomizeWidgetViewModel> {

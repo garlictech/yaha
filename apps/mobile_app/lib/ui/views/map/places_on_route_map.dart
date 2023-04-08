@@ -1,10 +1,9 @@
-import 'package:dartz/dartz.dart';
+import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:collection/collection.dart';
-import 'package:yaha/domain/services/hike-utility-services.dart';
 import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
+import 'package:yaha/domain/use-cases/hike/hike_with_bounds.dart';
 import '../../../domain/entities/entities.dart';
 import 'distance_markers.dart';
 import 'global_map_control.dart';
@@ -44,47 +43,39 @@ class PlacesOnRouteMapState extends ConsumerState<PlacesOnRouteMap> {
 
   @override
   Widget build(BuildContext context) {
-    final hikeUtilityServices = ref.read(hikeUtilityServicesProvider);
-    final hikeWithBounds =
-        hikeUtilityServices.getHikeListStreamWithBounds([widget.hikeId]);
+    final hikeWithBounds = ref.watch(hikeWithBoundsProvider(widget.hikeId));
     final globalMarkers = ref.watch(globalMarkersProvider);
     final distanceMarkers = ref.watch(distanceMarkersProvider(widget.hikeId));
 
-    return StreamBuilder(
-        stream: hikeWithBounds,
-        builder: (context,
-            AsyncSnapshot<Tuple2<List<Hike>, LatLngBounds>> snapshot) {
-          if (snapshot.data == null) {
-            return const CircularProgressIndicator();
-          }
+    if (hikeWithBounds == null) {
+      return Container();
+    }
+    final hike = hikeWithBounds.value1;
+    final bounds = hikeWithBounds.value2;
 
-          final hike = snapshot.data!.value1[0];
-          final bounds = snapshot.data!.value2;
-          return Stack(children: [
-            FlutterMap(
-              mapController: _mapController,
-              options: MapOptions(bounds: bounds),
-              children: <Widget>[
-                yahaTileLayer,
-                _getHikeLayerWidget(hike),
-                _getMarkerLayerWidget([...globalMarkers, ...distanceMarkers]),
-                _getMarkerClusterLayerWidget(),
-              ],
-            ),
-            Align(
-                alignment: Alignment.bottomRight,
-                child: Container(
-                    margin: EdgeInsets.only(bottom: widget.cardHeight),
-                    child: GlobalMapControl(
-                        mapcontroller: _mapController,
-                        originalBounds: bounds))),
-            Align(
-                alignment: Alignment.bottomLeft,
-                child: Container(
-                    margin: EdgeInsets.only(bottom: widget.cardHeight),
-                    child: HikeMapControl(hikeId: widget.hikeId))),
-          ]);
-        });
+    return Stack(children: [
+      FlutterMap(
+        mapController: _mapController,
+        options: MapOptions(bounds: bounds),
+        children: <Widget>[
+          yahaTileLayer,
+          _getHikeLayerWidget(hike),
+          _getMarkerLayerWidget([...globalMarkers, ...distanceMarkers]),
+          _getMarkerClusterLayerWidget(),
+        ],
+      ),
+      Align(
+          alignment: Alignment.bottomRight,
+          child: Container(
+              margin: EdgeInsets.only(bottom: widget.cardHeight),
+              child: GlobalMapControl(
+                  mapcontroller: _mapController, originalBounds: bounds))),
+      Align(
+          alignment: Alignment.bottomLeft,
+          child: Container(
+              margin: EdgeInsets.only(bottom: widget.cardHeight),
+              child: HikeMapControl(hikeId: widget.hikeId))),
+    ]);
   }
 
   _getHikeLayerWidget(Hike hike) {

@@ -6,8 +6,8 @@ part of 'important_pois_along_hike_with_yaha_pois.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$importantPoisAlongHikeWithYahaPoisProviderHash() =>
-    r'd82c73f8275f3ddecd7cf4ce2a6bf4d185523265';
+String _$importantPoisAlongHikeWithYahaPoisHash() =>
+    r'f85967f7a5a863c564d4eacd07e0c47f794dcba9';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -30,38 +30,37 @@ class _SystemHash {
   }
 }
 
-abstract class _$ImportantPoisAlongHikeWithYahaPoisProvider
-    extends BuildlessAutoDisposeAsyncNotifier<List<PoiOfHike>> {
+abstract class _$ImportantPoisAlongHikeWithYahaPois
+    extends BuildlessAutoDisposeNotifier<List<PoiOfHike>> {
   late final String hikeId;
 
-  Future<List<PoiOfHike>> build(
+  List<PoiOfHike> build(
     String hikeId,
   );
 }
 
-/// See also [ImportantPoisAlongHikeWithYahaPoisProvider].
-@ProviderFor(ImportantPoisAlongHikeWithYahaPoisProvider)
-const importantPoisAlongHikeWithYahaPoisProviderProvider =
-    ImportantPoisAlongHikeWithYahaPoisProviderFamily();
+/// See also [ImportantPoisAlongHikeWithYahaPois].
+@ProviderFor(ImportantPoisAlongHikeWithYahaPois)
+const importantPoisAlongHikeWithYahaPoisProvider =
+    ImportantPoisAlongHikeWithYahaPoisFamily();
 
-/// See also [ImportantPoisAlongHikeWithYahaPoisProvider].
-class ImportantPoisAlongHikeWithYahaPoisProviderFamily
-    extends Family<AsyncValue<List<PoiOfHike>>> {
-  /// See also [ImportantPoisAlongHikeWithYahaPoisProvider].
-  const ImportantPoisAlongHikeWithYahaPoisProviderFamily();
+/// See also [ImportantPoisAlongHikeWithYahaPois].
+class ImportantPoisAlongHikeWithYahaPoisFamily extends Family<List<PoiOfHike>> {
+  /// See also [ImportantPoisAlongHikeWithYahaPois].
+  const ImportantPoisAlongHikeWithYahaPoisFamily();
 
-  /// See also [ImportantPoisAlongHikeWithYahaPoisProvider].
-  ImportantPoisAlongHikeWithYahaPoisProviderProvider call(
+  /// See also [ImportantPoisAlongHikeWithYahaPois].
+  ImportantPoisAlongHikeWithYahaPoisProvider call(
     String hikeId,
   ) {
-    return ImportantPoisAlongHikeWithYahaPoisProviderProvider(
+    return ImportantPoisAlongHikeWithYahaPoisProvider(
       hikeId,
     );
   }
 
   @override
-  ImportantPoisAlongHikeWithYahaPoisProviderProvider getProviderOverride(
-    covariant ImportantPoisAlongHikeWithYahaPoisProviderProvider provider,
+  ImportantPoisAlongHikeWithYahaPoisProvider getProviderOverride(
+    covariant ImportantPoisAlongHikeWithYahaPoisProvider provider,
   ) {
     return call(
       provider.hikeId,
@@ -80,36 +79,34 @@ class ImportantPoisAlongHikeWithYahaPoisProviderFamily
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'importantPoisAlongHikeWithYahaPoisProviderProvider';
+  String? get name => r'importantPoisAlongHikeWithYahaPoisProvider';
 }
 
-/// See also [ImportantPoisAlongHikeWithYahaPoisProvider].
-class ImportantPoisAlongHikeWithYahaPoisProviderProvider
-    extends AutoDisposeAsyncNotifierProviderImpl<
-        ImportantPoisAlongHikeWithYahaPoisProvider, List<PoiOfHike>> {
-  /// See also [ImportantPoisAlongHikeWithYahaPoisProvider].
-  ImportantPoisAlongHikeWithYahaPoisProviderProvider(
+/// See also [ImportantPoisAlongHikeWithYahaPois].
+class ImportantPoisAlongHikeWithYahaPoisProvider
+    extends AutoDisposeNotifierProviderImpl<ImportantPoisAlongHikeWithYahaPois,
+        List<PoiOfHike>> {
+  /// See also [ImportantPoisAlongHikeWithYahaPois].
+  ImportantPoisAlongHikeWithYahaPoisProvider(
     this.hikeId,
   ) : super.internal(
-          () => ImportantPoisAlongHikeWithYahaPoisProvider()..hikeId = hikeId,
-          from: importantPoisAlongHikeWithYahaPoisProviderProvider,
-          name: r'importantPoisAlongHikeWithYahaPoisProviderProvider',
+          () => ImportantPoisAlongHikeWithYahaPois()..hikeId = hikeId,
+          from: importantPoisAlongHikeWithYahaPoisProvider,
+          name: r'importantPoisAlongHikeWithYahaPoisProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$importantPoisAlongHikeWithYahaPoisProviderHash,
-          dependencies:
-              ImportantPoisAlongHikeWithYahaPoisProviderFamily._dependencies,
-          allTransitiveDependencies:
-              ImportantPoisAlongHikeWithYahaPoisProviderFamily
-                  ._allTransitiveDependencies,
+                  : _$importantPoisAlongHikeWithYahaPoisHash,
+          dependencies: ImportantPoisAlongHikeWithYahaPoisFamily._dependencies,
+          allTransitiveDependencies: ImportantPoisAlongHikeWithYahaPoisFamily
+              ._allTransitiveDependencies,
         );
 
   final String hikeId;
 
   @override
   bool operator ==(Object other) {
-    return other is ImportantPoisAlongHikeWithYahaPoisProviderProvider &&
+    return other is ImportantPoisAlongHikeWithYahaPoisProvider &&
         other.hikeId == hikeId;
   }
 
@@ -122,8 +119,8 @@ class ImportantPoisAlongHikeWithYahaPoisProviderProvider
   }
 
   @override
-  Future<List<PoiOfHike>> runNotifierBuild(
-    covariant ImportantPoisAlongHikeWithYahaPoisProvider notifier,
+  List<PoiOfHike> runNotifierBuild(
+    covariant ImportantPoisAlongHikeWithYahaPois notifier,
   ) {
     return notifier.build(
       hikeId,

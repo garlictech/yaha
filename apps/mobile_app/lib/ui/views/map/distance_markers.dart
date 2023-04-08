@@ -11,30 +11,32 @@ part 'distance_markers.g.dart';
 class DistanceMarkers extends _$DistanceMarkers {
   @override
   List<Marker> build(String hikeId) {
-    ref
-        .watch(cachedHikeProvider(hikeId).future)
-        .then((hike) => state = hike?.distanceMarkers
-                .mapIndexed((index, d) => Marker(
-                    height: 18,
-                    width: 18,
-                    point: d,
-                    builder: (BuildContext c) {
-                      return SizedBox(
-                          child: PhysicalModel(
-                              color: YahaColors.gunmetalGray,
-                              shadowColor: Colors.black,
-                              elevation: 8.0,
-                              shape: BoxShape.circle,
-                              child: Align(
-                                  alignment: Alignment.center,
-                                  child: Text((index + 1).toString(),
-                                      style: const TextStyle(
-                                          fontSize: 10,
-                                          color: Colors.white)))));
-                    }))
-                .toList() ??
-            []);
+    final hikeState = ref.watch(cachedHikeProvider(hikeId));
 
-    return [];
+    if (hikeState.data == null) {
+      return [];
+    }
+
+    final hike = hikeState.data!;
+
+    return hike.distanceMarkers
+        .mapIndexed((index, d) => Marker(
+            height: 18,
+            width: 18,
+            point: d,
+            builder: (BuildContext c) {
+              return SizedBox(
+                  child: PhysicalModel(
+                      color: YahaColors.gunmetalGray,
+                      shadowColor: Colors.black,
+                      elevation: 8.0,
+                      shape: BoxShape.circle,
+                      child: Align(
+                          alignment: Alignment.center,
+                          child: Text((index + 1).toString(),
+                              style: const TextStyle(
+                                  fontSize: 10, color: Colors.white)))));
+            }))
+        .toList();
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-Widget errorWidget(err, stack) {
+Widget errorWidget(err, dynamic stack) {
   debugPrint("Error: $err");
-  debugPrint("$stack");
+  debugPrint("${stack ?? StackTrace.current}");
   return const Center(child: Text('Something bad happened 😭'));
 }

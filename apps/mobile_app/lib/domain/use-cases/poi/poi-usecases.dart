@@ -5,8 +5,10 @@ import 'package:yaha/domain/domain.dart';
 final poisAroundHikeProvider =
     FutureProvider.autoDispose.family<List<Poi>, String>((ref, hikeId) async {
   final poiUtilities = ref.read(poiUtilityServicesProvider);
-  final hike = await ref.watch(cachedHikeProvider(hikeId).future);
+  final hikeState = ref.watch(cachedHikeProvider(hikeId));
   final hikeSettings = ref.watch(hikingSettingsServiceProvider(hikeId));
 
-  return poiUtilities.getOffroutePoisOfHike(hike, hikeSettings);
+  return hikeState.data == null
+      ? Future.value([])
+      : poiUtilities.getOffroutePoisOfHike(hikeState.data!, hikeSettings);
 });

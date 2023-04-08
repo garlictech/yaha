@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:yaha/domain/entities/poi/poi_of_hike.dart';
 
@@ -10,9 +11,10 @@ part "touristic_pois_along_hike_sorted_by_distance.g.dart";
 class TouristicPoisAlongHikeSortedByDistance
     extends _$TouristicPoisAlongHikeSortedByDistance {
   @override
-  Future<List<PoiOfHike>> build(String hikeId) {
-    return ref
-        .watch(touristicPoisAlongHikeProvider(hikeId).future)
-        .then((pois) => PoiUtils.sortByDistanceFromHikeStart(pois));
+  List<PoiOfHike> build(String hikeId) {
+    final pois = ref.watch(touristicPoisAlongHikeProvider(hikeId));
+    PoiUtils.sortByDistanceFromHikeStart(pois).then((pois) => state = pois);
+
+    return [];
   }
 }

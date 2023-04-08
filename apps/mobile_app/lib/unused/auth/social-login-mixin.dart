@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yaha/utils/auth/auth-methods.dart';
 
-import '../../views/auth/screens/social-login-screen.dart';
+import '../../ui/views/auth/screens/social-login-screen.dart';
 
 mixin SocialLogin {
   late BuildContext _context;

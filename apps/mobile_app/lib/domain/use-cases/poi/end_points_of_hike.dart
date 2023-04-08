@@ -7,9 +7,15 @@ part "end_points_of_hike.g.dart";
 @riverpod
 class EndPointsOfHike extends _$EndPointsOfHike {
   @override
-  Future<Tuple2<PoiOfHike, PoiOfHike>?> build(String hikeId) async {
-    final hike = await ref.watch(cachedHikeProvider(hikeId).future);
+  Tuple2<PoiOfHike, PoiOfHike>? build(String hikeId) {
+    final hikeState = ref.watch(cachedHikeProvider(hikeId));
     final hikeSettings = ref.watch(hikingSettingsServiceProvider(hikeId));
+
+    if (hikeState.data == null) {
+      return null;
+    }
+
+    final hike = hikeState.data!;
 
     final start = PoiOfHike(
         poi: Poi(
@@ -34,6 +40,7 @@ class EndPointsOfHike extends _$EndPointsOfHike {
         hike: hike,
         settings: hikeSettings,
         ref: ref);
+
     return Tuple2(start, end);
   }
 }

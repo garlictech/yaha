@@ -7,7 +7,7 @@ part of 'touristic_pois_along_hike_sorted_by_distance.dart';
 // **************************************************************************
 
 String _$touristicPoisAlongHikeSortedByDistanceHash() =>
-    r'f89878850f230d6af2e9b36ef8a4d47897898ecb';
+    r'7cb9ec1a298e5356cd2a941a399222e223e19c71';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -31,10 +31,10 @@ class _SystemHash {
 }
 
 abstract class _$TouristicPoisAlongHikeSortedByDistance
-    extends BuildlessAutoDisposeAsyncNotifier<List<PoiOfHike>> {
+    extends BuildlessAutoDisposeNotifier<List<PoiOfHike>> {
   late final String hikeId;
 
-  Future<List<PoiOfHike>> build(
+  List<PoiOfHike> build(
     String hikeId,
   );
 }
@@ -46,7 +46,7 @@ const touristicPoisAlongHikeSortedByDistanceProvider =
 
 /// See also [TouristicPoisAlongHikeSortedByDistance].
 class TouristicPoisAlongHikeSortedByDistanceFamily
-    extends Family<AsyncValue<List<PoiOfHike>>> {
+    extends Family<List<PoiOfHike>> {
   /// See also [TouristicPoisAlongHikeSortedByDistance].
   const TouristicPoisAlongHikeSortedByDistanceFamily();
 
@@ -85,7 +85,7 @@ class TouristicPoisAlongHikeSortedByDistanceFamily
 
 /// See also [TouristicPoisAlongHikeSortedByDistance].
 class TouristicPoisAlongHikeSortedByDistanceProvider
-    extends AutoDisposeAsyncNotifierProviderImpl<
+    extends AutoDisposeNotifierProviderImpl<
         TouristicPoisAlongHikeSortedByDistance, List<PoiOfHike>> {
   /// See also [TouristicPoisAlongHikeSortedByDistance].
   TouristicPoisAlongHikeSortedByDistanceProvider(
@@ -122,7 +122,7 @@ class TouristicPoisAlongHikeSortedByDistanceProvider
   }
 
   @override
-  Future<List<PoiOfHike>> runNotifierBuild(
+  List<PoiOfHike> runNotifierBuild(
     covariant TouristicPoisAlongHikeSortedByDistance notifier,
   ) {
     return notifier.build(

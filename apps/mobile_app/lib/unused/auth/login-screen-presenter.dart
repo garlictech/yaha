@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../viewmodels/auth/login-screen-viewmodel.dart';
-import '../../views/auth/screens/login-with-email-screen.dart';
-import '../../views/auth/screens/signup-screen.dart';
+import '../../ui/viewmodels/auth/login-screen-viewmodel.dart';
+import '../../ui/views/auth/screens/login-with-email-screen.dart';
+import '../../ui/views/auth/screens/signup-screen.dart';
 import 'social-login-mixin.dart';
 import 'terms-accepted-mixin.dart';
 
 class LoginScreenPresenter extends StateNotifier<LoginScreenViewModel>
     with SocialLogin, TermsAccepted {
-  LoginScreenPresenter(
-      {required BuildContext newContext, required Ref newRef})
+  LoginScreenPresenter({required BuildContext newContext, required Ref newRef})
       : super(LoginScreenViewModel()) {
     ref = newRef;
     buildContext = newContext;

@@ -6,7 +6,7 @@ import 'package:yaha/domain/repositories/auth/cognito-oauth2-repository.dart';
 import 'package:yaha/domain/states/auth/oauth2-state.dart';
 import 'package:yaha/utils/auth/auth-methods.dart';
 
-import '../../viewmodels/auth/social-login-screen-viewmodel.dart';
+import '../../ui/viewmodels/auth/social-login-screen-viewmodel.dart';
 
 class SocialLoginScreenPresenter
     extends StateNotifier<SocialLoginScreenViewModel> {

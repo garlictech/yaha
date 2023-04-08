@@ -7,7 +7,7 @@ part of 'touristic_pois_along_hike.dart';
 // **************************************************************************
 
 String _$touristicPoisAlongHikeHash() =>
-    r'10239f92f7a1445e41d3041b473e2db1aa55f25f';
+    r'e87de95046ee13c02bf68ecde80c15d98ff3326b';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -31,10 +31,10 @@ class _SystemHash {
 }
 
 abstract class _$TouristicPoisAlongHike
-    extends BuildlessAutoDisposeAsyncNotifier<List<PoiOfHike>> {
+    extends BuildlessAutoDisposeNotifier<List<PoiOfHike>> {
   late final String hikeId;
 
-  Future<List<PoiOfHike>> build(
+  List<PoiOfHike> build(
     String hikeId,
   );
 }
@@ -44,7 +44,7 @@ abstract class _$TouristicPoisAlongHike
 const touristicPoisAlongHikeProvider = TouristicPoisAlongHikeFamily();
 
 /// See also [TouristicPoisAlongHike].
-class TouristicPoisAlongHikeFamily extends Family<AsyncValue<List<PoiOfHike>>> {
+class TouristicPoisAlongHikeFamily extends Family<List<PoiOfHike>> {
   /// See also [TouristicPoisAlongHike].
   const TouristicPoisAlongHikeFamily();
 
@@ -82,9 +82,8 @@ class TouristicPoisAlongHikeFamily extends Family<AsyncValue<List<PoiOfHike>>> {
 }
 
 /// See also [TouristicPoisAlongHike].
-class TouristicPoisAlongHikeProvider
-    extends AutoDisposeAsyncNotifierProviderImpl<TouristicPoisAlongHike,
-        List<PoiOfHike>> {
+class TouristicPoisAlongHikeProvider extends AutoDisposeNotifierProviderImpl<
+    TouristicPoisAlongHike, List<PoiOfHike>> {
   /// See also [TouristicPoisAlongHike].
   TouristicPoisAlongHikeProvider(
     this.hikeId,
@@ -117,7 +116,7 @@ class TouristicPoisAlongHikeProvider
   }
 
   @override
-  Future<List<PoiOfHike>> runNotifierBuild(
+  List<PoiOfHike> runNotifierBuild(
     covariant TouristicPoisAlongHike notifier,
   ) {
     return notifier.build(

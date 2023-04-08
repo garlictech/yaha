@@ -1,1 +1,1 @@
-export 'weather_usecases.dart';
+export 'weather_pois_of_hike.dart';

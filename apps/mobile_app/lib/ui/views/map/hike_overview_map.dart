@@ -3,7 +3,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:yaha/domain/domain.dart';
-import 'package:yaha/domain/services/hike_list_stream_with_bounds.dart';
+import 'package:yaha/domain/use-cases/hike/hike_with_bounds.dart';
 import 'package:yaha/ui/views/map/global_markers.dart';
 import 'package:yaha/ui/views/map/hike_map_control.dart';
 import 'package:yaha/ui/views/poi/poi-icon.dart';
@@ -31,37 +31,34 @@ class HikeOverviewMapState extends ConsumerState<HikeOverviewMap> {
 
   @override
   Widget build(BuildContext context) {
-    final hikeWithBounds =
-        ref.watch(hikeListStreamWithBoundsProvider(widget.hikeId));
+    final hikeWithBounds = ref.watch(hikeWithBoundsProvider(widget.hikeId));
     final globalMarkers = ref.watch(globalMarkersProvider);
 
-    return hikeWithBounds.when(
-        loading: () => const CircularProgressIndicator(),
-        error: (error, stack) =>
-            const Text('Oops, something unexpected happened'),
-        data: (data) {
-          final hike = data.value1[0];
-          final bounds = data.value2;
+    if (hikeWithBounds == null) {
+      return Container();
+    }
 
-          return Stack(children: [
-            FlutterMap(
-              mapController: _mapController,
-              options: MapOptions(bounds: bounds),
-              children: <Widget>[
-                yahaTileLayer,
-                _getHikeLayerWidget(hike),
-                _getMarkerLayerWidget(hike, globalMarkers),
-              ],
-            ),
-            Align(
-                alignment: Alignment.bottomRight,
-                child: GlobalMapControl(
-                    mapcontroller: _mapController, originalBounds: bounds)),
-            Align(
-                alignment: Alignment.bottomLeft,
-                child: HikeMapControl(hikeId: widget.hikeId)),
-          ]);
-        });
+    final hike = hikeWithBounds.value1;
+    final bounds = hikeWithBounds.value2;
+
+    return Stack(children: [
+      FlutterMap(
+        mapController: _mapController,
+        options: MapOptions(bounds: bounds),
+        children: <Widget>[
+          yahaTileLayer,
+          _getHikeLayerWidget(hike),
+          _getMarkerLayerWidget(hike, globalMarkers),
+        ],
+      ),
+      Align(
+          alignment: Alignment.bottomRight,
+          child: GlobalMapControl(
+              mapcontroller: _mapController, originalBounds: bounds)),
+      Align(
+          alignment: Alignment.bottomLeft,
+          child: HikeMapControl(hikeId: widget.hikeId)),
+    ]);
   }
 
   _getHikeLayerWidget(Hike hike) {

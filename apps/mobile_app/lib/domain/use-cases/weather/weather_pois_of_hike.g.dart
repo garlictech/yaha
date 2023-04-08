@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'cached_hike.dart';
+part of 'weather_pois_of_hike.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$cachedHikeHash() => r'f1b62353d5aa9450a1635d40e05a4bd1485fcbd7';
+String _$weatherPoisOfHikeHash() => r'd28579c0ff792c4a025b4df2c8c2ca61cdbd843e';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,36 +29,36 @@ class _SystemHash {
   }
 }
 
-abstract class _$CachedHike
-    extends BuildlessAutoDisposeNotifier<LoadableState<Hike>> {
+abstract class _$WeatherPoisOfHike
+    extends BuildlessAutoDisposeNotifier<List<PoiOfHike>> {
   late final String hikeId;
 
-  LoadableState<Hike> build(
+  List<PoiOfHike> build(
     String hikeId,
   );
 }
 
-/// See also [CachedHike].
-@ProviderFor(CachedHike)
-const cachedHikeProvider = CachedHikeFamily();
+/// See also [WeatherPoisOfHike].
+@ProviderFor(WeatherPoisOfHike)
+const weatherPoisOfHikeProvider = WeatherPoisOfHikeFamily();
 
-/// See also [CachedHike].
-class CachedHikeFamily extends Family<LoadableState<Hike>> {
-  /// See also [CachedHike].
-  const CachedHikeFamily();
+/// See also [WeatherPoisOfHike].
+class WeatherPoisOfHikeFamily extends Family<List<PoiOfHike>> {
+  /// See also [WeatherPoisOfHike].
+  const WeatherPoisOfHikeFamily();
 
-  /// See also [CachedHike].
-  CachedHikeProvider call(
+  /// See also [WeatherPoisOfHike].
+  WeatherPoisOfHikeProvider call(
     String hikeId,
   ) {
-    return CachedHikeProvider(
+    return WeatherPoisOfHikeProvider(
       hikeId,
     );
   }
 
   @override
-  CachedHikeProvider getProviderOverride(
-    covariant CachedHikeProvider provider,
+  WeatherPoisOfHikeProvider getProviderOverride(
+    covariant WeatherPoisOfHikeProvider provider,
   ) {
     return call(
       provider.hikeId,
@@ -77,33 +77,33 @@ class CachedHikeFamily extends Family<LoadableState<Hike>> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'cachedHikeProvider';
+  String? get name => r'weatherPoisOfHikeProvider';
 }
 
-/// See also [CachedHike].
-class CachedHikeProvider
-    extends AutoDisposeNotifierProviderImpl<CachedHike, LoadableState<Hike>> {
-  /// See also [CachedHike].
-  CachedHikeProvider(
+/// See also [WeatherPoisOfHike].
+class WeatherPoisOfHikeProvider extends AutoDisposeNotifierProviderImpl<
+    WeatherPoisOfHike, List<PoiOfHike>> {
+  /// See also [WeatherPoisOfHike].
+  WeatherPoisOfHikeProvider(
     this.hikeId,
   ) : super.internal(
-          () => CachedHike()..hikeId = hikeId,
-          from: cachedHikeProvider,
-          name: r'cachedHikeProvider',
+          () => WeatherPoisOfHike()..hikeId = hikeId,
+          from: weatherPoisOfHikeProvider,
+          name: r'weatherPoisOfHikeProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$cachedHikeHash,
-          dependencies: CachedHikeFamily._dependencies,
+                  : _$weatherPoisOfHikeHash,
+          dependencies: WeatherPoisOfHikeFamily._dependencies,
           allTransitiveDependencies:
-              CachedHikeFamily._allTransitiveDependencies,
+              WeatherPoisOfHikeFamily._allTransitiveDependencies,
         );
 
   final String hikeId;
 
   @override
   bool operator ==(Object other) {
-    return other is CachedHikeProvider && other.hikeId == hikeId;
+    return other is WeatherPoisOfHikeProvider && other.hikeId == hikeId;
   }
 
   @override
@@ -115,8 +115,8 @@ class CachedHikeProvider
   }
 
   @override
-  LoadableState<Hike> runNotifierBuild(
-    covariant CachedHike notifier,
+  List<PoiOfHike> runNotifierBuild(
+    covariant WeatherPoisOfHike notifier,
   ) {
     return notifier.build(
       hikeId,

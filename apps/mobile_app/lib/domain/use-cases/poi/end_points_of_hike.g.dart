@@ -6,7 +6,7 @@ part of 'end_points_of_hike.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$endPointsOfHikeHash() => r'2cc5bd8d0573e37ad46a44d4cc5a1f519e9cadc0';
+String _$endPointsOfHikeHash() => r'362207844cb3b922bcad72e9bfe65acf917c64d3';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -30,10 +30,10 @@ class _SystemHash {
 }
 
 abstract class _$EndPointsOfHike
-    extends BuildlessAutoDisposeAsyncNotifier<Tuple2<PoiOfHike, PoiOfHike>?> {
+    extends BuildlessAutoDisposeNotifier<Tuple2<PoiOfHike, PoiOfHike>?> {
   late final String hikeId;
 
-  Future<Tuple2<PoiOfHike, PoiOfHike>?> build(
+  Tuple2<PoiOfHike, PoiOfHike>? build(
     String hikeId,
   );
 }
@@ -43,8 +43,7 @@ abstract class _$EndPointsOfHike
 const endPointsOfHikeProvider = EndPointsOfHikeFamily();
 
 /// See also [EndPointsOfHike].
-class EndPointsOfHikeFamily
-    extends Family<AsyncValue<Tuple2<PoiOfHike, PoiOfHike>?>> {
+class EndPointsOfHikeFamily extends Family<Tuple2<PoiOfHike, PoiOfHike>?> {
   /// See also [EndPointsOfHike].
   const EndPointsOfHikeFamily();
 
@@ -82,7 +81,7 @@ class EndPointsOfHikeFamily
 }
 
 /// See also [EndPointsOfHike].
-class EndPointsOfHikeProvider extends AutoDisposeAsyncNotifierProviderImpl<
+class EndPointsOfHikeProvider extends AutoDisposeNotifierProviderImpl<
     EndPointsOfHike, Tuple2<PoiOfHike, PoiOfHike>?> {
   /// See also [EndPointsOfHike].
   EndPointsOfHikeProvider(
@@ -116,7 +115,7 @@ class EndPointsOfHikeProvider extends AutoDisposeAsyncNotifierProviderImpl<
   }
 
   @override
-  Future<Tuple2<PoiOfHike, PoiOfHike>?> runNotifierBuild(
+  Tuple2<PoiOfHike, PoiOfHike>? runNotifierBuild(
     covariant EndPointsOfHike notifier,
   ) {
     return notifier.build(

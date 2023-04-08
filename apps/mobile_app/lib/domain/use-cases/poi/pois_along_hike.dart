@@ -9,12 +9,21 @@ part "pois_along_hike.g.dart";
 @riverpod
 class PoisAlongHike extends _$PoisAlongHike {
   @override
-  Future<List<PoiOfHike>> build(String hikeId) {
+  List<PoiOfHike> build(String hikeId) {
     final poiUtilities = ref.read(poiUtilityServicesProvider);
     final hikeSettings = ref.watch(hikingSettingsServiceProvider(hikeId));
+    final hikeState = ref.watch(cachedHikeProvider(hikeId));
 
-    return ref
-        .watch(cachedHikeProvider(hikeId).future)
-        .then((hike) => poiUtilities.getOnroutePoisOfHike(hike, hikeSettings));
+    if (hikeState.data == null) {
+      return [];
+    }
+
+    final hike = hikeState.data!;
+
+    poiUtilities
+        .getOnroutePoisOfHike(hike, hikeSettings)
+        .then((pois) => state = pois);
+
+    return [];
   }
 }
