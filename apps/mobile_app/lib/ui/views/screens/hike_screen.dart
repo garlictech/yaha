@@ -14,7 +14,6 @@ import '../poi/poi.dart';
 import '../poi/poi_icon_list.dart';
 import '../shared/shared.dart';
 import '../shared/widgets/yaha-image.dart';
-import '../utils/error-utils.dart';
 import '../hikes/hike_properties.dart';
 //import 'weather-screen.dart';
 

@@ -1,5 +1,6 @@
 import 'package:dartx/dartx.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter/foundation.dart';
 
 import '../../entities/entities.dart';
 
@@ -30,7 +31,9 @@ class PoiUtils {
 
   static List<T> filterPoisByTypes<T extends Poi>(
       List<T> pois, List<PoiType> poiTypes) {
-    return pois.where((poi) => poiTypes.contains(poi.poiType)).toList();
+    return pois.where((poi) {
+      return poiTypes.contains(poi.poiType);
+    }).toList();
   }
 
   static Future<List<PoiOfHike>> sortByDistanceFromHikeStart(

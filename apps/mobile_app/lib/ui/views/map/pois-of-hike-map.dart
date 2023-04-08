@@ -52,8 +52,9 @@ class PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
 
   @override
   Widget build(BuildContext context) {
-    final obtainedPois = ref.watch(
-        domain.importantPoisAlongHikeWithYahaPoisProvider(widget.hike.id));
+    final obtainedPois = ref.watch(widget.filteredPoiTypes == null
+        ? domain.importantPoisAlongHikeWithYahaPoisProvider(widget.hike.id)
+        : domain.poisAlongHikeProvider(widget.hike.id));
 
     final mapPresenter = ref.watch(leafletMapMVPProvider.notifier);
     _cardHeight = 110;
