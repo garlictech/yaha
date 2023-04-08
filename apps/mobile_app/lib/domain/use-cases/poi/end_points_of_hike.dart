@@ -8,7 +8,7 @@ part "end_points_of_hike.g.dart";
 class EndPointsOfHike extends _$EndPointsOfHike {
   @override
   Tuple2<PoiOfHike, PoiOfHike>? build(String hikeId) {
-    final hikeState = ref.watch(cachedHikeProvider(hikeId));
+    final hikeState = ref.watch(configuredHikeProvider(hikeId));
     final hikeSettings = ref.watch(hikingSettingsServiceProvider(hikeId));
 
     if (hikeState.data == null) {

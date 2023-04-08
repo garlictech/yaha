@@ -12,7 +12,7 @@ class HikeFilters extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var filterSettingsStateNotifier =
-        ref.watch(hikeSearchStateProvider.notifier);
+        ref.read(hikeSearchStateProvider.notifier);
     var filterSettingsState = ref.watch(hikeSearchStateProvider);
     SfRangeValues lengthValues = SfRangeValues(
         filterSettingsState.lengthMin, filterSettingsState.lengthMax);

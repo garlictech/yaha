@@ -11,7 +11,7 @@ part 'distance_markers.g.dart';
 class DistanceMarkers extends _$DistanceMarkers {
   @override
   List<Marker> build(String hikeId) {
-    final hikeState = ref.watch(cachedHikeProvider(hikeId));
+    final hikeState = ref.watch(configuredHikeProvider(hikeId));
 
     if (hikeState.data == null) {
       return [];

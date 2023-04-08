@@ -10,7 +10,7 @@ part "hike_with_bounds.g.dart";
 class HikeWithBounds extends _$HikeWithBounds {
   @override
   Tuple2<Hike, LatLngBounds>? build(String hikeId) {
-    final hikeState = ref.watch(cachedHikeProvider(hikeId));
+    final hikeState = ref.watch(configuredHikeProvider(hikeId));
 
     if (hikeState.data == null) {
       return null;

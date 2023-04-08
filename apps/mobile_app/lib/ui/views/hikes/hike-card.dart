@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yaha/domain/use-cases/hike/cached_hike.dart';
+import 'package:yaha/domain/use-cases/hike/configured_hike.dart';
 
 import '../shared/shared.dart';
 import '../shared/widgets/yaha-image.dart';
@@ -23,7 +23,7 @@ class HikeCard extends ConsumerWidget {
     return ClipRRect(
         borderRadius: BorderRadius.circular(YahaBorderRadius.general),
         child: Consumer(builder: (c, ref, child) {
-          final hikeState = ref.watch(cachedHikeProvider(hikeId));
+          final hikeState = ref.watch(configuredHikeProvider(hikeId));
 
           if (hikeState.loading) {
             return const YahaProgressIndicator(text: "Loading hike...");

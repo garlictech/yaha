@@ -92,5 +92,6 @@ class HikeSearchStateNotifier extends StateNotifier<HikeSearchState> {
 }
 
 final hikeSearchStateProvider =
-    StateNotifierProvider<HikeSearchStateNotifier, HikeSearchState>(
-        (ref) => HikeSearchStateNotifier(ref: ref));
+    StateNotifierProvider<HikeSearchStateNotifier, HikeSearchState>((ref) {
+  return HikeSearchStateNotifier(ref: ref);
+});

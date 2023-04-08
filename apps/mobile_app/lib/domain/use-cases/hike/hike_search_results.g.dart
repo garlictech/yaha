@@ -1,27 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'hike_list_with_bounds.dart';
+part of 'hike_search_results.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$hikeListWithBoundsHash() =>
-    r'61dbfd75290e9cbd5837ec7f201c472b55a14942';
+String _$hikeSearchResultsHash() => r'a82ec82db149ee81052e737b7c65443cf1b0e532';
 
-/// See also [HikeListWithBounds].
-@ProviderFor(HikeListWithBounds)
-final hikeListWithBoundsProvider = AutoDisposeNotifierProvider<
-    HikeListWithBounds, Tuple2<List<Hike>, LatLngBounds>>.internal(
-  HikeListWithBounds.new,
-  name: r'hikeListWithBoundsProvider',
+/// See also [HikeSearchResults].
+@ProviderFor(HikeSearchResults)
+final hikeSearchResultsProvider = AutoDisposeNotifierProvider<HikeSearchResults,
+    Tuple2<List<HikeEntity>, LatLngBounds>?>.internal(
+  HikeSearchResults.new,
+  name: r'hikeSearchResultsProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$hikeListWithBoundsHash,
+      : _$hikeSearchResultsHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$HikeListWithBounds
-    = AutoDisposeNotifier<Tuple2<List<Hike>, LatLngBounds>>;
+typedef _$HikeSearchResults
+    = AutoDisposeNotifier<Tuple2<List<HikeEntity>, LatLngBounds>?>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

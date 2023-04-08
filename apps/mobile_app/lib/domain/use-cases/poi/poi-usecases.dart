@@ -5,7 +5,7 @@ import 'package:yaha/domain/domain.dart';
 final poisAroundHikeProvider =
     FutureProvider.autoDispose.family<List<Poi>, String>((ref, hikeId) async {
   final poiUtilities = ref.read(poiUtilityServicesProvider);
-  final hikeState = ref.watch(cachedHikeProvider(hikeId));
+  final hikeState = ref.watch(configuredHikeProvider(hikeId));
   final hikeSettings = ref.watch(hikingSettingsServiceProvider(hikeId));
 
   return hikeState.data == null

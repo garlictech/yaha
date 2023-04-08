@@ -9,7 +9,7 @@ part 'weather_pois_of_hike.g.dart';
 class WeatherPoisOfHike extends _$WeatherPoisOfHike {
   @override
   List<PoiOfHike> build(String hikeId) {
-    final hikeState = ref.watch(cachedHikeProvider(hikeId));
+    final hikeState = ref.watch(configuredHikeProvider(hikeId));
     final activeHike = ref.watch(activeHikeProvider(hikeId));
     final weatherApi = ref.read(weatherApiProvider);
     final settings = ref.watch(hikingSettingsServiceProvider(hikeId));

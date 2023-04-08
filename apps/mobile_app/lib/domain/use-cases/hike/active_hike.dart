@@ -27,7 +27,7 @@ sumSegments(List<num> segmentVals) {
 class ActiveHike extends _$ActiveHike {
   @override
   ActiveHikeEntity? build(String hikeId) {
-    final hikeState = ref.watch(cachedHikeProvider(hikeId));
+    final hikeState = ref.watch(configuredHikeProvider(hikeId));
     final settings = ref.watch(hikingSettingsServiceProvider(hikeId));
 
     if (hikeState.data == null) {

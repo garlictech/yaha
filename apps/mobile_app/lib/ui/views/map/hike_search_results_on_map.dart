@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:yaha/domain/use-cases/hike/hike_list_with_bounds.dart';
+import 'package:yaha/domain/entities/hike/hike_entity.dart';
+import 'package:yaha/domain/use-cases/hike/hike_search_results.dart';
 import 'package:yaha/ui/views/hikes/hike-card.dart';
 import 'package:yaha/ui/views/map/leaflet_map_widgets.dart';
 
-import '../../../domain/entities/entities.dart';
 import 'global_map_control.dart';
 import 'global_markers.dart';
 import 'hike_card_popup_state.dart';
@@ -25,8 +25,6 @@ class HikeSearchSesultsOnMap extends ConsumerStatefulWidget {
 
 class HikeSearchSesultsOnMapState
     extends ConsumerState<HikeSearchSesultsOnMap> {
-  final MapController _mapController = MapController();
-
   final popup = Consumer(builder: (c, ref, child) {
     final currentlyShownHikeId = ref.watch(hikeCardPopupStateProvider);
     const popupSize = 200.0;
@@ -69,14 +67,21 @@ class HikeSearchSesultsOnMapState
 
   @override
   Widget build(BuildContext context) {
-    final hikesWithBounds = ref.watch(hikeListWithBoundsProvider);
+    final hikesWithBounds = ref.watch(hikeSearchResultsProvider);
     final globalMarkers = ref.watch(globalMarkersProvider);
+    final MapController mapController = MapController();
+
+    if (hikesWithBounds == null) {
+      return Container();
+    }
+
     final hikes = hikesWithBounds.value1;
     final bounds = hikesWithBounds.value2;
+    debugPrint("***** ${bounds.southEast}");
 
     return Stack(children: [
       FlutterMap(
-        mapController: _mapController,
+        mapController: mapController,
         options: MapOptions(bounds: bounds),
         children: <Widget>[
           yahaTileLayer,
@@ -87,12 +92,12 @@ class HikeSearchSesultsOnMapState
       Align(
           alignment: Alignment.bottomRight,
           child: GlobalMapControl(
-              mapcontroller: _mapController, originalBounds: bounds)),
+              mapcontroller: mapController, originalBounds: bounds)),
       popup
     ]);
   }
 
-  _getHikeLayerWidget(List<Hike> hikes) {
+  _getHikeLayerWidget(List<HikeEntity> hikes) {
     final currentlyShownHikeId = ref.watch(hikeCardPopupStateProvider);
     final lines = hikes.map((hike) {
       final widthMultiplier = currentlyShownHikeId == hike.id ? 2.0 : 1.0;
@@ -111,7 +116,7 @@ class HikeSearchSesultsOnMapState
     return PolylineLayer(polylines: lines);
   }
 
-  _getMarkerLayerWidget(List<Hike> hikes, List<Marker> globalMarkers) {
+  _getMarkerLayerWidget(List<HikeEntity> hikes, List<Marker> globalMarkers) {
     const markerSize = 20.0;
 
     final markers = hikes
@@ -137,15 +142,16 @@ class HikeSearchSesultsOnMapState
           final startMarker = Marker(
               height: markerSize,
               width: markerSize,
-              point:
-                  LatLng(hike.startPoint.latitude, hike.startPoint.longitude),
+              point: LatLng(hike.route.coordinates.first.location.latitude,
+                  hike.route.coordinates.first.location.longitude),
               builder: (c) {
                 return markerShape(Colors.green, ref);
               });
           final endMarker = Marker(
               height: markerSize,
               width: markerSize,
-              point: LatLng(hike.endPoint.latitude, hike.endPoint.longitude),
+              point: LatLng(hike.route.coordinates.last.location.latitude,
+                  hike.route.coordinates.last.location.longitude),
               builder: (c) {
                 return markerShape(Colors.red, ref);
               });

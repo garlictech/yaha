@@ -97,7 +97,7 @@ class HikeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final defaults = ref.watch(defaultsProvider);
     final hikeSettings = ref.watch(hikingSettingsServiceProvider(hikeId));
-    final hikeState = ref.watch(cachedHikeProvider(hikeId));
+    final hikeState = ref.watch(configuredHikeProvider(hikeId));
     final timeText =
         "Start time: ${hikeSettings.startTime.day}/${hikeSettings.startTime.month}, ${hikeSettings.startTime.hour}:${hikeSettings.startTime.minute.toString().padLeft(2, '0')}";
 
