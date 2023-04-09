@@ -88,6 +88,7 @@ dependencies:
   flutter_map_marker_cluster: ^1.1.0
   flutter_datetime_picker: ^1.5.1
   font_awesome_flutter: ^10.4.0
+  google_maps_flutter: ^2.2.5
 
 flutter_icons:
   android: true

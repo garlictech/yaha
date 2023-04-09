@@ -5,11 +5,11 @@ import 'package:latlong2/latlong.dart';
 import 'package:yaha/domain/domain.dart';
 import 'package:yaha/domain/use-cases/hike/hike_with_bounds.dart';
 import 'package:yaha/ui/views/map/global_markers.dart';
-import 'package:yaha/ui/views/map/hike_map_control.dart';
+import 'package:yaha/ui/views/map/controls/hike_map_control.dart';
 import 'package:yaha/ui/views/poi/poi-icon.dart';
 
 import '../../../domain/entities/entities.dart';
-import 'global_map_control.dart';
+import 'controls/global_map_control.dart';
 import 'leaflet_map_widgets.dart';
 
 class HikeOverviewMap extends ConsumerStatefulWidget {
@@ -46,7 +46,7 @@ class HikeOverviewMapState extends ConsumerState<HikeOverviewMap> {
         mapController: _mapController,
         options: MapOptions(bounds: bounds),
         children: <Widget>[
-          yahaTileLayer,
+          osmTileLayer,
           _getHikeLayerWidget(hike),
           _getMarkerLayerWidget(hike, globalMarkers),
         ],
@@ -55,6 +55,9 @@ class HikeOverviewMapState extends ConsumerState<HikeOverviewMap> {
           alignment: Alignment.bottomRight,
           child: GlobalMapControl(
               mapcontroller: _mapController, originalBounds: bounds)),
+      Align(
+          alignment: Alignment.bottomLeft,
+          child: HikeMapControl(hikeId: widget.hikeId)),
       Align(
           alignment: Alignment.bottomLeft,
           child: HikeMapControl(hikeId: widget.hikeId)),

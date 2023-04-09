@@ -7,7 +7,7 @@ import 'package:yaha/domain/use-cases/hike/hike_with_bounds.dart';
 import 'package:yaha/ui/views/poi/poi-icon.dart';
 
 import '../../../domain/entities/entities.dart';
-import 'global_map_control.dart';
+import 'controls/global_map_control.dart';
 import 'global_markers.dart';
 import 'leaflet_map_widgets.dart';
 
@@ -46,7 +46,7 @@ class PoiInfoMapState extends ConsumerState<PoiInfoMap> {
         mapController: _mapController,
         options: MapOptions(bounds: bounds),
         children: <Widget>[
-          yahaTileLayer,
+          osmTileLayer,
           _getHikeLayerWidget(hike),
           _getMarkerLayerWidget(hike, globalMarkers),
         ],

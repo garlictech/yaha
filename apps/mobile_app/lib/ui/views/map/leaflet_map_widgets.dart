@@ -2,10 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:yaha/domain/entities/hike/hike.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
-final yahaTileLayer = TileLayer(
+final googleSatelliteTileLayer = TileLayer(
+    urlTemplate: "http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}",
+    subdomains: const ['mt0', 'mt1', 'mt2', 'mt3'],
+    maxZoom: 20);
+
+final osmTileLayer = TileLayer(
     urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
     subdomains: const ['a', 'b', 'c']);
+
+final topoTileLayer = TileLayer(
+    urlTemplate: "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
+    subdomains: const ['a', 'b', 'c']);
+
+final waymarkedTrails = TileLayer(
+  urlTemplate: "https://tile.waymarkedtrails.org/hiking/{z}/{x}/{y}.png",
+  backgroundColor: Colors.transparent,
+);
 
 Map<Symbol, dynamic> trackBaseProps(Hike hike) {
   final points = hike.route.coordinates

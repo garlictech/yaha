@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'buttons/jump_to_current_location_button.dart';
-import 'buttons/reset_to_features_button.dart';
+import '../buttons/jump_to_current_location_button.dart';
+import '../buttons/reset_to_features_button.dart';
 
 class GlobalMapControl extends ConsumerWidget {
   static const size = 35.0;

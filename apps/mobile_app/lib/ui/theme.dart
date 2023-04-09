@@ -1,5 +1,14 @@
 import 'package:flutter/material.dart';
 
+class TextStyles {
+  static TextStyle mapOverlayTextStyles(BuildContext context) {
+    return Theme.of(context)
+        .textTheme
+        .titleMedium!
+        .copyWith(color: Theme.of(context).colorScheme.primary, fontSize: 20.0);
+  }
+}
+
 final yahaTheme = ThemeData(
     colorScheme: const ColorScheme(
       brightness: Brightness.light,

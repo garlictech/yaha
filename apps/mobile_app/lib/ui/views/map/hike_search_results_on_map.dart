@@ -9,7 +9,7 @@ import 'package:yaha/domain/use-cases/hike/hike_search_results.dart';
 import 'package:yaha/ui/views/hikes/hike-card.dart';
 import 'package:yaha/ui/views/map/leaflet_map_widgets.dart';
 
-import 'global_map_control.dart';
+import 'controls/global_map_control.dart';
 import 'global_markers.dart';
 import 'hike_card_popup_state.dart';
 
@@ -77,14 +77,13 @@ class HikeSearchSesultsOnMapState
 
     final hikes = hikesWithBounds.value1;
     final bounds = hikesWithBounds.value2;
-    debugPrint("***** ${bounds.southEast}");
 
     return Stack(children: [
       FlutterMap(
         mapController: mapController,
         options: MapOptions(bounds: bounds),
         children: <Widget>[
-          yahaTileLayer,
+          osmTileLayer,
           _getHikeLayerWidget(hikes),
           _getMarkerLayerWidget(hikes, globalMarkers),
         ],
