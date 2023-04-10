@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:yaha/domain/domain.dart';
 
 import '../shared/shared.dart';
-import '../screens/places_on_route_screen.dart';
 import 'poi-icon.dart';
 
 class PoiIconList extends StatelessWidget {
   final List<PoiType> types;
   final Hike hike;
-  const PoiIconList({Key? key, required this.types, required this.hike})
+  final Function(List<PoiType>)? onTap;
+
+  const PoiIconList(
+      {Key? key, required this.types, required this.hike, this.onTap})
       : super(key: key);
 
   @override
@@ -18,13 +20,9 @@ class PoiIconList extends StatelessWidget {
             message: type.kind.replaceAll('_', ' '),
             child: InkWell(
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => PlacesOnRouteScreen(
-                                hike: hike,
-                                filteredPoiTypes: [type],
-                              )));
+                  if (onTap != null) {
+                    onTap!([type]);
+                  }
                 },
                 child: SizedBox(
                     height: 40,

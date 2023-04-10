@@ -6,11 +6,8 @@ import '../shared/shared.dart';
 
 class PlacesOnRouteScreen extends ConsumerWidget {
   final Hike hike;
-  final List<PoiType>? filteredPoiTypes;
 
-  const PlacesOnRouteScreen(
-      {Key? key, this.filteredPoiTypes, required this.hike})
-      : super(key: key);
+  const PlacesOnRouteScreen({Key? key, required this.hike}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -25,7 +22,6 @@ class PlacesOnRouteScreen extends ConsumerWidget {
                 child: YahaScreenHeadTitleText(
                     text: hike.title, color: Colors.white))),
         extendBodyBehindAppBar: true,
-        body: PoisOfHikeMap(
-            key: UniqueKey(), hike: hike, filteredPoiTypes: filteredPoiTypes));
+        body: PoisOfHikeMap(key: UniqueKey(), hike: hike));
   }
 }

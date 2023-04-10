@@ -6,7 +6,7 @@ part of 'weather_pois_of_hike.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$weatherPoisOfHikeHash() => r'd28579c0ff792c4a025b4df2c8c2ca61cdbd843e';
+String _$weatherPoisOfHikeHash() => r'c1d5154fba2c0e25629e8e2858537c99ec30379f';
 
 /// Copied from Dart SDK
 class _SystemHash {

@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:functional_data/functional_data.dart';
+import 'package:yaha/domain/entities/poi/poi_type.dart';
 
 part 'hiking_settings.g.dart';
 
@@ -12,11 +13,17 @@ class HikingSettings extends $HikingSettings {
   final DateTime startTime;
   @override
   final bool reversedHike;
+  @override
+  final List<PoiType> filteredPoiTypes;
+  @override
+  final bool showAllPoisAlongHike;
 
   HikingSettings(
       {required this.speed,
       required this.startTime,
-      required this.reversedHike});
+      required this.reversedHike,
+      this.filteredPoiTypes = const [],
+      this.showAllPoisAlongHike = false});
 
   factory HikingSettings.fromJson(Map<String, dynamic> json) =>
       _$HikingSettingsFromJson(json);

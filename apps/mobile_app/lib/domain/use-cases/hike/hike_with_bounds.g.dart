@@ -6,7 +6,7 @@ part of 'hike_with_bounds.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$hikeWithBoundsHash() => r'bf575c86952d36f912a71b3d4e0c0e42310f9fe1';
+String _$hikeWithBoundsHash() => r'8caf4605d1302266510666713771b543078e14d2';
 
 /// Copied from Dart SDK
 class _SystemHash {

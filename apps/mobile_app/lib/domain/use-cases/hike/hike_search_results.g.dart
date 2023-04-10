@@ -6,7 +6,7 @@ part of 'hike_search_results.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$hikeSearchResultsHash() => r'a82ec82db149ee81052e737b7c65443cf1b0e532';
+String _$hikeSearchResultsHash() => r'9d2e20f13dbb3390bb32cfa3025989c64b95e766';
 
 /// See also [HikeSearchResults].
 @ProviderFor(HikeSearchResults)

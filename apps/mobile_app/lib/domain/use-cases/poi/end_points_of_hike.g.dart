@@ -6,7 +6,7 @@ part of 'end_points_of_hike.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$endPointsOfHikeHash() => r'362207844cb3b922bcad72e9bfe65acf917c64d3';
+String _$endPointsOfHikeHash() => r'1e374332a62ffe2e0cccc3e01da007c96a9ca03c';
 
 /// Copied from Dart SDK
 class _SystemHash {

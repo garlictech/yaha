@@ -4,7 +4,9 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 import 'package:yaha/domain/use-cases/hike/hike_with_bounds.dart';
+import 'package:yaha/ui/views/map/buttons/poi_filter_button.dart';
 import 'package:yaha/ui/views/map/controls/layers_control.dart';
+import 'package:yaha/ui/views/map/controls/poi_selector_modal.dart';
 import '../../../domain/entities/entities.dart';
 import 'controls/layers_modal.dart';
 import 'distance_markers.dart';
@@ -39,6 +41,7 @@ class PlacesOnRouteMapState extends ConsumerState<PlacesOnRouteMap> {
   final MapController _mapController = MapController();
   bool _isLayerSelectorOn = false;
   bool _isMapOnly = false;
+  bool _isPoiFilterOn = false;
   TileLayer _mainTileLayer = osmTileLayer;
   final List<TileLayer> _optionalTilelayers = [];
 
@@ -89,6 +92,18 @@ class PlacesOnRouteMapState extends ConsumerState<PlacesOnRouteMap> {
       });
     }
 
+    onPoiFilterPressed() {
+      setState(() {
+        _isPoiFilterOn = true;
+      });
+    }
+
+    onPoiFilterCloseTapped() {
+      setState(() {
+        _isPoiFilterOn = false;
+      });
+    }
+
     return Stack(children: [
       FlutterMap(
         mapController: _mapController,
@@ -96,6 +111,7 @@ class PlacesOnRouteMapState extends ConsumerState<PlacesOnRouteMap> {
             onTap: (_, __) {
               setState(() {
                 _isLayerSelectorOn = false;
+                _isPoiFilterOn = false;
               });
             },
             bounds: bounds),
@@ -126,7 +142,10 @@ class PlacesOnRouteMapState extends ConsumerState<PlacesOnRouteMap> {
           alignment: Alignment.bottomLeft,
           child: Container(
               margin: EdgeInsets.only(bottom: widget.cardHeight),
-              child: HikeMapControl(hikeId: widget.hikeId))),
+              child: Row(children: [
+                HikeMapControl(hikeId: widget.hikeId),
+                PoiFilterButton(onPressed: onPoiFilterPressed)
+              ]))),
       if (_isLayerSelectorOn)
         Align(
             alignment: Alignment.topRight,
@@ -138,7 +157,17 @@ class PlacesOnRouteMapState extends ConsumerState<PlacesOnRouteMap> {
                   currentlyAdded: _optionalTilelayers,
                   onLayerSelected: onLayerSelected,
                   onLayerAdded: onLayerAdded,
-                )))
+                ))),
+      if (_isPoiFilterOn)
+        Align(
+            alignment: Alignment.center,
+            child: FractionallySizedBox(
+                widthFactor: 0.9,
+                heightFactor: 0.6,
+                child: PoiSelectorModal(
+                  hike: hike,
+                  onCloseTapped: onPoiFilterCloseTapped,
+                ))),
     ]);
   }
 

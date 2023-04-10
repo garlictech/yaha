@@ -6,7 +6,7 @@ part of 'active_hike.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$activeHikeHash() => r'abc6bd88044bb0521afa1033e36361cb16d68008';
+String _$activeHikeHash() => r'aa5acca9410837422384cc0b3fee9289ebfd537c';
 
 /// Copied from Dart SDK
 class _SystemHash {

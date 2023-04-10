@@ -6,7 +6,7 @@ part of 'pois_along_hike.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$poisAlongHikeHash() => r'5b4d98c6fc3a9914528d4ff131800e48e603684b';
+String _$poisAlongHikeHash() => r'38965cb23233a6ecb9af3a354f07ddc45e89fcd1';
 
 /// Copied from Dart SDK
 class _SystemHash {

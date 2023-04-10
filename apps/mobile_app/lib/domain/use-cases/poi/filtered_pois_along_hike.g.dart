@@ -1,12 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'distance_markers.dart';
+part of 'filtered_pois_along_hike.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$distanceMarkersHash() => r'513cf86f955e9bf9b22ef851b2a9169f79133c59';
+String _$filteredPoisAlongHikeHash() =>
+    r'a2c53662e17c84dba4eea95cb9ff080e5497c76d';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,36 +30,36 @@ class _SystemHash {
   }
 }
 
-abstract class _$DistanceMarkers
-    extends BuildlessAutoDisposeNotifier<List<Marker>> {
+abstract class _$FilteredPoisAlongHike
+    extends BuildlessAutoDisposeNotifier<List<PoiOfHike>> {
   late final String hikeId;
 
-  List<Marker> build(
+  List<PoiOfHike> build(
     String hikeId,
   );
 }
 
-/// See also [DistanceMarkers].
-@ProviderFor(DistanceMarkers)
-const distanceMarkersProvider = DistanceMarkersFamily();
+/// See also [FilteredPoisAlongHike].
+@ProviderFor(FilteredPoisAlongHike)
+const filteredPoisAlongHikeProvider = FilteredPoisAlongHikeFamily();
 
-/// See also [DistanceMarkers].
-class DistanceMarkersFamily extends Family<List<Marker>> {
-  /// See also [DistanceMarkers].
-  const DistanceMarkersFamily();
+/// See also [FilteredPoisAlongHike].
+class FilteredPoisAlongHikeFamily extends Family<List<PoiOfHike>> {
+  /// See also [FilteredPoisAlongHike].
+  const FilteredPoisAlongHikeFamily();
 
-  /// See also [DistanceMarkers].
-  DistanceMarkersProvider call(
+  /// See also [FilteredPoisAlongHike].
+  FilteredPoisAlongHikeProvider call(
     String hikeId,
   ) {
-    return DistanceMarkersProvider(
+    return FilteredPoisAlongHikeProvider(
       hikeId,
     );
   }
 
   @override
-  DistanceMarkersProvider getProviderOverride(
-    covariant DistanceMarkersProvider provider,
+  FilteredPoisAlongHikeProvider getProviderOverride(
+    covariant FilteredPoisAlongHikeProvider provider,
   ) {
     return call(
       provider.hikeId,
@@ -77,33 +78,33 @@ class DistanceMarkersFamily extends Family<List<Marker>> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'distanceMarkersProvider';
+  String? get name => r'filteredPoisAlongHikeProvider';
 }
 
-/// See also [DistanceMarkers].
-class DistanceMarkersProvider
-    extends AutoDisposeNotifierProviderImpl<DistanceMarkers, List<Marker>> {
-  /// See also [DistanceMarkers].
-  DistanceMarkersProvider(
+/// See also [FilteredPoisAlongHike].
+class FilteredPoisAlongHikeProvider extends AutoDisposeNotifierProviderImpl<
+    FilteredPoisAlongHike, List<PoiOfHike>> {
+  /// See also [FilteredPoisAlongHike].
+  FilteredPoisAlongHikeProvider(
     this.hikeId,
   ) : super.internal(
-          () => DistanceMarkers()..hikeId = hikeId,
-          from: distanceMarkersProvider,
-          name: r'distanceMarkersProvider',
+          () => FilteredPoisAlongHike()..hikeId = hikeId,
+          from: filteredPoisAlongHikeProvider,
+          name: r'filteredPoisAlongHikeProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$distanceMarkersHash,
-          dependencies: DistanceMarkersFamily._dependencies,
+                  : _$filteredPoisAlongHikeHash,
+          dependencies: FilteredPoisAlongHikeFamily._dependencies,
           allTransitiveDependencies:
-              DistanceMarkersFamily._allTransitiveDependencies,
+              FilteredPoisAlongHikeFamily._allTransitiveDependencies,
         );
 
   final String hikeId;
 
   @override
   bool operator ==(Object other) {
-    return other is DistanceMarkersProvider && other.hikeId == hikeId;
+    return other is FilteredPoisAlongHikeProvider && other.hikeId == hikeId;
   }
 
   @override
@@ -115,8 +116,8 @@ class DistanceMarkersProvider
   }
 
   @override
-  List<Marker> runNotifierBuild(
-    covariant DistanceMarkers notifier,
+  List<PoiOfHike> runNotifierBuild(
+    covariant FilteredPoisAlongHike notifier,
   ) {
     return notifier.build(
       hikeId,

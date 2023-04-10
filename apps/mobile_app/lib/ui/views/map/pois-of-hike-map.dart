@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:yaha/domain/use-cases/poi/filtered_pois_along_hike.dart';
 import 'package:yaha/ui/views/screens/poi_info_screen.dart';
 
 import 'package:yaha/ui/views/poi/poi-icon.dart';
@@ -14,11 +15,9 @@ import 'places_on_route_map.dart';
 /// Renders the map widget with OSM map.
 class PoisOfHikeMap extends ConsumerStatefulWidget {
   final domain.Hike hike;
-  final List<domain.PoiType>? filteredPoiTypes;
 
   /// Creates the map widget with OSM map.
-  const PoisOfHikeMap({Key? key, required this.hike, this.filteredPoiTypes})
-      : super(key: key);
+  const PoisOfHikeMap({Key? key, required this.hike}) : super(key: key);
 
   @override
   PoisOfHikeMapState createState() => PoisOfHikeMapState();
@@ -32,7 +31,7 @@ class PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
   late int _tappedMarkerIndex;
   late int _cardNum;
 
-  late double _cardHeight;
+  final double _cardHeight = 110;
   late bool _canUpdateFocalLatLng;
 
   @override
@@ -52,17 +51,8 @@ class PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
 
   @override
   Widget build(BuildContext context) {
-    final obtainedPois = ref.watch(widget.filteredPoiTypes == null
-        ? domain.importantPoisAlongHikeWithYahaPoisProvider(widget.hike.id)
-        : domain.poisAlongHikeProvider(widget.hike.id));
-
+    final pois = ref.watch(filteredPoisAlongHikeProvider(widget.hike.id));
     final mapPresenter = ref.watch(leafletMapMVPProvider.notifier);
-    _cardHeight = 110;
-
-    final pois = widget.filteredPoiTypes == null
-        ? obtainedPois
-        : domain.PoiUtils.filterPoisByTypes(
-            obtainedPois, widget.filteredPoiTypes!);
 
     if (pois.length != _cardNum) {
       _currentSelectedIndex = 0;

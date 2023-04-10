@@ -111,6 +111,18 @@ class HikeScreen extends ConsumerWidget {
 
     final hike = hikeState.data!;
 
+    onPoiIconTapped(List<PoiType> types) {
+      ref
+          .read(hikingSettingsServiceProvider(hikeId).notifier)
+          .setFilteredPois(types);
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => PlacesOnRouteScreen(
+                    hike: hike,
+                  )));
+    }
+
     return Scaffold(
         body: CustomScrollView(
       physics: const BouncingScrollPhysics(),
@@ -199,7 +211,9 @@ class HikeScreen extends ConsumerWidget {
                     Consumer(builder: (c, ref, child) {
                       final pois = ref.watch(poisAlongHikeProvider(hike.id));
                       return PoiIconList(
-                          types: PoiUtils.uniqueTypes(pois), hike: hike);
+                          onTap: onPoiIconTapped,
+                          types: PoiUtils.uniqueTypes(pois),
+                          hike: hike);
                     }),
                     const SectionTitle(
                         title: 'Some interesting places on route'),
@@ -389,19 +403,22 @@ class HikeScreenDescription extends StatelessWidget {
   }
 }
 
-class HikeScreenShowOutlineButton extends StatelessWidget {
+class HikeScreenShowOutlineButton extends ConsumerWidget {
   final domain.Hike hike;
   const HikeScreenShowOutlineButton({Key? key, required this.hike})
       : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return ElevatedButton.icon(
       icon: const Icon(
         Icons.timeline,
         size: YahaFontSizes.large,
       ),
       onPressed: () {
+        ref
+            .read(hikingSettingsServiceProvider(hike.id).notifier)
+            .resetFilteredPois();
         Navigator.of(context)
             .push(MaterialPageRoute<dynamic>(builder: (BuildContext context) {
           return PlacesOnRouteScreen(hike: hike);
