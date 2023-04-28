@@ -6,7 +6,7 @@ part of 'pois_along_hike.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$poisAlongHikeHash() => r'38965cb23233a6ecb9af3a354f07ddc45e89fcd1';
+String _$poisAlongHikeHash() => r'f9fd57b8c1b419934e3ab5aa04902f7f285b763f';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -30,10 +30,10 @@ class _SystemHash {
 }
 
 abstract class _$PoisAlongHike
-    extends BuildlessAutoDisposeNotifier<List<PoiOfHike>> {
+    extends BuildlessAutoDisposeNotifier<LoadableState<List<PoiOfHike>>> {
   late final String hikeId;
 
-  List<PoiOfHike> build(
+  LoadableState<List<PoiOfHike>> build(
     String hikeId,
   );
 }
@@ -43,7 +43,7 @@ abstract class _$PoisAlongHike
 const poisAlongHikeProvider = PoisAlongHikeFamily();
 
 /// See also [PoisAlongHike].
-class PoisAlongHikeFamily extends Family<List<PoiOfHike>> {
+class PoisAlongHikeFamily extends Family<LoadableState<List<PoiOfHike>>> {
   /// See also [PoisAlongHike].
   const PoisAlongHikeFamily();
 
@@ -81,8 +81,8 @@ class PoisAlongHikeFamily extends Family<List<PoiOfHike>> {
 }
 
 /// See also [PoisAlongHike].
-class PoisAlongHikeProvider
-    extends AutoDisposeNotifierProviderImpl<PoisAlongHike, List<PoiOfHike>> {
+class PoisAlongHikeProvider extends AutoDisposeNotifierProviderImpl<
+    PoisAlongHike, LoadableState<List<PoiOfHike>>> {
   /// See also [PoisAlongHike].
   PoisAlongHikeProvider(
     this.hikeId,
@@ -115,7 +115,7 @@ class PoisAlongHikeProvider
   }
 
   @override
-  List<PoiOfHike> runNotifierBuild(
+  LoadableState<List<PoiOfHike>> runNotifierBuild(
     covariant PoisAlongHike notifier,
   ) {
     return notifier.build(

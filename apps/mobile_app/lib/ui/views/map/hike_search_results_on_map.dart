@@ -85,13 +85,13 @@ class HikeSearchSesultsOnMapState
         children: <Widget>[
           osmTileLayer,
           _getHikeLayerWidget(hikes),
-          _getMarkerLayerWidget(hikes, globalMarkers),
+          _getMarkerLayerWidget(hikes, globalMarkers ?? []),
         ],
       ),
       Align(
           alignment: Alignment.bottomRight,
-          child: GlobalMapControl(
-              mapcontroller: mapController, originalBounds: bounds)),
+          child:
+              GlobalMapControl(bounds: bounds, mapcontroller: mapController)),
       popup
     ]);
   }

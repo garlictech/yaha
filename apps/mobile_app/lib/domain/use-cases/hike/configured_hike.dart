@@ -18,13 +18,12 @@ class ConfiguredHike extends _$ConfiguredHike {
   ConfiguredHikeState build(String hikeId) {
     final badImages = ref.watch(badImagesProvider);
     final geoCalc = ref.read(geoCalcProvider);
-    final settings = ref.watch(hikingSettingsServiceProvider(hikeId));
+    final reversedHike = ref.watch(hikingSettingsServiceProvider(hikeId)
+        .select((value) => value.reversedHike));
 
     ref.watch(cachedHikeProvider(hikeId).future).then((hikeEntity) {
       final route = Route(
-          route: settings.reversedHike
-              ? hikeEntity.route.reversed()
-              : hikeEntity.route);
+          route: reversedHike ? hikeEntity.route.reversed() : hikeEntity.route);
 
       return geoCalc
           .getFixedDistanceCoordinates(route.asLineString, 1)

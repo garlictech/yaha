@@ -17,14 +17,17 @@ class GlobalMarkers extends _$GlobalMarkers {
   );
 
   @override
-  List<Marker> build() {
+  List<Marker>? build() {
     final currentLocation = ref.watch(currentLocationStateProvider);
     final currentLocationMarker = currentLocation == null
         ? null
         : _currentLocationMarker(
             currentLocation.latitude, currentLocation.longitude);
 
-    return [if (currentLocationMarker != null) currentLocationMarker];
+    final allMarkers = [
+      if (currentLocationMarker != null) currentLocationMarker
+    ];
+    return allMarkers.isEmpty ? null : allMarkers;
   }
 
   Marker _currentLocationMarker(double latitude, double longitude) {

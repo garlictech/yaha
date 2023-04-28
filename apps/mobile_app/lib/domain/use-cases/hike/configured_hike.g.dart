@@ -6,7 +6,7 @@ part of 'configured_hike.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$configuredHikeHash() => r'09161816231b7cc5622a8e4513047a0089ebe22f';
+String _$configuredHikeHash() => r'8dc6ae480d4d02542807eb79c9779bd72cd37d6e';
 
 /// Copied from Dart SDK
 class _SystemHash {

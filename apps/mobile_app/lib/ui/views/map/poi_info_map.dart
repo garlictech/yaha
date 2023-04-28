@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -48,13 +47,13 @@ class PoiInfoMapState extends ConsumerState<PoiInfoMap> {
         children: <Widget>[
           osmTileLayer,
           _getHikeLayerWidget(hike),
-          _getMarkerLayerWidget(hike, globalMarkers),
+          _getMarkerLayerWidget(hike, globalMarkers ?? []),
         ],
       ),
       Align(
           alignment: Alignment.bottomRight,
-          child: GlobalMapControl(
-              mapcontroller: _mapController, originalBounds: bounds)),
+          child:
+              GlobalMapControl(mapcontroller: _mapController, bounds: bounds)),
     ]);
   }
 

@@ -1,5 +1,4 @@
 // ignore: file_names
-import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -128,7 +127,7 @@ class HikeScreen extends ConsumerWidget {
       physics: const BouncingScrollPhysics(),
       slivers: <Widget>[
         YahaSliverAppBar(
-            title: hike!.descriptions.first.title ?? '',
+            title: hike.descriptions.first.title ?? '',
             content: Stack(
               children: [
                 if (hike.mainImageUrl != null)
@@ -209,7 +208,8 @@ class HikeScreen extends ConsumerWidget {
                             averageSpeedKmh: defaults.averageSpeedKmh)),
                     const SectionTitle(title: 'Things on route'),
                     Consumer(builder: (c, ref, child) {
-                      final pois = ref.watch(poisAlongHikeProvider(hike.id));
+                      final pois =
+                          ref.watch(poisAlongHikeProvider(hike.id)).data ?? [];
                       return PoiIconList(
                           onTap: onPoiIconTapped,
                           types: PoiUtils.uniqueTypes(pois),
@@ -226,8 +226,11 @@ class HikeScreen extends ConsumerWidget {
                             BorderRadius.circular(YahaBorderRadius.general),
                       ),
                       child: Consumer(builder: (c, ref, child) {
-                        final pois = ref.watch(
-                            randomTouristicPoisAlongHikeProvider(hike.id));
+                        final pois = ref
+                                .watch(randomTouristicPoisAlongHikeProvider(
+                                    hike.id))
+                                .data ??
+                            [];
                         return PoiTitleList(pois: pois);
                       }),
                     ),

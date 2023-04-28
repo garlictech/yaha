@@ -6,7 +6,7 @@ part of 'distance_markers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$distanceMarkersHash() => r'513cf86f955e9bf9b22ef851b2a9169f79133c59';
+String _$distanceMarkersHash() => r'fe2a028d7ebd4f043ddee2f0c9b8147529cdf637';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -30,10 +30,10 @@ class _SystemHash {
 }
 
 abstract class _$DistanceMarkers
-    extends BuildlessAutoDisposeNotifier<List<Marker>> {
+    extends BuildlessAutoDisposeNotifier<List<Marker>?> {
   late final String hikeId;
 
-  List<Marker> build(
+  List<Marker>? build(
     String hikeId,
   );
 }
@@ -43,7 +43,7 @@ abstract class _$DistanceMarkers
 const distanceMarkersProvider = DistanceMarkersFamily();
 
 /// See also [DistanceMarkers].
-class DistanceMarkersFamily extends Family<List<Marker>> {
+class DistanceMarkersFamily extends Family<List<Marker>?> {
   /// See also [DistanceMarkers].
   const DistanceMarkersFamily();
 
@@ -82,7 +82,7 @@ class DistanceMarkersFamily extends Family<List<Marker>> {
 
 /// See also [DistanceMarkers].
 class DistanceMarkersProvider
-    extends AutoDisposeNotifierProviderImpl<DistanceMarkers, List<Marker>> {
+    extends AutoDisposeNotifierProviderImpl<DistanceMarkers, List<Marker>?> {
   /// See also [DistanceMarkers].
   DistanceMarkersProvider(
     this.hikeId,
@@ -115,7 +115,7 @@ class DistanceMarkersProvider
   }
 
   @override
-  List<Marker> runNotifierBuild(
+  List<Marker>? runNotifierBuild(
     covariant DistanceMarkers notifier,
   ) {
     return notifier.build(

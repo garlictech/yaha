@@ -1,4 +1,3 @@
-export 'poi-usecases.dart';
 export 'utils.dart';
 export 'poi.dart';
 export 'end_points_of_hike.dart';

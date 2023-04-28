@@ -3,32 +3,37 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
-import 'package:yaha/domain/use-cases/hike/hike_with_bounds.dart';
+import 'package:latlong2/latlong.dart';
+import 'package:yaha/domain/use-cases/poi/filtered_pois_around_hike.dart';
 import 'package:yaha/ui/views/map/buttons/poi_filter_button.dart';
 import 'package:yaha/ui/views/map/controls/layers_control.dart';
 import 'package:yaha/ui/views/map/controls/poi_selector_modal.dart';
+import 'package:yaha/ui/views/map/places_on_route_map_controller.dart';
+import 'package:yaha/ui/views/poi/poi-icon.dart';
 import '../../../domain/entities/entities.dart';
 import 'controls/layers_modal.dart';
-import 'distance_markers.dart';
+import 'controls/poi_popup.dart';
 import 'controls/global_map_control.dart';
-import 'global_markers.dart';
 import 'controls/hike_map_control.dart';
 import 'leaflet_map_widgets.dart';
 
-typedef PoiMarkerBuilder = Marker Function(
+typedef OnroutePoiMarkerBuilder = Marker Function(
     BuildContext context, Poi poi, int poiIndex);
 
+typedef OffroutePoiMarkerBuilder = Marker Function(
+    BuildContext context, Poi poi);
+
 class PlacesOnRouteMap extends ConsumerStatefulWidget {
-  final PoiMarkerBuilder? poiMarkerBuilder;
-  final List<Poi> pois;
+  final OnroutePoiMarkerBuilder? onroutePoiMarkerBuilder;
+  final List<Poi> onroutePois;
   final String hikeId;
   final double cardHeight;
   final double headerHeight = 105.0;
 
   const PlacesOnRouteMap(
       {Key? key,
-      this.poiMarkerBuilder,
-      this.pois = const [],
+      this.onroutePoiMarkerBuilder,
+      this.onroutePois = const [],
       required this.hikeId,
       required this.cardHeight})
       : super(key: key);
@@ -40,8 +45,6 @@ class PlacesOnRouteMap extends ConsumerStatefulWidget {
 class PlacesOnRouteMapState extends ConsumerState<PlacesOnRouteMap> {
   final MapController _mapController = MapController();
   bool _isLayerSelectorOn = false;
-  bool _isMapOnly = false;
-  bool _isPoiFilterOn = false;
   TileLayer _mainTileLayer = osmTileLayer;
   final List<TileLayer> _optionalTilelayers = [];
 
@@ -52,15 +55,9 @@ class PlacesOnRouteMapState extends ConsumerState<PlacesOnRouteMap> {
 
   @override
   Widget build(BuildContext context) {
-    final hikeWithBounds = ref.watch(hikeWithBoundsProvider(widget.hikeId));
-    final globalMarkers = ref.watch(globalMarkersProvider);
-    final distanceMarkers = ref.watch(distanceMarkersProvider(widget.hikeId));
-
-    if (hikeWithBounds == null) {
-      return Container();
-    }
-    final hike = hikeWithBounds.value1;
-    final bounds = hikeWithBounds.value2;
+    final isMapOnly = ref.watch(
+        placesOnRouteMapControllerProvider(widget.hikeId)
+            .select((value) => value.isMapOnly));
 
     onLayersPressed() {
       setState(() {
@@ -86,65 +83,58 @@ class PlacesOnRouteMapState extends ConsumerState<PlacesOnRouteMap> {
       });
     }
 
-    onMapOnlyPressed() {
-      setState(() {
-        _isMapOnly = !_isMapOnly;
-      });
-    }
-
-    onPoiFilterPressed() {
-      setState(() {
-        _isPoiFilterOn = true;
-      });
-    }
-
-    onPoiFilterCloseTapped() {
-      setState(() {
-        _isPoiFilterOn = false;
-      });
-    }
-
     return Stack(children: [
-      FlutterMap(
-        mapController: _mapController,
-        options: MapOptions(
-            onTap: (_, __) {
-              setState(() {
-                _isLayerSelectorOn = false;
-                _isPoiFilterOn = false;
-              });
-            },
-            bounds: bounds),
-        children: <Widget>[
-          _mainTileLayer,
-          if (!_isMapOnly) _getHikeLayerWidget(hike),
-          ..._optionalTilelayers,
-          if (!_isMapOnly)
-            _getMarkerLayerWidget([...globalMarkers, ...distanceMarkers]),
-          if (!_isMapOnly) _getMarkerClusterLayerWidget(),
-        ],
-      ),
-      Align(
-          alignment: Alignment.bottomRight,
-          child: Container(
-              margin: EdgeInsets.only(bottom: widget.cardHeight),
-              child: GlobalMapControl(
-                  mapcontroller: _mapController, originalBounds: bounds))),
+      Consumer(builder: (c, ref, child) {
+        final bounds = ref.watch(
+            placesOnRouteMapControllerProvider(widget.hikeId)
+                .select((value) => value.mapBounds));
+
+        return Stack(children: [
+          FlutterMap(
+            mapController: _mapController,
+            options: MapOptions(
+                onTap: (_, __) {
+                  ref
+                      .read(placesOnRouteMapControllerProvider(widget.hikeId)
+                          .notifier)
+                      .hideAllModals();
+                  setState(() {
+                    _isLayerSelectorOn = false;
+                  });
+                },
+                bounds: bounds),
+            children: <Widget>[
+              _mainTileLayer,
+              if (!isMapOnly) _getHikeLayerWidget(),
+              ..._optionalTilelayers,
+              if (!isMapOnly) _getMarkerLayerWidget(),
+              if (!isMapOnly) _getMarkerClusterLayerWidget(),
+            ],
+          ),
+          if (bounds != null)
+            Align(
+                alignment: Alignment.bottomRight,
+                child: Container(
+                    margin: EdgeInsets.only(bottom: widget.cardHeight),
+                    child: GlobalMapControl(
+                        mapcontroller: _mapController, bounds: bounds)))
+        ]);
+      }),
       Align(
           alignment: Alignment.topRight,
           child: Container(
               margin: EdgeInsets.only(top: widget.headerHeight),
               child: LayersControl(
-                  onLayerPressed: onLayersPressed,
-                  onMapOnlyPressed: onMapOnlyPressed,
-                  isMapOnly: _isMapOnly))),
+                hikeId: widget.hikeId,
+                onLayerPressed: onLayersPressed,
+              ))),
       Align(
           alignment: Alignment.bottomLeft,
           child: Container(
               margin: EdgeInsets.only(bottom: widget.cardHeight),
               child: Row(children: [
                 HikeMapControl(hikeId: widget.hikeId),
-                PoiFilterButton(onPressed: onPoiFilterPressed)
+                PoiFilterButton(hikeId: widget.hikeId)
               ]))),
       if (_isLayerSelectorOn)
         Align(
@@ -158,43 +148,102 @@ class PlacesOnRouteMapState extends ConsumerState<PlacesOnRouteMap> {
                   onLayerSelected: onLayerSelected,
                   onLayerAdded: onLayerAdded,
                 ))),
-      if (_isPoiFilterOn)
-        Align(
-            alignment: Alignment.center,
-            child: FractionallySizedBox(
-                widthFactor: 0.9,
-                heightFactor: 0.6,
-                child: PoiSelectorModal(
-                  hike: hike,
-                  onCloseTapped: onPoiFilterCloseTapped,
-                ))),
+      Consumer(builder: (c, ref, child) {
+        final isPoiFilterOn = ref.watch(
+            placesOnRouteMapControllerProvider(widget.hikeId)
+                .select((value) => value.isPoifilterOn));
+
+        return isPoiFilterOn
+            ? Align(
+                alignment: Alignment.center,
+                child: FractionallySizedBox(
+                    widthFactor: 0.9,
+                    heightFactor: 0.6,
+                    child: PoiSelectorModal(
+                      hikeId: widget.hikeId,
+                    )))
+            : Container();
+      }),
+      Consumer(builder: (c, ref, child) {
+        final tappedOffroutePoi = ref.watch(
+            placesOnRouteMapControllerProvider(widget.hikeId)
+                .select((value) => value.tappedOffroutePoiIcon));
+        final hike = ref.watch(placesOnRouteMapControllerProvider(widget.hikeId)
+            .select((value) => value.hike));
+
+        return tappedOffroutePoi != null && hike != null
+            ? Align(
+                alignment: Alignment.topLeft,
+                child: Container(
+                    margin: EdgeInsets.only(
+                        top: widget.headerHeight + 55, left: 10.0),
+                    child: PoiPopup(
+                      poiId: tappedOffroutePoi,
+                      hike: hike,
+                    )))
+            : Container();
+      }),
+      Consumer(builder: (c, ref, child) {
+        final showLoader = ref.watch(
+            placesOnRouteMapControllerProvider(widget.hikeId)
+                .select((value) => value.showLoader));
+        return showLoader
+            ? Align(
+                alignment: Alignment.bottomCenter,
+                child: LinearProgressIndicator(
+                    color: Theme.of(context).colorScheme.primary))
+            : Container();
+      })
     ]);
   }
 
-  _getHikeLayerWidget(Hike hike) {
-    final line = Function.apply(
-        Polyline.new, [], {...trackBaseProps(hike), #strokeWidth: 10.0});
-    return PolylineLayer(polylines: [line]);
+  _getHikeLayerWidget() {
+    return Consumer(builder: (c, ref, child) {
+      final hike = ref.watch(placesOnRouteMapControllerProvider(widget.hikeId)
+          .select((value) => value.hike));
+
+      if (hike != null) {
+        final line = Function.apply(
+            Polyline.new, [], {...trackBaseProps(hike), #strokeWidth: 10.0});
+        return PolylineLayer(polylines: [line]);
+      } else {
+        return PolylineLayer(polylines: const []);
+      }
+    });
   }
 
-  _getMarkerLayerWidget(List<Marker> globalMarkers) {
-    return MarkerLayer(
-      markers: globalMarkers,
-    );
+  _getMarkerLayerWidget() {
+    return Consumer(builder: (c, ref, child) {
+      final markers = ref.watch(
+          placesOnRouteMapControllerProvider(widget.hikeId)
+              .select((value) => value.allMarkers));
+
+      return MarkerLayer(
+        markers: markers,
+      );
+    });
   }
 
   _getMarkerClusterLayerWidget() {
     return Consumer(builder: (c, ref, child) {
-      final markers = widget.poiMarkerBuilder == null
+      final offroutePois =
+          ref.watch(filteredPoisAroundHikeProvider(widget.hikeId)).data ?? [];
+
+      final onrouteMarkers = widget.onroutePoiMarkerBuilder == null
           ? const <Marker>[]
-          : widget.pois
-              .mapIndexed<Marker>(
-                  (index, poi) => widget.poiMarkerBuilder!(context, poi, index))
+          : widget.onroutePois
+              .mapIndexed<Marker>((index, poi) =>
+                  widget.onroutePoiMarkerBuilder!(context, poi, index))
               .toList();
+
+      final offrouteMarkers = offroutePois
+          .mapIndexed<Marker>(
+              (index, poi) => _offroutePoiMarkerBuilder(context, poi))
+          .toList();
 
       return MarkerClusterLayerWidget(
         options: MarkerClusterLayerOptions(
-          markers: markers,
+          markers: [...onrouteMarkers, ...(offrouteMarkers)],
           maxClusterRadius: 45,
           size: const Size(40, 40),
           anchor: AnchorPos.align(AnchorAlign.center),
@@ -224,5 +273,34 @@ class PlacesOnRouteMapState extends ConsumerState<PlacesOnRouteMap> {
         ),
       );
     });
+  }
+
+  _offroutePoiMarkerBuilder(BuildContext context, Poi poi) {
+    const double markerSize = 25.0;
+
+    return Marker(
+        height: markerSize,
+        width: markerSize,
+        point: LatLng(
+            poi.location.location.latitude, poi.location.location.longitude),
+        builder: (BuildContext c) {
+          return GestureDetector(
+            onTap: () {
+              ref
+                  .read(placesOnRouteMapControllerProvider(widget.hikeId)
+                      .notifier)
+                  .onOffroutePoiIconTapped(poi.id);
+            },
+            child: AnimatedContainer(
+                duration: const Duration(milliseconds: 2500),
+                child: FittedBox(
+                    child: PhysicalModel(
+                        color: Colors.black,
+                        shadowColor: Colors.black,
+                        elevation: 8.0,
+                        shape: BoxShape.circle,
+                        child: PoiIcon(poiType: poi.poiType)))),
+          );
+        });
   }
 }

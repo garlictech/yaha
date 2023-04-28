@@ -7,7 +7,7 @@ part of 'important_pois_along_hike_with_yaha_pois.dart';
 // **************************************************************************
 
 String _$importantPoisAlongHikeWithYahaPoisHash() =>
-    r'f85967f7a5a863c564d4eacd07e0c47f794dcba9';
+    r'8f8b05fd77887904212370cc5c28e7980165abec';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -31,10 +31,10 @@ class _SystemHash {
 }
 
 abstract class _$ImportantPoisAlongHikeWithYahaPois
-    extends BuildlessAutoDisposeNotifier<List<PoiOfHike>> {
+    extends BuildlessAutoDisposeNotifier<LoadableState<List<PoiOfHike>>> {
   late final String hikeId;
 
-  List<PoiOfHike> build(
+  LoadableState<List<PoiOfHike>> build(
     String hikeId,
   );
 }
@@ -45,7 +45,8 @@ const importantPoisAlongHikeWithYahaPoisProvider =
     ImportantPoisAlongHikeWithYahaPoisFamily();
 
 /// See also [ImportantPoisAlongHikeWithYahaPois].
-class ImportantPoisAlongHikeWithYahaPoisFamily extends Family<List<PoiOfHike>> {
+class ImportantPoisAlongHikeWithYahaPoisFamily
+    extends Family<LoadableState<List<PoiOfHike>>> {
   /// See also [ImportantPoisAlongHikeWithYahaPois].
   const ImportantPoisAlongHikeWithYahaPoisFamily();
 
@@ -85,7 +86,7 @@ class ImportantPoisAlongHikeWithYahaPoisFamily extends Family<List<PoiOfHike>> {
 /// See also [ImportantPoisAlongHikeWithYahaPois].
 class ImportantPoisAlongHikeWithYahaPoisProvider
     extends AutoDisposeNotifierProviderImpl<ImportantPoisAlongHikeWithYahaPois,
-        List<PoiOfHike>> {
+        LoadableState<List<PoiOfHike>>> {
   /// See also [ImportantPoisAlongHikeWithYahaPois].
   ImportantPoisAlongHikeWithYahaPoisProvider(
     this.hikeId,
@@ -119,7 +120,7 @@ class ImportantPoisAlongHikeWithYahaPoisProvider
   }
 
   @override
-  List<PoiOfHike> runNotifierBuild(
+  LoadableState<List<PoiOfHike>> runNotifierBuild(
     covariant ImportantPoisAlongHikeWithYahaPois notifier,
   ) {
     return notifier.build(

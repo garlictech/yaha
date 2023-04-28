@@ -93,7 +93,8 @@ class PoiInfoScreen extends ConsumerWidget {
           YahaSliverAppBar(
               title: poi.title,
               content: poi.imageCardUrls.isEmpty
-                  ? Image.asset('assets/images/default_poi_header.jpg',
+                  ? Image.asset(
+                      'assets/images/default_poi_popup_background.jpg',
                       fit: BoxFit.cover)
                   : Image.network(poi.imageCardUrls.first, fit: BoxFit.cover)),
           SliverList(

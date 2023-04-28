@@ -14,6 +14,7 @@ abstract class $HikingSettings {
   bool get reversedHike;
   List<PoiType> get filteredPoiTypes;
   bool get showAllPoisAlongHike;
+  bool get showPoisAroundHike;
 
   HikingSettings copyWith({
     double? speed,
@@ -21,6 +22,7 @@ abstract class $HikingSettings {
     bool? reversedHike,
     List<PoiType>? filteredPoiTypes,
     bool? showAllPoisAlongHike,
+    bool? showPoisAroundHike,
   }) =>
       HikingSettings(
         speed: speed ?? this.speed,
@@ -28,6 +30,7 @@ abstract class $HikingSettings {
         reversedHike: reversedHike ?? this.reversedHike,
         filteredPoiTypes: filteredPoiTypes ?? this.filteredPoiTypes,
         showAllPoisAlongHike: showAllPoisAlongHike ?? this.showAllPoisAlongHike,
+        showPoisAroundHike: showPoisAroundHike ?? this.showPoisAroundHike,
       );
 
   HikingSettings copyUsing(
@@ -38,6 +41,7 @@ abstract class $HikingSettings {
       this.reversedHike,
       this.filteredPoiTypes,
       this.showAllPoisAlongHike,
+      this.showPoisAroundHike,
     );
     mutator(change);
     return HikingSettings(
@@ -46,12 +50,13 @@ abstract class $HikingSettings {
       reversedHike: change.reversedHike,
       filteredPoiTypes: change.filteredPoiTypes,
       showAllPoisAlongHike: change.showAllPoisAlongHike,
+      showPoisAroundHike: change.showPoisAroundHike,
     );
   }
 
   @override
   String toString() =>
-      "HikingSettings(speed: $speed, startTime: $startTime, reversedHike: $reversedHike, filteredPoiTypes: $filteredPoiTypes, showAllPoisAlongHike: $showAllPoisAlongHike)";
+      "HikingSettings(speed: $speed, startTime: $startTime, reversedHike: $reversedHike, filteredPoiTypes: $filteredPoiTypes, showAllPoisAlongHike: $showAllPoisAlongHike, showPoisAroundHike: $showPoisAroundHike)";
 
   @override
   // ignore: avoid_equals_and_hash_code_on_mutable_classes
@@ -62,7 +67,8 @@ abstract class $HikingSettings {
       startTime == other.startTime &&
       reversedHike == other.reversedHike &&
       filteredPoiTypes == other.filteredPoiTypes &&
-      showAllPoisAlongHike == other.showAllPoisAlongHike;
+      showAllPoisAlongHike == other.showAllPoisAlongHike &&
+      showPoisAroundHike == other.showPoisAroundHike;
 
   @override
   // ignore: avoid_equals_and_hash_code_on_mutable_classes
@@ -73,6 +79,7 @@ abstract class $HikingSettings {
     result = 37 * result + reversedHike.hashCode;
     result = 37 * result + filteredPoiTypes.hashCode;
     result = 37 * result + showAllPoisAlongHike.hashCode;
+    result = 37 * result + showPoisAroundHike.hashCode;
     return result;
   }
 }
@@ -84,6 +91,7 @@ class HikingSettings$Change {
     this.reversedHike,
     this.filteredPoiTypes,
     this.showAllPoisAlongHike,
+    this.showPoisAroundHike,
   );
 
   double speed;
@@ -91,6 +99,7 @@ class HikingSettings$Change {
   bool reversedHike;
   List<PoiType> filteredPoiTypes;
   bool showAllPoisAlongHike;
+  bool showPoisAroundHike;
 }
 
 // ignore: avoid_classes_with_only_static_members
@@ -125,6 +134,14 @@ class HikingSettings$ {
         showAllPoisAlongHikeContainer.copyWith(
             showAllPoisAlongHike: showAllPoisAlongHike),
   );
+
+  static final showPoisAroundHike = Lens<HikingSettings, bool>(
+    (showPoisAroundHikeContainer) =>
+        showPoisAroundHikeContainer.showPoisAroundHike,
+    (showPoisAroundHikeContainer, showPoisAroundHike) =>
+        showPoisAroundHikeContainer.copyWith(
+            showPoisAroundHike: showPoisAroundHike),
+  );
 }
 
 // **************************************************************************
@@ -141,6 +158,7 @@ HikingSettings _$HikingSettingsFromJson(Map<String, dynamic> json) =>
               .toList() ??
           const [],
       showAllPoisAlongHike: json['showAllPoisAlongHike'] as bool? ?? false,
+      showPoisAroundHike: json['showPoisAroundHike'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$HikingSettingsToJson(HikingSettings instance) =>
@@ -151,4 +169,5 @@ Map<String, dynamic> _$HikingSettingsToJson(HikingSettings instance) =>
       'filteredPoiTypes':
           instance.filteredPoiTypes.map((e) => e.toJson()).toList(),
       'showAllPoisAlongHike': instance.showAllPoisAlongHike,
+      'showPoisAroundHike': instance.showPoisAroundHike,
     };

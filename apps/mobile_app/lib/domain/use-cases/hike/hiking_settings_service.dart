@@ -38,4 +38,8 @@ class HikingSettingsService extends _$HikingSettingsService {
     state = state
         .copyWith(showAllPoisAlongHike: toShow, filteredPoiTypes: const []);
   }
+
+  togglePoisAroundHike() {
+    state = state.copyWith(showPoisAroundHike: !state.showAllPoisAlongHike);
+  }
 }

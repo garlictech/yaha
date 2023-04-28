@@ -48,13 +48,13 @@ class HikeOverviewMapState extends ConsumerState<HikeOverviewMap> {
         children: <Widget>[
           osmTileLayer,
           _getHikeLayerWidget(hike),
-          _getMarkerLayerWidget(hike, globalMarkers),
+          _getMarkerLayerWidget(hike, globalMarkers ?? []),
         ],
       ),
       Align(
           alignment: Alignment.bottomRight,
-          child: GlobalMapControl(
-              mapcontroller: _mapController, originalBounds: bounds)),
+          child:
+              GlobalMapControl(mapcontroller: _mapController, bounds: bounds)),
       Align(
           alignment: Alignment.bottomLeft,
           child: HikeMapControl(hikeId: widget.hikeId)),

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../map/hike_search_results_on_map.dart';
-import 'hike-filter-screen.dart';
 import '/domain/domain.dart' as domain;
 import '../hikes/hike-card.dart';
 import '../search/location_search_by_google.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import '../shared/shared.dart';
 import '../search/hike_search_by_content.dart';

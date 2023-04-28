@@ -51,12 +51,13 @@ class PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
 
   @override
   Widget build(BuildContext context) {
-    final pois = ref.watch(filteredPoisAlongHikeProvider(widget.hike.id));
-    final mapPresenter = ref.watch(leafletMapMVPProvider.notifier);
+    final poisAlongHike =
+        ref.watch(filteredPoisAlongHikeProvider(widget.hike.id)).data ?? [];
+    final mapPresenter = ref.read(leafletMapMVPProvider.notifier);
 
-    if (pois.length != _cardNum) {
+    if (poisAlongHike.length != _cardNum) {
       _currentSelectedIndex = 0;
-      _cardNum = pois.length;
+      _cardNum = poisAlongHike.length;
     }
 
     _pageViewController = PageController(
@@ -66,7 +67,7 @@ class PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
                 ? 0.7
                 : 0.8);
 
-    markerBuilder(BuildContext context, domain.Poi poi, int index) {
+    onroutePoiMarkerBuilder(BuildContext context, domain.Poi poi, int index) {
       final double markerSize = _currentSelectedIndex == index ? 50 : 25;
       final key = _currentSelectedIndex == index ? "CURRENT" : index.toString();
 
@@ -111,9 +112,9 @@ class PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
           ),
         ),
         PlacesOnRouteMap(
-            poiMarkerBuilder: markerBuilder,
+            onroutePoiMarkerBuilder: onroutePoiMarkerBuilder,
             hikeId: widget.hike.id,
-            pois: pois,
+            onroutePois: poisAlongHike,
             cardHeight: _cardHeight),
         Align(
           alignment: Alignment.bottomCenter,
@@ -123,12 +124,12 @@ class PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
 
             /// PageView which shows the poi details at the bottom.
             child: PageView.builder(
-              itemCount: pois.length,
+              itemCount: poisAlongHike.length,
               onPageChanged: (index) =>
-                  _handlePageChange(index, pois, mapPresenter),
+                  _handlePageChange(index, poisAlongHike, mapPresenter),
               controller: _pageViewController,
               itemBuilder: (BuildContext context, int index) {
-                final item = pois[index];
+                final item = poisAlongHike[index];
                 return Transform.scale(
                   scale: index == _currentSelectedIndex ? 1 : 0.85,
                   child: Stack(

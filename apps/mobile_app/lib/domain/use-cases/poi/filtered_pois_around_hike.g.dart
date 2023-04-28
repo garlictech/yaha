@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'filtered_pois_along_hike.dart';
+part of 'filtered_pois_around_hike.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$filteredPoisAlongHikeHash() =>
-    r'57b1dd7ac055ec6022aca2cf55f036ca225f3c8e';
+String _$filteredPoisAroundHikeHash() =>
+    r'999813eb327570ef4bd5f200228bcde7878f351f';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -30,37 +30,36 @@ class _SystemHash {
   }
 }
 
-abstract class _$FilteredPoisAlongHike
-    extends BuildlessAutoDisposeNotifier<LoadableState<List<PoiOfHike>>> {
+abstract class _$FilteredPoisAroundHike
+    extends BuildlessAutoDisposeNotifier<LoadableState<List<Poi>>> {
   late final String hikeId;
 
-  LoadableState<List<PoiOfHike>> build(
+  LoadableState<List<Poi>> build(
     String hikeId,
   );
 }
 
-/// See also [FilteredPoisAlongHike].
-@ProviderFor(FilteredPoisAlongHike)
-const filteredPoisAlongHikeProvider = FilteredPoisAlongHikeFamily();
+/// See also [FilteredPoisAroundHike].
+@ProviderFor(FilteredPoisAroundHike)
+const filteredPoisAroundHikeProvider = FilteredPoisAroundHikeFamily();
 
-/// See also [FilteredPoisAlongHike].
-class FilteredPoisAlongHikeFamily
-    extends Family<LoadableState<List<PoiOfHike>>> {
-  /// See also [FilteredPoisAlongHike].
-  const FilteredPoisAlongHikeFamily();
+/// See also [FilteredPoisAroundHike].
+class FilteredPoisAroundHikeFamily extends Family<LoadableState<List<Poi>>> {
+  /// See also [FilteredPoisAroundHike].
+  const FilteredPoisAroundHikeFamily();
 
-  /// See also [FilteredPoisAlongHike].
-  FilteredPoisAlongHikeProvider call(
+  /// See also [FilteredPoisAroundHike].
+  FilteredPoisAroundHikeProvider call(
     String hikeId,
   ) {
-    return FilteredPoisAlongHikeProvider(
+    return FilteredPoisAroundHikeProvider(
       hikeId,
     );
   }
 
   @override
-  FilteredPoisAlongHikeProvider getProviderOverride(
-    covariant FilteredPoisAlongHikeProvider provider,
+  FilteredPoisAroundHikeProvider getProviderOverride(
+    covariant FilteredPoisAroundHikeProvider provider,
   ) {
     return call(
       provider.hikeId,
@@ -79,33 +78,33 @@ class FilteredPoisAlongHikeFamily
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'filteredPoisAlongHikeProvider';
+  String? get name => r'filteredPoisAroundHikeProvider';
 }
 
-/// See also [FilteredPoisAlongHike].
-class FilteredPoisAlongHikeProvider extends AutoDisposeNotifierProviderImpl<
-    FilteredPoisAlongHike, LoadableState<List<PoiOfHike>>> {
-  /// See also [FilteredPoisAlongHike].
-  FilteredPoisAlongHikeProvider(
+/// See also [FilteredPoisAroundHike].
+class FilteredPoisAroundHikeProvider extends AutoDisposeNotifierProviderImpl<
+    FilteredPoisAroundHike, LoadableState<List<Poi>>> {
+  /// See also [FilteredPoisAroundHike].
+  FilteredPoisAroundHikeProvider(
     this.hikeId,
   ) : super.internal(
-          () => FilteredPoisAlongHike()..hikeId = hikeId,
-          from: filteredPoisAlongHikeProvider,
-          name: r'filteredPoisAlongHikeProvider',
+          () => FilteredPoisAroundHike()..hikeId = hikeId,
+          from: filteredPoisAroundHikeProvider,
+          name: r'filteredPoisAroundHikeProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$filteredPoisAlongHikeHash,
-          dependencies: FilteredPoisAlongHikeFamily._dependencies,
+                  : _$filteredPoisAroundHikeHash,
+          dependencies: FilteredPoisAroundHikeFamily._dependencies,
           allTransitiveDependencies:
-              FilteredPoisAlongHikeFamily._allTransitiveDependencies,
+              FilteredPoisAroundHikeFamily._allTransitiveDependencies,
         );
 
   final String hikeId;
 
   @override
   bool operator ==(Object other) {
-    return other is FilteredPoisAlongHikeProvider && other.hikeId == hikeId;
+    return other is FilteredPoisAroundHikeProvider && other.hikeId == hikeId;
   }
 
   @override
@@ -117,8 +116,8 @@ class FilteredPoisAlongHikeProvider extends AutoDisposeNotifierProviderImpl<
   }
 
   @override
-  LoadableState<List<PoiOfHike>> runNotifierBuild(
-    covariant FilteredPoisAlongHike notifier,
+  LoadableState<List<Poi>> runNotifierBuild(
+    covariant FilteredPoisAroundHike notifier,
   ) {
     return notifier.build(
       hikeId,

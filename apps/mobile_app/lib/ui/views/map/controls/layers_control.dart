@@ -6,14 +6,10 @@ import 'package:yaha/ui/views/map/buttons/map_only_button.dart';
 class LayersControl extends ConsumerWidget {
   static const size = 35.0;
   final VoidCallback onLayerPressed;
-  final VoidCallback onMapOnlyPressed;
-  final bool isMapOnly;
+  final String hikeId;
 
   const LayersControl(
-      {super.key,
-      required this.onLayerPressed,
-      required this.onMapOnlyPressed,
-      required this.isMapOnly});
+      {super.key, required this.onLayerPressed, required this.hikeId});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -21,7 +17,7 @@ class LayersControl extends ConsumerWidget {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          MapOnlyButton(onPressed: onMapOnlyPressed, isActive: isMapOnly),
+          MapOnlyButton(hikeId: hikeId),
           LayersButton(
             onPressed: onLayerPressed,
           ),

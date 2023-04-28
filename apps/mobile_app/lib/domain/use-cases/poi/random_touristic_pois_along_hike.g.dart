@@ -7,7 +7,7 @@ part of 'random_touristic_pois_along_hike.dart';
 // **************************************************************************
 
 String _$randomTouristicPoisAlongHikeHash() =>
-    r'fb4c4d7eda130258f066583dd30d2ed9b2d57400';
+    r'31d982c24f5caa531feb49611bb465d1ea3f6fe9';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -31,10 +31,10 @@ class _SystemHash {
 }
 
 abstract class _$RandomTouristicPoisAlongHike
-    extends BuildlessAutoDisposeNotifier<List<PoiOfHike>> {
+    extends BuildlessAutoDisposeNotifier<LoadableState<List<PoiOfHike>>> {
   late final String hikeId;
 
-  List<PoiOfHike> build(
+  LoadableState<List<PoiOfHike>> build(
     String hikeId,
   );
 }
@@ -45,7 +45,8 @@ const randomTouristicPoisAlongHikeProvider =
     RandomTouristicPoisAlongHikeFamily();
 
 /// See also [RandomTouristicPoisAlongHike].
-class RandomTouristicPoisAlongHikeFamily extends Family<List<PoiOfHike>> {
+class RandomTouristicPoisAlongHikeFamily
+    extends Family<LoadableState<List<PoiOfHike>>> {
   /// See also [RandomTouristicPoisAlongHike].
   const RandomTouristicPoisAlongHikeFamily();
 
@@ -85,7 +86,7 @@ class RandomTouristicPoisAlongHikeFamily extends Family<List<PoiOfHike>> {
 /// See also [RandomTouristicPoisAlongHike].
 class RandomTouristicPoisAlongHikeProvider
     extends AutoDisposeNotifierProviderImpl<RandomTouristicPoisAlongHike,
-        List<PoiOfHike>> {
+        LoadableState<List<PoiOfHike>>> {
   /// See also [RandomTouristicPoisAlongHike].
   RandomTouristicPoisAlongHikeProvider(
     this.hikeId,
@@ -119,7 +120,7 @@ class RandomTouristicPoisAlongHikeProvider
   }
 
   @override
-  List<PoiOfHike> runNotifierBuild(
+  LoadableState<List<PoiOfHike>> runNotifierBuild(
     covariant RandomTouristicPoisAlongHike notifier,
   ) {
     return notifier.build(

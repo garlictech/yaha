@@ -7,7 +7,7 @@ part of 'hiking_settings_service.dart';
 // **************************************************************************
 
 String _$hikingSettingsServiceHash() =>
-    r'19906f3cc6c6fd196a19c2a4848432e704a3e644';
+    r'9fc2cded409e15edad31b83cb9d4973a9730adc0';
 
 /// Copied from Dart SDK
 class _SystemHash {

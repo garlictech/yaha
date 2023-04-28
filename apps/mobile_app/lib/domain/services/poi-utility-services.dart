@@ -19,9 +19,8 @@ class PoiUtilityServices {
         .toList();
   }
 
-  Future<List<Poi>> getOffroutePoisOfHike(
-      Hike hike, HikingSettings hikingSettings) async {
-    final pois = await ref.read(onroutePoisProvider(hike.id).future);
+  Future<List<Poi>> getOffroutePoisOfHike(Hike hike) async {
+    final pois = await ref.read(offroutePoisProvider(hike.id).future);
     return pois.whereType<Poi>().where((poi) => poi.isSupported()).toList();
   }
 }

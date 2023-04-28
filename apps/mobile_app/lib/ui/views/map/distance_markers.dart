@@ -10,16 +10,15 @@ part 'distance_markers.g.dart';
 @riverpod
 class DistanceMarkers extends _$DistanceMarkers {
   @override
-  List<Marker> build(String hikeId) {
-    final hikeState = ref.watch(configuredHikeProvider(hikeId));
+  List<Marker>? build(String hikeId) {
+    final distanceMarkers = ref.watch(configuredHikeProvider(hikeId)
+        .select((state) => state.data?.distanceMarkers));
 
-    if (hikeState.data == null) {
-      return [];
+    if (distanceMarkers == null) {
+      return null;
     }
 
-    final hike = hikeState.data!;
-
-    return hike.distanceMarkers
+    return distanceMarkers
         .mapIndexed((index, d) => Marker(
             height: 18,
             width: 18,
