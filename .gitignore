@@ -52,7 +52,5 @@ cyreport
 /libs/shared/config/src/lib/*/*
 cdk.out
 
-/libs/gql-api/src/lib/generated/
-
 dist/
 node_modules
