@@ -173,7 +173,8 @@ const getElevation =
   (lat: number, lon: number): Observable<number> =>
     pipe(
       deps.http.get(
-        `https://api.open-elevation.com/api/v1/lookup?locations=${lat},${lon}`,
+        // `https://api.open-elevation.com/api/v1/lookup?locations=${lat},${lon}`,
+        `http://192.168.68.129:9080/api/v1/lookup?locations=${lat},${lon}`,
       ),
       map(res => res.results[0].elevation),
     );
@@ -262,12 +263,27 @@ export const getExternalPois =
     hikeData: HikeData_WithBuffers,
   ): Observable<ExternalPoi[]> => {
     const calc1 = forkJoin([
-      getAllWikipediaPois(deps)(bounds, allLanguages),
-      osmPois(getOsmPois(deps))(bounds),
+      getAllWikipediaPois(deps)(bounds, allLanguages).pipe(
+        catchError(err => {
+          console.error(`Error in wikipedia POI fetch: ${err}`);
+          return of([]);
+        }),
+      ),
+      osmPois(getOsmPois(deps))(bounds).pipe(
+        catchError(err => {
+          console.error(`Error in OSM POI fetch: ${err}`);
+          return of([]);
+        }),
+      ),
       getGooglePois({
         apiKey: deps.googleApiKey,
         http: deps.http,
-      })(bounds),
+      })(bounds).pipe(
+        catchError(err => {
+          console.error(`Error in Google POI fetch: ${err}`);
+          return of([]);
+        }),
+      ),
     ]).pipe(
       map(pois =>
         pipe(
@@ -308,6 +324,9 @@ export const getExternalPois =
       ),
       toArray(),
       map(R.reject((poi: ExternalPoi) => R.isNil(poi.elevation))),
+      tap(res =>
+        console.warn('Number of external external pois to DB:', res.length),
+      ),
       switchMap(pois =>
         from(pois).pipe(
           concatMap(addPoiToDb(deps)(hikeData)),
@@ -315,10 +334,6 @@ export const getExternalPois =
           mapTo(pois),
         ),
       ),
-      catchError(err => {
-        console.error(`Error in external POI fetch: ${err}`);
-        return of([]);
-      }),
     );
   };
 
@@ -438,7 +453,7 @@ export const getExternalImages =
       ),
       mapTo(true),
       catchError(err => {
-        console.error(`Error in external POI fetch: ${err}`);
+        console.error(`Error in external image fetch: ${err}`);
         return of(false);
       }),
     );
