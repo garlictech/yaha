@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 import * as fp from 'lodash/fp';
 import { forkJoin, from, interval, Observable, of } from 'rxjs';
-import { combineAll, map, switchMap, take } from 'rxjs/operators';
+import { combineAll, map, switchMap, take, tap } from 'rxjs/operators';
 import { pipe as fptsPipe } from 'fp-ts/lib/function';
 import { map as fptsMap, isSome, Option } from 'fp-ts/lib/Option';
 import { ExternalPoi } from './lib/types';
@@ -160,6 +160,7 @@ export const getAllWikipediaPois =
     bounds: BoundingBox,
     languageCodesShort: string[],
   ): Observable<ExternalPoi[]> => {
+    console.log('Searching for wikipedia pois...');
     const boundsArr: BoundingBox[] = [];
     splitBoundingBox(bounds, 10000, boundsArr);
     const _observables: Observable<ExternalPoi[]>[] = _.flatten(
@@ -172,5 +173,6 @@ export const getAllWikipediaPois =
 
     return forkJoin(_observables).pipe(
       map(poisArr => _.uniqBy(_.flatten(poisArr), 'id')),
+      tap(res => console.log(`Found ${res.length} Wikipedia pois`)),
     );
   };

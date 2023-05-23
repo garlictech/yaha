@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 import * as fp from 'lodash/fp';
 import { Observable, of } from 'rxjs';
-import { catchError, map, take } from 'rxjs/operators';
+import { tap, catchError, map, take } from 'rxjs/operators';
 import { OsmPoiTypes, ExternalPoi } from './lib/types';
 import { Logger } from '../bunyan-logger';
 import { YahaApi } from '@yaha/gql-api';
@@ -48,6 +48,7 @@ export const getOsmPois =
     typeParam: OsmPoiTypes,
     lng = 'en',
   ): Observable<ExternalPoi[]> => {
+    console.log(`Getting OSM pois for type ${typeParam}`);
     const languageKey = LanguageFp.shortToLocale(lng);
 
     const request = `
@@ -106,6 +107,9 @@ export const getOsmPois =
               } as ExternalPoi;
             }),
           )(response),
+        ),
+        tap(res =>
+          console.log(`Found ${res.length} OSM pois of type ${typeParam}`),
         ),
         take(1),
         catchError(err => {

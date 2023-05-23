@@ -13,6 +13,7 @@ import {
   mergeAll,
   switchMap,
   toArray,
+  tap,
 } from 'rxjs/operators';
 import { ExternalPoi } from './lib/types';
 import { YahaApi } from '@yaha/gql-api';
@@ -34,6 +35,8 @@ export const getGooglePois =
   (deps: GooglePoiDeps) =>
   (bounds: BoundingBox): Observable<ExternalPoi[]> => {
     // eslint-disable-next-line prefer-rest-params
+
+    console.log('Searching for Google pois...');
     const resultOption: Option<Observable<ExternalPoi[]>> = fptsPipe(
       getCenterRadiusOfBox(bounds),
       fptsMap((circle: Circle) => {
@@ -71,6 +74,7 @@ export const getGooglePois =
           concatMap(({ items }) => items),
           toArray(),
           switchMap(placeIds => _getPoiDetails(deps)(placeIds)),
+          tap(res => console.log(`Found ${res.length} Google pois`)),
         );
       }),
     );
