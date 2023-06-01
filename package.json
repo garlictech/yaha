@@ -37,7 +37,7 @@
   },
   "private": true,
   "dependencies": {
-    "@aws-amplify/auth": "4.6.3",
+    "@aws-amplify/auth": "4.6.17",
     "@googlemaps/google-maps-services-js": "3.3.16",
     "@mapbox/togeojson": "0.16.0",
     "@neo4j/graphql": "3.7.0",
