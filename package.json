@@ -41,7 +41,7 @@
     "@googlemaps/google-maps-services-js": "3.3.16",
     "@mapbox/togeojson": "0.16.0",
     "@neo4j/graphql": "3.7.0",
-    "@neo4j/graphql-ogm": "3.6.3",
+    "@neo4j/graphql-ogm": "3.24.3",
     "@turf/line-chunk": "6.5.0",
     "@turf/turf": "6.5.0",
     "@types/d3-geo": "3.0.2",
