@@ -92,7 +92,7 @@
     "@serverless-stack/cli": "1.14.4",
     "@serverless-stack/resources": "1.14.4",
     "@types/aws-lambda": "8.10.102",
-    "@types/bunyan": "1.8.8",
+    "@types/bunyan": "1.8.11",
     "@types/googlemaps": "3.43.3",
     "@types/jest": "28.1.8",
     "@types/lodash-es": "4.17.6",
