@@ -18,10 +18,16 @@ class HikeWithBounds extends _$HikeWithBounds {
 
     final hike = hikeState.data!;
 
-    final bounds = LatLngBounds();
-    hike.route.coordinates.forEach((point) => bounds
-        .extend(LatLng(point.location.latitude, point.location.longitude)));
-    bounds.pad(0.2);
+    final firstBoundary = hike.route.coordinates.first.location;
+    final lastBoundary = hike.route.coordinates.last.location;
+    final corner1 = LatLng(firstBoundary.latitude, firstBoundary.longitude);
+    final corner2 = LatLng(lastBoundary.latitude, lastBoundary.longitude);
+    final bounds = LatLngBounds(corner1, corner2);
+
+    for (var point in hike.route.coordinates) {
+      bounds.extend(LatLng(point.location.latitude, point.location.longitude));
+    }
+    //bounds.pad(0.2);
 
     return Tuple2(hike, bounds);
   }

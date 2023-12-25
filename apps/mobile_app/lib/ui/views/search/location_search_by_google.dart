@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_maps_webservice/places.dart';
+//import 'package:google_maps_webservice/places.dart';
 import 'package:yaha/app/providers.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:yaha/config.dart';
 import '../shared/shared.dart';
 import '/domain/domain.dart' as domain;
 
-final places = GoogleMapsPlaces(apiKey: kGoogleApiKey);
+//final places = GoogleMapsPlaces(apiKey: kGoogleApiKey);
+
+class PlacesSearchResult {}
 
 class LocationSearchByGoogleFieldViewModel {
   final List<PlacesSearchResult> hits;
@@ -22,18 +24,19 @@ class LocationSearchByGoogleFieldPresenter
       : super(LocationSearchByGoogleFieldViewModel(hits: []));
 
   getSuggestions(String pattern) {
-    return places.searchByText(pattern).then((response) {
+    return [];
+    /* return places.searchByText(pattern).then((response) {
       return response.results;
-    });
+    });*/
   }
 
   suggestionSelected(PlacesSearchResult result) async {
-    final location = result.geometry?.location;
+    /*final location = result.geometry?.location;
 
     if (location != null) {
       await _getHikes(domain.Point(
           latitude: location.lat, longitude: location.lng, height: 0));
-    }
+    }*/
   }
 
   onTapCurrentLocation() async {
@@ -63,7 +66,10 @@ class LocationSearchByGoogleField extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final presenter = ref.watch(presenterInstance.notifier);
-
+    return Container();
+  }
+}
+/*
     return Row(children: [
       Expanded(
           child: TypeAheadField(
@@ -96,4 +102,5 @@ class LocationSearchByGoogleField extends ConsumerWidget {
               child: Icon(Icons.gps_not_fixed))),
     ]);
   }
-}
+}*/
+

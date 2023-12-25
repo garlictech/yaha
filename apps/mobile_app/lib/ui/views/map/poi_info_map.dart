@@ -68,17 +68,15 @@ class PoiInfoMapState extends ConsumerState<PoiInfoMap> {
     final marker = Marker(
         point:
             LatLng(widget.poi.geoPoint.latitude, widget.poi.geoPoint.longitude),
-        builder: (BuildContext c) {
-          return SizedBox(
-              height: markerSize,
-              width: markerSize,
-              child: PhysicalModel(
-                  color: Colors.black,
-                  shadowColor: Colors.black,
-                  elevation: 8.0,
-                  shape: BoxShape.circle,
-                  child: PoiIcon(poiType: widget.poi.poiType)));
-        });
+        child: SizedBox(
+            height: markerSize,
+            width: markerSize,
+            child: PhysicalModel(
+                color: Colors.black,
+                shadowColor: Colors.black,
+                elevation: 8.0,
+                shape: BoxShape.circle,
+                child: PoiIcon(poiType: widget.poi.poiType))));
     return MarkerLayer(markers: [marker, ...globalMarkers]);
   }
 }

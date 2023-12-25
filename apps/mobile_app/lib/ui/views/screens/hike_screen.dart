@@ -1,6 +1,6 @@
 // ignore: file_names
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:yaha/domain/domain.dart' as domain;
@@ -90,7 +90,7 @@ SpeedDial buildSpeedDial() {
 
 class HikeScreen extends ConsumerWidget {
   final String hikeId;
-  const HikeScreen({Key? key, required this.hikeId}) : super(key: key);
+  const HikeScreen({super.key, required this.hikeId});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

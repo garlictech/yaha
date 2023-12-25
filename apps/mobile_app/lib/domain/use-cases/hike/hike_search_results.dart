@@ -30,11 +30,16 @@ class HikeSearchResults extends _$HikeSearchResults {
         return null;
       }
 
-      final bounds = LatLngBounds();
+      final firstBoundary = hikes.first.route.coordinates.first.location;
+      final lastBoundary = hikes.first.route.coordinates.last.location;
+      final corner1 = LatLng(firstBoundary.latitude, firstBoundary.longitude);
+      final corner2 = LatLng(lastBoundary.latitude, lastBoundary.longitude);
+      final bounds = LatLngBounds(corner1, corner2);
+
       hikes.map((hike) => hike.route.coordinates).expand((i) => i).forEach(
           (point) => bounds.extend(
               LatLng(point.location.latitude, point.location.longitude)));
-      bounds.pad(0.2);
+      //bounds.pad(0.2);
       state = Tuple2(hikes.toList(), bounds);
     }).toList();
 

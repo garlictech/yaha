@@ -246,11 +246,9 @@ class PlacesOnRouteMapState extends ConsumerState<PlacesOnRouteMap> {
           markers: [...onrouteMarkers, ...(offrouteMarkers)],
           maxClusterRadius: 45,
           size: const Size(40, 40),
-          anchor: AnchorPos.align(AnchorAlign.center),
-          fitBoundsOptions: const FitBoundsOptions(
-            padding: EdgeInsets.all(50),
-            maxZoom: 15,
-          ),
+          alignment: Alignment.center,
+          padding: const EdgeInsets.all(50),
+          maxZoom: 15,
           builder: (context, markers) {
             final bool isCurrentInCluster = markers.where((marker) {
               return marker.key.toString() == const Key("CURRENT").toString();
@@ -283,24 +281,22 @@ class PlacesOnRouteMapState extends ConsumerState<PlacesOnRouteMap> {
         width: markerSize,
         point: LatLng(
             poi.location.location.latitude, poi.location.location.longitude),
-        builder: (BuildContext c) {
-          return GestureDetector(
-            onTap: () {
-              ref
-                  .read(placesOnRouteMapControllerProvider(widget.hikeId)
-                      .notifier)
-                  .onOffroutePoiIconTapped(poi.id);
-            },
-            child: AnimatedContainer(
-                duration: const Duration(milliseconds: 2500),
-                child: FittedBox(
-                    child: PhysicalModel(
-                        color: Colors.black,
-                        shadowColor: Colors.black,
-                        elevation: 8.0,
-                        shape: BoxShape.circle,
-                        child: PoiIcon(poiType: poi.poiType)))),
-          );
-        });
+        child: GestureDetector(
+          onTap: () {
+            ref
+                .read(
+                    placesOnRouteMapControllerProvider(widget.hikeId).notifier)
+                .onOffroutePoiIconTapped(poi.id);
+          },
+          child: AnimatedContainer(
+              duration: const Duration(milliseconds: 2500),
+              child: FittedBox(
+                  child: PhysicalModel(
+                      color: Colors.black,
+                      shadowColor: Colors.black,
+                      elevation: 8.0,
+                      shape: BoxShape.circle,
+                      child: PoiIcon(poiType: poi.poiType)))),
+        ));
   }
 }

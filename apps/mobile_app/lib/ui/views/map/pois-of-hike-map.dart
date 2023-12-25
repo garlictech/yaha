@@ -77,30 +77,28 @@ class PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
           width: markerSize,
           point: LatLng(
               poi.location.location.latitude, poi.location.location.longitude),
-          builder: (BuildContext c) {
-            return GestureDetector(
-              onTap: () {
-                if (_currentSelectedIndex != index) {
-                  _canUpdateFocalLatLng = false;
-                  _tappedMarkerIndex = index;
-                  _pageViewController.animateToPage(
-                    index,
-                    duration: const Duration(milliseconds: 500),
-                    curve: Curves.easeInOut,
-                  );
-                }
-              },
-              child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 2500),
-                  child: FittedBox(
-                      child: PhysicalModel(
-                          color: Colors.black,
-                          shadowColor: Colors.black,
-                          elevation: 8.0,
-                          shape: BoxShape.circle,
-                          child: PoiIcon(poiType: poi.poiType)))),
-            );
-          });
+          child: GestureDetector(
+            onTap: () {
+              if (_currentSelectedIndex != index) {
+                _canUpdateFocalLatLng = false;
+                _tappedMarkerIndex = index;
+                _pageViewController.animateToPage(
+                  index,
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.easeInOut,
+                );
+              }
+            },
+            child: AnimatedContainer(
+                duration: const Duration(milliseconds: 2500),
+                child: FittedBox(
+                    child: PhysicalModel(
+                        color: Colors.black,
+                        shadowColor: Colors.black,
+                        elevation: 8.0,
+                        shape: BoxShape.circle,
+                        child: PoiIcon(poiType: poi.poiType)))),
+          ));
     }
 
     return Stack(

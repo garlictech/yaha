@@ -143,17 +143,13 @@ class HikeSearchSesultsOnMapState
               width: markerSize,
               point: LatLng(hike.route.coordinates.first.location.latitude,
                   hike.route.coordinates.first.location.longitude),
-              builder: (c) {
-                return markerShape(Colors.green, ref);
-              });
+              child: markerShape(Colors.green, ref));
           final endMarker = Marker(
               height: markerSize,
               width: markerSize,
               point: LatLng(hike.route.coordinates.last.location.latitude,
                   hike.route.coordinates.last.location.longitude),
-              builder: (c) {
-                return markerShape(Colors.red, ref);
-              });
+              child: markerShape(Colors.red, ref));
           return [startMarker, endMarker];
         })
         .expand((i) => i)

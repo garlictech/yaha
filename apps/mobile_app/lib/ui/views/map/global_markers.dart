@@ -36,13 +36,11 @@ class GlobalMarkers extends _$GlobalMarkers {
         height: markerSize,
         width: markerSize,
         point: LatLng(latitude, longitude),
-        builder: (context) {
-          return const PhysicalModel(
-              color: Colors.black,
-              shadowColor: Colors.black,
-              elevation: 8.0,
-              shape: BoxShape.circle,
-              child: AvatarImage());
-        });
+        child: const PhysicalModel(
+            color: Colors.black,
+            shadowColor: Colors.black,
+            elevation: 8.0,
+            shape: BoxShape.circle,
+            child: AvatarImage()));
   }
 }

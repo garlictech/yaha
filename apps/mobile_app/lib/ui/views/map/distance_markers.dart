@@ -23,19 +23,17 @@ class DistanceMarkers extends _$DistanceMarkers {
             height: 18,
             width: 18,
             point: d,
-            builder: (BuildContext c) {
-              return SizedBox(
-                  child: PhysicalModel(
-                      color: YahaColors.gunmetalGray,
-                      shadowColor: Colors.black,
-                      elevation: 8.0,
-                      shape: BoxShape.circle,
-                      child: Align(
-                          alignment: Alignment.center,
-                          child: Text((index + 1).toString(),
-                              style: const TextStyle(
-                                  fontSize: 10, color: Colors.white)))));
-            }))
+            child: SizedBox(
+                child: PhysicalModel(
+                    color: YahaColors.gunmetalGray,
+                    shadowColor: Colors.black,
+                    elevation: 8.0,
+                    shape: BoxShape.circle,
+                    child: Align(
+                        alignment: Alignment.center,
+                        child: Text((index + 1).toString(),
+                            style: const TextStyle(
+                                fontSize: 10, color: Colors.white)))))))
         .toList();
   }
 }

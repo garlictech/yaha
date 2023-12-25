@@ -90,22 +90,18 @@ class HikeOverviewMapState extends ConsumerState<HikeOverviewMap> {
         height: markerSize,
         width: markerSize,
         point: LatLng(hike.startPoint.latitude, hike.startPoint.longitude),
-        builder: (c) {
-          return markerShape(
-              const PoiIcon(
-                  poiType: PoiType(category: "yaha", kind: "start_hike")),
-              ref);
-        });
+        child: markerShape(
+            const PoiIcon(
+                poiType: PoiType(category: "yaha", kind: "start_hike")),
+            ref));
     final endMarker = Marker(
         height: markerSize,
         width: markerSize,
         point: LatLng(hike.endPoint.latitude, hike.endPoint.longitude),
-        builder: (c) {
-          return markerShape(
-              const PoiIcon(
-                  poiType: PoiType(category: "yaha", kind: "finish_hike")),
-              ref);
-        });
+        child: markerShape(
+            const PoiIcon(
+                poiType: PoiType(category: "yaha", kind: "finish_hike")),
+            ref));
 
     return MarkerLayer(markers: [startMarker, endMarker, ...globalMarkers]);
   }
