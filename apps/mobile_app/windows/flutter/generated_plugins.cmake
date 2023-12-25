@@ -4,6 +4,9 @@
 
 list(APPEND FLUTTER_PLUGIN_LIST
   desktop_webview_auth
+  file_selector_windows
+  firebase_auth
+  firebase_core
   flutter_js
   geolocator_windows
   url_launcher_windows
