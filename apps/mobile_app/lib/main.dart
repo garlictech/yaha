@@ -7,13 +7,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:yaha/config.dart';
-import 'package:yaha/data/auth/logged_in_state.dart';
-import 'package:yaha/ui/theme.dart';
-import 'package:yaha/ui/views/screens/account-screen.dart';
-import 'package:yaha/ui/views/screens/main_screen.dart';
+import 'package:flutter_yaha_lib/data/auth/logged_in_state.dart';
+import 'package:flutter_yaha_lib/ui/theme.dart';
+import 'package:flutter_yaha_lib/ui/views/screens/account-screen.dart';
+import 'package:flutter_yaha_lib/ui/views/screens/main_screen.dart';
+import 'package:flutter_yaha_lib/ui/views/screens/login_screen.dart';
 
 import 'firebase_options.dart';
-import 'ui/views/screens/login_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
