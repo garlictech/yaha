@@ -172,7 +172,7 @@ export const getAllWikipediaPois =
     );
 
     return forkJoin(_observables).pipe(
-      map(poisArr => _.uniqBy(_.flatten(poisArr), 'id')),
+      map(poisArr => _.uniqBy(_.flatten(poisArr), 'externalId')),
       tap(res => console.log(`Found ${res.length} Wikipedia pois`)),
     );
   };

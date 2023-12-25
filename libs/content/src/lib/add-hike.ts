@@ -1,6 +1,6 @@
 import lineChunk from '@turf/line-chunk';
 import { Neo4jdeps } from './utils';
-import { from, defer, of, forkJoin, Observable } from 'rxjs';
+import { from, defer, of, forkJoin, Observable, throwError } from 'rxjs';
 import {
   map,
   concatMap,
@@ -12,8 +12,9 @@ import {
   mapTo,
   takeLast,
   concatAll,
+  count,
 } from 'rxjs/operators';
-import { flow, pipe } from 'fp-ts/lib/function';
+import { pipe } from 'fp-ts/lib/function';
 import * as R from 'ramda';
 import { lineString, LineString, FeatureCollection } from '@turf/helpers';
 import { Feature, Polygon, Properties } from '@turf/turf';
@@ -47,7 +48,7 @@ interface HikeData_WithBuffers extends HikeData {
   smallBuffer: BufferType;
 }
 
-const chunkSize = 100;
+const chunkSize = 10;
 
 const checkCoordinates = (coordinates: number[][]) =>
   R.tap(() =>
@@ -90,16 +91,14 @@ merge (hike)-[:GOES_ON]->(route)
       `,
       res => res + createDescription(hikeData.title, hikeData.summary),
       query => defer(() => deps.session.writeTransaction(tx => tx.run(query))),
-      map(() =>
+      switchMap(() =>
         pipe(
           coordinates.map(
-            (point, index) => `
-call {
-  merge (p:Waypoint {id: "${point[1]}${point[0]}"})
-  set p.location = Point({latitude: ${point[1]}, longitude: ${point[0]}, height: ${point[2]}})
-  merge (route)-[r:CONTAINS]->(p)
-  set r.orderIndex = ${index}
-}
+            (point, i) => `
+merge (p${i}:Waypoint {id: "${point[1]}${point[0]}"})
+set p${i}.location = Point({latitude: ${point[1]}, longitude: ${point[0]}, height: ${point[2]}})
+merge (route)-[r${i}:CONTAINS]->(p${i})
+set r${i}.orderIndex = ${i}
           `,
           ),
           R.splitEvery(chunkSize),
@@ -110,7 +109,6 @@ call {
               res => `
 match (route:Route {id: "${hikeData.externalId}"})
 ${res}
-
 `,
               query =>
                 defer(() => deps.session.writeTransaction(tx => tx.run(query))),
@@ -121,11 +119,11 @@ ${res}
               ),
             ),
           ),
+          from,
+          concatAll(),
+          takeLast(1),
         ),
       ),
-      from,
-      concatAll(),
-      takeLast(1),
       tap(() => console.log(`Added the points to the route in DB`)),
       map(
         () => `
@@ -211,52 +209,50 @@ const addPoisToDb =
         : 'OFF_ROUTE';
 
     return pipe(
-      pois,
-      R.map(poi =>
+      pois.map((poi, i) =>
         pipe(
           `
-call {
-merge (poi:Poi {id: "${poi.externalId}"})
-merge (poi)-[:${relation(poi)}]->(route)
-merge (w:Waypoint {id: "${poi.location.lat}${poi.location.lon}"})
-set w.location = Point({latitude: ${poi.location.lat}, longitude: ${
+merge (poi${i}:Poi {id: "${poi.externalId}"})
+merge (poi${i})-[:${relation(poi)}]->(route)
+merge (w${i}:Waypoint {id: "${poi.location.lat}${poi.location.lon}"})
+set w${i}.location = Point({latitude: ${poi.location.lat}, longitude: ${
             poi.location.lon
           }, height: ${poi.elevation}})
-merge (poi)-[:LOCATED_AT]->(w)
+merge (poi${i})-[:LOCATED_AT]->(w${i})
 `,
-          res => (poi.type ? `${res}set poi.type = "${poi.type}"\n` : res),
+          res => (poi.type ? `${res}set poi${i}.type = "${poi.type}"\n` : res),
           res =>
-            poi.address ? `${res}set poi.address = "${poi.address}"\n` : res,
-          res =>
-            poi.phoneNumber
-              ? `${res}set poi.phone = "${poi.phoneNumber}"\n`
+            poi.address
+              ? `${res}set poi${i}.address = "${sanitizeText(poi.address)}"\n`
               : res,
           res =>
-            poi.infoUrl ? `${res}set poi.infoUrl = "${poi.infoUrl}"\n` : res,
+            poi.phoneNumber
+              ? `${res}set poi${i}.phone = "${poi.phoneNumber}"\n`
+              : res,
+          res =>
+            poi.infoUrl
+              ? `${res}set poi${i}.infoUrl = "${poi.infoUrl}"\n`
+              : res,
           res =>
             poi.description?.title
               ? pipe(
                   `${res}
-merge (desc:Description {languageKey: "${
+merge (desc${i}:Description {languageKey: "${
                     poi.description.languageKey
                   }", source: "${poi.externalId}"})
-set desc.title = "${sanitizeText(poi.description.title)}"
-set desc.type = "${poi.description.type || 'plaintext'}"
-merge (desc)-[:EXPLAINS]->(poi)
+set desc${i}.title = "${sanitizeText(poi.description.title)}"
+set desc${i}.type = "${poi.description.type || 'plaintext'}"
+merge (desc${i})-[:EXPLAINS]->(poi${i})
             `,
                   descRes =>
                     poi.description?.summary
-                      ? `${descRes}set desc.summary = "${sanitizeText(
+                      ? `${descRes}set desc${i}.summary = "${sanitizeText(
                           poi.description.summary,
                         )}"
             `
                       : descRes,
                 )
               : res,
-          res => `
-  ${res}
-}
-              `,
         ),
       ),
       R.splitEvery(chunkSize),
@@ -272,8 +268,13 @@ match (route:Route) where route.id = "${hikeData.externalId}"
 ${res}
 `,
           query =>
-            defer(() => deps.session.writeTransaction(tx => tx.run(query))),
-          tap(() => console.log(`${chunk.length} External pois added to DB`)),
+            defer(() =>
+              deps.session.writeTransaction(tx => tx.run(query)),
+            ).pipe(
+              tap(() =>
+                console.log(`${chunk.length} External pois added to DB`),
+              ),
+            ),
         ),
       ),
       from,
@@ -333,15 +334,15 @@ export const getExternalPois =
           return of([]);
         }),
       ),
-      getGooglePois({
-        apiKey: deps.googleApiKey,
-        http: deps.http,
-      })(bounds).pipe(
-        catchError(err => {
-          console.error(`Error in Google POI fetch: ${err}`);
-          return of([]);
-        }),
-      ),
+      /*getGooglePois({
+          apiKey: deps.googleApiKey,
+          http: deps.http,
+        })(bounds).pipe(
+          catchError(err => {
+            console.error(`Error in Google POI fetch: ${err}`);
+            return of([]);
+          }),
+        ),*/
     ]).pipe(
       map(pois =>
         pipe(
@@ -356,7 +357,6 @@ export const getExternalPois =
             ...x,
             type: poiTypeConversion[x.type ?? 'foobar'] ?? x.type,
           })),
-          x => x,
           R.tap(res =>
             console.warn('Number of correct unique external pois:', res.length),
           ),
@@ -394,16 +394,15 @@ const addImagesToDb = (deps: Neo4jdeps) => (images: ExternalImage[]) =>
   pipe(
     images,
     R.tap(() => console.log(`Adding ${images.length} 🖼  to DB`)),
-    R.map(
-      image => `
-call {
-  merge (image:Image {id: "${image.externalId}"})
-  set image.original = "${image.original}"
-  set image.card = "${image.card}"
-  set image.thumbnail = "${image.thumbnail}"
-}
+    images =>
+      images.map(
+        (image, i) => `
+  merge (image${i}:Image {id: "${image.externalId}"})
+  set image${i}.original = "${image.original}"
+  set image${i}.card = "${image.card}"
+  set image${i}.thumbnail = "${image.thumbnail}"
     `,
-    ),
+      ),
     R.splitEvery(chunkSize),
     R.map(chunk =>
       pipe(
@@ -431,40 +430,28 @@ export const addPoiImageRelations =
             [image],
             pois,
           ),
-          R.map(
-            poi =>
-              `
-call {
-  match (poi:Poi) where poi.id = "${poi.externalId}"
-  match (image:Image) where image.id = "${image.externalId}"
-  merge (image)-[:TAKEN_AT]->(poi)
-}
+          pois =>
+            pois.map(
+              (poi, i) =>
+                `
+  match (poi${i}:Poi) where poi${i}.id = "${poi.externalId}"
+  match (image${i}:Image) where image${i}.id = "${image.externalId}"
+  merge (image${i})-[:TAKEN_AT]->(poi${i})
       `,
-          ),
+            ),
         ),
       ),
       R.flatten,
-      R.tap(x => console.log(`Adding ${x.length} 🖼 - poi relations to DB`)),
-      R.splitEvery(chunkSize),
-      R.map(chunk =>
-        pipe(
-          chunk,
-          R.tap(chunk =>
-            console.log(
-              `Start adding ${chunk.length}  🖼 - poi relations to the DB`,
-            ),
-          ),
-          R.join('\n'),
-          query =>
-            defer(() => deps.session.writeTransaction(tx => tx.run(query))),
-          tap(() =>
-            console.log(`${chunk.length} 🖼 - poi relations added to DB`),
-          ),
-        ),
+      R.tap(x =>
+        console.log(`${x.length}  🖼 relations is being added to the db...`),
+      ),
+      R.map(query =>
+        defer(() => deps.session.writeTransaction(tx => tx.run(query))),
       ),
       from,
       concatAll(),
-      takeLast(1),
+      count(),
+      tap(x => console.log(`${x}  🖼 relations added to the db`)),
     );
 
 export const addRouteImageRelations =
@@ -473,40 +460,23 @@ export const addRouteImageRelations =
   (images: ExternalImage[]) =>
     pipe(
       removePointsOutsideOfPolygon<ExternalImage>(hikeData.smallBuffer)(images),
-      R.map(
-        image =>
-          `
-call {
-  match (image:Image) where image.id = "${image.externalId}"
-  merge (image)-[:TAKEN_AT]->(route)
-}
-      `,
-      ),
-      R.tap(x => console.log(`Adding ${x.length} 🖼 -route relations to DB`)),
-      R.splitEvery(chunkSize),
-      R.map(chunk =>
-        pipe(
-          chunk,
-          R.tap(chunk =>
-            console.log(
-              `Start adding ${chunk.length} 🖼 -route relations to the DB`,
-            ),
-          ),
-          R.join('\n'),
-          res => `
+      images =>
+        images.map(
+          (image, i) =>
+            `
 match (route:Route) where route.id = "${hikeData.externalId}"
-${res}
-          `,
-          query =>
-            defer(() => deps.session.writeTransaction(tx => tx.run(query))),
-          tap(() =>
-            console.log(`${chunk.length} 🖼 -route relations added to DB`),
-          ),
+match (image${i}:Image) where image${i}.id = "${image.externalId}"
+merge (image${i})-[:TAKEN_AT]->(route)
+      `,
         ),
+      R.tap(x => console.log(`Adding ${x.length} 🖼 -route relations to DB`)),
+      R.map(query =>
+        defer(() => deps.session.writeTransaction(tx => tx.run(query))),
       ),
       from,
       concatAll(),
-      takeLast(1),
+      count(),
+      tap(x => console.log(`${x}  🖼 relations added to the db`)),
     );
 
 export const getExternalImages =
@@ -566,7 +536,6 @@ const processSegments =
     from(segments).pipe(
       map(x => lineString(x)),
       map(getBounds),
-      x => x,
       concatMap(bounds =>
         getExternalPois(deps)(bounds.boundingBox, ['en', 'hu'], hikeData).pipe(
           switchMap(pois =>
@@ -622,5 +591,6 @@ CREATE CONSTRAINT unique_image IF NOT EXISTS FOR (image:Image) REQUIRE image.id 
 CREATE CONSTRAINT unique_waypoint IF NOT EXISTS FOR (wp:Waypoint) REQUIRE wp.id IS UNIQUE;
 
 
+CREATE FULLTEXT INDEX titlesAndDescriptions FOR (n:Description) ON EACH [n.title, n.description, n.summary]
 
  */

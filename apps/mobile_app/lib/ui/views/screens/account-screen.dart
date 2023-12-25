@@ -1,7 +1,6 @@
 import 'package:firebase_ui_auth/firebase_ui_auth.dart' as fb;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart' hide EmailAuthProvider;
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:yaha/ui/views/screens/login_screen.dart';
