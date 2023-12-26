@@ -1,6 +1,6 @@
 import lineChunk from '@turf/line-chunk';
 import { Neo4jdeps } from './utils';
-import { from, defer, of, forkJoin, Observable, throwError } from 'rxjs';
+import { from, defer, of, forkJoin, Observable } from 'rxjs';
 import {
   map,
   concatMap,
