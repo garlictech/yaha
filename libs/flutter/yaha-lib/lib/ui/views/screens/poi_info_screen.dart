@@ -7,6 +7,7 @@ import 'package:flutter_yaha_lib/domain/entities/poi/poi_entity.dart';
 import 'package:flutter_yaha_lib/ui/views/map/poi_info_map.dart';
 
 import '../shared/shared.dart';
+import '../utils/get_poi_background_image.dart';
 
 class LocationLine extends StatelessWidget {
   final String label;
@@ -91,12 +92,7 @@ class PoiInfoScreen extends ConsumerWidget {
         physics: const BouncingScrollPhysics(),
         slivers: <Widget>[
           YahaSliverAppBar(
-              title: poi.title,
-              content: poi.imageCardUrls.isEmpty
-                  ? Image.asset(
-                      'packages/flutter_yaha_lib/assets/poi-backgrounds/fire_hydrant.png',
-                      fit: BoxFit.cover)
-                  : Image.network(poi.imageCardUrls.first, fit: BoxFit.cover)),
+              title: poi.title, content: getPoiBackgroundImage(poi.poiType)),
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
