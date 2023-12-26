@@ -1,6 +1,6 @@
 import lineChunk from '@turf/line-chunk';
 import { Neo4jdeps } from './utils';
-import { from, defer, of, forkJoin, Observable } from 'rxjs';
+import { from, of, forkJoin, Observable } from 'rxjs';
 import {
   map,
   concatMap,
@@ -9,7 +9,6 @@ import {
   toArray,
   catchError,
   delay,
-  mapTo,
   takeLast,
   concatAll,
   count,
@@ -31,9 +30,14 @@ import {
   isCreateImageInput,
   getOsmPois,
   getAllWikipediaPois,
-  getGooglePois,
+  //getGooglePois,
 } from '@yaha/backend/hike-search/services';
 import { BoundingBox } from '@yaha/backend/hike-search/services';
+import {
+  generateBackgroundForExternalPois,
+  generateIconForExternalPois,
+} from './process_poi_types';
+import { retriableNeo4jQuery } from './utils/neo4j-utils';
 
 export interface HikeData {
   externalId: string;
@@ -90,7 +94,7 @@ merge (hike:Hike {id: "${hikeData.externalId}"})
 merge (hike)-[:GOES_ON]->(route)
       `,
       res => res + createDescription(hikeData.title, hikeData.summary),
-      query => defer(() => deps.session.writeTransaction(tx => tx.run(query))),
+      retriableNeo4jQuery(deps.driver),
       switchMap(() =>
         pipe(
           coordinates.map(
@@ -110,8 +114,7 @@ set r${i}.orderIndex = ${i}
 match (route:Route {id: "${hikeData.externalId}"})
 ${res}
 `,
-              query =>
-                defer(() => deps.session.writeTransaction(tx => tx.run(query))),
+              retriableNeo4jQuery(deps.driver),
               tap(() =>
                 console.log(
                   `${chunk.length} waypoints added to the route in DB`,
@@ -134,9 +137,7 @@ with r, m where m is not null
 set r.municipality = m
         `,
       ),
-      switchMap(query =>
-        defer(() => deps.session.writeTransaction(tx => tx.run(query))),
-      ),
+      switchMap(retriableNeo4jQuery(deps.driver)),
       tap(() => console.log(`Added municipality to the route`)),
     );
 
@@ -268,9 +269,7 @@ match (route:Route) where route.id = "${hikeData.externalId}"
 ${res}
 `,
           query =>
-            defer(() =>
-              deps.session.writeTransaction(tx => tx.run(query)),
-            ).pipe(
+            retriableNeo4jQuery(deps.driver)(query).pipe(
               tap(() =>
                 console.log(`${chunk.length} External pois added to DB`),
               ),
@@ -280,7 +279,7 @@ ${res}
       from,
       concatAll(),
       takeLast(1),
-      mapTo(pois),
+      map(() => pois),
     );
   };
 
@@ -369,7 +368,7 @@ export const getExternalPois =
       ),
     );
 
-    return calc1.pipe(
+    const calc2 = calc1.pipe(
       switchMap(x => from(x)),
       concatMap(poi =>
         getElevation(deps)(poi.location.lat, poi.location.lon).pipe(
@@ -385,7 +384,12 @@ export const getExternalPois =
         console.warn('Number of external external pois to DB:', res.length),
       ),
       tap(() => console.log('Processing external pois...')),
+    );
+
+    return calc2.pipe(
       switchMap(addPoisToDb(deps)(hikeData)),
+      map(generateIconForExternalPois(deps.projectRoot)),
+      map(generateBackgroundForExternalPois(deps.projectRoot)),
       tap(() => console.log('Pois added to DB')),
     );
   };
@@ -409,8 +413,7 @@ const addImagesToDb = (deps: Neo4jdeps) => (images: ExternalImage[]) =>
         chunk,
         R.tap(chunk => console.log(`Start adding ${chunk.length} 🖼  `)),
         R.join('\n'),
-        query =>
-          defer(() => deps.session.writeTransaction(tx => tx.run(query))),
+        retriableNeo4jQuery(deps.driver),
         tap(() => console.log(`${chunk.length}  🖼  added`)),
       ),
     ),
@@ -445,9 +448,7 @@ export const addPoiImageRelations =
       R.tap(x =>
         console.log(`${x.length}  🖼 relations is being added to the db...`),
       ),
-      R.map(query =>
-        defer(() => deps.session.writeTransaction(tx => tx.run(query))),
-      ),
+      R.map(retriableNeo4jQuery(deps.driver)),
       from,
       concatAll(),
       count(),
@@ -470,9 +471,7 @@ merge (image${i})-[:TAKEN_AT]->(route)
       `,
         ),
       R.tap(x => console.log(`Adding ${x.length} 🖼 -route relations to DB`)),
-      R.map(query =>
-        defer(() => deps.session.writeTransaction(tx => tx.run(query))),
-      ),
+      R.map(retriableNeo4jQuery(deps.driver)),
       from,
       concatAll(),
       count(),
@@ -522,7 +521,7 @@ export const getExternalImages =
           tap(() => console.log(`Added the route 🖼 relations to DB`)),
         ),
       ),
-      mapTo(true),
+      map(() => true),
       catchError(err => {
         console.error(`Error in external image fetch: ${err}`);
         return of(false);

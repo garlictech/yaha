@@ -41,7 +41,7 @@ let cnt = 0;
 
 export const tagUntaggedImagesOfEntity = (deps: Neo4jdeps) => (query: string) =>
   pipe(
-    defer(() => deps.session.readTransaction(tx => tx.run(query))),
+    defer(() => deps.driver.executeQuery(query)),
     map(result =>
       pipe(
         result.records,
@@ -78,8 +78,7 @@ set image.banned = ${newProps.banned}
 set image.labels = '${newProps.labels}' 
 set image.processed = true
 `,
-            query =>
-              defer(() => deps.session.writeTransaction(tx => tx.run(query))),
+            query => defer(() => deps.driver.executeQuery(query)),
           ),
         ),
       );

@@ -94,7 +94,7 @@ class PoiInfoScreen extends ConsumerWidget {
               title: poi.title,
               content: poi.imageCardUrls.isEmpty
                   ? Image.asset(
-                      'packages/flutter_yaha_lib/assets/images/default_poi_popup_background.jpg',
+                      'packages/flutter_yaha_lib/assets/poi-backgrounds/fire_hydrant.png',
                       fit: BoxFit.cover)
                   : Image.network(poi.imageCardUrls.first, fit: BoxFit.cover)),
           SliverList(
