@@ -11,7 +11,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/shared/graphql/api-client"],
+      "outputs": ["{workspaceRoot}/coverage/libs/shared/graphql/api-client"],
       "options": {
         "jestConfig": "libs/shared/graphql/api-client/jest.config.ts",
         "passWithNoTests": true

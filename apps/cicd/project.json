@@ -6,9 +6,9 @@
     "build": {
       "executor": "@nrwl/workspace:run-commands",
       "outputs": [
-        "apps/cicd/cdk.out",
-        "apps/cicd/.build",
-        "apps/cicd/.serverless"
+        "{projectRoot}/cdk.out",
+        "{projectRoot}/.build",
+        "{projectRoot}/.serverless"
       ],
       "options": {
         "outputPath": "dist/apps/cicd",
@@ -47,7 +47,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/cicd"],
+      "outputs": ["{workspaceRoot}/coverage/apps/cicd"],
       "options": {
         "jestConfig": "apps/cicd/jest.config.ts",
         "passWithNoTests": true

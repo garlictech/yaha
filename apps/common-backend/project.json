@@ -9,7 +9,7 @@
         "parallel": false,
         "commands": ["yarn sst cdk synth --stage='{args.env}'"]
       },
-      "outputs": ["apps/common-backend/cdk.out", "apps/common-backend/.build"]
+      "outputs": ["{projectRoot}/cdk.out", "{projectRoot}/.build"]
     },
     "deploy": {
       "executor": "@nrwl/workspace:run-commands",
@@ -44,7 +44,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/common-backend"],
+      "outputs": ["{workspaceRoot}/coverage/apps/common-backend"],
       "options": {
         "jestConfig": "apps/common-backend/jest.config.ts",
         "passWithNoTests": true

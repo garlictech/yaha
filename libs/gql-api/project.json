@@ -8,7 +8,7 @@
         "parallel": false,
         "commands": ["yarn graphql-codegen --config tools/graphql-codegen.yml"]
       },
-      "outputs": ["libs/gql-api/src/lib/generated"]
+      "outputs": ["{projectRoot}/src/lib/generated"]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
@@ -19,7 +19,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/gql-api"],
+      "outputs": ["{workspaceRoot}/coverage/libs/gql-api"],
       "options": {
         "jestConfig": "libs/gql-api/jest.config.ts",
         "passWithNoTests": true

@@ -11,7 +11,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/integration-tests/backend"],
+      "outputs": ["{workspaceRoot}/coverage/libs/integration-tests/backend"],
       "options": {
         "jestConfig": "libs/integration-tests/backend/jest.config.ts",
         "passWithNoTests": true

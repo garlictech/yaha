@@ -12,7 +12,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/flutter-js"],
+      "outputs": ["{workspaceRoot}/coverage/libs/flutter-js"],
       "options": {
         "jestConfig": "libs/flutter-js/jest.config.ts",
         "passWithNoTests": true

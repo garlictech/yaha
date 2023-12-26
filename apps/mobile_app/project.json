@@ -179,8 +179,8 @@
         "commands": ["../../tools/build-schema-mobile_app.sh '{args.env}'"]
       },
       "outputs": [
-        "apps/mobile_app/lib/awsconfiguration.dart",
-        "apps/mobile_app/lib/models"
+        "{projectRoot}/lib/awsconfiguration.dart",
+        "{projectRoot}/lib/models"
       ]
     },
     "deploy-amplify": {

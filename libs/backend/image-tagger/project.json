@@ -11,7 +11,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/backend/image-tagger"],
+      "outputs": ["{workspaceRoot}/coverage/libs/backend/image-tagger"],
       "options": {
         "jestConfig": "libs/backend/image-tagger/jest.config.ts",
         "passWithNoTests": true
