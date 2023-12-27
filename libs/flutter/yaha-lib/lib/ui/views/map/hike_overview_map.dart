@@ -15,7 +15,7 @@ import 'leaflet_map_widgets.dart';
 class HikeOverviewMap extends ConsumerStatefulWidget {
   final String hikeId;
 
-  const HikeOverviewMap({Key? key, required this.hikeId}) : super(key: key);
+  const HikeOverviewMap({super.key, required this.hikeId});
 
   @override
   HikeOverviewMapState createState() => HikeOverviewMapState();
@@ -44,7 +44,11 @@ class HikeOverviewMapState extends ConsumerState<HikeOverviewMap> {
     return Stack(children: [
       FlutterMap(
         mapController: _mapController,
-        options: MapOptions(bounds: bounds),
+        options: MapOptions(
+            initialCameraFit: CameraFit.bounds(
+          bounds: bounds,
+          padding: const EdgeInsets.all(20),
+        )),
         children: <Widget>[
           osmTileLayer,
           _getHikeLayerWidget(hike),
