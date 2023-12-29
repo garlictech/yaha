@@ -92,4 +92,4 @@ set image.processed = true
   );
 
 export const tagUntaggedImages = (deps: Neo4jdeps) =>
-  tagUntaggedImagesOfEntity(deps)(poiQuery);
+  tagUntaggedImagesOfEntity(deps)(hikeQuery);

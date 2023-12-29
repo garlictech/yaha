@@ -12,6 +12,7 @@ import 'package:flutter_yaha_lib/ui/theme.dart';
 import 'package:flutter_yaha_lib/ui/views/screens/account-screen.dart';
 import 'package:flutter_yaha_lib/ui/views/screens/main_screen.dart';
 import 'package:flutter_yaha_lib/ui/views/screens/login_screen.dart';
+import 'package:flutter_yaha_lib/app/go_router_service.dart';
 
 import 'firebase_options.dart';
 
@@ -41,6 +42,8 @@ class MyAppState extends ConsumerState<MyApp> {
   Widget build(BuildContext context) {
     final isLoggedIn = ref.watch(loggedInStateProvider);
 
+    final goRouter = ref.watch(goRouterServiceProvider);
+
     return RefreshConfiguration(
         footerTriggerDistance: 15,
         dragSpeedRatio: 0.91,
@@ -61,15 +64,11 @@ class MyAppState extends ConsumerState<MyApp> {
                 currentFocus.unfocus();
               }
             },
-            child: MaterialApp(
+            child: MaterialApp.router(
               title: 'Yaha',
               debugShowCheckedModeBanner: false,
               theme: yahaTheme,
-              home: isLoggedIn ? const MainScreen() : const LoginScreen(),
-              routes: {
-                '/login': (context) => const LoginScreen(),
-                '/account': (context) => const AccountScreen()
-              },
+              routerConfig: goRouter,
             )));
   }
 }
