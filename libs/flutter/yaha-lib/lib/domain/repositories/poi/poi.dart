@@ -1,1 +1,1 @@
-export 'poi-repository.dart';
+export 'poi_repository.dart';

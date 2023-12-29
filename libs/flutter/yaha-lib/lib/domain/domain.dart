@@ -1,5 +1,4 @@
-export 'repositories/repositories.dart';
 export 'entities/entities.dart';
-export 'use-cases/use-cases.dart';
-export 'game-rules.dart';
-export 'states/states.dart';
+export 'repositories/repositories.dart';
+export 'services/services.dart';
+export 'value_objects/value_objects.dart';

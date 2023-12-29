@@ -1,10 +1,10 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_yaha_lib/data/utils/neo4j-repository.dart';
 import 'package:flutter_yaha_lib/domain/domain.dart';
 
-class PoiRepositoryNeo4j extends RepositoryNeo4j<Poi> implements PoiRepository {
-  PoiRepositoryNeo4j({required Ref ref})
-      : super(ref: ref, fromJson: Poi.fromJson);
+class PoiRepositoryNeo4j extends RepositoryNeo4j<PoiEntity>
+    implements PoiRepository {
+  PoiRepositoryNeo4j({required super.ref})
+      : super(fromJson: PoiEntity.fromJson);
 
   @override
   searchPoiByRadius(SearchByRadiusInput input) async {

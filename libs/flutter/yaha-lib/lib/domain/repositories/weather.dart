@@ -1,5 +1,5 @@
-import '../entities/entities.dart';
+import 'package:flutter_yaha_lib/domain/domain.dart';
 
 abstract class WeatherRepository {
-  Future<List<Weather>> getWeatherAround(Location location);
+  Future<List<WeatherEntity>> getWeatherAround(Location location);
 }

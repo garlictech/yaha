@@ -2,18 +2,14 @@ import 'dart:core';
 import 'package:flutter/foundation.dart';
 
 import 'package:json_annotation/json_annotation.dart';
-import 'package:flutter_yaha_lib/domain/entities/poi/supported_pois.dart';
 
+import '../../value_objects/value_objects.dart';
 import '../image/image.dart';
-import '../shared/description.dart';
-import '../shared/waypoint.dart';
-import 'poi_type.dart';
-import '/utils/string.dart';
 
 part 'poi_entity.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class Poi {
+class PoiEntity {
   final String id;
   final String type;
   final List<Description>? descriptions;
@@ -22,13 +18,13 @@ class Poi {
   final String? phone;
   final String? openingHours;
   final String? infoUrl;
-  final List<Image> images;
+  final List<ImageEntity> images;
   final Waypoint location;
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: true, includeToJson: true)
   PoiType? _poiType;
 
-  Poi(
+  PoiEntity(
       {required this.id,
       this.type = "generic:unknown",
       this.descriptions,
@@ -94,7 +90,8 @@ class Poi {
     return images.map((image) => image.card).toList();
   }
 
-  factory Poi.fromJson(Map<String, dynamic> json) => _$PoiFromJson(json);
+  factory PoiEntity.fromJson(Map<String, dynamic> json) =>
+      _$PoiEntityFromJson(json);
 
-  Map<String, dynamic> toJson() => _$PoiToJson(this);
+  Map<String, dynamic> toJson() => _$PoiEntityToJson(this);
 }

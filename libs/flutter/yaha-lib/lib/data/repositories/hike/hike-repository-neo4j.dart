@@ -1,17 +1,15 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:graphql/client.dart';
 import 'package:flutter_yaha_lib/data/utils/neo4j-repository.dart';
 import 'package:flutter_yaha_lib/domain/domain.dart';
-import 'package:flutter_yaha_lib/domain/entities/hike/hike_entity.dart';
 
-class HikeRepositoryNeo4j extends RepositoryNeo4j<HikeEntity>
-    implements HikeRepository {
-  HikeRepositoryNeo4j({required Ref ref})
-      : super(ref: ref, fromJson: HikeEntity.fromJson);
+class HikeRepositoryNeo4j extends RepositoryNeo4j<TrackEntity>
+    implements TrackRepository {
+  HikeRepositoryNeo4j({required super.ref})
+      : super(fromJson: TrackEntity.fromJson);
 
   @override
-  getHikeList() async {
+  getTrackList() async {
     const String query = r'''
     query Hikes {
       hikes {
@@ -23,7 +21,7 @@ class HikeRepositoryNeo4j extends RepositoryNeo4j<HikeEntity>
   }
 
   @override
-  searchHikeByRadius(SearchByRadiusInput input) async {
+  searchTrackByRadius(SearchByRadiusInput input) async {
     const String query = r'''
   query Query($params: SearchByRadiusInput!) {
   searchHikeByRadius(params: $params)
@@ -34,7 +32,7 @@ class HikeRepositoryNeo4j extends RepositoryNeo4j<HikeEntity>
   }
 
   @override
-  getHike(String id) async {
+  getTrack(String id) async {
     const String query = r'''
     query Hikes($where: HikeWhere) {
       hikes(where: $where) {
@@ -73,7 +71,7 @@ class HikeRepositoryNeo4j extends RepositoryNeo4j<HikeEntity>
   }
 
   @override
-  searchHikeByContent(SearchByContentInput input) async {
+  searchTrackByContent(SearchByContentInput input) async {
     const String query = r'''
   query Query($params: String!) {
   searchHikeByContent(params: $params)
@@ -94,7 +92,7 @@ class HikeRepositoryNeo4j extends RepositoryNeo4j<HikeEntity>
   }
 
   @override
-  Future<List<String>> getRandomHikes(int limit) async {
+  Future<List<String>> getRandomTracks(int limit) async {
     const String query = r'''
        query Query($limit: Int!) {
           getRandomHikes(limit: $limit) 
@@ -103,7 +101,7 @@ class HikeRepositoryNeo4j extends RepositoryNeo4j<HikeEntity>
     return executeEntityIdQuery(query, 'getRandomHikes', {'limit': limit});
   }
 
-  Future<List<Poi>> _getRoutePois(String id, String routeLabel) async {
+  Future<List<PoiEntity>> _getRoutePois(String id, String routeLabel) async {
     String query = '''
     query Hikes(\$where: HikeWhere) {
       hikes(where: \$where) {
@@ -155,7 +153,7 @@ class HikeRepositoryNeo4j extends RepositoryNeo4j<HikeEntity>
 
     if (entityData != null) {
       return (entityData as List)
-          .map((entity) => Poi.fromJson(entity))
+          .map((entity) => PoiEntity.fromJson(entity))
           .toList();
     } else {
       throw "$routeLabel of hike $id cannot be found.";

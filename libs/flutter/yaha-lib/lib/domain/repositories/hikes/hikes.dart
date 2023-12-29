@@ -1,1 +1,1 @@
-export 'hike-repository.dart';
+export 'hike_repository.dart';

@@ -6,7 +6,7 @@ part of 'poi_entity.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Poi _$PoiFromJson(Map<String, dynamic> json) => Poi(
+PoiEntity _$PoiEntityFromJson(Map<String, dynamic> json) => PoiEntity(
       id: json['id'] as String,
       type: json['type'] as String? ?? "generic:unknown",
       descriptions: (json['descriptions'] as List<dynamic>?)
@@ -15,16 +15,18 @@ Poi _$PoiFromJson(Map<String, dynamic> json) => Poi(
       openingHours: json['openingHours'] as String?,
       phone: json['phone'] as String?,
       images: (json['images'] as List<dynamic>?)
-              ?.map((e) => Image.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => ImageEntity.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
       address: json['address'] as String?,
       infoUrl: json['infoUrl'] as String?,
       location: Waypoint.fromJson(json['location'] as Map<String, dynamic>),
       tags: (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList(),
-    );
+    ).._poiType = json['_poiType'] == null
+        ? null
+        : PoiType.fromJson(json['_poiType'] as Map<String, dynamic>);
 
-Map<String, dynamic> _$PoiToJson(Poi instance) {
+Map<String, dynamic> _$PoiEntityToJson(PoiEntity instance) {
   final val = <String, dynamic>{
     'id': instance.id,
     'type': instance.type,
@@ -45,5 +47,6 @@ Map<String, dynamic> _$PoiToJson(Poi instance) {
   writeNotNull('infoUrl', instance.infoUrl);
   val['images'] = instance.images.map((e) => e.toJson()).toList();
   val['location'] = instance.location.toJson();
+  writeNotNull('_poiType', instance._poiType?.toJson());
   return val;
 }

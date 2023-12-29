@@ -1,2 +1,2 @@
-export 'poi-utility-services.dart';
-export '../use-cases/hike/hike_search_results.dart';
+export 'geocalc_service.dart';
+export 'game_rules_service.dart';

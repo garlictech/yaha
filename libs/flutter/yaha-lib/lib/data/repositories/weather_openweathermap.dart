@@ -22,8 +22,8 @@ class WeatherRepositoryOpenWeatherMap implements WeatherRepository {
           result.data['city']['sunset'] * 1000);
 
       return [
-        Weather(when: sunset, type: "sunset"),
-        Weather(when: sunrise, type: "sunrise")
+        WeatherEntity(when: sunset, type: "sunset"),
+        WeatherEntity(when: sunrise, type: "sunrise")
       ];
     });
   }

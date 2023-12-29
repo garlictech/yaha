@@ -28,7 +28,7 @@ class CheckpointModel {
 }
 
 class Checkpoint extends StatelessWidget {
-  final Poi poi;
+  final PoiEntity poi;
 
   const Checkpoint({Key? key, required this.poi}) : super(key: key);
 
