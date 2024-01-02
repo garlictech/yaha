@@ -7,7 +7,7 @@ part of 'places_on_route_map_controller.dart';
 // **************************************************************************
 
 String _$placesOnRouteMapControllerHash() =>
-    r'39aa320cd424be3cec1017ca138435cdabb05e81';
+    r'5ea6c85a3291cdc3010f03e0ec3608b27930d7b6';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -31,10 +31,10 @@ class _SystemHash {
 }
 
 abstract class _$PlacesOnRouteMapController
-    extends BuildlessAutoDisposeNotifier<PlacesOnRouteMapState> {
+    extends BuildlessAutoDisposeAsyncNotifier<PlacesOnRouteMapState> {
   late final String hikeId;
 
-  PlacesOnRouteMapState build(
+  FutureOr<PlacesOnRouteMapState> build(
     String hikeId,
   );
 }
@@ -44,7 +44,8 @@ abstract class _$PlacesOnRouteMapController
 const placesOnRouteMapControllerProvider = PlacesOnRouteMapControllerFamily();
 
 /// See also [PlacesOnRouteMapController].
-class PlacesOnRouteMapControllerFamily extends Family<PlacesOnRouteMapState> {
+class PlacesOnRouteMapControllerFamily
+    extends Family<AsyncValue<PlacesOnRouteMapState>> {
   /// See also [PlacesOnRouteMapController].
   const PlacesOnRouteMapControllerFamily();
 
@@ -83,7 +84,7 @@ class PlacesOnRouteMapControllerFamily extends Family<PlacesOnRouteMapState> {
 
 /// See also [PlacesOnRouteMapController].
 class PlacesOnRouteMapControllerProvider
-    extends AutoDisposeNotifierProviderImpl<PlacesOnRouteMapController,
+    extends AutoDisposeAsyncNotifierProviderImpl<PlacesOnRouteMapController,
         PlacesOnRouteMapState> {
   /// See also [PlacesOnRouteMapController].
   PlacesOnRouteMapControllerProvider(
@@ -115,7 +116,7 @@ class PlacesOnRouteMapControllerProvider
   final String hikeId;
 
   @override
-  PlacesOnRouteMapState runNotifierBuild(
+  FutureOr<PlacesOnRouteMapState> runNotifierBuild(
     covariant PlacesOnRouteMapController notifier,
   ) {
     return notifier.build(
@@ -140,7 +141,7 @@ class PlacesOnRouteMapControllerProvider
   }
 
   @override
-  AutoDisposeNotifierProviderElement<PlacesOnRouteMapController,
+  AutoDisposeAsyncNotifierProviderElement<PlacesOnRouteMapController,
       PlacesOnRouteMapState> createElement() {
     return _PlacesOnRouteMapControllerProviderElement(this);
   }
@@ -161,13 +162,13 @@ class PlacesOnRouteMapControllerProvider
 }
 
 mixin PlacesOnRouteMapControllerRef
-    on AutoDisposeNotifierProviderRef<PlacesOnRouteMapState> {
+    on AutoDisposeAsyncNotifierProviderRef<PlacesOnRouteMapState> {
   /// The parameter `hikeId` of this provider.
   String get hikeId;
 }
 
 class _PlacesOnRouteMapControllerProviderElement
-    extends AutoDisposeNotifierProviderElement<PlacesOnRouteMapController,
+    extends AutoDisposeAsyncNotifierProviderElement<PlacesOnRouteMapController,
         PlacesOnRouteMapState> with PlacesOnRouteMapControllerRef {
   _PlacesOnRouteMapControllerProviderElement(super.provider);
 

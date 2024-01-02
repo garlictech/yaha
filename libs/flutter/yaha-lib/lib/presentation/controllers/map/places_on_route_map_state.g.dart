@@ -14,7 +14,6 @@ abstract class $PlacesOnRouteMapState {
   List<Marker>? get globalMarkers;
   List<Marker>? get distanceMarkers;
   LatLngBounds? get mapBounds;
-  bool get showLoader;
   bool get isMapOnly;
   bool get isPoifilterOn;
   bool get isOffroutePoisShown;
@@ -26,7 +25,6 @@ abstract class $PlacesOnRouteMapState {
     List<Marker>? globalMarkers,
     List<Marker>? distanceMarkers,
     LatLngBounds? mapBounds,
-    bool? showLoader,
     bool? isMapOnly,
     bool? isPoifilterOn,
     bool? isOffroutePoisShown,
@@ -38,7 +36,6 @@ abstract class $PlacesOnRouteMapState {
         globalMarkers: globalMarkers ?? this.globalMarkers,
         distanceMarkers: distanceMarkers ?? this.distanceMarkers,
         mapBounds: mapBounds ?? this.mapBounds,
-        showLoader: showLoader ?? this.showLoader,
         isMapOnly: isMapOnly ?? this.isMapOnly,
         isPoifilterOn: isPoifilterOn ?? this.isPoifilterOn,
         isOffroutePoisShown: isOffroutePoisShown ?? this.isOffroutePoisShown,
@@ -54,7 +51,6 @@ abstract class $PlacesOnRouteMapState {
       this.globalMarkers,
       this.distanceMarkers,
       this.mapBounds,
-      this.showLoader,
       this.isMapOnly,
       this.isPoifilterOn,
       this.isOffroutePoisShown,
@@ -67,7 +63,6 @@ abstract class $PlacesOnRouteMapState {
       globalMarkers: change.globalMarkers,
       distanceMarkers: change.distanceMarkers,
       mapBounds: change.mapBounds,
-      showLoader: change.showLoader,
       isMapOnly: change.isMapOnly,
       isPoifilterOn: change.isPoifilterOn,
       isOffroutePoisShown: change.isOffroutePoisShown,
@@ -77,7 +72,7 @@ abstract class $PlacesOnRouteMapState {
 
   @override
   String toString() =>
-      "PlacesOnRouteMapState(offroutePois: $offroutePois, hike: $hike, globalMarkers: $globalMarkers, distanceMarkers: $distanceMarkers, mapBounds: $mapBounds, showLoader: $showLoader, isMapOnly: $isMapOnly, isPoifilterOn: $isPoifilterOn, isOffroutePoisShown: $isOffroutePoisShown, tappedOffroutePoiIcon: $tappedOffroutePoiIcon)";
+      "PlacesOnRouteMapState(offroutePois: $offroutePois, hike: $hike, globalMarkers: $globalMarkers, distanceMarkers: $distanceMarkers, mapBounds: $mapBounds, isMapOnly: $isMapOnly, isPoifilterOn: $isPoifilterOn, isOffroutePoisShown: $isOffroutePoisShown, tappedOffroutePoiIcon: $tappedOffroutePoiIcon)";
 
   @override
   // ignore: avoid_equals_and_hash_code_on_mutable_classes
@@ -89,7 +84,6 @@ abstract class $PlacesOnRouteMapState {
       globalMarkers == other.globalMarkers &&
       distanceMarkers == other.distanceMarkers &&
       mapBounds == other.mapBounds &&
-      showLoader == other.showLoader &&
       isMapOnly == other.isMapOnly &&
       isPoifilterOn == other.isPoifilterOn &&
       isOffroutePoisShown == other.isOffroutePoisShown &&
@@ -104,7 +98,6 @@ abstract class $PlacesOnRouteMapState {
     result = 37 * result + globalMarkers.hashCode;
     result = 37 * result + distanceMarkers.hashCode;
     result = 37 * result + mapBounds.hashCode;
-    result = 37 * result + showLoader.hashCode;
     result = 37 * result + isMapOnly.hashCode;
     result = 37 * result + isPoifilterOn.hashCode;
     result = 37 * result + isOffroutePoisShown.hashCode;
@@ -120,7 +113,6 @@ class PlacesOnRouteMapState$Change {
     this.globalMarkers,
     this.distanceMarkers,
     this.mapBounds,
-    this.showLoader,
     this.isMapOnly,
     this.isPoifilterOn,
     this.isOffroutePoisShown,
@@ -132,7 +124,6 @@ class PlacesOnRouteMapState$Change {
   List<Marker>? globalMarkers;
   List<Marker>? distanceMarkers;
   LatLngBounds? mapBounds;
-  bool showLoader;
   bool isMapOnly;
   bool isPoifilterOn;
   bool isOffroutePoisShown;
@@ -168,12 +159,6 @@ class PlacesOnRouteMapState$ {
     (mapBoundsContainer) => mapBoundsContainer.mapBounds,
     (mapBoundsContainer, mapBounds) =>
         mapBoundsContainer.copyWith(mapBounds: mapBounds),
-  );
-
-  static final showLoader = Lens<PlacesOnRouteMapState, bool>(
-    (showLoaderContainer) => showLoaderContainer.showLoader,
-    (showLoaderContainer, showLoader) =>
-        showLoaderContainer.copyWith(showLoader: showLoader),
   );
 
   static final isMapOnly = Lens<PlacesOnRouteMapState, bool>(

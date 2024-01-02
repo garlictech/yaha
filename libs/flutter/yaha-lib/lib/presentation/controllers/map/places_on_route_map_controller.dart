@@ -1,78 +1,31 @@
+import 'package:flutter_yaha_lib/app/app.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:flutter_map/flutter_map.dart';
-import 'package:functional_data/functional_data.dart';
-import 'package:flutter_yaha_lib/domain/entities/hike/hike_entity.dart';
-import 'package:flutter_yaha_lib/domain/entities/poi/poi_entity.dart';
+
+import 'distance_markers.dart';
+import 'places_on_route_map_state.dart';
+import 'utils/utils.dart';
 
 part 'places_on_route_map_controller.g.dart';
-
-@FunctionalData()
-class PlacesOnRouteMapState extends $PlacesOnRouteMapState {
-  @override
-  final List<PoiEntity>? offroutePois;
-  @override
-  final HikeEntity? hike;
-  @override
-  final List<Marker>? globalMarkers;
-  @override
-  final List<Marker>? distanceMarkers;
-  @override
-  final LatLngBounds? mapBounds;
-  @override
-  final bool showLoader;
-  @override
-  final bool isMapOnly;
-  @override
-  final bool isPoifilterOn;
-  @override
-  final bool isOffroutePoisShown;
-  @override
-  final String? tappedOffroutePoiIcon;
-
-  List<Marker> get allMarkers {
-    return [...(globalMarkers ?? []), ...(distanceMarkers ?? [])];
-  }
-
-  PlacesOnRouteMapState(
-      {this.offroutePois,
-      this.hike,
-      this.globalMarkers,
-      this.distanceMarkers,
-      this.mapBounds,
-      this.showLoader = true,
-      this.isMapOnly = false,
-      this.isPoifilterOn = false,
-      this.isOffroutePoisShown = false,
-      this.tappedOffroutePoiIcon});
-}
 
 @riverpod
 class PlacesOnRouteMapController extends _$PlacesOnRouteMapController {
   @override
-  PlacesOnRouteMapState build(String hikeId) {
-    final hikeWithBounds = ref.watch(hikeWithBoundsProvider(hikeId));
-    final globalMarkers = ref.watch(globalMarkersProvider);
-    final distanceMarkers = ref.watch(distanceMarkersProvider(hikeId));
-    final offroutePois = ref.watch(filteredPoisAroundHikeProvider(hikeId));
+  Future<PlacesOnRouteMapState> build(String hikeId) async {
+    final hike = await ref.watch(createConfiguredHikeProvider(hikeId).future);
+    final globalMarkers = await ref.watch(globalMarkersProvider.future);
+    final distanceMarkers =
+        await ref.watch(distanceMarkersProvider(hikeId).future);
+    final offroutePois =
+        await ref.watch(filteredPoisAroundHikeProvider(hikeId).future);
 
-    if (hikeWithBounds == null ||
-        globalMarkers == null ||
-        distanceMarkers == null ||
-        offroutePois.loading) {
-      return PlacesOnRouteMapState(showLoader: true);
-    }
-
-    final hike = hikeWithBounds.value1;
-    final bounds = hikeWithBounds.value2;
-    final pois = offroutePois.data ?? [];
+    final bounds = hike.bounds;
 
     return PlacesOnRouteMapState(
         hike: hike,
         mapBounds: bounds,
         globalMarkers: globalMarkers,
         distanceMarkers: distanceMarkers,
-        offroutePois: pois,
-        showLoader: false);
+        offroutePois: offroutePois);
   }
 
   toggleOffroutePois() {
@@ -81,23 +34,33 @@ class PlacesOnRouteMapController extends _$PlacesOnRouteMapController {
         .togglePoisAroundHike();
   }
 
-  onMapOnlyPressed() {
-    state = state.copyWith(isMapOnly: !state.isMapOnly);
+  onMapOnlyPressed() async {
+    final value = await future;
+    final newValue = value.copyWith(isMapOnly: !value.isMapOnly);
+    state = AsyncValue.data(newValue);
   }
 
-  onPoiFilterPressed() {
-    state = state.copyWith(isPoifilterOn: true);
+  onPoiFilterPressed() async {
+    final value = await future;
+    final newValue = value.copyWith(isPoifilterOn: true);
+    state = AsyncValue.data(newValue);
   }
 
-  onPoiFilterCloseTapped() {
-    state = state.copyWith(isPoifilterOn: false);
+  onPoiFilterCloseTapped() async {
+    final value = await future;
+    final newValue = value.copyWith(isPoifilterOn: false);
+    state = AsyncValue.data(newValue);
   }
 
-  onOffroutePoiIconTapped(String poiId) {
-    state = state.copyWith(tappedOffroutePoiIcon: poiId);
+  onOffroutePoiIconTapped(String poiId) async {
+    final value = await future;
+    final newValue = value.copyWith(tappedOffroutePoiIcon: poiId);
+    state = AsyncValue.data(newValue);
   }
 
-  hideAllModals() {
-    state = state.copyWith(isPoifilterOn: false, tappedOffroutePoiIcon: null);
+  hideAllModals() async {
+    final value = await future;
+    final newValue = value.copyWith(tappedOffroutePoiIcon: null);
+    state = AsyncValue.data(newValue);
   }
 }

@@ -6,7 +6,7 @@ part of 'distance_markers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$distanceMarkersHash() => r'c11e8ee94cd756c2b62a15c7b4c9549e0a8f9f77';
+String _$distanceMarkersHash() => r'9e5cf73ecdcb8e8a4f4359d89e932a87f4e70450';
 
 /// Copied from Dart SDK
 class _SystemHash {

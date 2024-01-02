@@ -1,9 +1,10 @@
 import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_yaha_lib/app/app.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:flutter_yaha_lib/domain/use-cases/hike/hike.dart';
-import 'package:flutter_yaha_lib/ui/views/shared/widgets/yaha-colors.dart';
+
+import '../../widgets/shared/shared.dart';
 
 part 'distance_markers.g.dart';
 
@@ -11,7 +12,7 @@ part 'distance_markers.g.dart';
 class DistanceMarkers extends _$DistanceMarkers {
   @override
   FutureOr<List<Marker>> build(String hikeId) async {
-    final hike = await ref.watch(configuredHikeProvider(hikeId).future);
+    final hike = await ref.watch(createConfiguredHikeProvider(hikeId).future);
 
     return hike.distanceMarkers
         .mapIndexed((index, d) => Marker(

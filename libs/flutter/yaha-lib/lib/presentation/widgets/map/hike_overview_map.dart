@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_yaha_lib/app/app.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:flutter_yaha_lib/domain/domain.dart';
-import 'package:flutter_yaha_lib/domain/use-cases/hike/hike_with_bounds.dart';
-import 'package:flutter_yaha_lib/ui/views/map/providers/global_markers.dart';
-import 'package:flutter_yaha_lib/ui/views/map/controls/hike_map_control.dart';
-import 'package:flutter_yaha_lib/ui/views/poi/poi-icon.dart';
 
-import '../../../domain/entities/entities.dart';
+import '../../controllers/map/map.dart';
+import '../poi/poi.dart';
+import '../utils/error-utils.dart';
 import 'controls/global_map_control.dart';
+import 'controls/hike_map_control.dart';
 import 'leaflet_map_widgets.dart';
 
 class HikeOverviewMap extends ConsumerStatefulWidget {
@@ -31,41 +31,39 @@ class HikeOverviewMapState extends ConsumerState<HikeOverviewMap> {
 
   @override
   Widget build(BuildContext context) {
-    final hikeWithBounds = ref.watch(hikeWithBoundsProvider(widget.hikeId));
+    final hike = ref.watch(createConfiguredHikeProvider(widget.hikeId));
     final globalMarkers = ref.watch(globalMarkersProvider);
 
-    if (hikeWithBounds == null) {
-      return Container();
-    }
-
-    final hike = hikeWithBounds.value1;
-    final bounds = hikeWithBounds.value2;
-
-    return Stack(children: [
-      FlutterMap(
-        mapController: _mapController,
-        options: MapOptions(
-            initialCameraFit: CameraFit.bounds(
-          bounds: bounds,
-          padding: const EdgeInsets.all(20),
-        )),
-        children: <Widget>[
-          osmTileLayer,
-          _getHikeLayerWidget(hike),
-          _getMarkerLayerWidget(hike, globalMarkers ?? []),
-        ],
-      ),
-      Align(
-          alignment: Alignment.bottomRight,
-          child:
-              GlobalMapControl(mapcontroller: _mapController, bounds: bounds)),
-      Align(
-          alignment: Alignment.bottomLeft,
-          child: HikeMapControl(hikeId: widget.hikeId)),
-      Align(
-          alignment: Alignment.bottomLeft,
-          child: HikeMapControl(hikeId: widget.hikeId)),
-    ]);
+    return hike.when(
+        data: (hike) {
+          return Stack(children: [
+            FlutterMap(
+              mapController: _mapController,
+              options: MapOptions(
+                  initialCameraFit: CameraFit.bounds(
+                bounds: hike.bounds,
+                padding: const EdgeInsets.all(20),
+              )),
+              children: <Widget>[
+                osmTileLayer,
+                _getHikeLayerWidget(hike),
+                _getMarkerLayerWidget(hike, globalMarkers ?? []),
+              ],
+            ),
+            Align(
+                alignment: Alignment.bottomRight,
+                child: GlobalMapControl(
+                    mapcontroller: _mapController, bounds: hike.bounds)),
+            Align(
+                alignment: Alignment.bottomLeft,
+                child: HikeMapControl(hikeId: widget.hikeId)),
+            Align(
+                alignment: Alignment.bottomLeft,
+                child: HikeMapControl(hikeId: widget.hikeId)),
+          ]);
+        },
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (error, stack) => errorWidget(error, stack));
   }
 
   _getHikeLayerWidget(HikeEntity hike) {

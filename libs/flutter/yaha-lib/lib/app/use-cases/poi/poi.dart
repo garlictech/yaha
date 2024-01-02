@@ -6,3 +6,5 @@ export 'pois_along_hike.dart';
 export 'random_touristic_pois_along_hike.dart';
 export 'touristic_pois_along_hike.dart';
 export 'touristic_pois_along_hike_sorted_by_distance.dart';
+export 'filtered_pois_along_hike.dart';
+export 'filtered_pois_around_hike.dart';

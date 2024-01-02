@@ -18,8 +18,6 @@ class PlacesOnRouteMapState extends $PlacesOnRouteMapState {
   @override
   final LatLngBounds? mapBounds;
   @override
-  final bool showLoader;
-  @override
   final bool isMapOnly;
   @override
   final bool isPoifilterOn;
@@ -38,7 +36,6 @@ class PlacesOnRouteMapState extends $PlacesOnRouteMapState {
       this.globalMarkers,
       this.distanceMarkers,
       this.mapBounds,
-      this.showLoader = true,
       this.isMapOnly = false,
       this.isPoifilterOn = false,
       this.isOffroutePoisShown = false,

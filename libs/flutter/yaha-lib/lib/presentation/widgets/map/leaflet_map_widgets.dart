@@ -35,5 +35,3 @@ Map<Symbol, dynamic> trackBaseProps(HikeEntity hike) {
     #points: points
   };
 }
-
-const roundMarkerSize = 30.0;

@@ -1,27 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'current_location_state.dart';
+part of 'current_location_service.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$currentLocationStateHash() =>
-    r'042a340c3d163bf1d7ca213c90fe591c4b5829f6';
+String _$currentLocationServiceHash() =>
+    r'775dfe859344c14661c77cebdef3e70c52cedc9f';
 
-/// See also [CurrentLocationState].
-@ProviderFor(CurrentLocationState)
-final currentLocationStateProvider =
-    AutoDisposeNotifierProvider<CurrentLocationState, Position?>.internal(
-  CurrentLocationState.new,
-  name: r'currentLocationStateProvider',
+/// See also [currentLocationService].
+@ProviderFor(currentLocationService)
+final currentLocationServiceProvider =
+    AutoDisposeFutureProvider<GeoLocation>.internal(
+  currentLocationService,
+  name: r'currentLocationServiceProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$currentLocationStateHash,
+      : _$currentLocationServiceHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$CurrentLocationState = AutoDisposeNotifier<Position?>;
+typedef CurrentLocationServiceRef = AutoDisposeFutureProviderRef<GeoLocation>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

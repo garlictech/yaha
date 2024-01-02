@@ -1,5 +1,6 @@
-import 'package:geolocator/geolocator.dart';
+import '../value_objects/geo_location.dart';
 
 abstract class GeoLocationRepository {
-  Future<Position> getCurrentLocation();
+  Future<GeoLocation> getCurrentLocation();
+  Stream<GeoLocation> watchCurrentLocation();
 }

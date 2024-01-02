@@ -11,3 +11,4 @@ export 'supported_pois.dart';
 export 'bounding_box.dart';
 export 'failure.dart';
 export 'track_search_filters.dart';
+export 'geo_location.dart';

@@ -1,9 +1,29 @@
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter_yaha_lib/domain/domain.dart';
 
-class GeoLocationRepositoryImpl implements GeoLocationRepository {
+import '../mappers/geo_location_mappers.dart';
+
+class GeoLocationRepositoryGeoLocator implements GeoLocationRepository {
+  static const LocationSettings locationSettings = LocationSettings(
+    accuracy: LocationAccuracy.high,
+    distanceFilter: 10,
+  );
+
   @override
   getCurrentLocation() async {
+    await _checkPermission();
+
+    return GeoLocationMappers.fromPosition(
+        await Geolocator.getCurrentPosition());
+  }
+
+  @override
+  Stream<GeoLocation> watchCurrentLocation() {
+    return Geolocator.getPositionStream(locationSettings: locationSettings)
+        .map(GeoLocationMappers.fromPosition);
+  }
+
+  _checkPermission() async {
     bool serviceEnabled;
     LocationPermission permission;
 
@@ -34,19 +54,5 @@ class GeoLocationRepositoryImpl implements GeoLocationRepository {
       return Future.error(
           'Location permissions are permanently denied, we cannot request permissions.');
     }
-
-    // When we reach here, permissions are granted and we can
-    // continue accessing the position of the device.
-/*    return Position(
-        heading: 0,
-        speedAccuracy: 0,
-        speed: 0,
-        longitude: 19.960138,
-        latitude: 47.844277,
-        accuracy: 0,
-        altitude: 0,
-        timestamp: DateTime(1));
-  */
-    return await Geolocator.getCurrentPosition();
   }
 }

@@ -3,15 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
+import 'package:flutter_yaha_lib/app/app.dart';
+import 'package:flutter_yaha_lib/domain/domain.dart';
+import 'package:flutter_yaha_lib/presentation/widgets/utils/error-utils.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:flutter_yaha_lib/domain/use-cases/poi/filtered_pois_around_hike.dart';
-import '../../../domain/entities/entities.dart';
+import '../../controllers/map/map.dart';
+import '../poi/poi.dart';
+import 'buttons/poi_filter_button.dart';
+import 'controls/layers_control.dart';
 import 'controls/layers_modal.dart';
 import 'controls/poi_popup.dart';
 import 'controls/global_map_control.dart';
 import 'controls/hike_map_control.dart';
+import 'controls/poi_selector_modal.dart';
 import 'leaflet_map_widgets.dart';
-import 'places_on_route_map_controller.dart';
 
 typedef OnroutePoiMarkerBuilder = Marker Function(
     BuildContext context, PoiEntity poi, int poiIndex);
@@ -27,12 +32,11 @@ class PlacesOnRouteMap extends ConsumerStatefulWidget {
   final double headerHeight = 105.0;
 
   const PlacesOnRouteMap(
-      {Key? key,
+      {super.key,
       this.onroutePoiMarkerBuilder,
       this.onroutePois = const [],
       required this.hikeId,
-      required this.cardHeight})
-      : super(key: key);
+      required this.cardHeight});
 
   @override
   PlacesOnRouteMapState createState() => PlacesOnRouteMapState();
@@ -98,7 +102,7 @@ class PlacesOnRouteMapState extends ConsumerState<PlacesOnRouteMap> {
                     _isLayerSelectorOn = false;
                   });
                 },
-                bounds: bounds),
+                initialCameraFit: CameraFit.bounds(bounds: bounds)),
             children: <Widget>[
               _mainTileLayer,
               if (!isMapOnly) _getHikeLayerWidget(),
@@ -223,49 +227,55 @@ class PlacesOnRouteMapState extends ConsumerState<PlacesOnRouteMap> {
   _getMarkerClusterLayerWidget() {
     return Consumer(builder: (c, ref, child) {
       final offroutePois =
-          ref.watch(filteredPoisAroundHikeProvider(widget.hikeId)).data ?? [];
+          ref.watch(filteredPoisAroundHikeProvider(widget.hikeId));
 
-      final onrouteMarkers = widget.onroutePoiMarkerBuilder == null
-          ? const <Marker>[]
-          : widget.onroutePois
-              .mapIndexed<Marker>((index, poi) =>
-                  widget.onroutePoiMarkerBuilder!(context, poi, index))
-              .toList();
+      return offroutePois.when(data: (offroutePois) {
+        final onrouteMarkers = widget.onroutePoiMarkerBuilder == null
+            ? const <Marker>[]
+            : widget.onroutePois
+                .mapIndexed<Marker>((index, poi) =>
+                    widget.onroutePoiMarkerBuilder!(context, poi, index))
+                .toList();
 
-      final offrouteMarkers = offroutePois
-          .mapIndexed<Marker>(
-              (index, poi) => _offroutePoiMarkerBuilder(context, poi))
-          .toList();
+        final offrouteMarkers = offroutePois
+            .mapIndexed<Marker>(
+                (index, poi) => _offroutePoiMarkerBuilder(context, poi))
+            .toList();
 
-      return MarkerClusterLayerWidget(
-        options: MarkerClusterLayerOptions(
-          markers: [...onrouteMarkers, ...(offrouteMarkers)],
-          maxClusterRadius: 45,
-          size: const Size(40, 40),
-          alignment: Alignment.center,
-          padding: const EdgeInsets.all(50),
-          maxZoom: 15,
-          builder: (context, markers) {
-            final bool isCurrentInCluster = markers.where((marker) {
-              return marker.key.toString() == const Key("CURRENT").toString();
-            }).isNotEmpty;
+        return MarkerClusterLayerWidget(
+          options: MarkerClusterLayerOptions(
+            markers: [...onrouteMarkers, ...(offrouteMarkers)],
+            maxClusterRadius: 45,
+            size: const Size(40, 40),
+            alignment: Alignment.center,
+            padding: const EdgeInsets.all(50),
+            maxZoom: 15,
+            builder: (context, markers) {
+              final bool isCurrentInCluster = markers.where((marker) {
+                return marker.key.toString() == const Key("CURRENT").toString();
+              }).isNotEmpty;
 
-            return Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: isCurrentInCluster
-                      ? Colors.red
-                      : Theme.of(context).primaryColor),
-              child: Center(
-                child: Text(
-                  markers.length.toString(),
-                  style: const TextStyle(color: Colors.white),
+              return Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: isCurrentInCluster
+                        ? Colors.red
+                        : Theme.of(context).primaryColor),
+                child: Center(
+                  child: Text(
+                    markers.length.toString(),
+                    style: const TextStyle(color: Colors.white),
+                  ),
                 ),
-              ),
-            );
-          },
-        ),
-      );
+              );
+            },
+          ),
+        );
+      }, loading: () {
+        return const CircularProgressIndicator();
+      }, error: (err, stack) {
+        return errorWidget(err, stack);
+      });
     });
   }
 
