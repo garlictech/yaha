@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../shared/shared.dart';
-import '../weather/weather-column-tile-widget.dart';
-import '../weather/weather-row-tile-widget.dart';
+import '../widgets/shared/shared.dart';
+import '../widgets/weather/weather.dart';
 
 class WeatherScreen extends ConsumerWidget {
-  const WeatherScreen({Key? key}) : super(key: key);
+  const WeatherScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -32,17 +31,17 @@ class WeatherScreen extends ConsumerWidget {
                 return SafeArea(
                   child: Column(
                     children: [
-                      Stack(
+                      const Stack(
                         alignment: Alignment.center,
                         children: [
-                          const Align(
+                          Align(
                             alignment: Alignment.centerLeft,
                             child: YahaBackButton(),
                           ),
                           Align(
                             alignment: Alignment.center,
                             child: Column(
-                              children: const [
+                              children: [
                                 Text(
                                   'Budapest',
                                   style: TextStyle(
@@ -128,9 +127,9 @@ class WeatherScreen extends ConsumerWidget {
                                 thickness: YahaBorderWidth.xxxSmall,
                               ),
                             ),
-                            Row(
+                            const Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: const [
+                              children: [
                                 WeatherRowTile(
                                   time: 'Now',
                                   icon:
@@ -178,8 +177,8 @@ class WeatherScreen extends ConsumerWidget {
                                 thickness: YahaBorderWidth.xxxSmall,
                               ),
                             ),
-                            Column(
-                              children: const [
+                            const Column(
+                              children: [
                                 WeatherColumnTile(
                                   day: 'Tuesday',
                                   icon:

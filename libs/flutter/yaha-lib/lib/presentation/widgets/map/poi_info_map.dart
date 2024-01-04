@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_yaha_lib/app/app.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:flutter_yaha_lib/domain/use-cases/hike/hike_with_bounds.dart';
-import 'package:flutter_yaha_lib/ui/views/poi/poi-icon.dart';
 
 import '../../../domain/entities/entities.dart';
+import '../../controllers/map/utils/parameters.dart';
+import '../../controllers/map/utils/utils.dart';
+import '../poi/poi.dart';
+import '../utils/utils.dart';
 import 'controls/global_map_control.dart';
-import 'providers/global_markers.dart';
 import 'leaflet_map_widgets.dart';
 
 class PoiInfoMap extends ConsumerStatefulWidget {
   final String hikeId;
   final PoiEntity poi;
 
-  const PoiInfoMap({Key? key, required this.hikeId, required this.poi})
-      : super(key: key);
+  const PoiInfoMap({super.key, required this.hikeId, required this.poi});
 
   @override
   PoiInfoMapState createState() => PoiInfoMapState();
@@ -31,23 +32,30 @@ class PoiInfoMapState extends ConsumerState<PoiInfoMap> {
 
   @override
   Widget build(BuildContext context) {
-    final hikeWithBounds = ref.watch(hikeWithBoundsProvider(widget.hikeId));
-    final globalMarkers = ref.watch(globalMarkersProvider);
+    final trackState = ref.watch(createConfiguredHikeProvider(widget.hikeId));
+    final globalMarkersState = ref.watch(globalMarkersProvider);
 
-    if (hikeWithBounds == null) {
-      return Container();
+    if (trackState is AsyncError || globalMarkersState is AsyncError) {
+      return errorWidget(trackState.error, null);
     }
-    final hike = hikeWithBounds.value1;
-    final bounds = hikeWithBounds.value2;
+
+    final hike = trackState.asData?.value;
+    final globalMarkers = globalMarkersState.asData?.value;
+
+    if (hike == null || globalMarkers == null) {
+      return errorWidget("Hike not found", null);
+    }
+
+    final bounds = hike.bounds;
 
     return Stack(children: [
       FlutterMap(
         mapController: _mapController,
-        options: MapOptions(bounds: bounds),
+        options: MapOptions(initialCameraFit: CameraFit.bounds(bounds: bounds)),
         children: <Widget>[
           osmTileLayer,
           _getHikeLayerWidget(hike),
-          _getMarkerLayerWidget(hike, globalMarkers ?? []),
+          _getMarkerLayerWidget(hike, globalMarkers),
         ],
       ),
       Align(

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_yaha_lib/ui/views/map/pois-of-hike-map.dart';
 import 'package:flutter_yaha_lib/domain/domain.dart';
-import '../shared/shared.dart';
+
+import '../widgets/map/map.dart';
+import '../widgets/shared/shared.dart';
 
 class PlacesOnRouteScreen extends ConsumerWidget {
   final HikeEntity hike;
 
-  const PlacesOnRouteScreen({Key? key, required this.hike}) : super(key: key);
+  const PlacesOnRouteScreen({super.key, required this.hike});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

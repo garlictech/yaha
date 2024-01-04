@@ -1,6 +1,5 @@
-import 'package:flutter_yaha_lib/domain/entities/image/image_entity.dart';
-import 'package:flutter_yaha_lib/domain/entities/value_objects/search-by-radius-input.dart';
-import 'package:flutter_yaha_lib/domain/entities/value_objects/search-safe-images-around-hike-input.dart';
+import '../../entities/entities.dart';
+import '../../value_objects/value_objects.dart';
 
 abstract class ImageRepository {
   Future<ImageEntity?> getImage(String id);

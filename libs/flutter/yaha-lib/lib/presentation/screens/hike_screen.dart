@@ -3,10 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:flutter_yaha_lib/domain/domain.dart';
+import 'package:flutter_yaha_lib/presentation/widgets/utils/utils.dart';
 
 import '../../app/app.dart';
 import '../../providers/providers.dart';
+import '../widgets/hikes/hikes.dart';
+import '../widgets/map/map.dart';
+import '../widgets/poi/poi.dart';
 import '../widgets/shared/shared.dart';
+import 'places_on_route_screen.dart';
 
 SpeedDial buildSpeedDial() {
   return SpeedDial(
@@ -92,122 +98,120 @@ class HikeScreen extends ConsumerWidget {
     final timeText =
         "Start time: ${hikeSettings.startTime.day}/${hikeSettings.startTime.month}, ${hikeSettings.startTime.hour}:${hikeSettings.startTime.minute.toString().padLeft(2, '0')}";
 
-    if (hikeState.loading) {
-      return const CircularProgressIndicator();
-    }
-
-    if (hikeState.data == null) {
-      return const Text('Oops, something unexpected happened');
-    }
-
-    final hike = hikeState.data!;
-
-    return Scaffold(
-        body: CustomScrollView(
-      physics: const BouncingScrollPhysics(),
-      slivers: <Widget>[
-        YahaSliverAppBar(
-            title: hike.descriptions.first.title ?? '',
-            content: Stack(
-              children: [
-                if (hike.mainImageUrl != null)
-                  AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 1000),
-                    child: YahaImage(
-                        key: UniqueKey(), imageUrl: hike.mainImageUrl!),
-                  ),
-                Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                        begin: Alignment.bottomCenter,
-                        end: Alignment.topCenter,
-                        colors: [
-                          Colors.black.withOpacity(0.6),
-                          Colors.black.withOpacity(0.2),
-                        ]),
-                  ),
-                ),
-              ],
-            )),
-        SliverList(
-          delegate: SliverChildBuilderDelegate(
-            (BuildContext context, int index) {
-              return Container(
-                padding: const EdgeInsets.only(
-                  top: YahaSpaceSizes.general,
-                ),
-                child: Column(
-                  children: [
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          const HikeScreenStartHikeButton(),
-                          HikeScreenShowOutlineButton(hike: hike)
-                        ]),
-                    Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: YahaSpaceSizes.small),
-                        child: HikeScreenDescription(
-                            summary: hike.descriptions.first.summary ?? '')),
-                    Padding(
-                        padding:
-                            const EdgeInsets.only(bottom: YahaSpaceSizes.large),
-                        child: ElevatedButton.icon(
-                            icon: const Icon(
-                              Icons.watch_rounded,
-                              size: YahaFontSizes.large,
-                            ),
-                            onPressed: () {
-                              DatePicker.showDateTimePicker(
-                                context,
-                                showTitleActions: true,
-                                minTime: DateTime.now(),
-                                onConfirm: (date) {
-                                  ref
-                                      .read(
-                                          hikingSettingsServiceProvider(hike.id)
-                                              .notifier)
-                                      .setStartTime(date);
-                                },
-                                currentTime: DateTime.now(),
-                              );
-                            },
-                            label: Text(timeText))),
-                    Container(
-                        margin:
-                            const EdgeInsets.only(bottom: YahaSpaceSizes.large),
-                        height: YahaBoxSizes.heightMedium,
-                        width: MediaQuery.of(context).size.width,
-                        child: GalleryWidget(
-                            key: UniqueKey(), imageUrls: hike.imageCardUrls)),
-                    Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: YahaSpaceSizes.small),
-                        child: HikeProperties(
-                            hike: hike,
-                            averageSpeedKmh: defaults.averageSpeedKmh)),
-                    const SectionTitle(title: 'Things on route'),
-                    ThingsOnRouteAsIcons(hike: hike),
-                    const SectionTitle(
-                        title: 'Some interesting places on route'),
-                    InterestingPlacesOnRouteList(hike: hike),
-                    Container(
-                        padding:
-                            const EdgeInsets.only(top: YahaSpaceSizes.small),
-                        child: ShowMoreButton(
-                          nextScreen: PlacesOnRouteScreen(hike: hike),
-                        )),
-                    Container(
-                      padding: const EdgeInsets.only(top: YahaSpaceSizes.large),
-                      height: 340,
-                      width: MediaQuery.of(context).size.width,
-                      /*child: ClipRRect(
+    return hikeState.when(
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: errorWidget,
+        data: (hike) => Scaffold(
+                body: CustomScrollView(
+              physics: const BouncingScrollPhysics(),
+              slivers: <Widget>[
+                YahaSliverAppBar(
+                    title: hike.descriptions.first.title ?? '',
+                    content: Stack(
+                      children: [
+                        if (hike.mainImageUrl != null)
+                          AnimatedSwitcher(
+                            duration: const Duration(milliseconds: 1000),
+                            child: YahaImage(
+                                key: UniqueKey(), imageUrl: hike.mainImageUrl!),
+                          ),
+                        Container(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                                begin: Alignment.bottomCenter,
+                                end: Alignment.topCenter,
+                                colors: [
+                                  Colors.black.withOpacity(0.6),
+                                  Colors.black.withOpacity(0.2),
+                                ]),
+                          ),
+                        ),
+                      ],
+                    )),
+                SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (BuildContext context, int index) {
+                      return Container(
+                        padding: const EdgeInsets.only(
+                          top: YahaSpaceSizes.general,
+                        ),
+                        child: Column(
+                          children: [
+                            Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  const HikeScreenStartHikeButton(),
+                                  HikeScreenShowOutlineButton(hike: hike)
+                                ]),
+                            Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: YahaSpaceSizes.small),
+                                child: HikeScreenDescription(
+                                    summary:
+                                        hike.descriptions.first.summary ?? '')),
+                            Padding(
+                                padding: const EdgeInsets.only(
+                                    bottom: YahaSpaceSizes.large),
+                                child: ElevatedButton.icon(
+                                    icon: const Icon(
+                                      Icons.watch_rounded,
+                                      size: YahaFontSizes.large,
+                                    ),
+                                    onPressed: () {
+                                      DatePicker.showDateTimePicker(
+                                        context,
+                                        showTitleActions: true,
+                                        minTime: DateTime.now(),
+                                        onConfirm: (date) {
+                                          ref
+                                              .read(
+                                                  hikingSettingsServiceProvider(
+                                                          hike.id)
+                                                      .notifier)
+                                              .setStartTime(date);
+                                        },
+                                        currentTime: DateTime.now(),
+                                      );
+                                    },
+                                    label: Text(timeText))),
+                            Container(
+                                margin: const EdgeInsets.only(
+                                    bottom: YahaSpaceSizes.large),
+                                height: YahaBoxSizes.heightMedium,
+                                width: MediaQuery.of(context).size.width,
+                                child: GalleryWidget(
+                                    key: UniqueKey(),
+                                    imageUrls: hike.imageCardUrls)),
+                            Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: YahaSpaceSizes.small),
+                                child: HikeProperties(
+                                    hike: hike,
+                                    averageSpeedKmh: defaults.averageSpeedKmh)),
+                            const SectionTitle(title: 'Things on route'),
+                            ThingsOnRouteAsIcons(hike: hike),
+                            const SectionTitle(
+                                title: 'Some interesting places on route'),
+                            InterestingPlacesOnRouteList(hike: hike),
+                            Container(
+                                padding: const EdgeInsets.only(
+                                    top: YahaSpaceSizes.small),
+                                child: ShowMoreButton(
+                                  nextScreen: PlacesOnRouteScreen(hike: hike),
+                                )),
+                            Container(
+                              padding: const EdgeInsets.only(
+                                  top: YahaSpaceSizes.large),
+                              height: 340,
+                              width: MediaQuery.of(context).size.width,
+                              /*child: ClipRRect(
                             borderRadius:
                                 BorderRadius.circular(YahaBorderRadius.general),*/
-                      child: HikeOverviewMap(hikeId: hike.id),
-                      //),
-                    ),
-                    /*const SectionTitle(title: 'Weather'),
+                              child: HikeOverviewMap(hikeId: hike.id),
+                              //),
+                            ),
+                            /*const SectionTitle(title: 'Weather'),
                       GridView.count(
                         shrinkWrap: true,
                         primary: false,
@@ -331,15 +335,15 @@ class HikeScreen extends ConsumerWidget {
                       ),
                       const ShowMoreButton(nextScreen: WeatherScreen()),
                       */
-                  ],
+                          ],
+                        ),
+                      );
+                    },
+                    childCount: 1,
+                  ),
                 ),
-              );
-            },
-            childCount: 1,
-          ),
-        ),
-      ],
-    ));
+              ],
+            )));
     //floatingActionButton: buildSpeedDial(),
   }
 }
@@ -364,7 +368,7 @@ class HikeScreenDescription extends StatelessWidget {
 }
 
 class HikeScreenShowOutlineButton extends ConsumerWidget {
-  final domain.HikeEntity hike;
+  final HikeEntity hike;
   const HikeScreenShowOutlineButton({super.key, required this.hike});
 
   @override

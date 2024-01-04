@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_yaha_lib/app/app.dart';
 import 'package:rxdart/rxdart.dart';
 
-import '../shared/widgets/yaha-text-input.dart';
-import '/domain/domain.dart' as domain;
+import '../shared/shared.dart';
 
 class HikeSearchByContentFieldViewModel {
   HikeSearchByContentFieldViewModel();
@@ -24,9 +24,8 @@ class HikeSearchByContentFieldPresenter
     _subscription = subject
         .debounceTime(const Duration(seconds: 1))
         .where((text) => text.length > 2)
-        .doOnData((String text) => ref
-            .read(domain.hikeSearchStateProvider.notifier)
-            .searchInContent(text))
+        .doOnData((String text) =>
+            ref.read(searchTracksByContentProvider.notifier).execute(text))
         .listen(null);
 
     controller.addListener(() {
@@ -46,7 +45,7 @@ final searchByContentPresenterInstance = StateNotifierProvider.autoDispose<
     (ref) => HikeSearchByContentFieldPresenter(ref: ref));
 
 class HikeSearchByContentField extends ConsumerWidget {
-  const HikeSearchByContentField({Key? key}) : super(key: key);
+  const HikeSearchByContentField({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

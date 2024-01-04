@@ -2,28 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter_yaha_lib/domain/domain.dart';
 import 'package:flutter_yaha_lib/app/utils/units.dart';
 
+import '../../screens/poi_info_screen.dart';
 import 'poi-icon.dart';
 import '../shared/shared.dart';
-import '../screens/poi_info_screen.dart';
 
 class PoiListTileWidget extends StatelessWidget {
   final PoiEntity poi;
+  final HikeEntity hike;
   final String title;
   final double distanceFromStart;
 
   const PoiListTileWidget({
-    Key? key,
+    super.key,
     required this.poi,
+    required this.hike,
     required this.title,
     required this.distanceFromStart,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => PoiInfoScreen(poi: poi)));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => PoiInfoScreen(poi: poi, hike: hike)));
       },
       child: Padding(
         padding: const EdgeInsets.only(
@@ -35,9 +39,9 @@ class PoiListTileWidget extends StatelessWidget {
             Row(
               children: [
                 SizedBox(
-                    child: PoiIcon(poiType: poi.poiType),
                     height: 40,
-                    width: 40),
+                    width: 40,
+                    child: PoiIcon(poiType: poi.poiType)),
                 Padding(
                   padding: const EdgeInsets.only(left: YahaSpaceSizes.small),
                   child: Column(

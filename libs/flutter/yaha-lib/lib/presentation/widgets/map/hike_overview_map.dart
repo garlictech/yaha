@@ -5,7 +5,8 @@ import 'package:flutter_yaha_lib/app/app.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:flutter_yaha_lib/domain/domain.dart';
 
-import '../../controllers/map/map.dart';
+import '../../controllers/map/utils/parameters.dart';
+import '../../controllers/map/utils/utils.dart';
 import '../poi/poi.dart';
 import '../utils/error-utils.dart';
 import 'controls/global_map_control.dart';
@@ -31,39 +32,49 @@ class HikeOverviewMapState extends ConsumerState<HikeOverviewMap> {
 
   @override
   Widget build(BuildContext context) {
-    final hike = ref.watch(createConfiguredHikeProvider(widget.hikeId));
-    final globalMarkers = ref.watch(globalMarkersProvider);
+    final hikeState = ref.watch(createConfiguredHikeProvider(widget.hikeId));
+    final globalMarkersState = ref.watch(globalMarkersProvider);
 
-    return hike.when(
-        data: (hike) {
-          return Stack(children: [
-            FlutterMap(
-              mapController: _mapController,
-              options: MapOptions(
-                  initialCameraFit: CameraFit.bounds(
-                bounds: hike.bounds,
-                padding: const EdgeInsets.all(20),
-              )),
-              children: <Widget>[
-                osmTileLayer,
-                _getHikeLayerWidget(hike),
-                _getMarkerLayerWidget(hike, globalMarkers ?? []),
-              ],
-            ),
-            Align(
-                alignment: Alignment.bottomRight,
-                child: GlobalMapControl(
-                    mapcontroller: _mapController, bounds: hike.bounds)),
-            Align(
-                alignment: Alignment.bottomLeft,
-                child: HikeMapControl(hikeId: widget.hikeId)),
-            Align(
-                alignment: Alignment.bottomLeft,
-                child: HikeMapControl(hikeId: widget.hikeId)),
-          ]);
-        },
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (error, stack) => errorWidget(error, stack));
+    if (hikeState is AsyncError || globalMarkersState is AsyncError) {
+      return errorWidget(hikeState.error, null);
+    }
+
+    if (hikeState is AsyncLoading || globalMarkersState is AsyncLoading) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
+    final hike = hikeState.asData?.value;
+    final globalMarkers = globalMarkersState.asData?.value;
+
+    if (hike == null || globalMarkers == null) {
+      return errorWidget("Hike not found", null);
+    }
+
+    return Stack(children: [
+      FlutterMap(
+        mapController: _mapController,
+        options: MapOptions(
+            initialCameraFit: CameraFit.bounds(
+          bounds: hike.bounds,
+          padding: const EdgeInsets.all(20),
+        )),
+        children: <Widget>[
+          osmTileLayer,
+          _getHikeLayerWidget(hike),
+          _getMarkerLayerWidget(hike, globalMarkers),
+        ],
+      ),
+      Align(
+          alignment: Alignment.bottomRight,
+          child: GlobalMapControl(
+              mapcontroller: _mapController, bounds: hike.bounds)),
+      Align(
+          alignment: Alignment.bottomLeft,
+          child: HikeMapControl(hikeId: widget.hikeId)),
+      Align(
+          alignment: Alignment.bottomLeft,
+          child: HikeMapControl(hikeId: widget.hikeId)),
+    ]);
   }
 
   _getHikeLayerWidget(HikeEntity hike) {

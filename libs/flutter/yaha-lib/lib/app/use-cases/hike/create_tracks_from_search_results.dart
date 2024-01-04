@@ -1,16 +1,19 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:flutter_yaha_lib/domain/domain.dart';
 
 import 'fetch_track_entity.dart';
 
-class CreateTracksFromSearchResultsUsecase {
-  final Ref ref;
+part 'create_tracks_from_search_results.g.dart';
 
-  CreateTracksFromSearchResultsUsecase({required this.ref});
+@riverpod
+class CreateTracksFromSearchResultsUsecase
+    extends _$CreateTracksFromSearchResultsUsecase {
+  @override
+  FutureOr<void> build() {}
 
   execute(List<String> foundTrackIds) {
     final streams = foundTrackIds

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_yaha_lib/domain/entities/hike/hike_entity.dart';
+import '../../controllers/pois/pois.dart';
 import 'poi_icon_list.dart';
-import 'things_on_route_as_icons.controller.dart';
 
 class ThingsOnRouteAsIcons extends ConsumerWidget {
   final HikeEntity hike;

@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_yaha_lib/app/app.dart';
+import 'package:flutter_yaha_lib/domain/domain.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:flutter_yaha_lib/domain/use-cases/poi/filtered_pois_along_hike.dart';
-import 'package:flutter_yaha_lib/ui/views/screens/poi_info_screen.dart';
-
-import 'package:flutter_yaha_lib/ui/views/poi/poi-icon.dart';
-import 'package:flutter_yaha_lib/ui/views/poi/poi_list_item.dart';
-import 'package:flutter_yaha_lib/domain/domain.dart' as domain;
 
 import '../../controllers/map/map.dart';
+import '../../screens/poi_info_screen.dart';
+import '../poi/poi-icon.dart';
+import '../poi/poi_list_item.dart';
+import '../utils/utils.dart';
 import 'places_on_route_map.dart';
 
 /// Renders the map widget with OSM map.
 class PoisOfHikeMap extends ConsumerStatefulWidget {
-  final domain.HikeEntity hike;
+  final HikeEntity hike;
 
   /// Creates the map widget with OSM map.
-  const PoisOfHikeMap({Key? key, required this.hike}) : super(key: key);
+  const PoisOfHikeMap({super.key, required this.hike});
 
   @override
   PoisOfHikeMapState createState() => PoisOfHikeMapState();
@@ -51,9 +51,20 @@ class PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
 
   @override
   Widget build(BuildContext context) {
-    final poisAlongHike =
-        ref.watch(filteredPoisAlongHikeProvider(widget.hike.id)).data ?? [];
-    final mapPresenter = ref.read(leafletMapMVPProvider.notifier);
+    final poisAlongHikeState =
+        ref.watch(filteredPoisAlongHikeProvider(widget.hike.id));
+
+    final mapPresenter = ref.read(leafletMapControllerProvider.notifier);
+
+    if (poisAlongHikeState is AsyncError) {
+      return errorWidget(poisAlongHikeState.error, null);
+    }
+
+    if (poisAlongHikeState is AsyncLoading) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
+    final poisAlongHike = poisAlongHikeState.asData?.value ?? [];
 
     if (poisAlongHike.length != _cardNum) {
       _currentSelectedIndex = 0;
@@ -67,8 +78,7 @@ class PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
                 ? 0.7
                 : 0.8);
 
-    onroutePoiMarkerBuilder(
-        BuildContext context, domain.PoiEntity poi, int index) {
+    onroutePoiMarkerBuilder(BuildContext context, PoiEntity poi, int index) {
       final double markerSize = _currentSelectedIndex == index ? 50 : 25;
       final key = _currentSelectedIndex == index ? "CURRENT" : index.toString();
 
@@ -183,8 +193,8 @@ class PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
     );
   }
 
-  void _handlePageChange(int index, List<domain.PoiEntity> pois,
-      LeafletMapController mapPresenter) {
+  void _handlePageChange(
+      int index, List<PoiEntity> pois, LeafletMapController mapPresenter) {
     /// While updating the page viewer through interaction, selected position's
     /// marker should be moved to the center of the maps. However, when the
     /// marker is directly clicked, only the respective card should be moved to
@@ -198,8 +208,8 @@ class PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
     }
   }
 
-  void _updateSelectedCard(int index, List<domain.PoiEntity> pois,
-      LeafletMapController mapPresenter) {
+  void _updateSelectedCard(
+      int index, List<PoiEntity> pois, LeafletMapController mapPresenter) {
     setState(() {
       _currentSelectedIndex = index;
     });
@@ -209,10 +219,10 @@ class PoisOfHikeMapState extends ConsumerState<PoisOfHikeMap>
     /// marker is directly clicked, only the respective card should be moved to
     /// center and the marker itself should not move to the center of the maps.
     if (_canUpdateFocalLatLng) {
-      mapPresenter.mapCenter = domain.Location(
+      mapPresenter.setMapCenter(Location(
         lat: pois[_currentSelectedIndex].location.location.latitude,
         lon: pois[_currentSelectedIndex].location.location.longitude,
-      );
+      ));
     }
 
     /// Updating the design of the selected marker. Please check the

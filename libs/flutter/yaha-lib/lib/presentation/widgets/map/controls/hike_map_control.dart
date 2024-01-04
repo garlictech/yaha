@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_yaha_lib/ui/views/map/buttons/reverse_hike_button.dart';
-import 'package:flutter_yaha_lib/ui/views/map/buttons/show_pois_around_hike_button.dart';
+
+import '../buttons/reverse_hike_button.dart';
+import '../buttons/show_pois_around_hike_button.dart';
 
 class HikeMapControl extends ConsumerWidget {
   static const size = 35.0;

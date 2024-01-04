@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
-import 'package:flutter_yaha_lib/ui/providers/main_tab_controller.dart';
-import 'package:flutter_yaha_lib/ui/views/screens/settings-screen.dart';
-import 'package:flutter_yaha_lib/ui/views/screens/search_hike_screen.dart';
-import 'package:flutter_yaha_lib/ui/views/shared/shared.dart';
 
+import '../controllers/main_tab_controller.dart';
+import '../widgets/shared/shared.dart';
 import 'overview_screen.dart';
+import 'search_hike_screen.dart';
+import 'settings_screen.dart';
 import 'tracking.dart';
 
 class MainScreen extends ConsumerWidget {
-  const MainScreen({Key? key}) : super(key: key);
+  const MainScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

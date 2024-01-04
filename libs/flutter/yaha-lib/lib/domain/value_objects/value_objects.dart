@@ -12,3 +12,5 @@ export 'bounding_box.dart';
 export 'failure.dart';
 export 'track_search_filters.dart';
 export 'geo_location.dart';
+export 'search-safe-images-around-hike-input.dart';
+export 'track_search_results.dart';

@@ -1,14 +1,15 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_yaha_lib/ui/views/poi/poi-icon.dart';
-import 'package:flutter_yaha_lib/ui/views/shared/shared.dart';
 import 'package:flutter_yaha_lib/domain/entities/entities.dart';
+
+import '../shared/shared.dart';
+import 'poi-icon.dart';
 
 class PoiListItem extends ConsumerWidget {
   final PoiOfHikeEntity poi;
 
-  const PoiListItem({Key? key, required this.poi}) : super(key: key);
+  const PoiListItem({super.key, required this.poi});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_yaha_lib/domain/entities/entities.dart';
+import 'package:flutter_yaha_lib/domain/domain.dart';
 
 import '../shared/shared.dart';
 

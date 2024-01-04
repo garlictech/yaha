@@ -7,7 +7,7 @@ part of 'things_on_route_as_icons.controller.dart';
 // **************************************************************************
 
 String _$thingsOnRouteAsIconsControllerHash() =>
-    r'8dbc9589b8dfcb644c30b6c6235ca754a3352ebf';
+    r'805cbb1630b9ac280eccd4e777014abafe608a0b';
 
 /// Copied from Dart SDK
 class _SystemHash {

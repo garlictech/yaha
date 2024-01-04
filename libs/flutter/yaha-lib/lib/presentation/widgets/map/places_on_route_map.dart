@@ -56,8 +56,12 @@ class PlacesOnRouteMapState extends ConsumerState<PlacesOnRouteMap> {
   @override
   Widget build(BuildContext context) {
     final isMapOnly = ref.watch(
-        placesOnRouteMapControllerProvider(widget.hikeId)
-            .select((value) => value.isMapOnly));
+            placesOnRouteMapControllerProvider(widget.hikeId)
+                .select((v) => switch (v) {
+                      AsyncData(:final value) => value.isMapOnly,
+                      _ => null,
+                    })) ??
+        false;
 
     onLayersPressed() {
       setState(() {
@@ -87,7 +91,10 @@ class PlacesOnRouteMapState extends ConsumerState<PlacesOnRouteMap> {
       Consumer(builder: (c, ref, child) {
         final bounds = ref.watch(
             placesOnRouteMapControllerProvider(widget.hikeId)
-                .select((value) => value.mapBounds));
+                .select((v) => switch (v) {
+                      AsyncData(:final value) => value.mapBounds,
+                      _ => null,
+                    }));
 
         return Stack(children: [
           FlutterMap(
@@ -102,7 +109,8 @@ class PlacesOnRouteMapState extends ConsumerState<PlacesOnRouteMap> {
                     _isLayerSelectorOn = false;
                   });
                 },
-                initialCameraFit: CameraFit.bounds(bounds: bounds)),
+                initialCameraFit: CameraFit.bounds(
+                    bounds: bounds ?? _mapController.camera.visibleBounds)),
             children: <Widget>[
               _mainTileLayer,
               if (!isMapOnly) _getHikeLayerWidget(),
@@ -150,8 +158,12 @@ class PlacesOnRouteMapState extends ConsumerState<PlacesOnRouteMap> {
                 ))),
       Consumer(builder: (c, ref, child) {
         final isPoiFilterOn = ref.watch(
-            placesOnRouteMapControllerProvider(widget.hikeId)
-                .select((value) => value.isPoifilterOn));
+                placesOnRouteMapControllerProvider(widget.hikeId)
+                    .select((v) => switch (v) {
+                          AsyncData(:final value) => value.isPoifilterOn,
+                          _ => null,
+                        })) ??
+            false;
 
         return isPoiFilterOn
             ? Align(
@@ -165,28 +177,36 @@ class PlacesOnRouteMapState extends ConsumerState<PlacesOnRouteMap> {
             : Container();
       }),
       Consumer(builder: (c, ref, child) {
-        final tappedOffroutePoi = ref.watch(
+        final tappedOffroutePoiIcon = ref.watch(
             placesOnRouteMapControllerProvider(widget.hikeId)
-                .select((value) => value.tappedOffroutePoiIcon));
-        final hike = ref.watch(placesOnRouteMapControllerProvider(widget.hikeId)
-            .select((value) => value.hike));
+                .select((v) => switch (v) {
+                      AsyncData(:final value) => value.tappedOffroutePoiIcon,
+                      _ => null,
+                    }));
 
-        return tappedOffroutePoi != null && hike != null
+        final hike = ref.watch(placesOnRouteMapControllerProvider(widget.hikeId)
+            .select((v) => switch (v) {
+                  AsyncData(:final value) => value.hike,
+                  _ => null,
+                }));
+
+        return tappedOffroutePoiIcon != null && hike != null
             ? Align(
                 alignment: Alignment.topLeft,
                 child: Container(
                     margin: EdgeInsets.only(
                         top: widget.headerHeight + 55, left: 10.0),
                     child: PoiPopup(
-                      poiId: tappedOffroutePoi,
+                      poiId: tappedOffroutePoiIcon,
                       hike: hike,
                     )))
             : Container();
       }),
       Consumer(builder: (c, ref, child) {
-        final showLoader = ref.watch(
-            placesOnRouteMapControllerProvider(widget.hikeId)
-                .select((value) => value.showLoader));
+        final showLoader =
+            ref.watch(placesOnRouteMapControllerProvider(widget.hikeId))
+                is AsyncLoading;
+
         return showLoader
             ? Align(
                 alignment: Alignment.bottomCenter,
@@ -200,14 +220,17 @@ class PlacesOnRouteMapState extends ConsumerState<PlacesOnRouteMap> {
   _getHikeLayerWidget() {
     return Consumer(builder: (c, ref, child) {
       final hike = ref.watch(placesOnRouteMapControllerProvider(widget.hikeId)
-          .select((value) => value.hike));
+          .select((v) => switch (v) {
+                AsyncData(:final value) => value.hike,
+                _ => null,
+              }));
 
       if (hike != null) {
         final line = Function.apply(
             Polyline.new, [], {...trackBaseProps(hike), #strokeWidth: 10.0});
         return PolylineLayer(polylines: [line]);
       } else {
-        return PolylineLayer(polylines: const []);
+        return const PolylineLayer(polylines: []);
       }
     });
   }
@@ -215,8 +238,12 @@ class PlacesOnRouteMapState extends ConsumerState<PlacesOnRouteMap> {
   _getMarkerLayerWidget() {
     return Consumer(builder: (c, ref, child) {
       final markers = ref.watch(
-          placesOnRouteMapControllerProvider(widget.hikeId)
-              .select((value) => value.allMarkers));
+              placesOnRouteMapControllerProvider(widget.hikeId)
+                  .select((v) => switch (v) {
+                        AsyncData(:final value) => value.allMarkers,
+                        _ => null,
+                      })) ??
+          [];
 
       return MarkerLayer(
         markers: markers,

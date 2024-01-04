@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../widgets/hikes/hikes.dart';
 import '../widgets/shared/shared.dart';
 import 'account-screen.dart';
 

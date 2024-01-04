@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_yaha_lib/domain/domain.dart';
+import 'package:flutter_yaha_lib/app/app.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'map_icon_button.dart';

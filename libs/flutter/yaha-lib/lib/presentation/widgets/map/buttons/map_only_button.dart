@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../places_on_route_map_controller.dart';
+import '../../../controllers/map/map.dart';
 import 'map_icon_button.dart';
 
 class MapOnlyButton extends ConsumerWidget {
@@ -12,7 +12,11 @@ class MapOnlyButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isMapOnly = ref.watch(placesOnRouteMapControllerProvider(hikeId)
-        .select((value) => value.isMapOnly));
+            .select((v) => switch (v) {
+                  AsyncData(:final value) => value.isMapOnly,
+                  _ => null,
+                })) ??
+        false;
 
     return MapIconButton(
         onPressed: () {

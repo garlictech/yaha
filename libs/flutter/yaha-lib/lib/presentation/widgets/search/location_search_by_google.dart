@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_yaha_lib/app/app.dart';
+import 'package:flutter_yaha_lib/domain/domain.dart';
+import 'package:flutter_yaha_lib/providers/providers.dart';
 //import 'package:google_maps_webservice/places.dart';
-import 'package:flutter_yaha_lib/app/providers.dart';
 //import 'package:flutter_typeahead/flutter_typeahead.dart';
 //import 'package:flutter_yaha_lib/config.dart';
 //import '../shared/shared.dart';
-import '/domain/domain.dart' as domain;
 
 //final places = GoogleMapsPlaces(apiKey: kGoogleApiKey);
 
@@ -42,16 +43,18 @@ class LocationSearchByGoogleFieldPresenter
   onTapCurrentLocation() async {
     final geoLoc = ref.read(geoLocationRepositoryProvider);
     await geoLoc.getCurrentLocation().then((currentLocation) => _getHikes(
-        domain.Point(
+        GeoPoint(
             latitude: currentLocation.latitude,
             longitude: currentLocation.longitude,
             height: 0)));
   }
 
-  _getHikes(domain.Point origin) {
+  _getHikes(GeoPoint origin) {
+    final radius = ref.read(trackSearchFiltersServiceProvider).searchRadius;
+
     ref
-        .read(domain.hikeSearchStateProvider.notifier)
-        .searchAroundLocation(origin);
+        .read(searchTracksAroundLocationUsecaseProvider.notifier)
+        .execute(origin, radius);
   }
 }
 

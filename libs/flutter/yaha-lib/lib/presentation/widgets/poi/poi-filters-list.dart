@@ -5,7 +5,7 @@ import '../shared/shared.dart';
 const List<Object> defaultPoiFiltersList = [];
 
 class PoiFiltersList extends StatelessWidget {
-  const PoiFiltersList({Key? key}) : super(key: key);
+  const PoiFiltersList({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class PoiFiltersList extends StatelessWidget {
 */
     return SizedBox(
       width: MediaQuery.of(context).size.width,
-      child: Wrap(
+      child: const Wrap(
         direction: Axis.horizontal,
         spacing: YahaSpaceSizes.medium,
         runSpacing: YahaSpaceSizes.xSmall,

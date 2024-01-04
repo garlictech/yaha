@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_yaha_lib/domain/domain.dart' as domain;
-import 'package:flutter_yaha_lib/domain/entities/poi/poi_entity.dart';
-import 'package:flutter_yaha_lib/ui/views/map/poi_info_map.dart';
+import 'package:flutter_yaha_lib/domain/domain.dart';
 
-import '../shared/shared.dart';
-import '../utils/get_poi_background_image.dart';
+import '../widgets/map/map.dart';
+import '../widgets/shared/shared.dart';
+import '../widgets/utils/utils.dart';
 
 class LocationLine extends StatelessWidget {
   final String label;
@@ -66,10 +65,9 @@ class LocationInfo extends StatelessWidget {
 }
 
 class PoiInfoScreen extends ConsumerWidget {
-  final domain.PoiEntity poi;
-  final domain.HikeEntity hike;
-  const PoiInfoScreen({Key? key, required this.poi, required this.hike})
-      : super(key: key);
+  final PoiEntity poi;
+  final HikeEntity hike;
+  const PoiInfoScreen({super.key, required this.poi, required this.hike});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

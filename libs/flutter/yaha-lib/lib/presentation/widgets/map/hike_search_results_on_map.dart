@@ -3,21 +3,19 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_yaha_lib/domain/domain.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:flutter_yaha_lib/domain/entities/hike/track_entity.dart';
-import 'package:flutter_yaha_lib/domain/use-cases/hike/hike_search_results.dart';
-import 'package:flutter_yaha_lib/ui/views/hikes/hike-card.dart';
-import 'package:flutter_yaha_lib/ui/views/map/leaflet_map_widgets.dart';
 
+import '../../controllers/controllers.dart';
+import '../../controllers/map/utils/utils.dart';
+import '../hikes/hike-card.dart';
+import '../utils/utils.dart';
 import 'controls/global_map_control.dart';
-import 'providers/global_markers.dart';
 import 'hike_card_popup_state.dart';
+import 'leaflet_map_widgets.dart';
 
 class HikeSearchSesultsOnMap extends ConsumerStatefulWidget {
-  final List<String> hikeIds;
-
-  const HikeSearchSesultsOnMap({Key? key, required this.hikeIds})
-      : super(key: key);
+  const HikeSearchSesultsOnMap({super.key});
 
   @override
   HikeSearchSesultsOnMapState createState() => HikeSearchSesultsOnMapState();
@@ -67,33 +65,42 @@ class HikeSearchSesultsOnMapState
 
   @override
   Widget build(BuildContext context) {
-    final hikesWithBounds = ref.watch(hikeSearchResultsProvider);
-    final globalMarkers = ref.watch(globalMarkersProvider);
+    final searchState = ref.watch(trackSearchControllerProvider);
+    final globalMarkersState = ref.watch(globalMarkersProvider);
     final MapController mapController = MapController();
 
-    if (hikesWithBounds == null) {
-      return Container();
+    if (searchState is AsyncLoading || globalMarkersState is AsyncLoading) {
+      return const Center(child: CircularProgressIndicator());
     }
 
-    final hikes = hikesWithBounds.value1;
-    final bounds = hikesWithBounds.value2;
+    final hits = searchState.asData?.value;
+    final globalMarkers = globalMarkersState.asData?.value;
 
-    return Stack(children: [
-      FlutterMap(
-        mapController: mapController,
-        options: MapOptions(bounds: bounds),
-        children: <Widget>[
-          osmTileLayer,
-          _getHikeLayerWidget(hikes),
-          _getMarkerLayerWidget(hikes, globalMarkers ?? []),
-        ],
-      ),
-      Align(
-          alignment: Alignment.bottomRight,
-          child:
-              GlobalMapControl(bounds: bounds, mapcontroller: mapController)),
-      popup
-    ]);
+    if (hits == null || globalMarkers == null) {
+      return errorWidget("Track search error", null);
+    }
+
+    final bounds = hits.bounds;
+
+    return bounds != null
+        ? Stack(children: [
+            FlutterMap(
+              mapController: mapController,
+              options: MapOptions(
+                  initialCameraFit: CameraFit.bounds(bounds: bounds)),
+              children: <Widget>[
+                osmTileLayer,
+                _getHikeLayerWidget(hits.tracks),
+                _getMarkerLayerWidget(hits.tracks, globalMarkers),
+              ],
+            ),
+            Align(
+                alignment: Alignment.bottomRight,
+                child: GlobalMapControl(
+                    bounds: bounds, mapcontroller: mapController)),
+            popup
+          ])
+        : const Center(child: Text("No hikes"));
   }
 
   _getHikeLayerWidget(List<TrackEntity> hikes) {

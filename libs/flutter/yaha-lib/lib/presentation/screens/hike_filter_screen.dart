@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_yaha_lib/app/app.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
@@ -10,15 +11,15 @@ class HikeFilters extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var filterSettingsStateNotifier =
-        ref.read(updateTrackSearchFiltersProvider.notifier);
-    var filterSettingsState = ref.watch(hikeSearchStateProvider);
+    var trackSearchFiltersService =
+        ref.read(trackSearchFiltersServiceProvider.notifier);
+    var trackSearchFilters = ref.watch(trackSearchFiltersServiceProvider);
     SfRangeValues lengthValues = SfRangeValues(
-        filterSettingsState.lengthMin, filterSettingsState.lengthMax);
+        trackSearchFilters.lengthMin, trackSearchFilters.lengthMax);
     SfRangeValues durationValues = SfRangeValues(
-        filterSettingsState.durationMin, filterSettingsState.durationMax);
+        trackSearchFilters.durationMin, trackSearchFilters.durationMax);
 
-    int durationValue = filterSettingsState.searchRadius;
+    int durationValue = trackSearchFilters.searchRadius;
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -54,7 +55,7 @@ class HikeFilters extends ConsumerWidget {
             minorTicksPerInterval: 1,
             values: lengthValues,
             onChanged: (dynamic value) {
-              filterSettingsStateNotifier.updateLength(value.start, value.end);
+              trackSearchFiltersService.updateLength(value.start, value.end);
             },
           ),
         ),
@@ -88,8 +89,7 @@ class HikeFilters extends ConsumerWidget {
             minorTicksPerInterval: 1,
             values: durationValues,
             onChanged: (dynamic value) {
-              filterSettingsStateNotifier.updateDuration(
-                  value.start, value.end);
+              trackSearchFiltersService.updateDuration(value.start, value.end);
             },
           ),
         ),
@@ -123,7 +123,7 @@ class HikeFilters extends ConsumerWidget {
             enableTooltip: true,
             minorTicksPerInterval: 1,
             onChanged: (dynamic value) {
-              filterSettingsStateNotifier.updateSearchRadius(value);
+              trackSearchFiltersService.updateSearchRadius(value);
             },
           ),
         ),
@@ -149,7 +149,7 @@ class HikeFilters extends ConsumerWidget {
           child: ToggleSwitch(
             minWidth: 100,
             inactiveBgColor: YahaColors.accentColor,
-            initialLabelIndex: filterSettingsState.difficultyIndex,
+            initialLabelIndex: trackSearchFilters.difficultyIndex,
             totalSwitches: 3,
             labels: const ['1', '2', '3'],
             onToggle: (index) {
@@ -166,7 +166,7 @@ class HikeFilters extends ConsumerWidget {
                   break;
               }
 
-              filterSettingsStateNotifier.updateDifficulty(
+              trackSearchFiltersService.updateDifficulty(
                   newDifficultyState, index ?? 0);
             },
           ),

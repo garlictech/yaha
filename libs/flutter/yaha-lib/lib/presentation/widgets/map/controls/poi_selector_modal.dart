@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_yaha_lib/app/app.dart';
 import 'package:flutter_yaha_lib/domain/domain.dart';
-import 'package:flutter_yaha_lib/ui/views/map/places_on_route_map_controller.dart';
-import 'package:flutter_yaha_lib/ui/views/poi/poi_icon_list.dart';
+
+import '../../../controllers/map/map.dart';
+import '../../poi/poi_icon_list.dart';
 
 class PoiSelectorModal extends ConsumerWidget {
   final String hikeId;
@@ -38,8 +40,11 @@ class PoiSelectorModal extends ConsumerWidget {
       onCloseTapped();
     }
 
-    final hike = ref.watch(placesOnRouteMapControllerProvider(hikeId)
-        .select((value) => value.hike));
+    final hike = ref.watch(
+        placesOnRouteMapControllerProvider(hikeId).select((v) => switch (v) {
+              AsyncData(:final value) => value.hike,
+              _ => null,
+            }));
 
     return hike == null
         ? Container()
@@ -62,10 +67,11 @@ class PoiSelectorModal extends ConsumerWidget {
                     color: Theme.of(context).colorScheme.primary)
               ]),
               Expanded(child: Consumer(builder: (c, ref, child) {
-                final pois =
-                    ref.watch(poisAlongHikeProvider(hikeId)).data ?? [];
-                return SingleChildScrollView(
-                    child: PoiIconList(
+                final poisState = ref.watch(poisAlongHikeProvider(hikeId));
+                return poisState.when(
+                    loading: () => const CircularProgressIndicator(),
+                    error: (err, stack) => const Text("Cannot load pois"),
+                    data: (pois) => PoiIconList(
                         types: PoiUtils.uniqueTypes(pois),
                         hike: hike,
                         onTap: onTapIcon));

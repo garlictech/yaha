@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_yaha_lib/ui/views/shared/shared.dart';
+
+import '../shared/shared.dart';
 
 class Statistics extends StatelessWidget {
   final int hikes;
@@ -7,11 +8,11 @@ class Statistics extends StatelessWidget {
   final int hours;
 
   const Statistics({
-    Key? key,
+    super.key,
     required this.hikes,
     required this.km,
     required this.hours,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

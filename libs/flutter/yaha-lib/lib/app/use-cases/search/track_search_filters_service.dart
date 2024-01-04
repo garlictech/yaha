@@ -1,10 +1,10 @@
 import 'package:flutter_yaha_lib/domain/domain.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'update_track_search_filters.g.dart';
+part 'track_search_filters_service.g.dart';
 
 @riverpod
-class UpdateTrackSearchFilters extends _$UpdateTrackSearchFilters {
+class TrackSearchFiltersService extends _$TrackSearchFiltersService {
   @override
   TrackSearchFilters build() {
     return TrackSearchFilters();

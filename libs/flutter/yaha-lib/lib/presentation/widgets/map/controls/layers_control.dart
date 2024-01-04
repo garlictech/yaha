@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_yaha_lib/ui/views/map/buttons/layers_button.dart';
-import 'package:flutter_yaha_lib/ui/views/map/buttons/map_only_button.dart';
+
+import '../buttons/layers_button.dart';
+import '../buttons/map_only_button.dart';
 
 class LayersControl extends ConsumerWidget {
   static const size = 35.0;

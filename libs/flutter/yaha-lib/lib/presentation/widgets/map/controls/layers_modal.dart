@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:flutter_yaha_lib/ui/theme.dart';
-import 'package:flutter_yaha_lib/ui/views/map/leaflet_map_widgets.dart';
+
+import '../../../theme.dart';
+import '../leaflet_map_widgets.dart';
 
 class LayersModalListElement extends StatelessWidget {
   final void Function() onTap;

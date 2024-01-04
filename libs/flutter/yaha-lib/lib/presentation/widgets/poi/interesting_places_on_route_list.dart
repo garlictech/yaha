@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_yaha_lib/app/app.dart';
 import 'package:flutter_yaha_lib/domain/entities/hike/hike_entity.dart';
-import 'package:flutter_yaha_lib/domain/use-cases/poi/random_touristic_pois_along_hike.dart';
-import 'package:flutter_yaha_lib/ui/views/shared/widgets/progress_indicator.dart';
-import 'package:flutter_yaha_lib/ui/views/shared/widgets/yaha-border-radius.dart';
-import 'package:flutter_yaha_lib/ui/views/shared/widgets/yaha-colors.dart';
-import 'package:flutter_yaha_lib/ui/views/shared/widgets/yaha-space-sizes.dart';
 
+import '../shared/shared.dart';
 import 'poi-title-list.dart';
 
 class InterestingPlacesOnRouteList extends ConsumerWidget {

@@ -1,11 +1,12 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_yaha_lib/domain/domain.dart' as domain;
+import 'package:flutter_yaha_lib/app/app.dart';
 import 'package:flutter_yaha_lib/domain/entities/hike/hike_entity.dart';
-import 'package:flutter_yaha_lib/ui/views/map/places_on_route_map_controller.dart';
-import 'package:flutter_yaha_lib/ui/views/screens/poi_info_screen.dart';
-import 'package:flutter_yaha_lib/ui/views/shared/widgets/yaha-image.dart';
+
+import '../../../controllers/map/map.dart';
+import '../../../screens/poi_info_screen.dart';
+import '../../shared/shared.dart';
 
 class PoiPopup extends ConsumerWidget {
   final String poiId;
@@ -15,7 +16,7 @@ class PoiPopup extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final poi = ref.watch(domain.poiProvider(poiId));
+    final poi = ref.watch(poiProvider(poiId));
     const popupSize = 200.0;
 
     onClose() {

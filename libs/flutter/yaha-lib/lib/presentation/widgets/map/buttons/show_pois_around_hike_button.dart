@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_yaha_lib/ui/views/map/places_on_route_map_controller.dart';
 
+import '../../../controllers/map/map.dart';
 import 'map_icon_button.dart';
 
 class ShowPoisAroundHikeButton extends ConsumerWidget {

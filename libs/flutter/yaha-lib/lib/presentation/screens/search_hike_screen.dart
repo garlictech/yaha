@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../map/hike_search_results_on_map.dart';
-import '/domain/domain.dart' as domain;
-import '../hikes/hike-card.dart';
-import '../search/location_search_by_google.dart';
 
-import '../shared/shared.dart';
-import '../search/hike_search_by_content.dart';
+import '../controllers/controllers.dart';
+import '../widgets/hikes/hikes.dart';
+import '../widgets/map/map.dart';
+import '../widgets/search/search.dart';
+import '../widgets/shared/shared.dart';
+import '../widgets/utils/utils.dart';
 
 class SearchHikeScreenFieldViewModel {
   final bool mapShown;
@@ -32,7 +32,7 @@ final presenterInstance = StateNotifierProvider<SearchHikeScreenFieldPresenter,
 });
 
 class SearchHikeScreen extends ConsumerStatefulWidget {
-  const SearchHikeScreen({Key? key}) : super(key: key);
+  const SearchHikeScreen({super.key});
 
   @override
   SearchHikeScreenState createState() => SearchHikeScreenState();
@@ -62,7 +62,7 @@ class SearchHikeScreenState extends ConsumerState<SearchHikeScreen>
 
   @override
   Widget build(BuildContext context) {
-    final searchState = ref.watch(domain.hikeSearchStateProvider);
+    final searchState = ref.watch(trackSearchControllerProvider);
     final model = ref.watch(presenterInstance);
     final presenter = ref.watch(presenterInstance.notifier);
 
@@ -111,22 +111,24 @@ class SearchHikeScreenState extends ConsumerState<SearchHikeScreen>
                     )),
               ])),
           Expanded(
-              child: searchState.searching
-                  ? const Center(child: CircularProgressIndicator())
-                  : searchState.noHits
+              child: searchState.when(
+                  error: errorWidget,
+                  loading: () =>
+                      const Center(child: CircularProgressIndicator()),
+                  data: (hits) => hits.tracks.isEmpty
                       ? const Center(child: Text("No hikes"))
                       : model.mapShown
-                          ? HikeSearchSesultsOnMap(hikeIds: searchState.hits)
+                          ? const HikeSearchSesultsOnMap()
                           : ListView(
                               itemExtent: 230,
-                              children: searchState.hits
+                              children: hits.tracks
                                   .map((hit) => Container(
                                       padding: const EdgeInsets.only(
                                           bottom: 5, left: 5, right: 5),
                                       child: HikeCard(
-                                          hikeId: hit,
+                                          hikeId: hit.id,
                                           distanceFromCurrentLocation: 2)))
-                                  .toList())),
+                                  .toList()))),
         ])));
   }
 }
