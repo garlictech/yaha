@@ -17,10 +17,7 @@ class TrackSearchController extends _$TrackSearchController {
 
     state = const AsyncLoading();
 
-    await usecase.execute();
-
-    final tracks =
-        await ref.read(searchTracksAroundCurrentLocationUseCaseProvider.future);
+    final tracks = await usecase.execute();
 
     final resultsProcessor =
         ref.read(createTracksFromSearchResultsUsecaseProvider.notifier);

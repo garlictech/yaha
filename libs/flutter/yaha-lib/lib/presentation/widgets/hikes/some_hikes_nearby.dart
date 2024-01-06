@@ -9,12 +9,25 @@ class SomeHikesNearby extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final searchResultState =
-        ref.watch(searchTracksAroundCurrentLocationUseCaseProvider);
+    final useCase =
+        ref.watch(searchTracksAroundCurrentLocationUseCaseProvider.notifier);
 
-    return HorizontalHikeCards(
-      title: 'Some hikes near you',
-      trackIds: searchResultState,
+    final searchResultState = useCase.execute();
+
+    return FutureBuilder(
+      future: searchResultState,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return HorizontalHikeCards(
+            title: 'Some hikes near you',
+            trackIds: snapshot.data ?? [],
+          );
+        } else if (snapshot.hasError) {
+          return Text('${snapshot.error}');
+        }
+
+        return const CircularProgressIndicator();
+      },
     );
   }
 }

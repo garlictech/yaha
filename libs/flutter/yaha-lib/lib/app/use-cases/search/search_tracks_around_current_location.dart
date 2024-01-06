@@ -10,16 +10,9 @@ part 'search_tracks_around_current_location.g.dart';
 class SearchTracksAroundCurrentLocationUseCase
     extends _$SearchTracksAroundCurrentLocationUseCase {
   @override
-  FutureOr<List<String>> build() {
-    return _execute();
-  }
+  FutureOr<void> build() {}
 
-  Future<void> execute() async {
-    state = const AsyncLoading();
-    state = await _execute();
-  }
-
-  _execute() async {
+  Future<List<String>> execute() async {
     final currentLocation =
         await ref.read(geoLocationRepositoryProvider).getCurrentLocation();
 
@@ -30,10 +23,8 @@ class SearchTracksAroundCurrentLocationUseCase
 
     final radius = ref.read(defaultsProvider).searchRadiusInMeters;
 
-    await ref
+    return ref
         .read(searchTracksAroundLocationUsecaseProvider.notifier)
         .execute(searchOrigin, radius);
-
-    return ref.read(searchTracksAroundLocationUsecaseProvider);
   }
 }

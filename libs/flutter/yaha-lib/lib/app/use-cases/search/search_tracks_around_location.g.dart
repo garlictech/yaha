@@ -7,13 +7,13 @@ part of 'search_tracks_around_location.dart';
 // **************************************************************************
 
 String _$searchTracksAroundLocationUsecaseHash() =>
-    r'bc4367ea027832a103de48f8a6bc67cdb365bc02';
+    r'98581a6e59825314ecd0987b31c4361c4073aab9';
 
 /// See also [SearchTracksAroundLocationUsecase].
 @ProviderFor(SearchTracksAroundLocationUsecase)
 final searchTracksAroundLocationUsecaseProvider =
     AutoDisposeAsyncNotifierProvider<SearchTracksAroundLocationUsecase,
-        List<String>>.internal(
+        void>.internal(
   SearchTracksAroundLocationUsecase.new,
   name: r'searchTracksAroundLocationUsecaseProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -23,7 +23,6 @@ final searchTracksAroundLocationUsecaseProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$SearchTracksAroundLocationUsecase
-    = AutoDisposeAsyncNotifier<List<String>>;
+typedef _$SearchTracksAroundLocationUsecase = AutoDisposeAsyncNotifier<void>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

@@ -9,16 +9,12 @@ part 'search_tracks_by_content.g.dart';
 @riverpod
 class SearchTracksByContent extends _$SearchTracksByContent {
   @override
-  FutureOr<List<String>> build() {
-    return [];
-  }
+  FutureOr<void> build() {}
 
-  Future<void> execute(String text) async {
-    state = const AsyncLoading();
-
+  Future<List<String>> execute(String text) async {
     final trackRepository = ref.read(trackRepositoryProvider);
 
-    state = await AsyncValue.guard(() => trackRepository
-        .searchTrackByContent(SearchByContentInput(content: text)));
+    return trackRepository
+        .searchTrackByContent(SearchByContentInput(content: text));
   }
 }

@@ -3,12 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 //import 'package:flutter_yaha_lib/utility/buttons/show-more-button.dart';
 
 import '../shared/shared.dart';
-import '../utils/error-utils.dart';
 import 'hike-card.dart';
 
 class HorizontalHikeCards extends ConsumerWidget {
   final String title;
-  final AsyncValue<List<String>> trackIds;
+  final List<String> trackIds;
 
   const HorizontalHikeCards(
       {required this.title, required this.trackIds, super.key});
@@ -19,19 +18,16 @@ class HorizontalHikeCards extends ConsumerWidget {
       SectionTitle(title: title),
       SizedBox(
           height: YahaBoxSizes.heightMedium,
-          child: trackIds.when(
-              data: (data) => ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: data
-                      .map((hikeId) => Container(
-                          margin: const EdgeInsets.only(
-                              right: YahaSpaceSizes.general),
-                          width: YahaBoxSizes.widthMedium,
-                          height: YahaBoxSizes.widthMedium,
-                          child: HikeCard(hikeId: hikeId)))
-                      .toList()),
-              loading: () => const Center(child: CircularProgressIndicator()),
-              error: errorWidget))
+          child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: trackIds
+                  .map((hikeId) => Container(
+                      margin:
+                          const EdgeInsets.only(right: YahaSpaceSizes.general),
+                      width: YahaBoxSizes.widthMedium,
+                      height: YahaBoxSizes.widthMedium,
+                      child: HikeCard(hikeId: hikeId)))
+                  .toList())),
       //ShowMoreButton(nextScreen: BestHikesOfTheWorld())
     ]);
   }

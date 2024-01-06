@@ -9,12 +9,25 @@ class RandomHikesWorldwide extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final searchResultState =
-        ref.watch(searchBestHikesOfTheWorldUseCaseProvider);
+    final useCase =
+        ref.watch(searchBestHikesOfTheWorldUseCaseProvider.notifier);
 
-    return HorizontalHikeCards(
-      title: 'Some hikes around the world',
-      trackIds: searchResultState,
+    final searchResultState = useCase.execute();
+
+    return FutureBuilder(
+      future: searchResultState,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return HorizontalHikeCards(
+            title: 'Some hikes around the world',
+            trackIds: snapshot.data ?? [],
+          );
+        } else if (snapshot.hasError) {
+          return Text('${snapshot.error}');
+        }
+
+        return const CircularProgressIndicator();
+      },
     );
   }
 }

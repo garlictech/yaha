@@ -7,18 +7,11 @@ part 'search_best_hikes_of_the_world.g.dart';
 class SearchBestHikesOfTheWorldUseCase
     extends _$SearchBestHikesOfTheWorldUseCase {
   @override
-  FutureOr<List<String>> build() {
-    return _execute();
-  }
+  FutureOr<void> build() {}
 
-  Future<void> execute() async {
-    state = const AsyncLoading();
-    _execute();
-  }
-
-  _execute() {
+  Future<List<String>> execute() {
     final trackRepository = ref.read(trackRepositoryProvider);
 
-    return AsyncValue.guard(() => trackRepository.getRandomTracks(10));
+    return trackRepository.getRandomTracks(10);
   }
 }

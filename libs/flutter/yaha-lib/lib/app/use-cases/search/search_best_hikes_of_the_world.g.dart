@@ -7,13 +7,13 @@ part of 'search_best_hikes_of_the_world.dart';
 // **************************************************************************
 
 String _$searchBestHikesOfTheWorldUseCaseHash() =>
-    r'5b6d30f90dd3d47c596cb6113eb2a6a73554bb53';
+    r'97d1144d1658c1123281f1b6b9ea10734a2cc328';
 
 /// See also [SearchBestHikesOfTheWorldUseCase].
 @ProviderFor(SearchBestHikesOfTheWorldUseCase)
 final searchBestHikesOfTheWorldUseCaseProvider =
     AutoDisposeAsyncNotifierProvider<SearchBestHikesOfTheWorldUseCase,
-        List<String>>.internal(
+        void>.internal(
   SearchBestHikesOfTheWorldUseCase.new,
   name: r'searchBestHikesOfTheWorldUseCaseProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -23,7 +23,6 @@ final searchBestHikesOfTheWorldUseCaseProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$SearchBestHikesOfTheWorldUseCase
-    = AutoDisposeAsyncNotifier<List<String>>;
+typedef _$SearchBestHikesOfTheWorldUseCase = AutoDisposeAsyncNotifier<void>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

@@ -7,7 +7,7 @@ part of 'track_search_controller.dart';
 // **************************************************************************
 
 String _$trackSearchControllerHash() =>
-    r'88b71c5c366a33b6b692483161b94dbda3ae6d79';
+    r'7ef7c17f7e12fe271260216f43ac8ba29267588e';
 
 /// See also [TrackSearchController].
 @ProviderFor(TrackSearchController)

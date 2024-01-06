@@ -8,15 +8,11 @@ part 'search_tracks_around_location.g.dart';
 class SearchTracksAroundLocationUsecase
     extends _$SearchTracksAroundLocationUsecase {
   @override
-  FutureOr<List<String>> build() {
-    return [];
-  }
+  FutureOr<void> build() {}
 
-  Future<void> execute(GeoPoint origin, int radiusInMeters) async {
+  Future<List<String>> execute(GeoPoint origin, int radiusInMeters) async {
     final trackRepository = ref.read(trackRepositoryProvider);
-    state = const AsyncLoading();
-
-    state = await AsyncValue.guard(() => trackRepository.searchTrackByRadius(
-        SearchByRadiusInput(origin: origin, radiusInMeters: radiusInMeters)));
+    return trackRepository.searchTrackByRadius(
+        SearchByRadiusInput(origin: origin, radiusInMeters: radiusInMeters));
   }
 }
