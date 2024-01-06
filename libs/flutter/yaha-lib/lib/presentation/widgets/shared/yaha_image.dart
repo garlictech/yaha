@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_yaha_lib/app/app.dart';
-import 'yaha-colors.dart';
+import 'progress_indicator.dart';
 
 class YahaImage extends ConsumerWidget {
   final String? placeholderImagePath;
@@ -35,8 +35,10 @@ class YahaImage extends ConsumerWidget {
                     )),
                   ),
               placeholder: (context, url) => placeholderImagePath == null
-                  ? const CircularProgressIndicator(
-                      color: YahaColors.lightGreen)
+                  ? Container(
+                      constraints: const BoxConstraints.expand(),
+                      color: Colors.black,
+                      child: const Center(child: YahaProgressIndicator()))
                   : placeHolder,
               errorWidget: (context, url, error) {
                 Future.delayed(Duration.zero).then((x) {

@@ -7,7 +7,7 @@ part of 'search_tracks_by_content.dart';
 // **************************************************************************
 
 String _$searchTracksByContentHash() =>
-    r'f818f474aca1d1c961eb279d4421e7d3afdf23db';
+    r'cd6b52d1104c1f98444391818fd978bfc87a6d6c';
 
 /// See also [SearchTracksByContent].
 @ProviderFor(SearchTracksByContent)

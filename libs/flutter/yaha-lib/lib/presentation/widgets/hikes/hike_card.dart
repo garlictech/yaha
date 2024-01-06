@@ -25,7 +25,8 @@ class HikeCard extends ConsumerWidget {
           final hikeState = ref.watch(createConfiguredHikeProvider(hikeId));
 
           if (hikeState.isLoading) {
-            return const YahaProgressIndicator(text: "Loading hike...");
+            return const Center(
+                child: YahaProgressIndicator(text: "Loading hike..."));
           }
 
           if (hikeState.error != null) {

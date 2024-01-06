@@ -19,5 +19,5 @@ export 'sliver-app-bar.dart';
 export 'screen_head_title_text.dart';
 export 'progress_indicator.dart';
 export 'section_title.dart';
-export 'yaha-image.dart';
+export 'yaha_image.dart';
 export 'yaha-text-input.dart';

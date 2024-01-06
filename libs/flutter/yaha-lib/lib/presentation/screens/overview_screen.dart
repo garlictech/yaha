@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_yaha_lib/presentation/widgets/hikes/some_hikes_nearby.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
+import '../controllers/hikes/hikes.dart';
 import '../widgets/hikes/hikes.dart';
 import '../widgets/shared/shared.dart';
 
@@ -19,6 +20,7 @@ class OverviewScreen extends ConsumerWidget {
       controller: refreshController,
       enablePullDown: true,
       onRefresh: () {
+        _refresh(ref);
         refreshController.refreshCompleted();
       },
       child: CustomScrollView(
@@ -63,5 +65,10 @@ class OverviewScreen extends ConsumerWidget {
         ],
       ),
     ));
+  }
+
+  _refresh(WidgetRef ref) {
+    ref.read(someHikesNearbyControllerProvider.notifier).refresh();
+    ref.read(randomHikesWorldwideControllerProvider.notifier).refresh();
   }
 }

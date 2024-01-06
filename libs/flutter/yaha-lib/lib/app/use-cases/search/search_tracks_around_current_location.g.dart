@@ -7,7 +7,7 @@ part of 'search_tracks_around_current_location.dart';
 // **************************************************************************
 
 String _$searchTracksAroundCurrentLocationUseCaseHash() =>
-    r'c82ce55d91937c7263980b1fe9fcf108942fa70c';
+    r'c947574c9b96bae63cafd000161cecbf2639eca0';
 
 /// See also [SearchTracksAroundCurrentLocationUseCase].
 @ProviderFor(SearchTracksAroundCurrentLocationUseCase)

@@ -1,33 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_yaha_lib/app/use-cases/search/search.dart';
 
-import 'horizontal-hike-cards.dart';
+import '../../controllers/hikes/hikes.dart';
+import 'horizontal_hike_cards.dart';
 
 class RandomHikesWorldwide extends ConsumerWidget {
   const RandomHikesWorldwide({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final useCase =
-        ref.watch(searchBestHikesOfTheWorldUseCaseProvider.notifier);
+    final hits = ref.watch(randomHikesWorldwideControllerProvider);
 
-    final searchResultState = useCase.execute();
-
-    return FutureBuilder(
-      future: searchResultState,
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return HorizontalHikeCards(
-            title: 'Some hikes around the world',
-            trackIds: snapshot.data ?? [],
-          );
-        } else if (snapshot.hasError) {
-          return Text('${snapshot.error}');
-        }
-
-        return const CircularProgressIndicator();
-      },
+    return HorizontalHikeCards(
+      title: 'Some hikes around the world',
+      trackIds: hits,
     );
   }
 }

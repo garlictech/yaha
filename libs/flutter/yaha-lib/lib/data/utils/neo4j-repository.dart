@@ -73,10 +73,14 @@ class RepositoryNeo4j<T> {
     }
   }
 
-  Future<List<String>> executeEntityIdQuery(String query, String resultPropName,
-      Map<String, dynamic>? variables) async {
-    final QueryOptions options =
-        QueryOptions(document: gql(query), variables: variables ?? {});
+  Future<List<String>> executeEntityIdQuery(
+      String query, String resultPropName, Map<String, dynamic>? variables,
+      {bool disableCache = false}) async {
+    final QueryOptions options = QueryOptions(
+      document: gql(query),
+      variables: variables ?? {},
+      fetchPolicy: disableCache ? FetchPolicy.noCache : FetchPolicy.cacheFirst,
+    );
     final QueryResult result = await client.query(options);
 
     if (result.hasException) {

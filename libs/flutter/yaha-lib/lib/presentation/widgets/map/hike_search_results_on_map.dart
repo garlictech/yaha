@@ -8,7 +8,7 @@ import 'package:latlong2/latlong.dart';
 
 import '../../controllers/controllers.dart';
 import '../../controllers/map/utils/utils.dart';
-import '../hikes/hike-card.dart';
+import '../hikes/hikes.dart';
 import '../utils/utils.dart';
 import 'controls/global_map_control.dart';
 import 'hike_card_popup_state.dart';

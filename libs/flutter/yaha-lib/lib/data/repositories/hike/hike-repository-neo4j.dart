@@ -98,7 +98,8 @@ class HikeRepositoryNeo4j extends RepositoryNeo4j<TrackEntity>
           getRandomHikes(limit: $limit) 
        }
     ''';
-    return executeEntityIdQuery(query, 'getRandomHikes', {'limit': limit});
+    return executeEntityIdQuery(query, 'getRandomHikes', {'limit': limit},
+        disableCache: true);
   }
 
   Future<List<PoiEntity>> _getRoutePois(String id, String routeLabel) async {

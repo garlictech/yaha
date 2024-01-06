@@ -2,7 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 import 'yaha-border-radius.dart';
-import 'yaha-image.dart';
+import 'yaha_image.dart';
 
 class GalleryWidget extends StatelessWidget {
   final List<String>? imageUrls;
