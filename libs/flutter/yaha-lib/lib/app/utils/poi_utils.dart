@@ -8,6 +8,7 @@ class PoiUtils {
         .where((poi) => touristicCategories.contains(poi.poiType.category))
         .where((poi) => !nonTouristicKinds.contains(poi.poiType.kind))
         .distinctBy((poi) => poi.title)
+        .where((poi) => poi.hasOwnTitle)
         .toList();
   }
 

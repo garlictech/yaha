@@ -51,20 +51,20 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyD2x93Mfvz8GfB9CkG1DWIYIq9EXLebEHw',
-    appId: '1:613858852311:android:0db80bd3601599e8e49f92',
+    appId: '1:613858852311:android:74c468256868ccefe49f92',
     messagingSenderId: '613858852311',
     projectId: 'yet-another-projects',
     storageBucket: 'yet-another-projects.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCZB1HYkbFErOcXAOiQ59YSlbSi9F_2v0s',
-    appId: '1:613858852311:ios:90640932480286efe49f92',
+    apiKey: 'AIzaSyCkgIJd8uM3kY5V1cpngB7LqX8KeFWjsLo',
+    appId: '1:613858852311:ios:ee7a52ff28e57cdbe49f92',
     messagingSenderId: '613858852311',
     projectId: 'yet-another-projects',
     storageBucket: 'yet-another-projects.appspot.com',
-    iosClientId:
-        '613858852311-s502vgo12lg8c3jels5lsdi8d2117lit.apps.googleusercontent.com',
-    iosBundleId: 'com.garlictech.yaha',
+    androidClientId: '613858852311-h4aid8pbdhp4qcvejahl7qf76ct4fcbn.apps.googleusercontent.com',
+    iosClientId: '613858852311-6affg7hflckj4tnksjvt9h72kr19hcjd.apps.googleusercontent.com',
+    iosBundleId: 'com.garlictech.yaha2',
   );
 }

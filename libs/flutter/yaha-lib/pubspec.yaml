@@ -166,5 +166,5 @@ flutter:
   # identifiers, which may be completely independent or the same as these.
   module:
     androidX: true
-    androidPackage: com.garlictech.yahalib.flutter_yaha_lib
-    iosBundleIdentifier: com.garlictech.yaha-lib.flutterYahaLib
+    androidPackage: com.garlictech.yaha2lib.flutter_yaha_lib
+    iosBundleIdentifier: com.garlictech.yaha2-lib.flutterYahaLib

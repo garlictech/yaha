@@ -1,4 +1,4 @@
-package com.garlictech.yaha;
+package com.garlictech.yaha2;
 
 import io.flutter.embedding.android.FlutterActivity;
 

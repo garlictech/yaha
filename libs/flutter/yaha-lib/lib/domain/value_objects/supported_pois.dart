@@ -332,7 +332,6 @@ const Map<String, Set<String>> supportedTags = {
     'convenience',
     'deli',
     'dairy',
-    'estate_agent',
     'farm',
     'frozen_food',
     'greengrocer',
