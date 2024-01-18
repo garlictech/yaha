@@ -1,23 +1,13 @@
 {
   "root": true,
-  "ignorePatterns": [
-    "**/*"
-  ],
-  "plugins": [
-    "unused-imports",
-    "@nrwl/nx"
-  ],
+  "ignorePatterns": ["**/*"],
+  "plugins": ["unused-imports", "@nx"],
   "overrides": [
     {
-      "files": [
-        "*.ts",
-        "*.tsx",
-        "*.js",
-        "*.jsx"
-      ],
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "rules": {
         "unused-imports/no-unused-imports-ts": 2,
-        "@nrwl/nx/enforce-module-boundaries": [
+        "@nx/enforce-module-boundaries": [
           "error",
           {
             "enforceBuildableLibDependency": true,
@@ -25,22 +15,15 @@
             "depConstraints": [
               {
                 "sourceTag": "platform:nodejs",
-                "onlyDependOnLibsWithTags": [
-                  "platform:nodejs"
-                ]
+                "onlyDependOnLibsWithTags": ["platform:nodejs"]
               },
               {
                 "sourceTag": "platform:flutter",
-                "onlyDependOnLibsWithTags": [
-                  "platform:flutter"
-                ]
+                "onlyDependOnLibsWithTags": ["platform:flutter"]
               },
               {
                 "sourceTag": "layer:app",
-                "onlyDependOnLibsWithTags": [
-                  "layer:utils",
-                  "layer:service"
-                ]
+                "onlyDependOnLibsWithTags": ["layer:utils", "layer:service"]
               },
               {
                 "sourceTag": "layer:service",
@@ -53,22 +36,15 @@
               },
               {
                 "sourceTag": "layer:utils",
-                "onlyDependOnLibsWithTags": [
-                  "layer:utils"
-                ]
+                "onlyDependOnLibsWithTags": ["layer:utils"]
               },
               {
                 "sourceTag": "layer:repository",
-                "onlyDependOnLibsWithTags": [
-                  "layer:entity",
-                  "layer:repository"
-                ]
+                "onlyDependOnLibsWithTags": ["layer:entity", "layer:repository"]
               },
               {
                 "sourceTag": "type:integration-tests",
-                "onlyDependOnLibsWithTags": [
-                  "*"
-                ]
+                "onlyDependOnLibsWithTags": ["*"]
               }
             ]
           }
@@ -76,13 +52,8 @@
       }
     },
     {
-      "files": [
-        "*.ts",
-        "*.tsx"
-      ],
-      "extends": [
-        "plugin:@nrwl/nx/typescript"
-      ],
+      "files": ["*.ts", "*.tsx"],
+      "extends": ["plugin:@nx/typescript"],
       "parserOptions": {
         "project": "./tsconfig.*?.json"
       },
@@ -97,13 +68,8 @@
       }
     },
     {
-      "files": [
-        "*.js",
-        "*.jsx"
-      ],
-      "extends": [
-        "plugin:@nrwl/nx/javascript"
-      ],
+      "files": ["*.js", "*.jsx"],
+      "extends": ["plugin:@nx/javascript"],
       "rules": {}
     }
   ]

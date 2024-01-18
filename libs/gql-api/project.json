@@ -1,10 +1,11 @@
 {
   "name": "gql-api",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/gql-api/src",
   "projectType": "library",
   "targets": {
     "build-schema": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "@nx/workspace:run-commands",
       "options": {
         "parallel": false,
         "commands": ["yarn graphql-codegen --config tools/graphql-codegen.yml"]
@@ -12,14 +13,14 @@
       "outputs": ["{projectRoot}/src/lib/generated"]
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["libs/gql-api/**/*.ts"]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/gql-api"],
       "options": {
         "jestConfig": "libs/gql-api/jest.config.ts",

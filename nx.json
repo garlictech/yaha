@@ -5,7 +5,7 @@
   "npmScope": "yaha",
   "tasksRunnerOptions": {
     "default": {
-      "runner": "@nrwl/nx-cloud",
+      "runner": "nx-cloud",
       "options": {
         "cacheableOperations": ["build", "lint", "test", "e2e"],
         "accessToken": "YzIzOWI0OWUtMGRjMS00ZGZhLTliOTctZThlZmUxNGMyNGI2fHJlYWQtd3JpdGU=",
@@ -16,7 +16,7 @@
     }
   },
   "cli": {
-    "defaultCollection": "@nrwl/node"
+    "defaultCollection": "@nx/node"
   },
   "defaultProject": "cicd",
   "plugins": ["@nxrocks/nx-flutter"],

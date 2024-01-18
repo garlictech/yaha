@@ -1,10 +1,11 @@
 {
   "name": "common-backend",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/common-backend/src",
   "projectType": "application",
   "targets": {
     "synth": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "@nx/workspace:run-commands",
       "options": {
         "cwd": "apps/common-backend",
         "parallel": false,
@@ -13,7 +14,7 @@
       "outputs": ["{projectRoot}/cdk.out", "{projectRoot}/.build"]
     },
     "deploy": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "@nx/workspace:run-commands",
       "options": {
         "cwd": "apps/common-backend",
         "parallel": false,
@@ -25,7 +26,7 @@
       }
     },
     "remove": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "@nx/workspace:run-commands",
       "options": {
         "cwd": "apps/common-backend",
         "parallel": false,
@@ -37,14 +38,14 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["apps/common-backend/**/*.ts"]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/apps/common-backend"],
       "options": {
         "jestConfig": "apps/common-backend/jest.config.ts",
