@@ -39,17 +39,13 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["apps/common-backend/**/*.ts"]
-      }
+      "outputs": ["{options.outputFile}"]
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/apps/common-backend"],
       "options": {
-        "jestConfig": "apps/common-backend/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "apps/common-backend/jest.config.ts"
       }
     }
   },

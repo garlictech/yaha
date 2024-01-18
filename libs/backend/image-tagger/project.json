@@ -6,17 +6,13 @@
   "targets": {
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["libs/backend/image-tagger/**/*.ts"]
-      }
+      "outputs": ["{options.outputFile}"]
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/backend/image-tagger"],
       "options": {
-        "jestConfig": "libs/backend/image-tagger/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/backend/image-tagger/jest.config.ts"
       }
     }
   },

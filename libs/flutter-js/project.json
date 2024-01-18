@@ -6,17 +6,13 @@
   "targets": {
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["libs/flutter-js/**/*.ts"]
-      }
+      "outputs": ["{options.outputFile}"]
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/flutter-js"],
       "options": {
-        "jestConfig": "libs/flutter-js/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/flutter-js/jest.config.ts"
       }
     }
   },

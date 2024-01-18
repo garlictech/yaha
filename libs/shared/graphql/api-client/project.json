@@ -6,17 +6,13 @@
   "targets": {
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["libs/shared/graphql/api-client/**/*.ts"]
-      }
+      "outputs": ["{options.outputFile}"]
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/shared/graphql/api-client"],
       "options": {
-        "jestConfig": "libs/shared/graphql/api-client/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/shared/graphql/api-client/jest.config.ts"
       }
     }
   },

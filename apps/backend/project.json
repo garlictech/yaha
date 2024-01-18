@@ -50,7 +50,6 @@
     "lint": {
       "executor": "@nx/eslint:lint",
       "options": {
-        "lintFilePatterns": ["apps/backend/**/*.ts"],
         "cache": true
       }
     },
@@ -58,8 +57,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/apps/backend"],
       "options": {
-        "jestConfig": "apps/backend/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "apps/backend/jest.config.ts"
       }
     }
   },

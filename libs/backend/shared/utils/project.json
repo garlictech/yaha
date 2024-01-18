@@ -6,17 +6,13 @@
   "targets": {
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["libs/backend/shared/utils/**/*.ts"]
-      }
+      "outputs": ["{options.outputFile}"]
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/backend/shared/utils"],
       "options": {
-        "jestConfig": "libs/backend/shared/utils/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/backend/shared/utils/jest.config.ts"
       }
     }
   },

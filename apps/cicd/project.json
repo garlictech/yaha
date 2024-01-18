@@ -42,17 +42,13 @@
       }
     },
     "lint": {
-      "executor": "@nx/eslint:lint",
-      "options": {
-        "lintFilePatterns": ["apps/cicd/**/*.ts"]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/apps/cicd"],
       "options": {
-        "jestConfig": "apps/cicd/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "apps/cicd/jest.config.ts"
       }
     }
   },
