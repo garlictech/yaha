@@ -9,3 +9,5 @@ cyreport
 build
 apps/mobile_app/assets
 
+
+/.nx/cache
