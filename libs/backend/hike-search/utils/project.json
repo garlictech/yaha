@@ -1,4 +1,5 @@
 {
+  "name": "backend-hike-search-utils",
   "sourceRoot": "libs/backend/hike-search/utils/src",
   "projectType": "library",
   "targets": {

@@ -1,4 +1,5 @@
 {
+  "name": "backend-shared-utils",
   "sourceRoot": "libs/backend/shared/utils/src",
   "projectType": "library",
   "targets": {

@@ -1,4 +1,5 @@
 {
+  "name": "gql-api",
   "sourceRoot": "libs/gql-api/src",
   "projectType": "library",
   "targets": {
