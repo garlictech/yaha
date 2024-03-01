@@ -5,63 +5,66 @@ PODS:
   - AppAuth/Core (1.6.2)
   - AppAuth/ExternalUserAgent (1.6.2):
     - AppAuth/Core
-  - cloud_functions (4.4.0):
-    - Firebase/Functions (= 10.12.0)
+  - cloud_functions (4.6.6):
+    - Firebase/Functions (= 10.20.0)
     - firebase_core
     - Flutter
   - desktop_webview_auth (0.0.1):
     - Flutter
-  - Firebase/Auth (10.12.0):
+  - Firebase/Auth (10.20.0):
     - Firebase/CoreOnly
-    - FirebaseAuth (~> 10.12.0)
-  - Firebase/CoreOnly (10.12.0):
-    - FirebaseCore (= 10.12.0)
-  - Firebase/Database (10.12.0):
+    - FirebaseAuth (~> 10.20.0)
+  - Firebase/CoreOnly (10.20.0):
+    - FirebaseCore (= 10.20.0)
+  - Firebase/Database (10.20.0):
     - Firebase/CoreOnly
-    - FirebaseDatabase (~> 10.12.0)
-  - Firebase/DynamicLinks (10.12.0):
+    - FirebaseDatabase (~> 10.20.0)
+  - Firebase/DynamicLinks (10.20.0):
     - Firebase/CoreOnly
-    - FirebaseDynamicLinks (~> 10.12.0)
-  - Firebase/Functions (10.12.0):
+    - FirebaseDynamicLinks (~> 10.20.0)
+  - Firebase/Functions (10.20.0):
     - Firebase/CoreOnly
-    - FirebaseFunctions (~> 10.12.0)
-  - firebase_auth (4.9.0):
-    - Firebase/Auth (= 10.12.0)
+    - FirebaseFunctions (~> 10.20.0)
+  - firebase_auth (4.17.6):
+    - Firebase/Auth (= 10.20.0)
     - firebase_core
     - Flutter
-  - firebase_core (2.15.1):
-    - Firebase/CoreOnly (= 10.12.0)
+  - firebase_core (2.25.5):
+    - Firebase/CoreOnly (= 10.20.0)
     - Flutter
-  - firebase_database (10.2.5):
-    - Firebase/Database (= 10.12.0)
+  - firebase_database (10.4.7):
+    - Firebase/Database (= 10.20.0)
     - firebase_core
     - Flutter
-  - firebase_dynamic_links (5.3.5):
-    - Firebase/DynamicLinks (= 10.12.0)
+  - firebase_dynamic_links (5.4.15):
+    - Firebase/DynamicLinks (= 10.20.0)
     - firebase_core
     - Flutter
-  - FirebaseAppCheckInterop (10.20.0)
-  - FirebaseAuth (10.12.0):
-    - FirebaseAppCheckInterop (~> 10.0)
+  - FirebaseAppCheckInterop (10.21.0)
+  - FirebaseAuth (10.20.0):
+    - FirebaseAppCheckInterop (~> 10.17)
     - FirebaseCore (~> 10.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
     - GoogleUtilities/Environment (~> 7.8)
     - GTMSessionFetcher/Core (< 4.0, >= 2.1)
-  - FirebaseAuthInterop (10.20.0)
-  - FirebaseCore (10.12.0):
+    - RecaptchaInterop (~> 100.0)
+  - FirebaseAuthInterop (10.21.0)
+  - FirebaseCore (10.20.0):
     - FirebaseCoreInternal (~> 10.0)
-    - GoogleUtilities/Environment (~> 7.8)
-    - GoogleUtilities/Logger (~> 7.8)
-  - FirebaseCoreExtension (10.20.0):
+    - GoogleUtilities/Environment (~> 7.12)
+    - GoogleUtilities/Logger (~> 7.12)
+  - FirebaseCoreExtension (10.21.0):
     - FirebaseCore (~> 10.0)
-  - FirebaseCoreInternal (10.20.0):
+  - FirebaseCoreInternal (10.21.0):
     - "GoogleUtilities/NSData+zlib (~> 7.8)"
-  - FirebaseDatabase (10.12.0):
+  - FirebaseDatabase (10.20.0):
+    - FirebaseAppCheckInterop (~> 10.17)
     - FirebaseCore (~> 10.0)
+    - FirebaseSharedSwift (~> 10.0)
     - leveldb-library (~> 1.22)
-  - FirebaseDynamicLinks (10.12.0):
+  - FirebaseDynamicLinks (10.20.0):
     - FirebaseCore (~> 10.0)
-  - FirebaseFunctions (10.12.0):
+  - FirebaseFunctions (10.20.0):
     - FirebaseAppCheckInterop (~> 10.10)
     - FirebaseAuthInterop (~> 10.0)
     - FirebaseCore (~> 10.0)
@@ -69,8 +72,8 @@ PODS:
     - FirebaseMessagingInterop (~> 10.0)
     - FirebaseSharedSwift (~> 10.0)
     - GTMSessionFetcher/Core (< 4.0, >= 2.1)
-  - FirebaseMessagingInterop (10.20.0)
-  - FirebaseSharedSwift (10.20.0)
+  - FirebaseMessagingInterop (10.21.0)
+  - FirebaseSharedSwift (10.21.0)
   - Flutter (1.0.0)
   - flutter_local_notifications (0.0.1):
     - Flutter
@@ -78,11 +81,12 @@ PODS:
     - Flutter
   - google_sign_in_ios (0.0.1):
     - Flutter
-    - GoogleSignIn (~> 6.2)
-  - GoogleSignIn (6.2.4):
+    - FlutterMacOS
+    - GoogleSignIn (~> 7.0)
+  - GoogleSignIn (7.0.0):
     - AppAuth (~> 1.5)
-    - GTMAppAuth (~> 1.3)
-    - GTMSessionFetcher/Core (< 3.0, >= 1.1)
+    - GTMAppAuth (< 3.0, >= 1.3)
+    - GTMSessionFetcher/Core (< 4.0, >= 1.1)
   - GoogleUtilities/AppDelegateSwizzler (7.12.0):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -98,59 +102,60 @@ PODS:
   - "GoogleUtilities/NSData+zlib (7.12.0)"
   - GoogleUtilities/Reachability (7.12.0):
     - GoogleUtilities/Logger
-  - GTMAppAuth (1.3.1):
+  - GTMAppAuth (2.0.0):
     - AppAuth/Core (~> 1.6)
-    - GTMSessionFetcher/Core (< 3.0, >= 1.5)
-  - GTMSessionFetcher/Core (2.3.0)
-  - leveldb-library (1.22.2)
+    - GTMSessionFetcher/Core (< 4.0, >= 1.5)
+  - GTMSessionFetcher/Core (3.3.1)
+  - leveldb-library (1.22.4)
   - modal_progress_hud_nsn (0.4.0):
     - Flutter
-  - PromisesObjC (2.3.1)
-  - purchases_flutter (5.6.5):
+  - PromisesObjC (2.4.0)
+  - purchases_flutter (5.8.1):
     - Flutter
-    - PurchasesHybridCommon (= 6.1.2)
-  - PurchasesHybridCommon (6.1.2):
-    - RevenueCat (= 4.25.9)
-  - RevenueCat (4.25.9)
+    - PurchasesHybridCommon (= 6.3.1)
+  - PurchasesHybridCommon (6.3.1):
+    - RevenueCat (= 4.26.1)
+  - RecaptchaInterop (100.0.0)
+  - RevenueCat (4.26.1)
   - shared_preferences_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
-  - Stripe (23.12.0):
-    - StripeApplePay (= 23.12.0)
-    - StripeCore (= 23.12.0)
-    - StripePayments (= 23.12.0)
-    - StripePaymentsUI (= 23.12.0)
-    - StripeUICore (= 23.12.0)
+  - Stripe (23.18.3):
+    - StripeApplePay (= 23.18.3)
+    - StripeCore (= 23.18.3)
+    - StripePayments (= 23.18.3)
+    - StripePaymentsUI (= 23.18.3)
+    - StripeUICore (= 23.18.3)
   - stripe_ios (0.0.1):
     - Flutter
-    - Stripe (~> 23.12.0)
-    - StripeApplePay (~> 23.12.0)
-    - StripeFinancialConnections (~> 23.12.0)
-    - StripePayments (~> 23.12.0)
-    - StripePaymentSheet (~> 23.12.0)
-    - StripePaymentsUI (~> 23.12.0)
-  - StripeApplePay (23.12.0):
-    - StripeCore (= 23.12.0)
-  - StripeCore (23.12.0)
-  - StripeFinancialConnections (23.12.0):
-    - StripeCore (= 23.12.0)
-    - StripeUICore (= 23.12.0)
-  - StripePayments (23.12.0):
-    - StripeCore (= 23.12.0)
-    - StripePayments/Stripe3DS2 (= 23.12.0)
-  - StripePayments/Stripe3DS2 (23.12.0):
-    - StripeCore (= 23.12.0)
-  - StripePaymentSheet (23.12.0):
-    - StripeApplePay (= 23.12.0)
-    - StripeCore (= 23.12.0)
-    - StripePayments (= 23.12.0)
-    - StripePaymentsUI (= 23.12.0)
-  - StripePaymentsUI (23.12.0):
-    - StripeCore (= 23.12.0)
-    - StripePayments (= 23.12.0)
-    - StripeUICore (= 23.12.0)
-  - StripeUICore (23.12.0):
-    - StripeCore (= 23.12.0)
+    - Stripe (~> 23.18.0)
+    - StripeApplePay (~> 23.18.0)
+    - StripeFinancialConnections (~> 23.18.0)
+    - StripePayments (~> 23.18.0)
+    - StripePaymentSheet (~> 23.18.0)
+    - StripePaymentsUI (~> 23.18.0)
+  - StripeApplePay (23.18.3):
+    - StripeCore (= 23.18.3)
+  - StripeCore (23.18.3)
+  - StripeFinancialConnections (23.18.3):
+    - StripeCore (= 23.18.3)
+    - StripeUICore (= 23.18.3)
+  - StripePayments (23.18.3):
+    - StripeCore (= 23.18.3)
+    - StripePayments/Stripe3DS2 (= 23.18.3)
+  - StripePayments/Stripe3DS2 (23.18.3):
+    - StripeCore (= 23.18.3)
+  - StripePaymentSheet (23.18.3):
+    - StripeApplePay (= 23.18.3)
+    - StripeCore (= 23.18.3)
+    - StripePayments (= 23.18.3)
+    - StripePaymentsUI (= 23.18.3)
+  - StripePaymentsUI (23.18.3):
+    - StripeCore (= 23.18.3)
+    - StripePayments (= 23.18.3)
+    - StripeUICore (= 23.18.3)
+  - StripeUICore (23.18.3):
+    - StripeCore (= 23.18.3)
 
 DEPENDENCIES:
   - cloud_functions (from `.symlinks/plugins/cloud_functions/ios`)
@@ -162,7 +167,7 @@ DEPENDENCIES:
   - Flutter (from `Flutter`)
   - flutter_local_notifications (from `.symlinks/plugins/flutter_local_notifications/ios`)
   - flutter_timezone (from `.symlinks/plugins/flutter_timezone/ios`)
-  - google_sign_in_ios (from `.symlinks/plugins/google_sign_in_ios/ios`)
+  - google_sign_in_ios (from `.symlinks/plugins/google_sign_in_ios/darwin`)
   - modal_progress_hud_nsn (from `.symlinks/plugins/modal_progress_hud_nsn/ios`)
   - purchases_flutter (from `.symlinks/plugins/purchases_flutter/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
@@ -190,6 +195,7 @@ SPEC REPOS:
     - leveldb-library
     - PromisesObjC
     - PurchasesHybridCommon
+    - RecaptchaInterop
     - RevenueCat
     - Stripe
     - StripeApplePay
@@ -220,7 +226,7 @@ EXTERNAL SOURCES:
   flutter_timezone:
     :path: ".symlinks/plugins/flutter_timezone/ios"
   google_sign_in_ios:
-    :path: ".symlinks/plugins/google_sign_in_ios/ios"
+    :path: ".symlinks/plugins/google_sign_in_ios/darwin"
   modal_progress_hud_nsn:
     :path: ".symlinks/plugins/modal_progress_hud_nsn/ios"
   purchases_flutter:
@@ -232,48 +238,49 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AppAuth: 3bb1d1cd9340bd09f5ed189fb00b1cc28e1e8570
-  cloud_functions: 19478d5af48098293778c254f64cf85ac8f1c1b8
+  cloud_functions: befc250156435e78c5662cf27459dfef4095f8b8
   desktop_webview_auth: d645139460ef203d50bd0cdb33356785dd939cce
-  Firebase: 07150e75d142fb9399f6777fa56a187b17f833a0
-  firebase_auth: 097a2440d40bed75f4dfe4cb91b4d98349509b47
-  firebase_core: 4a3246a02f828a01c74a2c26427037786d90f17f
-  firebase_database: ae8b70d7f5867c5f65a08353d81521896d850771
-  firebase_dynamic_links: cc3fd36190c7b58c27353915271d2c0d031ee11b
-  FirebaseAppCheckInterop: e81bdb1cdb82f8e0cef353ba5018a8402682032c
-  FirebaseAuth: a66c1e14ec58f41d154a4b41ce1a23ea00ad4805
-  FirebaseAuthInterop: 6142981334978f7942ff0e8a6f8966c3b3c8ff37
-  FirebaseCore: f86a1394906b97ac445ae49c92552a9425831bed
-  FirebaseCoreExtension: 0659f035b88c5a7a15a9763c48c2e6ca8c0a2977
-  FirebaseCoreInternal: efeeb171ac02d623bdaefe121539939821e10811
-  FirebaseDatabase: 6d998d7ef2c1723b3e798a85e61a7dc0504b1ea0
-  FirebaseDynamicLinks: 1a387da899779e5ef34f4d6f8bdba882f90d0e67
-  FirebaseFunctions: d49c7920b289d85029882927e4056ad04a906e19
-  FirebaseMessagingInterop: ffbbd63321f6a1e21dc724d382c22805c95671a0
-  FirebaseSharedSwift: 2fbf73618288b7a36b2014b957745dcdd781389e
+  Firebase: 10c8cb12fb7ad2ae0c09ffc86cd9c1ab392a0031
+  firebase_auth: b237f065b2afc6bd7962124e1cbacdbef31036e6
+  firebase_core: c8628c7ce80f79439149549052bff22f6784fbf5
+  firebase_database: 515d4f325b6b39eb7c94a4ca70df33dd07369917
+  firebase_dynamic_links: c45216717e2c651300092a5bc7f7675b604337d5
+  FirebaseAppCheckInterop: 69fc7d8f6a1cbfa973efb8d1723651de30d12525
+  FirebaseAuth: 9c5c400d2c3055d8ae3a0284944c86fa95d48dac
+  FirebaseAuthInterop: b4161d3e99b05d2d528d6ee2759bc55a01976eba
+  FirebaseCore: 28045c1560a2600d284b9c45a904fe322dc890b6
+  FirebaseCoreExtension: 1c044fd46e95036cccb29134757c499613f3f564
+  FirebaseCoreInternal: 43c1788eaeee9d1b97caaa751af567ce11010d00
+  FirebaseDatabase: 7e838abb62ac2e1a1c792cbeb51df3c4b6607f54
+  FirebaseDynamicLinks: 61a82d43b81cd74a3cdbb1d65f07fb0241aaa553
+  FirebaseFunctions: 2b6ec69b93c49347025190ccb0a27cdbfd1cad66
+  FirebaseMessagingInterop: bd03eed9a75b75d882bc685f29dcdfcae29e3279
+  FirebaseSharedSwift: 19b3f709993d6fa1d84941d41c01e3c4c11eab93
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
-  flutter_local_notifications: 0c0b1ae97e741e1521e4c1629a459d04b9aec743
+  flutter_local_notifications: 4cde75091f6327eb8517fa068a0a5950212d2086
   flutter_timezone: ffb07bdad3c6276af8dada0f11978d8a1f8a20bb
-  google_sign_in_ios: 1256ff9d941db546373826966720b0c24804bcdd
-  GoogleSignIn: 5651ce3a61e56ca864160e79b484cd9ed3f49b7a
+  google_sign_in_ios: 1bfaf6607b44cd1b24c4d4bc39719870440f9ce1
+  GoogleSignIn: b232380cf495a429b8095d3178a8d5855b42e842
   GoogleUtilities: 0759d1a57ebb953965c2dfe0ba4c82e95ccc2e34
-  GTMAppAuth: 0ff230db599948a9ad7470ca667337803b3fc4dd
-  GTMSessionFetcher: 3a63d75eecd6aa32c2fc79f578064e1214dfdec2
-  leveldb-library: f03246171cce0484482ec291f88b6d563699ee06
+  GTMAppAuth: 99fb010047ba3973b7026e45393f51f27ab965ae
+  GTMSessionFetcher: 8a1b34ad97ebe6f909fb8b9b77fba99943007556
+  leveldb-library: 06a69cc7582d64b29424a63e085e683cc188230a
   modal_progress_hud_nsn: b66f99f02da7de83484e50dfe1fe2d71ac406e67
-  PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
-  purchases_flutter: 440e09b1d692a20438574da78a45fda193bb80c5
-  PurchasesHybridCommon: b7c4205b6d2479cdd8914084a2b536e5e5b1445f
-  RevenueCat: 4160d04575059fc1edbb973981f541b705ddebef
-  shared_preferences_foundation: 5b919d13b803cadd15ed2dc053125c68730e5126
-  Stripe: 15fad81ffb8d553d77ff504a6d50d47b9028bed0
-  stripe_ios: 872ce75ce051b4070d061a185c8b7b67323c9f30
-  StripeApplePay: 871274acfa7a96650ea8a697c288c54b8288fb6e
-  StripeCore: 7b08fd286e8f8f5336eb725bc7ed1d2a4705cdc4
-  StripeFinancialConnections: 561831507db3d383be3933a3979f1b9d287a15e7
-  StripePayments: 081e01e73762852ccf3e662202d5dd4107634058
-  StripePaymentSheet: ec04397e9223c86a87be8b348cdbcf2075dd7a16
-  StripePaymentsUI: 3dae7fed9b148b2749dff622ece45f9b441b88ce
-  StripeUICore: 4a76fa59cab679e1b2fe1ad37d6b08c5bf2ada54
+  PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
+  purchases_flutter: 2ca3361e3f0fe097729e868584cb7356f0c205cd
+  PurchasesHybridCommon: abfad6b418371634f3033e39a33eddc25e0c880d
+  RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
+  RevenueCat: 4e8899a69fd57180ef166237d1eb670023be05de
+  shared_preferences_foundation: b4c3b4cddf1c21f02770737f147a3f5da9d39695
+  Stripe: e046335ab6e3f25d39f1a55bd98620a85269cffa
+  stripe_ios: 37dd66ec680264019be16c5f47333f381164e6a6
+  StripeApplePay: 1aa77f8ec7a6d9463fa8f49ae0672fe59dbf4c73
+  StripeCore: fe10c34fb3c9ae18b986913f7e4460e7c653ce93
+  StripeFinancialConnections: 6022426894046f26fe21d348da02d83d8a637fb0
+  StripePayments: 7084fed30c5f03f15ae23c5dce63715ba0b53e15
+  StripePaymentSheet: c8d25d4133476c6238d3cc932fb8219bb5ea49c0
+  StripePaymentsUI: c12de264eda974d91e43a769f53a6c6afc9a1715
+  StripeUICore: 090c4fe916d039616ce8f8de30392f4aeb33dd16
 
 PODFILE CHECKSUM: 70d9d25280d0dd177a5f637cdb0f0b0b12c6a189
 

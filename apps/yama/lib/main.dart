@@ -5,22 +5,22 @@ import 'package:intl/intl.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
-import 'package:firebase_ui_oauth_apple/firebase_ui_oauth_apple.dart';
+import 'package:firebase_ui_oauth_apple/firebase_ui_oauth_apple.dart' ;
 import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
-import 'package:garlic_revenuecat_purchase/garlic_revenuecat_purchase.dart';
-import 'package:yama_motivate/data/auth/logged_in_state.dart';
-import 'package:yama_motivate/data/services/revenuecat/revenuecat_config.dart';
-import 'package:yama_motivate/domain/usecases/notification_controller.dart';
-import 'package:yama_motivate/l10n/app_localizations.dart';
-import 'package:yama_motivate/presentation/screens/start_screen.dart';
-import 'domain/usecases/notifications.dart';
+import 'package:revenuecat_purchase/revenuecat_purchase.dart';
+import 'package:yama_lib/data/auth/logged_in_state.dart';
+import 'package:yama_lib/data/services/revenuecat/revenuecat_config.dart';
+import 'package:yama_lib/domain/usecases/notification_controller.dart';
+import 'package:yama_lib/l10n/app_localizations.dart';
+import 'package:yama_lib/presentation/screens/start_screen.dart';
+import 'package:yama_lib/domain/usecases/notifications.dart';
 import 'firebase_options.dart';
+import 'package:yama_lib/presentation/screens/home_screen.dart';
+import 'package:yama_lib/presentation/theme.dart';
 import 'package:get_it/get_it.dart';
 
 import ".env.dart";
 
-import 'presentation/screens/home_screen.dart';
-import 'presentation/theme.dart';
 
 GetIt getIt = GetIt.instance;
 
