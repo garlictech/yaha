@@ -14,15 +14,15 @@ import 'controls/global_map_control.dart';
 import 'hike_card_popup_state.dart';
 import 'leaflet_map_widgets.dart';
 
-class HikeSearchSesultsOnMap extends ConsumerStatefulWidget {
-  const HikeSearchSesultsOnMap({super.key});
+class HikeSearchResultsOnMap extends ConsumerStatefulWidget {
+  const HikeSearchResultsOnMap({super.key});
 
   @override
   HikeSearchSesultsOnMapState createState() => HikeSearchSesultsOnMapState();
 }
 
 class HikeSearchSesultsOnMapState
-    extends ConsumerState<HikeSearchSesultsOnMap> {
+    extends ConsumerState<HikeSearchResultsOnMap> {
   final popup = Consumer(builder: (c, ref, child) {
     final currentlyShownHikeId = ref.watch(hikeCardPopupStateProvider);
     const popupSize = 200.0;

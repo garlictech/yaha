@@ -225,14 +225,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.18.0"
-  color:
-    dependency: transitive
-    description:
-      name: color
-      sha256: ddcdf1b3badd7008233f5acffaf20ca9f5dc2cd0172b75f68f24526a5f5725cb
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.0"
   convert:
     dependency: transitive
     description:
@@ -494,22 +486,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_gen:
-    dependency: transitive
-    description:
-      name: flutter_gen
-      sha256: e46c44b2d612d660f913ebfa4423a5171513f4828c029a98aa847f4aecf624a4
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.4.0"
-  flutter_gen_core:
-    dependency: transitive
-    description:
-      name: flutter_gen_core
-      sha256: "3a6c3dbc1c0e260088e9c7ed1ba905436844e8c01a44799f6281edada9e45308"
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.4.0"
   flutter_hooks:
     dependency: "direct main"
     description:
@@ -844,14 +820,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.5"
-  modal_progress_hud_nsn:
-    dependency: transitive
-    description:
-      name: modal_progress_hud_nsn
-      sha256: "0b0d95e5ce3e1884390624fbe79fcf90d7de10abe05d26c0e276c25e7130e3e0"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.4.0"
   package_config:
     dependency: transitive
     description:
@@ -965,20 +933,13 @@ packages:
     source: hosted
     version: "1.2.3"
   purchases_flutter:
-    dependency: transitive
-    description:
-      name: purchases_flutter
-      sha256: "144264ab8ffedfde4ae7c39d183f21a46f5300416f8dec7b2a16b87a26e5245d"
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.8.1"
-  revenuecat_purchase:
     dependency: "direct main"
     description:
-      path: "../revenuecat_purchase"
-      relative: true
-    source: path
-    version: "0.0.1"
+      name: purchases_flutter
+      sha256: "4ff3a62a685cd964590d2c8126be62c3ede3657a5421adf558fd95f01699643a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.29.0"
   riverpod:
     dependency: transitive
     description:

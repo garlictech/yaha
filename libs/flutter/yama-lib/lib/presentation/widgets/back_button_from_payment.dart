@@ -11,6 +11,6 @@ class BackButtonFromPayment extends StatelessWidget {
         onPressed: () {
           Navigator.pop(context, isPaymentSuccessfull);
         },
-        child: Text(AppLocalizations.of(context)!.backToGoals));
+        child: Text(AppLocalizations.of(context).backToGoals));
   }
 }
