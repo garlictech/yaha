@@ -7,7 +7,7 @@ part of 'daily_reminder_times.dart';
 // **************************************************************************
 
 String _$dailyReminderTimesHash() =>
-    r'cc9a344dd9e891f16852539da6bd779bd0119258';
+    r'12c068f063127e49342b28aabb9c7b1496cfb34f';
 
 /// See also [DailyReminderTimes].
 @ProviderFor(DailyReminderTimes)

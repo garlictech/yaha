@@ -16,9 +16,6 @@ dependencies:
   yama_lib:
     path: ../../libs/flutter/yama-lib
 
-  revenuecat_purchase:
-    path: ../../libs/flutter/revenuecat_purchase
-
 flutter:
   uses-material-design: true
   generate: true

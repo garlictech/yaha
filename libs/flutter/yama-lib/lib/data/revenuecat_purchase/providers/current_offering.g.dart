@@ -1,26 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'notifications.dart';
+part of 'current_offering.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$notificationsHash() => r'eb8d8e7dea6537527981c368672f262b6051d7e6';
+String _$currentOfferingHash() => r'1fb9ec2fec890656bc34f0ec983914289da090ea';
 
-/// See also [Notifications].
-@ProviderFor(Notifications)
-final notificationsProvider =
-    AutoDisposeNotifierProvider<Notifications, NotificationsState>.internal(
-  Notifications.new,
-  name: r'notificationsProvider',
+/// See also [CurrentOffering].
+@ProviderFor(CurrentOffering)
+final currentOfferingProvider =
+    AutoDisposeAsyncNotifierProvider<CurrentOffering, Offering?>.internal(
+  CurrentOffering.new,
+  name: r'currentOfferingProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$notificationsHash,
+      : _$currentOfferingHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$Notifications = AutoDisposeNotifier<NotificationsState>;
+typedef _$CurrentOffering = AutoDisposeAsyncNotifier<Offering?>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

@@ -6,7 +6,7 @@ part of 'goals.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$goalsHash() => r'd86a0bdac19f1f8b681b3e7f93b96151816febfb';
+String _$goalsHash() => r'0a55364746f899f6df65caa235542605952bb9e8';
 
 /// See also [Goals].
 @ProviderFor(Goals)

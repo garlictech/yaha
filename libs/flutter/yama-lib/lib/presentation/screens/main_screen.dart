@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:revenuecat_purchase/providers/is_subscription_purchased.dart';
-import 'package:revenuecat_purchase/providers/purchased_subscription.dart';
+import 'package:yama_lib/data/revenuecat_purchase/providers/is_subscription_purchased.dart';
+import 'package:yama_lib/data/revenuecat_purchase/revenuecat_purchase.dart';
 import 'package:yama_lib/domain/entities/goal.dart';
 import 'package:yama_lib/domain/usecases/failed_goals.dart';
 import 'package:yama_lib/domain/usecases/goals.dart';
@@ -93,9 +93,7 @@ class MainScreenState extends ConsumerState<MainScreen> {
         .read(isSubscriptionPurchasedProvider.future)
         .then((isSubscriptionPurchased) {
       if (!isSubscriptionPurchased) {
-        debugPrint("Must purchase a subscription");
-        ref.read(purchasedSubscriptionProvider.notifier).purchase();
-        return;
+        return ref.read(purchasedSubscriptionProvider.notifier).purchase();
       }
 
       showDialog(

@@ -1,14 +1,13 @@
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intl/intl.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
-import 'package:firebase_ui_oauth_apple/firebase_ui_oauth_apple.dart' ;
+import 'package:firebase_ui_oauth_apple/firebase_ui_oauth_apple.dart';
 import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
-import 'package:revenuecat_purchase/revenuecat_purchase.dart';
 import 'package:yama_lib/data/auth/logged_in_state.dart';
+import 'package:yama_lib/data/revenuecat_purchase/revenuecat_purchase.dart';
 import 'package:yama_lib/data/services/revenuecat/revenuecat_config.dart';
 import 'package:yama_lib/domain/usecases/notification_controller.dart';
 import 'package:yama_lib/l10n/app_localizations.dart';
@@ -21,7 +20,6 @@ import 'package:get_it/get_it.dart';
 
 import ".env.dart";
 
-
 GetIt getIt = GetIt.instance;
 
 void main() async {
@@ -30,6 +28,7 @@ void main() async {
   FirebaseUIAuth.configureProviders([
     AppleProvider(),
     GoogleProvider(clientId: DefaultFirebaseOptions.ios.iosClientId ?? ''),
+    EmailAuthProvider()
   ]);
   Stripe.publishableKey = stripePublishableKey;
   Stripe.merchantIdentifier = "merchant.com.garlictech.6days";

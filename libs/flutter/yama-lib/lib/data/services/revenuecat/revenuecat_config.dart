@@ -1,4 +1,4 @@
-import 'package:revenuecat_purchase/revenuecat_purchase.dart';
+import '../../revenuecat_purchase/revenuecat_config.dart';
 
 RevenuecatConfig createRevenuecatConfig() {
   return const RevenuecatConfig(
