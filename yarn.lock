@@ -4108,7 +4108,7 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.18.9"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.17.8", "@babel/runtime@^7.5.5", "@babel/runtime@^7.9.6":
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.17.8", "@babel/runtime@^7.9.6":
   version "7.19.0"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.19.0.tgz#22b11c037b094d27a8a2504ea4dcff00f50e2259"
   integrity sha512-eR8Lo9hnDS7tqkO7NsV+mKvCmv5boaXFSZ70DnfhcgiEne8hv9oCEd36Klw74EtizEqLsy4YnW8UWwpBVolHZA==
@@ -13855,29 +13855,28 @@ neo-async@^2.6.2:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
-neo4j-driver-bolt-connection@^4.4.7:
-  version "4.4.9"
-  resolved "https://registry.yarnpkg.com/neo4j-driver-bolt-connection/-/neo4j-driver-bolt-connection-4.4.9.tgz#c0d7e6655a70127a1e004f1d7c2ee0d5f2b16e8c"
-  integrity sha512-5SkCV6hu7EoFcKubaY0+JbOpw0ihW6tgC71K70HnRldyDBEUMQQ+XzvSZjBpsJ1gx2zalNKOt1nDjwqUulubNQ==
+neo4j-driver-bolt-connection@5.26.0:
+  version "5.26.0"
+  resolved "https://registry.yarnpkg.com/neo4j-driver-bolt-connection/-/neo4j-driver-bolt-connection-5.26.0.tgz#071444c8ae1300d31210ddc1de9d2bca7c9c454c"
+  integrity sha512-Tq548RNZJoQdmZhTRcUxDntU1DkNhhKF8oWWuCQ7OtX20EIYpIgVkQYWJu75bSiYyUGxmuSk4U02oXNBdggjgg==
   dependencies:
     buffer "^6.0.3"
-    neo4j-driver-core "^4.4.9"
+    neo4j-driver-core "5.26.0"
     string_decoder "^1.3.0"
 
-neo4j-driver-core@^4.4.7, neo4j-driver-core@^4.4.9:
-  version "4.4.9"
-  resolved "https://registry.yarnpkg.com/neo4j-driver-core/-/neo4j-driver-core-4.4.9.tgz#a473068bfad8d4e34d3a06c137cfb528cd3a0485"
-  integrity sha512-vCKkfurYT06QbR7dSMKLLaHEqE3Nw0FWR4VCcX/n3Xs1BPi4dcudHOCT9lJM9q9egJRjJ2Kuo3MiXji5AeEMbA==
+neo4j-driver-core@5.26.0:
+  version "5.26.0"
+  resolved "https://registry.yarnpkg.com/neo4j-driver-core/-/neo4j-driver-core-5.26.0.tgz#6ac836dc944941e11f06ba7dabf1b50b6335ac41"
+  integrity sha512-S3nHbqGuKPktWkRGenfx8Dt4MuqqrrUQjo4COhRj9r9P6WOjd0jzF/wyZb8H44pW5Qx/gmqn9B3If+7gfiaRmw==
 
-neo4j-driver@4.4.7:
-  version "4.4.7"
-  resolved "https://registry.yarnpkg.com/neo4j-driver/-/neo4j-driver-4.4.7.tgz#51b3fb48241e66eb3be94e90032cc494c44e59f3"
-  integrity sha512-N7GddPhp12gVJe4eB84u5ik5SmrtRv8nH3rK47Qy7IUKnJkVEos/F1QjOJN6zt1jLnDXwDcGzCKK8XklYpzogw==
+neo4j-driver@5.26.0:
+  version "5.26.0"
+  resolved "https://registry.yarnpkg.com/neo4j-driver/-/neo4j-driver-5.26.0.tgz#1642814062ed58152fa0c537a2680f2526631e43"
+  integrity sha512-cQEzXHmUxWb2uBOqsvjs3/GxyVtOgP6WsOpozqTvI47Zzopzw/4b/E4uCJQR5bIn1UXdcUfZKJ60jOmAzEvM8A==
   dependencies:
-    "@babel/runtime" "^7.5.5"
-    neo4j-driver-bolt-connection "^4.4.7"
-    neo4j-driver-core "^4.4.7"
-    rxjs "^6.6.3"
+    neo4j-driver-bolt-connection "5.26.0"
+    neo4j-driver-core "5.26.0"
+    rxjs "^7.8.1"
 
 nice-try@^1.0.4:
   version "1.0.5"
@@ -15011,12 +15010,19 @@ rxjs@7.5.6, rxjs@^7.5.5:
   dependencies:
     tslib "^2.1.0"
 
-rxjs@^6.5.4, rxjs@^6.6.0, rxjs@^6.6.3:
+rxjs@^6.5.4, rxjs@^6.6.0:
   version "6.6.7"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.6.7.tgz#90ac018acabf491bf65044235d5863c4dab804c9"
   integrity sha512-hTdwr+7yYNIT5n4AMYp85KA6yw2Va0FLa3Rguvbpa4W3I5xynaBZo41cM3XM+4Q6fRMj3sBYIR1VAmZMXYJvRQ==
   dependencies:
     tslib "^1.9.0"
+
+rxjs@^7.8.1:
+  version "7.8.1"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-7.8.1.tgz#6f6f3d99ea8044291efd92e7c7fcf562c4057543"
+  integrity sha512-AA3TVj+0A2iuIoQkWEK/tqFjBq2j+6PO6Y0zJcvzLAFhEFIO3HL0vls9hWLncZbAAbK0mar7oZ4V079I/qPMxg==
+  dependencies:
+    tslib "^2.1.0"
 
 safe-buffer@5.2.1, safe-buffer@^5.0.1, safe-buffer@^5.1.0, safe-buffer@^5.1.2, safe-buffer@~5.2.0:
   version "5.2.1"
