@@ -11534,10 +11534,10 @@ graphql-ws@^5.4.1:
   resolved "https://registry.yarnpkg.com/graphql-ws/-/graphql-ws-5.10.2.tgz#1aeb38eb31b7351113c9dc3dbab719a0967000c0"
   integrity sha512-QnLz0hbpTkmp/ATKAA3Tsg9LFZjWtgrLMgxc3W9G+3+rxUtzcYLwQh4YbXELYcpCqo8zdQxmERAtIQSgq75LTw==
 
-graphql@15.8.0, graphql@^16.5.0:
-  version "15.8.0"
-  resolved "https://registry.yarnpkg.com/graphql/-/graphql-15.8.0.tgz#33410e96b012fa3bdb1091cc99a94769db212b38"
-  integrity sha512-5gghUc24tP9HRznNpV2+FIoq3xKkj5dTQqf4v0CpdPbFVwFkWoxOM+o+2OC9ZSvjEMTjfmG9QT+gcvggTwW1zw==
+graphql@15.10.3, graphql@15.8.0, graphql@^16.5.0:
+  version "15.10.3"
+  resolved "https://registry.yarnpkg.com/graphql/-/graphql-15.10.3.tgz#3f97c9d59f56847a725f1c6850d62f13c240c0ce"
+  integrity sha512-e2ut+7oOFe5/jENYc+T7GZnL5lIBd7vcWg6TlqVx1L/MFXY3CKOsEcP+jMPgL8uwcfrllJRNSmqq5psZahdKZg==
 
 hard-rejection@^2.1.0:
   version "2.1.0"
