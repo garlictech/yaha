@@ -63,7 +63,7 @@
     "graphql-subscriptions": "2.0.0",
     "graphql-tag": "2.12.6",
     "graphql-tools": "8.3.3",
-    "joi": "17.6.0",
+    "joi": "17.13.6",
     "lodash-es": "4.17.21",
     "neo4j-driver": "4.4.7",
     "ramda": "0.28.0",
